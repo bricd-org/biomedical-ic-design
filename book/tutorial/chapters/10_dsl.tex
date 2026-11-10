@@ -1,0 +1,43 @@
+%% 10_dsl.tex -- Chapter 10: Input Impedance, DC Servo Loops and Offset Rejection
+%% Status: OUTLINE (build stage 3). Replace the outline with the full chapter when it is written.
+\chapter{Input Impedance, DC Servo Loops and Offset Rejection}\label{ch:dsl}
+\chapterlead{Electrodes bring hundreds of millivolts of DC and megaohms of source impedance. The front-end must reject the first without loading the second.}
+
+\begin{specnote}[Chapter status: outline]
+This chapter is an outline. It will be written in build stage 3 (Part II with Labs 3--5). The topics, the design question and the labs below are fixed; the derivations, worked examples and figures are still to come.
+\end{specnote}
+
+\begin{objectives}
+\begin{itemize}
+  \item derive the input impedance of a capacitively coupled, chopped front-end;
+  \item design a positive-feedback impedance-boosting loop;
+  \item design a DC servo loop (DSL) that rejects \qty{\pm 300}{\milli\volt} of electrode offset;
+  \item compare DC-coupled and AC-coupled front-ends;
+  \item state the trade-offs for dry electrodes.
+\end{itemize}
+\end{objectives}
+
+\begin{insight}[Design question]
+How do you tolerate \qty{\pm 300}{\milli\volt} of electrode offset and keep the input impedance high enough for dry electrodes?
+\end{insight}
+
+\section{Input impedance of chopped CCIAs}\label{sec:ch10-1}
+Switched-capacitor input resistance, its frequency dependence, and the \qty{2.5}{\mega\ohm} the ECG standards require (\cref{ch:interference}).
+
+\section{Positive-feedback impedance boosting}\label{sec:ch10-2}
+Pre-charging the input capacitors from the output to cancel the current drawn from the electrode; stability and matching limits.
+
+\section{The DC servo loop}\label{sec:ch10-3}
+An integrator in a feedback path subtracts the electrode offset at the input; the loop sets the high-pass corner and must not add noise in band.
+
+\section{DC-coupled versus AC-coupled front-ends}\label{sec:ch10-4}
+DC coupling keeps the electrode offset for motion-artefact detection and needs a wide-range ADC; AC coupling removes it in the analog domain. The choice decides between the two converters of Part~III.
+
+\section{Dry electrodes}\label{sec:ch10-5}
+Megaohm source impedance, larger offsets and motion artefacts; what each front-end option buys and costs.
+
+\begin{tryit}[Labs for this chapter]
+Lab~5 (\cref{sec:lab5}) measures the input impedance with and without a chopper and verifies \qty{\pm 300}{\milli\volt} offset tolerance with the DC servo loop.
+\end{tryit}
+
+\paragraph{Read with this chapter} Yazicioglu, Van Hoof and Puers~\cite{yazicioglubook}, Spinelli et al.~\cite{spinelli2003}, Chi et al.~\cite{chi2010}.

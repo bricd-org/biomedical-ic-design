@@ -1,0 +1,28 @@
+// BRICD dark colour scheme: the same navy and gold accents on a deep navy page.
+// Compiled into assets/css/just-the-docs-bricd-dark.css, which the dark mode button
+// (_includes/header_custom.html) switches to. Component colours are in custom/custom.scss.
+$color-scheme: dark;
+$bricd-night: #121a2b;
+$bricd-night-d: #0d1422;
+$bricd-night-l: #1a2439;
+$bricd-ink: #c9d2e3;
+$bricd-heading: #e6ecf7;
+$bricd-link: #82b1ea;
+$bricd-muted: #98a5bb;
+$bricd-line: #28334c;
+
+$body-background-color: $bricd-night;
+$body-heading-color: $bricd-heading;
+$body-text-color: $bricd-ink;
+$link-color: $bricd-link;
+$nav-child-link-color: $bricd-muted;
+$sidebar-color: $bricd-night-d;
+$base-button-color: $bricd-night-l;
+$btn-primary-color: #2b5797;
+$code-background-color: $bricd-night-d;
+$code-linenumber-color: $bricd-muted;
+$feedback-color: darken($sidebar-color, 3%);
+$table-background-color: $bricd-night;
+$search-background-color: $bricd-night-l;
+$search-result-preview-color: $bricd-muted;
+$border-color: $bricd-line;

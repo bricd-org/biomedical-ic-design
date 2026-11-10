@@ -1,0 +1,26 @@
+// BRICD light colour scheme (matches www.thebricd.org and the PDF edition)
+$color-scheme: light;
+$bricd-navy: #1b2a52;
+$bricd-blue: #235ea3;
+$bricd-blue-d: #173f78;
+$bricd-gold: #a8862e;
+$bricd-gold-d: #8a6a1c;
+$bricd-ink: #18222e;
+$bricd-muted: #56657a;
+$bricd-line: #e4e9f1;
+$bricd-soft: #f5f7fa;
+
+$body-background-color: #ffffff;
+$body-heading-color: $bricd-navy;
+$body-text-color: $bricd-ink;
+$link-color: $bricd-blue;
+$nav-child-link-color: $bricd-muted;
+$sidebar-color: $bricd-soft;
+$base-button-color: #f7f7f7;
+$btn-primary-color: $bricd-navy;
+$code-background-color: #f4f6fa;
+$feedback-color: darken($sidebar-color, 3%);
+$table-background-color: #ffffff;
+$search-background-color: #ffffff;
+$search-result-preview-color: $bricd-muted;
+$border-color: $bricd-line;

@@ -1,0 +1,51 @@
+%% 28_bioz.tex -- Chapter 28: Bioimpedance Sensing and IQ Demodulation
+%% Status: OUTLINE (build stage 5). Replace the outline with the full chapter when it is written.
+\chapter{Bioimpedance Sensing and IQ Demodulation}\label{ch:bioz}
+\chapterlead{Inject a small AC current, measure the voltage, and recover the complex impedance of tissue or of the electrode interface.}
+
+\begin{specnote}[Chapter status: outline]
+This chapter is an outline. It will be written in build stage 5 (Part IV, including bioimpedance, with Labs 11--13 and 15). The topics, the design question and the labs below are fixed; the derivations, worked examples and figures are still to come.
+\end{specnote}
+
+\begin{objectives}
+\begin{itemize}
+  \item model tissue and electrodes with the Cole model and its dispersion;
+  \item explain why a tetrapolar (four-electrode) measurement removes electrode impedance;
+  \item design excitation sources: sine DAC with V-to-I converter, Howland and OTA-based current sources, square and pseudo-sine waves, multi-sine and chirp;
+  \item implement IQ (quadrature) demodulation in the analog and digital domains and predict its errors;
+  \item run ECG and impedance on the same electrodes by frequency separation;
+  \item respect the frequency-dependent patient-current limits.
+\end{itemize}
+\end{objectives}
+
+\begin{insight}[Design question]
+What excitation frequency, current and demodulator give the required $\Delta Z$ resolution within the safety limits?
+\end{insight}
+
+\section{Applications}\label{sec:ch28-1}
+Respiration by impedance pneumography (reusing the ECG electrodes), impedance cardiography, body composition (BIA/BIS), electrical impedance tomography (EIT), electrodermal activity, electrode-contact quality and cell and tissue impedance spectroscopy.
+
+\begin{keyeq}[IQ demodulation]
+\begin{equation}
+  I = \tfrac{A}{2}\cos\varphi,\quad Q = \tfrac{A}{2}\sin\varphi \quad\Rightarrow\quad |Z| = \frac{2\sqrt{I^2+Q^2}}{I_{\mathrm{exc}}},\quad \varphi = \operatorname{atan2}(Q, I)
+  \label{eq:iq}
+\end{equation}
+\end{keyeq}
+
+\section{Tissue and electrode models}\label{sec:ch28-2}
+The Cole model and dispersion; bipolar versus tetrapolar measurement; the small $\Delta Z$ of respiration and heartbeat on top of a large baseline $Z$, which sets the dynamic range.
+
+\section{Excitation}\label{sec:ch28-3}
+Sine DAC plus V-to-I converter, Howland and OTA-based current sources, square-wave and pseudo-sine excitation, multi-sine and chirp for spectroscopy; output impedance, common-mode control and the frequency-dependent patient-current limits of \cref{ch:interference}.
+
+\section{IQ demodulation}\label{sec:ch28-4}
+Mixing with in-phase and quadrature references, low-pass filtering, magnitude and phase; analog mixers versus chopper-style square-wave demodulators (and their odd-harmonic errors) versus digital IQ after the ADC; reference phase errors and I/Q mismatch; synchronous detection as a lock-in amplifier.
+
+\section{Readout architecture}\label{sec:ch28-5}
+IA and baseline cancellation, ADC requirements for the IQ outputs, ECG and impedance on the same electrodes, and multi-frequency, multi-channel systems for EIT.
+
+\begin{tryit}[Labs for this chapter]
+Lab~15 (\cref{sec:lab15}) models Cole tissue in a tetrapolar set-up with digital IQ demodulation in Python, then builds an OTA current source and a square-wave IQ demodulator in \sgx{}.
+\end{tryit}
+
+\paragraph{Read with this chapter} Webster~\cite{webster}, Pall\`as-Areny and Webster~\cite{pallasareny}.

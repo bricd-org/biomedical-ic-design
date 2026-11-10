@@ -1,0 +1,35 @@
+%% 11_filters.tex -- Chapter 11: Filters, PGAs and Anti-Aliasing
+%% Status: OUTLINE (build stage 3). Replace the outline with the full chapter when it is written.
+\chapter{Filters, PGAs and Anti-Aliasing}\label{ch:filters}
+\chapterlead{Between the LNA and the ADC the signal needs more gain, a defined bandwidth and protection from aliasing, at corner frequencies from a fraction of a hertz to a few kilohertz.}
+
+\begin{specnote}[Chapter status: outline]
+This chapter is an outline. It will be written in build stage 3 (Part II with Labs 3--5). The topics, the design question and the labs below are fixed; the derivations, worked examples and figures are still to come.
+\end{specnote}
+
+\begin{objectives}
+\begin{itemize}
+  \item design Gm-C and switched-capacitor filters with sub-hertz to kilohertz corners;
+  \item design a programmable-gain amplifier for the three \OB{} modes;
+  \item choose the anti-aliasing filter order from the ADC oversampling ratio;
+  \item explain why mains notch filters belong in the digital domain.
+\end{itemize}
+\end{objectives}
+
+\begin{insight}[Design question]
+How much filtering and gain does each mode need before the SAR and the $\Delta\Sigma$ ADC, and where should each filter live?
+\end{insight}
+
+\section{Very-low-frequency filters on chip}\label{sec:ch11-1}
+Gm-C filters with nanoampere transconductors and switched-capacitor filters at low clock rates; area, noise and linearity at sub-hertz corners.
+
+\section{Programmable gain}\label{sec:ch11-2}
+Capacitive and resistive PGAs; gain steps for ECG, EEG and EMG amplitudes (\cref{ch:signals}) so the ADC range is used well.
+
+\section{Anti-aliasing versus oversampling}\label{sec:ch11-3}
+The required attenuation at $\fs - f_\mathrm{B}$ for the SAR; why the $\Delta\Sigma$ converter relaxes the analog filter; mains harmonics and EMG folding into the ECG band (\cref{ch:sampling}).
+
+\section{Mains notch filtering}\label{sec:ch11-4}
+Analog notches drift and distort; adaptive and comb notches after the ADC (\cref{ch:dsp}) track the mains frequency.
+
+\paragraph{Read with this chapter} Razavi~\cite{razavi} (switched-capacitor circuits), Yazicioglu, Van Hoof and Puers~\cite{yazicioglubook}.

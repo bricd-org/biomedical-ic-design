@@ -1,0 +1,50 @@
+%% 15_switches.tex -- Chapter 15: Sample-and-Hold Circuits and Switches
+%% Status: OUTLINE (build stage 4). Replace the outline with the full chapter when it is written.
+\chapter{Sample-and-Hold Circuits and Switches}\label{ch:switches}
+\chapterlead{The sampling switch and capacitor set the noise floor of a SAR converter before a single comparison is made.}
+
+\begin{specnote}[Chapter status: outline]
+This chapter is an outline. It will be written in build stage 4 (the rest of Part III with Labs 7, 8 and 10). The topics, the design question and the labs below are fixed; the derivations, worked examples and figures are still to come.
+\end{specnote}
+
+\begin{objectives}
+\begin{itemize}
+  \item derive $kT/C$ noise and the minimum sampling capacitance per bit;
+  \item size a switch for settling within the acquisition time;
+  \item reduce charge injection and clock feedthrough with bottom-plate sampling;
+  \item design a bootstrapped switch for a \qty{1.2}{\volt} supply;
+  \item handle leakage at very low sample rates and multiplexer crosstalk.
+\end{itemize}
+\end{objectives}
+
+\begin{insight}[Design question]
+How large must the sampling capacitor be, and how should the switch be built, for 12 bits at \qty{1.2}{\volt} and a few kilosamples per second?
+\end{insight}
+
+\section{\texorpdfstring{$kT/C$}{kT/C} noise and capacitor size}\label{sec:ch15-1}
+The sampled thermal noise is independent of the switch resistance; the capacitance needed for $N$ bits grows as $2^{2N}$.
+
+\begin{keyeq}[Sampled noise and minimum capacitance]
+\begin{equation}
+  v_{n,\mathrm{rms}} = \sqrt{kT/C} \quad\Rightarrow\quad C_{\min} \approx \frac{12\,kT\,2^{2N}}{V_{\mathrm{FS}}^2}
+  \label{eq:ktc}
+\end{equation}
+\end{keyeq}
+
+\section{Settling and on-resistance}\label{sec:ch15-2}
+Exponential settling to half an LSB in the acquisition window; the on-resistance across the input range at a low supply.
+
+\section{Charge injection and clock feedthrough}\label{sec:ch15-3}
+Signal-dependent errors from channel charge; bottom-plate sampling and dummy switches.
+
+\section{Bootstrapped switches}\label{sec:ch15-4}
+Keeping $V_\mathrm{GS}$ constant to linearise the switch at \qty{1.2}{\volt}; reliability limits in \sgx{}.
+
+\section{Leakage and multiplexing}\label{sec:ch15-5}
+At a few hundred samples per second the held charge leaks through off switches, a problem specific to biomedical ADCs; crosstalk between multiplexed channels.
+
+\begin{tryit}[Labs for this chapter]
+Lab~8 (\cref{sec:lab8}) builds a bootstrapped sample-and-hold as part of the SAR ADC.
+\end{tryit}
+
+\paragraph{Read with this chapter} Razavi~\cite{razavi}, Pelgrom~\cite{pelgrom}.

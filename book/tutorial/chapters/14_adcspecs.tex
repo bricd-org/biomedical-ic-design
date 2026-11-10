@@ -1,0 +1,65 @@
+%% 14_adcspecs.tex -- Chapter 14: Specifications, Figures of Merit and Architecture Choice
+%% Status: OUTLINE (build stage 2). Replace the outline with the full chapter when it is written.
+\chapter{Specifications, Figures of Merit and Architecture Choice}\label{ch:adcspecs}
+\chapterlead{A converter is described by a dozen numbers, but for a biosignal chip two of them, resolution and energy per conversion, decide the architecture.}
+
+\begin{specnote}[Chapter status: outline]
+This chapter is an outline. It will be written in build stage 2 (the Python-only converter core: Chapters 13, 14 and 19 with Labs 6 and 9). The topics, the design question and the labs below are fixed; the derivations, worked examples and figures are still to come.
+\end{specnote}
+
+\begin{objectives}
+\begin{itemize}
+  \item define SNR, SNDR, SFDR, THD, ENOB, DNL, INL, offset and gain error and measure each;
+  \item compute the Walden and Schreier figures of merit and know when each applies;
+  \item place biomedical converters on the Murmann ADC survey;
+  \item explain why thermal-noise-limited power grows $\times 4$ per bit and $CV^2$-limited power $\times 2$;
+  \item choose between SAR, $\Delta\Sigma$, incremental, VCO-based and event-driven converters for a given biosignal.
+\end{itemize}
+\end{objectives}
+
+\begin{insight}[Design question]
+Which converter architecture fits each \OB{} mode, and what energy per conversion should you expect?
+\end{insight}
+
+\section{Dynamic and static specifications}\label{sec:ch14-1}
+Spectral metrics from an FFT, and code-density metrics (DNL, INL) from a histogram; offset and gain error and why biomedical systems can often calibrate them away.
+
+\begin{keyeq}[Walden and Schreier figures of merit]
+\begin{equation}
+  \mathrm{FoM_W} = \frac{P}{f_s\,2^{\ENOB}}, \qquad \mathrm{FoM_S} = \mathrm{SNDR} + 10\log_{10}\!\frac{f_s/2}{P}
+  \label{eq:fom}
+\end{equation}
+\end{keyeq}
+
+\begin{table}[tbp]
+\centering\small
+\caption{\textbf{Converter architectures for biosignals.} The two converters built in this tutorial are the SAR and the incremental $\Delta\Sigma$; the others appear in \cref{ch:bioadc} or only for contrast.}
+\label{tab:ch14-arch}
+\begin{tabularx}{\linewidth}{@{}l L L L@{}}
+\toprule
+Architecture & Typical bio use & Strength & Weakness \\
+\midrule
+SAR & Multiplexed ExG, neural spikes, 8--12\,b & Lowest energy per conversion, mostly digital, scales with technology & Needs an anti-alias filter and S/H; $kT/C$ and DAC matching limit the bits \\
+$\Delta\Sigma$ (DT or CT) & ECG/EEG at 14--20\,b & Relaxed anti-alias filter, high resolution, mismatch-tolerant with a 1-bit DAC & Decimation-filter power; continuous operation; idle tones \\
+Incremental $\Delta\Sigma$ & Multiplexed high-resolution channels & $\Delta\Sigma$ accuracy with a reset per sample, multiplexer-friendly & Lower SQNR per OSR than a free-running $\Delta\Sigma$ \\
+VCO / time-domain & Direct digitisation, tiny area & Mostly digital, inherent first-order shaping & VCO nonlinearity, supply sensitivity \\
+Level-crossing / event-driven & Sparse signals (spikes, ECG) & Data and power scale with activity & Non-uniform samples, harder DSP \\
+Pipeline / flash & Not used for ExG & Speed & Power far beyond biosignal needs; shown only for contrast \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Figures of merit}\label{sec:ch14-2}
+Walden FoM for converters limited by energy per step, Schreier FoM for thermal-noise-limited designs; reading the survey data of Murmann~\cite{murmannsurvey}.
+
+\section{Power per bit}\label{sec:ch14-3}
+$kT/C$ sets the capacitor size and therefore the energy for high-resolution converters ($\times 4$ per extra bit); switching energy $CV^2$ dominates at low resolution ($\times 2$ per bit).
+
+\section{Architecture choice for biosignals}\label{sec:ch14-4}
+The summary in \cref{tab:ch14-arch}: SAR for multiplexed EMG and spikes, incremental $\Delta\Sigma$ for high-resolution ECG and EEG, and newer time-domain and event-driven options.
+
+\begin{tryit}[Labs for this chapter]
+Lab~6 (\cref{sec:lab6}) computes SNDR, SFDR and ENOB and histogram DNL/INL with injected capacitor mismatch.
+\end{tryit}
+
+\paragraph{Read with this chapter} Murmann~\cite{murmannsurvey}, Pelgrom~\cite{pelgrom}.

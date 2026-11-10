@@ -1,0 +1,46 @@
+%% 18_sar.tex -- Chapter 18: The SAR ADC
+%% Status: OUTLINE (build stage 4). Replace the outline with the full chapter when it is written.
+\chapter{The SAR ADC}\label{ch:sar}
+\chapterlead{Binary search in silicon: the 12-bit asynchronous SAR is the converter for the multiplexed EMG and spike modes of \OB{}.}
+
+\begin{specnote}[Chapter status: outline]
+This chapter is an outline. It will be written in build stage 4 (the rest of Part III with Labs 7, 8 and 10). The topics, the design question and the labs below are fixed; the derivations, worked examples and figures are still to come.
+\end{specnote}
+
+\begin{objectives}
+\begin{itemize}
+  \item implement the binary search algorithm with a CDAC, a comparator and SAR logic;
+  \item choose between synchronous and asynchronous timing;
+  \item write the SAR logic in Verilog and synthesise or hand-build it;
+  \item add redundancy with non-binary weights and calibrate digitally;
+  \item power-gate and duty-cycle the converter between biosignal samples.
+\end{itemize}
+\end{objectives}
+
+\begin{insight}[Design question]
+What SAR design reaches 12 bits at the lowest energy per conversion for eight multiplexed channels?
+\end{insight}
+
+\section{The binary search algorithm}\label{sec:ch18-1}
+Sampling, $N$ comparison cycles and the DAC update; the timing of a conversion.
+
+\section{Synchronous versus asynchronous timing}\label{sec:ch18-2}
+An external fast clock versus self-timed comparisons; why asynchronous SARs dominate low-power designs.
+
+\section{SAR logic}\label{sec:ch18-3}
+Verilog for the successive-approximation register, synthesised with the open flow or built from custom cells.
+
+\section{Redundancy and calibration}\label{sec:ch18-4}
+Non-binary weights tolerate DAC settling errors and decision errors; digital correction and calibration.
+
+\section{Power gating and duty cycling}\label{sec:ch18-5}
+At a few kilosamples per second the converter idles most of the time; leakage then dominates.
+
+\section{Case study: a 12-bit SAR in a seizure-detection SoC}\label{sec:ch18-6}
+The \qty{1}{\volt} SAR inside the EEG acquisition SoC of Verma et al.~\cite{verma2010}, read alongside the open SKY130 design of Moser and Pretl~\cite{jkusar}.
+
+\begin{tryit}[Labs for this chapter]
+Lab~8 (\cref{sec:lab8}) integrates the S/H, the CDAC and Verilog SAR logic into a 10- to 12-bit SAR and measures its ENOB and FoM with \code{adctest.py}.
+\end{tryit}
+
+\paragraph{Read with this chapter} Verma et al.~\cite{verma2010}, Moser and Pretl~\cite{jkusar}, the TWEPP 2024 talk~\cite{twepp2024sar}, the IHP Analog Academy~\cite{ihpacademy}.

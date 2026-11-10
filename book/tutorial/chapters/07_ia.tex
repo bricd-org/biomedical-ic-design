@@ -1,0 +1,38 @@
+%% 07_ia.tex -- Chapter 7: Instrumentation Amplifier Architectures
+%% Status: OUTLINE (build stage 3). Replace the outline with the full chapter when it is written.
+\chapter{Instrumentation Amplifier Architectures}\label{ch:ia}
+\chapterlead{The instrumentation amplifier is where the common-mode rejection of the whole chain is won or lost.}
+
+\begin{specnote}[Chapter status: outline]
+This chapter is an outline. It will be written in build stage 3 (Part II with Labs 3--5). The topics, the design question and the labs below are fixed; the derivations, worked examples and figures are still to come.
+\end{specnote}
+
+\begin{objectives}
+\begin{itemize}
+  \item analyse the three-op-amp, current-feedback and capacitively coupled instrumentation amplifiers (CCIA);
+  \item trace where CMRR comes from in each: resistor or capacitor mismatch, finite common-mode gain, input impedance;
+  \item design for a rail-to-rail common-mode range at a \qty{1.2}{\volt} supply;
+  \item choose an IA architecture for the \OB{} channel.
+\end{itemize}
+\end{objectives}
+
+\begin{insight}[Design question]
+Which instrumentation-amplifier architecture gives more than \qty{90}{\deci\bel} of CMRR and a \qty{\pm 300}{\milli\volt} offset range at microwatt power and \qty{1.2}{\volt}?
+\end{insight}
+
+\section{The three-op-amp instrumentation amplifier}\label{sec:ch7-1}
+Gain in the first stage, CMRR set by resistor matching in the difference amplifier, and why the classic textbook IA is too power-hungry and offset-limited for a microwatt ExG chip.
+
+\section{Current-feedback (indirect current feedback) IAs}\label{sec:ch7-2}
+Transconductors convert the input and feedback voltages to currents; CMRR no longer depends on resistor matching; limited input range and linearity.
+
+\section{Capacitively coupled IAs}\label{sec:ch7-3}
+Input capacitors block electrode DC and set the gain by a capacitor ratio, which matches well on chip. CCIAs dominate modern ExG front-ends and lead to the chopper amplifiers of \cref{ch:chopper}.
+
+\section{CMRR mechanisms and mismatch}\label{sec:ch7-4}
+Intrinsic CMRR of the amplifier versus CMRR lost to electrode impedance imbalance (\cref{ch:interference}); budgeting the two against the \qty{89}{\deci\bel} the ECG standards imply.
+
+\section{Common-mode range at \texorpdfstring{\qty{1.2}{\volt}}{1.2 V}}\label{sec:ch7-5}
+Input stages that tolerate the body common-mode voltage and the \qty{\pm 300}{\milli\volt} electrode offset on a low supply.
+
+\paragraph{Read with this chapter} Yazicioglu, Van Hoof and Puers~\cite{yazicioglubook}, Pall\`as-Areny and Webster~\cite{pallas1991}, Webster~\cite{webster} (biopotential amplifiers).

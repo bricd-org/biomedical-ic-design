@@ -1,0 +1,31 @@
+<!-- Dark mode: apply the reader's saved choice (or else their system setting) before the page is drawn.
+     The button in header_custom.html switches it; jtd.setTheme swaps in just-the-docs-bricd-dark.css. -->
+<script>
+  (function () {
+    var theme = null;
+    try { theme = localStorage.getItem('bricd-theme'); } catch (e) {}
+    if (theme !== 'dark' && theme !== 'light')
+      theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') {
+      // render-blocking, so the light page does not flash up while the dark stylesheet loads
+      document.querySelector('[rel="stylesheet"]').setAttribute('blocking', 'render');
+      jtd.setTheme('bricd-dark');
+    }
+  })();
+</script>
+
+<!-- BRICD fonts (same families as www.thebricd.org) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- KaTeX: every page's maths is written as \( ... \) and \[ ... \] by the LaTeX converter -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+  onload="renderMathInElement(document.querySelector('.main-content') || document.body, {
+    delimiters: [{left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}],
+    ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+    throwOnError: false, strict: 'ignore', trust: true});"></script>
+<meta property="og:image" content="{{ '/assets/images/cover.png' | absolute_url }}">

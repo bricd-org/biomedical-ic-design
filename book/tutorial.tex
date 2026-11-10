@@ -1,0 +1,109 @@
+%% tutorial.tex -- Open-BioAFE Design Tutorial (BRICD)
+%% Compile with pdfLaTeX + BibTeX (Overleaf: set this file as the Main document).
+%% All sources live in the tutorial/ folder.
+\documentclass[11pt,a4paper,oneside,openany]{book}
+\usepackage{tutorial/biotut}
+
+% Faster compiles while editing: uncomment and list the chapters you are working on;
+% cross-references to other chapters keep working.
+%\includeonly{tutorial/chapters/02_signals,tutorial/chapters/03_electrodes}
+% Partial builds (local): if <jobname>.only exists it may contain \includeonly{...}
+\IfFileExists{\jobname.only}{\input{\jobname.only}}{}
+
+\hypersetup{pdftitle={Designing a Biopotential Acquisition Chip from Scratch: The Open-BioAFE Tutorial},
+            pdfauthor={Open-BioAFE Project, BRICD}}
+
+\begin{document}
+\frontmatter
+%% ------------------------------------------------------------------ title page
+\begin{titlepage}
+\thispagestyle{empty}
+\tikzexternaldisable
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[navy] (current page.south west) rectangle (current page.north east);
+  \foreach \x in {0,1,...,21}{\draw[slate,line width=0.3pt] ($(current page.south west)+(\x*1cm,0)$) -- ++(0,30cm);}
+  \foreach \y in {0,1,...,30}{\draw[slate,line width=0.3pt] ($(current page.south west)+(0,\y*1cm)$) -- ++(21cm,0);}
+  % stylised ECG trace: three beats (P wave, QRS complex, T wave)
+  \begin{scope}[shift={($(current page.south west)+(1.2cm,6.2cm)$)},x=1cm,y=1cm]
+    \foreach \s in {0,6.2,12.4}{
+      \draw[goldlt,line width=2.2pt,line cap=round,line join=round]
+        (\s,0) -- (\s+0.9,0) .. controls (\s+1.15,0.55) and (\s+1.45,0.55) .. (\s+1.7,0)
+        -- (\s+2.15,0) -- (\s+2.35,-0.45) -- (\s+2.65,3.6) -- (\s+2.95,-0.9) -- (\s+3.15,0)
+        -- (\s+3.7,0) .. controls (\s+4.1,1.05) and (\s+4.7,1.05) .. (\s+5.1,0) -- (\s+6.2,0);
+    }
+  \end{scope}
+  \node[anchor=north west,text=goldlt,font=\sffamily\bfseries\large] at ($(current page.north west)+(2.4cm,-3.2cm)$)
+     {OPEN-BIOAFE \textperiodcentered{} IHP SG13G2 \textperiodcentered{} 8-CHANNEL ExG FRONT-END};
+  \node[anchor=north west,text=white,font=\sffamily\bfseries\fontsize{40}{46}\selectfont,text width=16.5cm,align=left]
+     at ($(current page.north west)+(2.4cm,-4.4cm)$) {Designing a Biopotential Acquisition Chip from Scratch};
+  \draw[gold,line width=2.4pt] ($(current page.north west)+(2.45cm,-10.3cm)$) -- ++(4.5cm,0);
+  \node[anchor=north west,text=pale,font=\sffamily\Large,text width=15.5cm,align=left]
+     at ($(current page.north west)+(2.4cm,-10.9cm)$)
+     {A design tutorial for undergraduate and early-graduate engineers building an open-source biomedical analog front-end and data converters in 130\,nm SiGe BiCMOS};
+  \node[anchor=north west,text=white,font=\sffamily\normalsize,text width=15.5cm,align=left]
+     at ($(current page.north west)+(2.4cm,-14.6cm)$)
+     {Bioelectric signals \textperiodcentered{} Electrodes and safety \textperiodcentered{} Low-noise amplifiers \textperiodcentered{} Chopping \textperiodcentered{} SAR and $\Delta\Sigma$ ADCs \textperiodcentered{} Bioimpedance \textperiodcentered{} Biosignal processing \textperiodcentered{} Open-source flow \textperiodcentered{} Hands-on labs};
+  \node[anchor=south west,text=white,font=\sffamily\bfseries\large] at ($(current page.south west)+(2.4cm,2.6cm)$) {BRICD};
+  \node[anchor=south west,text=pale,font=\sffamily\small] at ($(current page.south west)+(2.4cm,1.9cm)$)
+     {Biomedical Research in Integrated Circuit Design \textperiodcentered{} thebricd.org};
+  \node[anchor=south east,text=pale,font=\sffamily\small,align=right] at ($(current page.south east)+(-2.4cm,1.9cm)$)
+     {Open-BioAFE Project\\Draft v0.1 \textperiodcentered{} November 2026};
+\end{tikzpicture}
+\tikzexternalenable
+\end{titlepage}
+
+\input{tutorial/chapters/00_preface}
+{\hypersetup{linkcolor=navy}\tableofcontents}
+
+\mainmatter
+\tutpart{Foundations}{Where biopotentials come from, how big and how fast they are, what the electrode and the body do to them, and the interference, safety rules and standards every front-end must meet. Every budget in the rest of the tutorial starts here.}
+\include{tutorial/chapters/01_why}
+\include{tutorial/chapters/02_signals}
+\include{tutorial/chapters/03_electrodes}
+\include{tutorial/chapters/04_interference}
+
+\tutpart{The Analog Front-End}{Low-noise, low-power amplification at the microwatt level: devices in weak inversion, the noise--power trade-off, instrumentation amplifiers, the AC-coupled LNA, chopping, DC servo loops, filters and common-mode control, all in SG13G2.}
+\include{tutorial/chapters/05_devices}
+\include{tutorial/chapters/06_noise}
+\include{tutorial/chapters/07_ia}
+\include{tutorial/chapters/08_lna}
+\include{tutorial/chapters/09_chopper}
+\include{tutorial/chapters/10_dsl}
+\include{tutorial/chapters/11_filters}
+\include{tutorial/chapters/12_cmcontrol}
+
+\tutpart{Data Converters}{From the quantiser to a measured converter: sampling, specifications and figures of merit, switches, comparators, capacitive DACs, the 12-bit SAR ADC, $\Delta\Sigma$ theory and circuits, converters made for biosignals, and how to test them.}
+\include{tutorial/chapters/13_sampling}
+\include{tutorial/chapters/14_adcspecs}
+\include{tutorial/chapters/15_switches}
+\include{tutorial/chapters/16_comparators}
+\include{tutorial/chapters/17_cdac}
+\include{tutorial/chapters/18_sar}
+\include{tutorial/chapters/19_dstheory}
+\include{tutorial/chapters/20_dscircuits}
+\include{tutorial/chapters/21_bioadc}
+\include{tutorial/chapters/22_adctest}
+
+\tutpart{Biosignal Processing and Systems}{What happens to the samples: a DSP toolkit for biosignals, ECG, EEG, EMG and spike processing on open datasets, on-chip feature extraction and system blocks, and bioimpedance sensing with IQ demodulation.}
+\include{tutorial/chapters/23_dsp}
+\include{tutorial/chapters/24_ecg}
+\include{tutorial/chapters/25_eeg}
+\include{tutorial/chapters/26_emg}
+\include{tutorial/chapters/27_soc}
+\include{tutorial/chapters/28_bioz}
+
+\tutpart{Putting It Together}{The full Open-BioAFE architecture and its budgets, the open-source design and verification flow from schematic to an IHP OpenMPW submission, and fifteen hands-on labs with a capstone.}
+\include{tutorial/chapters/29_arch}
+\include{tutorial/chapters/30_flow}
+\include{tutorial/chapters/31_labs}
+
+\appendix
+\include{tutorial/chapters/A_appendices}
+
+\backmatter
+\cleardoublepage
+\renewcommand{\bibname}{References}
+\phantomsection\addcontentsline{toc}{chapter}{References}
+\bibliographystyle{unsrtnat}
+\bibliography{tutorial/bib/core}
+\end{document}

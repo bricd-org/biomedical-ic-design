@@ -1,0 +1,39 @@
+%% 25_eeg.tex -- Chapter 25: EEG Processing and Brain--Computer Interfaces
+%% Status: OUTLINE (build stage 5). Replace the outline with the full chapter when it is written.
+\chapter{EEG Processing and Brain--Computer Interfaces}\label{ch:eeg}
+\chapterlead{EEG carries information in rhythms and their changes; most of the processing estimates power in frequency bands.}
+
+\begin{specnote}[Chapter status: outline]
+This chapter is an outline. It will be written in build stage 5 (Part IV, including bioimpedance, with Labs 11--13 and 15). The topics, the design question and the labs below are fixed; the derivations, worked examples and figures are still to come.
+\end{specnote}
+
+\begin{objectives}
+\begin{itemize}
+  \item compute band power and spectral features;
+  \item remove EOG and EMG artefacts, including with ICA;
+  \item detect seizure onset on the CHB-MIT database;
+  \item explain the basics of SSVEP and motor-imagery BCIs.
+\end{itemize}
+\end{objectives}
+
+\begin{insight}[Design question]
+Which EEG features need which resolution and sample rate, and what does that save on chip?
+\end{insight}
+
+\section{Band power and spectral features}\label{sec:ch25-1}
+Welch spectra, relative band power and spectral edge frequency for the $\delta$ to $\gamma$ bands of \cref{ch:signals}.
+
+\section{Artefact removal}\label{sec:ch25-2}
+Eye-blink and muscle artefacts; regression and independent component analysis.
+
+\section{Seizure-onset detection}\label{sec:ch25-3}
+Patient-specific detectors on the CHB-MIT database~\cite{chbmit} and the SoC of Verma et al.~\cite{verma2010}.
+
+\section{BCI basics}\label{sec:ch25-4}
+Steady-state visually evoked potentials and motor imagery.
+
+\begin{tryit}[Labs for this chapter]
+Lab~12 (\cref{sec:lab12}) computes band-power features on CHB-MIT, trains a simple classifier and repeats it with reduced word length and sample rate.
+\end{tryit}
+
+\paragraph{Read with this chapter} Shoeb~\cite{chbmit}, Verma et al.~\cite{verma2010}.

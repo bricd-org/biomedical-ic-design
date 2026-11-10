@@ -1,0 +1,34 @@
+<!-- Dark mode button. The saved theme is applied early by the script at the top of head_custom.html. -->
+<button type="button" id="theme-toggle" class="theme-toggle" aria-label="Dark mode" aria-pressed="false" title="Switch to dark mode">
+  <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></g></svg>
+</button>
+<script>
+  (function () {
+    var buttons = [document.getElementById('theme-toggle')];
+    // on narrow screens this header is folded into the menu, so put a copy next to the menu button
+    var menu = document.getElementById('menu-button');
+    if (menu) {
+      var copy = buttons[0].cloneNode(true);
+      copy.removeAttribute('id');
+      menu.parentNode.insertBefore(copy, menu);
+      buttons.push(copy);
+    }
+    function show(theme) {
+      buttons.forEach(function (btn) {
+        btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+        btn.title = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+      });
+    }
+    function toggle() {
+      var theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      // "default" is just-the-docs-default.css, the light BRICD scheme set in _config.yml
+      jtd.setTheme(theme === 'dark' ? 'bricd-dark' : 'default');
+      document.documentElement.setAttribute('data-theme', theme);
+      try { localStorage.setItem('bricd-theme', theme); } catch (e) {}
+      show(theme);
+    }
+    show(document.documentElement.getAttribute('data-theme'));
+    buttons.forEach(function (btn) { btn.addEventListener('click', toggle); });
+  })();
+</script>

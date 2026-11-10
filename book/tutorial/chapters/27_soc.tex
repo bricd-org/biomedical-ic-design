@@ -1,0 +1,47 @@
+%% 27_soc.tex -- Chapter 27: On-Chip Processing and System Integration
+%% Status: OUTLINE (build stage 5). Replace the outline with the full chapter when it is written.
+\chapter{On-Chip Processing and System Integration}\label{ch:soc}
+\chapterlead{On a wearable or implant, the radio usually costs more energy than the sensing; computing on chip is how you spend less of it.}
+
+\begin{specnote}[Chapter status: outline]
+This chapter is an outline. It will be written in build stage 5 (Part IV, including bioimpedance, with Labs 11--13 and 15). The topics, the design question and the labs below are fixed; the derivations, worked examples and figures are still to come.
+\end{specnote}
+
+\begin{objectives}
+\begin{itemize}
+  \item place feature extraction and small machine-learning models in silicon;
+  \item use the seizure-detection SoC of Verma et al.~\cite{verma2010} as a case study;
+  \item compress biosignal data before transmission;
+  \item design power management with LDOs and energy harvesting;
+  \item compare BLE, backscatter and inductive data links;
+  \item introduce stimulation: current DACs and charge balance.
+\end{itemize}
+\end{objectives}
+
+\begin{insight}[Design question]
+Which processing belongs on the \OB{} chip, and which data must leave it?
+\end{insight}
+
+\section{Feature extraction and edge ML in silicon}\label{sec:ch27-1}
+Energy per operation versus energy per transmitted bit.
+
+\section{Case study: an EEG seizure-detection SoC}\label{sec:ch27-2}
+Chopper IA, 12-bit SAR and feature processor on one die~\cite{verma2010}.
+
+\section{Compression}\label{sec:ch27-3}
+Lossless and lossy compression for ECG, EEG and spikes.
+
+\section{Power management}\label{sec:ch27-4}
+LDOs, their noise and PSRR for microvolt front-ends; batteries and energy harvesting.
+
+\section{Data links}\label{sec:ch27-5}
+BLE, backscatter and inductive links; energy per bit.
+
+\section{Stimulation}\label{sec:ch27-6}
+Current-steering DACs, charge balance and electrode safety.
+
+\begin{tryit}[Labs for this chapter]
+Lab~12 (\cref{sec:lab12}) relates seizure-detection accuracy to bits and a power proxy.
+\end{tryit}
+
+\paragraph{Read with this chapter} Verma et al.~\cite{verma2010}, Sarpeshkar~\cite{sarpeshkar}.

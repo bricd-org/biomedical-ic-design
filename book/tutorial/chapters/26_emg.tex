@@ -1,0 +1,39 @@
+%% 26_emg.tex -- Chapter 26: EMG and Neural Spike Processing
+%% Status: OUTLINE (build stage 5). Replace the outline with the full chapter when it is written.
+\chapter{EMG and Neural Spike Processing}\label{ch:emg}
+\chapterlead{Muscle signals are read through their envelope; neural signals through the timing of individual spikes.}
+
+\begin{specnote}[Chapter status: outline]
+This chapter is an outline. It will be written in build stage 5 (Part IV, including bioimpedance, with Labs 11--13 and 15). The topics, the design question and the labs below are fixed; the derivations, worked examples and figures are still to come.
+\end{specnote}
+
+\begin{objectives}
+\begin{itemize}
+  \item compute EMG envelopes and the time-domain features MAV, WL, ZC and SSC;
+  \item classify hand gestures on NinaPro;
+  \item detect neural spikes with the nonlinear energy operator (NEO);
+  \item explain spike sorting and why implants compress before transmitting.
+\end{itemize}
+\end{objectives}
+
+\begin{insight}[Design question]
+How much resolution, sample rate and channel count does gesture recognition or spike detection actually need?
+\end{insight}
+
+\section{EMG envelopes and features}\label{sec:ch26-1}
+Rectification and smoothing; mean absolute value, waveform length, zero crossings and slope-sign changes.
+
+\section{Gesture classification}\label{sec:ch26-2}
+LDA and SVM classifiers on the NinaPro database~\cite{ninapro}.
+
+\section{Spike detection}\label{sec:ch26-3}
+Thresholds and the NEO; detection versus the noise of \cref{ch:noise}.
+
+\section{Spike sorting and compression}\label{sec:ch26-4}
+Clustering waveforms; why a thousand-channel implant must send spikes, not samples.
+
+\begin{tryit}[Labs for this chapter]
+Lab~13 (\cref{sec:lab13}) computes MAV, WL, ZC and SSC on NinaPro, classifies with LDA or SVM and repeats with fixed-point features.
+\end{tryit}
+
+\paragraph{Read with this chapter} Atzori et al.~\cite{ninapro}.

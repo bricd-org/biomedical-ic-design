@@ -1,0 +1,39 @@
+%% 21_bioadc.tex -- Chapter 21: Biomedical Converter Innovations
+%% Status: OUTLINE (build stage 4). Replace the outline with the full chapter when it is written.
+\chapter{Biomedical Converter Innovations}\label{ch:bioadc}
+\chapterlead{In recent designs the boundary between the amplifier and the converter is dissolving.}
+
+\begin{specnote}[Chapter status: outline]
+This chapter is an outline. It will be written in build stage 4 (the rest of Part III with Labs 7, 8 and 10). The topics, the design question and the labs below are fixed; the derivations, worked examples and figures are still to come.
+\end{specnote}
+
+\begin{objectives}
+\begin{itemize}
+  \item explain direct digitisation with $\Delta\Sigma$ front-ends that take the electrode as input;
+  \item design for the large input range that motion artefacts require;
+  \item describe VCO- and time-based ADCs;
+  \item compare level-crossing and event-driven sampling with uniform sampling;
+  \item assess compressive sensing for biosignals.
+\end{itemize}
+\end{objectives}
+
+\begin{insight}[Design question]
+When does it pay to merge the amplifier and the ADC, and when to sample only on events?
+\end{insight}
+
+\section{Direct digitisation}\label{sec:ch21-1}
+$\Delta\Sigma$ loops that close around the electrode, removing the LNA and gaining dynamic range against artefacts.
+
+\section{VCO- and time-domain ADCs}\label{sec:ch21-2}
+Voltage-controlled oscillators as integrating quantisers with first-order shaping; nonlinearity and supply sensitivity.
+
+\section{Level-crossing and event-driven sampling}\label{sec:ch21-3}
+Data and power that scale with activity for sparse spikes and ECG.
+
+\section{Compressive sensing}\label{sec:ch21-4}
+Random projections of sparse signals; what it saves in the radio and costs in reconstruction.
+
+\section{The dissolving AFE/ADC boundary}\label{sec:ch21-5}
+Reading recent ISSCC designs with the budgets of this tutorial.
+
+\paragraph{Read with this chapter} Murmann~\cite{murmannsurvey}.

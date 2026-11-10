@@ -1,0 +1,43 @@
+%% 22_adctest.tex -- Chapter 22: Testing and Characterising ADCs
+%% Status: OUTLINE (build stage 4). Replace the outline with the full chapter when it is written.
+\chapter{Testing and Characterising ADCs}\label{ch:adctest}
+\chapterlead{A converter is only as good as the measurement that proves it.}
+
+\begin{specnote}[Chapter status: outline]
+This chapter is an outline. It will be written in build stage 4 (the rest of Part III with Labs 7, 8 and 10). The topics, the design question and the labs below are fixed; the derivations, worked examples and figures are still to come.
+\end{specnote}
+
+\begin{objectives}
+\begin{itemize}
+  \item choose coherent sampling frequencies and windows for FFT tests;
+  \item compute SNDR and SFDR from an FFT;
+  \item measure DNL and INL with the sine-wave histogram and with static ramps;
+  \item compare behavioural Verilog-A or Python models with transistor-level results;
+  \item plan the measurements for a returned OpenMPW die.
+\end{itemize}
+\end{objectives}
+
+\begin{insight}[Design question]
+How do you prove, in simulation and on a returned die, that the \OB{} converters meet their specifications?
+\end{insight}
+
+\section{Coherent sampling and windowing}\label{sec:ch22-1}
+Choosing $f_\mathrm{in} = (M/N)\fs$ with $M$ and $N$ co-prime; windows when coherence is impossible.
+
+\section{FFT-based SNDR and SFDR}\label{sec:ch22-2}
+Bins, leakage, harmonics and the noise floor; the processing gain of a long FFT.
+
+\section{Histogram and ramp tests}\label{sec:ch22-3}
+Code-density DNL and INL from a sine-wave histogram; static ramp tests for slow converters.
+
+\section{Models versus transistors}\label{sec:ch22-4}
+Behavioural models for fast system simulation and their validation against transistor-level results.
+
+\section{Testing a returned die}\label{sec:ch22-5}
+The bench set-up, the measurements that matter, and how to report them.
+
+\begin{tryit}[Labs for this chapter]
+Lab~6 (\cref{sec:lab6}) writes the \code{adctest.py} module used by Labs~8 and~10.
+\end{tryit}
+
+\paragraph{Read with this chapter} Pelgrom~\cite{pelgrom}.
