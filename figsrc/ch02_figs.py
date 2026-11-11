@@ -4,6 +4,7 @@ import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "labs", "python"))
 from bricdstyle import *
 from matplotlib.patches import Rectangle
+from matplotlib.colors import to_rgba
 import biosig as bs
 
 
@@ -106,7 +107,8 @@ def amplitude_bandwidth_map():
               "LFP (intracortical)": ((0.9, 5.5e-2), (2.0, 2e-3)),
               "Spikes (extracellular)": ((900, 2.2e-3), (2.5e3, 5e-4))}
     for (name, ((a_lo, a_hi), (f_lo, f_hi), fs)), c in zip(bs.SIGNALS.items(), cols):
-        ax.add_patch(Rectangle((f_lo, a_lo), f_hi - f_lo, a_hi - a_lo, facecolor=c, alpha=0.07,
+        # light fill, solid border: alpha goes on the face colour only, so the edge stays opaque
+        ax.add_patch(Rectangle((f_lo, a_lo), f_hi - f_lo, a_hi - a_lo, facecolor=to_rgba(c, 0.07),
                                edgecolor=c, lw=1.4))
         (tx, ty), pt = labels[name]
         if pt is None:
@@ -115,7 +117,7 @@ def amplitude_bandwidth_map():
             ax.annotate(name, xy=pt, xytext=(tx, ty), fontsize=7.4, color=c, fontweight="bold", va="center",
                         arrowprops=dict(arrowstyle="-", lw=0.7, color=c, shrinkA=2, shrinkB=0))
     # electrode offset and the noise target
-    ax.add_patch(Rectangle((0.01, 0.1), 0.04, 0.2, facecolor=MUTED, alpha=0.2, edgecolor=MUTED, lw=1))
+    ax.add_patch(Rectangle((0.01, 0.1), 0.04, 0.2, facecolor=to_rgba(MUTED, 0.2), edgecolor=MUTED, lw=1.4))
     ax.text(0.012, 0.42, "electrode DC offset\nup to ±300 mV", fontsize=7, color=SLATE, va="bottom")
     ax.axhline(bs.SPEC["noise_eeg_uVrms"] * 1e-6, color=AMBER, lw=1.0, ls="--")
     ax.text(1.8e4, 1.25e-6, "Open-BioAFE EEG-mode noise target 1.5 µVrms", fontsize=7, color=AMBERDK,

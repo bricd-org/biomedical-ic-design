@@ -6,6 +6,7 @@ permalink: /
 ---
 
 <div class="hero">
+  <div class="hero-cover"><a href="{% link preface.md %}"><img src="{{ '/assets/images/cover.svg' | relative_url }}" alt="Cover of the Open-BioAFE Tutorial: Designing a Biopotential Acquisition Chip from Scratch"></a></div>
   <div class="hero-text">
     <p class="eyebrow">Open-BioAFE · IHP SG13G2 · 8-channel ExG front-end</p>
     <h1>Designing a Biopotential Acquisition Chip from Scratch</h1>

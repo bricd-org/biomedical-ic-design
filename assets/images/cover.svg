@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 297" width="420" height="594">
+  <title>Designing a Biopotential Acquisition Chip from Scratch: the Open-BioAFE Tutorial</title>
+  <rect width="210" height="297" fill="#1D2A30"/>
+  <!-- monitor grid, 10 mm -->
+  <g stroke="#2E4048" stroke-width="0.3" fill="none"><path d="M10 0 V297"/><path d="M20 0 V297"/><path d="M30 0 V297"/><path d="M40 0 V297"/><path d="M50 0 V297"/><path d="M60 0 V297"/><path d="M70 0 V297"/><path d="M80 0 V297"/><path d="M90 0 V297"/><path d="M100 0 V297"/><path d="M110 0 V297"/><path d="M120 0 V297"/><path d="M130 0 V297"/><path d="M140 0 V297"/><path d="M150 0 V297"/><path d="M160 0 V297"/><path d="M170 0 V297"/><path d="M180 0 V297"/><path d="M190 0 V297"/><path d="M200 0 V297"/><path d="M0 10 H210"/><path d="M0 20 H210"/><path d="M0 30 H210"/><path d="M0 40 H210"/><path d="M0 50 H210"/><path d="M0 60 H210"/><path d="M0 70 H210"/><path d="M0 80 H210"/><path d="M0 90 H210"/><path d="M0 100 H210"/><path d="M0 110 H210"/><path d="M0 120 H210"/><path d="M0 130 H210"/><path d="M0 140 H210"/><path d="M0 150 H210"/><path d="M0 160 H210"/><path d="M0 170 H210"/><path d="M0 180 H210"/><path d="M0 190 H210"/><path d="M0 200 H210"/><path d="M0 210 H210"/><path d="M0 220 H210"/><path d="M0 230 H210"/><path d="M0 240 H210"/><path d="M0 250 H210"/><path d="M0 260 H210"/><path d="M0 270 H210"/><path d="M0 280 H210"/><path d="M0 290 H210"/></g>
+  <g font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+    <text x="24" y="36" fill="#4FD58E" font-size="4.1" font-weight="700" letter-spacing="0.35">OPEN-BIOAFE · IHP SG13G2 · 8-CHANNEL ExG FRONT-END</text>
+    <g fill="#FFFFFF" font-size="12" font-weight="700">
+      <text x="23.4" y="58">Designing a Biopotential</text>
+      <text x="23.4" y="72">Acquisition Chip</text>
+      <text x="23.4" y="86">from Scratch</text>
+    </g>
+    <path d="M24.5 97 H69.5" stroke="#F2B84B" stroke-width="0.9"/>
+    <g fill="#B5C3C5" font-size="5.1">
+      <text x="24" y="110">A design tutorial for undergraduate and early-graduate</text>
+      <text x="24" y="117.5">engineers building an open-source biomedical analog</text>
+      <text x="24" y="125">front-end and data converters in 130 nm SiGe BiCMOS</text>
+    </g>
+    <g fill="#E8F0EE" font-size="3.6">
+      <text x="24" y="143">Bioelectric signals · Electrodes and safety · Low-noise amplifiers · Chopping ·</text>
+      <text x="24" y="149">SAR and ΔΣ ADCs · Bioimpedance · Biosignal processing · Open-source flow ·</text>
+      <text x="24" y="155">Hands-on labs</text>
+    </g>
+    <text x="24" y="270" fill="#FFFFFF" font-size="5" font-weight="700">BRICD</text>
+    <text x="24" y="277.5" fill="#93A1A5" font-size="3.4">Biomedical Research in Integrated Circuit Design · thebricd.org</text>
+    <g fill="#93A1A5" font-size="3.4" text-anchor="end">
+      <text x="186" y="271.5">Open-BioAFE Project</text>
+      <text x="186" y="277.5">Draft v0.1 · November 2026</text>
+    </g>
+  </g>
+  <!-- three heartbeats -->
+  <path d="M12 235 H21.0 C23.5 229.5 26.5 229.5 29.0 235 H33.5 L35.5 239.5 L38.5 199.0 L41.5 244.0 L43.5 235 H49.0 C53.0 224.5 59.0 224.5 63.0 235 H74.0 M74.0 235 H83.0 C85.5 229.5 88.5 229.5 91.0 235 H95.5 L97.5 239.5 L100.5 199.0 L103.5 244.0 L105.5 235 H111.0 C115.0 224.5 121.0 224.5 125.0 235 H136.0 M136.0 235 H145.0 C147.5 229.5 150.5 229.5 153.0 235 H157.5 L159.5 239.5 L162.5 199.0 L165.5 244.0 L167.5 235 H173.0 C177.0 224.5 183.0 224.5 187.0 235 H198.0" fill="none" stroke="#4FD58E" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
