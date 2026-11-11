@@ -20,7 +20,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<!-- KaTeX: every page's maths is written as \( ... \) and \[ ... \] by the LaTeX converter -->
+<!-- KaTeX: write maths as $$...$$ in the Markdown; kramdown turns it into \( ... \) (inline)
+     or \[ ... \] (on its own paragraph), which this auto-render picks up -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"
@@ -28,4 +29,4 @@
     delimiters: [{left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}],
     ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
     throwOnError: false, strict: 'ignore', trust: true});"></script>
-<meta property="og:image" content="{{ '/assets/images/cover.png' | absolute_url }}">
+<meta property="og:image" content="{{ '/assets/images/bricd-logo.png' | absolute_url }}">

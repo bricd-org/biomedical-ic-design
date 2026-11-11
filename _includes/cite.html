@@ -1,0 +1,16 @@
+{%- comment -%}
+  Numbered citation: {% include cite.html keys="harrison2003" %} or keys="iicosic,jkutemplate".
+  The number is the position of the key in _data/references.yml.
+{%- endcomment -%}
+{%- assign cite_keys = include.keys | split: "," -%}
+<span class="cite">[
+{%- for k in cite_keys -%}
+  {%- assign cite_key = k | strip -%}
+  {%- assign cite_n = "?" -%}
+  {%- for r in site.data.references -%}
+    {%- if r.key == cite_key -%}{%- assign cite_n = forloop.index -%}{%- break -%}{%- endif -%}
+  {%- endfor -%}
+  <a href="{{ "/references/" | relative_url }}#ref-{{ cite_key }}">{{ cite_n }}</a>
+  {%- unless forloop.last %}, {% endunless -%}
+{%- endfor -%}
+]</span>

@@ -1,6 +1,6 @@
 // ============================================================================
-// Open-BioAFE Tutorial -- styles for the pages generated from the LaTeX book (shared with Open-SERDES).
-// Colours follow the PDF edition (biotut.sty) and www.thebricd.org.
+// Open-BioAFE Tutorial -- styles for the Markdown pages (look shared with Open-SERDES).
+// Colours follow www.thebricd.org.
 // ============================================================================
 $navy: #1b2a52;
 $blue: #2b5797;
@@ -41,7 +41,7 @@ $heading-font: "Spectral", Georgia, "Times New Roman", serif;
 .main-content h1 { padding-bottom: 0.5rem; border-bottom: 3px solid $gold; }
 .secnum { color: $gold; margin-right: 0.45em; font-weight: 700; }
 
-.chapterlead p { font-family: $heading-font; font-style: italic; font-size: 1.22rem; color: $slate; line-height: 1.5; }
+p.chapterlead, .chapterlead p { font-family: $heading-font; font-style: italic; font-size: 1.22rem; color: $slate; line-height: 1.5; }
 
 // ---------------------------------------------------------------- boxes (tcolorbox look-alikes)
 .tbox {
@@ -215,7 +215,7 @@ ol.references li::before { color: $navy; font-weight: 700; }
   }
   .chapnum { background: $d-navy; }
   .secnum, .main-content .tbox li::before { color: $d-gold; }
-  .chapterlead p, .part-blurb { color: $d-lead; }
+  p.chapterlead, .chapterlead p, .part-blurb { color: $d-lead; }
 
   .tbox-keyeq > .tbox-title, .tbox-insight > .tbox-title { background: $d-navy; }
   .tbox-keyeq { background: #182544; border-left-color: $d-rule; }
@@ -297,6 +297,10 @@ ol.references li::before { color: $navy; font-weight: 700; }
 .status-outline { background: $bgpale; color: $slate; border: 1px solid $line; }
 .lab-table td:first-child { white-space: nowrap; font-weight: 600; }
 .chain-figure img { width: 100%; max-width: 820px; }
+// table captions: a paragraph with {: .tabcaption #tab-N-M } just above the table
+.tabcaption { font-size: 0.88rem; color: #39445a; margin: 1.6rem 0 0.4rem; }
+.cite { white-space: nowrap; }
 @if $color-scheme == dark {
   .status-outline { background: #1a2439; color: #b9c5dc; border-color: #2c3f70; }
+  .tabcaption { color: #a9b4c8; }
 }

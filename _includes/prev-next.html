@@ -1,0 +1,14 @@
+{%- comment -%}
+  Previous / next links between the preface (chapter: 0) and Chapters 1–31, found from the
+  `chapter` number in each page's front matter. Included by footer_custom.html.
+{%- endcomment -%}
+{%- if page.chapter != nil -%}
+  {%- assign pn_prev_n = page.chapter | minus: 1 -%}
+  {%- assign pn_next_n = page.chapter | plus: 1 -%}
+  {%- assign pn_prev = site.pages | where: "chapter", pn_prev_n | first -%}
+  {%- assign pn_next = site.pages | where: "chapter", pn_next_n | first -%}
+<nav class="prev-next" aria-label="Chapter navigation">
+  {%- if pn_prev %}<a class="pn-link prev" href="{{ pn_prev.url | relative_url }}"><small>← Previous</small>{{ pn_prev.title }}</a>{% else %}<span></span>{% endif -%}
+  {%- if pn_next %}<a class="pn-link next" href="{{ pn_next.url | relative_url }}"><small>Next →</small>{{ pn_next.title }}</a>{% endif -%}
+</nav>
+{%- endif -%}

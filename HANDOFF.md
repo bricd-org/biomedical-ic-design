@@ -1,83 +1,85 @@
 # HANDOFF — Open-BioAFE Tutorial (pick up here)
 
-Last session: 10 November 2026. Last commit on `main`: `fe63f09` (pushed to
-`git@github.com:bricd-org/biomedical-ic-design.git`). This file is not committed yet.
+Last updated: 10 November 2026. On that day the tutorial was switched from a LaTeX book (with a
+generated website) to **a website written directly in Markdown**. There is no LaTeX book and no
+PDF any more; `book/` and `tools/build_site.py` were removed.
 
 ## 1. The goal
 
-Build a course website + PDF book like the Open-SERDES tutorial
-(`/Users/kithminrw/SerDes Project/serdes-tutorial`, live at https://www.thebricd.org/serdes-tutorial/),
+Build a course website like the Open-SERDES tutorial (live at https://www.thebricd.org/serdes-tutorial/),
 following the curriculum document *"Biomedical IC Design Tutorial — Curriculum & Labs"*
-(10 Nov 2026, Kithmin Wickremasinghe). That PDF was in `~/Downloads` and has since been moved;
-everything needed from it is captured in this file (section 8) and in the outline chapters.
+(10 Nov 2026). That PDF has since been moved; everything needed from it is captured in this file
+(section 8) and in the outline chapters. Unlike Open-SERDES, **no LaTeX book or PDF**.
 
 - Title: **Open-BioAFE: Designing a Biopotential Acquisition Chip from Scratch**
 - 5 parts, 31 chapters, 15 labs, appendices A–E. One reference chip: 8-channel ECG/EEG/EMG
   front-end + 12-bit async SAR + 2nd-order incremental ΔΣ in IHP SG13G2.
 - Formula per concept (same as SerDes): short derivation → worked example with the project's real
   numbers → *what this means for your design* box.
-- Optional content source: `/Users/kithminrw/SkillSurf/art_of_aicd` (https://www.skillsurf.org/art_of_aicd/)
-  — cross-link its Part II (transistor, gm/ID) from Ch 5 rather than repeating it.
+- Optional content source: https://www.skillsurf.org/art_of_aicd/ — cross-link its Part II
+  (transistor, gm/ID) from Ch 5 rather than repeating it.
 
-**The user's current scope (first release):** finish the full outline + the basic chapters
-(Part I), push, then pause. The user works directly on `main`.
+**Scope of the first release:** the full outline + the basic chapters (Part I), then pause. The
+user works directly on `main`.
 
 ## 2. Where we stopped
 
 | Item | State |
 |---|---|
-| Site scaffold (Jekyll just-the-docs, BRICD theme, dark mode, KaTeX) | done, copied from SerDes and rebranded |
-| `tools/build_site.py` (LaTeX → pandoc → Jekyll pages) | adapted, **never run** (pandoc missing) |
-| `book/tutorial.tex` (title page, 5 parts, all 31 `\include`s, appendix, bib) | done |
-| `book/tutorial/biotut.sty` (house style) | done (renamed macros, rms units added) |
-| `book/tutorial/bib/core.bib` | done (46 entries) |
-| Preface `00_preface.tex` | **written** (incl. reading-paths TikZ figure) |
-| Ch 1–4 (Part I) | **NOT written** — figures and numbers ready (section 4) |
-| Ch 5–30 | written as **outlines** (generated, now hand-editable) |
-| Ch 31 `31_labs.tex` | **missing** |
-| Appendices `A_appendices.tex` | **missing** |
+| Site (Jekyll 4.4 + just-the-docs 0.10.1, BRICD theme, dark mode, KaTeX) | done; builds cleanly |
+| Home page `index.md` (hero, key numbers, signal chain, part cards) | done |
+| Preface `preface.md` (incl. reading-paths figure `assets/figs/reading-paths.svg`) | **written** |
+| Ch 1–4 (Part I) | **outlines** (Ch 1 has the spec table and signal-chain figure); text NOT written — figures and numbers ready (section 4) |
+| Ch 5–30 | outlines |
+| Ch 31 `chapters/31_labs.md` | outline: lab table + one short section per lab (anchors `#lab-1`…`#lab-15`, `#setup`, `#capstone`) |
+| Appendices | **missing** (no pages yet, not in the menu) |
+| `references.md` + `_data/references.yml` (46 entries) | done |
 | `labs/python/biosig.py` (shared model) | done, tested |
 | Lab 1 and Lab 2 scripts | **missing** |
-| Figure scripts + PDFs for Ch 1–4 (13 plots) | done, **not visually reviewed yet** |
-| Home page `index.md`, labs page `labs.md` | **missing** |
-| Book compiled with latexmk | **never** (would fail on missing includes) |
-| Website built / previewed | **never** |
-| Pages deploy | workflow switched to **manual trigger** so a half-built site is not published |
+| Figure scripts `figsrc/` → `assets/figs/*.svg` (13 plots) | done, reviewed once (see section 7); not yet used on any page |
+| Pages deploy | `.github/workflows/pages.yml` deploys on every push to `main` |
 
 ## 3. Decisions already made (do not re-litigate)
 
-- **Pipeline:** same as SerDes — LaTeX book is the single source of truth; `tools/build_site.py`
-  generates `chapters/`, `appendices/`, `parts/`, `preface.html`, `references.html`, figures and the
-  PDF. Never hand-edit generated pages.
-- **Permalinks follow the curriculum's site map:** chapters `/part-N/chNN/`, appendices
-  `/appendix/a/`…`/e/`, appendix index `/appendix/`, plus `/preface/`, `/references/`, and a
-  hand-written `/labs/` page (nav_order 7; appendices 8, references 9 — set in `build_site.py`).
+- **No LaTeX book, no PDF.** The Markdown pages are the source; edit them directly.
+- **Permalinks follow the curriculum's site map:** chapters `/part-N/chNN/`, parts `/part-N/`,
+  plus `/preface/` and `/references/`. Appendices, when written: `/appendix/a/`…`/e/` and an
+  index at `/appendix/` (parent "Appendices").
+- **Menu order** (`nav_order`): Home 0, Preface 1, Parts 2–6, References 7; chapters sit under
+  their part (`parent: "Part I · Foundations"` etc.) with `nav_order` = chapter number.
+  Appendices, when added, go between the parts and References.
+- **No separate labs page:** Chapter 31 is the lab hub; the home page's "Go to the labs" button
+  and every `tryit` box link into it.
 - **Repository layout from the curriculum:** labs in `labs/python/` (later `labs/xschem/`,
-  `labs/verilog/`, `labs/layout/`), `data/` holds download scripts only. Figure scripts stay in
-  `book/tutorial/figsrc/` (Overleaf compatibility, like SerDes) and import `labs/python/biosig.py`.
-- **Outline chapters** carry a `specnote[Chapter status: outline]` box naming their build stage.
-- **Branch:** work on `main` (user's choice). Remote switched from HTTPS to SSH (other BRICD
-  repos use SSH; HTTPS had no credentials).
+  `labs/verilog/`, `labs/layout/`), `data/` holds download scripts only. Figure scripts live in
+  `figsrc/`, import `labs/python/biosig.py`, and write SVGs to `assets/figs/`.
+- **Outline chapters** carry a `specnote` box titled *Chapter status: outline* naming their
+  build stage.
+- **Branch:** work on `main` (user's choice). Remote uses SSH (HTTPS had no credentials).
 - **Honesty line:** AI-assistance disclaimer says the draft *may contain mistakes*; it does not
   claim human review. Standards are summarised, never reproduced.
 
 ## 4. Next steps, in order
 
-### Step 1 — Write Chapters 1–4 (`book/tutorial/chapters/0N_*.tex`)
+### Step 1 — Write Chapters 1–4 (`chapters/0N_*.md`)
 
-Use SerDes `01_intro.tex` as the style model. Every chapter: `\tikzsetfigurename{NN_name-}` first
-line if it has TikZ, `\chapter{..}\label{ch:..}`, `\chapterlead{..}`, `objectives` box, sections
-with `\label{sec:..}`, worked examples (`\begin{example}{Title}\label{we:..}`), `keyeq`,
-`insight`, `pitfall`, `tryit` (pointing to `\cref{sec:lab1}` etc.), `specnote`, and a closing
-`takeaways` box. **Labels below are already referenced by other chapters and must exist.**
+Each page already exists as an outline: replace the outline with the full text, keeping the front
+matter. Use a SerDes chapter page as the style model for content. Every chapter: lead paragraph
+(`{: .chapterlead }`), `objectives` box, numbered sections (`## <span class="secnum">2.1</span>Title`),
+worked examples (`tbox-example`, titled *Worked Example 2.1 · Title*), `keyeq`, `insight`,
+`pitfall`, `tryit` (linking to `{% link chapters/31_labs.md %}#lab-1` etc.), `specnote`, and a
+closing `takeaways` box. Figures: `<figure id="fig-2-1">` with an `<img>` from `assets/figs/` and
+a `<figcaption>` starting `<span class="capnum">Figure 2.1.</span> <strong>…</strong>`. Other
+pages already link to `01_why.md#tab-1-1` and `#fig-1-1`; keep those ids. Circuit diagrams
+(planned below) are hand-drawn SVGs, like
+`assets/figs/signal-chain.svg`.
 
-**Ch 1 `01_why.tex` — Why Biomedical ICs** — `\label{ch:why}`
+**Ch 1 `01_why.md` — Why Biomedical ICs?**
 - Sections: applications (wearable ECG patch, Holter, EEG headset, sEMG prosthetics, neural
   implants/BCIs) with a table (channels / signal & band / what limits the design); why integrate
   (channel count, power, size); the signal chain; the Open-BioAFE spec sheet; the design question
   *"what does each application demand in channels, noise, power and lifetime?"*
-- **Must define** `fig:ch1-chain` (TikZ, 9 blocks — see section 8) and `tab:ch1-spec`
-  (spec sheet — see section 8).
+- Figure 1.1 (signal chain) and Table 1.1 (spec sheet) are already on the page.
 - Figure `ch01_lifetime` (battery lifetime vs average power).
 - Worked examples: battery life — 8 ch × 10 µW = 80 µW on a CR2032 (≈2430 J) ≈ **352 days**;
   8 × 100 µW ≈ 35 days; discrete-class 8 × ~1 mW ≈ **3.5 days** (energy only; radio excluded,
@@ -90,7 +92,7 @@ with `\label{sec:..}`, worked examples (`\begin{example}{Title}\label{we:..}`), 
 - SG13G2 facts safe to state: 130 nm SiGe BiCMOS, HBT fT/fmax ≈ 350/450 GHz, 1.2 V core and
   3.3 V I/O MOS, MIM capacitors. HBTs: low 1/f noise but base current through the electrode.
 
-**Ch 2 `02_signals.tex` — Bioelectric Signals** — `\label{ch:signals}`
+**Ch 2 `02_signals.md` — Bioelectric Signals**
 - Action potentials (Hodgkin–Huxley, cite `hodgkin1952`), ECG (P-QRS-T, leads, Einthoven),
   EEG (δ 0.5–4, θ 4–8, α 8–13, β 13–30, γ 30–100 Hz; 10–20 system), EMG (motor units, surface
   vs needle), spikes and LFPs, ECoG (cite `buzsaki2012`). The master amplitude-vs-bandwidth table
@@ -104,11 +106,11 @@ with `\label{sec:..}`, worked examples (`\begin{example}{Title}\label{we:..}`), 
   its noise floor is higher.
 - `tryit` → Lab 1.
 
-**Ch 3 `03_electrodes.tex` — Electrodes and the Body as a Circuit** — `\label{ch:electrodes}`
+**Ch 3 `03_electrodes.md` — Electrodes and the Body as a Circuit**
 - Ag/AgCl wet vs dry vs implanted; half-cell potential (Ag/AgCl ≈ +0.222 V vs SHE) and DC
   offset; Randles model (cite `randles1947`); electrode thermal noise; motion artefacts; source
-  impedance mismatch (cite `chi2010` for dry electrodes). TikZ: electrode–skin equivalent circuit
-  (circuitikz: Ehc, Rd‖Cd, gel Rs, skin potential, epidermis Re‖Ce, dermis Ru).
+  impedance mismatch (cite `chi2010` for dry electrodes). Diagram (SVG): electrode–skin equivalent circuit
+  ( Ehc, Rd‖Cd, gel Rs, skin potential, epidermis Re‖Ce, dermis Ru).
 - Models (`ELECTRODES` in `biosig.py`): wet = 1 kΩ + 51 kΩ‖47 nF (the standards' network);
   dry = 5 kΩ + 1 MΩ‖4.7 nF; implanted micro = 10 kΩ + CPE (n = 0.85, |Z| = 500 kΩ at 1 kHz).
 - Numbers (T = 310 K, one electrode, 0.5–100 Hz thermal noise): wet **0.24 µVrms**, dry
@@ -121,10 +123,10 @@ with `\label{sec:..}`, worked examples (`\begin{example}{Title}\label{we:..}`), 
 - Figures: `ch03_impedance`, `ch03_noise`, `ch03_loading`, `ch03_offset`.
 - `tryit` → Lab 2.
 
-**Ch 4 `04_interference.tex` — Interference, Safety and Standards** — `\label{ch:interference}`
+**Ch 4 `04_interference.md` — Interference, Safety and Standards**
 - Mains coupling (cite `huhta1973`): 230 V/50 Hz, Cpow = 3 pF, Cbody = 200 pF → displacement
   current **0.22 µA**; floating body Vcm = **3.4 V**; with a 51 kΩ‖47 nF ground electrode
-  Vcm ≈ **9 mV**. TikZ (circuitikz): mains → Cpow → body → Cbody → earth; electrodes Z1, Z2, Z3 to
+  Vcm ≈ **9 mV**. Diagram (SVG): mains → Cpow → body → Cbody → earth; electrodes Z1, Z2, Z3 to
   amplifier inputs with Zcm to amplifier ground; Ciso to earth.
 - CM→DM by imbalance (cite `pallas1991`): with Vcm = 9 mV and ΔZ = 40.7 kΩ: Zcm 10 MΩ →
   36.6 µV, 100 MΩ → **3.7 µV**, 1 GΩ → 0.37 µV, 10 GΩ → 0.037 µV of mains.
@@ -142,11 +144,10 @@ with `\label{sec:..}`, worked examples (`\begin{example}{Title}\label{we:..}`), 
   tissue rise ≈ 1 °C; power density limit of tens of mW/cm² — cite `kim2007` and hedge.
 - Figures: `ch04_cmdm`, `ch04_mains_eeg`, `ch04_limits`.
 
-### Step 2 — Chapter 31 `31_labs.tex` — Hands-on Labs — `\label{ch:labs}`
-Model on SerDes `16_labs.tex`. Must define `sec:lab1` … `sec:lab15` (and ideally
-`sec:capstone`). Write Lab 0 (set-up), Lab 1 and Lab 2 in full (goal, code, expected figure and
-numbers, questions); Labs 3–15 as short planned sections from the table in section 8. Add a lab
-table with tracks A/B/C.
+### Step 2 — Chapter 31 `chapters/31_labs.md` — Hands-on Labs
+The outline has the lab table and a short section per lab. Write the set-up section, Lab 1 and
+Lab 2 in full (goal, code, expected figure and numbers, questions); keep the anchors
+(`{#lab-1}` … `{#lab-15}`, `{#setup}`, `{#capstone}`) because other pages link to them.
 
 ### Step 3 — Lab scripts in `labs/python/`
 - `lab1_biosignal_explorer.py`: load MIT-BIH record 100 (`wfdb.rdrecord('100', pn_dir='mitdb')`),
@@ -161,88 +162,70 @@ table with tracks A/B/C.
   (ngspice-47 is installed via Homebrew).
 - `data/fetch_data.py`: download helpers only.
 
-### Step 4 — Appendices `A_appendices.tex` (one file, five `\chapter`s, like SerDes)
+### Step 4 — Appendices (`appendices/a_formulas.md` … `e_reading.md` + `appendices/index.md`)
+Each page `parent: "Appendices"`; the index `has_children: true`, permalink `/appendix/`, and a
+`nav_order` between the parts and References (move References to 8). Content:
 A Formula sheet (NEF/PEF, kT/C, CMRR with imbalance, SQNR/ENOB, Walden/Schreier FoM, ΔΣ SQNR,
 IQ |Z| and φ — the equations are already in the outline chapters); B Biosignal reference tables
 (`SIGNALS` + electrode impedances); C Design-review checklists (AFE: noise, CMRR, offset, Zin,
 protection; ADC: kT/C, matching, comparator noise, reference; layout: common centroid, guard
 rings, shielding of high-impedance nodes); D Glossary (ExG, NEF, DRL, DSL, CCIA, NTF, OSR, ENOB…);
 E Further reading (section 2 of the curriculum + AI-assistance disclaimer and corrections contact).
+Add `appendices` to the `defaults` layout scope in `_config.yml`, and an Appendices card on the
+home page.
 
-### Step 5 — Home page and labs page (hand-written)
-- `index.md`: copy SerDes `index.md` structure. Hero kicker *OPEN-BIOAFE · IHP SG13G2 · 8-CHANNEL
-  ExG FRONT-END*, title, subtitle (section 8), buttons *Start reading · Go to the labs · Source
-  on GitHub*; key-numbers strip (7 tiles, section 8); signal-chain figure
-  (`assets/figs/tikz/01_why-0.svg` once built, class `chain-figure`); "What is inside" cards per
-  part with `<span class="status status-written">` / `status-outline` badges (CSS already added
-  at the end of `_sass/custom/custom.scss`); labs; about + AI disclaimer.
-- `labs.md` (permalink `/labs/`, nav_order 7): the 15-lab table (class `lab-table`), tool
-  setup (Python venv; IIC-OSIC-TOOLS container), links to Ch 31 sections and scripts.
-
-### Step 6 — Build, check, publish
-1. Tools: `pandoc` ≥ 3 and `poppler` (pdftocairo, pdftoppm, pdfinfo). See section 6.
-2. `python3 tools/build_site.py` (compiles with `latexmk -pdf -shell-escape`; TikZ is externalised
-   to `book/tutorial/tikzext/`). Fix warnings in `tools/last_build_warnings.txt`.
-3. Preview: `bundle install && bundle exec jekyll serve` → http://localhost:4000/biomedical-ic-design/
-   (needs Ruby ≥ 3.1; system Ruby is 2.6).
-4. Check every page in the browser (light + dark, phone width), the PDF, and that the outline
-   chapters render.
-5. Re-enable `push` in `.github/workflows/pages.yml`; in GitHub settings set
-   Pages → Source → GitHub Actions; tag v0.1 when the first release is ready.
+### Step 5 — Check and publish
+1. Preview (section 6), check every page in light and dark mode and at phone width.
+2. Push to `main`; the Pages workflow deploys. In the repository settings, Pages → Source must be
+   **GitHub Actions**. Tag v0.1 when the first release is ready.
 
 ## 5. Conventions and gotchas
 
-- **Macros** (in `biotut.sty`; any new one must also go in `PRELUDE` in `tools/build_site.py`):
-  `\OB` (Open-BioAFE), `\sgx`, `\SNR`, `\CMRR`, `\ENOB`, `\NEF`, `\PEF`, `\Vdd`, `\Vcm`, `\Vdm`,
-  `\Zin`, `\Zcm`, `\Ze`, `\Ehc`, `\vn`, `\fs`, `\fc`, `\gm`, `\code{}`, `\tool{}`, `\ie`, `\eg`.
-- **Units:** siunitx `\qty{..}{..}`; custom units `\Vrms`, `\mVrms`, `\uVrms`, `\uVpp`, `\Vpp`
-  (also mapped in the builder's `UNIT` table — keep both in sync). `\uVrms` = `\micro V_{rms}`
-  has not been compiled yet; check it on the first LaTeX build.
-- **Citations:** the builder renders `\citet` as a bare number, so write `Name~\cite{key}`
-  (the outline generator already does this).
-- **Boxes the builder knows:** keyeq, example, insight, pitfall, tryit (default title "Try it in
-  Python"), derivation, specnote (default "Open-BioAFE target"), objectives, takeaways. Adding a
-  new box type needs changes in `biotut.sty`, `build_site.py` (`BOX_DEFAULT` + regexes) and CSS.
-- **Figures:** draw at final size with `bricdstyle.py` (`FULL`, `FULL2`, `HALF`…), include
-  with `\includegraphics{name}` (no scaling). Redraw: `cd book/tutorial/figsrc && python chNN_figs.py`.
+- **Maths:** `$$...$$` (kramdown) inline or as its own paragraph; KaTeX renders the `\( \)` /
+  `\[ \]` that kramdown writes. In tables, avoid `|` inside maths (use `\lvert \rvert`). Write
+  ΔΣ, µV, Ω as Unicode in text and in front-matter titles (the menu cannot render maths).
+- **Units:** plain text with a space: `1.5 µVrms`, `±300 mV`, `0.5–100 Hz`.
+- **Boxes:** `<div class="tbox tbox-NAME" markdown="1">`, then `<div class="tbox-title">Title</div>`,
+  a blank line, the Markdown content, a blank line, `</div>`. Names: keyeq, example, insight,
+  pitfall, tryit, derivation, specnote, objectives, takeaways. Default titles: keyeq "Key
+  equation · …", insight "What this means for your design", pitfall "Common pitfall", tryit "Try
+  it in Python", specnote "Open-BioAFE target", objectives "In this chapter you will learn",
+  takeaways "Key takeaways". Box titles are raw HTML: use `\(...\)` there for maths.
+- **Links:** `[Chapter 6]({% link chapters/06_noise.md %})`, with `#anchor` after the tag for a
+  section; the build fails on a missing file. Headings get automatic ids; add `{#id}` at the end
+  of a heading for a stable one.
+- **Citations:** `Name {% include cite.html keys="key1,key2" %}`. New references go at the **end**
+  of `_data/references.yml` (numbers are positions in that file); the text field is Markdown.
+- **Prev/next links** come from the `chapter:` number in each page's front matter (preface 0).
+- **Figures:** draw with `figsrc/bricdstyle.py` (`FULL`, `FULL2`, `HALF`…); redraw with
+  `cd figsrc && python chNN_figs.py`. Diagrams are hand-written SVG in `assets/figs/`.
 - **Python:** use `~/opt/anaconda3/bin/python` (3.9, numpy 1.22, scipy 1.7, matplotlib 3.5).
   Homebrew pythons have no numpy. `wfdb` is not installed yet: make a venv with
   `--system-site-packages` from the anaconda python and `pip install wfdb` (and later
   `python-deltasigma`, `mne` if used).
-- **Title page and part pages** use `\tikzexternaldisable`; everything else is externalised.
 
 ## 6. Environment status (this Mac)
 
-- TeX Live: `pdflatex`, `latexmk` present.
-- **pandoc / poppler: not installed yet.** A `brew install pandoc poppler ruby` was left running
-  in the background; Homebrew had no bottle for this macOS and was **compiling pandoc from
-  source with GHC/cabal** (slow; may take a long time). If it fails or is stopped, install the
-  official pandoc macOS arm64 package from https://github.com/jgm/pandoc/releases instead, then
-  `brew install poppler` separately. Check with `which pandoc pdftocairo` and
-  `brew list --versions pandoc poppler ruby`.
-- Ruby: system 2.6 (too old for Jekyll 4.4). Homebrew `ruby` was in the same install command;
-  use `/opt/homebrew/opt/ruby/bin` on PATH for `bundle`.
+- No Ruby ≥ 3.1 on the Mac (system Ruby is 2.6), so preview in Docker (the `ruby:3.3` image is
+  pulled; gems are cached in the `bioafe-gems` volume):
+  `docker run --rm -p 4000:4000 -v "$PWD":/site -v bioafe-gems:/usr/local/bundle -w /site ruby:3.3 bash -c "bundle install && bundle exec jekyll serve --host 0.0.0.0 --force_polling"`
+  → http://localhost:4000/biomedical-ic-design/. In an arm64 container bundler adds an
+  `aarch64-linux` platform to `Gemfile.lock`; revert that (`git checkout Gemfile.lock`) before
+  committing unless it is wanted.
+- `gh` (GitHub CLI) is not installed.
 - ngspice-47 installed (Homebrew).
-- The curriculum PDF is no longer at `~/Downloads/Biomedical IC Design Tutorial — Curriculum & Labs.pdf`.
 
 ## 7. Known issues to clean up
 
-- The 13 figures were generated but **not visually reviewed** (label overlaps likely in
-  `ch02_eeg` band labels, `ch02_map` text positions, `ch03_offset` annotations). Render to PNG
-  (`sips -s format png in.pdf --out out.png`) and inspect.
-- `tutorial.tex` includes `01_why`, `02_signals`, `03_electrodes`, `04_interference`, `31_labs`,
-  `A_appendices` which do not exist yet.
-- 21 labels are referenced but not defined: `ch:signals ch:electrodes ch:interference ch:labs
-  fig:ch1-chain tab:ch1-spec sec:lab1`…`sec:lab15`.
-- Not yet cited (fine for now, use them in Part I): `buzsaki2012 hodgkin1952 iec60601-1
-  iec60601-2-25 iec60601-2-27 iec60601-2-47 kim2007 mcsharry2003 medteqcmrr medteqzin
-  randles1947 wfdb`.
+- Figures reviewed once at small size: `ch02_map` labels crowd each other (ECoG / EEG (scalp) /
+  LFP), and in `ch03_noise` (b) the green curve crosses the "EEG-mode target" label. Fix before
+  using them on a page.
+- Not yet cited anywhere (fine for now, use them when Part I is written): check with a search of
+  `chapters/` for each key in `_data/references.yml`.
 - Outline polish: key equations are placed after each outline chapter's first section (Ch 6's NEF
   box sits under "Noise sources" and repeats the formula in section 6.3); Ch 6 reading list says
-  "Razavi (Chapter on noise)". The generator lives only in the old session scratchpad, so edit the
-  `.tex` files directly from now on.
-- `bricdstyle.py` still carries SerDes eye-diagram helpers (harmless).
-- `tools/build_site.py` has not been run since adaptation; expect small fixes.
+  "Razavi (Chapter on noise)".
+- `figsrc/bricdstyle.py` still carries SerDes eye-diagram helpers (harmless).
 
 ## 8. Reference data from the curriculum (the PDF is gone — this is the record)
 
@@ -259,19 +242,19 @@ input-referred noise, 0.5–100 Hz (EEG mode) · > 90 dB CMRR (above the ~89 dB 
 test implies) · ±300 mV electrode DC offset tolerated · 12 b SAR / 16 b ΔΣ · < 10 µW/ch front-end
 power. (`SPEC` in `biosig.py` holds the same numbers.)
 
-**Spec sheet for `tab:ch1-spec`** (parameter · target · chapter): channels 8 selectable (1);
+**Spec sheet (Table 1.1)** (parameter · target · chapter): channels 8 selectable (1);
 band 0.5 Hz–1 kHz, spikes to 7 kHz optional (2); noise < 1.5 µVrms 0.5–100 Hz EEG mode (2, 3, 6);
 CMRR > 90 dB at 50/60 Hz (4); offset ±300 mV (3, 10); input impedance ≥ 2.5 MΩ per input,
 common-mode goal > 1 GΩ at 50 Hz (3, 4); converters 12-b SAR for EMG/spikes and 16-b incremental
 ΔΣ for ECG/EEG (13–20); front-end power < 10 µW/ch (6, 29); supply 1.2 V (5); process IHP SG13G2
 130 nm SiGe BiCMOS (5, 30); optional bioimpedance (respiration) channel (28); data out SPI (27).
 
-**Signal chain for `fig:ch1-chain` (9 blocks):** Electrodes, body (Ch 2–4) → ESD + lead-off
+**Signal chain (Figure 1.1, 9 blocks):** Electrodes, body (Ch 2–4) → ESD + lead-off
 (Ch 12) → Chopper LNA + DSL (Ch 5–10) → PGA + anti-alias (Ch 11) → splits to **12-bit SAR ADC**
 (Ch 15–18 · EMG, spikes) and **Incremental ΔΣ ADC** (Ch 19–20 · ECG, EEG) → Decimation + feature
 DSP (Ch 20, 23–27) → Data out (SPI/BLE · Ch 27). Right-leg drive (Ch 12 · CM feedback) loops from
-the LNA back to the electrodes. Highlight the two converters (Part III). Use the `blk`/`blkb`/`sig`
-TikZ styles from `biotut.sty`.
+the LNA back to the electrodes. Highlight the two converters (Part III). Drawn as
+`assets/figs/signal-chain.svg` (Figure 1.1, also on the home page).
 
 **Reading paths:** circuit = Part I → II → III → V; signal = Part I → IV → Ch 13–14 → V;
 converter-only = Ch 13–22 + Labs 6–10 (already in the Preface figure).
@@ -318,5 +301,3 @@ indico.cern.ch/event/1381495/contributions/5988502/ · MEDTEQ CMRR and Zin artic
 - Keep Lab 14 in Track C as the curriculum says, or move it to Track B?
 - NinaPro downloads may need registration: is a "bring your own file + synthetic fallback"
   approach acceptable for Lab 1/13?
-- When should the Pages deploy go live — after stage 1 (Part I) or later?
-- Should `HANDOFF.md` be committed, or kept local?

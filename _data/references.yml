@@ -1,0 +1,95 @@
+# References, numbered in this order. Cite with {% include cite.html keys="key1,key2" %}.
+# Add new entries at the end so existing numbers do not change.
+
+- key: ihppdk
+  text: "IHP GmbH. *IHP-Open-PDK: SG13G2 130 nm SiGe BiCMOS open-source process design kit*. 2026. <https://github.com/IHP-GmbH/IHP-Open-PDK>"
+- key: iicosic
+  text: "Institute for Integrated Circuits and Quantum Computing, JKU Linz. *IIC-OSIC-TOOLS: an all-in-one container for open-source analog and digital chip design*. 2026. <https://github.com/iic-jku/IIC-OSIC-TOOLS>"
+- key: serdestut
+  text: "Open-SERDES Project, BRICD. *Designing a Serial Link from Scratch: The Open-SERDES Tutorial*. 2026. <https://www.thebricd.org/serdes-tutorial/>"
+- key: artofaicd
+  text: "SkillSurf. *The Art of Analog IC Design*. 2025. <https://www.skillsurf.org/art_of_aicd/>"
+- key: physionet
+  text: "Ary L. Goldberger et al.. “PhysioBank, PhysioToolkit, and PhysioNet: components of a new research resource for complex physiologic signals.” *Circulation*, 101(23):e215–e220, 2000."
+- key: ninapro
+  text: "Manfredo Atzori et al.. “Electromyography data for non-invasive naturally-controlled robotic hand prostheses.” *Scientific Data*, 1:140053, 2014. Data: <https://ninapro.hevs.ch>."
+- key: webster
+  text: "John G. Webster. *Medical Instrumentation: Application and Design*, 4th edition. Wiley, 2010."
+- key: yazicioglubook
+  text: "Refet Firat Yazicioglu, Chris Van Hoof and Robert Puers. *Biopotential Readout Circuits for Portable Acquisition Systems*. Springer, 2009."
+- key: pelgrom
+  text: "Marcel J. M. Pelgrom. *Analog-to-Digital Conversion*, 3rd edition. Springer, 2017."
+- key: schreier
+  text: "Richard Schreier, Gabor C. Temes and Shanthi Pavan. *Understanding Delta-Sigma Data Converters*, 2nd edition. Wiley-IEEE Press, 2017."
+- key: jkutemplate
+  text: "Simon Dorrer and Harald Pretl. *A tutorial on open-source analog-mixed-signal chip design with the ihp-sg13g2 Open-PDK (ihp-sg13g2-ams-chip-template)*. 2026. <https://github.com/iic-jku/ihp-sg13g2-ams-chip-template>"
+- key: sarpeshkar
+  text: "Rahul Sarpeshkar. *Ultra Low Power Bioelectronics: Fundamentals, Biomedical Applications, and Bio-Inspired Systems*. Cambridge University Press, 2010."
+- key: razavi
+  text: "Behzad Razavi. *Design of Analog CMOS Integrated Circuits*, 2nd edition. McGraw-Hill, 2017."
+- key: steyaert1987
+  text: "Michiel S. J. Steyaert and Willy M. C. Sansen. “A micropower low-noise monolithic instrumentation amplifier for medical purposes.” *IEEE Journal of Solid-State Circuits*, 22(6):1163–1168, 1987."
+- key: harrison2003
+  text: "Reid R. Harrison and Cameron Charles. “A low-power low-noise CMOS amplifier for neural recording applications.” *IEEE Journal of Solid-State Circuits*, 38(6):958–965, 2003."
+- key: pallas1991
+  text: "Ramon Pallàs-Areny and John G. Webster. “Common mode rejection ratio in differential amplifiers.” *IEEE Transactions on Instrumentation and Measurement*, 40(4):669–676, 1991."
+- key: yazicioglu2007
+  text: "Refet Firat Yazicioglu, Patrick Merken, Robert Puers and Chris Van Hoof. “A 60 µW 60 nV/√Hz readout front-end for portable biopotential acquisition systems.” *IEEE Journal of Solid-State Circuits*, 42(5):1100–1110, 2007."
+- key: spinelli2003
+  text: "Enrique M. Spinelli, Ramon Pallàs-Areny and Miguel A. Mayosky. “AC-coupled front-end for biopotential measurements.” *IEEE Transactions on Biomedical Engineering*, 50(3):391–395, 2003."
+- key: chi2010
+  text: "Yu Mike Chi, Tzyy-Ping Jung and Gert Cauwenberghs. “Dry-contact and noncontact biopotential electrodes: methodological review.” *IEEE Reviews in Biomedical Engineering*, 3:106–119, 2010."
+- key: winter1983
+  text: "Bruce B. Winter and John G. Webster. “Driven-right-leg circuit design.” *IEEE Transactions on Biomedical Engineering*, BME-30(1):62–66, 1983."
+- key: huhta1973
+  text: "James C. Huhta and John G. Webster. “60-Hz interference in electrocardiography.” *IEEE Transactions on Biomedical Engineering*, BME-20(2):91–101, 1973."
+- key: murmannsurvey
+  text: "Boris Murmann. *ADC Performance Survey 1997–2024*. 2024. <https://github.com/bmurmann/ADC-survey>"
+- key: ihpacademy
+  text: "IHP GmbH. *IHP-AnalogAcademy: hands-on analog and mixed-signal design modules for SG13G2, including an 8-bit synchronous SAR ADC*. 2026. <https://github.com/IHP-GmbH/IHP-AnalogAcademy>"
+- key: jkusar
+  text: "Manuel Moser and Harald Pretl. *SKY130_SAR-ADC1: a fully differential asynchronous non-binary 12-bit SAR ADC in SKY130*. 2024. <https://github.com/iic-jku/SKY130_SAR-ADC1>"
+- key: verma2010
+  text: "Naveen Verma et al.. “A micro-power EEG acquisition SoC with integrated feature extraction processor for a chronic seizure detection system.” *IEEE Journal of Solid-State Circuits*, 45(4):804–816, 2010."
+- key: twepp2024sar
+  text: "Manuel Moser and Harald Pretl. *An open-source 12-bit non-binary SAR ADC (talk at TWEPP 2024)*. 2024. <https://indico.cern.ch/event/1381495/contributions/5988502/>"
+- key: pydeltasigma
+  text: "Giuseppe Venturini et al.. *python-deltasigma: a Python port of R. Schreier's Delta Sigma Toolbox*. 2016. <https://github.com/ggventurini/python-deltasigma>"
+- key: tompkins
+  text: "Willis J. Tompkins (ed.). *Biomedical Digital Signal Processing*. Prentice Hall, 1993."
+- key: pantompkins1985
+  text: "Jiapu Pan and Willis J. Tompkins. “A real-time QRS detection algorithm.” *IEEE Transactions on Biomedical Engineering*, BME-32(3):230–236, 1985."
+- key: mitbih
+  text: "George B. Moody and Roger G. Mark. “The impact of the MIT-BIH Arrhythmia Database.” *IEEE Engineering in Medicine and Biology Magazine*, 20(3):45–50, 2001. Data: <https://physionet.org/content/mitdb/1.0.0/>."
+- key: nstdb
+  text: "George B. Moody, W. K. Muldrow and Roger G. Mark. “A noise stress test for arrhythmia detectors.” In *Computers in Cardiology*, 1984. Data: <https://physionet.org/content/nstdb/1.0.0/>."
+- key: chbmit
+  text: "Ali H. Shoeb. *Application of Machine Learning to Epileptic Seizure Onset Detection and Treatment*. PhD thesis, Massachusetts Institute of Technology, 2009. CHB-MIT Scalp EEG Database: <https://physionet.org/content/chbmit/1.0.0/>."
+- key: pallasareny
+  text: "Ramon Pallàs-Areny and John G. Webster. *Sensors and Signal Conditioning*, 2nd edition. Wiley, 2001."
+- key: ihpdesignlib
+  text: "IHP GmbH. *IHP-Open-DesignLib: open-source designs taped out on the IHP OpenMPW shuttles*. 2026. <https://github.com/IHP-GmbH/IHP-Open-DesignLib>"
+- key: hodgkin1952
+  text: "Alan L. Hodgkin and Andrew F. Huxley. “A quantitative description of membrane current and its application to conduction and excitation in nerve.” *The Journal of Physiology*, 117(4):500–544, 1952."
+- key: buzsaki2012
+  text: "György Buzsáki, Costas A. Anastassiou and Christof Koch. “The origin of extracellular fields and currents–-EEG, ECoG, LFP and spikes.” *Nature Reviews Neuroscience*, 13:407–420, 2012."
+- key: mcsharry2003
+  text: "Patrick E. McSharry, Gari D. Clifford, Lionel Tarassenko and Leonard A. Smith. “A dynamical model for generating synthetic electrocardiogram signals.” *IEEE Transactions on Biomedical Engineering*, 50(3):289–294, 2003."
+- key: randles1947
+  text: "J. E. B. Randles. “Kinetics of rapid electrode reactions.” *Discussions of the Faraday Society*, 1:11–19, 1947."
+- key: kim2007
+  text: "Sohee Kim, Prashant Tathireddy, Richard A. Normann and Florian Solzbacher. “Thermal impact of an active 3-D microelectrode array implanted in the brain.” *IEEE Transactions on Neural Systems and Rehabilitation Engineering*, 15(4):493–501, 2007."
+- key: wfdb
+  text: "MIT Laboratory for Computational Physiology. *WFDB Python: a library of tools for reading, writing and processing PhysioNet signals and annotations*. 2025. <https://github.com/MIT-LCP/wfdb-python>"
+- key: iec60601-1
+  text: "International Electrotechnical Commission. *IEC 60601-1: Medical electrical equipment – Part 1: General requirements for basic safety and essential performance*. 2005. Edition 3 with amendments 1 (2012) and 2 (2020)."
+- key: iec60601-2-25
+  text: "International Electrotechnical Commission. *IEC 60601-2-25: Particular requirements for the basic safety and essential performance of electrocardiographs*. 2011."
+- key: iec60601-2-27
+  text: "International Electrotechnical Commission. *IEC 60601-2-27: Particular requirements for the basic safety and essential performance of electrocardiographic monitoring equipment*. 2011."
+- key: iec60601-2-47
+  text: "International Electrotechnical Commission. *IEC 60601-2-47: Particular requirements for the basic safety and essential performance of ambulatory electrocardiographic systems*. 2012."
+- key: medteqcmrr
+  text: "MEDTEQ. *CMRR testing (IEC 60601-2-25, -2-27, -2-47)*. 2017. <https://medteq.squarespace.com/article/cmrr-testing-iec-60601-2-25-2-27-2-47>"
+- key: medteqzin
+  text: "MEDTEQ. *IEC 60601-2-25 clause 201.12.4.103: input impedance*. 2017. <https://medteq.squarespace.com/article/2017/4/1/iec-60601-2-25-clause-201124103-input-impedance>"

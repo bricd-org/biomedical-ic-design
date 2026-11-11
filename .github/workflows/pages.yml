@@ -1,13 +1,12 @@
 # Build the Jekyll (just-the-docs) site and deploy it to GitHub Pages.
 # Because the bricd-org user site uses the custom domain www.thebricd.org,
-# this project site is served at https://www.thebricd.org/serdes-tutorial/
+# this project site is served at https://www.thebricd.org/biomedical-ic-design/
 name: Deploy site to GitHub Pages
 
-# Manual trigger only while the first release (v0.1) is being written, so an unfinished site is
-# not published. Put the push trigger back when the home page and Part I are ready:
-#   push:
-#     branches: ["main"]
+# Deploys on every push to main; it can also be run by hand from the Actions tab.
 on:
+  push:
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
