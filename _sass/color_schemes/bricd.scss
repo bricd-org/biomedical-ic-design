@@ -1,26 +1,25 @@
-// BRICD light colour scheme (matches www.thebricd.org and the PDF edition)
+// Open-BioAFE light colour scheme ("Monitor"): graphite headings, signal-green accents and
+// blue links on a white page. Component colours are in custom/custom.scss.
 $color-scheme: light;
-$bricd-navy: #1b2a52;
-$bricd-blue: #235ea3;
-$bricd-blue-d: #173f78;
-$bricd-gold: #a8862e;
-$bricd-gold-d: #8a6a1c;
-$bricd-ink: #18222e;
-$bricd-muted: #56657a;
-$bricd-line: #e4e9f1;
-$bricd-soft: #f5f7fa;
+$mon-graphite: #1d2a30;
+$mon-green: #1a7a4c;
+$mon-link: #1f64a8;
+$mon-ink: #1a2226;
+$mon-muted: #56656b;
+$mon-line: #e1e8e8;
+$mon-soft: #f4f7f7;
 
 $body-background-color: #ffffff;
-$body-heading-color: $bricd-navy;
-$body-text-color: $bricd-ink;
-$link-color: $bricd-blue;
-$nav-child-link-color: $bricd-muted;
-$sidebar-color: $bricd-soft;
+$body-heading-color: $mon-graphite;
+$body-text-color: $mon-ink;
+$link-color: $mon-link;
+$nav-child-link-color: $mon-muted;
+$sidebar-color: $mon-soft;
 $base-button-color: #f7f7f7;
-$btn-primary-color: $bricd-navy;
-$code-background-color: #f4f6fa;
+$btn-primary-color: $mon-green;
+$code-background-color: #f3f6f6;
 $feedback-color: darken($sidebar-color, 3%);
 $table-background-color: #ffffff;
 $search-background-color: #ffffff;
-$search-result-preview-color: $bricd-muted;
-$border-color: $bricd-line;
+$search-result-preview-color: $mon-muted;
+$border-color: $mon-line;

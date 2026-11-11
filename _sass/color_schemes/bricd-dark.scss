@@ -1,28 +1,29 @@
-// BRICD dark colour scheme: the same navy and gold accents on a deep navy page.
+// Open-BioAFE dark colour scheme ("Monitor"): a patient-monitor look, with signal-green and
+// amber accents and cyan links on a near-black page.
 // Compiled into assets/css/just-the-docs-bricd-dark.css, which the dark mode button
 // (_includes/header_custom.html) switches to. Component colours are in custom/custom.scss.
 $color-scheme: dark;
-$bricd-night: #121a2b;
-$bricd-night-d: #0d1422;
-$bricd-night-l: #1a2439;
-$bricd-ink: #c9d2e3;
-$bricd-heading: #e6ecf7;
-$bricd-link: #82b1ea;
-$bricd-muted: #98a5bb;
-$bricd-line: #28334c;
+$mon-night: #0a0f11;
+$mon-night-d: #070b0c;
+$mon-night-l: #142023;
+$mon-ink: #c3cdcf;
+$mon-heading: #e8f0ee;
+$mon-link: #5fc8ea;
+$mon-muted: #93a1a5;
+$mon-line: #1f2b2e;
 
-$body-background-color: $bricd-night;
-$body-heading-color: $bricd-heading;
-$body-text-color: $bricd-ink;
-$link-color: $bricd-link;
-$nav-child-link-color: $bricd-muted;
-$sidebar-color: $bricd-night-d;
-$base-button-color: $bricd-night-l;
-$btn-primary-color: #2b5797;
-$code-background-color: $bricd-night-d;
-$code-linenumber-color: $bricd-muted;
+$body-background-color: $mon-night;
+$body-heading-color: $mon-heading;
+$body-text-color: $mon-ink;
+$link-color: $mon-link;
+$nav-child-link-color: $mon-muted;
+$sidebar-color: $mon-night-d;
+$base-button-color: $mon-night-l;
+$btn-primary-color: #1a7a4c;
+$code-background-color: $mon-night-d;
+$code-linenumber-color: $mon-muted;
 $feedback-color: darken($sidebar-color, 3%);
-$table-background-color: $bricd-night;
-$search-background-color: $bricd-night-l;
-$search-result-preview-color: $bricd-muted;
-$border-color: $bricd-line;
+$table-background-color: $mon-night;
+$search-background-color: $mon-night-l;
+$search-result-preview-color: $mon-muted;
+$border-color: $mon-line;

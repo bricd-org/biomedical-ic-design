@@ -20,11 +20,11 @@ def lifetime():
     e0 = list(BATTERIES.values())[0]
     for pw, lab in marks:
         d = e0 / pw / 86400
-        ax.plot(pw * 1e3, d, "o", color=NAVY, ms=4.5, zorder=5)
+        ax.plot(pw * 1e3, d, "o", color=GRAPHITE, ms=4.5, zorder=5)
         ax.annotate(f"{lab}\n{d:,.0f} days" if d >= 10 else f"{lab}\n{d:.1f} days", xy=(pw * 1e3, d),
-                    xytext=(8, 4), textcoords="offset points", fontsize=7, color=NAVY, va="bottom")
-    ax.axhline(365, color=GOLD, lw=0.9, ls="--")
-    ax.text(0.011, 400, "one year", color=GOLDDK, fontsize=7, va="bottom")
+                    xytext=(8, 4), textcoords="offset points", fontsize=7, color=GRAPHITE, va="bottom")
+    ax.axhline(365, color=AMBER, lw=0.9, ls="--")
+    ax.text(0.011, 400, "one year", color=AMBERDK, fontsize=7, va="bottom")
     ax.axhline(1, color=MUTED, lw=0.7, ls=":")
     ax.text(0.011, 1.1, "one day", color=MUTED, fontsize=7, va="bottom")
     ax.set_xlim(0.01, 30); ax.set_ylim(0.05, 5000)

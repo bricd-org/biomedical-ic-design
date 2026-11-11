@@ -16,8 +16,8 @@ def cm_to_dm():
         vdm = [bs.cm_to_dm(VCM_GND, d, 0.0, zcm) for d in dz]
         lab = f"{zcm/1e9:g} GΩ" if zcm >= 1e9 else f"{zcm/1e6:g} MΩ"
         a1.loglog(dz / 1e3, np.array(vdm) * 1e6, color=c, label=r"$Z_\mathrm{cm}$ = " + lab)
-    a1.axhline(bs.SPEC["noise_eeg_uVrms"], color=GOLD, ls="--", lw=1)
-    a1.text(0.12, 1.75, "1.5 µV", fontsize=7, color=GOLDDK, va="bottom")
+    a1.axhline(bs.SPEC["noise_eeg_uVrms"], color=AMBER, ls="--", lw=1)
+    a1.text(0.12, 1.75, "1.5 µV", fontsize=7, color=AMBERDK, va="bottom")
     a1.axvline(40.7, color=MUTED, lw=0.7, ls=":")
     a1.text(45, 2e-3, "51 kΩ‖47 nF\nat 50 Hz", fontsize=6.5, color=MUTED)
     a1.set_ylim(1e-3, 1e3)
@@ -30,8 +30,8 @@ def cm_to_dm():
     for cmrr_db, c in zip((80, 100, 120), (C2, C1, C3)):
         inv = 10 ** (-cmrr_db / 20) + dzt / zcm
         a2.semilogx(zcm, -20 * np.log10(inv), color=c, label=f"amplifier CMRR {cmrr_db} dB")
-    a2.axhline(89.0, color=GOLD, ls="--", lw=1)
-    a2.text(1.2e7, 90.2, "89 dB (ECG CMRR test)", fontsize=7, color=GOLDDK, va="bottom")
+    a2.axhline(89.0, color=AMBER, ls="--", lw=1)
+    a2.text(1.2e7, 90.2, "89 dB (ECG CMRR test)", fontsize=7, color=AMBERDK, va="bottom")
     a2.set_ylim(40, 125)
     a2.set_xticks([1e7, 1e8, 1e9, 1e10, 1e11]); a2.set_xticklabels(["10M", "100M", "1G", "10G", "100G"])
     finish(a2, xlabel=r"Common-mode input impedance $Z_\mathrm{cm}$ (Ω)", ylabel="Effective CMRR (dB)",
@@ -63,9 +63,9 @@ def current_limits():
         ax.loglog(f, bs.patient_current_limit(f, part) * 1e6, color=c, label=f"type {part}, normal condition")
         ax.loglog(f, bs.patient_current_limit(f, part, single_fault=True) * 1e6, color=c, ls="--", lw=1,
                   label=f"type {part}, single fault")
-    ax.plot(50e3, 50, "o", color=NAVY, ms=4.5)
+    ax.plot(50e3, 50, "o", color=GRAPHITE, ms=4.5)
     ax.annotate("example bioimpedance\nexcitation: 50 µA at 50 kHz", xy=(50e3, 50), xytext=(1.2e3, 2.2e3),
-                fontsize=7, color=NAVY, arrowprops=dict(arrowstyle="-|>", lw=0.7, color=NAVY, mutation_scale=7))
+                fontsize=7, color=GRAPHITE, arrowprops=dict(arrowstyle="-|>", lw=0.7, color=GRAPHITE, mutation_scale=7))
     ax.axhline(bs.PATIENT_LIMIT_DC * 1e6, xmax=0.06, color=MUTED, lw=2.5)
     ax.text(1.3, 7, "d.c. limit 10 µA", fontsize=7, color=MUTED, va="top")
     ax.set_xlim(1, 1e6); ax.set_ylim(1, 2e4)

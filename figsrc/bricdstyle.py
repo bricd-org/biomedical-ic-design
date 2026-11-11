@@ -19,12 +19,13 @@ import matplotlib.pyplot as plt
 from matplotlib import font_manager
 from matplotlib.colors import LinearSegmentedColormap
 
-# ---------------------------------------------------------------- palette (= serdestut.sty)
-NAVY, BLUE, GOLD, GOLDDK, GOLDLT = "#1B2A52", "#2B5797", "#A8862E", "#8A6A1C", "#E8C25E"
-BROWN, MUTED, PALE, SLATE = "#7A5C14", "#5A6478", "#B8C4DD", "#34446A"
-GRID, BTINT, GTINT, BGPALE = "#DFE6F0", "#E4EBF6", "#F5EDD8", "#F1F4F9"
-C1, C2, C3, C4, C5 = "#2B5797", "#C9822B", "#2E8B74", "#B5473A", "#6B5CA5"
-SERIES = [C1, C2, C3, C4, C5, NAVY, GOLD]
+# ---------------------------------------------------------------- palette (site theme "Monitor", _sass/custom/custom.scss)
+GRAPHITE, BLUE, GREEN = "#1D2A30", "#1F64A8", "#1A7A4C"
+AMBER, AMBERDK, AMBERLT = "#C98A1C", "#9A6212", "#F2B84B"     # targets, limits, highlights
+BROWN, MUTED, PALE, SLATE = "#7A5C14", "#56656B", "#B9C6C9", "#3E4C52"
+GRID, BTINT, ATINT, BGPALE = "#E1E8E8", "#E4EEF8", "#FBF1DF", "#F2F5F5"
+C1, C2, C3, C4, C5 = "#1F64A8", "#C98A1C", "#1A7A4C", "#B5473A", "#6B5CA5"
+SERIES = [C1, C2, C3, C4, C5, GRAPHITE, AMBER]
 GOOD, BAD = C3, C4
 
 # ---------------------------------------------------------------- sizes (inches)
@@ -73,12 +74,12 @@ def apply():
         "mathtext.bf": fam + ":bold", "mathtext.sf": fam,
         "font.size": 8.5, "axes.titlesize": 9, "axes.labelsize": 8.5,
         "xtick.labelsize": 7.5, "ytick.labelsize": 7.5, "legend.fontsize": 7.5,
-        "axes.edgecolor": MUTED, "axes.labelcolor": NAVY, "axes.linewidth": 0.7,
+        "axes.edgecolor": MUTED, "axes.labelcolor": GRAPHITE, "axes.linewidth": 0.7,
         "xtick.color": MUTED, "ytick.color": MUTED, "xtick.major.width": 0.6, "ytick.major.width": 0.6,
         "xtick.major.size": 3, "ytick.major.size": 3,
         "axes.spines.top": False, "axes.spines.right": False,
         "axes.grid": True, "grid.color": GRID, "grid.linewidth": 0.6, "axes.axisbelow": True,
-        "axes.titleweight": "bold", "axes.titlecolor": NAVY, "axes.titlelocation": "left",
+        "axes.titleweight": "bold", "axes.titlecolor": GRAPHITE, "axes.titlelocation": "left",
         "axes.prop_cycle": matplotlib.cycler(color=SERIES),
         "lines.linewidth": 1.4, "lines.solid_capstyle": "round",
         "legend.frameon": False, "legend.handlelength": 1.8,
@@ -101,10 +102,10 @@ def finish(ax, xlabel=None, ylabel=None, title=None, legend=False, loc="best"):
 def panel(ax, letter, x=-0.02, y=1.04):
     """Panel tag '(a)' in the top-left corner."""
     ax.text(x, y, f"({letter})", transform=ax.transAxes, fontsize=9, fontweight="bold",
-            color=GOLDDK, ha="right", va="bottom")
+            color=AMBERDK, ha="right", va="bottom")
 
 
-def note(ax, xy, text, xytext, color=NAVY, fs=7.5, ha="left", arrow=True):
+def note(ax, xy, text, xytext, color=GRAPHITE, fs=7.5, ha="left", arrow=True):
     """Annotation with a thin arrow in house style."""
     ax.annotate(text, xy=xy, xytext=xytext, fontsize=fs, color=color, ha=ha, va="center",
                 arrowprops=dict(arrowstyle="-|>", lw=0.7, color=color, shrinkA=1, shrinkB=2,
@@ -124,7 +125,7 @@ def savefig(fig, name, png=False):
 
 # ---------------------------------------------------------------- eye diagrams
 EYE_CMAP = LinearSegmentedColormap.from_list(
-    "bricd_eye", ["#FFFFFF", "#DCE4F2", PALE, BLUE, NAVY, GOLDDK, GOLDLT], N=256)
+    "bricd_eye", ["#FFFFFF", "#DCE4F2", PALE, BLUE, GRAPHITE, AMBERDK, AMBERLT], N=256)
 
 
 def eye_density(ax, y, sps, phase=0, n_ui=2, skip_ui=50, vbins=220, vlim=None, gamma=0.6,
@@ -157,7 +158,7 @@ def eye_density(ax, y, sps, phase=0, n_ui=2, skip_ui=50, vbins=220, vlim=None, g
     return im
 
 
-def eye_lines(ax, y, sps, phase=0, n_ui=2, skip_ui=50, ntraces=400, color=NAVY, alpha=0.06, lw=0.6):
+def eye_lines(ax, y, sps, phase=0, n_ui=2, skip_ui=50, ntraces=400, color=GRAPHITE, alpha=0.06, lw=0.6):
     """Classic overlaid-trace eye diagram (good for few traces / clean channels)."""
     y = np.asarray(y, float)[skip_ui * sps:]
     span = n_ui * sps
@@ -171,7 +172,7 @@ def eye_lines(ax, y, sps, phase=0, n_ui=2, skip_ui=50, ntraces=400, color=NAVY, 
     ax.set_xlabel("Time (UI)")
 
 
-def stem_cursors(ax, k, pk, main_color=GOLD, pre_color=C4, post_color=C1, labels=True, fmt="{:.3f}"):
+def stem_cursors(ax, k, pk, main_color=AMBER, pre_color=C4, post_color=C1, labels=True, fmt="{:.3f}"):
     """Stem plot of pulse-response cursors p_k (k = integer UI index, 0 = main cursor)."""
     k = np.asarray(k); pk = np.asarray(pk)
     for kk, v in zip(k, pk):

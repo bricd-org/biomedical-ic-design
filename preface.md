@@ -29,7 +29,7 @@ The tutorial has five parts. **Part I, Foundations** (Chapters 1–4), explains 
 
 <figure id="fig-reading-paths">
   <img src="{{ '/assets/figs/reading-paths.svg' | relative_url }}" style="width:640px" alt="Three reading paths through the tutorial">
-  <figcaption><span class="capnum">Figure P.1.</span> <strong>Three ways to read the tutorial.</strong> The circuit path (gold) follows the front-end and converter circuits to a tape-out. The signal path (blue) goes from the signals to their processing and the converter specifications. The converter-only path (grey) is Part III with its labs on its own.</figcaption>
+  <figcaption><span class="capnum">Figure P.1.</span> <strong>Three ways to read the tutorial.</strong> The circuit path (amber) follows the front-end and converter circuits to a tape-out. The signal path (blue) goes from the signals to their processing and the converter specifications. The converter-only path (green) is Part III with its labs on its own.</figcaption>
 </figure>
 
 ## How to read the boxes

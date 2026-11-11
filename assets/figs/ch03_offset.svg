@@ -41,21 +41,21 @@ z
      <g id="line2d_1">
       <path d="M 42.031908 150.513932 
 L 42.031908 16.061383 
-" clip-path="url(#pf8d9796b98)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#padfe550307)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_2">
       <defs>
-       <path id="m39cd94386d" d="M 0 0 
+       <path id="m0a74465e03" d="M 0 0 
 L 0 3 
-" style="stroke: #5a6478; stroke-width: 0.6"/>
+" style="stroke: #56656b; stroke-width: 0.6"/>
       </defs>
       <g>
-       <use xlink:href="#m39cd94386d" x="42.031908" y="150.513932" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m0a74465e03" x="42.031908" y="150.513932" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_1">
       <!-- 0 -->
-      <g style="fill: #5a6478" transform="translate(39.947143 162.481901)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(39.947143 162.481901)scale(0.075 -0.075)">
        <defs>
         <path id="TeXGyreHeros-Regular-30" d="M 3245 2182 
 C 3245 3757 2746 4538 1760 4538 
@@ -79,16 +79,16 @@ z
      <g id="line2d_3">
       <path d="M 77.300211 150.513932 
 L 77.300211 16.061383 
-" clip-path="url(#pf8d9796b98)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#padfe550307)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_4">
       <g>
-       <use xlink:href="#m39cd94386d" x="77.300211" y="150.513932" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m0a74465e03" x="77.300211" y="150.513932" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_2">
       <!-- 2 -->
-      <g style="fill: #5a6478" transform="translate(75.215445 162.481901)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(75.215445 162.481901)scale(0.075 -0.075)">
        <defs>
         <path id="TeXGyreHeros-Regular-32" d="M 3270 3206 
 C 3270 3974 2675 4538 1818 4538 
@@ -116,16 +116,16 @@ z
      <g id="line2d_5">
       <path d="M 112.568514 150.513932 
 L 112.568514 16.061383 
-" clip-path="url(#pf8d9796b98)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#padfe550307)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_6">
       <g>
-       <use xlink:href="#m39cd94386d" x="112.568514" y="150.513932" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m0a74465e03" x="112.568514" y="150.513932" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_3">
       <!-- 4 -->
-      <g style="fill: #5a6478" transform="translate(110.483748 162.481901)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(110.483748 162.481901)scale(0.075 -0.075)">
        <defs>
         <path id="TeXGyreHeros-Regular-34" d="M 3328 1088 
 L 3328 1594 
@@ -155,16 +155,16 @@ z
      <g id="line2d_7">
       <path d="M 147.836816 150.513932 
 L 147.836816 16.061383 
-" clip-path="url(#pf8d9796b98)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#padfe550307)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_8">
       <g>
-       <use xlink:href="#m39cd94386d" x="147.836816" y="150.513932" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m0a74465e03" x="147.836816" y="150.513932" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_4">
       <!-- 6 -->
-      <g style="fill: #5a6478" transform="translate(145.752051 162.481901)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(145.752051 162.481901)scale(0.075 -0.075)">
        <defs>
         <path id="TeXGyreHeros-Regular-36" d="M 3283 1408 
 C 3283 2253 2707 2822 1894 2822 
@@ -193,16 +193,16 @@ z
      <g id="line2d_9">
       <path d="M 183.105119 150.513932 
 L 183.105119 16.061383 
-" clip-path="url(#pf8d9796b98)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#padfe550307)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_10">
       <g>
-       <use xlink:href="#m39cd94386d" x="183.105119" y="150.513932" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m0a74465e03" x="183.105119" y="150.513932" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_5">
       <!-- 8 -->
-      <g style="fill: #5a6478" transform="translate(181.020353 162.481901)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(181.020353 162.481901)scale(0.075 -0.075)">
        <defs>
         <path id="TeXGyreHeros-Regular-38" d="M 3283 1280 
 C 3283 1786 3027 2138 2502 2387 
@@ -236,16 +236,16 @@ z
      <g id="line2d_11">
       <path d="M 218.373422 150.513932 
 L 218.373422 16.061383 
-" clip-path="url(#pf8d9796b98)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#padfe550307)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_12">
       <g>
-       <use xlink:href="#m39cd94386d" x="218.373422" y="150.513932" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m0a74465e03" x="218.373422" y="150.513932" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_6">
       <!-- 10 -->
-      <g style="fill: #5a6478" transform="translate(214.203891 162.481901)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(214.203891 162.481901)scale(0.075 -0.075)">
        <defs>
         <path id="TeXGyreHeros-Regular-31" d="M 2221 0 
 L 2221 4538 
@@ -265,7 +265,7 @@ z
     </g>
     <g id="text_7">
      <!-- Time (s) -->
-     <g style="fill: #1b2a52" transform="translate(114.587826 174.313698)scale(0.085 -0.085)">
+     <g style="fill: #1d2a30" transform="translate(114.587826 174.313698)scale(0.085 -0.085)">
       <defs>
        <path id="TeXGyreHeros-Regular-54" d="M 3795 4141 
 L 3795 4666 
@@ -386,21 +386,21 @@ z
      <g id="line2d_13">
       <path d="M 33.218359 150.513932 
 L 227.116434 150.513932 
-" clip-path="url(#pf8d9796b98)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#padfe550307)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_14">
       <defs>
-       <path id="ma829013077" d="M 0 0 
+       <path id="m25f24ea98d" d="M 0 0 
 L -3 0 
-" style="stroke: #5a6478; stroke-width: 0.6"/>
+" style="stroke: #56656b; stroke-width: 0.6"/>
       </defs>
       <g>
-       <use xlink:href="#ma829013077" x="33.218359" y="150.513932" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m25f24ea98d" x="33.218359" y="150.513932" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_8">
       <!-- 0 -->
-      <g style="fill: #5a6478" transform="translate(22.548828 153.247917)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(22.548828 153.247917)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-30"/>
       </g>
      </g>
@@ -409,16 +409,16 @@ L -3 0
      <g id="line2d_15">
       <path d="M 33.218359 132.586926 
 L 227.116434 132.586926 
-" clip-path="url(#pf8d9796b98)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#padfe550307)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_16">
       <g>
-       <use xlink:href="#ma829013077" x="33.218359" y="132.586926" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m25f24ea98d" x="33.218359" y="132.586926" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_9">
       <!-- 20 -->
-      <g style="fill: #5a6478" transform="translate(18.379297 135.32091)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(18.379297 135.32091)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-32"/>
        <use xlink:href="#TeXGyreHeros-Regular-30" x="55.599991"/>
       </g>
@@ -428,16 +428,16 @@ L 227.116434 132.586926
      <g id="line2d_17">
       <path d="M 33.218359 114.659919 
 L 227.116434 114.659919 
-" clip-path="url(#pf8d9796b98)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#padfe550307)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_18">
       <g>
-       <use xlink:href="#ma829013077" x="33.218359" y="114.659919" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m25f24ea98d" x="33.218359" y="114.659919" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_10">
       <!-- 40 -->
-      <g style="fill: #5a6478" transform="translate(18.379297 117.393904)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(18.379297 117.393904)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-34"/>
        <use xlink:href="#TeXGyreHeros-Regular-30" x="55.599991"/>
       </g>
@@ -447,16 +447,16 @@ L 227.116434 114.659919
      <g id="line2d_19">
       <path d="M 33.218359 96.732913 
 L 227.116434 96.732913 
-" clip-path="url(#pf8d9796b98)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#padfe550307)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_20">
       <g>
-       <use xlink:href="#ma829013077" x="33.218359" y="96.732913" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m25f24ea98d" x="33.218359" y="96.732913" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_11">
       <!-- 60 -->
-      <g style="fill: #5a6478" transform="translate(18.379297 99.466897)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(18.379297 99.466897)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-36"/>
        <use xlink:href="#TeXGyreHeros-Regular-30" x="55.599991"/>
       </g>
@@ -466,16 +466,16 @@ L 227.116434 96.732913
      <g id="line2d_21">
       <path d="M 33.218359 78.805906 
 L 227.116434 78.805906 
-" clip-path="url(#pf8d9796b98)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#padfe550307)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_22">
       <g>
-       <use xlink:href="#ma829013077" x="33.218359" y="78.805906" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m25f24ea98d" x="33.218359" y="78.805906" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_12">
       <!-- 80 -->
-      <g style="fill: #5a6478" transform="translate(18.379297 81.539891)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(18.379297 81.539891)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-38"/>
        <use xlink:href="#TeXGyreHeros-Regular-30" x="55.599991"/>
       </g>
@@ -485,16 +485,16 @@ L 227.116434 78.805906
      <g id="line2d_23">
       <path d="M 33.218359 60.8789 
 L 227.116434 60.8789 
-" clip-path="url(#pf8d9796b98)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#padfe550307)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_24">
       <g>
-       <use xlink:href="#ma829013077" x="33.218359" y="60.8789" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m25f24ea98d" x="33.218359" y="60.8789" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_13">
       <!-- 100 -->
-      <g style="fill: #5a6478" transform="translate(14.209766 63.612884)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(14.209766 63.612884)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-31"/>
        <use xlink:href="#TeXGyreHeros-Regular-30" x="55.599991"/>
        <use xlink:href="#TeXGyreHeros-Regular-30" x="111.199982"/>
@@ -505,16 +505,16 @@ L 227.116434 60.8789
      <g id="line2d_25">
       <path d="M 33.218359 42.951893 
 L 227.116434 42.951893 
-" clip-path="url(#pf8d9796b98)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#padfe550307)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_26">
       <g>
-       <use xlink:href="#ma829013077" x="33.218359" y="42.951893" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m25f24ea98d" x="33.218359" y="42.951893" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_14">
       <!-- 120 -->
-      <g style="fill: #5a6478" transform="translate(14.209766 45.685877)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(14.209766 45.685877)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-31"/>
        <use xlink:href="#TeXGyreHeros-Regular-32" x="55.599991"/>
        <use xlink:href="#TeXGyreHeros-Regular-30" x="111.199982"/>
@@ -525,16 +525,16 @@ L 227.116434 42.951893
      <g id="line2d_27">
       <path d="M 33.218359 25.024886 
 L 227.116434 25.024886 
-" clip-path="url(#pf8d9796b98)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#padfe550307)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_28">
       <g>
-       <use xlink:href="#ma829013077" x="33.218359" y="25.024886" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m25f24ea98d" x="33.218359" y="25.024886" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_15">
       <!-- 140 -->
-      <g style="fill: #5a6478" transform="translate(14.209766 27.758871)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(14.209766 27.758871)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-31"/>
        <use xlink:href="#TeXGyreHeros-Regular-34" x="55.599991"/>
        <use xlink:href="#TeXGyreHeros-Regular-30" x="111.199982"/>
@@ -543,7 +543,7 @@ L 227.116434 25.024886
     </g>
     <g id="text_16">
      <!-- Electrode-pair voltage (mV) -->
-     <g style="fill: #1b2a52" transform="translate(8.357031 135.006838)rotate(-90)scale(0.085 -0.085)">
+     <g style="fill: #1d2a30" transform="translate(8.357031 135.006838)rotate(-90)scale(0.085 -0.085)">
       <defs>
        <path id="TeXGyreHeros-Regular-45" d="M 3923 0 
 L 3923 525 
@@ -1673,21 +1673,21 @@ L 217.879666 41.465226
 L 218.020739 41.331744 
 L 218.302885 41.269438 
 L 218.302885 41.269438 
-" clip-path="url(#pf8d9796b98)" style="fill: none; stroke: #2b5797; stroke-width: 0.8; stroke-linecap: round"/>
+" clip-path="url(#padfe550307)" style="fill: none; stroke: #1f64a8; stroke-width: 0.8; stroke-linecap: round"/>
    </g>
    <g id="patch_3">
     <path d="M 33.218359 150.513932 
 L 33.218359 16.061383 
-" style="fill: none; stroke: #5a6478; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+" style="fill: none; stroke: #56656b; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_4">
     <path d="M 33.218359 150.513932 
 L 227.116434 150.513932 
-" style="fill: none; stroke: #5a6478; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+" style="fill: none; stroke: #56656b; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_17">
     <!-- ≈120 mV offset, ECG invisible -->
-    <g style="fill: #1b2a52" transform="translate(47.322154 26.338484)scale(0.07 -0.07)">
+    <g style="fill: #1d2a30" transform="translate(47.322154 26.338484)scale(0.07 -0.07)">
      <defs>
       <path id="TeXGyreHeros-Regular-2248" d="M 3443 2522 
 L 3443 2624 
@@ -1847,7 +1847,7 @@ z
      <use xlink:href="#TeXGyreHeros-Regular-65" x="1281.499725"/>
     </g>
     <!-- at this scale -->
-    <g style="fill: #1b2a52" transform="translate(47.322154 33.98839)scale(0.07 -0.07)">
+    <g style="fill: #1d2a30" transform="translate(47.322154 33.98839)scale(0.07 -0.07)">
      <defs>
       <path id="TeXGyreHeros-Regular-68" d="M 3110 0 
 L 3110 2534 
@@ -1882,7 +1882,7 @@ z
    </g>
    <g id="text_18">
     <!-- (a) -->
-    <g style="fill: #8a6a1c" transform="translate(18.343523 8.721562)scale(0.09 -0.09)">
+    <g style="fill: #9a6212" transform="translate(18.343523 8.721562)scale(0.09 -0.09)">
      <defs>
       <path id="TeXGyreHeros-Bold-28" d="M 1939 -1280 
 C 1261 38 1043 755 1043 1696 
@@ -1949,16 +1949,16 @@ z
      <g id="line2d_30">
       <path d="M 264.674994 150.513932 
 L 264.674994 16.061383 
-" clip-path="url(#pd0a08be8c2)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#pe1e0fa645b)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_31">
       <g>
-       <use xlink:href="#m39cd94386d" x="264.674994" y="150.513932" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m0a74465e03" x="264.674994" y="150.513932" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_19">
       <!-- 0 -->
-      <g style="fill: #5a6478" transform="translate(262.590229 162.481901)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(262.590229 162.481901)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-30"/>
       </g>
      </g>
@@ -1967,16 +1967,16 @@ L 264.674994 16.061383
      <g id="line2d_32">
       <path d="M 299.943297 150.513932 
 L 299.943297 16.061383 
-" clip-path="url(#pd0a08be8c2)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#pe1e0fa645b)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_33">
       <g>
-       <use xlink:href="#m39cd94386d" x="299.943297" y="150.513932" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m0a74465e03" x="299.943297" y="150.513932" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_20">
       <!-- 2 -->
-      <g style="fill: #5a6478" transform="translate(297.858531 162.481901)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(297.858531 162.481901)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-32"/>
       </g>
      </g>
@@ -1985,16 +1985,16 @@ L 299.943297 16.061383
      <g id="line2d_34">
       <path d="M 335.2116 150.513932 
 L 335.2116 16.061383 
-" clip-path="url(#pd0a08be8c2)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#pe1e0fa645b)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_35">
       <g>
-       <use xlink:href="#m39cd94386d" x="335.2116" y="150.513932" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m0a74465e03" x="335.2116" y="150.513932" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_21">
       <!-- 4 -->
-      <g style="fill: #5a6478" transform="translate(333.126834 162.481901)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(333.126834 162.481901)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-34"/>
       </g>
      </g>
@@ -2003,16 +2003,16 @@ L 335.2116 16.061383
      <g id="line2d_36">
       <path d="M 370.479902 150.513932 
 L 370.479902 16.061383 
-" clip-path="url(#pd0a08be8c2)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#pe1e0fa645b)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_37">
       <g>
-       <use xlink:href="#m39cd94386d" x="370.479902" y="150.513932" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m0a74465e03" x="370.479902" y="150.513932" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_22">
       <!-- 6 -->
-      <g style="fill: #5a6478" transform="translate(368.395137 162.481901)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(368.395137 162.481901)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-36"/>
       </g>
      </g>
@@ -2021,16 +2021,16 @@ L 370.479902 16.061383
      <g id="line2d_38">
       <path d="M 405.748205 150.513932 
 L 405.748205 16.061383 
-" clip-path="url(#pd0a08be8c2)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#pe1e0fa645b)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_39">
       <g>
-       <use xlink:href="#m39cd94386d" x="405.748205" y="150.513932" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m0a74465e03" x="405.748205" y="150.513932" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_23">
       <!-- 8 -->
-      <g style="fill: #5a6478" transform="translate(403.663439 162.481901)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(403.663439 162.481901)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-38"/>
       </g>
      </g>
@@ -2039,16 +2039,16 @@ L 405.748205 16.061383
      <g id="line2d_40">
       <path d="M 441.016508 150.513932 
 L 441.016508 16.061383 
-" clip-path="url(#pd0a08be8c2)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#pe1e0fa645b)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_41">
       <g>
-       <use xlink:href="#m39cd94386d" x="441.016508" y="150.513932" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m0a74465e03" x="441.016508" y="150.513932" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_24">
       <!-- 10 -->
-      <g style="fill: #5a6478" transform="translate(436.846977 162.481901)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(436.846977 162.481901)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-31"/>
        <use xlink:href="#TeXGyreHeros-Regular-30" x="55.599991"/>
       </g>
@@ -2056,7 +2056,7 @@ L 441.016508 16.061383
     </g>
     <g id="text_25">
      <!-- Time (s) -->
-     <g style="fill: #1b2a52" transform="translate(337.230912 174.313698)scale(0.085 -0.085)">
+     <g style="fill: #1d2a30" transform="translate(337.230912 174.313698)scale(0.085 -0.085)">
       <use xlink:href="#TeXGyreHeros-Regular-54"/>
       <use xlink:href="#TeXGyreHeros-Regular-69" x="61.099991"/>
       <use xlink:href="#TeXGyreHeros-Regular-6d" x="83.299988"/>
@@ -2073,16 +2073,16 @@ L 441.016508 16.061383
      <g id="line2d_42">
       <path d="M 255.861445 141.16182 
 L 449.75952 141.16182 
-" clip-path="url(#pd0a08be8c2)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#pe1e0fa645b)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_43">
       <g>
-       <use xlink:href="#ma829013077" x="255.861445" y="141.16182" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m25f24ea98d" x="255.861445" y="141.16182" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_26">
       <!-- 0 -->
-      <g style="fill: #5a6478" transform="translate(245.191914 143.895804)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(245.191914 143.895804)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-30"/>
       </g>
      </g>
@@ -2091,16 +2091,16 @@ L 449.75952 141.16182
      <g id="line2d_44">
       <path d="M 255.861445 116.124215 
 L 449.75952 116.124215 
-" clip-path="url(#pd0a08be8c2)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#pe1e0fa645b)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_45">
       <g>
-       <use xlink:href="#ma829013077" x="255.861445" y="116.124215" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m25f24ea98d" x="255.861445" y="116.124215" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_27">
       <!-- 2 -->
-      <g style="fill: #5a6478" transform="translate(245.191914 118.858199)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(245.191914 118.858199)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-32"/>
       </g>
      </g>
@@ -2109,16 +2109,16 @@ L 449.75952 116.124215
      <g id="line2d_46">
       <path d="M 255.861445 91.08661 
 L 449.75952 91.08661 
-" clip-path="url(#pd0a08be8c2)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#pe1e0fa645b)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_47">
       <g>
-       <use xlink:href="#ma829013077" x="255.861445" y="91.08661" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m25f24ea98d" x="255.861445" y="91.08661" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_28">
       <!-- 4 -->
-      <g style="fill: #5a6478" transform="translate(245.191914 93.820595)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(245.191914 93.820595)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-34"/>
       </g>
      </g>
@@ -2127,16 +2127,16 @@ L 449.75952 91.08661
      <g id="line2d_48">
       <path d="M 255.861445 66.049005 
 L 449.75952 66.049005 
-" clip-path="url(#pd0a08be8c2)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#pe1e0fa645b)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_49">
       <g>
-       <use xlink:href="#ma829013077" x="255.861445" y="66.049005" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m25f24ea98d" x="255.861445" y="66.049005" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_29">
       <!-- 6 -->
-      <g style="fill: #5a6478" transform="translate(245.191914 68.78299)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(245.191914 68.78299)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-36"/>
       </g>
      </g>
@@ -2145,23 +2145,23 @@ L 449.75952 66.049005
      <g id="line2d_50">
       <path d="M 255.861445 41.011401 
 L 449.75952 41.011401 
-" clip-path="url(#pd0a08be8c2)" style="fill: none; stroke: #dfe6f0; stroke-width: 0.6; stroke-linecap: round"/>
+" clip-path="url(#pe1e0fa645b)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
      </g>
      <g id="line2d_51">
       <g>
-       <use xlink:href="#ma829013077" x="255.861445" y="41.011401" style="fill: #5a6478; stroke: #5a6478; stroke-width: 0.6"/>
+       <use xlink:href="#m25f24ea98d" x="255.861445" y="41.011401" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
       </g>
      </g>
      <g id="text_30">
       <!-- 8 -->
-      <g style="fill: #5a6478" transform="translate(245.191914 43.745385)scale(0.075 -0.075)">
+      <g style="fill: #56656b" transform="translate(245.191914 43.745385)scale(0.075 -0.075)">
        <use xlink:href="#TeXGyreHeros-Regular-38"/>
       </g>
      </g>
     </g>
     <g id="text_31">
      <!-- After removing 120 mV (mV) -->
-     <g style="fill: #1b2a52" transform="translate(239.33918 137.131838)rotate(-90)scale(0.085 -0.085)">
+     <g style="fill: #1d2a30" transform="translate(239.33918 137.131838)rotate(-90)scale(0.085 -0.085)">
       <defs>
        <path id="TeXGyreHeros-Regular-41" d="M 4179 0 
 L 2541 4666 
@@ -3621,32 +3621,32 @@ L 440.804898 118.900822
 L 440.875435 119.332014 
 L 440.945971 117.663956 
 L 440.945971 117.663956 
-" clip-path="url(#pd0a08be8c2)" style="fill: none; stroke: #2b5797; stroke-width: 0.8; stroke-linecap: round"/>
+" clip-path="url(#pe1e0fa645b)" style="fill: none; stroke: #1f64a8; stroke-width: 0.8; stroke-linecap: round"/>
    </g>
    <g id="patch_6">
     <path d="M 255.861445 150.513932 
 L 255.861445 16.061383 
-" style="fill: none; stroke: #5a6478; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+" style="fill: none; stroke: #56656b; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_7">
     <path d="M 255.861445 150.513932 
 L 449.75952 150.513932 
-" style="fill: none; stroke: #5a6478; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+" style="fill: none; stroke: #56656b; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_8">
     <path d="M 405.372113 53.300763 
 Q 388.805553 62.32545 372.926259 70.975746 
-" style="fill: none; stroke: #1b2a52; stroke-width: 0.7; stroke-linecap: round"/>
+" style="fill: none; stroke: #1d2a30; stroke-width: 0.7; stroke-linecap: round"/>
     <path d="M 376.054819 70.865705 
 L 372.926259 70.975746 
 L 374.715363 68.406873 
 L 376.054819 70.865705 
 z
-" style="fill: #1b2a52; stroke: #1b2a52; stroke-width: 0.7; stroke-linecap: round"/>
+" style="fill: #1d2a30; stroke: #1d2a30; stroke-width: 0.7; stroke-linecap: round"/>
    </g>
    <g id="text_32">
     <!-- motion artefact -->
-    <g style="fill: #1b2a52" transform="translate(391.640884 49.187404)scale(0.075 -0.075)">
+    <g style="fill: #1d2a30" transform="translate(391.640884 49.187404)scale(0.075 -0.075)">
      <use xlink:href="#TeXGyreHeros-Regular-6d"/>
      <use xlink:href="#TeXGyreHeros-Regular-6f" x="83.299988"/>
      <use xlink:href="#TeXGyreHeros-Regular-74" x="138.899979"/>
@@ -3666,7 +3666,7 @@ z
    </g>
    <g id="text_33">
     <!-- (b) -->
-    <g style="fill: #8a6a1c" transform="translate(240.491609 8.721562)scale(0.09 -0.09)">
+    <g style="fill: #9a6212" transform="translate(240.491609 8.721562)scale(0.09 -0.09)">
      <defs>
       <path id="TeXGyreHeros-Bold-62" d="M 3680 1683 
 C 3680 2662 3136 3514 2227 3514 
@@ -3695,10 +3695,10 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="pf8d9796b98">
+  <clipPath id="padfe550307">
    <rect x="33.218359" y="16.061383" width="193.898075" height="134.452549"/>
   </clipPath>
-  <clipPath id="pd0a08be8c2">
+  <clipPath id="pe1e0fa645b">
    <rect x="255.861445" y="16.061383" width="193.898075" height="134.452549"/>
   </clipPath>
  </defs>
