@@ -44,8 +44,8 @@ def ecg_figure():
         y = np.interp(tt, tb, x[m] * 1e3)
         a2.text(tt, y + 0.08, "QRS" if name == "R" else name, ha="center", va="bottom", fontsize=7.5,
                 color=AMBERDK, fontweight="bold")
-    a2.annotate("", xy=(-30, -0.45), xytext=(30, -0.45), arrowprops=dict(arrowstyle="<->", lw=0.7, color=GRAPHITE))
-    a2.text(0, -0.5, "QRS ≈ 80 ms", ha="center", va="top", fontsize=7, color=GRAPHITE)
+    a2.plot([-40, 40], [-0.45, -0.45], color=GRAPHITE, lw=0.9, marker="|", ms=6, mew=0.9)
+    a2.text(0, -0.52, "QRS ≈ 80 ms", ha="center", va="top", fontsize=7, color=GRAPHITE)
     a2.set_ylim(-0.75, 1.3)
     finish(a2, xlabel="Time from R peak (ms)", ylabel="mV")
     panel(a2, "b")
@@ -96,19 +96,30 @@ def emg_spike_figure():
 def amplitude_bandwidth_map():
     fig, ax = plt.subplots(figsize=FULLTALL)
     cols = [C1, C3, C2, C5, GRAPHITE, BROWN, C4]
-    offs = {"ECG (surface)": (1.0, 1.25), "EEG (scalp)": (1.0, 1.35), "EMG (surface)": (1.2, 1.25),
-            "EOG": (0.9, 0.62), "ECoG": (1.3, 1.25), "LFP (intracortical)": (0.9, 1.3),
-            "Spikes (extracellular)": (1.1, 1.25)}
+    # label position (text x, y) and the point on the box edge its leader line goes to (None: no line).
+    # The labels sit in the free space above and below the boxes so they never overlap one another.
+    labels = {"ECG (surface)": ((0.06, 2.2e-2), (0.4, 4e-3)),
+              "EEG (scalp)": ((0.12, 2.6e-6), (0.9, 5e-6)),
+              "EMG (surface)": ((35, 2.2e-2), (60, 5e-3)),
+              "EOG": ((0.058, 1.35e-5), None),
+              "ECoG": ((140, 4.6e-6), (300, 1e-5)),
+              "LFP (intracortical)": ((0.9, 5.5e-2), (2.0, 2e-3)),
+              "Spikes (extracellular)": ((900, 2.2e-3), (2.5e3, 5e-4))}
     for (name, ((a_lo, a_hi), (f_lo, f_hi), fs)), c in zip(bs.SIGNALS.items(), cols):
-        ax.add_patch(Rectangle((f_lo, a_lo), f_hi - f_lo, a_hi - a_lo, facecolor=c, alpha=0.13,
-                               edgecolor=c, lw=1.2))
-        fx, fy = offs[name]
-        ax.text(f_lo * fx, a_hi * fy, name, fontsize=7.2, color=c, fontweight="bold", va="bottom")
+        ax.add_patch(Rectangle((f_lo, a_lo), f_hi - f_lo, a_hi - a_lo, facecolor=c, alpha=0.07,
+                               edgecolor=c, lw=1.4))
+        (tx, ty), pt = labels[name]
+        if pt is None:
+            ax.text(tx, ty, name, fontsize=7.4, color=c, fontweight="bold", va="center")
+        else:
+            ax.annotate(name, xy=pt, xytext=(tx, ty), fontsize=7.4, color=c, fontweight="bold", va="center",
+                        arrowprops=dict(arrowstyle="-", lw=0.7, color=c, shrinkA=2, shrinkB=0))
     # electrode offset and the noise target
     ax.add_patch(Rectangle((0.01, 0.1), 0.04, 0.2, facecolor=MUTED, alpha=0.2, edgecolor=MUTED, lw=1))
     ax.text(0.012, 0.42, "electrode DC offset\nup to ±300 mV", fontsize=7, color=SLATE, va="bottom")
     ax.axhline(bs.SPEC["noise_eeg_uVrms"] * 1e-6, color=AMBER, lw=1.0, ls="--")
-    ax.text(0.012, 1.7e-6, "Open-BioAFE EEG-mode noise target 1.5 µVrms", fontsize=7, color=AMBERDK, va="bottom")
+    ax.text(1.8e4, 1.25e-6, "Open-BioAFE EEG-mode noise target 1.5 µVrms", fontsize=7, color=AMBERDK,
+            va="top", ha="right")
     ax.set_xscale("log"); ax.set_yscale("log")
     ax.set_xlim(0.01, 2e4); ax.set_ylim(5e-7, 2)
     ax.set_yticks([1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1])

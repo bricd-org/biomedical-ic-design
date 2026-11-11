@@ -14,9 +14,9 @@ def lifetime():
     fig, ax = plt.subplots(figsize=FULL)
     for (name, e), c in zip(BATTERIES.items(), (C1, C2)):
         ax.loglog(p * 1e3, e / p / 86400, color=c, label=name)
-    marks = [(bs.SPEC["channels"] * bs.SPEC["power_per_ch_W"], "Open-BioAFE AFE target\n8 ch x 10 uW"),
-             (8 * 100e-6, "8 ch x 100 uW"),
-             (8 * 1e-3, "discrete-class AFE\n8 ch x ~1 mW")]
+    marks = [(bs.SPEC["channels"] * bs.SPEC["power_per_ch_W"], "Open-BioAFE AFE target\n8 ch × 10 µW"),
+             (8 * 100e-6, "8 ch × 100 µW"),
+             (8 * 1e-3, "discrete-class AFE\n8 ch × ~1 mW")]
     e0 = list(BATTERIES.values())[0]
     for pw, lab in marks:
         d = e0 / pw / 86400
@@ -24,9 +24,9 @@ def lifetime():
         ax.annotate(f"{lab}\n{d:,.0f} days" if d >= 10 else f"{lab}\n{d:.1f} days", xy=(pw * 1e3, d),
                     xytext=(8, 4), textcoords="offset points", fontsize=7, color=GRAPHITE, va="bottom")
     ax.axhline(365, color=AMBER, lw=0.9, ls="--")
-    ax.text(0.011, 400, "one year", color=AMBERDK, fontsize=7, va="bottom")
+    ax.text(28, 400, "one year", color=AMBERDK, fontsize=7, va="bottom", ha="right")
     ax.axhline(1, color=MUTED, lw=0.7, ls=":")
-    ax.text(0.011, 1.1, "one day", color=MUTED, fontsize=7, va="bottom")
+    ax.text(0.011, 0.85, "one day", color=MUTED, fontsize=7, va="top")
     ax.set_xlim(0.01, 30); ax.set_ylim(0.05, 5000)
     finish(ax, xlabel="Average power drawn from the battery (mW)", ylabel="Lifetime (days)", legend=True, loc="upper right")
     savefig(fig, "ch01_lifetime")

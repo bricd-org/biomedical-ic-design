@@ -31,7 +31,7 @@ This chapter is an outline. It will be written in build stage 6 (Part V, Lab 14,
 <div class="tbox tbox-insight" markdown="1">
 <div class="tbox-title">Design question</div>
 
-Does the assembled Open-BioAFE chip meet every number of its specification ([Table 1.1]({% link chapters/01_why.md %}#tab-1-1)), and where is the margin?
+Does the assembled Open-BioAFE chip meet every number of its specification ([Table 1.2]({% link chapters/01_why.md %}#tab-1-2)), and where is the margin?
 
 </div>
 

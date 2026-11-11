@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 338" width="720" height="338" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>Equivalent circuit of the electrode–skin interface</title>
+  <!-- ======================= full model ======================= -->
+  <!-- layer labels -->
+  <g fill="#56656B" font-size="11.5" text-anchor="middle">
+    <text x="180" y="30">electrode–gel interface</text>
+    <text x="324" y="30">gel</text>
+    <text x="456" y="30">epidermis</text>
+    <text x="596" y="24">dermis and</text><text x="596" y="37">deeper tissue</text>
+  </g>
+  <g stroke="#B9C6C9" stroke-width="1.4" fill="none">
+    <path d="M86 50 V44 H274 V50"/>
+    <path d="M292 50 V44 H356 V50"/>
+    <path d="M372 50 V44 H544 V50"/>
+    <path d="M564 50 V44 H628 V50"/>
+  </g>
+  <!-- wires -->
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none" stroke-linejoin="round">
+    <path d="M44 120 H100 M108 120 H148"/>
+    <path d="M148 88 V152 M268 88 V152"/>
+    <path d="M148 88 H180 M236 88 H268 M148 152 H204 M212 152 H268"/>
+    <path d="M268 120 H296 M352 120 H384 M392 120 H420"/>
+    <path d="M420 88 V152 M540 88 V152"/>
+    <path d="M420 88 H452 M508 88 H540 M420 152 H476 M484 152 H540"/>
+    <path d="M540 120 H568 M624 120 H660"/>
+    <!-- resistors (zigzag, 56 wide) -->
+    <path d="M180 88 h8 l4,-7 l8,14 l8,-14 l8,14 l8,-14 l4,7 h8"/>
+    <path d="M296 120 h8 l4,-7 l8,14 l8,-14 l8,14 l8,-14 l4,7 h8"/>
+    <path d="M452 88 h8 l4,-7 l8,14 l8,-14 l8,14 l8,-14 l4,7 h8"/>
+    <path d="M568 120 h8 l4,-7 l8,14 l8,-14 l8,14 l8,-14 l4,7 h8"/>
+  </g>
+  <!-- capacitors and half-cell / skin potentials -->
+  <g stroke="#1D2A30" stroke-width="2.4">
+    <path d="M204 140 V164 M212 140 V164"/>
+    <path d="M476 140 V164 M484 140 V164"/>
+    <path d="M100 106 V134"/><path d="M108 112 V128" stroke-width="4"/>
+    <path d="M384 106 V134"/><path d="M392 112 V128" stroke-width="4"/>
+  </g>
+  <g fill="#1D2A30">
+    <circle cx="40" cy="120" r="4.5" fill="#fff" stroke="#1D2A30" stroke-width="1.8"/>
+    <circle cx="664" cy="120" r="4.5" fill="#fff" stroke="#1D2A30" stroke-width="1.8"/>
+    <circle cx="148" cy="120" r="3"/><circle cx="268" cy="120" r="3"/>
+    <circle cx="420" cy="120" r="3"/><circle cx="540" cy="120" r="3"/>
+  </g>
+  <!-- component labels -->
+  <g fill="#1D2A30" font-size="13" font-style="italic" text-anchor="middle">
+    <text x="104" y="100">E<tspan dy="3" font-size="9.5">hc</tspan></text>
+    <text x="208" y="74">R<tspan dy="3" font-size="9.5">d</tspan></text>
+    <text x="208" y="182">C<tspan dy="3" font-size="9.5">d</tspan></text>
+    <text x="324" y="104">R<tspan dy="3" font-size="9.5">s</tspan></text>
+    <text x="388" y="100">E<tspan dy="3" font-size="9.5">se</tspan></text>
+    <text x="480" y="74">R<tspan dy="3" font-size="9.5">e</tspan></text>
+    <text x="480" y="182">C<tspan dy="3" font-size="9.5">e</tspan></text>
+    <text x="596" y="104">R<tspan dy="3" font-size="9.5">u</tspan></text>
+  </g>
+  <g fill="#1D2A30" font-size="11.5" text-anchor="middle">
+    <text x="40" y="146">to the</text><text x="40" y="159">amplifier</text>
+    <text x="664" y="146">body</text>
+  </g>
+
+  <line x1="20" y1="200" x2="700" y2="200" stroke="#E1E8E8" stroke-width="1.2" stroke-dasharray="5 4"/>
+
+  <!-- ======================= simplified model ======================= -->
+  <text x="20" y="222" fill="#146240" font-size="11.5" font-weight="700" letter-spacing="0.5">SIMPLIFIED MODEL IN biosig.py</text>
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none" stroke-linejoin="round">
+    <path d="M44 270 H100 M108 270 H150 M206 270 H240"/>
+    <path d="M150 270 h8 l4,-7 l8,14 l8,-14 l8,14 l8,-14 l4,7 h8"/>
+    <path d="M240 240 V300 M360 240 V300"/>
+    <path d="M240 240 H272 M328 240 H360 M240 300 H296 M304 300 H360"/>
+    <path d="M272 240 h8 l4,-7 l8,14 l8,-14 l8,14 l8,-14 l4,7 h8"/>
+    <path d="M360 270 H396"/>
+  </g>
+  <g stroke="#1D2A30" stroke-width="2.4">
+    <path d="M296 288 V312 M304 288 V312"/>
+    <path d="M100 256 V284"/><path d="M108 262 V278" stroke-width="4"/>
+  </g>
+  <g fill="#1D2A30">
+    <circle cx="40" cy="270" r="4.5" fill="#fff" stroke="#1D2A30" stroke-width="1.8"/>
+    <circle cx="400" cy="270" r="4.5" fill="#fff" stroke="#1D2A30" stroke-width="1.8"/>
+    <circle cx="240" cy="270" r="3"/><circle cx="360" cy="270" r="3"/>
+  </g>
+  <text x="400" y="296" fill="#1D2A30" font-size="11.5" text-anchor="middle">body</text>
+  <g fill="#1D2A30" font-size="13" font-style="italic" text-anchor="middle">
+    <text x="104" y="250">E<tspan dy="3" font-size="9.5">hc</tspan></text>
+    <text x="178" y="254">R<tspan dy="3" font-size="9.5">s</tspan></text>
+    <text x="300" y="226">R<tspan dy="3" font-size="9.5">p</tspan></text>
+    <text x="300" y="332">C<tspan dy="3" font-size="9.5">p</tspan></text>
+  </g>
+  <g fill="#3A474C" font-size="11.5">
+    <text x="430" y="248"><tspan font-weight="700">wet Ag/AgCl</tspan>: 1 kΩ + 51 kΩ ‖ 47 nF</text>
+    <text x="430" y="268"><tspan font-weight="700">dry</tspan>: 5 kΩ + 1 MΩ ‖ 4.7 nF</text>
+    <text x="430" y="288"><tspan font-weight="700">implanted micro</tspan>: 10 kΩ + a constant-</text>
+    <text x="430" y="303">phase element in place of C<tspan dy="2" font-size="9">p</tspan></text>
+  </g>
+</svg>

@@ -12,7 +12,7 @@ and published at <https://www.thebricd.org/biomedical-ic-design/>.
 | Part | Chapters | State |
 |---|---|---|
 | Preface | audience, reading paths, how the labs work | written |
-| I. Foundations | 1–4: why biomedical ICs, bioelectric signals, electrodes, interference and safety | outline; figures and models done |
+| I. Foundations | 1–4: why biomedical ICs, bioelectric signals, electrodes, interference and safety | written |
 | II. The analog front-end | 5–12 | outline |
 | III. Data converters | 13–22 | outline |
 | IV. Biosignal processing and systems | 23–28 | outline |
@@ -80,8 +80,7 @@ cd figsrc && for f in ch0*_figs.py; do python "$f"; done
 
 ## Next steps
 
-1. Write Chapters 1–4 in full (the figures are already in `assets/figs/`), Chapter 31 Labs 1–2,
-   and the appendices.
+1. Write Chapter 31 Labs 1–2 in full, and the appendices.
 2. Write `labs/python/lab1_biosignal_explorer.py` and `lab2_electrodes_interference.py`.
 
 ## AI assistance and corrections

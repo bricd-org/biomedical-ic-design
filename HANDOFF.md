@@ -29,14 +29,14 @@ user works directly on `main`.
 | Site (Jekyll 4.4 + just-the-docs 0.10.1, BRICD theme, dark mode, KaTeX) | done; builds cleanly |
 | Home page `index.md` (hero, key numbers, signal chain, part cards) | done |
 | Preface `preface.md` (incl. reading-paths figure `assets/figs/reading-paths.svg`) | **written** |
-| Ch 1–4 (Part I) | **outlines** (Ch 1 has the spec table and signal-chain figure); text NOT written — figures and numbers ready (section 4) |
+| Ch 1–4 (Part I) | **written** (11 Nov 2026): full text, 15 figures (incl. diagrams `ch03_electrode_model.svg`, `ch04_mains_coupling.svg`), 5 tables, worked examples; every number checked against `biosig.py` |
 | Ch 5–30 | outlines |
 | Ch 31 `chapters/31_labs.md` | outline: lab table + one short section per lab (anchors `#lab-1`…`#lab-15`, `#setup`, `#capstone`) |
 | Appendices | **missing** (no pages yet, not in the menu) |
 | `references.md` + `_data/references.yml` (46 entries) | done |
 | `labs/python/biosig.py` (shared model) | done, tested |
 | Lab 1 and Lab 2 scripts | **missing** |
-| Figure scripts `figsrc/` → `assets/figs/*.svg` (13 plots) | done, reviewed once (see section 7); not yet used on any page |
+| Figure scripts `figsrc/` → `assets/figs/*.svg` (13 plots) | done, reviewed at page size and used in Ch 1–4 |
 | Pages deploy | `.github/workflows/pages.yml` deploys on every push to `main` |
 
 ## 3. Decisions already made (do not re-litigate)
@@ -61,88 +61,14 @@ user works directly on `main`.
 
 ## 4. Next steps, in order
 
-### Step 1 — Write Chapters 1–4 (`chapters/0N_*.md`)
+### Step 1 — Chapters 1–4: DONE (11 Nov 2026)
 
-Each page already exists as an outline: replace the outline with the full text, keeping the front
-matter. Use a SerDes chapter page as the style model for content. Every chapter: lead paragraph
-(`{: .chapterlead }`), `objectives` box, numbered sections (`## <span class="secnum">2.1</span>Title`),
-worked examples (`tbox-example`, titled *Worked Example 2.1 · Title*), `keyeq`, `insight`,
-`pitfall`, `tryit` (linking to `{% link chapters/31_labs.md %}#lab-1` etc.), `specnote`, and a
-closing `takeaways` box. Figures: `<figure id="fig-2-1">` with an `<img>` from `assets/figs/` and
-a `<figcaption>` starting `<span class="capnum">Figure 2.1.</span> <strong>…</strong>`. Other
-pages already link to `01_why.md#tab-1-1` and `#fig-1-1`; keep those ids. Circuit diagrams
-(planned below) are hand-drawn SVGs, like
-`assets/figs/signal-chain.svg`.
-
-**Ch 1 `01_why.md` — Why Biomedical ICs?**
-- Sections: applications (wearable ECG patch, Holter, EEG headset, sEMG prosthetics, neural
-  implants/BCIs) with a table (channels / signal & band / what limits the design); why integrate
-  (channel count, power, size); the signal chain; the Open-BioAFE spec sheet; the design question
-  *"what does each application demand in channels, noise, power and lifetime?"*
-- Figure 1.1 (signal chain) and Table 1.1 (spec sheet) are already on the page.
-- Figure `ch01_lifetime` (battery lifetime vs average power).
-- Worked examples: battery life — 8 ch × 10 µW = 80 µW on a CR2032 (≈2430 J) ≈ **352 days**;
-  8 × 100 µW ≈ 35 days; discrete-class 8 × ~1 mW ≈ **3.5 days** (energy only; radio excluded,
-  coin cells cannot supply high peaks). Data rates: ECG/EEG 8 × 500 S/s × 16 b = 64 kb/s; EMG
-  8 × 2 kS/s × 12 b = 192 kb/s; spike mode 8 × 20 kS/s × 12 b = 1.92 Mb/s; at an *illustrative*
-  ~10 nJ/bit radio, 64 kb/s costs ≈0.64 mW = 8× the whole AFE budget → motivates Ch 27.
-- Key equation: lifetime `T = E_batt / (N·P_ch + P_dig + P_radio)`.
-- Say "commercial discrete AFEs are of the order of 1 mW per channel" — avoid quoting exact
-  datasheet numbers unless verified.
-- SG13G2 facts safe to state: 130 nm SiGe BiCMOS, HBT fT/fmax ≈ 350/450 GHz, 1.2 V core and
-  3.3 V I/O MOS, MIM capacitors. HBTs: low 1/f noise but base current through the electrode.
-
-**Ch 2 `02_signals.md` — Bioelectric Signals**
-- Action potentials (Hodgkin–Huxley, cite `hodgkin1952`), ECG (P-QRS-T, leads, Einthoven),
-  EEG (δ 0.5–4, θ 4–8, α 8–13, β 13–30, γ 30–100 Hz; 10–20 system), EMG (motor units, surface
-  vs needle), spikes and LFPs, ECoG (cite `buzsaki2012`). The master amplitude-vs-bandwidth table
-  (`SIGNALS` in `biosig.py`). Design question: dynamic range and bandwidth of the chain.
-- Figures: `ch02_ap` (HH: peak ≈ +39 mV, rest −65 mV, AHP ≈ −76 mV), `ch02_ecg` (synthetic,
-  cite `mcsharry2003`), `ch02_eeg` (trace + PSD with bands), `ch02_emg_spikes`, `ch02_map`
-  (the key figure).
-- Worked example — dynamic range: DC-coupled, ±300 mV offset (212 mV rms full-scale sine) over
-  1.5 µVrms → **103 dB ≈ 16.8 bits** (motivates 16-b ΔΣ); AC-coupled, 5 mV peak EMG over
-  1.5 µVrms → **67 dB ≈ 10.9 bits** (motivates 12-b SAR). Note EMG mode has more bandwidth, so
-  its noise floor is higher.
-- `tryit` → Lab 1.
-
-**Ch 3 `03_electrodes.md` — Electrodes and the Body as a Circuit**
-- Ag/AgCl wet vs dry vs implanted; half-cell potential (Ag/AgCl ≈ +0.222 V vs SHE) and DC
-  offset; Randles model (cite `randles1947`); electrode thermal noise; motion artefacts; source
-  impedance mismatch (cite `chi2010` for dry electrodes). Diagram (SVG): electrode–skin equivalent circuit
-  ( Ehc, Rd‖Cd, gel Rs, skin potential, epidermis Re‖Ce, dermis Ru).
-- Models (`ELECTRODES` in `biosig.py`): wet = 1 kΩ + 51 kΩ‖47 nF (the standards' network);
-  dry = 5 kΩ + 1 MΩ‖4.7 nF; implanted micro = 10 kΩ + CPE (n = 0.85, |Z| = 500 kΩ at 1 kHz).
-- Numbers (T = 310 K, one electrode, 0.5–100 Hz thermal noise): wet **0.24 µVrms**, dry
-  **0.85 µVrms**, micro 2.3 µVrms (micro 300 Hz–7 kHz: 2.8 µVrms). |Z| wet: 52 k (0.67 Hz),
-  41.5 k (50 Hz); dry: 1.0 M (0.67 Hz), 564 k (50 Hz). Real electrodes add excess noise above
-  thermal (pitfall box).
-- Input-impedance worked example: the standards' test uses 620 kΩ‖4.7 nF at 0.67 Hz and 40 Hz
-  with ±300 mV offsets, ≤20 % drop allowed → Zin ≥ 4·|Zs| = **2.48 MΩ at 0.67 Hz** (this is
-  the 2.5 MΩ rule), 2.0 MΩ at 40 Hz (cite `medteqzin`, `iec60601-2-25`).
-- Figures: `ch03_impedance`, `ch03_noise`, `ch03_loading`, `ch03_offset`.
-- `tryit` → Lab 2.
-
-**Ch 4 `04_interference.md` — Interference, Safety and Standards**
-- Mains coupling (cite `huhta1973`): 230 V/50 Hz, Cpow = 3 pF, Cbody = 200 pF → displacement
-  current **0.22 µA**; floating body Vcm = **3.4 V**; with a 51 kΩ‖47 nF ground electrode
-  Vcm ≈ **9 mV**. Diagram (SVG): mains → Cpow → body → Cbody → earth; electrodes Z1, Z2, Z3 to
-  amplifier inputs with Zcm to amplifier ground; Ciso to earth.
-- CM→DM by imbalance (cite `pallas1991`): with Vcm = 9 mV and ΔZ = 40.7 kΩ: Zcm 10 MΩ →
-  36.6 µV, 100 MΩ → **3.7 µV**, 1 GΩ → 0.37 µV, 10 GΩ → 0.037 µV of mains.
-- CMRR test (cite `medteqcmrr`, `iec60601-2-25`, `-2-27`): standard's 20 Vrms via 100 pF
-  divider ≡ 10 Vrms behind 200 pF; 51 kΩ‖47 nF in one lead (40.7 kΩ at 50 Hz, 37.8 kΩ at 60 Hz);
-  300 mV DC; indication must stay below 1 mV (10 mm at 10 mm/mV). 10 Vrms = 28.3 Vpp →
-  **89.0 dB**. Worst-case bound if all 10 V reached the electrodes: Zcm ≥ **1.15 GΩ at 50 Hz
-  (≤ 2.76 pF)**, 1.07 GΩ at 60 Hz (≤ 2.48 pF). Typical ECGs measure ~95 dB; claims of 120 dB are
-  usually without the imbalance network. -2-47 (ambulatory) uses only 2.8 Vrms.
-- Effective CMRR: `1/CMRR_eff = 1/CMRR_amp + ΔZ/Zcm` (figure `ch04_cmdm` b).
-- Safety (cite `iec60601-1`; summarise, hedge): patient/auxiliary current, normal condition:
-  BF 100 µA, CF 10 µA a.c.; single fault 500 / 50 µA; d.c. 10 µA; above 1 kHz × f/1 kHz up to
-  100 kHz, never above 10 mA. Isolation, defibrillation (survive several kV, recover quickly),
-  ESD (system ±8 kV contact / ±15 kV air per 60601-1-2; on-chip HBM). Implant heating: keep
-  tissue rise ≈ 1 °C; power density limit of tens of mW/cm² — cite `kim2007` and hedge.
-- Figures: `ch04_cmdm`, `ch04_mains_eeg`, `ch04_limits`.
+Written from the plan that was here (the numbers are also in section 8 and in `biosig.py`). Use
+them as the style model for later chapters: lead, objectives, design question, numbered sections,
+key equations, worked examples with the project's numbers, insight/pitfall/specnote/tryit boxes,
+"Read with this chapter", closing takeaways. Figure ids are `fig-N-M` in reading order; table
+captions use `{: .tabcaption #tab-N-M }`. Maths inside a `<figure>` caption or a box title must be
+written `\( ... \)`, not `$$...$$` (kramdown does not convert maths inside raw HTML).
 
 ### Step 2 — Chapter 31 `chapters/31_labs.md` — Hands-on Labs
 The outline has the lab table and a short section per lab. Write the set-up section, Lab 1 and
@@ -217,11 +143,15 @@ home page.
 
 ## 7. Known issues to clean up
 
-- Figures reviewed once at small size: `ch02_map` labels crowd each other (ECoG / EEG (scalp) /
-  LFP), and in `ch03_noise` (b) the green curve crosses the "EEG-mode target" label. Fix before
-  using them on a page.
-- Not yet cited anywhere (fine for now, use them when Part I is written): check with a search of
-  `chapters/` for each key in `_data/references.yml`.
+- **Open design point from Ch 4:** with the standards' 40.7 kΩ imbalance and a 100 dB amplifier,
+  90 dB effective CMRR needs Z_cm ≈ 1.9 GΩ at 50 Hz, about twice the "> 1 GΩ" goal in Table 1.2
+  (Ch 1) and `SPEC`. Ch 4 says so in its specnote; settle it in the Ch 29 budgets and then update
+  Table 1.2.
+- Figure scripts find TeX Gyre Heros through `kpsewhich`; `bricdstyle.py` now also looks in
+  `/Library/TeX/texbin`, because a non-login shell may not have it on PATH (plots otherwise fall
+  back to DejaVu Sans).
+- Some references in `_data/references.yml` are still uncited (they belong to later chapters);
+  search `chapters/` for a key before assuming it is used.
 - Outline polish: key equations are placed after each outline chapter's first section (Ch 6's NEF
   box sits under "Noise sources" and repeats the formula in section 6.3); Ch 6 reading list says
   "Razavi (Chapter on noise)".

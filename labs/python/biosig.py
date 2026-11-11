@@ -1,6 +1,6 @@
 """biosig.py -- shared models for the Open-BioAFE labs and figure scripts.
 
-Every lab in labs/python/ and every figure script in book/tutorial/figsrc/ imports this file,
+Every lab in labs/python/ and every figure script in figsrc/ imports this file,
 so the numbers in the book and the numbers your labs print come from the same code.
 
 Contents

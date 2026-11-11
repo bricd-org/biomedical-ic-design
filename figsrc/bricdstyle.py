@@ -42,12 +42,17 @@ FIGDIR = os.path.normpath(os.path.join(_HERE, "..", "assets", "figs"))
 
 def _tex_gyre_paths():
     """TeX Gyre Heros from the local TeX installation (macOS/Linux), found with kpsewhich."""
-    import subprocess
+    import shutil, subprocess
+    # kpsewhich may not be on PATH (e.g. a non-login shell on macOS), so also try the usual places
+    kpse = shutil.which("kpsewhich") or next((p for p in ("/Library/TeX/texbin/kpsewhich", "/usr/bin/kpsewhich",
+                                                           "/usr/local/texlive/bin/kpsewhich") if os.path.exists(p)), None)
     out = []
+    if kpse is None:
+        return out
     for name in ("texgyreheros-regular.otf", "texgyreheros-bold.otf", "texgyreheros-italic.otf",
                  "texgyreheros-bolditalic.otf"):
         try:
-            r = subprocess.run(["kpsewhich", name], capture_output=True, text=True, timeout=10)
+            r = subprocess.run([kpse, name], capture_output=True, text=True, timeout=10)
             if r.stdout.strip():
                 out.append(r.stdout.strip())
         except (OSError, subprocess.SubprocessError):

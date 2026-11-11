@@ -107,4 +107,4 @@ Model Cole tissue, tetrapolar measurement and digital IQ demodulation in Python,
 
 ## Capstone · One Open-BioAFE channel {#capstone}
 
-Combine Lab 5, a PGA and Lab 8 (SAR) or Lab 10 (ΔΣ), and optionally Lab 15; verify across corners; feed real ECG and EEG through the transistor-level chain with ngspice PWL sources; and report against the specification of [Table 1.1]({% link chapters/01_why.md %}#tab-1-1). The best designs go to an IHP OpenMPW submission.
+Combine Lab 5, a PGA and Lab 8 (SAR) or Lab 10 (ΔΣ), and optionally Lab 15; verify across corners; feed real ECG and EEG through the transistor-level chain with ngspice PWL sources; and report against the specification of [Table 1.2]({% link chapters/01_why.md %}#tab-1-2). The best designs go to an IHP OpenMPW submission.

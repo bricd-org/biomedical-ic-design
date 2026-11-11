@@ -10,9 +10,9 @@
 - key: artofaicd
   text: "SkillSurf. *The Art of Analog IC Design*. 2025. <https://www.skillsurf.org/art_of_aicd/>"
 - key: physionet
-  text: "Ary L. Goldberger et al.. “PhysioBank, PhysioToolkit, and PhysioNet: components of a new research resource for complex physiologic signals.” *Circulation*, 101(23):e215–e220, 2000."
+  text: "Ary L. Goldberger et al. “PhysioBank, PhysioToolkit, and PhysioNet: components of a new research resource for complex physiologic signals.” *Circulation*, 101(23):e215–e220, 2000."
 - key: ninapro
-  text: "Manfredo Atzori et al.. “Electromyography data for non-invasive naturally-controlled robotic hand prostheses.” *Scientific Data*, 1:140053, 2014. Data: <https://ninapro.hevs.ch>."
+  text: "Manfredo Atzori et al. “Electromyography data for non-invasive naturally-controlled robotic hand prostheses.” *Scientific Data*, 1:140053, 2014. Data: <https://ninapro.hevs.ch>."
 - key: webster
   text: "John G. Webster. *Medical Instrumentation: Application and Design*, 4th edition. Wiley, 2010."
 - key: yazicioglubook
@@ -50,11 +50,11 @@
 - key: jkusar
   text: "Manuel Moser and Harald Pretl. *SKY130_SAR-ADC1: a fully differential asynchronous non-binary 12-bit SAR ADC in SKY130*. 2024. <https://github.com/iic-jku/SKY130_SAR-ADC1>"
 - key: verma2010
-  text: "Naveen Verma et al.. “A micro-power EEG acquisition SoC with integrated feature extraction processor for a chronic seizure detection system.” *IEEE Journal of Solid-State Circuits*, 45(4):804–816, 2010."
+  text: "Naveen Verma et al. “A micro-power EEG acquisition SoC with integrated feature extraction processor for a chronic seizure detection system.” *IEEE Journal of Solid-State Circuits*, 45(4):804–816, 2010."
 - key: twepp2024sar
   text: "Manuel Moser and Harald Pretl. *An open-source 12-bit non-binary SAR ADC (talk at TWEPP 2024)*. 2024. <https://indico.cern.ch/event/1381495/contributions/5988502/>"
 - key: pydeltasigma
-  text: "Giuseppe Venturini et al.. *python-deltasigma: a Python port of R. Schreier's Delta Sigma Toolbox*. 2016. <https://github.com/ggventurini/python-deltasigma>"
+  text: "Giuseppe Venturini et al. *python-deltasigma: a Python port of R. Schreier's Delta Sigma Toolbox*. 2016. <https://github.com/ggventurini/python-deltasigma>"
 - key: tompkins
   text: "Willis J. Tompkins (ed.). *Biomedical Digital Signal Processing*. Prentice Hall, 1993."
 - key: pantompkins1985
@@ -72,7 +72,7 @@
 - key: hodgkin1952
   text: "Alan L. Hodgkin and Andrew F. Huxley. “A quantitative description of membrane current and its application to conduction and excitation in nerve.” *The Journal of Physiology*, 117(4):500–544, 1952."
 - key: buzsaki2012
-  text: "György Buzsáki, Costas A. Anastassiou and Christof Koch. “The origin of extracellular fields and currents–-EEG, ECoG, LFP and spikes.” *Nature Reviews Neuroscience*, 13:407–420, 2012."
+  text: "György Buzsáki, Costas A. Anastassiou and Christof Koch. “The origin of extracellular fields and currents—EEG, ECoG, LFP and spikes.” *Nature Reviews Neuroscience*, 13:407–420, 2012."
 - key: mcsharry2003
   text: "Patrick E. McSharry, Gari D. Clifford, Lionel Tarassenko and Leonard A. Smith. “A dynamical model for generating synthetic electrocardiogram signals.” *IEEE Transactions on Biomedical Engineering*, 50(3):289–294, 2003."
 - key: randles1947

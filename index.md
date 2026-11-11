@@ -28,7 +28,7 @@ permalink: /
   <div><b>&lt; 10 µW</b><span>front-end power per channel</span></div>
 </div>
 
-Every wearable ECG patch, EEG headset, prosthetic-control armband and neural implant needs a chip that turns microvolt biopotentials into clean numbers while the body picks up volts of mains interference and the battery allows a few microwatts per channel. This tutorial follows one design, the **Open-BioAFE** front-end in IHP's open SG13G2 PDK, from the signals and electrodes to a tape-out-ready architecture. Every concept follows the same pattern: a short derivation, a worked example with the project's real numbers, and a *what this means for your design* box. The numbers above are the design targets ([Table 1.1]({% link chapters/01_why.md %}#tab-1-1)).
+Every wearable ECG patch, EEG headset, prosthetic-control armband and neural implant needs a chip that turns microvolt biopotentials into clean numbers while the body picks up volts of mains interference and the battery allows a few microwatts per channel. This tutorial follows one design, the **Open-BioAFE** front-end in IHP's open SG13G2 PDK, from the signals and electrodes to a tape-out-ready architecture. Every concept follows the same pattern: a short derivation, a worked example with the project's real numbers, and a *what this means for your design* box. The numbers above are the design targets ([Table 1.2]({% link chapters/01_why.md %}#tab-1-2)).
 
 <figure class="chain-figure">
   <img src="{{ '/assets/figs/signal-chain.svg' | relative_url }}" alt="The Open-BioAFE signal chain, from the electrodes to the data output">
@@ -38,7 +38,7 @@ Every wearable ECG patch, EEG headset, prosthetic-control armband and neural imp
 ## What is inside
 
 <div class="card-grid">
-  <div class="card"><span class="card-label">Part I · Ch 1–4 <span class="status status-outline">outline</span></span><h3><a href="{% link parts/part-1.md %}">Foundations</a></h3><p>Why biomedical ICs, bioelectric signals, electrodes and the body as a circuit, interference, safety and standards.</p></div>
+  <div class="card"><span class="card-label">Part I · Ch 1–4 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-1.md %}">Foundations</a></h3><p>Why biomedical ICs, bioelectric signals, electrodes and the body as a circuit, interference, safety and standards.</p></div>
   <div class="card"><span class="card-label">Part II · Ch 5–12 <span class="status status-outline">outline</span></span><h3><a href="{% link parts/part-2.md %}">The analog front-end</a></h3><p>Devices in weak inversion, noise and power, instrumentation amplifiers, the AC-coupled LNA, chopping, DC servo loops, filters and common-mode control.</p></div>
   <div class="card"><span class="card-label">Part III · Ch 13–22 <span class="status status-outline">outline</span></span><h3><a href="{% link parts/part-3.md %}">Data converters</a></h3><p>Sampling, specifications, switches, comparators, capacitive DACs, the SAR ADC, ΔΣ theory and circuits, and ADC testing.</p></div>
   <div class="card"><span class="card-label">Part IV · Ch 23–28 <span class="status status-outline">outline</span></span><h3><a href="{% link parts/part-4.md %}">Biosignal processing and systems</a></h3><p>DSP for biosignals, ECG, EEG and EMG processing on open datasets, on-chip features and bioimpedance sensing.</p></div>
@@ -55,4 +55,4 @@ The tutorial is written for the Open-BioAFE project at [BRICD](https://www.thebr
 
 **How this tutorial is made.** The Open-BioAFE Tutorial is being developed with the help of AI tools, and this draft may contain mistakes. If you spot one, please email [bricd.org@gmail.com](mailto:bricd.org@gmail.com) and we will correct it.
 
-This is a living draft (v0.1, November 2026): every chapter is still an outline, and Part I is being written first. Corrections and contributions are welcome through [GitHub issues](https://github.com/bricd-org/biomedical-ic-design/issues).
+This is a living draft (v0.1, November 2026): Part I is written, and the other chapters are outlines that are being filled in. Corrections and contributions are welcome through [GitHub issues](https://github.com/bricd-org/biomedical-ic-design/issues).
