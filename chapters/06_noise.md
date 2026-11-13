@@ -51,7 +51,7 @@ $$
 
 ## <span class="secnum">6.2</span>Input-referred noise and noise bandwidth
 
-Referring output noise to the input; the equivalent noise bandwidth of first- and second-order roll-offs ($$\pi/2$$ and $$\pi/(2\sqrt2)$$ factors); integrating $$1/f$$ noise between a sub-hertz high-pass and the low-pass corner.
+Referring output noise to the input; the equivalent noise bandwidth of first- and second-order roll-offs ($$\pi/2$$ and $$\pi/(2\sqrt2)$$ factors); integrating $$1/f$$ noise between a sub-hertz high-pass and the low-pass corner. Noise with a source attached: the amplifier's current noise $$i_\mathrm{n}$$ flows through the electrode impedance, so the total input noise density is $$e_\mathrm{n}^2 + i_\mathrm{n}^2\lvert Z_\mathrm{e}\rvert^2 + 4kT\,\mathrm{Re}\{Z_\mathrm{e}\}$$. Above $$\lvert Z_\mathrm{e}\rvert = e_\mathrm{n}/i_\mathrm{n}$$ the current noise dominates, which is why the base current of an HBT input ([Chapter 5]({% link chapters/05_devices.md %})) matters with dry electrodes ([Chapter 3]({% link chapters/03_electrodes.md %})).
 
 ## <span class="secnum">6.3</span>Noise efficiency factor and power efficiency factor
 

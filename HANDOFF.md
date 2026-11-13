@@ -1,8 +1,9 @@
 # HANDOFF — Open-BioAFE Tutorial (pick up here)
 
-Last updated: 10 November 2026. On that day the tutorial was switched from a LaTeX book (with a
-generated website) to **a website written directly in Markdown**. There is no LaTeX book and no
-PDF any more; `book/` and `tools/build_site.py` were removed.
+Last updated: 12 November 2026 (outline review against lecture material, section 2a). On
+10 November the tutorial was switched from a LaTeX book (with a generated website) to **a website
+written directly in Markdown**. There is no LaTeX book and no PDF any more; `book/` and
+`tools/build_site.py` were removed.
 
 ## 1. The goal
 
@@ -33,11 +34,40 @@ user works directly on `main`.
 | Ch 5–30 | outlines |
 | Ch 31 `chapters/31_labs.md` | outline: lab table + one short section per lab (anchors `#lab-1`…`#lab-15`, `#setup`, `#capstone`) |
 | Appendices | **missing** (no pages yet, not in the menu) |
-| `references.md` + `_data/references.yml` (46 entries) | done |
+| `references.md` + `_data/references.yml` (48 entries; `rich1983`, `ott2009` added 12 Nov) | done |
 | `labs/python/biosig.py` (shared model) | done, tested |
 | Lab 1 and Lab 2 scripts | **missing** |
 | Figure scripts `figsrc/` → `assets/figs/*.svg` (13 plots) | done, reviewed at page size and used in Ch 1–4 |
 | Pages deploy | `.github/workflows/pages.yml` deploys on every push to `main` |
+| Local preview | `preview_start bioafe` (Docker, port 4005; entry in `~/SkillSurf/.claude/launch.json`) → http://localhost:4005/biomedical-ic-design/ |
+
+## 2a. Outline review against lecture material (12 Nov 2026)
+
+The user asked whether the course material in `~/Downloads/Courses/Biomedical IC Design` could
+improve the outline, "only if required". That folder holds university lecture slides
+(biopotential electrodes, operational amplifiers, biopotential amplifiers, signal conditioning,
+built on Webster). Most of it was already covered by Ch 2–4 and the outlines. The gaps found and
+filled:
+
+- **Ch 4 (written):** new pitfall box at the end of 4.1, *The body is not the only antenna*:
+  magnetic loop pickup (1 µT, 50 Hz, 100 cm² → about 3 µV, already differential; twist the
+  leads), capacitive pickup on the leads and the grounded shield's ~100 pF/m that drops Z_cm to
+  ~30 MΩ at 50 Hz for a one-metre lead (hence driven shields), and RF rectification in the
+  input pair. Links to `ch12/#shielding`.
+- **Ch 12 (outline):** 12.1 adds RLD saturation safety (series resistor limits patient current;
+  loop gain keeps the effective resistance low); 12.4 is now *Input protection, ESD and RF
+  filtering* (RC mismatch between inputs costs CMRR); new **12.5 Shielding, guarding and active
+  electrodes** `{#shielding}`; two new objectives; reading list adds Rich and Ott.
+- **Ch 7 (outline):** 7.1 adds why first-stage gain multiplies the second stage's CMRR (0.1 %
+  resistors: 54 dB at unity gain, 94 dB behind a gain of 100); 7.4 adds the worst-case
+  (1+G)/(4t) resistor-mismatch CMRR, op-amp CMRR in combination, and CMRR versus frequency.
+- **Ch 6 (outline):** 6.2 adds noise with a source, e_n² + i_n²|Z_e|² + 4kT Re{Z_e}, and the
+  e_n/i_n crossover (ties to the HBT base-current point in 5.4 and to dry electrodes).
+- **Ch 9 (outline):** 9.2 adds residual offset ∝ f_ch (so f_ch just above the 1/f corner),
+  duty-cycle and non-overlap errors, and syncing the chopper clock with the ADC.
+
+Not used (already covered, or op-amp basics that *The Art of Analog IC Design* covers): ideal
+op-amp circuits, slew rate, offset trimming, electrode chemistry details, electrode catalogue.
 
 ## 3. Decisions already made (do not re-litigate)
 
@@ -58,6 +88,10 @@ user works directly on `main`.
 - **Branch:** work on `main` (user's choice). Remote uses SSH (HTTPS had no credentials).
 - **Honesty line:** AI-assistance disclaimer says the draft *may contain mistakes*; it does not
   claim human review. Standards are summarised, never reproduced.
+- **Lecture slides are a private checklist only.** The slides in
+  `~/Downloads/Courses/Biomedical IC Design` are never cited, linked, named or copied on the
+  public site. Cite the public sources they build on instead (Webster, Pallàs-Areny and Webster,
+  Winter and Webster, Rich, Chi et al.).
 
 ## 4. Next steps, in order
 
@@ -84,7 +118,9 @@ Lab 2 in full (goal, code, expected figure and numbers, questions); keep the anc
 - `lab2_electrodes_interference.py`: phasor model of body + electrodes + amplifier
   (`body_cm_voltage`, `cm_to_dm`, `required_cmrr_db`); inject 10 Vrms CM; sweep CMRR, Zcm and
   imbalance; add a behavioural right-leg drive (Vcm reduced by 1 + loop gain); plot interference vs
-  CMRR and imbalance; print the required CMRR. Optional: `labs/spice/lab2_body.cir` for ngspice
+  CMRR and imbalance; print the required CMRR. Include a grounded-shield case in the Z_cm sweep
+  (~100 pF/m of lead, about 30 MΩ at 50 Hz) against a driven shield, to match the Ch 4 pitfall
+  box. Optional: `labs/spice/lab2_body.cir` for ngspice
   (ngspice-47 is installed via Homebrew).
 - `data/fetch_data.py`: download helpers only.
 
@@ -93,9 +129,11 @@ Each page `parent: "Appendices"`; the index `has_children: true`, permalink `/ap
 `nav_order` between the parts and References (move References to 8). Content:
 A Formula sheet (NEF/PEF, kT/C, CMRR with imbalance, SQNR/ENOB, Walden/Schreier FoM, ΔΣ SQNR,
 IQ |Z| and φ — the equations are already in the outline chapters); B Biosignal reference tables
-(`SIGNALS` + electrode impedances); C Design-review checklists (AFE: noise, CMRR, offset, Zin,
-protection; ADC: kT/C, matching, comparator noise, reference; layout: common centroid, guard
-rings, shielding of high-impedance nodes); D Glossary (ExG, NEF, DRL, DSL, CCIA, NTF, OSR, ENOB…);
+(`SIGNALS` + electrode impedances); C Design-review checklists (AFE: noise incl. current noise × electrode impedance, CMRR incl. vs
+frequency, offset, Zin, protection, RF-filter matching, RLD current limit, shield drive; ADC:
+kT/C, matching, comparator noise, reference; layout: common centroid, guard rings, shielding of
+high-impedance nodes); D Glossary (ExG, NEF, DRL, DSL, CCIA, NTF, OSR, ENOB, driven shield,
+guard, active electrode, RF rectification…);
 E Further reading (section 2 of the curriculum + AI-assistance disclaimer and corrections contact).
 Add `appendices` to the `defaults` layout scope in `_config.yml`, and an Appendices card on the
 home page.

@@ -63,6 +63,19 @@ With a ground electrode of 51 kΩ‖47 nF, which is 40.7 kΩ at 50 Hz, the curre
 
 Nine millivolts is still six thousand times the 1.5 µVrms noise target. The amplifier's job is to reject it, and the next section shows what limits how well it can.
 
+<div class="tbox tbox-pitfall" markdown="1">
+<div class="tbox-title">Common pitfall · The body is not the only antenna</div>
+
+The path through the body is the largest, but three others reach the inputs directly, and CMRR does nothing against them:
+
+- **Magnetic pickup.** The two leads and the body close a loop, and the mains magnetic field induces a voltage in it that is already differential. A 1 µT field at 50 Hz, common near mains equipment, through a 100 cm² loop induces $$2\pi \cdot 50 \cdot 1\ \text{µT} \cdot 0.01\ \text{m}^2 \approx 3$$ µV, twice the noise target. Twisting the leads together shrinks the loop; a thin shield does not help, because a 50 Hz magnetic field passes through it.
+- **Capacitive coupling to the leads.** Stray capacitance from the mains to each unshielded lead drives current into its electrode impedance, and the two leads never pick up the same amount. A grounded shield stops this, but its capacitance to the inner wire, around 100 pF per metre, is now part of $$Z_\mathrm{cm}$$: about 30 MΩ at 50 Hz for a one-metre lead, far below the 1 GΩ goal, unless the shield is driven.
+- **Radio frequencies.** Phones, Wi-Fi and electrosurgery units put RF on the leads. It lies far above the ExG band, but the input transistors are nonlinear and rectify it into a baseband offset or a demodulated envelope, so it has to be filtered before the first transistor.
+
+[Chapter 12]({% link chapters/12_cmcontrol.md %}#shielding) covers shields, guards and RF filtering; Rich {% include cite.html keys="rich1983" %} gives the classic rules.
+
+</div>
+
 ## <span class="secnum">4.2</span>From common mode to differential mode
 
 Each signal input sees a divider: its electrode impedance in series, the amplifier's common-mode input impedance $$Z_\mathrm{cm}$$ to ground. If the two electrodes were identical, both inputs would see the same fraction of $$V_\mathrm{cm}$$ and the difference would be zero. They are not, and an imbalance $$\Delta Z$$ turns part of $$V_\mathrm{cm}$$ into a differential signal that no amplifier can tell from the ECG {% include cite.html keys="pallas1991" %}. For $$Z_\mathrm{cm} \gg Z_\mathrm{e}$$:

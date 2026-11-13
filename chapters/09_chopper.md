@@ -42,7 +42,7 @@ Multiplying by a square wave at $$f_\mathrm{ch}$$ moves the signal to odd harmon
 
 ## <span class="secnum">9.2</span>Residual offset and ripple
 
-Charge injection and clock feedthrough of the input switches create a residual offset; the up-modulated amplifier offset appears as a triangular ripple at the output.
+Charge injection and clock feedthrough of the input switches create a residual offset; the up-modulated amplifier offset appears as a triangular ripple at the output. The residual offset grows with $$f_\mathrm{ch}$$, because each cycle injects the same charge, so the chopper frequency sits just above the $$1/f$$ corner rather than as high as possible. Clock duty-cycle error and non-overlap time lower the effective gain and leave a residual of their own, and a chopper clock synchronised with the ADC keeps the ripple from aliasing into the band.
 
 ## <span class="secnum">9.3</span>Ripple-reduction loops
 

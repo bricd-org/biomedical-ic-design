@@ -93,3 +93,7 @@
   text: "MEDTEQ. *CMRR testing (IEC 60601-2-25, -2-27, -2-47)*. 2017. <https://medteq.squarespace.com/article/cmrr-testing-iec-60601-2-25-2-27-2-47>"
 - key: medteqzin
   text: "MEDTEQ. *IEC 60601-2-25 clause 201.12.4.103: input impedance*. 2017. <https://medteq.squarespace.com/article/2017/4/1/iec-60601-2-25-clause-201124103-input-impedance>"
+- key: rich1983
+  text: "Alan Rich. “Shielding and guarding: how to exclude interference-type noise.” *Analog Dialogue*, 17(1), 1983."
+- key: ott2009
+  text: "Henry W. Ott. *Electromagnetic Compatibility Engineering*. Wiley, 2009."
