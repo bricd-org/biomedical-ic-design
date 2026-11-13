@@ -256,3 +256,74 @@ def amplitude_stats(x):
     x = np.asarray(x, float) - np.median(x)
     lo, hi = np.percentile(x, [0.5, 99.5])
     return dict(pp=hi - lo, rms=np.std(x))
+
+
+# ---------------------------------------------------------------------------- converters (Part III)
+def quantize(x, nbits, vfs=1.0):
+    """Ideal mid-rise quantiser over [-vfs, +vfs]: returns the reconstructed value (V).
+    One LSB is 2*vfs/2**nbits; inputs outside the range clip to the end codes."""
+    lsb = 2.0 * vfs / 2 ** nbits
+    code = np.clip(np.floor(np.asarray(x, float) / lsb), -2 ** (nbits - 1), 2 ** (nbits - 1) - 1)
+    return (code + 0.5) * lsb
+
+
+def sqnr_ideal_db(nbits):
+    """SQNR of an ideal N-bit quantiser driven by a full-scale sine (dB)."""
+    return 6.02 * nbits + 1.76
+
+
+def enob(sndr_db):
+    """Effective number of bits from a measured SNDR (dB)."""
+    return (np.asarray(sndr_db, float) - 1.76) / 6.02
+
+
+def alias_freq(f, fs):
+    """Frequency (Hz) at which a tone at f appears after sampling at fs (folded into 0..fs/2)."""
+    r = np.mod(np.asarray(f, float), fs)
+    return np.minimum(r, fs - r)
+
+
+def butter_atten_db(f, fc, order):
+    """Attenuation (dB, positive) of an order-n Butterworth low-pass with corner fc at frequency f."""
+    return 10 * np.log10(1 + (np.asarray(f, float) / fc) ** (2 * order))
+
+
+def sqnr_os_db(nbits, osr, order=0):
+    """Peak SQNR (dB) of an N-bit quantiser oversampled by osr, with order-L noise shaping
+    (L = 0: plain oversampling, +3 dB per octave; L >= 1: NTF = (1 - z^-1)^L, linear model)."""
+    L = order
+    return (6.02 * nbits + 1.76 - 10 * np.log10(np.pi ** (2 * L) / (2 * L + 1))
+            + (20 * L + 10) * np.log10(np.asarray(osr, float)))
+
+
+def jitter_snr_db(f_in, sigma_t):
+    """SNR (dB) limit set by rms sampling-clock jitter sigma_t (s) on a full-scale sine at f_in (Hz)."""
+    return -20 * np.log10(2 * np.pi * np.asarray(f_in, float) * sigma_t)
+
+
+def coherent_tone(f_target, fs, n):
+    """Frequency (Hz) and cycle count M of a tone near f_target that completes an odd number of
+    cycles in an n-point record (M odd, so it is coprime with a power-of-two n)."""
+    m = max(1, int(round(f_target * n / fs)))
+    if m % 2 == 0:
+        m += 1
+    return m * fs / n, m
+
+
+def tone_metrics(y, m, n_harm=5, band_bins=None):
+    """SNDR, SNR, THD and SFDR (dB) of a coherently sampled record y with the tone in bin m
+    (rectangular window). band_bins limits the noise sum to bins 1..band_bins (oversampled case)."""
+    y = np.asarray(y, float)
+    n = len(y)
+    p = np.abs(np.fft.rfft(y - np.mean(y))) ** 2
+    p[0] = 0.0
+    top = len(p) - 1 if band_bins is None else band_bins
+    ps = p[m]
+    harm = [h * m % n for h in range(2, n_harm + 2)]
+    harm = sorted({min(k, n - k) for k in harm} - {0, m})
+    harm_in = [k for k in harm if k <= top]
+    pn_all = p[1:top + 1].sum() - ps
+    ph = sum(p[k] for k in harm_in)
+    spur = np.delete(p[1:top + 1], m - 1).max() if top >= m else p[1:top + 1].max()
+    return dict(sndr=10 * np.log10(ps / pn_all), snr=10 * np.log10(ps / (pn_all - ph)),
+                thd=10 * np.log10(ph / ps) if ph > 0 else -np.inf, sfdr=10 * np.log10(ps / spur))

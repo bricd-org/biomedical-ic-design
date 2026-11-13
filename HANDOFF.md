@@ -1,6 +1,7 @@
 # HANDOFF — Open-BioAFE Tutorial (pick up here)
 
-Last updated: 12 November 2026 (outline review against lecture material, section 2a). On
+Last updated: 12 November 2026, evening (Ch 13 written; outline review against lecture
+material, section 2a). On
 10 November the tutorial was switched from a LaTeX book (with a generated website) to **a website
 written directly in Markdown**. There is no LaTeX book and no PDF any more; `book/` and
 `tools/build_site.py` were removed.
@@ -31,13 +32,14 @@ user works directly on `main`.
 | Home page `index.md` (hero, key numbers, signal chain, part cards) | done |
 | Preface `preface.md` (incl. reading-paths figure `assets/figs/reading-paths.svg`) | **written** |
 | Ch 1–4 (Part I) | **written** (11 Nov 2026): full text, 15 figures (incl. diagrams `ch03_electrode_model.svg`, `ch04_mains_coupling.svg`), 5 tables, worked examples; every number checked against `biosig.py` |
-| Ch 5–30 | outlines |
+| Ch 13 | **written** (12 Nov 2026): aliasing of mains harmonics (250 Hz → 6 Hz at 256 S/s), anti-alias order (8th at 500 S/s vs 3rd at 2 kS/s), quantisation model and its failures, dither, oversampling, jitter, Table 13.1 (rate and bits per mode); 3 figures from `figsrc/ch13_figs.py` |
+| Ch 5–12, 14–30 | outlines. **Next: Ch 14, then Ch 19** (rest of build stage 2), then Part II (stage 3) |
 | Ch 31 `chapters/31_labs.md` | outline: lab table + one short section per lab (anchors `#lab-1`…`#lab-15`, `#setup`, `#capstone`) |
 | Appendices | **missing** (no pages yet, not in the menu) |
 | `references.md` + `_data/references.yml` (48 entries; `rich1983`, `ott2009` added 12 Nov) | done |
-| `labs/python/biosig.py` (shared model) | done, tested |
+| `labs/python/biosig.py` (shared model) | done, tested; converter helpers added 12 Nov: `quantize`, `sqnr_ideal_db`, `enob`, `alias_freq`, `butter_atten_db`, `sqnr_os_db(N, osr, L)`, `jitter_snr_db`, `coherent_tone`, `tone_metrics` (SNDR/SNR/THD/SFDR, optional in-band limit) |
 | Lab 1 and Lab 2 scripts | **missing** |
-| Figure scripts `figsrc/` → `assets/figs/*.svg` (13 plots) | done, reviewed at page size and used in Ch 1–4 |
+| Figure scripts `figsrc/` → `assets/figs/*.svg` (16 plots) | done, reviewed at page size; used in Ch 1–4 and 13 |
 | Pages deploy | `.github/workflows/pages.yml` deploys on every push to `main` |
 | Local preview | `preview_start bioafe` (Docker, port 4005; entry in `~/SkillSurf/.claude/launch.json`) → http://localhost:4005/biomedical-ic-design/ |
 | BRICD home page | Open-BioAFE is Project 01 (*to be commenced*) on www.thebricd.org (`bricd-org.github.io`, pushed 12 Nov, `a2cf7ac`), linking this tutorial; keep its numbers in step with `SPEC`. Preview: `preview_start bricd-site` (port 4006) |
@@ -104,6 +106,29 @@ key equations, worked examples with the project's numbers, insight/pitfall/specn
 "Read with this chapter", closing takeaways. Figure ids are `fig-N-M` in reading order; table
 captions use `{: .tabcaption #tab-N-M }`. Maths inside a `<figure>` caption or a box title must be
 written `\( ... \)`, not `$$...$$` (kramdown does not convert maths inside raw HTML).
+
+### Step 1b — Write the outline chapters (user's request, 12 Nov 2026)
+
+The user asked to "continue writing the empty chapters". Order: the curriculum's build stages
+(section 8), because stage 2 needs only Python: **Ch 13 (done) → Ch 14 → Ch 19**, then Part II
+(Ch 5–12, which needs SG13G2 device numbers from simulation), then the rest of Part III, Part IV,
+Part V. For each chapter: follow the Ch 2–4 / Ch 13 style, put every number through `biosig.py`
+(add helpers there), draw figures with `figsrc/chNN_figs.py`, remove the *Chapter status: outline*
+box, keep the outline's objectives/design question/section titles unless there is a reason, build
+and check the page (no `.katex-error`, images load), then update this file.
+
+Notes for the next chapters:
+- **Ch 14:** SNDR/SFDR/THD from `tone_metrics`; histogram DNL/INL with capacitor mismatch
+  (Pelgrom); Walden and Schreier FoM worked with the Ch 13 numbers (12-b SAR at 2 kS/s, 16-b ΔΣ
+  at 500 S/s); kT/C sizing (×4 per bit) vs CV² (×2 per bit); Murmann survey (cite, do not copy
+  data); keep Table 14.1.
+- **Ch 19:** NTF/STF of 1st/2nd order, `sqnr_os_db(N, osr, L)` already gives the key equation
+  (1-bit, L = 2, OSR 128 → 100.2 dB, quoted in Ch 13); simulate a 1st/2nd-order loop in plain
+  numpy (python-deltasigma is not installed; install in a venv or write a small `simulate_dsm`
+  in `biosig.py`); Lee criterion; idle tones with a DC input (ECG baseline); answer "order and OSR
+  for 16 b" at the lowest clock.
+- Ch 13 figure 13.3a: plain-oversampling simulation falls ~3 dB under the line at high OSR
+  (pure-sine quantisation error is not white); the text says so — keep it if redrawing.
 
 ### Step 2 — Chapter 31 `chapters/31_labs.md` — Hands-on Labs
 The outline has the lab table and a short section per lab. Write the set-up section, Lab 1 and
