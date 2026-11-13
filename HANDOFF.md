@@ -42,7 +42,8 @@ user works directly on `main`.
 | Ch 9 | **written** (13 Nov 2026): chopping as modulation (baseband ≈ S_white(1 + 0.85 f_c/f_ch)); 1000 µm² NMOS pair corner 460 Hz → 0.273 µVrms at 4 kHz (100 µm²: corner 4.6 kHz, 0.367 µV at 4 kHz); ripple = offset × gain (±39 mV for 100 µm², 0.39 mV σ); residual offset 2·f_ch·Δq·R_s (1 fC, 4 kHz: 0.4 µV wet, 8 µV dry); RRL (Yazicioglu 2007); auto-zero folding ~2f_n/f_s; Zin = 1/(2 f_ch C_in) = 6.25 MΩ at 4 kHz with 20 pF; **choice f_ch = 4 kHz, input devices 1000 µm²**; 2 figures from `figsrc/ch09_figs.py` |
 | Ch 10 | **written** (13 Nov 2026): chopped Zin 1/(2 f_ch C_in) = 6.25 MΩ flat vs unchopped 2/(jωC_in); pads 5 pF = 640 MΩ@50 Hz/32 MΩ@1 kHz; PF boosting Z/ε (dry needs ε < 6 %; 3 % → 208 MΩ@10 Hz); **input chopper defeats CCIA DC blocking → DSL required**: C_DSL ≥ (V_off/V_DSL)·C_in → 12 pF (1.2 V, noise gain 1.72) or **4 pF with a 3.3 V integrator (noise gain 1.32, chosen)**; f_HP = (C_DSL/C_fb)/(2πτ) → τ = 6.4 s for 0.5 Hz; DSL integrator output sampled by SAR as electrode-offset monitor; chopped LNA noise ≈ 0.36 µVrms; 1 figure from `figsrc/ch10_figs.py` |
 | Ch 11 | **written** (13 Nov 2026): Gm-C (100 Hz on 10 pF = 6.3 nS = 0.25 nA; 0.5 Hz = 1.3 pA ≈ leakage → sub-Hz corner by the DSL), Gm-C noise ξkT/C (41 µVrms on 10 pF → filters after gain), SC corner (C2/C1 = 6.4 for 100 Hz at 4 kHz); **gain plan Table 11.1** (ADC range ±0.5 V diff.: ECG 100×1, EEG 100×8, EMG 10×8, spikes 100×8); anti-alias: SAR EMG 2 kS/s → 4th-order Butterworth at 600 Hz (32 dB at 1.5 kHz), chopper ripple 4 kHz = 2·f_s aliases to DC (−66 dB); ΔΣ 512 kHz → one pole, 4 kHz in sinc notch (8 × 500 S/s); mains notch digital (Ch 23); 1 figure from `figsrc/ch11_figs.py` |
-| Ch 12, 15–18, 20–30 | outlines. **Next: Ch 12** (last of build stage 3; its outline already has 12.5 shielding/guarding), then Ch 15–18, 20–22 (stage 4), then Ch 15–18, 20–22 (stage 4), Part IV 23–28 (stage 5), Part V 29–30 (stage 6). User (13 Nov): "continue working until all the missing chapters are done" |
+| Ch 12 | **written** (13 Nov 2026): RLD divides CM by 1+A → CMRR test needs Zcm 11.4 MΩ at A = 100 (vs 1.15 GΩ); boosted 200 MΩ front-end leaves 0.06 mVpp (24 dB margin); RLD stability with C_body 200 pF and safety resistor R_o (≥ 120 kΩ for 10 µA at 1.2 V; **150 kΩ → 53° PM at 5 kHz crossover**, 45° at 300 pF); CMFB; lead-off DC (nA) / AC (→ Ch 28); ESD (sg13g2_esd, series R noise 0.13 µV for 5 kΩ), RF filter matching; 12.5 shielding/guarding/active electrodes kept (`#shielding`); anchor `#lead-off-detection`; 1 figure `figsrc/ch12_figs.py` |
+| Ch 15–18, 20–30 | outlines. **Next: Ch 15–18, 20–22** (stage 4), then Ch 15–18, 20–22 (stage 4), Part IV 23–28 (stage 5), Part V 29–30 (stage 6). User (13 Nov): "continue working until all the missing chapters are done" |
 | Ch 31 `chapters/31_labs.md` | outline: lab table + one short section per lab (anchors `#lab-1`…`#lab-15`, `#setup`, `#capstone`) |
 | Appendices | **missing** (no pages yet, not in the menu) |
 | `references.md` + `_data/references.yml` (48 entries; `rich1983`, `ott2009` added 12 Nov) | done |
@@ -217,7 +218,7 @@ home page.
 
 ## 7. Known issues to clean up
 
-- **Open design point from Ch 4:** with the standards' 40.7 kΩ imbalance and a 100 dB amplifier,
+- **Resolved in Ch 12 (keep Table 1.2 in step in Ch 29):** the RLD (loop gain 100) cuts the Z_cm need to 11.4 MΩ. Original note — **Open design point from Ch 4:** with the standards' 40.7 kΩ imbalance and a 100 dB amplifier,
   90 dB effective CMRR needs Z_cm ≈ 1.9 GΩ at 50 Hz, about twice the "> 1 GΩ" goal in Table 1.2
   (Ch 1) and `SPEC`. Ch 4 says so in its specnote; settle it in the Ch 29 budgets and then update
   Table 1.2.
