@@ -120,7 +120,7 @@ def run(netlists):
 
 
 def load(tag, ncol):
-    a = np.loadtxt(os.path.join(OUT, tag + ".txt"))
+    a = np.atleast_2d(np.loadtxt(os.path.join(OUT, tag + ".txt")))
     return [a[:, 0]] + [a[:, 2 * k + 1] for k in range(ncol)]
 
 
