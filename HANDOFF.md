@@ -40,6 +40,7 @@ user works directly on `main`.
 | Figure scripts `figsrc/` → `assets/figs/*.svg` (13 plots) | done, reviewed at page size and used in Ch 1–4 |
 | Pages deploy | `.github/workflows/pages.yml` deploys on every push to `main` |
 | Local preview | `preview_start bioafe` (Docker, port 4005; entry in `~/SkillSurf/.claude/launch.json`) → http://localhost:4005/biomedical-ic-design/ |
+| BRICD home page | Open-BioAFE is Project 01 (*to be commenced*) on www.thebricd.org (`bricd-org.github.io`, pushed 12 Nov, `a2cf7ac`), linking this tutorial; keep its numbers in step with `SPEC`. Preview: `preview_start bricd-site` (port 4006) |
 
 ## 2a. Outline review against lecture material (12 Nov 2026)
 
