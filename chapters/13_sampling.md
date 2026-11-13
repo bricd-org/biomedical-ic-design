@@ -151,7 +151,7 @@ $$\mathrm{SQNR} = 74.0 + 10\log_{10}128 = 74.0 + 21.1 = 95.1\ \text{dB} \;\appro
 
 Four extra bits, but at a hundred times as many conversions, and so roughly a hundred times the converter energy. And it works only if the error is white: the simulated points in [Figure 13.3](#fig-13-3)a fall up to 3 dB short at high OSR because a pure sine's quantisation error has harmonics that stay in band.
 
-A **noise-shaping** loop does far better at the same OSR. [Chapter 19]({% link chapters/19_dstheory.md %}) shows that a second-order loop with a *1-bit* quantiser reaches about 100 dB at an OSR of 128, because it pushes the quantisation noise out of the band instead of only spreading it.
+A **noise-shaping** loop does far better at the same OSR. With a *1-bit* quantiser, plain oversampling by 128 gives only 29 dB; a second-order noise-shaping loop gives about 100 dB in the linear model of [Chapter 19]({% link chapters/19_dstheory.md %}) and 85 dB in simulation at −6 dBFS, because it pushes the quantisation noise out of the band instead of only spreading it.
 
 </div>
 

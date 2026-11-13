@@ -327,3 +327,165 @@ def tone_metrics(y, m, n_harm=5, band_bins=None):
     spur = np.delete(p[1:top + 1], m - 1).max() if top >= m else p[1:top + 1].max()
     return dict(sndr=10 * np.log10(ps / pn_all), snr=10 * np.log10(ps / (pn_all - ph)),
                 thd=10 * np.log10(ph / ps) if ph > 0 else -np.inf, sfdr=10 * np.log10(ps / spur))
+
+
+def cdac_weights(nbits, sigma_u=0.0, seed=0):
+    """Actual bit weights (in LSB) of a binary-weighted capacitive DAC built from unit capacitors
+    whose values scatter by sigma_u (relative, rms). Bit k has 2**k units; one dummy unit makes
+    the total 2**nbits units. Weights are normalised to the total, as the charge redistribution does."""
+    rng = _rng(seed)
+    caps = [rng.normal(1.0, sigma_u, 2 ** k).sum() for k in range(nbits)]
+    dummy = rng.normal(1.0, sigma_u)
+    total = sum(caps) + dummy
+    return np.array(caps) / total * 2 ** nbits
+
+
+def sar_convert(x, nbits, weights=None, vfs=1.0):
+    """Behavioural SAR conversion of x (V) over [-vfs, +vfs] with bit weights in LSB (MSB last
+    index = nbits-1). The comparator decides with the real weights; the code is read as ideal binary."""
+    w = 2.0 ** np.arange(nbits) if weights is None else np.asarray(weights, float)
+    u = (np.asarray(x, float) + vfs) / (2 * vfs) * 2 ** nbits      # input in LSB, 0 .. 2^N
+    acc = np.zeros_like(u)
+    code = np.zeros(u.shape, dtype=np.int64)
+    for k in range(nbits - 1, -1, -1):
+        keep = u >= acc + w[k]
+        acc = np.where(keep, acc + w[k], acc)
+        code = code + keep * (1 << k)
+    return code
+
+
+def code_to_volts(code, nbits, vfs=1.0):
+    """Mid-tread reconstruction of an ideal binary code over [-vfs, +vfs]."""
+    return (np.asarray(code, float) + 0.5) * 2 * vfs / 2 ** nbits - vfs
+
+
+def dnl_inl(codes, nbits):
+    """DNL and INL (LSB) from a code histogram of a uniform ramp; the two end codes are dropped."""
+    h = np.bincount(np.asarray(codes, int), minlength=2 ** nbits)[1:-1].astype(float)
+    dnl = h / h.mean() - 1.0
+    inl = np.cumsum(dnl)
+    inl = inl - np.linspace(inl[0], inl[-1], len(inl))     # end-point fit
+    return dnl, inl
+
+
+def ktc_cap(nbits, vfs_pp=1.2, osr=1.0, T=T_ROOM):
+    """Sampling capacitance (F) whose kT/C noise equals the N-bit quantisation noise, Delta^2/12,
+    over a peak-to-peak range vfs_pp; oversampling by osr spreads the noise and divides C by osr."""
+    lsb = vfs_pp / 2 ** nbits
+    return 12 * K_B * T / lsb ** 2 / osr
+
+
+def e_thermal_min(snr_db, T=T_ROOM):
+    """Thermal (kT/C) lower bound on energy per Nyquist sample, 8 kT * SNR (J), for a full-swing
+    sampled sine charged from the supply."""
+    return 8 * K_B * T * 10 ** (np.asarray(snr_db, float) / 10)
+
+
+def fom_walden(p, fs, enob_bits):
+    """Walden figure of merit (J per conversion step)."""
+    return p / (fs * 2 ** np.asarray(enob_bits, float))
+
+
+def fom_schreier(sndr_db, bw, p):
+    """Schreier figure of merit (dB); bw is the signal bandwidth (fs/2 for a Nyquist converter)."""
+    return sndr_db + 10 * np.log10(bw / p)
+
+
+def ntf_pure(order):
+    """NTF(z) = (1 - z^-1)^L as (b, a) coefficient arrays in powers of z^-1."""
+    return np.poly(np.ones(order)), np.r_[1.0, np.zeros(order)]
+
+
+def synth_ntf(order, osr, h_inf=1.5, opt_zeros=False):
+    """Low-pass NTF of the given order with |NTF| <= h_inf (the Lee criterion), in the spirit of
+    Schreier's synthesizeNTF: zeros at DC (or, with opt_zeros, at the Legendre-root frequencies
+    that minimise in-band noise) and Butterworth-high-pass poles scaled until max|NTF| = h_inf.
+    Returns (b, a) in powers of z^-1 with b[0] = a[0] = 1."""
+    if opt_zeros:
+        r = np.polynomial.legendre.leggauss(order)[0]
+        zeros = np.exp(1j * r * np.pi / osr)
+    else:
+        zeros = np.ones(order, complex)
+    b = np.real(np.poly(zeros))
+    w = np.linspace(0, np.pi, 2048)
+    zz = np.exp(1j * w)
+
+    def hmax(wc):
+        _, p, _ = sps.butter(order, wc, "high", output="zpk")
+        a = np.real(np.poly(p))
+        return np.abs(np.polyval(b, zz) / np.polyval(a, zz)).max(), a
+
+    # max|NTF| is large for very low corners (poles near z = 1 lift the NTF at DC when the zeros
+    # are spread), dips, then grows towards 2^L; bisect on the rising branch only.
+    grid = np.logspace(-4, np.log10(0.999), 80)
+    lo, hi = grid[int(np.argmin([hmax(g)[0] for g in grid]))], 0.999
+    for _ in range(60):
+        mid = np.sqrt(lo * hi)
+        if hmax(mid)[0] > h_inf:
+            hi = mid
+        else:
+            lo = mid
+    return b, hmax(lo)[1]
+
+
+def ntf_response(b, a, f):
+    """|NTF| at normalised frequency f = f/fs (0..0.5)."""
+    z = np.exp(2j * np.pi * np.asarray(f, float))
+    return np.abs(np.polyval(b, z) / np.polyval(a, z))
+
+
+def simulate_dsm(u, b, a, limit=1e3, dither=None):
+    """1-bit delta-sigma modulator with NTF = b/a and STF = 1 (error-feedback form; every loop-filter
+    topology with the same NTF and STF gives the same output). Output levels +-1, so the input full
+    scale is 1. `dither` (array like u) is added at the quantiser input. Returns (v, stable); stable
+    is False if the quantiser input exceeded `limit`."""
+    c = (np.asarray(b, float) - np.asarray(a, float))[1:]      # (NTF - 1) numerator, z^-1 .. z^-L
+    d = np.asarray(a, float)[1:]
+    L = len(c)
+    e_hist = np.zeros(L)
+    y_hist = np.zeros(L)
+    v = np.empty(len(u))
+    for n, un in enumerate(u):
+        yf = c @ e_hist - d @ y_hist
+        w = un + yf + (0.0 if dither is None else dither[n])
+        if abs(w) > limit:
+            v[n:] = np.nan
+            return v, False
+        vn = 1.0 if w >= 0 else -1.0
+        e_hist = np.r_[vn - (w - (0.0 if dither is None else dither[n])), e_hist[:-1]]   # dither is shaped
+        y_hist = np.r_[yf, y_hist[:-1]]
+        v[n] = vn
+    return v, True
+
+
+def dsm_sqnr(v, m, osr):
+    """In-band SQNR (dB) of a modulator output v (length n) holding a tone in bin m. Uses a Hann^2
+    window, whose sidelobes fall fast enough for third- and fourth-order shaped noise (a plain Hann
+    window leaks out-of-band noise into the band above about 100 dB); signal = bins m-2..m+2,
+    noise = in-band bins 4..n/(2 osr) minus the signal bins."""
+    n = len(v)
+    p = np.abs(np.fft.rfft(v * np.hanning(n) ** 2)) ** 2
+    top = int(n / (2 * osr))
+    sig = p[m - 2:m + 3].sum()
+    noise = p[4:top + 1].sum() - sig
+    return 10 * np.log10(sig / noise)
+
+
+def incremental2(u_dc, m_cycles, a1=0.5, a2=0.5):
+    """Second-order incremental delta-sigma (two delaying integrators, feedback to both, 1-bit),
+    reset before each conversion; returns the input estimate from a cascade-of-integrators filter
+    for each DC input in u_dc (full scale +-1)."""
+    u_dc = np.atleast_1d(np.asarray(u_dc, float))
+    x1 = np.zeros_like(u_dc)
+    x2 = np.zeros_like(u_dc)
+    s1 = np.zeros_like(u_dc)        # sum of v
+    s2 = np.zeros_like(u_dc)        # sum over n of (sum_{k<n} v)
+    run = np.zeros_like(u_dc)
+    for _ in range(m_cycles):
+        v = np.where(x2 >= 0, 1.0, -1.0)
+        s2 += run
+        run += v
+        s1 += v
+        x2 = x2 + a2 * (x1 - v)
+        x1 = x1 + a1 * (u_dc - v)
+    return (s1 + a1 * s2) / (a1 * m_cycles * (m_cycles - 1) / 2)
