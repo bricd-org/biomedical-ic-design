@@ -109,19 +109,21 @@ The IHP Analog Academy SAR module {% include cite.html keys="ihpacademy" %} and 
 
 The references deliver the DAC's switching charge. A charge that arrives late, or a reference that droops while it is delivered, is a conversion error.
 
-At the MSB decision the array draws up to about $$C_\mathrm{DAC}V_\mathrm{ref}/2 = 2$$ pC from the reference. Delivered from an on-chip decoupling capacitor of 100 pF, that is a 20 mV droop, which the reference buffer must restore to within half an LSB, 122 µV, before the decision. Each bit of the 16 kS/s converter has about 4.8 µs, so the buffer must settle by a factor of 160 ($$\ln 160 = 5.1$$ time constants) in that time: $$\tau \le 0.94$$ µs. On 100 pF that needs a transconductance of about 106 µS, roughly 4 µA in weak inversion. Shared by the eight channels, that is about 0.6 µW per channel, more than the DAC itself. A larger decoupling capacitor, a reference whose droop is the same for every conversion (so that it calibrates out), or charge-recycling switching schemes all reduce it.
+At the MSB decision the array draws up to about $$C_\mathrm{DAC}V_\mathrm{ref}/2 = 2$$ pC from the reference. Delivered from an on-chip decoupling capacitor of 100 pF, that is a 20 mV droop, which the reference buffer must restore to within half an LSB, 122 µV, before the decision. Each bit of the 16 kS/s converter has about 4.8 µs, so the buffer must settle by a factor of 160 ($$\ln 160 = 5.1$$ time constants) in that time: $$\tau \le 0.94$$ µs. On 100 pF that needs a transconductance of about 106 µS, roughly 4 µA in weak inversion. Running continuously, that is 4.8 µW, or 300 pJ per conversion at 16 kS/s, fifteen times the converter's whole energy budget.
+
+The way out is to move the charge reservoir off chip. With a 1 µF capacitor on a reference pin, the MSB's 2 pC causes a droop of only 2 µV, far below an LSB, and the on-chip buffer has to supply only the *average* reference current: 0.84 pJ per conversion at 1 V and 16 kS/s is 13 nA. A bandgap and a slow, low-power buffer suffice. The price is one pin and one external capacitor, which a wearable system can afford. Where no pin is available, a reference whose droop is the same for every conversion, so that it calibrates out, or a duty-cycled buffer that runs only during conversions, are the alternatives.
 
 <div class="tbox tbox-insight" markdown="1">
 <div class="tbox-title">What this means for your design</div>
 
-Use a binary array of about 1 fF units, 4 pF per side, sized by noise and leakage, and let redundancy and calibration (Chapter 18) handle the mismatch, which at that size is 0.8 LSB at mid-scale. Switch it with the $$V_\mathrm{cm}$$-based or monotonic scheme: 0.8–1 pJ per conversion instead of 4.7. Lay it out in common centroid with dummies and a shielded top plate. Budget the reference buffer: at 16 kS/s it costs more than the DAC.
+Use a binary array of about 1 fF units, 4 pF per side, sized by noise and leakage, and let redundancy and calibration (Chapter 18) handle the mismatch, which at that size is 0.8 LSB at mid-scale. Switch it with the $$V_\mathrm{cm}$$-based or monotonic scheme: 0.8–1 pJ per conversion instead of 4.7. Lay it out in common centroid with dummies and a shielded top plate. Budget the reference: a fast on-chip buffer would cost fifteen times the converter's energy, so give the reference an off-chip 1 µF capacitor and let a 13 nA buffer supply the average current.
 
 </div>
 
 <div class="tbox tbox-specnote" markdown="1">
 <div class="tbox-title">Open-BioAFE target</div>
 
-12-bit binary CDAC, about 1 fF units (MOM or minimum MIM), 4 pF per side, $$V_\mathrm{cm}$$-based switching (0.84 pJ per conversion), common-centroid layout with dummies, redundancy and foreground calibration in the SAR logic. Reference buffer about 4 µA, shared by eight channels, with 100 pF of on-chip decoupling.
+12-bit binary CDAC, about 1 fF units (MOM or minimum MIM), 4 pF per side, $$V_\mathrm{cm}$$-based switching (0.84 pJ per conversion), common-centroid layout with dummies, redundancy and foreground calibration in the SAR logic. Reference: bandgap and low-power buffer (average current about 13 nA) with an off-chip 1 µF decoupling capacitor on the reference pin.
 
 </div>
 
@@ -148,6 +150,6 @@ Add the merged-capacitor scheme to `energy()` in `figsrc/ch17_figs.py`, and add 
 - Monotonic and $$V_\mathrm{cm}$$-based switching cut the DAC energy about fivefold against conventional switching (213–256 against 1193 $$C_uV_\mathrm{ref}^2$$ at 10 bits).
 - 12-bit matching in SG13G2 MIM needs 22 fF units and 91 pF per side; noise needs only 1.7–4 pF, so a small array with redundancy and calibration wins.
 - Common-centroid layout, dummies and a shielded top plate are part of the matching.
-- At 16 kS/s the reference buffer, about 4 µA for eight channels, costs more than the DAC switching.
+- A fast on-chip reference buffer would cost about 300 pJ per conversion; an off-chip 1 µF capacitor keeps the droop at 2 µV and the buffer at 13 nA.
 
 </div>
