@@ -23,3 +23,6 @@ labs/python/out/
 data/physionet/
 data/ninapro/
 *.edf
+
+# ngspice working files written by labs/spice/sg13_char.py
+labs/spice/char/
