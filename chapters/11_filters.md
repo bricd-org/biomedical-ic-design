@@ -80,7 +80,7 @@ The PGA is a second capacitively coupled stage, chopped or not, with switchable 
 
 The chopper ripple sits at 4 kHz, twice the SAR's sample rate. Because the two clocks are locked together, the ripple aliases exactly to DC, where it adds to the offset rather than appearing as a tone, and the fourth-order filter attenuates it by 66 dB first. This is the reason for the synchronous clocks of [Chapter 9]({% link chapters/09_chopper.md %}).
 
-**The incremental ΔΣ in ECG/EEG mode** clocks its loop at 512 kHz ([Chapter 19]({% link chapters/19_dstheory.md %})). Nothing folds into the band until hundreds of kilohertz, where the LNA's own roll-off already removes it, so one pole at a few kilohertz is enough. The 4 kHz ripple passes the analog path and is removed digitally. With an output rate of 500 S/s, 4 kHz is the eighth multiple of the rate and falls into a notch of the decimation filter ([Chapter 20]({% link chapters/20_dscircuits.md %})).
+**The incremental ΔΣ in ECG/EEG mode** clocks its loop at 512 kHz ([Chapter 19]({% link chapters/19_dstheory.md %})). Nothing folds into the band until hundreds of kilohertz, where the LNA's own roll-off already removes it, so one pole at a few kilohertz is enough. The 4 kHz ripple passes the analog path and is handled digitally. With an output rate of 500 S/s, 4 kHz is the eighth multiple of the rate, so with synchronous clocks it aliases to DC, an offset that the high-pass removes, and the incremental converter's decimation filter attenuates it by about 28 dB on the way ([Chapter 20]({% link chapters/20_dscircuits.md %})).
 
 <figure id="fig-11-1">
   <img src="{{ '/assets/figs/ch11_filters.svg' | relative_url }}" style="width:720px" alt="Bias current of a Gm-C transconductor versus corner frequency for two capacitors, and Butterworth anti-alias filter responses for the EMG SAR path with the folding and ripple frequencies marked">
@@ -96,7 +96,7 @@ After the converter, a notch can track the mains frequency, adapt its depth to t
 <div class="tbox tbox-insight" markdown="1">
 <div class="tbox-title">What this means for your design</div>
 
-Put the gain first and the filters after it, so their $$kT/C$$ noise is divided by the gain. Expect nanoampere transconductors in kilohertz Gm-C filters and give up on Gm-C below a few hertz; let the servo loop set the sub-hertz corner. Fit the anti-alias filter to the converter: fourth order at 600 Hz for the 2 kS/s SAR, a single pole for the 512 kHz incremental ΔΣ. Lock the chopper clock to both converters, so its ripple aliases to DC or lands in a decimation notch. Leave the mains notch to the digital domain.
+Put the gain first and the filters after it, so their $$kT/C$$ noise is divided by the gain. Expect nanoampere transconductors in kilohertz Gm-C filters and give up on Gm-C below a few hertz; let the servo loop set the sub-hertz corner. Fit the anti-alias filter to the converter: fourth order at 600 Hz for the 2 kS/s SAR, a single pole for the 512 kHz incremental ΔΣ. Lock the chopper clock to both converters, so its ripple aliases to DC, where the high-pass removes it. Leave the mains notch to the digital domain.
 
 </div>
 
@@ -130,7 +130,7 @@ Using `biosig.butter_atten_db()` and `biosig.alias_freq()`, find the lowest filt
 - A Gm-C filter's noise is about $$\xi kT/C$$ (41 µVrms on 10 pF), so it belongs after the gain.
 - The PGA brings each mode to the converter range: total gain 100 (ECG), 800 (EEG), 80 (EMG).
 - The 2 kS/s SAR needs a fourth-order filter at 600 Hz; the 512 kHz incremental ΔΣ needs one pole.
-- Synchronous clocks turn the chopper ripple into a DC offset at the SAR and put it into a decimation-filter notch at the ΔΣ.
+- Synchronous clocks turn the chopper ripple into a DC offset at both converters; the ΔΣ decimator also attenuates it by about 28 dB.
 - Mains notches belong after the converter.
 
 </div>
