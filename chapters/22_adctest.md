@@ -71,7 +71,7 @@ and $$\mathrm{DNL}_k = h_k/(p_k N_\mathrm{samples}) - 1$$. Slightly overdrive th
 
 `figsrc/ch22_figs.py` applies a sine-wave histogram to the mismatched 12-bit SAR of [Worked Example 14.1]({% link chapters/14_adcspecs.md %}) and compares it with the ramp histogram ([Figure 22.1](#fig-22-1)b). With $$2^{20}$$ samples, about 160 hits fall on each mid-scale code. Counting statistics give each DNL value a random error of $$1/\sqrt{160} = 0.079$$ LSB; the simulated difference between the two methods is 0.071 LSB rms. Both find the mid-scale step of +1.45 LSB (the sine histogram reads 1.77 there, within its noise).
 
-For a DNL resolution of 0.05 LSB you need about 400 hits per code. A sine crosses mid-scale fastest, so the middle codes collect the fewest hits and set the total: $$400\pi \cdot 2^{11} pprox 2.6$$ million samples for 12 bits. At 16 kS/s that is under three minutes of data.
+For a DNL resolution of 0.05 LSB you need about 400 hits per code. A sine crosses mid-scale fastest, so the middle codes collect the fewest hits and set the total: $$400\pi \cdot 2^{11} \approx 2.6$$ million samples for 12 bits. At 16 kS/s that is under three minutes of data.
 
 </div>
 
