@@ -14,7 +14,7 @@ Fifteen labs in three tracks, and a capstone: Python models first, then SG13G2 c
 <div class="tbox tbox-specnote" markdown="1">
 <div class="tbox-title">Lab status</div>
 
-The set-up and Labs 1, 2, 6 and 9 are complete, with their scripts in `labs/python/`. The other labs give their goal and deliverable; their scripts are being added. The SG13G2 characterisation scripts used for Chapters 5, 8 and 15 are already in `labs/spice/` and are the starting point for Labs 3 and 4.
+The set-up and Labs 1, 2, 6, 9 and 11 are complete, with their scripts in `labs/python/`, and so is the Python part of Lab 15. The other labs give their goal and deliverable; their scripts are being added. The SG13G2 characterisation scripts used for Chapters 5, 8 and 15 are already in `labs/spice/` and are the starting point for Labs 3 and 4.
 
 </div>
 
@@ -257,7 +257,40 @@ Build the Lab 9 loop with switched-capacitor integrators and a 1-bit quantiser a
 
 ## Lab 11 · ECG chain end to end {#lab-11}
 
-Run MIT-BIH and the Noise Stress Test database {% include cite.html keys="nstdb" %} through a behavioural front-end and ADC, detect QRS complexes with Pan–Tompkins {% include cite.html keys="pantompkins1985" %}, and see how ADC bits and input noise move sensitivity and positive predictive value. Goes with Chapters [24]({% link chapters/24_ecg.md %}) and [29]({% link chapters/29_arch.md %}).
+**Goal.** Find how many bits and how much input noise a heartbeat detector tolerates, and how it fails under electrode motion, so that a monitoring mode can be specified from evidence. Goes with Chapters [24]({% link chapters/24_ecg.md %}) and [29]({% link chapters/29_arch.md %}).
+
+**Data.** MIT-BIH record 100 with its beat annotations {% include cite.html keys="mitbih" %}, and the electrode-motion record `em` of the Noise Stress Test Database {% include cite.html keys="nstdb" %}, both streamed by wfdb. Offline, the script uses the synthetic ECG of Chapter 24 and band-limited (1–20 Hz) noise in place of electrode motion.
+
+**Run.**
+
+```bash
+cd labs/python
+python lab11_ecg_chain.py                          # record 100, first 5 minutes
+python lab11_ecg_chain.py --record 105 --seconds 600
+python lab11_ecg_chain.py --offline
+```
+
+The chain adds white input noise and 200 µV of baseline wander, quantises over the ±5 mV range of the ECG gain setting ([Table 11.1]({% link chapters/11_filters.md %}#tab-11-1)), and runs the simplified Pan–Tompkins detector of Chapter 24 {% include cite.html keys="pantompkins1985" %}. A detection within ±75 ms of an annotated beat is a true positive. The script then adds electrode-motion noise at the Noise Stress Test's signal-to-noise ratios, with the signal power taken from the QRS amplitude as in that database, (QRS peak-to-peak)²/8.
+
+**Expected results.** Offline (70 synthetic beats), Se/PPV in per cent:
+
+| Input noise | 3 bits | 4 bits | 5 bits | 8 bits | 12 bits |
+|---|---|---|---|---|---|
+| 0 | 49 / 31 | 84 / 78 | 100 / 100 | 100 / 100 | 100 / 100 |
+| 100 µVrms | 56 / 56 | 96 / 96 | 100 / 100 | 100 / 100 | 100 / 100 |
+| 200 µVrms | 62 / 46 | 94 / 94 | 99 / 99 | 99.5 / 99.5 | 99.5 / 99.5 |
+
+With electrode motion at 12 bits: 100 % at 24 dB SNR, 98.6 % at 18 dB, 87 % at 12 dB, and below 65 % at 6 dB. These agree with [Worked Example 24.1]({% link chapters/24_ecg.md %}): five bits and 100 µVrms suffice for detection. Electrode motion, which shares the QRS band, breaks the detector long before the converter or the input noise does. Record 105, which is noisy, and records with many ectopic beats (for example 119 or 208) are harder than record 100.
+
+**Questions.**
+
+1. What is the smallest number of bits, at 100 µVrms of noise, that keeps Se and PPV above 99.5 % on record 100? On record 105?
+2. Five bits over ±5 mV is an LSB of 312 µV, larger than the input noise. Why does the detector still work? Which stage of Pan–Tompkins is most sensitive to quantisation?
+3. Replace electrode motion by NSTDB muscle noise (`ma`) and baseline wander (`bw`). Rank the three by how much they hurt the detector, and explain the ranking from their spectra.
+4. A monitoring mode could run the converter at 6 bits and 250 S/s. Using the converter energy of [Chapter 18]({% link chapters/18_sar.md %}), estimate the power saved per channel against the diagnostic mode.
+5. Is a sensitivity of 99 % good enough for an arrhythmia monitor that runs for a day? How many missed beats is that?
+
+**Deliverable.** The Se/PPV table against bits and noise for at least two MIT-BIH records, the noise-stress curve, and a specification for an ECG monitoring mode (bits, noise, sample rate) with its evidence.
 
 ## Lab 12 · EEG seizure detection {#lab-12}
 
@@ -273,7 +306,47 @@ Lay out the comparator and the CDAC in KLayout, run DRC, LVS and extraction with
 
 ## Lab 15 · Bioimpedance IQ readout {#lab-15}
 
-Model Cole tissue, tetrapolar measurement and digital IQ demodulation in Python, then build an SG13G2 current source and a square-wave IQ demodulator. Goes with [Chapter 28]({% link chapters/28_bioz.md %}).
+**Goal.** Measure a tissue impedance and its small changes safely and precisely: see why four electrodes are needed, what resolution a given current buys, and what square-wave circuits cost in accuracy. Goes with [Chapter 28]({% link chapters/28_bioz.md %}).
+
+**Part 1 (Python).**
+
+```bash
+cd labs/python
+python lab15_bioz.py
+python lab15_bioz.py --i 20e-6 --vn 30e-9
+```
+
+The script takes the Cole model of Chapter 28 ($$R_0$$ = 60 Ω, $$R_\infty$$ = 30 Ω, $$f_\mathrm{c}$$ = 30 kHz, α = 0.7) and works through four steps:
+
+1. the tissue's impedance and phase from 5 to 500 kHz;
+2. a bipolar measurement, with the wet or dry electrodes of `biosig.z_electrode()` in series, against a tetrapolar one;
+3. a time-domain simulation of the readout: a 50 kHz current through the tissue, white readout noise, sampling at 400 kS/s, digital multiplication by the in-phase and quadrature references, and a boxcar low-pass with a 10 Hz noise bandwidth;
+4. square-wave excitation demodulated by a square-wave reference, as switched current sources and chopper-style demodulators do.
+
+The plot (`out/lab15_bioz.png`) shows the Cole plot and a recovered 0.5 Ω respiration with a 0.1 Ω cardiac component at 10 and 50 µA.
+
+**Expected results.**
+
+| Quantity | Result | Where in the text |
+|---|---|---|
+| Tissue at 50 kHz | 42.3 Ω, −12.0° | Section 28.2 |
+| Bipolar reading at 50 kHz, wet / dry electrodes | 2047 Ω / 10 134 Ω for 42 Ω of tissue | Section 28.2 |
+| ΔZ noise, 50 nV/√Hz in 10 Hz, at 10 / 50 / 500 µArms: simulated (formula) | 16.0 (15.8) / 3.21 (3.16) / 0.32 (0.32) mΩ | Worked Example 28.1 |
+| Square-wave excitation and reference | 40.8 Ω, −11.4°: 3.6 % low; noise ×1.11 | Section 28.4 |
+
+The simulated resolution confirms the formula $$v_\mathrm{n}\sqrt{B}/I_\mathrm{rms}$$ of Worked Example 28.1. The square-wave error comes from the harmonics at 150, 250 kHz and above, where the tissue's impedance is lower; it depends on the tissue, which is why Chapter 28 calibrates against an on-chip resistor.
+
+**Questions.**
+
+1. Respiration changes the thoracic impedance by about 1 Ω and the heartbeat by about 0.1 Ω. What current do you need to see the cardiac component with a signal-to-noise ratio of 20 dB, and is it inside the CF limit at 50 kHz?
+2. Repeat the square-wave case for a tissue with $$f_\mathrm{c}$$ = 100 kHz. Does the error grow or shrink, and why?
+3. Replace the square-wave excitation by a three-level pseudo-sine (0, ±1, with the zero levels lasting 1/6 of the period each), which has no third harmonic. What is the error now?
+4. Add the ECG (1 mV) to the measured voltage. Why does it disappear after demodulation, and what limits how well?
+5. The readout noise is 50 nV/√Hz at 50 kHz. Using the chopper amplifier of Chapter 9, is this realistic, and what sets it?
+
+**Part 2 (SG13G2).** Build a balanced current source for 10–50 µA at 50 kHz and a square-wave IQ demodulator from the chopper switches of [Chapter 9]({% link chapters/09_chopper.md %}); simulate them with the Cole network as the load and compare the analog IQ error with Part 1.
+
+**Deliverable.** The Cole plot, the ΔZ resolution against current with the safety limit, and the analog against digital IQ error.
 
 ## Capstone · One Open-BioAFE channel {#capstone}
 

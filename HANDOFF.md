@@ -1,7 +1,7 @@
 # HANDOFF — Open-BioAFE Tutorial (pick up here)
 
-Last updated: 14 November 2026 (**all chapters 1–30 written**; Ch 31 set-up + Labs 1, 2, 6, 9 and
-their scripts written; next: the other labs, appendices; outline review against lecture material, section 2a). On
+Last updated: 14 November 2026 (**all chapters 1–30 written**; Ch 31 set-up + Labs 1, 2, 6, 9, 11
+and 15 (Python part) written with scripts; next: the other labs, appendices; outline review against lecture material, section 2a). On
 10 November the tutorial was switched from a LaTeX book (with a generated website) to **a website
 written directly in Markdown**. There is no LaTeX book and no PDF any more; `book/` and
 `tools/build_site.py` were removed.
@@ -165,8 +165,12 @@ and **Lab 9** (`labs/python/lab9_deltasigma.py`: NTFs, SQNR vs OSR formula vs si
 a2 = 0.25, bit-true CoI, −28 dB at 4 kHz) also DONE. Side fixes: Ch 22 now warns that Hann's near
 skirt (−41 dBc) caps SNDR at ~41 dB unless ~30 bins are excluded; the incremental converter is
 **16.5 bits** worst case (error 1.04e-5), corrected from 16.6 in Ch 19, 20, 29.
-**Next: Labs 3–5, 7, 8, 10–15 in full** (Labs 11–13 Python + PhysioNet; Labs 3–4 reuse
-`labs/spice/sg13_char.py`/`sg13_lna.py`).
+**Lab 11** (`lab11_ecg_chain.py`: Pan–Tompkins, Se/PPV vs bits × noise matches WE 24.1; NSTDB em
+noise stress, SNR from QRS p-p²/8) and **Lab 15 Python part** (`lab15_bioz.py`: Cole, bipolar vs
+tetrapolar, time-domain digital IQ confirms WE 28.1 16/3.2/0.32 mΩ with rms currents; square-wave
+excitation+demod reads 3.6 % low) also DONE (14 Nov).
+**Next: Labs 12, 13 (Python + CHB-MIT/NinaPro, synthetic fallback), then the SG13G2 labs 3, 4, 5,
+7, 8, 10, 14 and Lab 15 part 2** (Labs 3–4 reuse `labs/spice/sg13_char.py`/`sg13_lna.py`).
 Original plan:
 The outline has the lab table and a short section per lab. Write the set-up section, Lab 1 and
 Lab 2 in full (goal, code, expected figure and numbers, questions); keep the anchors
