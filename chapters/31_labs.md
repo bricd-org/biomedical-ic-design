@@ -14,7 +14,7 @@ Fifteen labs in three tracks, and a capstone: Python models first, then SG13G2 c
 <div class="tbox tbox-specnote" markdown="1">
 <div class="tbox-title">Lab status</div>
 
-The set-up, Lab 1 and Lab 2 are complete, with their scripts in `labs/python/`. The other labs give their goal and deliverable; their scripts are being added. The SG13G2 characterisation scripts used for Chapters 5, 8 and 15 are already in `labs/spice/` and are the starting point for Labs 3 and 4.
+The set-up and Labs 1, 2, 6 and 9 are complete, with their scripts in `labs/python/`. The other labs give their goal and deliverable; their scripts are being added. The SG13G2 characterisation scripts used for Chapters 5, 8 and 15 are already in `labs/spice/` and are the starting point for Labs 3 and 4.
 
 </div>
 
@@ -165,7 +165,40 @@ Input and output choppers with a DC servo loop: 1/f noise removal, output ripple
 
 ## Lab 6 · Ideal ADC and spectral testing {#lab-6}
 
-Quantise sine waves, apply coherent sampling and windows, compute SNDR, SFDR and ENOB, and histogram DNL and INL with injected capacitor mismatch; the result is the `adctest.py` module that Labs 8 and 10 reuse. Goes with Chapters [13]({% link chapters/13_sampling.md %}), [14]({% link chapters/14_adcspecs.md %}) and [22]({% link chapters/22_adctest.md %}).
+**Goal.** Build `adctest.py`, the test bench that Labs 8 and 10 reuse, and learn what each test can and cannot see. Goes with Chapters [13]({% link chapters/13_sampling.md %}), [14]({% link chapters/14_adcspecs.md %}) and [22]({% link chapters/22_adctest.md %}).
+
+**Run.**
+
+```bash
+cd labs/python
+python adctest.py                  # 12-bit SAR, 1 % unit mismatch, seed 2 (Worked Example 14.1)
+python adctest.py --sigma 0.002    # the 0.2 % of Chapter 17
+```
+
+`adctest.py` is both the lab and a module. `sine_test()` returns SNDR, SNR, THD, SFDR and ENOB of a sine record, coherent (rectangular window) or not (Hann or four-term Blackman–Harris, with the tone's power summed over its lobe). `ramp_histogram()` and `sine_histogram()` return DNL and INL. The sine version estimates the sine's amplitude and offset from the counts in the two end codes and corrects for the arcsine distribution, so it needs no precision ramp. The converter under test is `biosig.sar_convert()` with the mismatched weights of `biosig.cdac_weights()`; replace it by your own model or by codes exported from a simulation.
+
+**Expected results.**
+
+| Test | Result | Where in the text |
+|---|---|---|
+| Coherent 97 Hz tone at 2 kS/s, 8192 points, ideal 12-bit | SNDR 74.0 dB, ENOB 12.00 | Section 13.2 |
+| Same, 1 % unit mismatch (seed 2) | SNDR 69.5 dB, ENOB 11.26, SFDR 76.2 dB | Worked Example 14.1 |
+| Non-coherent tone, ideal converter: rectangular / Hann (±2 bins) / Hann (±30 bins) / Blackman–Harris | SNDR 9.8 / 40.8 / 73.7 / 73.9 dB | Section 22.1 |
+| Ramp histogram, 64 hits per code | DNL −0.42 to +1.45 LSB, INL ±0.85 LSB | Worked Example 14.1 |
+| Sine histogram, 2<sup>20</sup> samples | amplitude found to 0.01 %, DNL within 0.070 LSB rms of the ramp | Worked Example 22.1 |
+| 10 converters each at σ<sub>u</sub> = 0.1, 0.2, 0.5, 1, 2 % | mean ENOB 11.99, 11.98, 11.89, 11.68, 11.20 | Chapter 17 |
+
+The Hann rows show a trap: the Hann window's sidelobes fall slowly, so near a full-scale tone they still hold about −41 dBc. Summing only the three-bin main lobe as signal leaves that skirt in the noise; exclude about 30 bins, or use Blackman–Harris.
+
+**Questions.**
+
+1. Seed 2 at 1 % gives 11.26 effective bits, the ten-seed mean 11.68. What does that say about quoting a converter's ENOB from one simulated or one measured chip? How many chips would you measure?
+2. Find the smallest σ<sub>u</sub> at which a missing code appears in 100 seeds. Compare it with the 3σ rule $$\sigma_u < 0.26\,\%$$ of Worked Example 14.1.
+3. Reduce the sine-histogram record to 2<sup>16</sup> samples. How large is the DNL error now, and does it match $$1/\sqrt{\text{hits per code}}$$?
+4. Add 0.1 LSB rms of white noise before the quantiser (comparator noise, Chapter 16). What happens to the SNDR, and to the DNL that the ramp histogram finds? Why does noise make the DNL look better?
+5. Use `band_bins` to test an oversampled converter: quantise a 10 Hz tone at 16 kS/s with 12 bits and compute the SNDR in a 125 Hz band. Compare with `biosig.sqnr_os_db()`.
+
+**Deliverable.** `adctest.py` with your own converter model plugged in, and a table of SNDR, SFDR, ENOB, DNL and INL for the ideal, 0.2 % and 1 % cases.
 
 ## Lab 7 · StrongARM comparator {#lab-7}
 
@@ -177,7 +210,46 @@ Combine a bootstrapped sample-and-hold, a monotonic CDAC and Verilog SAR logic i
 
 ## Lab 9 · ΔΣ by design {#lab-9}
 
-Synthesise first- to third-order noise-transfer functions with python-deltasigma, plot SQNR versus OSR, run the loop in incremental mode and design a fixed-point CIC decimator. Goes with Chapters [19]({% link chapters/19_dstheory.md %}) and [20]({% link chapters/20_dscircuits.md %}).
+**Goal.** Choose the order, OSR and loop of the ECG/EEG converter from simulation rather than from the linear formula, and build its decimator in integer arithmetic. Goes with Chapters [19]({% link chapters/19_dstheory.md %}) and [20]({% link chapters/20_dscircuits.md %}).
+
+**Run.**
+
+```bash
+cd labs/python
+python lab9_deltasigma.py               # -6 dBFS tone, 65 536-point records
+python lab9_deltasigma.py --amp 0.3
+```
+
+The script needs only NumPy and SciPy. `biosig.synth_ntf()` synthesises NTFs in the spirit of python-deltasigma's `synthesizeNTF` {% include cite.html keys="pydeltasigma" %}: zeros at DC or spread over the band, poles placed until $$\lVert\mathrm{NTF}\rVert_\infty$$ meets the Lee criterion. `biosig.simulate_dsm()` runs any NTF as a 1-bit modulator. If you have python-deltasigma installed, compare its results with these. The script works through four steps:
+
+1. four NTFs and their in-band noise at OSR 128;
+2. SQNR against OSR for first, second and third order, formula against simulation;
+3. the second-order incremental converter of Chapter 20 ($$a_1 = 0.5$$, $$a_2 = 0.25$$) on 8001 DC inputs;
+4. its cascade-of-integrators decimator in integer arithmetic, with register widths and the attenuation at the chopper frequency.
+
+**Expected results.**
+
+| Quantity | Result | Where in the text |
+|---|---|---|
+| In-band noise gain at OSR 128: MOD1 / MOD2 / MOD3 (1.5) / MOD3 (1.5, spread zeros) | −58 / −93 / −99 / −107 dB | Section 19.2 |
+| MOD2 at OSR 128, −6 dBFS: formula / simulation | 94.2 / 85.5 dB | Worked Example 19.1 |
+| MOD3 ($$\lVert\mathrm{NTF}\rVert_\infty$$ = 1.5) at OSR 128, −6 dBFS: formula / simulation | 127.9 / 102.0 dB | Section 19.4 |
+| Incremental, M = 256 / 512 / 1024, worst case | 12.4 / 14.5 / 16.5 bits (17.6 bits rms at 1024) | Worked Example 19.3 |
+| Integrator swing with $$a_2$$ = 0.25 / 0.5 | 1.12 / 2.25, identical codes | Chapter 20 |
+| CoI registers at M = 1024 | 12 and 20 bits; 16-bit output within 0.73 LSB | Section 20.4 |
+| CoI response at 50 Hz / 4 kHz (512 kHz clock) | −0.1 / −28.0 dB | Section 20.5 |
+
+The plot (`out/lab9_deltasigma.png`) shows the NTFs and the SQNR against OSR, simulation as markers and the formula dashed. The gap grows with order: the linear model ignores the 1-bit quantiser's gain and its overload.
+
+**Questions.**
+
+1. Raise the third-order loop's $$\lVert\mathrm{NTF}\rVert_\infty$$ to 2 and 3 (`biosig.synth_ntf(3, 128, h)`). At what value does the 1-bit loop go unstable at −6 dBFS, and at what input amplitude does the stable one overload?
+2. Why does the second-order modulator fall 9 dB short of its formula? Estimate the quantiser's effective gain from the simulated output and its input.
+3. With a DC input of 0.002 full scale, look at the MOD1 and MOD2 output spectra for idle tones. How much dither removes them, and what does it cost in SQNR (Worked Example 19.2)?
+4. For the incremental loop, find M for 14 bits and for 16 bits worst case, and the clock each needs at 500 S/s. How many cycles would a first-order incremental loop need for 16 bits?
+5. Replace the CoI by a sinc² filter over the same 1024 cycles. What happens to the resolution and to the attenuation at 4 kHz?
+
+**Deliverable.** The NTF, coefficients and M for the ECG/EEG channel, the SQNR-against-OSR plot, and a bit-true decimator with its register widths.
 
 ## Lab 10 · Switched-capacitor ΔΣ {#lab-10}
 

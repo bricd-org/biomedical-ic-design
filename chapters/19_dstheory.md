@@ -164,7 +164,7 @@ Each doubling of $$M$$ now gains two bits instead of one ([Figure 19.3](#fig-19-
 `biosig.incremental2()` runs the second-order incremental loop with $$a_1 = a_2 = 0.5$$ on 8001 DC inputs across ±0.8 of full scale. Taking 16 bits to mean a worst-case error of half an LSB over the ±1 range, $$1/2^{16} = 1.5 \times 10^{-5}$$:
 
 - $$M = 512$$ gives 14.5 bits, $$M = 768$$ gives 15.7 bits;
-- **$$M = 1024$$ gives 16.6 bits** (largest error $$9.9 \times 10^{-6}$$, which with the bound above means $$\lvert x_2\rvert_\mathrm{max} \approx 1.3$$); by rms error it is 17.6 bits.
+- **$$M = 1024$$ gives 16.5 bits** (largest error $$1.04 \times 10^{-5}$$, which with the bound above means $$\lvert x_2\rvert_\mathrm{max} \approx 1.4$$); by rms error it is 17.6 bits.
 
 At 500 conversions per second the loop clock is $$500 \times 1024 = 512$$ kHz. A free-running third-order loop meets the same 108 dB at an OSR of 128, a clock of $$2 \times 150\ \text{Hz} \times 128 = 38.4$$ kHz, more than thirteen times slower.
 
@@ -182,7 +182,7 @@ Noise shaping makes resolution cheap in bits of hardware and expensive in clock 
 <div class="tbox tbox-specnote" markdown="1">
 <div class="tbox-title">Open-BioAFE target</div>
 
-ECG/EEG converter: second-order incremental ΔΣ, 1-bit quantiser, $$M = 1024$$ cycles per conversion (16.6 bits worst case), 512 kHz loop clock at 500 S/s, input range ±0.8 of the reference. Reference point for comparison: a free-running third-order loop with $$\lVert\mathrm{NTF}\rVert_\infty = 1.5$$ at OSR 128 (38.4 kHz).
+ECG/EEG converter: second-order incremental ΔΣ, 1-bit quantiser, $$M = 1024$$ cycles per conversion (16.5 bits worst case), 512 kHz loop clock at 500 S/s, input range ±0.8 of the reference. Reference point for comparison: a free-running third-order loop with $$\lVert\mathrm{NTF}\rVert_\infty = 1.5$$ at OSR 128 (38.4 kHz).
 
 </div>
 
@@ -209,6 +209,6 @@ Do not judge a modulator by the linear-model formula, or by a short simulation w
 - The linear model gives the slopes; simulation gives the numbers. A 1-bit second-order loop at OSR 128 reaches 85 dB at −6 dBFS, 9 dB below the formula.
 - 1-bit loops above second order need $$\lVert\mathrm{NTF}\rVert_\infty \le 1.5$$ (Lee criterion) and accept a smaller input; spreading the zeros across the band gains up to 11 dB.
 - DC inputs make idle tones; with an ECG baseline they land in band. Higher order, dither at the quantiser and reset all cure them.
-- An incremental converter resets every conversion; second order gains two bits per doubling of M and reaches 16.6 bits at M = 1024, a 512 kHz clock at 500 S/s.
+- An incremental converter resets every conversion; second order gains two bits per doubling of M and reaches 16.5 bits at M = 1024, a 512 kHz clock at 500 S/s.
 
 </div>

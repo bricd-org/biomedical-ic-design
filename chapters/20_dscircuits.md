@@ -29,7 +29,7 @@ How do you implement the 2nd-order incremental modulator of Open-BioAFE and its 
 
 </div>
 
-[Chapter 19]({% link chapters/19_dstheory.md %}) settled the theory: a second-order incremental modulator with a 1-bit quantiser, 1024 cycles per conversion and a 512 kHz clock gives 16.6 bits. This chapter builds it, with the converter range of ±0.5 V differential used throughout Part III, and checks it against the 1–3 µW per channel that [Chapter 14]({% link chapters/14_adcspecs.md %}) estimated.
+[Chapter 19]({% link chapters/19_dstheory.md %}) settled the theory: a second-order incremental modulator with a 1-bit quantiser, 1024 cycles per conversion and a 512 kHz clock gives 16.5 bits. This chapter builds it, with the converter range of ±0.5 V differential used throughout Part III, and checks it against the 1–3 µW per channel that [Chapter 14]({% link chapters/14_adcspecs.md %}) estimated.
 
 ## <span class="secnum">20.1</span>Switched-capacitor integrators
 
@@ -96,7 +96,7 @@ The chopper's ripple at 4 kHz is the one in-band-adjacent tone the decimator mus
 | Quantiser | dynamic comparator, 1 decision per cycle | about 50 fJ × 512 k = 26 nW |
 | DAC | 1-bit, switched reference | inherently linear |
 | Decimator | CoI, 19-bit, 512 kHz | tens of nanowatts |
-| **Total** | 1024 cycles, 500 S/s, 16.6 bits worst case | **about 1.9 µW at 1.2 V** |
+| **Total** | 1024 cycles, 500 S/s, 16.5 bits worst case | **about 1.9 µW at 1.2 V** |
 
 The first integrator's OTA is itself chopped, so that its offset and flicker noise do not limit the converter, and its chopper runs from the same clock as the front-end's.
 
@@ -110,7 +110,7 @@ Use switched-capacitor integrators: their gains are capacitor ratios, they reset
 <div class="tbox tbox-specnote" markdown="1">
 <div class="tbox-title">Open-BioAFE target</div>
 
-Per channel: second-order discrete-time incremental ΔΣ, 1-bit, 512 kHz, $$M = 1024$$, $$a_1 = 0.5$$, $$a_2 = 0.25$$, $$C_\mathrm{s1} = 1.1$$ pF, chopped first OTA of about 1 µA, CoI decimator with a droop equaliser; about 1.9 µW at 1.2 V for 16.6 bits at 500 S/s.
+Per channel: second-order discrete-time incremental ΔΣ, 1-bit, 512 kHz, $$M = 1024$$, $$a_1 = 0.5$$, $$a_2 = 0.25$$, $$C_\mathrm{s1} = 1.1$$ pF, chopped first OTA of about 1 µA, CoI decimator with a droop equaliser; about 1.9 µW at 1.2 V for 16.5 bits at 500 S/s.
 
 </div>
 

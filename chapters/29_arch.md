@@ -78,7 +78,7 @@ The channel's CMRR has an intrinsic part and a part lost to the source ([Chapter
 | CMRR test residual | < 1 mVpp (≈ 89 dB) | 0.06 mVpp (24 dB margin) | 4, 7, 10, 12 |
 | Electrode offset | ±300 mV | ±300 mV with the 4 pF, 3.3 V servo loop | 10 |
 | Input impedance | ≥ 2.5 MΩ; ≥ 100 MΩ for dry | 6.25 MΩ chopped; about 200 MΩ boosted | 9, 10 |
-| ECG/EEG converter | 16 bits | incremental ΔΣ, 16.6 bits at 500 S/s | 13, 19, 20 |
+| ECG/EEG converter | 16 bits | incremental ΔΣ, 16.5 bits at 500 S/s | 13, 19, 20 |
 | EMG/spike converter | 12 bits | asynchronous SAR, ENOB ≥ 11, 16 kS/s shared | 13–18 |
 | Power per channel | < 10 µW | 6.8 µW (ECG/EEG), 4.9 µW (EMG) | 6, 14, 18, 20, 29 |
 | Supply, process | 1.2 V, SG13G2 | 1.2 V core, 3.3 V servo, IHP SG13G2 | 5, 10, 30 |

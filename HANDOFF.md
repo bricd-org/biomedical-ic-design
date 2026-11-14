@@ -1,7 +1,7 @@
 # HANDOFF — Open-BioAFE Tutorial (pick up here)
 
-Last updated: 14 November 2026 (**all chapters 1–30 written**; Ch 31 set-up + Labs 1–2 and their
-scripts written; next: Labs 3–15, appendices; outline review against lecture material, section 2a). On
+Last updated: 14 November 2026 (**all chapters 1–30 written**; Ch 31 set-up + Labs 1, 2, 6, 9 and
+their scripts written; next: the other labs, appendices; outline review against lecture material, section 2a). On
 10 November the tutorial was switched from a LaTeX book (with a generated website) to **a website
 written directly in Markdown**. There is no LaTeX book and no PDF any more; `book/` and
 `tools/build_site.py` were removed.
@@ -34,7 +34,7 @@ user works directly on `main`.
 | Ch 1–4 (Part I) | **written** (11 Nov 2026): full text, 15 figures (incl. diagrams `ch03_electrode_model.svg`, `ch04_mains_coupling.svg`), 5 tables, worked examples; every number checked against `biosig.py` |
 | Ch 13 | **written** (12 Nov 2026): aliasing of mains harmonics (250 Hz → 6 Hz at 256 S/s), anti-alias order (8th at 500 S/s vs 3rd at 2 kS/s), quantisation model and its failures, dither, oversampling, jitter, Table 13.1 (rate and bits per mode); 3 figures from `figsrc/ch13_figs.py` |
 | Ch 14 | **written** (13 Nov 2026): spectral metrics, coherent sampling, DNL/INL by ramp histogram; behavioural 12-b SAR with 1 % unit mismatch (SNDR 69.5 dB, DNL −0.42…+1.45, σ_u < 0.26 % needed); Walden/Schreier FoM (SAR ≈ 41 nW/ch at 10 fJ/step; ΔΣ 3.0 µW/ch at 175 dB, 0.95 µW at 180 dB); kT/C (0.58 pF 12 b, 150 pF 16 b, 1.2 pF at OSR 128); thermal bound 8kT·SNR ≈ FoM_S 192 dB; Table 14.1 kept; 2 figures from `figsrc/ch14_figs.py` |
-| Ch 19 | **written** (13 Nov 2026): NTF/STF, linear-model SQNR vs simulation (1-bit 2nd order at OSR 128: 100.2 dB formula FS, 84.9 dB simulated at −6 dBFS; effective quantiser gain ≈ 0.63), Table 19.1 (SQNR vs order 1–4 and OSR 16–256), Lee criterion and max stable amplitude, idle tones (DC 0.002 → lines at 38/77/115 Hz at 38.4 kHz), NTF synthesis (Legendre zeros, Butterworth poles, H∞ = 1.5), incremental: 2nd order M = 1024 → 16.6 b worst case, 512 kHz at 500 S/s vs free-running 3rd order OSR 128 at 38.4 kHz; 3 figures from `figsrc/ch19_figs.py` (~70 s to run) |
+| Ch 19 | **written** (13 Nov 2026): NTF/STF, linear-model SQNR vs simulation (1-bit 2nd order at OSR 128: 100.2 dB formula FS, 84.9 dB simulated at −6 dBFS; effective quantiser gain ≈ 0.63), Table 19.1 (SQNR vs order 1–4 and OSR 16–256), Lee criterion and max stable amplitude, idle tones (DC 0.002 → lines at 38/77/115 Hz at 38.4 kHz), NTF synthesis (Legendre zeros, Butterworth poles, H∞ = 1.5), incremental: 2nd order M = 1024 → 16.5 b worst case (was 16.6; corrected 14 Nov, error 1.04e-5), 512 kHz at 500 S/s vs free-running 3rd order OSR 128 at 38.4 kHz; 3 figures from `figsrc/ch19_figs.py` (~70 s to run) |
 | Ch 5 | **written** (13 Nov 2026, title kept "Devices for Microwatt Design"): IC/EKV, gm/ID from SG13G2 sims (n ≈ 1.22, ceiling 31.7 V⁻¹, I_spec ≈ 0.78 µA/□ NMOS, 0.20 µA/□ PMOS), thermal noise 18.5 nV/√Hz at 1 µA (PMOS floor ~40 % above 2nkT/gm in the models), flicker K = 1.6e-10 (NMOS) / 5.4e-10 (PMOS) V²µm² — **NMOS quieter in these models**; unchopped pair needs ~1800 µm²/device (NMOS) for 1 µVrms; HBT npn13G2 gm/IC 37.7, β ≈ 680, e_n 15.1 nV/√Hz flat, base shot noise beats MOS only below ~6 MΩ, r_π 18 MΩ; Pelgrom from PDK mismatch libs: A_VT 3.9/2.2 mV·µm, A_β 0.5/0.33 %·µm, MIM 1 %·µm, HBT IS 3.8 %; 3 figures from `figsrc/ch05_figs.py` |
 | Ch 6 | **written** (13 Nov 2026): noise sources (MOS weak-inversion channel noise = shot noise, 2nkT/gm), noise bandwidth (π/2, 1.11, ln fH/fL), chopped vs unchopped pair (0.26–0.33 vs ~1.0 µVrms), e_n/i_n with source; NEF/PEF with the **bandwidth convention made explicit** (brick-wall band: I_tot = NEF²·4kT·U_T·B_n/V², 4kTU_T·99.5 Hz = 4.26e-20 A·V²); limits: BJT pair √2, weak-inversion MOS pair √2·n = 1.73 (SG13G2 sim 1.72–2.05), current reuse → n; EEG target costs 60–840 nA; first stage 2 µA at NEF 3 → 0.44 µVrms; 2 figures from `figsrc/ch06_figs.py`. (The old outline's "single BJT NEF = 1" claim was dropped: with Steyaert's definition a single BJT gives 1/√2.) |
 | Ch 7 | **written** (13 Nov 2026): 3-op-amp IA (first stage multiplies CMRR; 0.1 % resistors: worst 54 dB, MC median 67.7 dB; ±300 mV at 1.2 V limits DC-coupled G1 to 1.5), current-feedback IA (no resistor matching, tens-of-mV input range), CCIA (G = Cin/Cfb, offset blocked; **SG13G2 MIM = 1.5 fF/µm²**, 20 pF = 13 300 µm²; unchopped CMRR from MIM matching 78 dB 1σ / 69 dB 3σ → chopping needed), RC-mismatch CMRR falls 20 dB/dec, effective CMRR needs Zcm (Ch 4: ~1.9 GΩ) or RLD; choice: chopped CCIA, Cin 20 pF, Cfb 200 fF; 2 figures from `figsrc/ch07_figs.py` |
@@ -158,8 +158,15 @@ Notes for the next chapters:
 ### Step 2 — Chapter 31 `chapters/31_labs.md` — Hands-on Labs: set-up, Lab 1, Lab 2 DONE (14 Nov 2026)
 Done: set-up (venv + `labs/python/requirements.txt`, container pull), Lab 1 and Lab 2 in full with
 expected-results tables (synthetic numbers for Lab 1; Lab 2 matches WE 4.1–4.4 and Ch 12 exactly),
-questions and deliverables; "Lab status" box replaces the outline box. **Next: Labs 3–15 in full**
-(Lab 6 and 9 are Python-only and cheapest; Labs 3–4 reuse `labs/spice/sg13_char.py`/`sg13_lna.py`).
+questions and deliverables; "Lab status" box replaces the outline box.
+**Lab 6** (`labs/python/adctest.py`, module + lab: sine_test with rect/hann/bh4 and `half` lobe width,
+ramp and sine histograms with amplitude/offset estimated from end codes; reproduces WE 14.1 exactly)
+and **Lab 9** (`labs/python/lab9_deltasigma.py`: NTFs, SQNR vs OSR formula vs sim, incremental with
+a2 = 0.25, bit-true CoI, −28 dB at 4 kHz) also DONE. Side fixes: Ch 22 now warns that Hann's near
+skirt (−41 dBc) caps SNDR at ~41 dB unless ~30 bins are excluded; the incremental converter is
+**16.5 bits** worst case (error 1.04e-5), corrected from 16.6 in Ch 19, 20, 29.
+**Next: Labs 3–5, 7, 8, 10–15 in full** (Labs 11–13 Python + PhysioNet; Labs 3–4 reuse
+`labs/spice/sg13_char.py`/`sg13_lna.py`).
 Original plan:
 The outline has the lab table and a short section per lab. Write the set-up section, Lab 1 and
 Lab 2 in full (goal, code, expected figure and numbers, questions); keep the anchors
