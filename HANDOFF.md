@@ -250,12 +250,27 @@ A telescopic OTA cannot hold its output at the input CM in the Harrison loop (we
   exponential, else ~1.6 µV); ripple 1.2 mV; servo −1.500 V; Z_in 6.5 MΩ (time-weighted current!); \`--parse-only\`.
 **All 15 labs are now complete.** Labs 1, 11, 12 run on real data (above). Possible next steps: Lab 13 on a
 NinaPro file once the user has one; a transistor-level OTA for Labs 5/10; routing the Lab 14 array; the capstone.
-**In progress (14 Nov, user asked for the fixes, the release steps and all optional extras; paused at the
-5-hour usage limit):** done — stale Ch 31 outline note removed, HANDOFF rows refreshed, Ch 18 SAR async
-timing figure (Fig 18.2, `figsrc/ch18_timing_svg.py`; old 18.2 → 18.3). Still to do, in order: level-crossing
-sampler diagram (Ch 21), lead-off detection diagram (Ch 12), transistor-level OTA for Labs 5 and 10, routing
-the Lab 14 array, a capstone reference run with expected numbers, the full-site check (light, dark, phone
-width), then push and tag v0.1.
+**In progress (15 Nov; user asked for the fixes, the release steps and all optional extras; paused at the
+5-hour usage limit).** Done and pushed: stale Ch 31 note removed; Fig 18.2 SAR async timing
+(`figsrc/ch18_timing_svg.py`); **arrows**: user said arrows in big block figures were too compressed →
+`tools/check_arrows.py` (flags marker-end shafts < 24 px; run it on every new diagram), all heads 7 px,
+Fig 29.6 redrawn from `figsrc/ch29_testchip_svg.py`, and Ch 7, 11, 13, 19, 21, 22, 24, 27, 28, 29 diagrams
+re-spaced (only the current-source symbols in ch28_readout/ch12_leadoff are short, by design);
+**interactive SAR demo** in Ch 18 18.4 (`_includes/demos/sar.html`, included inside `{::nomarkdown}`;
+binary vs radix 1.8, noisy fast decisions σ 4 LSB, 1000-input stats: binary rms 1.16 LSB worst 12,
+radix 1.8 rms 0.45 worst 1.6); new Fig 21.2 level-crossing ADC (`figsrc/ch21_lc_arch_svg.py`, old
+21.2 → 21.3) and Fig 12.3 DC/AC lead-off (`figsrc/ch12_leadoff_svg.py`).
+**OTA (in progress):** `labs/spice/sg13_ota.py` = single-ended SG13G2 folded cascode (PMOS input,
+bias network inside the subckt with ideal IB and B-source cascode gates), presets FAST (Lab 10) and
+LOWNOISE (Lab 5). Results at IB = 1 µA, CL = 1 pF: FAST core 1.97 µA, A0 57.9 dB, UGF 1.96 MHz,
+PM 78°, swing 0.37–0.86 V, white 106 nV/√Hz, 1/f corner 12.5 kHz; LOWNOISE (input 100/10, sinks and
+mirror 2/20) A0 43.1 dB, UGF 1.24 MHz, PM 32° (irrelevant in Lab 5: β < 0.01, loop crossover
+~10 kHz), white 82 nV/√Hz, corner 1.6 kHz, 1.06 µV/√Hz at 10 Hz, swing 0.46–0.76 V — the folding
+sinks and mirror dominate the noise. Next: (1) Lab 10 `--ota transistor` using FAST (inp at VCM);
+(2) Lab 5 `--ota transistor`: two LOWNOISE OTAs as a pseudo-differential pair, trnoise set from the
+.noise fit (white + 1/f), report gain/ripple/Zin/noise against the behavioural run; (3) Ch 31 Lab 5
+and Lab 10 text + numbers. Then: route the Lab 14 array, a capstone reference run with expected
+numbers, the full-site check (light, dark, phone width), push and tag v0.1.
 Original plan:
 The outline has the lab table and a short section per lab. Write the set-up section, Lab 1 and
 Lab 2 in full (goal, code, expected figure and numbers, questions); keep the anchors
