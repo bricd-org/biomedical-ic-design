@@ -51,7 +51,8 @@ def load_ecg(seconds, offline):
     wfdb = None if offline else _wfdb()
     if wfdb is not None:
         try:
-            rec = wfdb.rdrecord("100", pn_dir="mitdb", sampto=int(seconds * 360))
+            name, pdir = biosig.physionet_source("mitdb", "100")
+            rec = wfdb.rdrecord(name, pn_dir=pdir, sampto=int(seconds * 360))
             k = rec.sig_name.index("MLII") if "MLII" in rec.sig_name else 0
             x = rec.p_signal[:, k] * _scale(rec.units[k])
             return x, float(rec.fs), "MIT-BIH 100, MLII"
@@ -65,10 +66,7 @@ def load_eeg(seconds, offline, path):
     wfdb = None if offline else _wfdb()
     if wfdb is not None:
         try:
-            if path:
-                rec = wfdb.rdrecord(path)
-            else:
-                rec = wfdb.rdrecord("chb01_03.edf", pn_dir="chbmit/1.0.0/chb01")
+            rec = biosig.read_edf_record(path)
             k = rec.sig_name.index("FP1-F7") if "FP1-F7" in rec.sig_name else 0
             n = int(seconds * rec.fs)
             start = int(60 * rec.fs)                      # skip the first minute (settling)

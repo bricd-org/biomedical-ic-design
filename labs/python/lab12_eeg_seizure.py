@@ -48,8 +48,7 @@ def synthetic(seed, dur=120.0):
 
 
 def chbmit(path, sz):
-    import wfdb
-    rec = wfdb.rdrecord(path)
+    rec = biosig.read_edf_record(path)
     k = rec.sig_name.index("F7-T7") if "F7-T7" in rec.sig_name else 0
     scale = {"uv": 1e-6, "mv": 1e-3}.get(str(rec.units[k]).lower(), 1.0)
     return rec.p_signal[:, k] * scale, float(rec.fs), [tuple(sz)]

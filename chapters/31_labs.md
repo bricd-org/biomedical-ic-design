@@ -55,7 +55,14 @@ source .venv/bin/activate
 pip install -r labs/python/requirements.txt
 ```
 
-This installs NumPy, SciPy, Matplotlib and wfdb, which streams PhysioNet records {% include cite.html keys="mitbih,chbmit" %} without a manual download. Every lab imports `labs/python/biosig.py`, the same module that computes the numbers and figures in the chapters, and writes its plots and tables to `labs/python/out/`. Each lab also runs offline: a recording that cannot be loaded is replaced by the synthetic signal of `biosig.py`, and the output says which was used.
+This installs NumPy, SciPy, Matplotlib and wfdb, which streams PhysioNet records {% include cite.html keys="mitbih,chbmit" %} without a manual download. Every lab imports `labs/python/biosig.py`, the same module that computes the numbers and figures in the chapters, and writes its plots and tables to `labs/python/out/`. Each lab also runs offline: a recording that cannot be loaded is replaced by the synthetic signal of `biosig.py`, and the output says which was used. PhysioNet is sometimes slow or briefly down, so the scripts first look for a local copy in `data/physionet/<database>/` (git-ignored) and stream the record only when there is none. To make local copies of everything the labs use:
+
+```bash
+mkdir -p data/physionet/mitdb data/physionet/nstdb data/physionet/chbmit
+for r in 100 105 119; do for e in hea dat atr; do curl -sSL -o data/physionet/mitdb/$r.$e https://physionet.org/files/mitdb/1.0.0/$r.$e; done; done
+for r in em ma bw; do for e in hea dat; do curl -sSL -o data/physionet/nstdb/$r.$e https://physionet.org/files/nstdb/1.0.0/$r.$e; done; done
+curl -sSL -o data/physionet/chbmit/chb01_03.edf https://physionet.org/files/chbmit/1.0.0/chb01/chb01_03.edf
+```
 
 **Track B and Lab 14 (SG13G2).** Install Docker and pull the IIC-OSIC-TOOLS container {% include cite.html keys="iicosic" %}, which includes the IHP-Open-PDK {% include cite.html keys="ihppdk" %}, Xschem, ngspice and KLayout:
 
@@ -95,7 +102,14 @@ It plots five seconds of each trace next to its spectrum (`out/lab1_explorer.png
 | EEG | 105 µV | 19.7 µV | 0.5–21.8 Hz | 5–300 µV, 0.5–100 Hz |
 | EMG (bursts) | 1.38 mV | 216 µV | 30–441 Hz | 0.05–5 mV, 10–500 Hz |
 
-The real recordings give different numbers: compare them with the same columns.
+With the real recordings (`--chbmit data/physionet/chbmit/chb01_03.edf`), the first two rows become:
+
+| Signal | p-p | RMS | 95 % power band | Table 2.1 |
+|---|---|---|---|---|
+| ECG, MIT-BIH 100, MLII | 1.41 mV | 180 µV | 1–37 Hz | 0.5–4 mV, 0.05–150 Hz |
+| EEG, CHB-MIT chb01_03, FP1-F7 | 149 µV | 26 µV | 0.5–18 Hz | 5–300 µV, 0.5–100 Hz |
+
+Both fall inside the Chapter 2 ranges. The EMG row stays synthetic until you download a NinaPro file.
 
 **Questions.**
 
@@ -491,7 +505,7 @@ With a good OTA the transistor-switch loop comes within 4 dB of the ideal model,
 
 **Goal.** Find how many bits and how much input noise a heartbeat detector tolerates, and how it fails under electrode motion, so that a monitoring mode can be specified from evidence. Goes with Chapters [24]({% link chapters/24_ecg.md %}) and [29]({% link chapters/29_arch.md %}).
 
-**Data.** MIT-BIH record 100 with its beat annotations {% include cite.html keys="mitbih" %}, and the electrode-motion record `em` of the Noise Stress Test Database {% include cite.html keys="nstdb" %}, both streamed by wfdb. Offline, the script uses the synthetic ECG of Chapter 24 and band-limited (1–20 Hz) noise in place of electrode motion.
+**Data.** MIT-BIH record 100 with its beat annotations {% include cite.html keys="mitbih" %}, and the electrode-motion record `em` of the Noise Stress Test Database {% include cite.html keys="nstdb" %}, streamed by wfdb or read from local copies (see the set-up). Offline, the script uses the synthetic ECG of Chapter 24 and band-limited (1–20 Hz) noise in place of electrode motion.
 
 **Run.**
 
@@ -513,6 +527,15 @@ The chain adds white input noise and 200 µV of baseline wander, quantises over 
 | 200 µVrms | 62 / 46 | 94 / 94 | 99 / 99 | 99.5 / 99.5 | 99.5 / 99.5 |
 
 With electrode motion at 12 bits: 100 % at 24 dB SNR, 98.6 % at 18 dB, 87 % at 12 dB, and below 65 % at 6 dB. These agree with [Worked Example 24.1]({% link chapters/24_ecg.md %}): five bits and 100 µVrms suffice for detection. Electrode motion, which shares the QRS band, breaks the detector long before the converter or the input noise does. Record 105, which is noisy, and records with many ectopic beats (for example 119 or 208) are harder than record 100.
+
+On the real recordings (first five minutes, 371 and 417 beats), Se/PPV in per cent at 100 µVrms of input noise:
+
+| Record | 3 bits | 4 bits | 5 bits | 8 bits | 12 bits | Electrode motion at 6 / 0 dB SNR (12 bits) |
+|---|---|---|---|---|---|---|
+| 100 | 99.9 / 90.3 | 100 / 99.6 | 100 / 100 | 100 / 100 | 100 / 100 | 99.7 / 98.4, 96.8 / 75.9 |
+| 105 | 97.0 / 81.7 | 92.1 / 92.1 | 98.6 / 98.6 | 99.0 / 99.0 | 98.9 / 98.9 | 93.3 / 93.1, 80.3 / 72.0 |
+
+Real QRS complexes are sharper than the synthetic ones, so record 100 survives even 3 bits and electrode motion down to 6 dB. Record 105 saturates near 99 % whatever the converter does: its noise and artefacts, not the bits, limit the detector.
 
 **Questions.**
 
@@ -557,6 +580,16 @@ For each detector the script reports window accuracy, event sensitivity, the mea
 | 6 b, 64 S/s | 0.004 | 99.2 %, 2.0 s | 95.4 %, 3.0 s |
 
 Every discharge is found in every case. Line length stays at 75 % window accuracy, no better than always answering "no seizure", as [Worked Example 25.1]({% link chapters/25_eeg.md %}) found. Theta power needs only 6 bits and 64 S/s: a detection-only mode could run the converter at a fraction of a per cent of the diagnostic mode's energy. The latency of 2 s is set by the window length.
+
+The real recording turns the picture round. On `chb01_03.edf` (one hour of FP1-F7 with one 40 s seizure; the discriminant is trained and tested on the same record, which flatters it):
+
+| Detector, 12 bits, 256 S/s | Window accuracy | Seizure found | Latency | False detections per hour |
+|---|---|---|---|---|
+| Theta power, 3 × median | 92.2 % | yes | 6 s | 101 |
+| LDA on log band powers | 95.6 % | yes | 6 s | 58 |
+| Line length, 3 × median | 98.2 % | yes | — | 12 |
+
+Real EEG has far more theta outside seizures than the synthetic background, so the theta threshold fires a hundred times an hour; line length, useless on the synthetic data, is the best of the three here. Word length still barely matters down to 6 bits, but at 4 bits most of the background quantises to zero and the threshold's false detections drop for the wrong reason. Synthetic data shows what a circuit does; only real recordings show whether a detector works.
 
 **Questions.**
 

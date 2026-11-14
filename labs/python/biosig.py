@@ -14,6 +14,8 @@ Contents
 
 Only NumPy and SciPy are needed.
 """
+import os
+
 import numpy as np
 from scipy import signal as sps
 
@@ -489,3 +491,27 @@ def incremental2(u_dc, m_cycles, a1=0.5, a2=0.5):
         x2 = x2 + a2 * (x1 - v)
         x1 = x1 + a1 * (u_dc - v)
     return (s1 + a1 * s2) / (a1 * m_cycles * (m_cycles - 1) / 2)
+
+
+# ---------------------------------------------------------------------------- open data (labs 1, 11, 12)
+DATA_DIR = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "data", "physionet"))
+
+
+def physionet_source(db, record, pn_dir=None):
+    """Where to read a PhysioNet record from: (name, pn_dir) for wfdb. A local copy in
+    data/physionet/<db>/ (git-ignored) is used when present, so the labs also run when PhysioNet
+    is slow or down; otherwise the record is streamed from pn_dir (default: db)."""
+    local = os.path.join(DATA_DIR, db, record)
+    if os.path.exists(local) or os.path.exists(local + ".hea"):
+        return local, None
+    return record, (pn_dir or db)
+
+
+def read_edf_record(path=None, db="chbmit", record="chb01_03.edf", pn_dir="chbmit/1.0.0/chb01"):
+    """Read an EDF recording (such as CHB-MIT) with wfdb's EDF reader: a given path, else a local
+    copy in data/physionet/<db>/, else stream it from PhysioNet."""
+    from wfdb.io.convert.edf import read_edf
+    if path:
+        return read_edf(path)
+    name, pdir = physionet_source(db, record, pn_dir)
+    return read_edf(name, pn_dir=pdir)

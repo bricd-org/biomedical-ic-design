@@ -67,11 +67,13 @@ def load(args):
         try:
             import wfdb
             n = int(args.seconds * 360)
-            rec = wfdb.rdrecord(args.record, pn_dir="mitdb", sampto=n)
-            ann = wfdb.rdann(args.record, "atr", pn_dir="mitdb", sampto=n)
+            name, pdir = biosig.physionet_source("mitdb", args.record)
+            rec = wfdb.rdrecord(name, pn_dir=pdir, sampto=n)
+            ann = wfdb.rdann(name, "atr", pn_dir=pdir, sampto=n)
             x = rec.p_signal[:, 0] * 1e-3                                   # mV -> V
             truth = np.array([s for s, c in zip(ann.sample, ann.symbol) if c in BEATS]) / rec.fs
-            em = wfdb.rdrecord("em", pn_dir="nstdb", sampto=n).p_signal[:, 0] * 1e-3
+            name, pdir = biosig.physionet_source("nstdb", args.noise)
+            em = wfdb.rdrecord(name, pn_dir=pdir, sampto=n).p_signal[:, 0] * 1e-3
             return x, float(rec.fs), truth, em, f"MIT-BIH {args.record} ({args.seconds:g} s) + NSTDB em"
         except Exception as e:
             print(f"PhysioNet not available ({e.__class__.__name__}: {e}); using synthetic signals")
@@ -87,6 +89,7 @@ def main():
     ap = argparse.ArgumentParser(description="Lab 11: ECG chain end to end")
     ap.add_argument("--record", default="100")
     ap.add_argument("--seconds", type=float, default=300.0)
+    ap.add_argument("--noise", default="em", choices=["em", "ma", "bw"], help="NSTDB noise record")
     ap.add_argument("--offline", action="store_true")
     args = ap.parse_args()
     os.makedirs(OUT, exist_ok=True)
