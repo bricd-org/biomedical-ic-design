@@ -143,7 +143,7 @@ secondary text #56656B). Insert with the placeholder number NEW (id fig-N-NEW, "
 - Part II (all current figures are data plots): Ch 8 Harrison LNA — **DONE** (Fig 8.1); Ch 9 chopper
   amplifier with spectra — **DONE** (Fig 9.1);
   Ch 10 CCIA with DC-servo and impedance-boosting loops — **DONE** (Fig 10.1); Ch 12 RLD loop — **DONE**
-  (Fig 12.1); still to draw: Ch 7 IA topologies (3-op-amp, CFIA, CCIA); Ch 11 PGA + filter gain plan
+  (Fig 12.1); Ch 7 IA topologies — **DONE** (Fig 7.1); Ch 11 gain plan and two paths — **DONE** (Fig 11.1)
 - Ch 14 architecture map; Ch 29 full-chip block diagram; Ch 28 tetrapolar + IQ readout; Ch 24 Pan–Tompkins
   pipeline; Ch 27 SoC partition
 

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 250" width="720" height="250" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>One channel from the LNA to the two converter paths, with the gain and filter of each</title>
+  <defs>
+    <marker id="ga" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
+    </marker>
+  </defs>
+  <!-- blocks -->
+  <g stroke="#1D2A30" stroke-width="1.6">
+    <rect x="30" y="98" width="88" height="48" rx="3" fill="#E4EEF8"/>
+    <rect x="146" y="98" width="88" height="48" rx="3" fill="#E4EEF8"/>
+    <rect x="292" y="40" width="130" height="48" rx="3" fill="#E4EEF8"/>
+    <rect x="292" y="160" width="130" height="48" rx="3" fill="#E4EEF8"/>
+    <path d="M452 34 L452 94 L478 80 L478 48 Z" fill="#fff"/>
+    <rect x="504" y="40" width="96" height="48" rx="3" fill="#fff"/>
+    <rect x="504" y="160" width="96" height="48" rx="3" fill="#fff"/>
+    <rect x="616" y="96" width="100" height="52" rx="3" fill="#FBF1DF"/>
+  </g>
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <path d="M6 122 H28" marker-end="url(#ga)"/>
+    <path d="M118 122 H144" marker-end="url(#ga)"/>
+    <path d="M234 122 H262 V64 H290" marker-end="url(#ga)"/>
+    <path d="M262 122 V184 H290" marker-end="url(#ga)"/>
+    <path d="M422 64 H450" marker-end="url(#ga)"/>
+    <path d="M478 64 H502" marker-end="url(#ga)"/>
+    <path d="M422 184 H502" marker-end="url(#ga)"/>
+    <path d="M600 64 H606 V112 H614" marker-end="url(#ga)"/>
+    <path d="M600 184 H606 V132 H614" marker-end="url(#ga)"/>
+    <path d="M465 20 V38" marker-end="url(#ga)"/>
+  </g>
+  <circle cx="262" cy="122" r="3" fill="#1D2A30"/>
+  <g font-size="11.5" font-weight="700" fill="#1D2A30" text-anchor="middle">
+    <text x="74" y="119">LNA</text><text x="190" y="119">PGA</text>
+    <text x="357" y="61">anti-alias filter</text><text x="357" y="181">one-pole filter</text>
+    <text x="552" y="61">12-bit SAR</text><text x="552" y="181">incremental ΔΣ</text>
+    <text x="666" y="119">digital</text>
+  </g>
+  <g font-size="9.5" fill="#56656B" text-anchor="middle">
+    <text x="74" y="134">×100 or ×10</text><text x="190" y="134">×1, 2, 4, 8, 16</text>
+    <text x="357" y="76">4th-order Gm-C, 600 Hz</text><text x="357" y="196">a few kHz</text>
+    <text x="552" y="76">16 kS/s, shared</text><text x="552" y="196">512 kHz, 500 S/s</text>
+    <text x="666" y="134">decimation,</text><text x="666" y="146">features (Part IV)</text>
+    <text x="465" y="14">7 other channels</text>
+    <text x="465" y="106">8:1 MUX</text>
+  </g>
+  <g font-size="10" fill="#1D2A30">
+    <text x="292" y="30" font-weight="700">SAR path: EMG (and spikes)</text>
+    <text x="292" y="228" font-weight="700">ΔΣ path: ECG and EEG, one per channel</text>
+  </g>
+  <text x="4" y="90" font-size="9.5" fill="#56656B">electrodes</text>
+
+  <!-- gain plan -->
+  <g font-size="9.5" fill="#1D2A30">
+    <text x="30" y="186" font-weight="700">total gain onto ±0.5 V</text>
+    <text x="30" y="201">ECG 100 × 1 = 100</text>
+    <text x="30" y="215">EEG 100 × 8 = 800</text>
+    <text x="30" y="229">EMG 10 × 8 = 80</text>
+    <text x="140" y="201" fill="#56656B">(±4 mV → ±0.40 V)</text>
+    <text x="140" y="215" fill="#56656B">(±300 µV → ±0.24 V)</text>
+    <text x="140" y="229" fill="#56656B">(±5 mV → ±0.40 V)</text>
+  </g>
+</svg>

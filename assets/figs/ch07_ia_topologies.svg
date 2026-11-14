@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 290" width="720" height="290" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>Three instrumentation-amplifier topologies: three-op-amp, current-feedback and capacitively coupled</title>
+  <defs>
+    <marker id="ka" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
+    </marker>
+  </defs>
+  <text x="8" y="18" font-size="12" font-weight="700" fill="#1D2A30">(a) three-op-amp IA</text>
+  <text x="252" y="18" font-size="12" font-weight="700" fill="#1D2A30">(b) current-feedback IA</text>
+  <text x="494" y="18" font-size="12" font-weight="700" fill="#1D2A30">(c) capacitively coupled IA</text>
+  <path d="M244 28 V280 M486 28 V280" stroke="#E1E8E8" stroke-width="1.5"/>
+
+  <!-- (a) -->
+  <g fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.6">
+    <path d="M70 40 L70 90 L118 65 Z"/>
+    <path d="M70 170 L70 220 L118 195 Z"/>
+    <rect x="166" y="104" width="62" height="52" rx="3"/>
+  </g>
+  <g fill="#fff" stroke="#1D2A30" stroke-width="1.5">
+    <rect x="132" y="76" width="16" height="24" rx="2"/>
+    <rect x="132" y="160" width="16" height="24" rx="2"/>
+    <rect x="42" y="114" width="16" height="32" rx="2"/>
+  </g>
+  <g stroke="#1D2A30" stroke-width="1.7" fill="none">
+    <path d="M14 52 H70 M14 208 H70"/>
+    <path d="M70 78 H50 V114 M50 146 V182 H70"/>
+    <path d="M118 65 H156 V120 H166 M140 65 V76 M140 100 V104 H50"/>
+    <path d="M118 195 H156 V140 H166 M140 195 V184 M140 160 V156 H50"/>
+    <path d="M228 130 H240" marker-end="url(#ka)"/>
+  </g>
+  <g fill="#1D2A30"><circle cx="140" cy="65" r="2.6"/><circle cx="140" cy="195" r="2.6"/><circle cx="50" cy="104" r="2.6"/><circle cx="50" cy="156" r="2.6"/></g>
+  <g font-size="9" fill="#1D2A30"><text x="74" y="56">+</text><text x="74" y="82">−</text><text x="74" y="186">−</text><text x="74" y="212">+</text></g>
+  <g font-size="10" fill="#1D2A30" font-style="italic">
+    <text x="14" y="46">v<tspan font-size="7" dy="2">in+</tspan></text><text x="14" y="224">v<tspan font-size="7" dy="2">in−</tspan></text>
+    <text x="153" y="93">R<tspan font-size="7" dy="2">2</tspan></text><text x="153" y="177">R<tspan font-size="7" dy="2">2</tspan></text>
+    <text x="22" y="134">R<tspan font-size="7" dy="2">1</tspan></text>
+  </g>
+  <text x="197" y="126" font-size="9.5" fill="#1D2A30" text-anchor="middle">difference</text>
+  <text x="197" y="139" font-size="9.5" fill="#1D2A30" text-anchor="middle">amp, R<tspan font-size="7" dy="2">4</tspan><tspan dy="-2">/R</tspan><tspan font-size="7" dy="2">3</tspan></text>
+  <g font-size="9.5" fill="#56656B">
+    <text x="8" y="252">G = (1 + 2R<tspan font-size="7" dy="2">2</tspan><tspan dy="-2">/R</tspan><tspan font-size="7" dy="2">1</tspan><tspan dy="-2">) R</tspan><tspan font-size="7" dy="2">4</tspan><tspan dy="-2">/R</tspan><tspan font-size="7" dy="2">3</tspan></text>
+    <text x="8" y="266">CMRR from resistor matching; the first</text>
+    <text x="8" y="279">stage cannot pass a 300 mV offset at 1.2 V</text>
+  </g>
+
+  <!-- (b) -->
+  <g fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.6">
+    <rect x="276" y="66" width="48" height="38" rx="3"/>
+    <rect x="334" y="152" width="46" height="34" rx="3"/>
+    <path d="M384 62 L384 108 L428 85 Z"/>
+  </g>
+  <rect x="396" y="152" width="40" height="34" rx="3" fill="#fff" stroke="#1D2A30" stroke-width="1.6"/>
+  <circle cx="356" cy="85" r="11" fill="#fff" stroke="#1D2A30" stroke-width="1.5"/>
+  <path d="M350 85 H362 M356 79 V91" stroke="#1D2A30" stroke-width="1.3"/>
+  <g stroke="#1D2A30" stroke-width="1.7" fill="none">
+    <path d="M256 76 H276 M256 94 H276"/>
+    <path d="M324 85 H345" marker-end="url(#ka)"/>
+    <path d="M367 85 H384"/>
+    <path d="M428 85 H476" marker-end="url(#ka)"/>
+    <path d="M454 85 V169 H436"/>
+    <path d="M396 169 H380"/>
+    <path d="M357 152 V96" marker-end="url(#ka)"/>
+  </g>
+  <circle cx="454" cy="85" r="2.6" fill="#1D2A30"/>
+  <g font-size="10" fill="#1D2A30" text-anchor="middle">
+    <text x="300" y="89" font-style="italic">G<tspan font-size="7" dy="2">m1</tspan></text>
+    <text x="357" y="173" font-style="italic">G<tspan font-size="7" dy="2">m2</tspan></text>
+    <text x="416" y="173" font-style="italic">β</text>
+    <text x="400" y="89">A</text>
+  </g>
+  <g font-size="9" fill="#1D2A30"><text x="336" y="80">+</text><text x="361" y="106">−</text></g>
+  <text x="252" y="70" font-size="10" fill="#1D2A30" font-style="italic">v<tspan font-size="7" dy="2">in</tspan></text>
+  <text x="458" y="78" font-size="10" fill="#1D2A30" font-style="italic">v<tspan font-size="7" dy="2">out</tspan></text>
+  <text x="416" y="202" font-size="9" fill="#56656B" text-anchor="middle">divider</text>
+  <text x="300" y="122" font-size="9" fill="#56656B" text-anchor="middle">input current</text>
+  <text x="300" y="200" font-size="9" fill="#56656B" text-anchor="middle">feedback current</text>
+  <g font-size="9.5" fill="#56656B">
+    <text x="252" y="252">G = (G<tspan font-size="7" dy="2">m1</tspan><tspan dy="-2">/G</tspan><tspan font-size="7" dy="2">m2</tspan><tspan dy="-2">) / β</tspan></text>
+    <text x="252" y="266">the loop equalises the two currents;</text>
+    <text x="252" y="279">gain set by matched transconductors</text>
+  </g>
+
+  <!-- (c) -->
+  <path d="M590 70 L590 130 L642 100 Z" fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.6"/>
+  <g stroke="#1D2A30" stroke-width="1.7" fill="none">
+    <path d="M500 85 H526 M534 85 H590"/>
+    <path d="M572 85 V46 H612 M620 46 H662 V100"/>
+    <path d="M642 100 H712" marker-end="url(#ka)"/>
+    <path d="M590 116 H574 V132"/>
+  </g>
+  <g stroke="#1D2A30" stroke-width="2.4"><path d="M526 73 V97 M534 73 V97 M612 34 V58 M620 34 V58"/></g>
+  <g stroke="#1D2A30" stroke-width="1.4"><path d="M566 132 H582 M569 136 H579 M572 140 H576"/></g>
+  <g fill="#1D2A30"><circle cx="572" cy="85" r="2.6"/><circle cx="662" cy="100" r="2.6"/></g>
+  <g font-size="9" fill="#1D2A30"><text x="594" y="89">−</text><text x="594" y="120">+</text></g>
+  <g font-size="10" fill="#1D2A30" font-style="italic">
+    <text x="498" y="78">v<tspan font-size="7" dy="2">in</tspan></text>
+    <text x="530" y="66" text-anchor="middle">C<tspan font-size="7" dy="2">in</tspan></text>
+    <text x="616" y="28" text-anchor="middle">C<tspan font-size="7" dy="2">fb</tspan></text>
+    <text x="680" y="92">v<tspan font-size="7" dy="2">out</tspan></text>
+  </g>
+  <text x="558" y="152" font-size="9" fill="#56656B">V<tspan font-size="6.5" dy="2">cm</tspan></text>
+  <text x="604" y="104" font-size="9.5" fill="#1D2A30">OTA</text>
+  <g font-size="9.5" fill="#56656B">
+    <text x="494" y="252">G = C<tspan font-size="7" dy="2">in</tspan><tspan dy="-2">/C</tspan><tspan font-size="7" dy="2">fb</tspan><tspan dy="-2"> = 20 pF / 200 fF = 100</tspan></text>
+    <text x="494" y="266">C<tspan font-size="7" dy="2">in</tspan><tspan dy="-2"> blocks the electrode offset; the OTA</tspan></text>
+    <text x="494" y="279">inputs sit at V<tspan font-size="7" dy="2">cm</tspan><tspan dy="-2">, whatever the input does</tspan></text>
+  </g>
+  <text x="600" y="180" font-size="9.5" fill="#9A6212" text-anchor="middle">one half of the</text>
+  <text x="600" y="193" font-size="9.5" fill="#9A6212" text-anchor="middle">differential circuit</text>
+</svg>

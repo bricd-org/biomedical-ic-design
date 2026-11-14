@@ -28,7 +28,12 @@ How much filtering and gain does each mode need before the SAR and the ΔΣ ADC,
 
 </div>
 
-The LNA of Chapters [8]({% link chapters/08_lna.md %})–[10]({% link chapters/10_dsl.md %}) delivers a gain of 10 or 100, a chopper ripple at 4 kHz, and a band that reaches tens of kilohertz. The converters of Part III want a signal that fills their range, a band no wider than they can sample without aliasing, and no ripple. This chapter sets the gain and the filtering between the two.
+The LNA of Chapters [8]({% link chapters/08_lna.md %})–[10]({% link chapters/10_dsl.md %}) delivers a gain of 10 or 100, a chopper ripple at 4 kHz, and a band that reaches tens of kilohertz. The converters of Part III want a signal that fills their range, a band no wider than they can sample without aliasing, and no ripple. This chapter sets the gain and the filtering between the two ([Figure 11.1](#fig-11-1)).
+
+<figure id="fig-11-1">
+  <img src="{{ '/assets/figs/ch11_paths.svg' | relative_url }}" style="width:720px" alt="One channel: LNA and PGA, then two paths, an anti-alias filter and multiplexer into a shared 12-bit SAR, and a one-pole filter into a per-channel incremental delta-sigma converter, both feeding the digital back end">
+  <figcaption><span class="capnum">Figure 11.1.</span> <strong>Gain and filtering between the LNA and the converters.</strong> The LNA (×100, or ×10 in EMG mode) and the PGA map each mode's largest signal onto the converters' ±0.5 V range. The SAR path, for EMG, needs a sharp anti-alias filter because the shared converter samples each channel at only 2 kS/s. The ΔΣ path, for ECG and EEG, oversamples heavily, so one pole is enough. Section 11.2 derives the gains and Section 11.3 the filters.</figcaption>
+</figure>
 
 ## <span class="secnum">11.1</span>Very-low-frequency filters on chip
 
@@ -48,7 +53,7 @@ At biosignal frequencies the transconductances are tiny.
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 11.1 · How small is the transconductance of a 100 Hz filter?</div>
 
-With $$C = 10$$ pF, a 100 Hz corner needs $$g_\mathrm{m} = 2\pi \times 100 \times 10\ \text{pF} = 6.3$$ nS. At $$g_\mathrm{m}/I_\mathrm{D} = 25$$ V⁻¹ that is a bias current of **0.25 nA**; a 1 kHz corner needs 2.5 nA ([Figure 11.1](#fig-11-1)a). A 0.5 Hz corner would need 1.3 pA, the size of the junction leakage of the devices themselves, so sub-hertz Gm-C filters are impractical. Open-BioAFE sets its sub-hertz corner with the DC servo loop of [Chapter 10]({% link chapters/10_dsl.md %}) instead.
+With $$C = 10$$ pF, a 100 Hz corner needs $$g_\mathrm{m} = 2\pi \times 100 \times 10\ \text{pF} = 6.3$$ nS. At $$g_\mathrm{m}/I_\mathrm{D} = 25$$ V⁻¹ that is a bias current of **0.25 nA**; a 1 kHz corner needs 2.5 nA ([Figure 11.2](#fig-11-2)a). A 0.5 Hz corner would need 1.3 pA, the size of the junction leakage of the devices themselves, so sub-hertz Gm-C filters are impractical. Open-BioAFE sets its sub-hertz corner with the DC servo loop of [Chapter 10]({% link chapters/10_dsl.md %}) instead.
 
 </div>
 
@@ -76,15 +81,15 @@ The PGA is a second capacitively coupled stage, chopped or not, with switchable 
 
 [Chapter 13]({% link chapters/13_sampling.md %}) showed that the anti-alias filter is set by the interferers above the band, and that a faster converter relaxes it. The two Open-BioAFE converters sit at opposite ends of that trade.
 
-**The SAR in EMG mode** samples at 2 kS/s for a 500 Hz band. Anything between 1.5 and 2.5 kHz folds into the band, and surface EMG still carries about 0.1 mV there. To push it below the EMG-band noise floor of 3.3 µVrms ([Chapter 13]({% link chapters/13_sampling.md %})) takes $$20\log_{10}(0.1\ \text{mV}/3.3\ \text{µV}) = 30$$ dB at 1.5 kHz. A Butterworth filter at 600 Hz gives 16 dB at second order and **32 dB at fourth order** ([Figure 11.1](#fig-11-1)b), so the EMG path gets a fourth-order Gm-C filter, with bias currents of a few nanoamperes.
+**The SAR in EMG mode** samples at 2 kS/s for a 500 Hz band. Anything between 1.5 and 2.5 kHz folds into the band, and surface EMG still carries about 0.1 mV there. To push it below the EMG-band noise floor of 3.3 µVrms ([Chapter 13]({% link chapters/13_sampling.md %})) takes $$20\log_{10}(0.1\ \text{mV}/3.3\ \text{µV}) = 30$$ dB at 1.5 kHz. A Butterworth filter at 600 Hz gives 16 dB at second order and **32 dB at fourth order** ([Figure 11.2](#fig-11-2)b), so the EMG path gets a fourth-order Gm-C filter, with bias currents of a few nanoamperes.
 
 The chopper ripple sits at 4 kHz, twice the SAR's sample rate. Because the two clocks are locked together, the ripple aliases exactly to DC, where it adds to the offset rather than appearing as a tone, and the fourth-order filter attenuates it by 66 dB first. This is the reason for the synchronous clocks of [Chapter 9]({% link chapters/09_chopper.md %}).
 
 **The incremental ΔΣ in ECG/EEG mode** clocks its loop at 512 kHz ([Chapter 19]({% link chapters/19_dstheory.md %})). Nothing folds into the band until hundreds of kilohertz, where the LNA's own roll-off already removes it, so one pole at a few kilohertz is enough. The 4 kHz ripple passes the analog path and is handled digitally. With an output rate of 500 S/s, 4 kHz is the eighth multiple of the rate, so with synchronous clocks it aliases to DC, an offset that the high-pass removes, and the incremental converter's decimation filter attenuates it by about 28 dB on the way ([Chapter 20]({% link chapters/20_dscircuits.md %})).
 
-<figure id="fig-11-1">
+<figure id="fig-11-2">
   <img src="{{ '/assets/figs/ch11_filters.svg' | relative_url }}" style="width:720px" alt="Bias current of a Gm-C transconductor versus corner frequency for two capacitors, and Butterworth anti-alias filter responses for the EMG SAR path with the folding and ripple frequencies marked">
-  <figcaption><span class="capnum">Figure 11.1.</span> <strong>Biosignal filters run on nanoamperes, and the SAR path needs fourth order.</strong> (a) Bias current per transconductor of a Gm-C filter against its corner frequency, for 10 and 50 pF at g<sub>m</sub>/I<sub>D</sub> = 25 V⁻¹. Sub-hertz corners need picoamperes, comparable to junction leakage. (b) Butterworth filters at 600 Hz for the EMG path of the SAR at 2 kS/s: fourth order meets the 30 dB needed at 1.5 kHz, which folds to the 500 Hz band edge, and suppresses the 4 kHz chopper ripple, which aliases to DC, by 66 dB. Computed in <code>figsrc/ch11_figs.py</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 11.2.</span> <strong>Biosignal filters run on nanoamperes, and the SAR path needs fourth order.</strong> (a) Bias current per transconductor of a Gm-C filter against its corner frequency, for 10 and 50 pF at g<sub>m</sub>/I<sub>D</sub> = 25 V⁻¹. Sub-hertz corners need picoamperes, comparable to junction leakage. (b) Butterworth filters at 600 Hz for the EMG path of the SAR at 2 kS/s: fourth order meets the 30 dB needed at 1.5 kHz, which folds to the 500 Hz band edge, and suppresses the 4 kHz chopper ripple, which aliases to DC, by 66 dB. Computed in <code>figsrc/ch11_figs.py</code>.</figcaption>
 </figure>
 
 ## <span class="secnum">11.4</span>Mains notch filtering
