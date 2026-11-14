@@ -1,7 +1,7 @@
 # HANDOFF — Open-BioAFE Tutorial (pick up here)
 
 Last updated: 14 November 2026 (**all chapters 1–30 written**; Ch 31 set-up + all Python labs (1, 2, 6,
-9, 11, 12, 13, 15 part 1) written with scripts; next: the other labs, appendices; outline review against lecture material, section 2a). On
+9, 11, 12, 13, 15 part 1) and Lab 3 written with scripts; next: the other labs, appendices; outline review against lecture material, section 2a). On
 10 November the tutorial was switched from a LaTeX book (with a generated website) to **a website
 written directly in Markdown**. There is no LaTeX book and no PDF any more; `book/` and
 `tools/build_site.py` were removed.
@@ -177,7 +177,10 @@ channels × fs × bits; fixed point with Mitchell log2 keeps 100 % at 6-b weight
 essential, else 8-b weights fall to chance); electrode shift 0.4 → 84.5 %) DONE (14 Nov).
 All Python labs are now written (1, 2, 6, 9, 11, 12, 13, 15 part 1). The NinaPro and CHB-MIT code
 paths are untested here (no wfdb, no data downloaded): test them first when wfdb is installed.
-**Next: the SG13G2 labs 3, 4, 5, 7, 8, 10, 14 and Lab 15 part 2** (need Docker; Labs 3–4 reuse `labs/spice/sg13_char.py`/`sg13_lna.py`).
+**Lab 3** written from the existing `labs/spice/sg13_char.py` and its CSVs (expected numbers = Ch 5);
+watch out: a literal `|` in a list item (|V<sub>DS</sub>|) makes kramdown build a table, use `&#124;`.
+**Next: the SG13G2 labs 4, 5, 7, 8, 10, 14 and Lab 15 part 2** (need Docker; Lab 4 reuses
+`labs/spice/sg13_lna.py`), then the appendices.
 Original plan:
 The outline has the lab table and a short section per lab. Write the set-up section, Lab 1 and
 Lab 2 in full (goal, code, expected figure and numbers, questions); keep the anchors
