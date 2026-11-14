@@ -98,12 +98,13 @@ def ideal_bits(n):
     k = np.arange(n + 8)
     u = AMP * np.sin(2 * np.pi * fin * (k * tc + 20e-9))   # input as sampled at the start of phase 1
     x1 = x2 = 0.0
-    v = np.empty(len(k))
+    v, s1, s2 = np.empty(len(k)), np.empty(len(k)), np.empty(len(k))
     for i, ui in enumerate(u):
         v[i] = 1.0 if x2 > 0 else -1.0
         x2 = x2 + A2 * (x1 - v[i])
         x1 = x1 + A1 * (ui - v[i])
-    return v[8:]
+        s1[i], s2[i] = x1, x2
+    return v[8:], s1[8:] * VREF, s2[8:] * VREF
 
 
 def bits_from(tag, n):
@@ -116,24 +117,31 @@ def bits_from(tag, n):
 def main():
     ap = argparse.ArgumentParser(description="Lab 10: switched-capacitor delta-sigma loop")
     ap.add_argument("--n", type=int, default=4096)
+    ap.add_argument("--parse-only", action="store_true", help="analyse the outputs of the last run")
     args = ap.parse_args()
     n = args.n
     cases = [(60, 5e6), (40, 5e6), (60, 0.5e6)]
     nl = {f"lab10_{a}dB_{g/1e6:g}MHz": netlist(a, g, n, f"lab10_{a}dB_{g/1e6:g}MHz") for a, g in cases}
-    from concurrent.futures import ThreadPoolExecutor      # one container per case, in parallel
-    with ThreadPoolExecutor(len(nl)) as ex:
-        list(ex.map(lambda kv: ch.run({kv[0]: kv[1]}), nl.items()))
-    vi = ideal_bits(n)
+    if not args.parse_only:
+        from concurrent.futures import ThreadPoolExecutor      # one container per case, in parallel
+        with ThreadPoolExecutor(len(nl)) as ex:
+            list(ex.map(lambda kv: ch.run({kv[0]: kv[1]}), nl.items()))
+    vi, i1, i2 = ideal_bits(n)
+    p999 = lambda x: np.percentile(np.abs(x), 99.9)
     print(f"Second-order loop, a1 = {A1}, a2 = {A2}, tone at -6 dBFS (bin {M_TONE} of {n}), OSR {OSR}:")
-    print(f"   ideal difference equations      : SQNR {biosig.dsm_sqnr(vi, M_TONE, OSR):5.1f} dB")
+    print(f"   ideal difference equations      : SQNR {biosig.dsm_sqnr(vi, M_TONE, OSR):5.1f} dB; "
+          f"swing (99.9 %) |x1| {p999(i1[200:]):.2f} V, |x2| {p999(i2[200:]):.2f} V")
     rows = {}
     for a, g in cases:
         tag = f"lab10_{a}dB_{g/1e6:g}MHz"
         v, x1, x2 = bits_from(tag, n)
         sq = biosig.dsm_sqnr(v, M_TONE, OSR)
         rows[tag] = (v, sq)
+        clipped = np.nonzero((np.abs(x1) > 0.54) | (np.abs(x2) > 0.54))[0]
+        start = int(clipped.max()) + 1 if len(clipped) else 0
         print(f"   SC loop, A0 = {a} dB, GBW = {g/1e6:3g} MHz: SQNR {sq:5.1f} dB; "
-              f"integrator swing |x1| {np.abs(x1).max():.2f} V, |x2| {np.abs(x2).max():.2f} V")
+              f"swing after start-up (99.9 %) |x1| {p999(x1[200:]):.2f} V, |x2| {p999(x2[200:]):.2f} V; "
+              f"integrators clip only in the first {start} cycles")
     os.makedirs(PLOTS, exist_ok=True)
     try:
         import matplotlib

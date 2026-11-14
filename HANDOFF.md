@@ -213,7 +213,18 @@ hv pseudo-resistor; 39.4 dB, f_L 0.014 Hz, f_H 5–32 kHz, EEG-band noise 2.8–
 thick-oxide pseudo-resistor carries (0.35 pA at 0.6 V), so an unchopped teraohm-biased LNA needs thick-oxide
 inputs (leak ~1e-20 A, ~2.7× flicker power); chopped designs bias the input node through ~10 GΩ instead.
 A telescopic OTA cannot hold its output at the input CM in the Harrison loop (weak-inversion pair, V_GS ~ 50 mV).
-**Next: the SG13G2 labs 5, 7, 8, 10, 14 and Lab 15 part 2** (need Docker), then the appendices.
+**SG13G2 labs (14 Nov 2026):** scripts in `labs/spice/` for Labs 5, 7, 8, 10, 14, 15b.
+- **Lab 8** (`lab8_sar.py`): Part A ngspice sampler, plain NMOS SFDR 50 dB vs bootstrapped >100 dB (idealised
+  steering); Part B behavioural radix-1.8 SAR with integer weights 1,2,3,5,9,17,30,… (redundancy 0–4 LSB in the
+  low decisions). **Finding:** fast comparator mode noise 0.6 mV (2.5 LSB) exceeds that redundancy → ENOB 10.0 /
+  10.5 / 11.0 / 11.4 with 3 / 5 / 7 / 14 low-noise decisions; design point = 7 → **11.7 pJ/conversion, 5.7 fJ/step**
+  (Ch 16, 18, 29, B.5, Fig 18.2 updated from 7.6 pJ / 3.7 fJ).
+- **Lab 14** (`lab14_layout.py`): KLayout places 36 `cmim` PCells (pass w, l AND Calculate="C", else default 6.99 µm),
+  PDK DRC (`--min_drc --no_density`) clean, PDK LVS: 36/36 devices, nets ambiguous until routed (runner says fail).
+  **Finding:** smallest MIM cell 1.14×1.14 µm = 1.95 fF > Ch 17's 0.98 fF unit → Ch 17 now says MOM (or 8 pF MIM).
+- **Lab 15b** (`lab15_bioz_sg13.py`): single PMOS source + TG H-bridge returning to VCM, 150 kΩ in the reference
+  electrode, .ic balanced blocking caps; reads 37.2 Ω −17.0° vs ideal square/square 38.0 Ω −15.7° (−2.1 %).
+- **Labs 5, 7, 10**: see the rows below once their runs are written up.
 Original plan:
 The outline has the lab table and a short section per lab. Write the set-up section, Lab 1 and
 Lab 2 in full (goal, code, expected figure and numbers, questions); keep the anchors

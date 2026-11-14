@@ -119,9 +119,25 @@ def grab(log, name):
     return [float(v) for v in re.findall(rf"^{name}\s*=\s*([-+0-9.eE]+)", log, re.M)]
 
 
+def parse_mc(log):
+    """(tup, tdn) of every Monte Carlo sample whose two measurements both succeeded, in order.
+    A sample whose transient aborts (rare convergence failures) prints errors instead and is skipped."""
+    ev = re.findall(r"^(tup|tdn)\s*=\s*([-+0-9.eE]+)|measure\s+(tup|tdn)\s+when", log, re.M)
+    tu, td, cur = [], [], {}
+    for name, val, err in ev:
+        key = name or err
+        cur[key] = float(val) if name else None
+        if key == "tdn":
+            if cur.get("tup") is not None and cur.get("tdn") is not None:
+                tu.append(cur["tup"]); td.append(cur["tdn"])
+            cur = {}
+    return np.array(tu), np.array(td)
+
+
 def main():
     ap = argparse.ArgumentParser(description="Lab 7: StrongARM comparator in SG13G2")
     ap.add_argument("--mc", type=int, default=40, help="Monte Carlo samples for the offset")
+    ap.add_argument("--parse-only", action="store_true", help="analyse the logs of the last run")
     args = ap.parse_args()
     dvs = (1e-5, 1e-4, 1e-3, 1e-2)
     nl = {}
@@ -130,7 +146,8 @@ def main():
             nl[f"lab7_{mode}_{dv:g}"] = tran_fixed(dv, cl, f"lab7_{mode}_{dv:g}")
     vr, ncyc = 0.03, 150
     nl["lab7_mc"] = tran_mc(args.mc, vr, ncyc, "")
-    ch.run(nl)
+    if not args.parse_only:
+        ch.run(nl)
 
     res = {}
     for mode, cl in (("fast", 0.0), ("lownoise", C_LN)):
@@ -157,16 +174,17 @@ def main():
         print(line)
 
     log = open(os.path.join(ch.OUT, "lab7_mc.log")).read()
-    tu, tdn = np.array(grab(log, "tup")), np.array(grab(log, "tdn"))
+    tu, tdn = parse_mc(log)
     tr = ncyc * TMC
-    n = min(len(tu), len(tdn))
-    v_up = -vr + 2 * vr * tu[:n] / tr                 # input at which the decision flips going up
-    v_dn = vr - 2 * vr * (tdn[:n] - tr) / tr          # and going down
+    n = len(tu)
+    v_up = -vr + 2 * vr * tu / tr                     # input at which the decision flips going up
+    v_dn = vr - 2 * vr * (tdn - tr) / tr              # and going down
     vos = -(v_up + v_dn) / 2                          # input-referred offset
     hys = v_up - v_dn
     print(f"Offset Monte Carlo ({n} samples, 4/1 µm input pair, step {2*vr/ncyc*1e3:.2f} mV):"
           f" mean {vos.mean()*1e3:+.2f} mV, sigma {vos.std(ddof=1)*1e3:.2f} mV (Pelgrom estimate 2.0 mV);"
-          f" hysteresis {hys.mean()*1e3:.2f} ± {hys.std(ddof=1)*1e3:.2f} mV")
+          f" thresholds going up and down {abs(hys.mean())*1e3:.2f} ± {hys.std(ddof=1)*1e3:.2f} mV apart"
+          f" ({'leaning away from' if hys.mean() < 0 else 'leaning towards'} the previous decisions)")
     os.makedirs(PLOTS, exist_ok=True)
     with open(os.path.join(PLOTS, "lab7_summary.txt"), "w") as fh:
         for m in res:
