@@ -1,0 +1,3010 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="451.91952pt" height="178.32646pt" viewBox="0 0 451.91952 178.32646" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.5.1, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 178.32646 
+L 451.91952 178.32646 
+L 451.91952 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 32.310234 150.496694 
+L 218.53452 150.496694 
+L 218.53452 16.06072 
+L 32.310234 16.06072 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 32.310234 150.496694 
+L 32.310234 16.06072 
+" clip-path="url(#p484728c44d)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path id="m253cb54dd9" d="M 0 0 
+L 0 3 
+" style="stroke: #56656b; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#m253cb54dd9" x="32.310234" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <!-- $\mathdefault{10^{2}}$ -->
+      <g style="fill: #56656b" transform="translate(26.535234 162.464663)scale(0.075 -0.075)">
+       <defs>
+        <path id="TeXGyreHeros-Regular-31" d="M 2221 0 
+L 2221 4538 
+L 1850 4538 
+C 1651 3840 1523 3744 653 3635 
+L 653 3232 
+L 1658 3232 
+L 1658 0 
+L 2221 0 
+z
+" transform="scale(0.015625)"/>
+        <path id="TeXGyreHeros-Regular-30" d="M 3245 2182 
+C 3245 3757 2746 4538 1760 4538 
+C 781 4538 275 3744 275 2221 
+C 275 691 787 -96 1760 -96 
+C 2720 -96 3245 691 3245 2182 
+z
+M 2669 2234 
+C 2669 947 2374 371 1747 371 
+C 1152 371 851 973 851 2214 
+C 851 3456 1152 4038 1760 4038 
+C 2368 4038 2669 3450 2669 2234 
+z
+" transform="scale(0.015625)"/>
+        <path id="TeXGyreHeros-Regular-32" d="M 3270 3206 
+C 3270 3974 2675 4538 1818 4538 
+C 890 4538 352 4064 320 2963 
+L 883 2963 
+C 928 3725 1242 4045 1798 4045 
+C 2310 4045 2694 3680 2694 3194 
+C 2694 2835 2483 2528 2080 2298 
+L 1491 1965 
+C 544 1427 269 998 218 0 
+L 3238 0 
+L 3238 557 
+L 851 557 
+C 909 928 1114 1165 1670 1491 
+L 2310 1837 
+C 2944 2176 3270 2650 3270 3206 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-32" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 75.607837 150.496694 
+L 75.607837 16.06072 
+" clip-path="url(#p484728c44d)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m253cb54dd9" x="75.607837" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <!-- $\mathdefault{10^{3}}$ -->
+      <g style="fill: #56656b" transform="translate(69.832837 162.464663)scale(0.075 -0.075)">
+       <defs>
+        <path id="TeXGyreHeros-Regular-33" d="M 3238 1318 
+C 3238 1869 3014 2189 2470 2374 
+C 2893 2541 3104 2835 3104 3290 
+C 3104 4070 2586 4538 1722 4538 
+C 806 4538 320 4038 301 3072 
+L 864 3072 
+C 877 3744 1152 4045 1728 4045 
+C 2227 4045 2528 3750 2528 3270 
+C 2528 2784 2317 2586 1414 2586 
+L 1414 2112 
+L 1722 2112 
+C 2342 2112 2662 1818 2662 1312 
+C 2662 742 2310 403 1722 403 
+C 1107 403 806 710 768 1370 
+L 205 1370 
+C 275 358 774 -96 1702 -96 
+C 2637 -96 3238 461 3238 1318 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-33" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 118.905439 150.496694 
+L 118.905439 16.06072 
+" clip-path="url(#p484728c44d)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m253cb54dd9" x="118.905439" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <!-- $\mathdefault{10^{4}}$ -->
+      <g style="fill: #56656b" transform="translate(113.130439 162.464663)scale(0.075 -0.075)">
+       <defs>
+        <path id="TeXGyreHeros-Regular-34" d="M 3328 1088 
+L 3328 1594 
+L 2656 1594 
+L 2656 4538 
+L 2240 4538 
+L 179 1683 
+L 179 1088 
+L 2093 1088 
+L 2093 0 
+L 2656 0 
+L 2656 1088 
+L 3328 1088 
+z
+M 2093 1594 
+L 672 1594 
+L 2093 3578 
+L 2093 1594 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-34" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 162.203041 150.496694 
+L 162.203041 16.06072 
+" clip-path="url(#p484728c44d)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m253cb54dd9" x="162.203041" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <!-- $\mathdefault{10^{5}}$ -->
+      <g style="fill: #56656b" transform="translate(156.428041 162.464663)scale(0.075 -0.075)">
+       <defs>
+        <path id="TeXGyreHeros-Regular-35" d="M 3283 1504 
+C 3283 2400 2688 2989 1818 2989 
+C 1498 2989 1242 2906 979 2714 
+L 1158 3885 
+L 3046 3885 
+L 3046 4442 
+L 704 4442 
+L 365 2067 
+L 883 2067 
+C 1146 2381 1363 2490 1715 2490 
+C 2323 2490 2707 2099 2707 1427 
+C 2707 774 2330 403 1715 403 
+C 1222 403 922 653 787 1165 
+L 224 1165 
+C 410 262 922 -96 1728 -96 
+C 2643 -96 3283 544 3283 1504 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.73125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.73125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-35" transform="translate(112.117091 37.415625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 205.500643 150.496694 
+L 205.500643 16.06072 
+" clip-path="url(#p484728c44d)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#m253cb54dd9" x="205.500643" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <!-- $\mathdefault{10^{6}}$ -->
+      <g style="fill: #56656b" transform="translate(199.725643 162.464663)scale(0.075 -0.075)">
+       <defs>
+        <path id="TeXGyreHeros-Regular-36" d="M 3283 1408 
+C 3283 2253 2707 2822 1894 2822 
+C 1446 2822 1094 2650 851 2317 
+C 858 3424 1216 4038 1862 4038 
+C 2259 4038 2534 3789 2624 3354 
+L 3187 3354 
+C 3078 4096 2592 4538 1901 4538 
+C 845 4538 275 3648 275 2067 
+C 275 653 762 -96 1798 -96 
+C 2662 -96 3283 518 3283 1408 
+z
+M 2707 1363 
+C 2707 794 2323 403 1805 403 
+C 1280 403 883 813 883 1395 
+C 883 1958 1267 2323 1824 2323 
+C 2368 2323 2707 1971 2707 1363 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-36" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_11">
+      <defs>
+       <path id="m1f5acd87bb" d="M 0 0 
+L 0 2 
+" style="stroke: #56656b; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="45.344111" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="52.968441" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_13">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="58.377988" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_14">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="62.57396" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_10">
+     <g id="line2d_15">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="66.002318" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_11">
+     <g id="line2d_16">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="68.900953" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_12">
+     <g id="line2d_17">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="71.411865" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_13">
+     <g id="line2d_18">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="73.626647" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_14">
+     <g id="line2d_19">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="88.641714" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_15">
+     <g id="line2d_20">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="96.266043" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_16">
+     <g id="line2d_21">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="101.675591" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_17">
+     <g id="line2d_22">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="105.871562" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_18">
+     <g id="line2d_23">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="109.29992" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_19">
+     <g id="line2d_24">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="112.198555" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_20">
+     <g id="line2d_25">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="114.709468" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_21">
+     <g id="line2d_26">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="116.924249" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_22">
+     <g id="line2d_27">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="131.939316" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_23">
+     <g id="line2d_28">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="139.563645" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_24">
+     <g id="line2d_29">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="144.973193" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_25">
+     <g id="line2d_30">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="149.169164" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_26">
+     <g id="line2d_31">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="152.597522" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_27">
+     <g id="line2d_32">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="155.496157" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_28">
+     <g id="line2d_33">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="158.00707" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_29">
+     <g id="line2d_34">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="160.221851" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_30">
+     <g id="line2d_35">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="175.236918" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_31">
+     <g id="line2d_36">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="182.861247" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_32">
+     <g id="line2d_37">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="188.270795" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_33">
+     <g id="line2d_38">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="192.466766" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_34">
+     <g id="line2d_39">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="195.895124" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_35">
+     <g id="line2d_40">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="198.79376" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_36">
+     <g id="line2d_41">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="201.304672" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_37">
+     <g id="line2d_42">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="203.519453" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_38">
+     <g id="line2d_43">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="218.53452" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_6">
+     <!-- Frequency (Hz) -->
+     <g style="fill: #1d2a30" transform="translate(96.141869 174.29646)scale(0.085 -0.085)">
+      <defs>
+       <path id="TeXGyreHeros-Regular-46" d="M 3706 4141 
+L 3706 4666 
+L 576 4666 
+L 576 0 
+L 1171 0 
+L 1171 2125 
+L 3398 2125 
+L 3398 2650 
+L 1171 2650 
+L 1171 4141 
+L 3706 4141 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-72" d="M 2054 2886 
+L 2054 3430 
+C 1965 3443 1920 3450 1850 3450 
+C 1504 3450 1242 3245 934 2746 
+L 934 3354 
+L 448 3354 
+L 448 0 
+L 979 0 
+L 979 1741 
+C 979 2496 1229 2874 2054 2886 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-65" d="M 3283 1523 
+C 3283 2010 3245 2317 3149 2566 
+C 2931 3117 2419 3450 1792 3450 
+C 858 3450 256 2758 256 1658 
+C 256 557 838 -96 1779 -96 
+C 2547 -96 3078 339 3213 1018 
+L 2675 1018 
+C 2528 576 2227 397 1798 397 
+C 1242 397 826 755 813 1523 
+L 3283 1523 
+z
+M 2714 1997 
+C 2714 1997 2714 1971 2707 1958 
+L 826 1958 
+C 870 2554 1248 2957 1786 2957 
+C 2310 2957 2714 2522 2714 1997 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-71" d="M 3168 -1395 
+L 3168 3354 
+L 2694 3354 
+L 2694 2906 
+C 2445 3258 2067 3450 1626 3450 
+C 742 3450 166 2752 166 1638 
+C 166 550 717 -96 1600 -96 
+C 2067 -96 2387 70 2637 435 
+L 2637 -1395 
+L 3168 -1395 
+z
+M 2637 1658 
+C 2637 890 2266 403 1702 403 
+C 1114 403 723 896 723 1677 
+C 723 2451 1114 2950 1702 2950 
+C 2272 2950 2637 2438 2637 1658 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-75" d="M 3085 0 
+L 3085 3354 
+L 2554 3354 
+L 2554 1504 
+C 2554 819 2195 371 1638 371 
+C 1216 371 947 627 947 1030 
+L 947 3354 
+L 416 3354 
+L 416 819 
+C 416 262 832 -96 1485 -96 
+C 1978 -96 2291 77 2605 518 
+L 2605 0 
+L 3085 0 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-6e" d="M 3117 0 
+L 3117 2534 
+C 3117 3091 2701 3450 2054 3450 
+C 1555 3450 1235 3258 941 2790 
+L 941 3354 
+L 448 3354 
+L 448 0 
+L 979 0 
+L 979 1850 
+C 979 2534 1350 2982 1894 2982 
+C 2317 2982 2586 2726 2586 2323 
+L 2586 0 
+L 3117 0 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-63" d="M 3053 1152 
+L 2515 1152 
+C 2426 614 2150 397 1696 397 
+C 1107 397 755 851 755 1645 
+C 755 2483 1101 2957 1683 2957 
+C 2131 2957 2413 2694 2477 2227 
+L 3014 2227 
+C 2950 3046 2438 3450 1690 3450 
+C 787 3450 198 2758 198 1645 
+C 198 563 774 -96 1683 -96 
+C 2483 -96 2989 384 3053 1152 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-79" d="M 3059 3354 
+L 2483 3354 
+L 1555 742 
+L 698 3354 
+L 128 3354 
+L 1261 -13 
+L 1056 -544 
+C 966 -781 858 -870 627 -870 
+C 550 -870 461 -858 346 -832 
+L 346 -1312 
+C 454 -1370 563 -1395 704 -1395 
+C 1082 -1395 1389 -1184 1568 -704 
+L 3059 3354 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-20" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-28" d="M 1862 -1357 
+C 1299 -442 986 634 986 1658 
+C 986 2675 1299 3757 1862 4666 
+L 1510 4666 
+C 870 3827 467 2662 467 1658 
+C 467 646 870 -518 1510 -1357 
+L 1862 -1357 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-48" d="M 4122 0 
+L 4122 4666 
+L 3526 4666 
+L 3526 2650 
+L 1126 2650 
+L 1126 4666 
+L 531 4666 
+L 531 0 
+L 1126 0 
+L 1126 2125 
+L 3526 2125 
+L 3526 0 
+L 4122 0 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-7a" d="M 2925 0 
+L 2925 467 
+L 845 467 
+L 2835 2880 
+L 2835 3354 
+L 333 3354 
+L 333 2886 
+L 2202 2886 
+L 198 480 
+L 198 0 
+L 2925 0 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-29" d="M 1638 1651 
+C 1638 2662 1235 3827 595 4666 
+L 243 4666 
+C 806 3750 1120 2675 1120 1651 
+C 1120 634 806 -448 243 -1357 
+L 595 -1357 
+C 1235 -518 1638 646 1638 1651 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#TeXGyreHeros-Regular-46"/>
+      <use xlink:href="#TeXGyreHeros-Regular-72" x="61.099991"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="94.399979"/>
+      <use xlink:href="#TeXGyreHeros-Regular-71" x="149.999969"/>
+      <use xlink:href="#TeXGyreHeros-Regular-75" x="205.59996"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="261.199951"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6e" x="316.799942"/>
+      <use xlink:href="#TeXGyreHeros-Regular-63" x="372.399933"/>
+      <use xlink:href="#TeXGyreHeros-Regular-79" x="422.399918"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="472.399902"/>
+      <use xlink:href="#TeXGyreHeros-Regular-28" x="500.19989"/>
+      <use xlink:href="#TeXGyreHeros-Regular-48" x="533.499878"/>
+      <use xlink:href="#TeXGyreHeros-Regular-7a" x="605.69986"/>
+      <use xlink:href="#TeXGyreHeros-Regular-29" x="655.699844"/>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_44">
+      <path d="M 32.310234 150.496694 
+L 218.53452 150.496694 
+" clip-path="url(#p484728c44d)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_45">
+      <defs>
+       <path id="m6610517d1d" d="M 0 0 
+L -3 0 
+" style="stroke: #56656b; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#m6610517d1d" x="32.310234" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <!-- $\mathdefault{10^{1}}$ -->
+      <g style="fill: #56656b" transform="translate(14.260234 153.230679)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_46">
+      <path d="M 32.310234 128.090699 
+L 218.53452 128.090699 
+" clip-path="url(#p484728c44d)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_47">
+      <g>
+       <use xlink:href="#m6610517d1d" x="32.310234" y="128.090699" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <!-- $\mathdefault{10^{2}}$ -->
+      <g style="fill: #56656b" transform="translate(14.260234 130.824683)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-32" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_48">
+      <path d="M 32.310234 105.684703 
+L 218.53452 105.684703 
+" clip-path="url(#p484728c44d)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_49">
+      <g>
+       <use xlink:href="#m6610517d1d" x="32.310234" y="105.684703" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <!-- $\mathdefault{10^{3}}$ -->
+      <g style="fill: #56656b" transform="translate(14.260234 108.418687)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-33" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_50">
+      <path d="M 32.310234 83.278707 
+L 218.53452 83.278707 
+" clip-path="url(#p484728c44d)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_51">
+      <g>
+       <use xlink:href="#m6610517d1d" x="32.310234" y="83.278707" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_10">
+      <!-- $\mathdefault{10^{4}}$ -->
+      <g style="fill: #56656b" transform="translate(14.260234 86.012692)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-34" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_52">
+      <path d="M 32.310234 60.872712 
+L 218.53452 60.872712 
+" clip-path="url(#p484728c44d)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_53">
+      <g>
+       <use xlink:href="#m6610517d1d" x="32.310234" y="60.872712" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_11">
+      <!-- $\mathdefault{10^{5}}$ -->
+      <g style="fill: #56656b" transform="translate(14.260234 63.606696)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.73125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.73125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-35" transform="translate(112.117091 37.415625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_54">
+      <path d="M 32.310234 38.466716 
+L 218.53452 38.466716 
+" clip-path="url(#p484728c44d)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_55">
+      <g>
+       <use xlink:href="#m6610517d1d" x="32.310234" y="38.466716" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_12">
+      <!-- $\mathdefault{10^{6}}$ -->
+      <g style="fill: #56656b" transform="translate(14.260234 41.2007)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-36" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_56">
+      <path d="M 32.310234 16.06072 
+L 218.53452 16.06072 
+" clip-path="url(#p484728c44d)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_57">
+      <g>
+       <use xlink:href="#m6610517d1d" x="32.310234" y="16.06072" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_13">
+      <!-- $\mathdefault{10^{7}}$ -->
+      <g style="fill: #56656b" transform="translate(14.260234 18.794705)scale(0.075 -0.075)">
+       <defs>
+        <path id="TeXGyreHeros-Regular-37" d="M 3328 3968 
+L 3328 4442 
+L 294 4442 
+L 294 3885 
+L 2746 3885 
+C 1843 2746 1203 1421 883 0 
+L 1485 0 
+C 1734 1466 2374 2835 3328 3968 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.73125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.73125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-37" transform="translate(112.117091 37.415625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_58">
+      <defs>
+       <path id="m803aae9363" d="M 0 0 
+L -2 0 
+" style="stroke: #56656b; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="143.751818" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_59">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="139.806318" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_10">
+     <g id="line2d_60">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="137.006941" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_11">
+     <g id="line2d_61">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="134.835576" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_12">
+     <g id="line2d_62">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="133.061441" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_13">
+     <g id="line2d_63">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="131.561431" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_14">
+     <g id="line2d_64">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="130.262064" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_15">
+     <g id="line2d_65">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="129.115941" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_16">
+     <g id="line2d_66">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="121.345822" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_17">
+     <g id="line2d_67">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="117.400322" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_18">
+     <g id="line2d_68">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="114.600945" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_19">
+     <g id="line2d_69">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="112.42958" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_20">
+     <g id="line2d_70">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="110.655445" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_21">
+     <g id="line2d_71">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="109.155436" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_22">
+     <g id="line2d_72">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="107.856068" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_23">
+     <g id="line2d_73">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="106.709945" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_24">
+     <g id="line2d_74">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="98.939826" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_25">
+     <g id="line2d_75">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="94.994326" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_26">
+     <g id="line2d_76">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="92.194949" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_27">
+     <g id="line2d_77">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="90.023584" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_28">
+     <g id="line2d_78">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="88.249449" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_29">
+     <g id="line2d_79">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="86.74944" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_30">
+     <g id="line2d_80">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="85.450073" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_31">
+     <g id="line2d_81">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="84.303949" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_32">
+     <g id="line2d_82">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="76.533831" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_33">
+     <g id="line2d_83">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="72.588331" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_34">
+     <g id="line2d_84">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="69.788954" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_35">
+     <g id="line2d_85">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="67.617588" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_36">
+     <g id="line2d_86">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="65.843454" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_37">
+     <g id="line2d_87">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="64.343444" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_38">
+     <g id="line2d_88">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="63.044077" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_39">
+     <g id="line2d_89">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="61.897954" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_40">
+     <g id="line2d_90">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="54.127835" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_41">
+     <g id="line2d_91">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="50.182335" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_42">
+     <g id="line2d_92">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="47.382958" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_43">
+     <g id="line2d_93">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="45.211593" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_44">
+     <g id="line2d_94">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="43.437458" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_45">
+     <g id="line2d_95">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="41.937449" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_46">
+     <g id="line2d_96">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="40.638081" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_47">
+     <g id="line2d_97">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="39.491958" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_48">
+     <g id="line2d_98">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="31.721839" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_49">
+     <g id="line2d_99">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="27.776339" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_50">
+     <g id="line2d_100">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="24.976962" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_51">
+     <g id="line2d_101">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="22.805597" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_52">
+     <g id="line2d_102">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="21.031462" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_53">
+     <g id="line2d_103">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="19.531453" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_54">
+     <g id="line2d_104">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="18.232086" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_55">
+     <g id="line2d_105">
+      <g>
+       <use xlink:href="#m803aae9363" x="32.310234" y="17.085962" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_14">
+     <!-- |Z| (Ω) -->
+     <g style="fill: #1d2a30" transform="translate(8.4075 95.326793)rotate(-90)scale(0.085 -0.085)">
+      <defs>
+       <path id="TeXGyreHeros-Regular-7c" d="M 1050 -1357 
+L 1050 4666 
+L 614 4666 
+L 614 -1357 
+L 1050 -1357 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-5a" d="M 3731 0 
+L 3731 525 
+L 928 525 
+L 3718 4128 
+L 3718 4666 
+L 358 4666 
+L 358 4141 
+L 2982 4141 
+L 179 525 
+L 179 0 
+L 3731 0 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-3a9" d="M 4672 0 
+L 4672 525 
+L 3398 525 
+L 3398 954 
+C 4026 1299 4448 1958 4448 2726 
+C 4448 3834 3546 4742 2432 4742 
+C 1318 4742 416 3834 416 2726 
+C 416 1958 838 1299 1466 954 
+L 1466 525 
+L 192 525 
+L 192 0 
+L 2061 0 
+L 2061 1286 
+C 1446 1459 1011 2042 1011 2726 
+C 1011 3533 1632 4218 2432 4218 
+C 3232 4218 3853 3533 3853 2726 
+C 3853 2042 3418 1459 2803 1286 
+L 2803 0 
+L 4672 0 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#TeXGyreHeros-Regular-7c"/>
+      <use xlink:href="#TeXGyreHeros-Regular-5a" x="25.999985"/>
+      <use xlink:href="#TeXGyreHeros-Regular-7c" x="87.099976"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="113.09996"/>
+      <use xlink:href="#TeXGyreHeros-Regular-28" x="140.899948"/>
+      <use xlink:href="#TeXGyreHeros-Regular-3a9" x="174.199936"/>
+      <use xlink:href="#TeXGyreHeros-Regular-29" x="250.199921"/>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_106">
+    <path d="M 32.310234 133.102908 
+L 75.274778 133.278996 
+L 96.445713 133.57043 
+L 111.389902 133.993189 
+L 123.220718 134.54014 
+L 135.051534 135.313662 
+L 151.241073 136.633809 
+L 167.430611 137.890261 
+L 179.261427 138.573011 
+L 191.714918 139.055363 
+L 206.659107 139.39663 
+L 218.489924 139.551497 
+L 218.489924 139.551497 
+" clip-path="url(#p484728c44d)" style="fill: none; stroke: #1f64a8; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="line2d_107">
+    <path d="M 32.310234 66.242996 
+L 37.291631 68.163382 
+L 42.895702 70.585015 
+L 50.367796 74.089723 
+L 62.821287 80.231691 
+L 75.897453 86.617926 
+L 82.746873 89.731246 
+L 88.350944 92.031135 
+L 92.709665 93.599678 
+L 97.068387 94.932358 
+L 101.427109 96.008897 
+L 105.785831 96.834694 
+L 110.144553 97.438713 
+L 115.125949 97.912254 
+L 121.352694 98.27489 
+L 130.070138 98.533048 
+L 144.391653 98.691492 
+L 178.016078 98.774858 
+L 218.489924 98.791247 
+L 218.489924 98.791247 
+" clip-path="url(#p484728c44d)" style="fill: none; stroke: #1a7a4c; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="line2d_108">
+    <path d="M 32.310234 42.737162 
+L 40.405003 46.626797 
+L 52.858494 52.896371 
+L 85.860245 69.616433 
+L 93.33234 73.134076 
+L 98.936411 75.558697 
+L 103.917807 77.478911 
+L 108.276529 78.924298 
+L 112.635251 80.118558 
+L 116.993973 81.055017 
+L 121.352694 81.752817 
+L 126.334091 82.307206 
+L 131.938162 82.701143 
+L 139.410256 82.987071 
+L 150.618398 83.161917 
+L 173.034682 83.23766 
+L 218.489924 83.248754 
+L 218.489924 83.248754 
+" clip-path="url(#p484728c44d)" style="fill: none; stroke: #b5473a; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="line2d_109">
+    <path d="M 149.169164 150.496694 
+L 149.169164 16.06072 
+" clip-path="url(#p484728c44d)" style="fill: none; stroke-dasharray: 0.8,1.32; stroke-dashoffset: 0; stroke: #56656b; stroke-width: 0.8"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 32.310234 150.496694 
+L 32.310234 16.06072 
+" style="fill: none; stroke: #56656b; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 32.310234 150.496694 
+L 218.53452 150.496694 
+" style="fill: none; stroke: #56656b; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_15">
+    <!-- 50 kHz -->
+    <g style="fill: #56656b" transform="translate(150.961368 54.127835)scale(0.065 -0.065)">
+     <defs>
+      <path id="TeXGyreHeros-Regular-6b" d="M 3213 0 
+L 1843 2195 
+L 3008 3354 
+L 2323 3354 
+L 902 1933 
+L 902 4666 
+L 371 4666 
+L 371 0 
+L 902 0 
+L 902 1306 
+L 1421 1818 
+L 2554 0 
+L 3213 0 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#TeXGyreHeros-Regular-35"/>
+     <use xlink:href="#TeXGyreHeros-Regular-30" x="55.599991"/>
+     <use xlink:href="#TeXGyreHeros-Regular-20" x="111.199982"/>
+     <use xlink:href="#TeXGyreHeros-Regular-6b" x="138.999969"/>
+     <use xlink:href="#TeXGyreHeros-Regular-48" x="188.999954"/>
+     <use xlink:href="#TeXGyreHeros-Regular-7a" x="261.199936"/>
+    </g>
+   </g>
+   <g id="text_16">
+    <!-- (a) -->
+    <g style="fill: #9a6212" transform="translate(17.588874 8.721562)scale(0.09 -0.09)">
+     <defs>
+      <path id="TeXGyreHeros-Bold-28" d="M 1939 -1280 
+C 1261 38 1043 755 1043 1696 
+C 1043 2630 1261 3360 1939 4666 
+L 1299 4666 
+C 563 3558 256 2675 256 1696 
+C 256 710 563 -173 1299 -1280 
+L 1939 -1280 
+z
+" transform="scale(0.015625)"/>
+      <path id="TeXGyreHeros-Bold-61" d="M 3354 0 
+L 3354 109 
+C 3194 256 3149 352 3149 531 
+L 3149 2451 
+C 3149 3155 2669 3514 1734 3514 
+C 800 3514 314 3117 256 2317 
+L 1120 2317 
+C 1165 2675 1312 2790 1754 2790 
+C 2099 2790 2272 2675 2272 2445 
+C 2272 2080 2003 2118 1555 2042 
+L 1197 1978 
+C 512 1856 179 1562 179 934 
+C 179 262 653 -58 1229 -58 
+C 1613 -58 1965 109 2278 435 
+C 2278 256 2298 102 2381 0 
+L 3354 0 
+z
+M 2272 1478 
+C 2272 960 2016 666 1562 666 
+C 1261 666 1075 781 1075 1037 
+C 1075 1299 1216 1395 1587 1466 
+L 1894 1523 
+C 2131 1568 2170 1581 2272 1632 
+L 2272 1478 
+z
+" transform="scale(0.015625)"/>
+      <path id="TeXGyreHeros-Bold-29" d="M 1824 1690 
+C 1824 2675 1517 3558 781 4666 
+L 141 4666 
+C 819 3347 1037 2630 1037 1690 
+C 1037 755 819 26 141 -1280 
+L 781 -1280 
+C 1517 -173 1824 710 1824 1690 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#TeXGyreHeros-Bold-28"/>
+     <use xlink:href="#TeXGyreHeros-Bold-61" x="33.299988"/>
+     <use xlink:href="#TeXGyreHeros-Bold-29" x="88.899979"/>
+    </g>
+   </g>
+   <g id="legend_1">
+    <g id="line2d_110">
+     <path d="M 92.16327 23.842908 
+L 97.56327 23.842908 
+L 102.96327 23.842908 
+" style="fill: none; stroke: #1f64a8; stroke-width: 1.6; stroke-linecap: round"/>
+    </g>
+    <g id="text_17">
+     <!-- tissue (Cole), = tetrapolar reading -->
+     <g transform="translate(107.76327 25.942908)scale(0.06 -0.06)">
+      <defs>
+       <path id="TeXGyreHeros-Regular-74" d="M 1626 0 
+L 1626 448 
+C 1555 429 1472 422 1370 422 
+C 1139 422 1075 486 1075 723 
+L 1075 2918 
+L 1626 2918 
+L 1626 3354 
+L 1075 3354 
+L 1075 4275 
+L 544 4275 
+L 544 3354 
+L 90 3354 
+L 90 2918 
+L 544 2918 
+L 544 486 
+C 544 147 774 -45 1190 -45 
+C 1318 -45 1446 -32 1626 0 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-69" d="M 979 0 
+L 979 3354 
+L 448 3354 
+L 448 0 
+L 979 0 
+z
+M 1050 3859 
+L 1050 4525 
+L 384 4525 
+L 384 3859 
+L 1050 3859 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-73" d="M 2938 941 
+C 2938 1440 2656 1690 1990 1850 
+L 1478 1971 
+C 1043 2074 858 2214 858 2451 
+C 858 2758 1133 2957 1568 2957 
+C 1997 2957 2227 2771 2240 2419 
+L 2803 2419 
+C 2797 3078 2362 3450 1587 3450 
+C 806 3450 301 3046 301 2426 
+C 301 1901 570 1651 1363 1459 
+L 1862 1338 
+C 2234 1248 2381 1139 2381 896 
+C 2381 582 2067 397 1600 397 
+C 1120 397 851 512 781 1024 
+L 218 1024 
+C 243 250 678 -96 1555 -96 
+C 2400 -96 2938 294 2938 941 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-43" d="M 4333 1702 
+L 3718 1702 
+C 3578 819 3206 410 2419 410 
+C 1491 410 902 1120 902 2285 
+C 902 3482 1466 4256 2368 4256 
+C 3098 4256 3482 3930 3629 3219 
+L 4237 3219 
+C 4051 4243 3462 4781 2438 4781 
+C 1024 4781 307 3642 307 2278 
+C 307 915 1043 -115 2413 -115 
+C 3552 -115 4192 486 4333 1702 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-6f" d="M 3264 1651 
+C 3264 2810 2707 3450 1741 3450 
+C 800 3450 230 2803 230 1677 
+C 230 550 794 -96 1747 -96 
+C 2688 -96 3264 550 3264 1651 
+z
+M 2707 1658 
+C 2707 870 2336 397 1747 397 
+C 1152 397 787 864 787 1677 
+C 787 2483 1152 2957 1747 2957 
+C 2349 2957 2707 2490 2707 1658 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-6c" d="M 966 0 
+L 966 4666 
+L 435 4666 
+L 435 0 
+L 966 0 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-2c" d="M 1229 -102 
+L 1229 666 
+L 557 666 
+L 557 0 
+L 941 0 
+L 941 -115 
+C 941 -557 858 -685 557 -698 
+L 557 -941 
+C 1005 -941 1229 -653 1229 -102 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-3d" d="M 3302 1965 
+L 3302 2400 
+L 435 2400 
+L 435 1965 
+L 3302 1965 
+z
+M 3302 800 
+L 3302 1235 
+L 435 1235 
+L 435 800 
+L 3302 800 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-61" d="M 3424 13 
+L 3424 416 
+C 3366 403 3341 403 3309 403 
+C 3123 403 3021 499 3021 666 
+L 3021 2534 
+C 3021 3130 2586 3450 1760 3450 
+C 947 3450 448 3136 416 2362 
+L 954 2362 
+C 998 2771 1242 2957 1741 2957 
+C 2221 2957 2490 2778 2490 2458 
+L 2490 2317 
+C 2490 2093 2355 1997 1933 1946 
+C 1178 1850 1062 1824 858 1741 
+C 467 1581 269 1280 269 870 
+C 269 262 691 -96 1370 -96 
+C 1798 -96 2214 83 2509 397 
+C 2566 141 2797 -45 3059 -45 
+C 3168 -45 3251 -32 3424 13 
+z
+M 2490 1158 
+C 2490 678 2003 371 1485 371 
+C 1069 371 826 518 826 883 
+C 826 1235 1062 1389 1632 1472 
+C 2195 1549 2310 1574 2490 1658 
+L 2490 1158 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-70" d="M 3347 1645 
+C 3347 2771 2797 3450 1907 3450 
+C 1453 3450 1088 3245 838 2848 
+L 838 3354 
+L 352 3354 
+L 352 -1395 
+L 883 -1395 
+L 883 403 
+C 1165 58 1478 -96 1914 -96 
+C 2778 -96 3347 576 3347 1645 
+z
+M 2790 1658 
+C 2790 896 2400 403 1818 403 
+C 1254 403 883 864 883 1651 
+C 883 2438 1254 2950 1818 2950 
+C 2406 2950 2790 2458 2790 1658 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-64" d="M 3168 0 
+L 3168 4666 
+L 2637 4666 
+L 2637 2931 
+C 2413 3270 2054 3450 1606 3450 
+C 736 3450 166 2778 166 1709 
+C 166 576 723 -96 1626 -96 
+C 2086 -96 2406 77 2694 493 
+L 2694 0 
+L 3168 0 
+z
+M 2637 1664 
+C 2637 890 2266 403 1702 403 
+C 1114 403 723 896 723 1677 
+C 723 2458 1114 2950 1696 2950 
+C 2272 2950 2637 2438 2637 1664 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-67" d="M 3130 550 
+L 3130 3354 
+L 2637 3354 
+L 2637 2867 
+C 2368 3264 2042 3450 1613 3450 
+C 762 3450 186 2733 186 1645 
+C 186 589 781 -96 1568 -96 
+C 1990 -96 2285 83 2637 506 
+L 2637 282 
+C 2637 -608 2272 -947 1651 -947 
+C 1229 -947 902 -794 838 -384 
+L 294 -384 
+C 352 -1018 845 -1395 1632 -1395 
+C 2682 -1395 3130 -928 3130 550 
+z
+M 2586 1658 
+C 2586 858 2240 397 1677 397 
+C 1094 397 742 864 742 1677 
+C 742 2483 1101 2957 1670 2957 
+C 2246 2957 2586 2470 2586 1658 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#TeXGyreHeros-Regular-74"/>
+      <use xlink:href="#TeXGyreHeros-Regular-69" x="27.799988"/>
+      <use xlink:href="#TeXGyreHeros-Regular-73" x="49.999985"/>
+      <use xlink:href="#TeXGyreHeros-Regular-73" x="99.999969"/>
+      <use xlink:href="#TeXGyreHeros-Regular-75" x="149.999954"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="205.599945"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="261.199936"/>
+      <use xlink:href="#TeXGyreHeros-Regular-28" x="288.999924"/>
+      <use xlink:href="#TeXGyreHeros-Regular-43" x="322.299911"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6f" x="394.499893"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6c" x="450.099884"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="472.299881"/>
+      <use xlink:href="#TeXGyreHeros-Regular-29" x="527.899872"/>
+      <use xlink:href="#TeXGyreHeros-Regular-2c" x="561.19986"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="588.999847"/>
+      <use xlink:href="#TeXGyreHeros-Regular-3d" x="616.799835"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="675.199829"/>
+      <use xlink:href="#TeXGyreHeros-Regular-74" x="702.999817"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="730.799805"/>
+      <use xlink:href="#TeXGyreHeros-Regular-74" x="786.399796"/>
+      <use xlink:href="#TeXGyreHeros-Regular-72" x="814.199783"/>
+      <use xlink:href="#TeXGyreHeros-Regular-61" x="847.499771"/>
+      <use xlink:href="#TeXGyreHeros-Regular-70" x="903.099762"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6f" x="958.699753"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6c" x="1014.299744"/>
+      <use xlink:href="#TeXGyreHeros-Regular-61" x="1036.499741"/>
+      <use xlink:href="#TeXGyreHeros-Regular-72" x="1092.099731"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="1125.399719"/>
+      <use xlink:href="#TeXGyreHeros-Regular-72" x="1153.199707"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="1186.499695"/>
+      <use xlink:href="#TeXGyreHeros-Regular-61" x="1242.099686"/>
+      <use xlink:href="#TeXGyreHeros-Regular-64" x="1297.699677"/>
+      <use xlink:href="#TeXGyreHeros-Regular-69" x="1353.299667"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6e" x="1375.499664"/>
+      <use xlink:href="#TeXGyreHeros-Regular-67" x="1431.099655"/>
+     </g>
+    </g>
+    <g id="line2d_111">
+     <path d="M 92.16327 32.632908 
+L 97.56327 32.632908 
+L 102.96327 32.632908 
+" style="fill: none; stroke: #1a7a4c; stroke-width: 1.4; stroke-linecap: round"/>
+    </g>
+    <g id="text_18">
+     <!-- bipolar reading, wet Ag/AgCl electrodes -->
+     <g transform="translate(107.76327 34.732908)scale(0.06 -0.06)">
+      <defs>
+       <path id="TeXGyreHeros-Regular-62" d="M 3347 1715 
+C 3347 2803 2797 3450 1914 3450 
+C 1453 3450 1126 3277 877 2899 
+L 877 4666 
+L 346 4666 
+L 346 0 
+L 826 0 
+L 826 480 
+C 1082 90 1421 -96 1888 -96 
+C 2771 -96 3347 627 3347 1715 
+z
+M 2790 1683 
+C 2790 922 2394 403 1811 403 
+C 1248 403 877 915 877 1677 
+C 877 2464 1248 2976 1811 2950 
+C 2406 2950 2790 2432 2790 1683 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-77" d="M 4531 3354 
+L 3930 3354 
+L 3264 742 
+L 2605 3354 
+L 1952 3354 
+L 1312 742 
+L 627 3354 
+L 38 3354 
+L 1011 0 
+L 1613 0 
+L 2259 2630 
+L 2938 0 
+L 3546 0 
+L 4531 3354 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-41" d="M 4179 0 
+L 2541 4666 
+L 1773 4666 
+L 109 0 
+L 742 0 
+L 1235 1402 
+L 3034 1402 
+L 3514 0 
+L 4179 0 
+z
+M 2867 1901 
+L 1382 1901 
+L 2150 4026 
+L 2867 1901 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-2f" d="M 1818 4666 
+L 1466 4666 
+L -51 -128 
+L 301 -128 
+L 1818 4666 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#TeXGyreHeros-Regular-62"/>
+      <use xlink:href="#TeXGyreHeros-Regular-69" x="55.599991"/>
+      <use xlink:href="#TeXGyreHeros-Regular-70" x="77.799988"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6f" x="133.399979"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6c" x="188.999969"/>
+      <use xlink:href="#TeXGyreHeros-Regular-61" x="211.199966"/>
+      <use xlink:href="#TeXGyreHeros-Regular-72" x="266.799957"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="300.099945"/>
+      <use xlink:href="#TeXGyreHeros-Regular-72" x="327.899933"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="361.199921"/>
+      <use xlink:href="#TeXGyreHeros-Regular-61" x="416.799911"/>
+      <use xlink:href="#TeXGyreHeros-Regular-64" x="472.399902"/>
+      <use xlink:href="#TeXGyreHeros-Regular-69" x="527.999893"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6e" x="550.19989"/>
+      <use xlink:href="#TeXGyreHeros-Regular-67" x="605.799881"/>
+      <use xlink:href="#TeXGyreHeros-Regular-2c" x="661.399872"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="689.19986"/>
+      <use xlink:href="#TeXGyreHeros-Regular-77" x="716.999847"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="789.199829"/>
+      <use xlink:href="#TeXGyreHeros-Regular-74" x="844.79982"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="872.599808"/>
+      <use xlink:href="#TeXGyreHeros-Regular-41" x="900.399796"/>
+      <use xlink:href="#TeXGyreHeros-Regular-67" x="967.099792"/>
+      <use xlink:href="#TeXGyreHeros-Regular-2f" x="1022.699783"/>
+      <use xlink:href="#TeXGyreHeros-Regular-41" x="1050.499771"/>
+      <use xlink:href="#TeXGyreHeros-Regular-67" x="1117.199768"/>
+      <use xlink:href="#TeXGyreHeros-Regular-43" x="1172.799759"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6c" x="1244.999741"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="1267.199738"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="1294.999725"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6c" x="1350.599716"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="1372.799713"/>
+      <use xlink:href="#TeXGyreHeros-Regular-63" x="1428.399704"/>
+      <use xlink:href="#TeXGyreHeros-Regular-74" x="1478.399689"/>
+      <use xlink:href="#TeXGyreHeros-Regular-72" x="1506.199677"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6f" x="1539.499664"/>
+      <use xlink:href="#TeXGyreHeros-Regular-64" x="1595.099655"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="1650.699646"/>
+      <use xlink:href="#TeXGyreHeros-Regular-73" x="1706.299637"/>
+     </g>
+    </g>
+    <g id="line2d_112">
+     <path d="M 92.16327 41.315095 
+L 97.56327 41.315095 
+L 102.96327 41.315095 
+" style="fill: none; stroke: #b5473a; stroke-width: 1.4; stroke-linecap: round"/>
+    </g>
+    <g id="text_19">
+     <!-- bipolar reading, dry electrodes -->
+     <g transform="translate(107.76327 43.415095)scale(0.06 -0.06)">
+      <use xlink:href="#TeXGyreHeros-Regular-62"/>
+      <use xlink:href="#TeXGyreHeros-Regular-69" x="55.599991"/>
+      <use xlink:href="#TeXGyreHeros-Regular-70" x="77.799988"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6f" x="133.399979"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6c" x="188.999969"/>
+      <use xlink:href="#TeXGyreHeros-Regular-61" x="211.199966"/>
+      <use xlink:href="#TeXGyreHeros-Regular-72" x="266.799957"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="300.099945"/>
+      <use xlink:href="#TeXGyreHeros-Regular-72" x="327.899933"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="361.199921"/>
+      <use xlink:href="#TeXGyreHeros-Regular-61" x="416.799911"/>
+      <use xlink:href="#TeXGyreHeros-Regular-64" x="472.399902"/>
+      <use xlink:href="#TeXGyreHeros-Regular-69" x="527.999893"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6e" x="550.19989"/>
+      <use xlink:href="#TeXGyreHeros-Regular-67" x="605.799881"/>
+      <use xlink:href="#TeXGyreHeros-Regular-2c" x="661.399872"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="689.19986"/>
+      <use xlink:href="#TeXGyreHeros-Regular-64" x="716.999847"/>
+      <use xlink:href="#TeXGyreHeros-Regular-72" x="772.599838"/>
+      <use xlink:href="#TeXGyreHeros-Regular-79" x="805.899826"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="855.899811"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="883.699799"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6c" x="939.299789"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="961.499786"/>
+      <use xlink:href="#TeXGyreHeros-Regular-63" x="1017.099777"/>
+      <use xlink:href="#TeXGyreHeros-Regular-74" x="1067.099762"/>
+      <use xlink:href="#TeXGyreHeros-Regular-72" x="1094.89975"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6f" x="1128.199738"/>
+      <use xlink:href="#TeXGyreHeros-Regular-64" x="1183.799728"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="1239.399719"/>
+      <use xlink:href="#TeXGyreHeros-Regular-73" x="1294.99971"/>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_5">
+    <path d="M 257.760234 150.496694 
+L 443.98452 150.496694 
+L 443.98452 16.06072 
+L 257.760234 16.06072 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_39">
+     <g id="line2d_113">
+      <path d="M 257.760234 150.496694 
+L 257.760234 16.06072 
+" clip-path="url(#p287a536013)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_114">
+      <g>
+       <use xlink:href="#m253cb54dd9" x="257.760234" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_20">
+      <!-- $\mathdefault{10^{-1}}$ -->
+      <g style="fill: #56656b" transform="translate(250.447734 162.464663)scale(0.075 -0.075)">
+       <defs>
+        <path id="TeXGyreHeros-Regular-2212" d="M 3302 1382 
+L 3302 1818 
+L 435 1818 
+L 435 1382 
+L 3302 1382 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-2212" transform="translate(112.117091 37.365625)scale(0.7)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(152.997087 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_40">
+     <g id="line2d_115">
+      <path d="M 304.316306 150.496694 
+L 304.316306 16.06072 
+" clip-path="url(#p287a536013)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_116">
+      <g>
+       <use xlink:href="#m253cb54dd9" x="304.316306" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_21">
+      <!-- $\mathdefault{10^{0}}$ -->
+      <g style="fill: #56656b" transform="translate(298.541306 162.464663)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_41">
+     <g id="line2d_117">
+      <path d="M 350.872377 150.496694 
+L 350.872377 16.06072 
+" clip-path="url(#p287a536013)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_118">
+      <g>
+       <use xlink:href="#m253cb54dd9" x="350.872377" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_22">
+      <!-- $\mathdefault{10^{1}}$ -->
+      <g style="fill: #56656b" transform="translate(345.097377 162.464663)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_42">
+     <g id="line2d_119">
+      <path d="M 397.428449 150.496694 
+L 397.428449 16.06072 
+" clip-path="url(#p287a536013)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_120">
+      <g>
+       <use xlink:href="#m253cb54dd9" x="397.428449" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_23">
+      <!-- $\mathdefault{10^{2}}$ -->
+      <g style="fill: #56656b" transform="translate(391.653449 162.464663)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-32" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_43">
+     <g id="line2d_121">
+      <path d="M 443.98452 150.496694 
+L 443.98452 16.06072 
+" clip-path="url(#p287a536013)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_122">
+      <g>
+       <use xlink:href="#m253cb54dd9" x="443.98452" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_24">
+      <!-- $\mathdefault{10^{3}}$ -->
+      <g style="fill: #56656b" transform="translate(438.20952 162.464663)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-33" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_44">
+     <g id="line2d_123">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="271.775008" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_45">
+     <g id="line2d_124">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="279.973126" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_46">
+     <g id="line2d_125">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="285.789782" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_47">
+     <g id="line2d_126">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="290.301532" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_48">
+     <g id="line2d_127">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="293.9879" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_49">
+     <g id="line2d_128">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="297.104679" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_50">
+     <g id="line2d_129">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="299.804556" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_51">
+     <g id="line2d_130">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="302.186017" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_52">
+     <g id="line2d_131">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="318.33108" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_53">
+     <g id="line2d_132">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="326.529197" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_54">
+     <g id="line2d_133">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="332.345854" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_55">
+     <g id="line2d_134">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="336.857603" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_56">
+     <g id="line2d_135">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="340.543971" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_57">
+     <g id="line2d_136">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="343.66075" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_58">
+     <g id="line2d_137">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="346.360628" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_59">
+     <g id="line2d_138">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="348.742088" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_60">
+     <g id="line2d_139">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="364.887151" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_61">
+     <g id="line2d_140">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="373.085268" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_62">
+     <g id="line2d_141">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="378.901925" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_63">
+     <g id="line2d_142">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="383.413675" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_64">
+     <g id="line2d_143">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="387.100042" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_65">
+     <g id="line2d_144">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="390.216822" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_66">
+     <g id="line2d_145">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="392.916699" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_67">
+     <g id="line2d_146">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="395.29816" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_68">
+     <g id="line2d_147">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="411.443223" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_69">
+     <g id="line2d_148">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="419.64134" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_70">
+     <g id="line2d_149">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="425.457997" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_71">
+     <g id="line2d_150">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="429.969746" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_72">
+     <g id="line2d_151">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="433.656114" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_73">
+     <g id="line2d_152">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="436.772893" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_74">
+     <g id="line2d_153">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="439.472771" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_75">
+     <g id="line2d_154">
+      <g>
+       <use xlink:href="#m1f5acd87bb" x="441.854231" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_25">
+     <!-- Excitation current (µA rms) -->
+     <g style="fill: #1d2a30" transform="translate(300.572299 174.29646)scale(0.085 -0.085)">
+      <defs>
+       <path id="TeXGyreHeros-Regular-45" d="M 3923 0 
+L 3923 525 
+L 1171 525 
+L 1171 2125 
+L 3712 2125 
+L 3712 2650 
+L 1171 2650 
+L 1171 4141 
+L 3808 4141 
+L 3808 4666 
+L 576 4666 
+L 576 0 
+L 3923 0 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-78" d="M 3027 0 
+L 1869 1734 
+L 2995 3354 
+L 2394 3354 
+L 1587 2138 
+L 781 3354 
+L 173 3354 
+L 1293 1709 
+L 109 0 
+L 717 0 
+L 1568 1286 
+L 2406 0 
+L 3027 0 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-b5" d="M 3482 -90 
+L 3482 314 
+C 3418 301 3392 301 3366 301 
+C 3181 301 3078 390 3078 563 
+L 3078 3354 
+L 2547 3354 
+L 2547 1453 
+C 2547 768 2189 320 1632 320 
+C 1216 320 947 576 947 979 
+L 947 3354 
+L 416 3354 
+L 416 -1408 
+L 947 -1408 
+L 947 19 
+C 1107 -96 1293 -147 1523 -147 
+C 1958 -147 2317 32 2566 384 
+C 2579 19 2752 -147 3117 -147 
+C 3232 -147 3315 -134 3482 -90 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-6d" d="M 4864 0 
+L 4864 2515 
+C 4864 3117 4531 3450 3904 3450 
+C 3456 3450 3187 3315 2874 2938 
+C 2675 3296 2406 3450 1971 3450 
+C 1523 3450 1229 3283 941 2880 
+L 941 3354 
+L 454 3354 
+L 454 0 
+L 986 0 
+L 986 2106 
+C 986 2592 1338 2982 1773 2982 
+C 2170 2982 2394 2739 2394 2310 
+L 2394 0 
+L 2925 0 
+L 2925 2106 
+C 2925 2592 3283 2982 3718 2982 
+C 4109 2982 4333 2733 4333 2310 
+L 4333 0 
+L 4864 0 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#TeXGyreHeros-Regular-45"/>
+      <use xlink:href="#TeXGyreHeros-Regular-78" x="66.699997"/>
+      <use xlink:href="#TeXGyreHeros-Regular-63" x="116.699982"/>
+      <use xlink:href="#TeXGyreHeros-Regular-69" x="166.699966"/>
+      <use xlink:href="#TeXGyreHeros-Regular-74" x="188.899963"/>
+      <use xlink:href="#TeXGyreHeros-Regular-61" x="216.699951"/>
+      <use xlink:href="#TeXGyreHeros-Regular-74" x="272.299942"/>
+      <use xlink:href="#TeXGyreHeros-Regular-69" x="300.09993"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6f" x="322.299927"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6e" x="377.899918"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="433.499908"/>
+      <use xlink:href="#TeXGyreHeros-Regular-63" x="461.299896"/>
+      <use xlink:href="#TeXGyreHeros-Regular-75" x="511.299881"/>
+      <use xlink:href="#TeXGyreHeros-Regular-72" x="566.899872"/>
+      <use xlink:href="#TeXGyreHeros-Regular-72" x="600.19986"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="633.499847"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6e" x="689.099838"/>
+      <use xlink:href="#TeXGyreHeros-Regular-74" x="744.699829"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="772.499817"/>
+      <use xlink:href="#TeXGyreHeros-Regular-28" x="800.299805"/>
+      <use xlink:href="#TeXGyreHeros-Regular-b5" x="833.599792"/>
+      <use xlink:href="#TeXGyreHeros-Regular-41" x="889.199783"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="955.89978"/>
+      <use xlink:href="#TeXGyreHeros-Regular-72" x="983.699768"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6d" x="1016.999756"/>
+      <use xlink:href="#TeXGyreHeros-Regular-73" x="1100.299744"/>
+      <use xlink:href="#TeXGyreHeros-Regular-29" x="1150.299728"/>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_56">
+     <g id="line2d_155">
+      <path d="M 257.760234 150.496694 
+L 443.98452 150.496694 
+" clip-path="url(#p287a536013)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_156">
+      <g>
+       <use xlink:href="#m6610517d1d" x="257.760234" y="150.496694" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_26">
+      <!-- $\mathdefault{10^{-3}}$ -->
+      <g style="fill: #56656b" transform="translate(236.635234 153.230679)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-2212" transform="translate(112.117091 37.365625)scale(0.7)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-33" transform="translate(152.997087 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_57">
+     <g id="line2d_157">
+      <path d="M 257.760234 128.090699 
+L 443.98452 128.090699 
+" clip-path="url(#p287a536013)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_158">
+      <g>
+       <use xlink:href="#m6610517d1d" x="257.760234" y="128.090699" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_27">
+      <!-- $\mathdefault{10^{-2}}$ -->
+      <g style="fill: #56656b" transform="translate(236.635234 130.824683)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-2212" transform="translate(112.117091 37.365625)scale(0.7)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-32" transform="translate(152.997087 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_58">
+     <g id="line2d_159">
+      <path d="M 257.760234 105.684703 
+L 443.98452 105.684703 
+" clip-path="url(#p287a536013)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_160">
+      <g>
+       <use xlink:href="#m6610517d1d" x="257.760234" y="105.684703" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_28">
+      <!-- $\mathdefault{10^{-1}}$ -->
+      <g style="fill: #56656b" transform="translate(236.635234 108.418687)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-2212" transform="translate(112.117091 37.365625)scale(0.7)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(152.997087 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_59">
+     <g id="line2d_161">
+      <path d="M 257.760234 83.278707 
+L 443.98452 83.278707 
+" clip-path="url(#p287a536013)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_162">
+      <g>
+       <use xlink:href="#m6610517d1d" x="257.760234" y="83.278707" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_29">
+      <!-- $\mathdefault{10^{0}}$ -->
+      <g style="fill: #56656b" transform="translate(239.710234 86.012692)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_60">
+     <g id="line2d_163">
+      <path d="M 257.760234 60.872712 
+L 443.98452 60.872712 
+" clip-path="url(#p287a536013)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_164">
+      <g>
+       <use xlink:href="#m6610517d1d" x="257.760234" y="60.872712" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_30">
+      <!-- $\mathdefault{10^{1}}$ -->
+      <g style="fill: #56656b" transform="translate(239.710234 63.606696)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_61">
+     <g id="line2d_165">
+      <path d="M 257.760234 38.466716 
+L 443.98452 38.466716 
+" clip-path="url(#p287a536013)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_166">
+      <g>
+       <use xlink:href="#m6610517d1d" x="257.760234" y="38.466716" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_31">
+      <!-- $\mathdefault{10^{2}}$ -->
+      <g style="fill: #56656b" transform="translate(239.710234 41.2007)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-32" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_62">
+     <g id="line2d_167">
+      <path d="M 257.760234 16.06072 
+L 443.98452 16.06072 
+" clip-path="url(#p287a536013)" style="fill: none; stroke: #e1e8e8; stroke-width: 0.6; stroke-linecap: round"/>
+     </g>
+     <g id="line2d_168">
+      <g>
+       <use xlink:href="#m6610517d1d" x="257.760234" y="16.06072" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_32">
+      <!-- $\mathdefault{10^{3}}$ -->
+      <g style="fill: #56656b" transform="translate(239.710234 18.794705)scale(0.075 -0.075)">
+       <use xlink:href="#TeXGyreHeros-Regular-31" transform="translate(0 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-30" transform="translate(55.599991 0.68125)"/>
+       <use xlink:href="#TeXGyreHeros-Regular-33" transform="translate(112.117091 37.365625)scale(0.7)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_63">
+     <g id="line2d_169">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="143.751818" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_64">
+     <g id="line2d_170">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="139.806318" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_65">
+     <g id="line2d_171">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="137.006941" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_66">
+     <g id="line2d_172">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="134.835576" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_67">
+     <g id="line2d_173">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="133.061441" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_68">
+     <g id="line2d_174">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="131.561431" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_69">
+     <g id="line2d_175">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="130.262064" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_70">
+     <g id="line2d_176">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="129.115941" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_71">
+     <g id="line2d_177">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="121.345822" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_72">
+     <g id="line2d_178">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="117.400322" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_73">
+     <g id="line2d_179">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="114.600945" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_74">
+     <g id="line2d_180">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="112.42958" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_75">
+     <g id="line2d_181">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="110.655445" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_76">
+     <g id="line2d_182">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="109.155436" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_77">
+     <g id="line2d_183">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="107.856068" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_78">
+     <g id="line2d_184">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="106.709945" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_79">
+     <g id="line2d_185">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="98.939826" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_80">
+     <g id="line2d_186">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="94.994326" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_81">
+     <g id="line2d_187">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="92.194949" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_82">
+     <g id="line2d_188">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="90.023584" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_83">
+     <g id="line2d_189">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="88.249449" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_84">
+     <g id="line2d_190">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="86.74944" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_85">
+     <g id="line2d_191">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="85.450073" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_86">
+     <g id="line2d_192">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="84.303949" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_87">
+     <g id="line2d_193">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="76.533831" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_88">
+     <g id="line2d_194">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="72.588331" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_89">
+     <g id="line2d_195">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="69.788954" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_90">
+     <g id="line2d_196">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="67.617588" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_91">
+     <g id="line2d_197">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="65.843454" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_92">
+     <g id="line2d_198">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="64.343444" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_93">
+     <g id="line2d_199">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="63.044077" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_94">
+     <g id="line2d_200">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="61.897954" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_95">
+     <g id="line2d_201">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="54.127835" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_96">
+     <g id="line2d_202">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="50.182335" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_97">
+     <g id="line2d_203">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="47.382958" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_98">
+     <g id="line2d_204">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="45.211593" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_99">
+     <g id="line2d_205">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="43.437458" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_100">
+     <g id="line2d_206">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="41.937449" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_101">
+     <g id="line2d_207">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="40.638081" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_102">
+     <g id="line2d_208">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="39.491958" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_103">
+     <g id="line2d_209">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="31.721839" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_104">
+     <g id="line2d_210">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="27.776339" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_105">
+     <g id="line2d_211">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="24.976962" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_106">
+     <g id="line2d_212">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="22.805597" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_107">
+     <g id="line2d_213">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="21.031462" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_108">
+     <g id="line2d_214">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="19.531453" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_109">
+     <g id="line2d_215">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="18.232086" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_110">
+     <g id="line2d_216">
+      <g>
+       <use xlink:href="#m803aae9363" x="257.760234" y="17.085962" style="fill: #56656b; stroke: #56656b; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_33">
+     <!-- ΔZ resolution in 10 Hz (mΩ rms) -->
+     <g style="fill: #1d2a30" transform="translate(230.7825 144.313356)rotate(-90)scale(0.085 -0.085)">
+      <defs>
+       <path id="TeXGyreHeros-Regular-394" d="M 4563 0 
+L 2515 4576 
+L 2035 4576 
+L -13 0 
+L 4563 0 
+z
+M 3750 525 
+L 800 525 
+L 2272 3827 
+L 3750 525 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#TeXGyreHeros-Regular-394"/>
+      <use xlink:href="#TeXGyreHeros-Regular-5a" x="71.099991"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="132.199982"/>
+      <use xlink:href="#TeXGyreHeros-Regular-72" x="159.999969"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="193.299957"/>
+      <use xlink:href="#TeXGyreHeros-Regular-73" x="248.899948"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6f" x="298.899933"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6c" x="354.499924"/>
+      <use xlink:href="#TeXGyreHeros-Regular-75" x="376.699921"/>
+      <use xlink:href="#TeXGyreHeros-Regular-74" x="432.299911"/>
+      <use xlink:href="#TeXGyreHeros-Regular-69" x="460.099899"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6f" x="482.299896"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6e" x="537.899887"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="593.499878"/>
+      <use xlink:href="#TeXGyreHeros-Regular-69" x="621.299866"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6e" x="643.499863"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="699.099854"/>
+      <use xlink:href="#TeXGyreHeros-Regular-31" x="726.899841"/>
+      <use xlink:href="#TeXGyreHeros-Regular-30" x="782.499832"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="838.099823"/>
+      <use xlink:href="#TeXGyreHeros-Regular-48" x="865.899811"/>
+      <use xlink:href="#TeXGyreHeros-Regular-7a" x="938.099792"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="988.099777"/>
+      <use xlink:href="#TeXGyreHeros-Regular-28" x="1015.899765"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6d" x="1049.199753"/>
+      <use xlink:href="#TeXGyreHeros-Regular-3a9" x="1132.499741"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="1208.499725"/>
+      <use xlink:href="#TeXGyreHeros-Regular-72" x="1236.299713"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6d" x="1269.599701"/>
+      <use xlink:href="#TeXGyreHeros-Regular-73" x="1352.899689"/>
+      <use xlink:href="#TeXGyreHeros-Regular-29" x="1402.899673"/>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_217">
+    <path d="M 257.760234 20.518841 
+L 443.98452 110.142824 
+L 443.98452 110.142824 
+" clip-path="url(#p287a536013)" style="fill: none; stroke: #1a7a4c; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="line2d_218">
+    <path d="M 257.760234 11.602599 
+L 443.98452 101.226582 
+L 443.98452 101.226582 
+" clip-path="url(#p287a536013)" style="fill: none; stroke: #1f64a8; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="line2d_219">
+    <path d="M 259.603599 -1 
+L 443.98452 87.736828 
+L 443.98452 87.736828 
+" clip-path="url(#p287a536013)" style="fill: none; stroke: #b5473a; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="line2d_220">
+    <path d="M 429.969746 150.496694 
+L 429.969746 16.06072 
+" clip-path="url(#p287a536013)" style="fill: none; stroke-dasharray: 3.33,1.44; stroke-dashoffset: 0; stroke: #c98a1c; stroke-width: 0.9"/>
+   </g>
+   <g id="line2d_221">
+    <path d="M 257.760234 60.872712 
+L 443.98452 60.872712 
+" clip-path="url(#p287a536013)" style="fill: none; stroke-dasharray: 0.8,1.32; stroke-dashoffset: 0; stroke: #56656b; stroke-width: 0.8"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 257.760234 150.496694 
+L 257.760234 16.06072 
+" style="fill: none; stroke: #56656b; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 257.760234 150.496694 
+L 443.98452 150.496694 
+" style="fill: none; stroke: #56656b; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_34">
+    <!-- CF limit at 50 kHz -->
+    <g style="fill: #9a6212" transform="translate(376.978737 20.891424)scale(0.063 -0.063)">
+     <use xlink:href="#TeXGyreHeros-Regular-43"/>
+     <use xlink:href="#TeXGyreHeros-Regular-46" x="72.199982"/>
+     <use xlink:href="#TeXGyreHeros-Regular-20" x="133.299973"/>
+     <use xlink:href="#TeXGyreHeros-Regular-6c" x="161.09996"/>
+     <use xlink:href="#TeXGyreHeros-Regular-69" x="183.299957"/>
+     <use xlink:href="#TeXGyreHeros-Regular-6d" x="205.499954"/>
+     <use xlink:href="#TeXGyreHeros-Regular-69" x="288.799942"/>
+     <use xlink:href="#TeXGyreHeros-Regular-74" x="310.999939"/>
+     <use xlink:href="#TeXGyreHeros-Regular-20" x="338.799927"/>
+     <use xlink:href="#TeXGyreHeros-Regular-61" x="366.599915"/>
+     <use xlink:href="#TeXGyreHeros-Regular-74" x="422.199905"/>
+     <use xlink:href="#TeXGyreHeros-Regular-20" x="449.999893"/>
+     <use xlink:href="#TeXGyreHeros-Regular-35" x="477.799881"/>
+     <use xlink:href="#TeXGyreHeros-Regular-30" x="533.399872"/>
+     <use xlink:href="#TeXGyreHeros-Regular-20" x="588.999863"/>
+     <use xlink:href="#TeXGyreHeros-Regular-6b" x="616.79985"/>
+     <use xlink:href="#TeXGyreHeros-Regular-48" x="666.799835"/>
+     <use xlink:href="#TeXGyreHeros-Regular-7a" x="738.999817"/>
+    </g>
+    <!-- 500 µA -->
+    <g style="fill: #9a6212" transform="translate(406.720643 27.776339)scale(0.063 -0.063)">
+     <use xlink:href="#TeXGyreHeros-Regular-35"/>
+     <use xlink:href="#TeXGyreHeros-Regular-30" x="55.599991"/>
+     <use xlink:href="#TeXGyreHeros-Regular-30" x="111.199982"/>
+     <use xlink:href="#TeXGyreHeros-Regular-20" x="166.799973"/>
+     <use xlink:href="#TeXGyreHeros-Regular-b5" x="194.59996"/>
+     <use xlink:href="#TeXGyreHeros-Regular-41" x="250.199951"/>
+    </g>
+   </g>
+   <g id="text_35">
+    <!-- 10 mΩ -->
+    <g style="fill: #56656b" transform="translate(261.446602 59.098577)scale(0.063 -0.063)">
+     <use xlink:href="#TeXGyreHeros-Regular-31"/>
+     <use xlink:href="#TeXGyreHeros-Regular-30" x="55.599991"/>
+     <use xlink:href="#TeXGyreHeros-Regular-20" x="111.199982"/>
+     <use xlink:href="#TeXGyreHeros-Regular-6d" x="138.999969"/>
+     <use xlink:href="#TeXGyreHeros-Regular-3a9" x="222.299957"/>
+    </g>
+   </g>
+   <g id="text_36">
+    <!-- (b) -->
+    <g style="fill: #9a6212" transform="translate(242.543874 8.721562)scale(0.09 -0.09)">
+     <defs>
+      <path id="TeXGyreHeros-Bold-62" d="M 3680 1683 
+C 3680 2662 3136 3514 2227 3514 
+C 1798 3514 1491 3354 1274 3008 
+L 1274 4666 
+L 378 4666 
+L 378 0 
+L 1274 0 
+L 1274 397 
+C 1491 102 1792 -58 2227 -58 
+C 3053 -58 3680 640 3680 1683 
+z
+M 2784 1722 
+C 2784 1094 2470 691 2029 691 
+C 1574 691 1274 1082 1274 1741 
+C 1274 2368 1581 2765 2029 2765 
+C 2470 2765 2784 2362 2784 1722 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#TeXGyreHeros-Bold-28"/>
+     <use xlink:href="#TeXGyreHeros-Bold-62" x="33.299988"/>
+     <use xlink:href="#TeXGyreHeros-Bold-29" x="94.399979"/>
+    </g>
+   </g>
+   <g id="legend_2">
+    <g id="line2d_222">
+     <path d="M 263.160234 124.324507 
+L 268.560234 124.324507 
+L 273.960234 124.324507 
+" style="fill: none; stroke: #1a7a4c; stroke-width: 1.4; stroke-linecap: round"/>
+    </g>
+    <g id="text_37">
+     <!-- readout 20 nV/√Hz -->
+     <g transform="translate(278.760234 126.424507)scale(0.06 -0.06)">
+      <defs>
+       <path id="TeXGyreHeros-Regular-56" d="M 4128 4666 
+L 3494 4666 
+L 2202 717 
+L 832 4666 
+L 192 4666 
+L 1869 0 
+L 2509 0 
+L 4128 4666 
+z
+" transform="scale(0.015625)"/>
+       <path id="TeXGyreHeros-Regular-221a" d="M 3194 5594 
+L 2874 5658 
+L 1958 755 
+L 813 3251 
+L 326 2803 
+L 544 2560 
+L 704 2707 
+L 2086 -320 
+L 3194 5594 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#TeXGyreHeros-Regular-72"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="33.299988"/>
+      <use xlink:href="#TeXGyreHeros-Regular-61" x="88.899979"/>
+      <use xlink:href="#TeXGyreHeros-Regular-64" x="144.499969"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6f" x="200.09996"/>
+      <use xlink:href="#TeXGyreHeros-Regular-75" x="255.699951"/>
+      <use xlink:href="#TeXGyreHeros-Regular-74" x="311.299942"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="339.09993"/>
+      <use xlink:href="#TeXGyreHeros-Regular-32" x="366.899918"/>
+      <use xlink:href="#TeXGyreHeros-Regular-30" x="422.499908"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="478.099899"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6e" x="505.899887"/>
+      <use xlink:href="#TeXGyreHeros-Regular-56" x="561.499878"/>
+      <use xlink:href="#TeXGyreHeros-Regular-2f" x="628.199875"/>
+      <use xlink:href="#TeXGyreHeros-Regular-221a" x="655.999863"/>
+      <use xlink:href="#TeXGyreHeros-Regular-48" x="710.19986"/>
+      <use xlink:href="#TeXGyreHeros-Regular-7a" x="782.399841"/>
+     </g>
+    </g>
+    <g id="line2d_223">
+     <path d="M 263.160234 133.006694 
+L 268.560234 133.006694 
+L 273.960234 133.006694 
+" style="fill: none; stroke: #1f64a8; stroke-width: 1.4; stroke-linecap: round"/>
+    </g>
+    <g id="text_38">
+     <!-- readout 50 nV/√Hz -->
+     <g transform="translate(278.760234 135.106694)scale(0.06 -0.06)">
+      <use xlink:href="#TeXGyreHeros-Regular-72"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="33.299988"/>
+      <use xlink:href="#TeXGyreHeros-Regular-61" x="88.899979"/>
+      <use xlink:href="#TeXGyreHeros-Regular-64" x="144.499969"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6f" x="200.09996"/>
+      <use xlink:href="#TeXGyreHeros-Regular-75" x="255.699951"/>
+      <use xlink:href="#TeXGyreHeros-Regular-74" x="311.299942"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="339.09993"/>
+      <use xlink:href="#TeXGyreHeros-Regular-35" x="366.899918"/>
+      <use xlink:href="#TeXGyreHeros-Regular-30" x="422.499908"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="478.099899"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6e" x="505.899887"/>
+      <use xlink:href="#TeXGyreHeros-Regular-56" x="561.499878"/>
+      <use xlink:href="#TeXGyreHeros-Regular-2f" x="628.199875"/>
+      <use xlink:href="#TeXGyreHeros-Regular-221a" x="655.999863"/>
+      <use xlink:href="#TeXGyreHeros-Regular-48" x="710.19986"/>
+      <use xlink:href="#TeXGyreHeros-Regular-7a" x="782.399841"/>
+     </g>
+    </g>
+    <g id="line2d_224">
+     <path d="M 263.160234 141.688882 
+L 268.560234 141.688882 
+L 273.960234 141.688882 
+" style="fill: none; stroke: #b5473a; stroke-width: 1.4; stroke-linecap: round"/>
+    </g>
+    <g id="text_39">
+     <!-- readout 200 nV/√Hz -->
+     <g transform="translate(278.760234 143.788882)scale(0.06 -0.06)">
+      <use xlink:href="#TeXGyreHeros-Regular-72"/>
+      <use xlink:href="#TeXGyreHeros-Regular-65" x="33.299988"/>
+      <use xlink:href="#TeXGyreHeros-Regular-61" x="88.899979"/>
+      <use xlink:href="#TeXGyreHeros-Regular-64" x="144.499969"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6f" x="200.09996"/>
+      <use xlink:href="#TeXGyreHeros-Regular-75" x="255.699951"/>
+      <use xlink:href="#TeXGyreHeros-Regular-74" x="311.299942"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="339.09993"/>
+      <use xlink:href="#TeXGyreHeros-Regular-32" x="366.899918"/>
+      <use xlink:href="#TeXGyreHeros-Regular-30" x="422.499908"/>
+      <use xlink:href="#TeXGyreHeros-Regular-30" x="478.099899"/>
+      <use xlink:href="#TeXGyreHeros-Regular-20" x="533.69989"/>
+      <use xlink:href="#TeXGyreHeros-Regular-6e" x="561.499878"/>
+      <use xlink:href="#TeXGyreHeros-Regular-56" x="617.099869"/>
+      <use xlink:href="#TeXGyreHeros-Regular-2f" x="683.799866"/>
+      <use xlink:href="#TeXGyreHeros-Regular-221a" x="711.599854"/>
+      <use xlink:href="#TeXGyreHeros-Regular-48" x="765.79985"/>
+      <use xlink:href="#TeXGyreHeros-Regular-7a" x="837.999832"/>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p484728c44d">
+   <rect x="32.310234" y="16.06072" width="186.224286" height="134.435974"/>
+  </clipPath>
+  <clipPath id="p287a536013">
+   <rect x="257.760234" y="16.06072" width="186.224286" height="134.435974"/>
+  </clipPath>
+ </defs>
+</svg>
