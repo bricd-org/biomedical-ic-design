@@ -271,6 +271,15 @@ sinks and mirror dominate the noise. Next: (1) Lab 10 `--ota transistor` using F
 .noise fit (white + 1/f), report gain/ripple/Zin/noise against the behavioural run; (3) Ch 31 Lab 5
 and Lab 10 text + numbers. Then: route the Lab 14 array, a capstone reference run with expected
 numbers, the full-site check (light, dark, phone width), push and tag v0.1.
+**Interactive demos (user asked for many more, 15 Nov):** same pattern as `_includes/demos/sar.html`
+(navy panel like the www.thebricd.org hero, scoped CSS, one IIFE, included inside `{::nomarkdown}`);
+first move the shared CSS into `_includes/demos/base.html`. Planned: Ch 4 mains interference vs
+imbalance/CMRR/RLD gain; Ch 6 noise and NEF calculator; Ch 8 Harrison LNA Bode plot; Ch 9 chopper
+spectra (f_ch, 1/f corner, ripple); Ch 11 anti-alias order vs aliasing; Ch 13 aliasing and
+quantisation; Ch 19 live ΔΣ noise shaping (order, OSR, SQNR); Ch 20 incremental ΔΣ (M, CI vs CoI);
+Ch 22 coherent sampling and window leakage; Ch 24 Pan–Tompkins step-through with noise and bits;
+Ch 28 Cole plot and IQ demodulation; Ch 29 noise/power budget playground. Check each at phone width
+and in dark mode; no external libraries.
 Original plan:
 The outline has the lab table and a short section per lab. Write the set-up section, Lab 1 and
 Lab 2 in full (goal, code, expected figure and numbers, questions); keep the anchors
