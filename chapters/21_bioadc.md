@@ -54,10 +54,17 @@ Its limit is the VCO's tuning curve: frequency is not a linear function of volta
 
 A uniform sampler takes 500 samples per second of an ECG whether the heart is beating or the signal is flat between beats. A **level-crossing** ADC samples only when the signal has moved by a threshold $$\delta$$ since the last sample. It records the time of the crossing rather than the value. Its data rate, and much of its power, follows the signal's activity.
 
+[Figure 21.2](#fig-21-2) shows how. Two continuous-time comparators watch the input against the DAC level plus and minus $$\delta$$. When one fires, asynchronous logic steps an up/down counter, the DAC moves both thresholds by $$\delta$$, and an event register stores the direction with a time stamp from a free-running timer. No clock samples the input, so the comparators' delay and the timer's resolution set the timing error, and a feature smaller than $$\delta$$, like the P wave in the figure, is never seen at all.
+
+<figure id="fig-21-2">
+  <img src="{{ '/assets/figs/ch21_lc_arch.svg' | relative_url }}" style="width:720px" alt="Level-crossing ADC block diagram with two comparators, asynchronous up/down logic, a DAC that sets both thresholds, and an event register with a timer; below, a synthetic heartbeat with level lines, the tracked level and the up and down events">
+  <figcaption><span class="capnum">Figure 21.2.</span> <strong>A level-crossing ADC samples when the signal moves, not when a clock ticks.</strong> (a) Two comparators compare the input with the DAC level \(\pm\delta\); each firing steps the counter and the DAC and stores one event, a direction bit and a time stamp. (b) One synthetic heartbeat with \(\delta\) an eighth of the R wave: 19 events, crowded on the QRS complex and absent on the flat segments; the P wave, smaller than \(\delta\), produces none. From <code>figsrc/ch21_lc_arch_svg.py</code>.</figcaption>
+</figure>
+
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 21.1 · Level-crossing sampling of an ECG</div>
 
-`figsrc/ch21_figs.py` applies an ideal level-crossing sampler to the synthetic 1 mV ECG of `biosig.ecg()` and reconstructs it by linear interpolation ([Figure 21.2](#fig-21-2)):
+`figsrc/ch21_figs.py` applies an ideal level-crossing sampler to the synthetic 1 mV ECG of `biosig.ecg()` and reconstructs it by linear interpolation ([Figure 21.3](#fig-21-3)):
 
 - $$\delta = 7.6$$ µV: 562 samples per second and 2.4 µVrms of error, about the same rate as uniform sampling;
 - $$\delta = 27$$ µV: **156 samples per second**, three times fewer than 500 S/s, with 9.5 µVrms of error, 1 % of the R wave;
@@ -69,9 +76,9 @@ Most of the samples fall on the QRS complex, where the signal changes quickly; t
 
 The saving depends entirely on the signal. A sparse ECG or a spike train with long quiet periods benefits; an EEG, which is busy all the time, does not. The samples are non-uniform in time, so the digital processing that follows must either work with irregular samples or resample, and the threshold sets a resolution floor that, at useful compression, is far above the 1.5 µVrms noise target. Level crossing suits feature extraction (heart rate, spike detection) more than diagnostic recording.
 
-<figure id="fig-21-2">
+<figure id="fig-21-3">
   <img src="{{ '/assets/figs/ch21_levelcrossing.svg' | relative_url }}" style="width:720px" alt="An ECG sampled by a level-crossing ADC with a 50 microvolt threshold, and samples per second and reconstruction error versus threshold">
-  <figcaption><span class="capnum">Figure 21.2.</span> <strong>Event-driven sampling spends samples where the signal moves.</strong> (a) A synthetic ECG and the samples a level-crossing ADC with δ = 50 µV takes: dense on the QRS complexes, sparse on the flat segments. (b) Samples per second (left axis) and rms reconstruction error with linear interpolation (right axis) against the crossing threshold, with the 500 S/s of uniform sampling. Computed in <code>figsrc/ch21_figs.py</code> with <code>biosig.ecg()</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 21.3.</span> <strong>Event-driven sampling spends samples where the signal moves.</strong> (a) A synthetic ECG and the samples a level-crossing ADC with δ = 50 µV takes: dense on the QRS complexes, sparse on the flat segments. (b) Samples per second (left axis) and rms reconstruction error with linear interpolation (right axis) against the crossing threshold, with the 500 S/s of uniform sampling. Computed in <code>figsrc/ch21_figs.py</code> with <code>biosig.ecg()</code>.</figcaption>
 </figure>
 
 ## <span class="secnum">21.4</span>Compressive sensing
@@ -107,7 +114,7 @@ Open-BioAFE keeps the classic partition (chopped LNA, PGA, SAR or incremental Δ
 <div class="tbox tbox-pitfall" markdown="1">
 <div class="tbox-title">Common pitfall</div>
 
-Comparing an event-driven converter with a uniform one by samples per second alone. Each level-crossing sample carries a time stamp as well as a value, and its accuracy depends on the timing resolution; the reconstruction error, not the sample count, is the fair measure. Compare both at the same error, as in [Figure 21.2](#fig-21-2)b.
+Comparing an event-driven converter with a uniform one by samples per second alone. Each level-crossing sample carries a time stamp as well as a value, and its accuracy depends on the timing resolution; the reconstruction error, not the sample count, is the fair measure. Compare both at the same error, as in [Figure 21.3](#fig-21-3)b.
 
 </div>
 

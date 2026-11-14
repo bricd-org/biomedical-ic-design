@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 350" width="720" height="350" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>Lead-off detection: a DC current with a rail detector, and an AC current above the band measured as an impedance</title>
+  <defs>
+    <marker id="oa" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#1D2A30"/></marker>
+    <marker id="ok" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#9A6212"/></marker>
+  </defs>
+  <text x="8" y="16" font-size="11.5" fill="#1D2A30" text-anchor="start" font-weight="700">(a) DC lead-off: a few nanoamperes and a rail detector</text>
+  <rect x="10" y="44" width="54" height="122" rx="14" fill="#FBF1DF" stroke="#1D2A30" stroke-width="1.5"/>
+  <text x="37" y="109.0" font-size="10.5" fill="#1D2A30" text-anchor="middle" font-weight="700">body</text>
+  <path d="M64 74 H96 M124 74 H190" stroke="#1D2A30" stroke-width="1.5" fill="none"/>
+  <rect x="96" y="67" width="28" height="14" rx="2" fill="#fff" stroke="#1D2A30" stroke-width="1.4"/>
+  <text x="110" y="63" font-size="9" fill="#56656B" text-anchor="middle" font-style="italic">Z<tspan font-size="6.5" dy="2">e</tspan></text>
+  <circle cx="190" cy="74" r="2.6" fill="#1D2A30"/>
+  <path d="M64 136 H96 M124 136 H190" stroke="#1D2A30" stroke-width="1.5" fill="none"/>
+  <rect x="96" y="129" width="28" height="14" rx="2" fill="#fff" stroke="#1D2A30" stroke-width="1.4"/>
+  <text x="110" y="125" font-size="9" fill="#56656B" text-anchor="middle" font-style="italic">Z<tspan font-size="6.5" dy="2">e</tspan></text>
+  <circle cx="190" cy="136" r="2.6" fill="#1D2A30"/>
+  <text x="178" y="68" font-size="8.5" fill="#1D2A30" text-anchor="end" font-weight="700">IN+</text>
+  <text x="178" y="149" font-size="8.5" fill="#1D2A30" text-anchor="end" font-weight="700">IN−</text>
+  <circle cx="190" cy="38" r="10" fill="#fff" stroke="#9A6212" stroke-width="1.6"/>
+  <path d="M190 33 V43" stroke="#9A6212" stroke-width="1.5" marker-end="url(#ok)"/>
+  <text x="205" y="41" font-size="9" fill="#9A6212" text-anchor="start">6 nA from the supply</text>
+  <path d="M190 48 V74" stroke="#9A6212" stroke-width="1.4"/>
+  <circle cx="190" cy="168" r="10" fill="#fff" stroke="#9A6212" stroke-width="1.6"/>
+  <path d="M190 163 V173" stroke="#9A6212" stroke-width="1.5" marker-end="url(#ok)"/>
+  <text x="205" y="171" font-size="9" fill="#9A6212" text-anchor="start">6 nA to ground</text>
+  <path d="M190 136 V158" stroke="#9A6212" stroke-width="1.4"/>
+  <path d="M190 74 H250" stroke="#1D2A30" stroke-width="1.5" fill="none" marker-end="url(#oa)"/>
+  <path d="M190 136 H250" stroke="#1D2A30" stroke-width="1.5" fill="none" marker-end="url(#oa)"/>
+  <rect x="250" y="54" width="80" height="102" rx="3" fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.5"/>
+  <text x="290" y="95.0" font-size="10" fill="#1D2A30" text-anchor="middle" font-weight="700">chopped LNA</text>
+  <text x="290" y="108.0" font-size="10" fill="#1D2A30" text-anchor="middle" font-weight="700">+ DC servo</text>
+  <text x="290" y="121.0" font-size="8.5" fill="#56656B" text-anchor="middle">(Chapter 10)</text>
+  <path d="M330 80 H370" stroke="#1D2A30" stroke-width="1.5" fill="none" marker-end="url(#oa)"/>
+  <text x="374" y="84" font-size="9" fill="#1D2A30" text-anchor="start">signal</text>
+  <path d="M330 130 H370" stroke="#1D2A30" stroke-width="1.5" fill="none" marker-end="url(#oa)"/>
+  <text x="374" y="127" font-size="9" fill="#B5473A" text-anchor="start">flag: servo output</text>
+  <text x="374" y="139" font-size="9" fill="#B5473A" text-anchor="start">or comparator at a rail</text>
+  <text x="10" y="180" font-size="8.5" fill="#56656B" text-anchor="start">current returns through the RL electrode</text>
+  <path d="M530 150 H708 M530 150 V46" stroke="#B9C6C9" stroke-width="1"/>
+  <path d="M530 56 H708" stroke="#B9C6C9" stroke-width="0.8" stroke-dasharray="3 2"/>
+  <text x="708" y="52" font-size="8" fill="#56656B" text-anchor="end">rail</text>
+  <path d="M530 82 H708" stroke="#B5473A" stroke-width="0.9" stroke-dasharray="4 3"/>
+  <text x="534" y="78" font-size="8" fill="#B5473A" text-anchor="start">flag threshold</text>
+  <path d="M530.0 138.7 L530.9 138.7 L531.8 138.7 L532.7 138.7 L533.6 138.7 L534.5 138.7 L535.4 138.7 L536.3 138.7 L537.2 138.7 L538.1 138.7 L538.9 138.7 L539.8 138.7 L540.7 138.7 L541.6 138.7 L542.5 138.7 L543.4 138.7 L544.3 138.7 L545.2 138.7 L546.1 138.7 L547.0 138.7 L547.9 138.7 L548.8 138.7 L549.7 138.7 L550.6 138.7 L551.5 138.7 L552.4 138.7 L553.3 138.7 L554.2 138.7 L555.0 138.7 L555.9 138.7 L556.8 138.7 L557.7 138.7 L558.6 138.7 L559.5 138.7 L560.4 138.7 L561.3 138.7 L562.2 138.7 L563.1 138.7 L564.0 138.7 L564.9 138.7 L565.8 138.7 L566.7 138.7 L567.6 138.7 L568.5 138.7 L569.4 138.7 L570.3 138.7 L571.1 138.7 L572.0 138.7 L572.9 138.7 L573.8 138.7 L574.7 138.7 L575.6 138.7 L576.5 138.7 L577.4 138.7 L578.3 138.7 L579.2 138.7 L580.1 138.7 L581.0 138.7 L581.9 138.7 L582.8 138.7 L583.7 138.7 L584.6 138.7 L585.5 138.7 L586.4 138.7 L587.2 138.7 L588.1 138.7 L589.0 138.7 L589.9 138.7 L590.8 138.7 L591.7 138.7 L592.6 138.7 L593.5 138.7 L594.4 138.7 L595.3 138.7 L596.2 138.7 L597.1 138.7 L598.0 138.7 L598.9 138.7 L599.8 138.7 L600.7 138.7 L601.6 138.7 L602.5 138.7 L603.3 138.7 L604.2 138.7 L605.1 138.7 L606.0 138.7 L606.9 138.7 L607.8 138.7 L608.7 138.7 L609.6 138.7 L610.5 138.7 L611.4 138.7 L612.3 138.7 L613.2 138.7 L614.1 138.7 L615.0 138.7 L615.9 138.7 L616.8 138.7 L617.7 138.7 L618.6 138.7 L619.4 138.7 L620.3 138.7 L621.2 138.7 L622.1 138.7 L623.0 138.7 L623.9 138.7 L624.8 138.7 L625.7 138.7 L626.6 138.7 L627.5 138.7 L628.4 136.8 L629.3 133.5 L630.2 130.3 L631.1 127.3 L632.0 124.4 L632.9 121.6 L633.8 118.9 L634.7 116.3 L635.5 113.8 L636.4 111.5 L637.3 109.2 L638.2 107.0 L639.1 104.9 L640.0 102.9 L640.9 101.0 L641.8 99.1 L642.7 97.4 L643.6 95.7 L644.5 94.0 L645.4 92.5 L646.3 91.0 L647.2 89.5 L648.1 88.2 L649.0 86.9 L649.9 85.6 L650.8 84.4 L651.6 83.2 L652.5 82.1 L653.4 81.0 L654.3 80.0 L655.2 79.0 L656.1 78.1 L657.0 77.2 L657.9 76.3 L658.8 75.5 L659.7 74.7 L660.6 73.9 L661.5 73.2 L662.4 72.5 L663.3 71.8 L664.2 71.1 L665.1 70.5 L666.0 69.9 L666.9 69.4 L667.7 68.8 L668.6 68.3 L669.5 67.8 L670.4 67.3 L671.3 66.8 L672.2 66.4 L673.1 66.0 L674.0 65.6 L674.9 65.2 L675.8 64.8 L676.7 64.4 L677.6 64.1 L678.5 63.7 L679.4 63.4 L680.3 63.1 L681.2 62.8 L682.1 62.6 L683.0 62.3 L683.8 62.0 L684.7 61.8 L685.6 61.5 L686.5 61.3 L687.4 61.1 L688.3 60.9 L689.2 60.7 L690.1 60.5 L691.0 60.3 L691.9 60.1 L692.8 60.0 L693.7 59.8 L694.6 59.6 L695.5 59.5 L696.4 59.4 L697.3 59.2 L698.2 59.1 L699.1 59.0 L699.9 58.8 L700.8 58.7 L701.7 58.6 L702.6 58.5 L703.5 58.4 L704.4 58.3 L705.3 58.2 L706.2 58.1 L707.1 58.0 L708.0 57.9" stroke="#1F64A8" stroke-width="1.6" fill="none"/>
+  <path d="M627.9 150 V132" stroke="#56656B" stroke-width="0.8" stroke-dasharray="2 2"/>
+  <text x="534" y="137" font-size="8" fill="#1F64A8" text-anchor="start">6 nA × 1 MΩ = 6 mV</text>
+  <text x="631.9" y="162" font-size="8" fill="#56656B" text-anchor="start">contact lost</text>
+  <text x="530" y="42" font-size="8.5" fill="#1D2A30" text-anchor="start">v(IN+): drifts to the rail in milliseconds</text>
+  <path d="M8 196 H712" stroke="#E1E8E8" stroke-width="1.2"/>
+  <text x="8" y="216" font-size="11.5" fill="#1D2A30" text-anchor="start" font-weight="700">(b) AC lead-off: a small current above the band, measured as an impedance</text>
+  <rect x="10" y="228" width="54" height="112" rx="14" fill="#FBF1DF" stroke="#1D2A30" stroke-width="1.5"/>
+  <text x="37" y="288.0" font-size="10.5" fill="#1D2A30" text-anchor="middle" font-weight="700">body</text>
+  <path d="M64 252 H96 M124 252 H190" stroke="#1D2A30" stroke-width="1.5" fill="none"/>
+  <rect x="96" y="245" width="28" height="14" rx="2" fill="#fff" stroke="#1D2A30" stroke-width="1.4"/>
+  <text x="110" y="241" font-size="9" fill="#56656B" text-anchor="middle" font-style="italic">Z<tspan font-size="6.5" dy="2">e</tspan></text>
+  <circle cx="190" cy="252" r="2.6" fill="#1D2A30"/>
+  <path d="M64 316 H96 M124 316 H190" stroke="#1D2A30" stroke-width="1.5" fill="none"/>
+  <rect x="96" y="309" width="28" height="14" rx="2" fill="#fff" stroke="#1D2A30" stroke-width="1.4"/>
+  <text x="110" y="305" font-size="9" fill="#56656B" text-anchor="middle" font-style="italic">Z<tspan font-size="6.5" dy="2">e</tspan></text>
+  <circle cx="190" cy="316" r="2.6" fill="#1D2A30"/>
+  <text x="178" y="246" font-size="8.5" fill="#1D2A30" text-anchor="end" font-weight="700">IN+</text>
+  <text x="178" y="329" font-size="8.5" fill="#1D2A30" text-anchor="end" font-weight="700">IN−</text>
+  <circle cx="190" cy="284" r="10" fill="#fff" stroke="#9A6212" stroke-width="1.6"/>
+  <path d="M184 284 q3 -6 6 0 t6 0" stroke="#9A6212" stroke-width="1.5" fill="none"/>
+  <text x="205" y="287" font-size="9" fill="#9A6212" text-anchor="start"></text>
+  <path d="M190 252 V274 M190 294 V316" stroke="#9A6212" stroke-width="1.4"/>
+  <text x="176" y="281" font-size="9" fill="#9A6212" text-anchor="end" font-style="italic">I<tspan font-size="6.5" dy="2">AC</tspan></text>
+  <text x="176" y="294" font-size="8" fill="#9A6212" text-anchor="end">above the band</text>
+  <path d="M190 252 H250" stroke="#1D2A30" stroke-width="1.5" fill="none" marker-end="url(#oa)"/>
+  <path d="M190 316 H250" stroke="#1D2A30" stroke-width="1.5" fill="none" marker-end="url(#oa)"/>
+  <rect x="250" y="236" width="80" height="96" rx="3" fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.5"/>
+  <text x="290" y="274.0" font-size="10" fill="#1D2A30" text-anchor="middle" font-weight="700">LNA</text>
+  <text x="290" y="287.0" font-size="8.5" fill="#56656B" text-anchor="middle">the same</text>
+  <text x="290" y="300.0" font-size="8.5" fill="#56656B" text-anchor="middle">channel</text>
+  <path d="M330 284 H360" stroke="#1D2A30" stroke-width="1.5"/>
+  <circle cx="360" cy="284" r="2.6" fill="#1D2A30"/>
+  <path d="M360 284 V250 H400" stroke="#1D2A30" stroke-width="1.5" fill="none" marker-end="url(#oa)"/>
+  <path d="M360 284 V318 H400" stroke="#1D2A30" stroke-width="1.5" fill="none" marker-end="url(#oa)"/>
+  <rect x="400" y="234" width="132" height="32" rx="3" fill="#FBF1DF" stroke="#1D2A30" stroke-width="1.4"/>
+  <text x="466" y="248" font-size="9.5" fill="#1D2A30" text-anchor="middle" font-weight="700">low-pass, decimate</text>
+  <text x="466" y="260" font-size="8.5" fill="#56656B" text-anchor="middle">signal band only</text>
+  <rect x="400" y="302" width="132" height="32" rx="3" fill="#FBF1DF" stroke="#1D2A30" stroke-width="1.4"/>
+  <text x="466" y="316" font-size="9.5" fill="#1D2A30" text-anchor="middle" font-weight="700">demodulate at f<tspan font-size="6.5" dy="2">AC</tspan></text>
+  <text x="466" y="328" font-size="8.5" fill="#56656B" text-anchor="middle">voltage → |Z<tspan font-size="6.5" dy="2">e</tspan><tspan dy="-2">|, phase</tspan></text>
+  <path d="M532 250 H564" stroke="#1D2A30" stroke-width="1.5" fill="none" marker-end="url(#oa)"/>
+  <path d="M532 318 H564" stroke="#1D2A30" stroke-width="1.5" fill="none" marker-end="url(#oa)"/>
+  <text x="568" y="254" font-size="9" fill="#1D2A30" text-anchor="start">ECG, EEG</text>
+  <text x="568" y="314" font-size="9" fill="#1D2A30" text-anchor="start">impedance of every</text>
+  <text x="568" y="326" font-size="9" fill="#1D2A30" text-anchor="start">electrode, continuously</text>
+  <text x="568" y="338" font-size="8.5" fill="#56656B" text-anchor="start">(I/Q readout, Chapter 28)</text>
+  <text x="568" y="280" font-size="8.5" fill="#9A6212" text-anchor="start">keep the injected current inside</text>
+  <text x="568" y="292" font-size="8.5" fill="#9A6212" text-anchor="start">the patient-current limit (Chapter 4)</text>
+</svg>

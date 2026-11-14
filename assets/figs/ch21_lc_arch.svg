@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 410" width="720" height="410" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>A level-crossing ADC: two comparators around a tracking DAC level, and the events it produces from a waveform</title>
+  <defs>
+    <marker id="la" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#1D2A30"/></marker>
+    <marker id="lk" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#9A6212"/></marker>
+  </defs>
+  <text x="8" y="16" font-size="11.5" font-weight="700" fill="#1D2A30">(a) the converter: no sampling clock, only two comparators</text>
+  <text x="8" y="90" font-size="12" font-style="italic" fill="#1D2A30">v(t)</text>
+  <path d="M34 86 H70 M70 48 V122 M70 48 H112 M70 122 H112" stroke="#1D2A30" stroke-width="1.5" fill="none"/>
+  <circle cx="70" cy="86" r="2.8" fill="#1D2A30"/>
+  <path d="M112 40 L112 72 L152 56 Z" fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.5"/>
+  <path d="M112 98 L112 130 L152 114 Z" fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.5"/>
+  <path d="M200 192 H90 V64 H112 M90 106 H112" stroke="#1D2A30" stroke-width="1.5" fill="none"/>
+  <circle cx="90" cy="106" r="2.6" fill="#1D2A30"/>
+  <text x="96" y="186" font-size="8.5" fill="#56656B">v<tspan font-size="6.5" dy="2">DAC</tspan><tspan dy="-2"> ± δ</tspan></text>
+  <path d="M152 56 H200" stroke="#1D2A30" stroke-width="1.5" fill="none" marker-end="url(#la)"/>
+  <path d="M152 114 H200" stroke="#1D2A30" stroke-width="1.5" fill="none" marker-end="url(#la)"/>
+  <text x="176" y="50" font-size="9" fill="#1A7A4C" text-anchor="middle">up</text>
+  <text x="176" y="108" font-size="9" fill="#B5473A" text-anchor="middle">down</text>
+  <text x="132" y="34" font-size="8.5" fill="#56656B" text-anchor="middle">v &gt; v<tspan font-size="6.5" dy="2">DAC</tspan><tspan dy="-2"> + δ</tspan></text>
+  <text x="132" y="146" font-size="8.5" fill="#56656B" text-anchor="middle">v &lt; v<tspan font-size="6.5" dy="2">DAC</tspan><tspan dy="-2"> − δ</tspan></text>
+  <rect x="200" y="38" width="108" height="94" rx="3" fill="#FBF1DF" stroke="#1D2A30" stroke-width="1.5"/>
+  <text x="254" y="70" font-size="10" font-weight="700" fill="#1D2A30" text-anchor="middle">asynchronous</text>
+  <text x="254" y="84" font-size="10" font-weight="700" fill="#1D2A30" text-anchor="middle">logic</text>
+  <text x="254" y="102" font-size="8.5" fill="#56656B" text-anchor="middle">up/down counter</text>
+  <text x="254" y="115" font-size="8.5" fill="#56656B" text-anchor="middle">holds the level code</text>
+  <rect x="200" y="172" width="108" height="40" rx="3" fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.5"/>
+  <text x="254" y="189" font-size="10" font-weight="700" fill="#1D2A30" text-anchor="middle">DAC</text>
+  <text x="254" y="203" font-size="8.5" fill="#56656B" text-anchor="middle">level ± δ</text>
+  <path d="M254 132 V172" stroke="#1D2A30" stroke-width="1.5" fill="none" marker-end="url(#la)"/>
+  <rect x="348" y="50" width="112" height="72" rx="3" fill="#FBF1DF" stroke="#1D2A30" stroke-width="1.5"/>
+  <text x="404" y="76" font-size="10" font-weight="700" fill="#1D2A30" text-anchor="middle">event register</text>
+  <text x="404" y="94" font-size="8.5" fill="#56656B" text-anchor="middle">direction bit</text>
+  <text x="404" y="107" font-size="8.5" fill="#56656B" text-anchor="middle">+ time stamp</text>
+  <path d="M308 86 H348" stroke="#1D2A30" stroke-width="1.5" fill="none" marker-end="url(#la)"/>
+  <path d="M404 16 V50" stroke="#9A6212" stroke-width="1.5" fill="none" marker-end="url(#lk)"/>
+  <text x="410" y="28" font-size="8.5" fill="#9A6212">timer clock</text>
+  <path d="M460 86 H500" stroke="#1D2A30" stroke-width="1.5" fill="none" marker-end="url(#la)"/>
+  <text x="480" y="80" font-size="9" fill="#1D2A30" text-anchor="middle">events</text>
+  <text x="514" y="56" font-size="9" fill="#56656B">Nothing samples the input on a clock:</text>
+  <text x="514" y="69" font-size="9" fill="#56656B">a comparator fires when v(t) has moved</text>
+  <text x="514" y="82" font-size="9" fill="#56656B">by δ from the last level, the counter</text>
+  <text x="514" y="95" font-size="9" fill="#56656B">steps, and the DAC moves both thresholds.</text>
+  <text x="514" y="108" font-size="9" fill="#56656B">Each event is one bit plus a time stamp,</text>
+  <text x="514" y="121" font-size="9" fill="#56656B">so the data rate follows the signal's</text>
+  <text x="514" y="134" font-size="9" fill="#56656B">activity. The timer's resolution and</text>
+  <text x="514" y="147" font-size="9" fill="#56656B">the comparators' delay set the timing error.</text>
+  <text x="8" y="236" font-size="11.5" font-weight="700" fill="#1D2A30">(b) the events from one heartbeat</text>
+  <path d="M70 378.3 H700" stroke="#E1E8E8" stroke-width="0.8"/>
+  <path d="M70 364.7 H700" stroke="#E1E8E8" stroke-width="0.8"/>
+  <path d="M70 351.0 H700" stroke="#E1E8E8" stroke-width="0.8"/>
+  <path d="M70 337.4 H700" stroke="#E1E8E8" stroke-width="0.8"/>
+  <path d="M70 323.7 H700" stroke="#E1E8E8" stroke-width="0.8"/>
+  <path d="M70 310.1 H700" stroke="#E1E8E8" stroke-width="0.8"/>
+  <path d="M70 296.4 H700" stroke="#E1E8E8" stroke-width="0.8"/>
+  <path d="M70 282.8 H700" stroke="#E1E8E8" stroke-width="0.8"/>
+  <path d="M70 269.1 H700" stroke="#E1E8E8" stroke-width="0.8"/>
+  <path d="M70 255.5 H700" stroke="#E1E8E8" stroke-width="0.8"/>
+  <text x="64" y="323.7" font-size="8.5" fill="#56656B" text-anchor="end">levels</text>
+  <text x="64" y="334.7" font-size="8.5" fill="#56656B" text-anchor="end">δ apart</text>
+  <path d="M70.0 364.7 L72.1 364.7 L74.2 364.7 L76.3 364.7 L78.4 364.7 L80.5 364.7 L82.6 364.7 L84.7 364.7 L86.8 364.7 L88.9 364.7 L91.0 364.7 L93.1 364.7 L95.2 364.7 L97.3 364.7 L99.4 364.7 L101.5 364.7 L103.6 364.7 L105.7 364.7 L107.8 364.7 L109.9 364.6 L112.0 364.6 L114.1 364.6 L116.2 364.6 L118.3 364.5 L120.4 364.5 L122.5 364.4 L124.6 364.3 L126.7 364.2 L128.8 364.0 L131.0 363.9 L133.1 363.7 L135.2 363.4 L137.3 363.2 L139.4 362.8 L141.5 362.5 L143.6 362.0 L145.7 361.6 L147.8 361.0 L149.9 360.5 L152.0 359.8 L154.1 359.2 L156.2 358.5 L158.3 357.8 L160.4 357.0 L162.5 356.3 L164.6 355.5 L166.7 354.8 L168.8 354.1 L170.9 353.5 L173.0 352.9 L175.1 352.5 L177.2 352.1 L179.3 351.8 L181.4 351.6 L183.5 351.6 L185.6 351.6 L187.7 351.8 L189.8 352.1 L191.9 352.5 L194.0 353.0 L196.1 353.6 L198.2 354.2 L200.3 354.9 L202.4 355.6 L204.5 356.3 L206.6 357.1 L208.7 357.8 L210.8 358.5 L212.9 359.2 L215.0 359.9 L217.1 360.5 L219.2 361.1 L221.3 361.6 L223.4 362.1 L225.5 362.5 L227.6 362.9 L229.7 363.2 L231.8 363.5 L233.9 363.7 L236.0 363.9 L238.1 364.1 L240.2 364.2 L242.3 364.3 L244.4 364.4 L246.5 364.5 L248.6 364.5 L250.8 364.6 L252.9 364.6 L255.0 364.6 L257.1 364.6 L259.2 364.7 L261.3 364.7 L263.4 364.7 L265.5 364.7 L267.6 364.7 L269.7 364.7 L271.8 364.7 L273.9 364.7 L276.0 364.7 L278.1 364.7 L280.2 364.7 L282.3 364.7 L284.4 364.7 L286.5 364.7 L288.6 364.7 L290.7 364.6 L292.8 364.5 L294.9 364.3 L297.0 363.8 L299.1 362.8 L301.2 360.9 L303.3 357.5 L305.4 351.9 L307.5 343.4 L309.6 331.7 L311.7 316.8 L313.8 299.9 L315.9 282.9 L318.0 268.2 L320.1 258.5 L322.2 255.5 L324.3 260.0 L326.4 271.0 L328.5 286.7 L330.6 304.5 L332.7 322.3 L334.8 338.6 L336.9 352.7 L339.0 364.6 L341.1 374.2 L343.2 381.5 L345.3 386.2 L347.4 388.0 L349.5 387.0 L351.6 383.9 L353.7 379.5 L355.8 375.1 L357.9 371.3 L360.0 368.5 L362.1 366.7 L364.2 365.6 L366.3 365.1 L368.4 364.8 L370.6 364.7 L372.7 364.7 L374.8 364.7 L376.9 364.7 L379.0 364.7 L381.1 364.7 L383.2 364.7 L385.3 364.7 L387.4 364.7 L389.5 364.7 L391.6 364.7 L393.7 364.7 L395.8 364.7 L397.9 364.6 L400.0 364.6 L402.1 364.6 L404.2 364.6 L406.3 364.6 L408.4 364.6 L410.5 364.5 L412.6 364.5 L414.7 364.4 L416.8 364.4 L418.9 364.3 L421.0 364.2 L423.1 364.1 L425.2 364.0 L427.3 363.9 L429.4 363.7 L431.5 363.5 L433.6 363.3 L435.7 363.0 L437.8 362.7 L439.9 362.4 L442.0 362.0 L444.1 361.6 L446.2 361.2 L448.3 360.6 L450.4 360.1 L452.5 359.4 L454.6 358.7 L456.7 358.0 L458.8 357.1 L460.9 356.3 L463.0 355.3 L465.1 354.3 L467.2 353.3 L469.3 352.2 L471.4 351.0 L473.5 349.8 L475.6 348.6 L477.7 347.4 L479.8 346.1 L481.9 344.9 L484.0 343.6 L486.1 342.4 L488.2 341.3 L490.4 340.1 L492.5 339.1 L494.6 338.1 L496.7 337.2 L498.8 336.4 L500.9 335.7 L503.0 335.1 L505.1 334.7 L507.2 334.3 L509.3 334.2 L511.4 334.1 L513.5 334.2 L515.6 334.4 L517.7 334.8 L519.8 335.3 L521.9 335.9 L524.0 336.6 L526.1 337.5 L528.2 338.4 L530.3 339.4 L532.4 340.5 L534.5 341.7 L536.6 342.9 L538.7 344.1 L540.8 345.3 L542.9 346.6 L545.0 347.8 L547.1 349.0 L549.2 350.2 L551.3 351.4 L553.4 352.6 L555.5 353.6 L557.6 354.7 L559.7 355.7 L561.8 356.6 L563.9 357.4 L566.0 358.2 L568.1 359.0 L570.2 359.7 L572.3 360.3 L574.4 360.8 L576.5 361.3 L578.6 361.8 L580.7 362.2 L582.8 362.5 L584.9 362.9 L587.0 363.1 L589.1 363.4 L591.2 363.6 L593.3 363.8 L595.4 363.9 L597.5 364.0 L599.6 364.2 L601.7 364.2 L603.8 364.3 L605.9 364.4 L608.0 364.5 L610.2 364.5 L612.3 364.5 L614.4 364.6 L616.5 364.6 L618.6 364.6 L620.7 364.6 L622.8 364.6 L624.9 364.7 L627.0 364.7 L629.1 364.7 L631.2 364.7 L633.3 364.7 L635.4 364.7 L637.5 364.7 L639.6 364.7 L641.7 364.7 L643.8 364.7 L645.9 364.7 L648.0 364.7 L650.1 364.7 L652.2 364.7 L654.3 364.7 L656.4 364.7 L658.5 364.7 L660.6 364.7 L662.7 364.7 L664.8 364.7 L666.9 364.7 L669.0 364.7 L671.1 364.7 L673.2 364.7 L675.3 364.7 L677.4 364.7 L679.5 364.7 L681.6 364.7 L683.7 364.7 L685.8 364.7 L687.9 364.7 L690.0 364.7 L692.1 364.7 L694.2 364.7 L696.3 364.7 L698.4 364.7" stroke="#1F64A8" stroke-width="1.6" fill="none"/>
+  <path d="M70.0 364.7 H305.9 V351.0 H309.1 V337.4 H311.2 V323.7 H312.8 V310.1 H314.3 V296.4 H316.4 V282.8 H318.0 V269.1 H328.5 V282.8 H330.1 V296.4 H331.7 V310.1 H333.2 V323.7 H334.8 V337.4 H336.9 V351.0 H339.5 V364.7 H342.7 V378.3 H375.8 V364.7 H471.4 V351.0 H496.7 V337.4 H550.8 V351.0 H700.0" stroke="#9A6212" stroke-width="1.2" fill="none" stroke-dasharray="3 2"/>
+  <circle cx="305.9" cy="351.0" r="2.3" fill="#1A7A4C"/>
+  <circle cx="309.1" cy="337.4" r="2.3" fill="#1A7A4C"/>
+  <circle cx="311.2" cy="323.7" r="2.3" fill="#1A7A4C"/>
+  <circle cx="312.8" cy="310.1" r="2.3" fill="#1A7A4C"/>
+  <circle cx="314.3" cy="296.4" r="2.3" fill="#1A7A4C"/>
+  <circle cx="316.4" cy="282.8" r="2.3" fill="#1A7A4C"/>
+  <circle cx="318.0" cy="269.1" r="2.3" fill="#1A7A4C"/>
+  <circle cx="328.5" cy="282.8" r="2.3" fill="#B5473A"/>
+  <circle cx="330.1" cy="296.4" r="2.3" fill="#B5473A"/>
+  <circle cx="331.7" cy="310.1" r="2.3" fill="#B5473A"/>
+  <circle cx="333.2" cy="323.7" r="2.3" fill="#B5473A"/>
+  <circle cx="334.8" cy="337.4" r="2.3" fill="#B5473A"/>
+  <circle cx="336.9" cy="351.0" r="2.3" fill="#B5473A"/>
+  <circle cx="339.5" cy="364.7" r="2.3" fill="#B5473A"/>
+  <circle cx="342.7" cy="378.3" r="2.3" fill="#B5473A"/>
+  <circle cx="375.8" cy="364.7" r="2.3" fill="#1A7A4C"/>
+  <circle cx="471.4" cy="351.0" r="2.3" fill="#1A7A4C"/>
+  <circle cx="496.7" cy="337.4" r="2.3" fill="#1A7A4C"/>
+  <circle cx="550.8" cy="351.0" r="2.3" fill="#B5473A"/>
+  <text x="700" y="251.5" font-size="8.5" fill="#56656B" text-anchor="end">19 events in one beat, none on the flat parts</text>
+  <text x="416.5" y="282.8" font-size="8.5" fill="#9A6212">tracked level</text>
+  <text x="366.1" y="260.9" font-size="8.5" fill="#1A7A4C">● up</text>
+  <text x="366.1" y="271.9" font-size="8.5" fill="#B5473A">● down</text>
+</svg>

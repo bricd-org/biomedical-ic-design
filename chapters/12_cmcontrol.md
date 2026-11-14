@@ -92,6 +92,13 @@ A detached or drying electrode must be flagged, not digitised as signal. Two met
 
 **AC lead-off** injects a small current above the signal band and measures the voltage it produces. That is a measurement of the electrode impedance, not only a yes-or-no flag. It must stay within the frequency-dependent patient-current limits ([Chapter 4]({% link chapters/04_interference.md %})), and it must not intermodulate with the signal. Open-BioAFE extends it into continuous impedance tracking with I/Q demodulation in [Chapter 28]({% link chapters/28_bioz.md %}).
 
+[Figure 12.3](#fig-12-3) compares the two. The DC method needs only two current sources per channel and a detector the chip already has; the AC method reuses the whole channel and returns a number instead of a flag.
+
+<figure id="fig-12-3">
+  <img src="{{ '/assets/figs/ch12_leadoff.svg' | relative_url }}" style="width:720px" alt="DC lead-off: 6 nA sources into IN+ and out of IN-, a chopped LNA whose servo output flags a rail, and the input voltage drifting to the rail after the contact is lost; AC lead-off: a current source above the band between the inputs, the LNA output split into a low-pass signal path and a demodulator that gives the electrode impedance">
+  <figcaption><span class="capnum">Figure 12.3.</span> <strong>DC lead-off gives a flag; AC lead-off gives an impedance.</strong> (a) A few nanoamperes flow into IN+ and out of IN− and return through the RL electrode. A good contact turns them into millivolts, inside the servo's range; a lost contact lets the input drift to the rail within milliseconds, where the servo output or a comparator flags it. (b) A small current above the signal band produces a voltage proportional to the electrode impedance; the channel low-passes the signal band as usual, and a demodulator at the injection frequency returns \(|Z_e|\) and its phase, the method Chapter 28 develops. From <code>figsrc/ch12_leadoff_svg.py</code>.</figcaption>
+</figure>
+
 ## <span class="secnum">12.4</span>Input protection, ESD and RF filtering
 
 Every input pin connects the chip to a patient and to whoever handles the cable. It needs protection against electrostatic discharge, typically 2 kV human-body-model at the pins and more at the connector, and, for ECG, against defibrillation: up to 5 kV across the electrodes for a few milliseconds ([Chapter 4]({% link chapters/04_interference.md %})).
