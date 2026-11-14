@@ -92,6 +92,12 @@ assign done = (ptr == 0);
 
 **Redundancy** uses more cycles than bits, with weights of radix below two: a 12-bit converter with 14 cycles of radix 1.8 has weights 1820, 1011, 562, … units. Each bit's weight is now smaller than the sum of all the bits after it, so a wrong early decision, caused by noise, incomplete settling or a too-large MSB, can be corrected by the later bits. That makes calibration always possible (there are no gaps in the transfer curve), and it allows the early decisions to be fast and noisy.
 
+Try the two kinds of search below. Step through a conversion, then switch on the comparator noise: it flips a fast decision only when the residue is already small, and the binary search cannot undo that, because its later steps add up to less than the step just taken. The radix-1.8 search has 25 % to spare after every step, and recovers. *Convert 1000 inputs* counts the damage for both.
+
+{::nomarkdown}
+{% include demos/sar.html %}
+{:/}
+
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 18.1 · What calibration and redundancy recover</div>
 

@@ -1,0 +1,232 @@
+<!-- Interactive demo: one SAR conversion, binary or redundant, with noisy fast decisions (Chapter 18).
+     Self-contained: scoped CSS (.sard), one IIFE, no libraries; chapters include it inside a nomarkdown block. -->
+<div class="sard" id="sard" role="group" aria-label="Interactive SAR converter demo">
+  <div class="sard-head">
+    <span>// try it · one 12-bit SAR conversion</span>
+    <span class="sard-mode" role="group" aria-label="Weights">
+      <button type="button" data-mode="bin" aria-pressed="true">binary · 12</button><button type="button" data-mode="red" aria-pressed="false">radix 1.8 · 14</button>
+    </span>
+  </div>
+  <label class="sard-vin">
+    <span>v<sub>in</sub> <b id="sardVinTxt">+0.1234 V</b></span>
+    <input type="range" id="sardVin" min="-0.4995" max="0.4995" step="0.0001" value="0.1234" aria-label="Input voltage">
+  </label>
+  <div class="sard-scope">
+    <canvas id="sardDac" aria-hidden="true"></canvas>
+    <span class="sard-tag">DAC voltage after each decision</span>
+    <span class="sard-tag r">v<sub>in</sub> dashed</span>
+  </div>
+  <div class="sard-scope sard-scope2">
+    <canvas id="sardRes" aria-hidden="true"></canvas>
+    <span class="sard-tag">residue |v<sub>in</sub> − v<sub>DAC</sub>| before each decision, log scale</span>
+  </div>
+  <div class="sard-cells" id="sardCells" aria-hidden="true"></div>
+  <div class="sard-read" aria-live="polite">
+    <span>code <b id="sardCode">–</b></span><span>ideal <b id="sardIdeal">–</b></span><span>error <b id="sardErr">–</b></span>
+  </div>
+  <div class="sard-controls">
+    <button type="button" class="sard-btn" id="sardStep">Step</button>
+    <button type="button" class="sard-btn" id="sardRun">Run</button>
+    <button type="button" class="sard-btn" id="sardReset">Reset</button>
+    <button type="button" class="sard-toggle" id="sardNoise" aria-pressed="false">Noisy fast decisions</button>
+    <button type="button" class="sard-btn" id="sardMany">Convert 1000 inputs</button>
+  </div>
+  <p class="sard-caption" id="sardCap" aria-live="polite"></p>
+  <p class="sard-stats" id="sardStats"></p>
+</div>
+
+<style>
+.sard{position:relative;margin:1.6rem 0;border-radius:12px;background:linear-gradient(160deg,#0c2340,#143a66);padding:16px 16px 14px;color:#d7e6f7;box-shadow:0 24px 50px -30px rgba(12,35,64,.65);font-family:"Libre Franklin",sans-serif;}
+.sard::before{content:"";position:absolute;inset:7px;border:1px solid rgba(120,170,225,.26);border-radius:8px;pointer-events:none;}
+.sard *{box-sizing:border-box;}
+.sard-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(170,205,240,.75);margin:2px 2px 10px;}
+.sard-mode{display:inline-flex;border:1px solid rgba(230,190,95,.45);border-radius:30px;overflow:hidden;}
+.sard-mode button{font:inherit;letter-spacing:.08em;color:rgba(233,208,143,.7);background:transparent;border:0;padding:3px 10px;cursor:pointer;}
+.sard-mode button[aria-pressed="true"]{background:rgba(230,190,95,.22);color:#f3d48a;}
+.sard-vin{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:10px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:rgba(170,205,240,.8);margin:0 2px 8px;}
+.sard-vin b{color:#fff;font-weight:500;}
+.sard-vin input{width:100%;accent-color:#e0b85a;}
+.sard-scope{position:relative;border-radius:7px;background:rgba(5,16,32,.55);border:1px solid rgba(120,170,225,.2);overflow:hidden;}
+.sard-scope2{margin-top:6px;}
+.sard-scope canvas{display:block;width:100%;height:150px;}
+.sard-scope2 canvas{height:104px;}
+.sard-tag{position:absolute;top:5px;left:8px;font-family:"IBM Plex Mono",monospace;font-size:9.5px;color:rgba(170,205,240,.75);}
+.sard-tag.r{left:auto;right:8px;color:#e9d08f;}
+.sard-cells{display:grid;grid-template-columns:repeat(14,1fr);gap:3px;margin-top:8px;}
+.sard-cell{border-radius:4px;border:1px solid rgba(140,190,240,.22);background:rgba(255,255,255,.04);text-align:center;padding:3px 0 2px;font-family:"IBM Plex Mono",monospace;min-width:0;}
+.sard-cell b{display:block;font-size:13px;font-weight:500;color:rgba(205,225,248,.3);line-height:1.15;}
+.sard-cell i{display:block;font-style:normal;font-size:8px;color:rgba(160,195,230,.6);overflow:hidden;}
+.sard-cell.quiet{border-style:dashed;}
+.sard-cell.done b{color:#fff;}
+.sard-cell.one{background:rgba(86,156,222,.38);border-color:rgba(160,210,255,.7);}
+.sard-cell.trial{border-color:#f3d48a;box-shadow:0 0 9px rgba(230,190,95,.55);}
+.sard-cell.wrong{border-color:#f08a6a;box-shadow:0 0 9px rgba(240,138,106,.6);}
+.sard-cell.off{visibility:hidden;}
+.sard-read{display:flex;gap:18px;flex-wrap:wrap;margin:9px 2px 0;font-family:"IBM Plex Mono",monospace;font-size:11px;color:rgba(170,205,240,.75);}
+.sard-read b{color:#fff;font-weight:500;}
+.sard-controls{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;}
+.sard-btn,.sard-toggle{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:rgba(205,225,248,.85);background:transparent;border:1px solid rgba(140,190,240,.35);border-radius:30px;padding:5px 12px;cursor:pointer;}
+.sard-btn:hover,.sard-toggle:hover{color:#fff;border-color:#9fd0ff;}
+.sard-btn:disabled{opacity:.4;cursor:not-allowed;}
+.sard-toggle::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;background:rgba(160,195,230,.35);vertical-align:1px;}
+.sard-toggle[aria-pressed="true"]{border-color:#f08a6a;color:#fff;background:rgba(240,138,106,.14);}
+.sard-toggle[aria-pressed="true"]::before{background:#f08a6a;box-shadow:0 0 6px #f08a6a;}
+.sard button:focus-visible,.sard input:focus-visible{outline:2px solid #9fd0ff;outline-offset:2px;}
+.sard-caption{margin:10px 2px 0 !important;font-size:13.5px;line-height:1.5;color:rgba(215,230,247,.92);min-height:3em;}
+.sard-stats{margin:4px 2px 0 !important;font-family:"IBM Plex Mono",monospace;font-size:11px;line-height:1.5;color:#e9d08f;min-height:1.5em;}
+@media (max-width:640px){.sard-vin{grid-template-columns:1fr;}.sard-cell b{font-size:11px;}.sard-cell i{font-size:6.5px;}.sard-caption{font-size:12.5px;}}
+</style>
+
+<script>
+(function () {
+  var root = document.getElementById('sard');
+  if (!root) return;
+  var $ = function (id) { return document.getElementById(id); };
+  var LSB = 1 / 4096;                      // volts: ±0.5 V differential full scale, 12 bits
+  var SIG_FAST = 4, SIG_QUIET = 0.25;      // comparator noise in LSB: fast decisions, low-noise decisions
+  var NFAST = 7;                           // the first seven decisions are the fast, noisy ones
+  var S = { mode: 'bin', noise: false, vin: 0.1234 / LSB, k: 0, x: 0, hist: [], nz: [], steps: [], timer: null };
+
+  function stepsFor(mode) {
+    var s = [], i;
+    if (mode === 'bin') { for (i = 0; i < 12; i++) s.push(1024 / Math.pow(2, i)); }
+    else { var r = 1 / 1.8, s0 = 2048 * (1 - r) / (1 - Math.pow(r, 14)); for (i = 0; i < 14; i++) s.push(s0 * Math.pow(r, i)); }
+    return s;
+  }
+  function gauss() { var u = 1 - Math.random(), v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+  function noiseFor(n, on) { var a = []; for (var i = 0; i < n; i++) a.push(on ? (i < NFAST ? SIG_FAST : SIG_QUIET) * gauss() : 0); return a; }
+  function codeOf(x) { return Math.max(0, Math.min(4095, Math.round(x + 2047.5))); }
+  function idealOf(v) { return Math.max(0, Math.min(4095, Math.floor(v + 2048))); }
+  function convert(v, steps, on) {           // a whole conversion, for the statistics
+    var x = 0, nz = noiseFor(steps.length, on);
+    for (var i = 0; i < steps.length; i++) x += (v - x + nz[i] > 0) ? steps[i] : -steps[i];
+    return (codeOf(x) - 2047.5) - v;         // error of the reconstructed value, LSB (ideal quantiser: ±0.5)
+  }
+  function fmtV(v) { return (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(4) + ' V'; }
+  function fmtL(e) { var a = Math.abs(e); return a >= 100 ? a.toFixed(0) : a >= 10 ? a.toFixed(1) : a.toFixed(2); }
+
+  function reset() {
+    stop();
+    S.steps = stepsFor(S.mode); S.k = 0; S.x = 0; S.hist = []; S.nz = noiseFor(S.steps.length, S.noise);
+    cap('Sampled v<sub>in</sub> = ' + fmtV(S.vin * LSB) + '. The DAC starts at mid-scale; each decision moves it up or down by the next step, ' +
+        'first ' + fmtL(S.steps[0]) + ' LSB. ' + (S.mode === 'red' ? 'With radix 1.8 every step is smaller than the sum of all the steps after it.' :
+        'Binary steps halve every time: 12 decisions for 12 bits.'));
+    draw();
+  }
+  function step() {
+    if (S.k >= S.steps.length) return false;
+    var e = S.vin - S.x, n = S.nz[S.k], d = (e + n) > 0, wrong = d !== (e > 0), s = S.steps[S.k];
+    S.x += d ? s : -s;
+    S.hist.push({ e: e, d: d, wrong: wrong, x: S.x, s: s });
+    S.k++;
+    var rest = 0; for (var i = S.k; i < S.steps.length; i++) rest += S.steps[i];
+    var t = 'Decision ' + S.k + ': ' + (d ? 'v<sub>in</sub> &gt; v<sub>DAC</sub>, so the bit is 1 and the DAC moves up ' : 'v<sub>in</sub> &lt; v<sub>DAC</sub>, so the bit is 0 and the DAC moves down ') +
+            fmtL(s) + ' LSB. ';
+    if (wrong) t += '<b style="color:#f39a7c">Noise flipped this decision</b>: the residue was only ' + fmtL(e) + ' LSB, inside the comparator noise. ' +
+            (rest >= Math.abs(S.vin - S.x) ? 'The steps still to come add up to ' + fmtL(rest) + ' LSB, enough to undo it.' :
+             'The steps still to come add up to only ' + fmtL(rest) + ' LSB, so the error stays in the result.');
+    else t += 'Residue now ' + fmtL(S.vin - S.x) + ' LSB.';
+    if (S.k === S.steps.length) {
+      var err = codeOf(S.x) - idealOf(S.vin);
+      t += ' Done after ' + S.k + ' decisions: the output adds up the steps, code ' + codeOf(S.x) + ', error ' + (err > 0 ? '+' : '') + err + ' LSB.';
+    }
+    cap(t); draw();
+    return S.k < S.steps.length;
+  }
+  function run() {
+    if (S.timer) { stop(); return; }
+    if (S.k >= S.steps.length) reset();
+    $('sardRun').textContent = 'Pause';
+    S.timer = setInterval(function () { if (!step()) stop(); }, 420);
+  }
+  function stop() { if (S.timer) clearInterval(S.timer); S.timer = null; $('sardRun').textContent = 'Run'; }
+  function cap(h) { $('sardCap').innerHTML = h; }
+
+  function many() {
+    var out = [], modes = [['bin', 'binary, 12 decisions'], ['red', 'radix 1.8, 14 decisions']];
+    modes.forEach(function (m) {
+      var st = stepsFor(m[0]), ss = 0, worst = 0, bad = 0;
+      for (var i = 0; i < 1000; i++) {
+        var v = (Math.random() - 0.5) * 4094, e = convert(v, st, S.noise);
+        ss += e * e; worst = Math.max(worst, Math.abs(e)); if (Math.abs(e) > 1) bad++;
+      }
+      out.push(m[1] + ': rms error ' + Math.sqrt(ss / 1000).toFixed(2) + ' LSB, worst ' + worst.toFixed(1) + ' LSB, ' + (bad / 10).toFixed(1) + ' % off by more than 1 LSB');
+    });
+    $('sardStats').innerHTML = '1000 random inputs, ' + (S.noise ? 'comparator noise ' + SIG_FAST + ' LSB rms on the fast decisions and ' + SIG_QUIET + ' LSB on the low-noise ones' : 'noiseless comparator') +
+      ' (an ideal 12-bit quantiser: rms 0.29 LSB, worst 0.5 LSB):<br>' + out.join('<br>');
+  }
+
+  // ---- drawing ----
+  function setup(c) {
+    var dpr = window.devicePixelRatio || 1, w = c.clientWidth, h = c.clientHeight;
+    if (c.width !== Math.round(w * dpr) || c.height !== Math.round(h * dpr)) { c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); }
+    var g = c.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+    return { g: g, w: w, h: h };
+  }
+  function draw() {
+    var N = S.steps.length, d = setup($('sardDac')), g = d.g, L = 44, R = 12, T = 28, B = 12;
+    var xs = function (i) { return L + (d.w - L - R) * i / N; };
+    var ys = function (v) { return T + (d.h - T - B) * (0.5 - v / 4096); };
+    g.font = '9.5px "IBM Plex Mono", monospace'; g.fillStyle = 'rgba(170,205,240,.6)'; g.strokeStyle = 'rgba(140,190,240,.15)'; g.lineWidth = 1;
+    [[2048, '+0.5 V'], [0, '0'], [-2048, '−0.5 V']].forEach(function (p) { g.beginPath(); g.moveTo(L, ys(p[0])); g.lineTo(d.w - R, ys(p[0])); g.stroke(); g.fillText(p[1], 4, ys(p[0]) + 3); });
+    g.setLineDash([5, 4]); g.strokeStyle = '#e0b85a'; g.lineWidth = 1.4;
+    g.beginPath(); g.moveTo(L, ys(S.vin)); g.lineTo(d.w - R, ys(S.vin)); g.stroke(); g.setLineDash([]);
+    g.strokeStyle = '#7fb8f0'; g.lineWidth = 2; g.beginPath(); g.moveTo(xs(0), ys(0));
+    var x = 0;
+    S.hist.forEach(function (h, i) { g.lineTo(xs(i + 1), ys(x)); x = h.x; g.lineTo(xs(i + 1), ys(x)); });
+    g.lineTo(xs(S.hist.length + (S.hist.length < N ? 0.5 : 0)), ys(x)); g.stroke();
+    S.hist.forEach(function (h, i) { if (h.wrong) { g.fillStyle = '#f08a6a'; g.beginPath(); g.arc(xs(i + 1), ys(h.x), 4, 0, 7); g.fill(); } });
+    // residue bars, log scale from 0.1 to 4096 LSB
+    var r = setup($('sardRes')), q = r.g, lo = Math.log10(0.1), hi = Math.log10(4096), T2 = 18, B2 = 6;
+    var yl = function (e) { var v = Math.log10(Math.max(Math.abs(e), 0.1)); return T2 + (r.h - T2 - B2) * (hi - v) / (hi - lo); };
+    q.font = '9px "IBM Plex Mono", monospace';
+    [[1, '1 LSB'], [SIG_FAST, 'noise']].forEach(function (p, j) {
+      if (j === 1 && !S.noise) return;
+      q.strokeStyle = j ? 'rgba(240,138,106,.55)' : 'rgba(233,208,143,.55)'; q.setLineDash([4, 3]); q.beginPath(); q.moveTo(L, yl(p[0])); q.lineTo(r.w - R, yl(p[0])); q.stroke(); q.setLineDash([]);
+      q.fillStyle = j ? '#f39a7c' : '#e9d08f';
+      q.fillText(p[1], 4, yl(p[0]) + (j ? -3 : 9));      // 'noise' above its line, '1 LSB' below its line
+    });
+    var bw = (r.w - L - R) / N * 0.62;
+    S.hist.forEach(function (h, i) {
+      var cx = L + (r.w - L - R) * (i + 0.5) / N;
+      q.fillStyle = h.wrong ? '#f08a6a' : (i < NFAST ? '#6aa6e0' : '#7fd0b8');
+      q.fillRect(cx - bw / 2, yl(h.e), bw, r.h - B2 - yl(h.e));
+    });
+    // cells
+    var cells = $('sardCells'); cells.innerHTML = '';
+    for (var i = 0; i < 14; i++) {
+      var c = document.createElement('div'), h = S.hist[i];
+      c.className = 'sard-cell' + (i >= N ? ' off' : '') + (i >= NFAST ? ' quiet' : '') + (h ? ' done' + (h.d ? ' one' : '') + (h.wrong ? ' wrong' : '') : '') + (i === S.k && i < N ? ' trial' : '');
+      c.innerHTML = '<b>' + (h ? (h.d ? 1 : 0) : '·') + '</b><i>' + (i < N ? fmtL(S.steps[i]) : '') + '</i>';
+      cells.appendChild(c);
+    }
+    var done = S.k === N;
+    $('sardCode').textContent = done ? codeOf(S.x) : '–';
+    $('sardIdeal').textContent = idealOf(S.vin);
+    var err = codeOf(S.x) - idealOf(S.vin);
+    $('sardErr').textContent = done ? (err > 0 ? '+' : '') + err + ' LSB' : '–';
+    $('sardStep').disabled = done;
+  }
+
+  // ---- wiring ----
+  root.querySelectorAll('.sard-mode button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      S.mode = b.getAttribute('data-mode');
+      root.querySelectorAll('.sard-mode button').forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+      reset();
+    });
+  });
+  $('sardVin').addEventListener('input', function (e) { S.vin = parseFloat(e.target.value) / LSB; $('sardVinTxt').textContent = fmtV(S.vin * LSB); reset(); });
+  $('sardStep').addEventListener('click', function () { stop(); step(); });
+  $('sardRun').addEventListener('click', run);
+  $('sardReset').addEventListener('click', reset);
+  $('sardNoise').addEventListener('click', function () {
+    S.noise = !S.noise; this.setAttribute('aria-pressed', S.noise ? 'true' : 'false'); reset();
+    $('sardStats').innerHTML = '';
+  });
+  $('sardMany').addEventListener('click', many);
+  if (window.ResizeObserver) new ResizeObserver(function () { draw(); }).observe(root);
+  else window.addEventListener('resize', draw);
+  reset();
+})();
+</script>
