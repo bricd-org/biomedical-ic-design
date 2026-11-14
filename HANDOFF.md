@@ -179,8 +179,11 @@ All Python labs are now written (1, 2, 6, 9, 11, 12, 13, 15 part 1). The NinaPro
 paths are untested here (no wfdb, no data downloaded): test them first when wfdb is installed.
 **Lab 3** written from the existing `labs/spice/sg13_char.py` and its CSVs (expected numbers = Ch 5);
 watch out: a literal `|` in a list item (|V<sub>DS</sub>|) makes kramdown build a table, use `&#124;`.
-**Next: the SG13G2 labs 4, 5, 7, 8, 10, 14 and Lab 15 part 2** (need Docker; Lab 4 reuses
-`labs/spice/sg13_lna.py`), then the appendices.
+**Lab 4** written (14 Nov): Part 1 = `sg13_lna.py` pseudo-resistor table (Ch 8 numbers), Part 2 =
+student-built LNA with Ch 8 targets (C1 20 pF, C2 200 fF, 40 dB, f_H ≈ 24 kHz at 2 pF, 6200 µm²
+unchopped optimum, NEF limit 1.73). No full-LNA testbench script exists yet: adding
+`labs/spice/lab4_lna.py` (OTA + caps + pseudo-R, AC/noise/tran/NEF sweep) would make it complete.
+**Next: the SG13G2 labs 5, 7, 8, 10, 14 and Lab 15 part 2** (need Docker), then the appendices.
 Original plan:
 The outline has the lab table and a short section per lab. Write the set-up section, Lab 1 and
 Lab 2 in full (goal, code, expected figure and numbers, questions); keep the anchors

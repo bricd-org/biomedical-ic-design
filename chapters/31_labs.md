@@ -14,7 +14,7 @@ Fifteen labs in three tracks, and a capstone: Python models first, then SG13G2 c
 <div class="tbox tbox-specnote" markdown="1">
 <div class="tbox-title">Lab status</div>
 
-The set-up and Labs 1, 2, 3, 6, 9, 11, 12 and 13 are complete, with their scripts in `labs/python/` and `labs/spice/`, and so is the Python part of Lab 15. The other labs give their goal and deliverable; their scripts are being added. The SG13G2 scripts used for Chapters 8 and 15 are in `labs/spice/` and are the starting point for Labs 4 and 5.
+The set-up and Labs 1, 2, 3, 6, 9, 11, 12 and 13 are complete, with their scripts in `labs/python/` and `labs/spice/`, and so is the Python part of Lab 15. Lab 4 has its pseudo-resistor script and the targets for the amplifier you build. The other labs give their goal and deliverable; their scripts are being added. The SG13G2 scripts used for Chapters 8 and 15 are in `labs/spice/` and are the starting point for Labs 4 and 5.
 
 </div>
 
@@ -194,7 +194,38 @@ In these models the NMOS has less flicker noise than the PMOS, the opposite of t
 
 ## Lab 4 · The Harrison LNA {#lab-4}
 
-The capacitive-feedback LNA with pseudo-resistors: AC, noise and transient simulations, and the NEF versus bias current. Goes with [Chapter 8]({% link chapters/08_lna.md %}).
+**Goal.** Build the capacitive-feedback LNA of [Chapter 8]({% link chapters/08_lna.md %}) in SG13G2 and measure its gain, band, noise and NEF against bias current. Goes with Chapters [6]({% link chapters/06_noise.md %}) and [8]({% link chapters/08_lna.md %}).
+
+**Part 1: the pseudo-resistor.**
+
+```bash
+python labs/spice/sg13_lna.py
+```
+
+The script simulates back-to-back pairs of diode-connected PMOS devices (W/L = 1/10 µm): one or four thin-oxide pairs and one thick-oxide pair, from −0.6 to +0.6 V at 27, 37 and 85 °C. It also extracts the gate capacitance of the NMOS input devices. The results go to `figsrc/data/sg13_pseudo.csv` and `sg13_cgg.csv`. It lowers $$g_\mathrm{min}$$ to $$10^{-15}$$ S. With ngspice's default the thick-oxide pair reads 1.9 TΩ, the parallel conductance of the simulator itself ([Chapter 30]({% link chapters/30_flow.md %})).
+
+| Pseudo-resistor near 0 V | Resistance | High-pass corner with $$C_2$$ = 200 fF | Where in the text |
+|---|---|---|---|
+| One thin-oxide pair | 2 × 10¹¹ Ω | 4.1 Hz | Section 8.2 |
+| Four thin-oxide pairs in series | 7.6 × 10¹¹ Ω | 1.05 Hz | Section 8.2 |
+| One thick-oxide pair, 27 / 37 / 85 °C | 5.6 × 10¹³ Ω at 27 °C | 0.014 / 0.032 / 1.0 Hz | Section 8.2 |
+| NMOS gate capacitance | about 2.2 fF/µm² | | Section 8.3 |
+
+**Part 2: the amplifier.** Draw the LNA in Xschem: input capacitors $$C_1$$ = 20 pF (MIM, 1.5 fF/µm²), feedback capacitors $$C_2$$ = 200 fF with pseudo-resistors across them, the OTA of [Section 8.3]({% link chapters/08_lna.md %}) with NMOS input devices sized from your Lab 3 lookup tables, and a 2 pF load. Then simulate:
+
+1. **AC**: the midband gain should be $$C_1/C_2$$ = 40 dB. The low corner is set by the pseudo-resistor. The high corner is $$g_\mathrm{m}/(2\pi A_\mathrm{M} C_\mathrm{L})$$, about 24 kHz with 2 pF.
+2. **Noise**: the input-referred noise integrated over 0.5–100 Hz. Unchopped, flicker noise dominates: Chapter 8 needs about 6200 µm² of input device for 0.98 µVrms.
+3. **Transient**: a 1 mV, 10 Hz input with a 300 mV step at the electrode. Watch how long the pseudo-resistor takes to recover, and how the recovery changes from 27 to 37 °C.
+4. **NEF**: sweep the OTA's bias current from 0.5 to 5 µA, compute the NEF from the integrated noise and the total current ([Chapter 6]({% link chapters/06_noise.md %})), and compare with the weak-inversion limit of 1.73.
+
+**Questions.**
+
+1. Which pseudo-resistor would you use for EEG (0.5 Hz corner) and which for ECG (0.05 Hz)? What happens to each corner on the body (37 °C) and in a hot car (85 °C)?
+2. Why does the noise gain $$(C_1 + C_2 + C_\mathrm{in})/C_1$$, with $$C_\mathrm{in}$$ the input devices' gate capacitance, punish large input devices, and where is the optimum area? Compare with Chapter 8's 6200 µm².
+3. Apply a 50 mV differential step at the input. How does the pseudo-resistor's nonlinearity show in the output?
+4. How much of the 1.5 µVrms EEG budget does your unchopped LNA use, and what does that tell you about [Lab 5]({% link chapters/31_labs.md %}#lab-5)?
+
+**Deliverable.** An LNA that meets the gain and band, its noise spectrum, and the NEF against bias current with the theoretical limit.
 
 ## Lab 5 · Chopper amplifier {#lab-5}
 
