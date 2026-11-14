@@ -19,7 +19,7 @@
   <text x="267.0" y="30" font-size="8.8" fill="#9A6212" text-anchor="middle">7 fast decisions: large residue, noise does not matter</text>
   <path d="M358 38 V34 H680 V38" stroke="#9A6212" stroke-width="1" fill="none"/>
   <text x="519.0" y="30" font-size="8.8" fill="#9A6212" text-anchor="middle">7 low-noise decisions: residue near zero, integrate longer (Ch 16)</text>
-  <path d="M252 120 C 260 132, 250 136, 256 150" stroke="#B5473A" stroke-width="1" fill="none" marker-end="url(#ar)"/>
+  <path d="M252 123 V153" stroke="#B5473A" stroke-width="1.2" fill="none" marker-end="url(#ar)"/>
   <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#B5473A"/></marker></defs>
   <text x="176" y="250" font-size="8.8" fill="#B5473A">each ready switches the DAC; a delay cell waits for it to settle (clock low), then the next comparison starts (clock high)</text>
   <text x="176" y="264" font-size="8.8" fill="#56656B">a watchdog timeout ends any decision that hangs near metastability, so the burst always finishes</text>

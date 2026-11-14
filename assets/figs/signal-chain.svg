@@ -2,10 +2,10 @@
   <title>The Open-BioAFE signal chain</title>
   <defs>
     <!-- solid arrowheads drawn in user units, so they stay the same size on every line -->
-    <marker id="arr" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="13" orient="auto">
+    <marker id="arr" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
     </marker>
-    <marker id="arr-fb" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="13" orient="auto">
+    <marker id="arr-fb" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M0 0 L12 6 L0 12 z" fill="#9A6212"/>
     </marker>
   </defs>

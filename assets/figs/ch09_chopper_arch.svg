@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 270" width="720" height="270" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
   <title>A chopper amplifier and the spectra at its four nodes</title>
   <defs>
-    <marker id="pa" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+    <marker id="pa" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
     </marker>
     <!-- spectrum axes: origin (0,0) bottom-left, 120 wide, 56 high; f_ch at x = 70 -->

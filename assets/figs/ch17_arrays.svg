@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 720 240" width="720" height="240" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
   <title>Binary-weighted and split capacitor arrays with three-way bottom-plate switches</title>
   <defs>
-    <marker id="da" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+    <marker id="da" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
     </marker>
     <!-- capacitor hanging from a top plate at (0,0): bottom-plate wire ends at y = 52 -->

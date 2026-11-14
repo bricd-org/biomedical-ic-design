@@ -74,8 +74,7 @@ def brace(x0, x1, y, text, col=SEC):
 
 brace(cyc[0][0], cyc[6][3], 34, "7 fast decisions: large residue, noise does not matter", AMB)
 brace(cyc[7][0], cyc[13][3], 34, "7 low-noise decisions: residue near zero, integrate longer (Ch 16)", AMB)
-a(f'  <path d="M{cyc[2][2] + 2} 120 C {cyc[2][2] + 10} 132, {cyc[3][0] - 4} 136, {cyc[3][0] + 2} 150" '
-  f'stroke="{RED}" stroke-width="1" fill="none" marker-end="url(#ar)"/>')
+a(f'  <path d="M{cyc[2][2] + 2} 123 V153" stroke="{RED}" stroke-width="1.2" fill="none" marker-end="url(#ar)"/>')
 a(f'  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">'
   f'<path d="M0 0 L10 5 L0 10 z" fill="{RED}"/></marker></defs>')
 a(f'  <text x="{TS}" y="250" font-size="8.8" fill="{RED}">each ready switches the DAC; a delay cell waits for it to settle (clock low), then the next comparison starts (clock high)</text>')
