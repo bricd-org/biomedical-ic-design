@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 330" width="720" height="330" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>Block diagram of the complete Open-BioAFE chip</title>
+  <defs>
+    <marker id="za" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
+    </marker>
+  </defs>
+  <!-- channel strip x 8 -->
+  <rect x="14" y="44" width="526" height="74" rx="5" fill="#fff" stroke="#B9C6C9" stroke-width="1.4" transform="translate(8 8)"/>
+  <rect x="14" y="44" width="526" height="74" rx="5" fill="#fff" stroke="#B9C6C9" stroke-width="1.4" transform="translate(4 4)"/>
+  <rect x="14" y="44" width="526" height="74" rx="5" fill="#F2F5F5" stroke="#1D2A30" stroke-width="1.5"/>
+  <text x="20" y="38" font-size="11" font-weight="700" fill="#1D2A30">one of eight channels</text>
+  <g stroke="#1D2A30" stroke-width="1.5">
+    <rect x="22" y="62" width="34" height="38" rx="2" fill="#fff"/>
+    <rect x="66" y="62" width="62" height="38" rx="3" fill="#E4EEF8"/>
+    <rect x="138" y="62" width="104" height="38" rx="3" fill="#E4EEF8"/>
+    <rect x="252" y="62" width="54" height="38" rx="3" fill="#E4EEF8"/>
+    <rect x="316" y="62" width="76" height="38" rx="3" fill="#E4EEF8"/>
+    <rect x="402" y="62" width="76" height="38" rx="3" fill="#E4EEF8"/>
+  </g>
+  <g stroke="#1D2A30" stroke-width="1.6" fill="none">
+    <path d="M56 81 H64" marker-end="url(#za)"/><path d="M128 81 H136" marker-end="url(#za)"/>
+    <path d="M242 81 H250" marker-end="url(#za)"/><path d="M306 81 H314" marker-end="url(#za)"/>
+    <path d="M392 81 H400" marker-end="url(#za)"/>
+    <path d="M478 81 H570" marker-end="url(#za)"/>
+    <path d="M354 100 V150" marker-end="url(#za)"/>
+  </g>
+  <g font-size="10" fill="#1D2A30" text-anchor="middle">
+    <text x="39" y="79" font-weight="700">IN±</text><text x="39" y="92" font-size="8.5" fill="#56656B">pads</text>
+    <text x="97" y="79">protection</text><text x="97" y="92" font-size="8.5" fill="#56656B">5 kΩ, ESD</text>
+    <text x="190" y="77" font-weight="700">chopped LNA</text><text x="190" y="91" font-size="8.5" fill="#56656B">servo, boost (Ch 7–10)</text>
+    <text x="279" y="79" font-weight="700">PGA</text><text x="279" y="92" font-size="8.5" fill="#56656B">×1–16</text>
+    <text x="354" y="79">Gm-C filter</text><text x="354" y="92" font-size="8.5" fill="#56656B">4th order (Ch 11)</text>
+    <text x="440" y="77" font-weight="700">incremental</text><text x="440" y="91" font-size="8.5" fill="#56656B">ΔΣ, 16 b (Ch 20)</text>
+  </g>
+  <text x="494" y="74" font-size="9" fill="#56656B">ECG, EEG</text>
+  <text x="440" y="113" font-size="9" fill="#56656B" text-anchor="middle">6.8 µW per channel (ECG, EEG)</text>
+
+  <!-- shared SAR -->
+  <g stroke="#1D2A30" stroke-width="1.5">
+    <path d="M330 152 L330 196 L378 184 L378 164 Z" fill="#fff"/>
+    <rect x="400" y="152" width="96" height="44" rx="3" fill="#E4EEF8"/>
+  </g>
+  <g stroke="#1D2A30" stroke-width="1.6" fill="none">
+    <path d="M378 174 H398" marker-end="url(#za)"/>
+    <path d="M496 174 H558 V104 H570" marker-end="url(#za)"/>
+    <path d="M300 174 H328" marker-end="url(#za)"/>
+  </g>
+  <text x="354" y="210" font-size="9" fill="#56656B" text-anchor="middle">8:1 MUX</text>
+  <text x="296" y="168" font-size="9" fill="#56656B" text-anchor="end">7 other channels</text>
+  <text x="448" y="171" font-size="10.5" fill="#1D2A30" text-anchor="middle" font-weight="700">12-bit SAR</text>
+  <text x="448" y="185" font-size="8.5" fill="#56656B" text-anchor="middle">16 kS/s (Ch 15–18)</text>
+  <text x="502" y="166" font-size="9" fill="#56656B">EMG</text>
+
+  <!-- shared infrastructure -->
+  <g stroke="#1D2A30" stroke-width="1.4" fill="#F2F5F5">
+    <rect x="14" y="236" width="98" height="52" rx="3"/>
+    <rect x="122" y="236" width="104" height="52" rx="3"/>
+    <rect x="236" y="236" width="94" height="52" rx="3"/>
+    <rect x="340" y="236" width="98" height="52" rx="3"/>
+    <rect x="448" y="236" width="92" height="52" rx="3"/>
+  </g>
+  <text x="14" y="228" font-size="11" font-weight="700" fill="#1D2A30">shared</text>
+  <g font-size="10" fill="#1D2A30" text-anchor="middle">
+    <text x="63" y="256" font-weight="700">right-leg drive</text><text x="63" y="270" font-size="8.5" fill="#56656B">loop gain 100,</text><text x="63" y="281" font-size="8.5" fill="#56656B">150 kΩ (Ch 12)</text>
+    <text x="174" y="256" font-weight="700">bandgap, bias,</text><text x="174" y="270" font-weight="700">references</text><text x="174" y="281" font-size="8.5" fill="#56656B">1 µF off chip (Ch 17)</text>
+    <text x="283" y="256" font-weight="700">three LDOs</text><text x="283" y="270" font-size="8.5" fill="#56656B">analog, converter,</text><text x="283" y="281" font-size="8.5" fill="#56656B">digital (Ch 27)</text>
+    <text x="389" y="256" font-weight="700">clocks</text><text x="389" y="270" font-size="8.5" fill="#56656B">4 kHz chopper, 512 kHz</text><text x="389" y="281" font-size="8.5" fill="#56656B">ΔΣ, 16 kHz SAR</text>
+    <text x="494" y="256" font-weight="700">bioZ excitation</text><text x="494" y="270" font-size="8.5" fill="#56656B">optional, 50 kHz</text><text x="494" y="281" font-size="8.5" fill="#56656B">10–50 µA (Ch 28)</text>
+  </g>
+  <path d="M63 236 V214" stroke="#1D2A30" stroke-width="1.5" fill="none" marker-end="url(#za)"/>
+  <text x="70" y="214" font-size="9" fill="#56656B">to the RL pad</text>
+
+  <!-- digital back end -->
+  <rect x="572" y="44" width="134" height="244" rx="5" fill="#FBF1DF" stroke="#1D2A30" stroke-width="1.6"/>
+  <text x="639" y="64" font-size="11.5" font-weight="700" fill="#1D2A30" text-anchor="middle">digital back end</text>
+  <g stroke="#9A6212" stroke-width="1.2" fill="#fff">
+    <rect x="584" y="76" width="110" height="34" rx="3"/>
+    <rect x="584" y="120" width="110" height="34" rx="3"/>
+    <rect x="584" y="164" width="110" height="34" rx="3"/>
+    <rect x="584" y="208" width="110" height="34" rx="3"/>
+  </g>
+  <g font-size="10" fill="#1D2A30" text-anchor="middle">
+    <text x="639" y="92">decimators</text><text x="639" y="104" font-size="8.5" fill="#56656B">CoI (Ch 20, 23)</text>
+    <text x="639" y="136">feature extraction</text><text x="639" y="148" font-size="8.5" fill="#56656B">Ch 24–26</text>
+    <text x="639" y="180">lossless coding</text><text x="639" y="192" font-size="8.5" fill="#56656B">raw streams (Ch 27)</text>
+    <text x="639" y="224">SPI</text><text x="639" y="236" font-size="8.5" fill="#56656B">features 0.3–7 kb/s</text>
+  </g>
+  <path d="M639 288 V316" stroke="#1D2A30" stroke-width="1.6" fill="none" marker-end="url(#za)"/>
+  <text x="630" y="314" font-size="9.5" fill="#1D2A30" text-anchor="end">to a radio or MCU</text>
+  <text x="14" y="318" font-size="9.5" fill="#56656B">about 1.7 mm² of core in IHP SG13G2, 1.2 V (3.3 V for the servo integrators)</text>
+</svg>

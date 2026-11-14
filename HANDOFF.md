@@ -144,8 +144,8 @@ secondary text #56656B). Insert with the placeholder number NEW (id fig-N-NEW, "
   amplifier with spectra — **DONE** (Fig 9.1);
   Ch 10 CCIA with DC-servo and impedance-boosting loops — **DONE** (Fig 10.1); Ch 12 RLD loop — **DONE**
   (Fig 12.1); Ch 7 IA topologies — **DONE** (Fig 7.1); Ch 11 gain plan and two paths — **DONE** (Fig 11.1)
-- Ch 14 architecture map; Ch 29 full-chip block diagram; Ch 28 tetrapolar + IQ readout; Ch 24 Pan–Tompkins
-  pipeline; Ch 27 SoC partition
+- Ch 29 full-chip block diagram (Fig 29.1), Ch 28 tetrapolar + IQ readout (Fig 28.2), Ch 24 Pan–Tompkins
+  pipeline (Fig 24.1), Ch 27 system partition (Fig 27.1) — **DONE**; still to draw: Ch 14 architecture map
 
 ### Step 1 — Chapters 1–4: DONE (11 Nov 2026)
 

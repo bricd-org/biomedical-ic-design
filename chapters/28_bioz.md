@@ -116,7 +116,12 @@ All three suffer from **reference phase errors** (a phase offset rotates $$I$$ i
 
 ## <span class="secnum">28.5</span>Readout architecture
 
-The readout is an instrumentation amplifier at the excitation frequency, followed by the demodulators and low-pass filters, with a baseline-cancellation loop that subtracts the large static impedance so that the small changes use the converter's range. The IQ outputs are slow, a few hertz to tens of hertz, so the SAR converter of [Chapter 18]({% link chapters/18_sar.md %}) digitises them at a fraction of its capacity.
+The readout is an instrumentation amplifier at the excitation frequency, followed by the demodulators and low-pass filters, with a baseline-cancellation loop that subtracts the large static impedance so that the small changes use the converter's range. The IQ outputs are slow, a few hertz to tens of hertz, so the SAR converter of [Chapter 18]({% link chapters/18_sar.md %}) digitises them at a fraction of its capacity ([Figure 28.2](#fig-28-2)).
+
+<figure id="fig-28-2">
+  <img src="{{ '/assets/figs/ch28_readout.svg' | relative_url }}" style="width:720px" alt="Tetrapolar measurement: a current source drives the outer electrodes, the inner electrodes feed an instrumentation amplifier, whose output is multiplied by cosine and sine references, low-pass filtered and digitised by the SAR">
+  <figcaption><span class="capnum">Figure 28.2.</span> <strong>The tetrapolar impedance readout.</strong> A 50 kHz current flows through the outer electrodes (I+, I−); the inner pair (V+, V−) carries no current, so their impedances \(Z_\mathrm{e}\) drop no voltage and the amplifier sees only \(I_\mathrm{exc}Z\). Multiplying by in-phase and quadrature references and low-pass filtering gives the real and imaginary parts, which the shared SAR digitises. The baseline-cancellation loop described in the text is not drawn.</figcaption>
+</figure>
 
 **ECG and impedance on the same electrodes** work by frequency separation: the ECG lives below 150 Hz, the excitation at tens of kilohertz. The ECG front-end's low-pass and decimation filters reject the excitation; the impedance demodulator rejects the ECG. The chopper and the excitation must not share a frequency, or harmonics, with each other. Multi-frequency and multi-channel systems, such as EIT, multiplex the excitation and readout across electrode pairs.
 

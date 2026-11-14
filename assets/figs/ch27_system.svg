@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" width="720" height="260" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>System partition of a biosignal chip: sensing, on-chip processing, the data link, power management and stimulation</title>
+  <defs>
+    <marker id="sy" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
+    </marker>
+    <marker id="sg" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#1A7A4C"/>
+    </marker>
+  </defs>
+  <!-- chip outline -->
+  <rect x="92" y="28" width="420" height="192" rx="8" fill="none" stroke="#B9C6C9" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="102" y="22" font-size="10" fill="#56656B">the chip</text>
+
+  <g stroke="#1D2A30" stroke-width="1.5">
+    <rect x="10" y="56" width="70" height="56" rx="3" fill="#F2F5F5"/>
+    <rect x="104" y="56" width="120" height="56" rx="3" fill="#E4EEF8"/>
+    <rect x="248" y="44" width="150" height="80" rx="3" fill="#FBF1DF"/>
+    <rect x="524" y="56" width="108" height="56" rx="3" fill="#fff"/>
+    <rect x="640" y="56" width="72" height="56" rx="3" fill="#F2F5F5"/>
+    <rect x="104" y="150" width="120" height="56" rx="3" fill="#fff"/>
+    <rect x="248" y="150" width="150" height="56" rx="3" fill="#E4EEF8"/>
+    <rect x="524" y="150" width="120" height="56" rx="3" fill="#F2F5F5"/>
+  </g>
+  <g font-size="10.5" font-weight="700" fill="#1D2A30" text-anchor="middle">
+    <text x="45" y="81">electrodes</text>
+    <text x="164" y="77">AFE and ADCs</text>
+    <text x="323" y="62">on-chip processing</text>
+    <text x="578" y="77">radio link</text>
+    <text x="676" y="77">phone or</text><text x="676" y="91">base station</text>
+    <text x="164" y="171">stimulator</text>
+    <text x="323" y="171">power management</text>
+    <text x="584" y="171">battery or</text><text x="584" y="185">harvester</text>
+  </g>
+  <g font-size="9" fill="#56656B" text-anchor="middle">
+    <text x="164" y="92">Parts II–III</text><text x="164" y="104">80 µW for 8 channels</text>
+    <text x="323" y="78">decimation, features,</text><text x="323" y="90">small classifiers,</text>
+    <text x="323" y="102">lossless coding</text><text x="323" y="116">picojoules per operation</text>
+    <text x="578" y="92">BLE ≈ 5 nJ/bit;</text><text x="578" y="104">backscatter, inductive</text>
+    <text x="164" y="186">optional: biphasic</text><text x="164" y="198">current DAC, charge balance</text>
+    <text x="323" y="186">three LDOs: analog,</text><text x="323" y="198">converter, digital; PSRR ≥ 80 dB</text>
+    <text x="584" y="199">100 mAh, or tens of µW</text>
+  </g>
+  <g stroke="#1D2A30" stroke-width="1.7" fill="none">
+    <path d="M80 84 H102" marker-end="url(#sy)"/>
+    <path d="M224 84 H246" marker-end="url(#sy)"/>
+    <path d="M398 76 H522" marker-end="url(#sy)"/>
+    <path d="M632 84 H638" marker-end="url(#sy)"/>
+    <path d="M104 178 H45 V114" marker-end="url(#sy)"/>
+  </g>
+  <path d="M398 98 H522" stroke="#1D2A30" stroke-width="1.5" stroke-dasharray="5 3" fill="none" marker-end="url(#sy)"/>
+  <text x="455" y="70" font-size="9.5" fill="#1D2A30" text-anchor="middle">features 0.3–7 kb/s</text>
+  <text x="455" y="113" font-size="9.5" fill="#56656B" text-anchor="middle">raw on demand,</text><text x="455" y="125" font-size="9.5" fill="#56656B" text-anchor="middle">33–360 kb/s</text>
+  <!-- supplies -->
+  <g stroke="#1A7A4C" stroke-width="1.4" stroke-dasharray="4 3" fill="none">
+    <path d="M524 178 H400" marker-end="url(#sg)"/>
+    <path d="M300 150 V126" marker-end="url(#sg)"/>
+    <path d="M260 150 V136 H190 V114" marker-end="url(#sg)"/>
+  </g>
+  <text x="14" y="246" font-size="9.5" fill="#56656B">At 5 nJ/bit, raw EMG from eight channels costs 960 µW in the radio, twelve times the front-end; features cost 2–13 µW.</text>
+</svg>

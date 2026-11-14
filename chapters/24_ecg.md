@@ -33,7 +33,7 @@ Everything an ECG system reports, heart rate, rhythm, arrhythmia alarms, starts 
 
 ## <span class="secnum">24.1</span>Pan–Tompkins QRS detection
 
-The detector of Pan and Tompkins {% include cite.html keys="pantompkins1985" %} has stayed the reference for four decades because each of its stages has a clear job:
+The detector of Pan and Tompkins {% include cite.html keys="pantompkins1985" %} has stayed the reference for four decades because each of its stages has a clear job ([Figure 24.1](#fig-24-1)):
 
 1. a **band-pass filter** at 5–15 Hz keeps the QRS energy and rejects baseline wander, P and T waves, and muscle noise;
 2. a **derivative** emphasises the QRS's steep slopes;
@@ -41,7 +41,12 @@ The detector of Pan and Tompkins {% include cite.html keys="pantompkins1985" %} 
 4. a **moving-window integrator** of about 150 ms, the width of a wide QRS, turns each complex into one smooth pulse;
 5. **adaptive thresholds**, which track running estimates of the signal-peak and noise-peak levels, decide which pulses are beats, with a 200 ms refractory period after each one.
 
-The original paper reported detecting 99.3 % of the beats in the MIT-BIH Arrhythmia Database {% include cite.html keys="mitbih" %}. `figsrc/ch24_figs.py` contains a compact version, and [Figure 24.1](#fig-24-1)a shows its stages.
+<figure id="fig-24-1">
+  <img src="{{ '/assets/figs/ch24_pantompkins.svg' | relative_url }}" style="width:720px" alt="Pan-Tompkins detector stages: band-pass filter, derivative, squaring, moving-window integration and adaptive threshold, each with a sketch of its output">
+  <figcaption><span class="capnum">Figure 24.1.</span> <strong>The Pan–Tompkins pipeline.</strong> Each stage reshapes the ECG so that the next decision is easier: the band-pass keeps the QRS band, the derivative and the square turn its steep slopes into tall positive peaks, the moving-window integral merges them into one pulse per beat, and an adaptive threshold with a refractory period picks the beats. Every stage is a few additions per sample, cheap enough for the chip (Chapter 27).</figcaption>
+</figure>
+
+The original paper reported detecting 99.3 % of the beats in the MIT-BIH Arrhythmia Database {% include cite.html keys="mitbih" %}. `figsrc/ch24_figs.py` contains a compact version, and [Figure 24.2](#fig-24-2)a shows its stages.
 
 ## <span class="secnum">24.2</span>Heart rate and HRV
 
@@ -62,7 +67,7 @@ A behavioural chain answers the design question: synthetic ECG (1 mV R wave, 75 
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 24.1 · How much does QRS detection need?</div>
 
-Over 70 beats ([Figure 24.1](#fig-24-1)b):
+Over 70 beats ([Figure 24.2](#fig-24-2)b):
 
 - with **5 bits or more** and up to 100 µVrms of input noise, sensitivity and positive predictivity are both **100 %**;
 - with 200 µVrms of noise they stay at 98.6–100 %;
@@ -72,9 +77,9 @@ QRS detection is extraordinarily tolerant: five bits over ±5 mV is an LSB of 31
 
 </div>
 
-<figure id="fig-24-1">
+<figure id="fig-24-2">
   <img src="{{ '/assets/figs/ch24_qrs.svg' | relative_url }}" style="width:720px" alt="Stages of a Pan-Tompkins QRS detector on a noisy quantised ECG, and QRS detection sensitivity versus ADC bits for four input noise levels">
-  <figcaption><span class="capnum">Figure 24.1.</span> <strong>Heartbeat detection needs only a few bits.</strong> (a) Stages of the Pan–Tompkins detector on a synthetic ECG quantised to 8 bits with 50 µVrms of noise: the signal, the 5–15 Hz band-pass output and the moving-window integral, with the detected beats (dotted). (b) QRS sensitivity against ADC bits over a ±5 mV input range for four levels of input noise, averaged over three noise seeds. Computed in <code>figsrc/ch24_figs.py</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 24.2.</span> <strong>Heartbeat detection needs only a few bits.</strong> (a) Stages of the Pan–Tompkins detector on a synthetic ECG quantised to 8 bits with 50 µVrms of noise: the signal, the 5–15 Hz band-pass output and the moving-window integral, with the detected beats (dotted). (b) QRS sensitivity against ADC bits over a ±5 mV input range for four levels of input noise, averaged over three noise seeds. Computed in <code>figsrc/ch24_figs.py</code>.</figcaption>
 </figure>
 
 The lesson is not that the Open-BioAFE specification is too strict. Its 16 bits and 1.5 µVrms are set by EEG and by diagnostic ECG morphology, ST levels of tenths of a millivolt and P waves of a few tens of microvolts ([Chapter 2]({% link chapters/02_signals.md %})). The lesson is that a heart-rate monitor could run the same chip in a much cheaper mode: a few bits, a relaxed front-end bias, a lower sample rate. That trade belongs in the system budget of [Chapter 29]({% link chapters/29_arch.md %}).

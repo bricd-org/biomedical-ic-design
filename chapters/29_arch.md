@@ -28,7 +28,12 @@ Does the assembled Open-BioAFE chip meet every number of its specification ([Tab
 
 </div>
 
-[Figure 1.1]({% link chapters/01_why.md %}#fig-1-1) drew the signal chain before any block was designed. Twenty-seven chapters later every block has a design, a number and a reason. This chapter adds the numbers up. The figure script `figsrc/ch29_figs.py` holds the budgets in two tables, so they can be updated as the lab results replace the chapter estimates.
+[Figure 1.1]({% link chapters/01_why.md %}#fig-1-1) drew the signal chain before any block was designed. Twenty-seven chapters later every block has a design, a number and a reason. This chapter adds the numbers up. The figure script `figsrc/ch29_figs.py` holds the budgets in two tables, so they can be updated as the lab results replace the chapter estimates. [Figure 29.1](#fig-29-1) shows the chip that the budgets describe.
+
+<figure id="fig-29-1">
+  <img src="{{ '/assets/figs/ch29_chip.svg' | relative_url }}" style="width:720px" alt="Block diagram of the complete chip: eight channel strips with protection, chopped LNA, PGA, Gm-C filter and incremental delta-sigma converter; a shared multiplexer and SAR; shared right-leg drive, references, LDOs, clocks and bioimpedance excitation; and a digital back end with decimators, features, coding and SPI">
+  <figcaption><span class="capnum">Figure 29.1.</span> <strong>The complete Open-BioAFE chip.</strong> Each of the eight channels runs from its protected input pads through the chopped LNA with its servo and boosting loops, the PGA and the fourth-order filter to its own 16-bit incremental ΔΣ converter (ECG and EEG). An 8:1 multiplexer shares one 12-bit SAR among the channels (EMG). The right-leg drive, references, regulators, clocks and the optional impedance excitation are shared, and the digital back end turns the samples into features and sends them over SPI. Each block is labelled with the chapter that designs it.</figcaption>
+</figure>
 
 ## <span class="secnum">29.1</span>Noise budget
 
@@ -44,7 +49,7 @@ Noise sources add in power. Over the 0.5–100 Hz EEG band, referred to the elec
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 29.1 · The channel's noise</div>
 
-With wet electrodes: $$\sqrt{0.34^2 + 0.36^2 + 0.13^2 + 0.05^2 + 0.02^2} = $$ **0.51 µVrms**, a third of the 1.5 µVrms target. With dry electrodes: **1.26 µVrms**, 16 % below the target ([Figure 29.1](#fig-29-1)a).
+With wet electrodes: $$\sqrt{0.34^2 + 0.36^2 + 0.13^2 + 0.05^2 + 0.02^2} = $$ **0.51 µVrms**, a third of the 1.5 µVrms target. With dry electrodes: **1.26 µVrms**, 16 % below the target ([Figure 29.2](#fig-29-2)a).
 
 With dry electrodes the electrodes themselves take 91 % of the noise power, and the electronics only 9 %. Further front-end current would buy almost nothing; the excess noise of real dry electrodes ([Chapter 3]({% link chapters/03_electrodes.md %})) is the real risk to the margin.
 
@@ -56,15 +61,15 @@ The channel's CMRR has an intrinsic part and a part lost to the source ([Chapter
 
 ## <span class="secnum">29.3</span>Power, area and data rate
 
-**Power.** Per channel ([Figure 29.1](#fig-29-1)b): the LNA's 2 µA (2.4 µW), the ΔΣ converter (1.9 µW, in ECG/EEG mode), the PGA (0.6 µW), a share of the right-leg drive, bias and LDOs (0.6 µW), the 3.3 V servo integrator (0.33 µW), choppers and ripple loop (0.3 µW), impedance boosting (0.3 µW), feature extraction and decimation (0.3 µW), and the filter and SAR shares. That totals **6.8 µW in ECG/EEG mode** and **4.9 µW in EMG mode**, against the 10 µW target: about 3 µW of margin, all of it estimate until the labs measure the blocks.
+**Power.** Per channel ([Figure 29.2](#fig-29-2)b): the LNA's 2 µA (2.4 µW), the ΔΣ converter (1.9 µW, in ECG/EEG mode), the PGA (0.6 µW), a share of the right-leg drive, bias and LDOs (0.6 µW), the 3.3 V servo integrator (0.33 µW), choppers and ripple loop (0.3 µW), impedance boosting (0.3 µW), feature extraction and decimation (0.3 µW), and the filter and SAR shares. That totals **6.8 µW in ECG/EEG mode** and **4.9 µW in EMG mode**, against the 10 µW target: about 3 µW of margin, all of it estimate until the labs measure the blocks.
 
 **Area.** The input capacitors dominate: two 20 pF MIM capacitors per channel (0.027 mm²), the anti-alias filter's capacitors (about 0.03 mm²), the servo and boosting capacitors, the LNA, PGA and ΔΣ transistors. With routing, about 0.14 mm² per channel, 1.15 mm² for eight. The SAR, references, bias, LDOs and right-leg drive add about 0.2 mm², the digital back end about 0.3 mm²: **about 1.7 mm² of core**, plus the pad ring.
 
 **Data rate.** Features, 0.3–7 kb/s; raw data on demand up to 192 kb/s (eight channels of EMG), both well within an SPI link at a few megahertz ([Chapter 27]({% link chapters/27_soc.md %})).
 
-<figure id="fig-29-1">
+<figure id="fig-29-2">
   <img src="{{ '/assets/figs/ch29_budgets.svg' | relative_url }}" style="width:720px" alt="Stacked noise-power budget of one channel with wet and dry electrodes against the 1.5 microvolt target, and stacked power per channel by block in ECG/EEG and EMG modes against 10 microwatts">
-  <figcaption><span class="capnum">Figure 29.1.</span> <strong>The chip meets its noise and power targets; dry electrodes use most of the noise budget.</strong> (a) Noise power over 0.5–100 Hz of one channel, by source, with wet and dry electrodes, against the 1.5 µVrms target (2.25 µV²). (b) Power per channel by block in ECG/EEG mode (with the ΔΣ converter) and EMG mode (with a share of the SAR), against the 10 µW target. From the chapter numbers collected in <code>figsrc/ch29_figs.py</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 29.2.</span> <strong>The chip meets its noise and power targets; dry electrodes use most of the noise budget.</strong> (a) Noise power over 0.5–100 Hz of one channel, by source, with wet and dry electrodes, against the 1.5 µVrms target (2.25 µV²). (b) Power per channel by block in ECG/EEG mode (with the ΔΣ converter) and EMG mode (with a share of the SAR), against the 10 µW target. From the chapter numbers collected in <code>figsrc/ch29_figs.py</code>.</figcaption>
 </figure>
 
 ## <span class="secnum">29.4</span>SAR or ΔΣ per mode
@@ -111,14 +116,14 @@ Eight channels, each: protected inputs, chopped capacitively coupled LNA with se
 <div class="tbox tbox-pitfall" markdown="1">
 <div class="tbox-title">Common pitfall</div>
 
-Treating a budget built from estimates as a result. Every number in [Figure 29.1](#fig-29-1) comes from a chapter's model, not from a measured circuit; the labs exist to replace them. Keep the source of every entry next to its value, and expect the first silicon to move several of them.
+Treating a budget built from estimates as a result. Every number in [Figure 29.2](#fig-29-2) comes from a chapter's model, not from a measured circuit; the labs exist to replace them. Keep the source of every entry next to its value, and expect the first silicon to move several of them.
 
 </div>
 
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Try it in Python</div>
 
-Edit the `NOISE` and `POWER` tables in `figsrc/ch29_figs.py` with your own lab results (Labs 4, 5, 7, 8 and 10) and regenerate [Figure 29.1](#fig-29-1). Then try a heart-rate-only mode: halve the LNA current, drop the ΔΣ, and recompute the noise and power.
+Edit the `NOISE` and `POWER` tables in `figsrc/ch29_figs.py` with your own lab results (Labs 4, 5, 7, 8 and 10) and regenerate [Figure 29.2](#fig-29-2). Then try a heart-rate-only mode: halve the LNA current, drop the ΔΣ, and recompute the noise and power.
 
 </div>
 

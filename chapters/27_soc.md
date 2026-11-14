@@ -30,7 +30,12 @@ Which processing belongs on the Open-BioAFE chip, and which data must leave it?
 
 </div>
 
-Chapters [24]({% link chapters/24_ecg.md %})–[26]({% link chapters/26_emg.md %}) found that heartbeats, seizures and gestures can be recognised from a few numbers per window. This chapter asks what that is worth in a system, where the front-end is only one consumer among several, and adds the remaining pieces of a complete biosignal chip: power management, the data link and, briefly, stimulation.
+Chapters [24]({% link chapters/24_ecg.md %})–[26]({% link chapters/26_emg.md %}) found that heartbeats, seizures and gestures can be recognised from a few numbers per window. This chapter asks what that is worth in a system, where the front-end is only one consumer among several, and adds the remaining pieces of a complete biosignal chip: power management, the data link and, briefly, stimulation ([Figure 27.1](#fig-27-1)).
+
+<figure id="fig-27-1">
+  <img src="{{ '/assets/figs/ch27_system.svg' | relative_url }}" style="width:720px" alt="System partition: electrodes, the analog front-end and converters, on-chip processing, an external radio link and phone, with power management from a battery or harvester and an optional stimulator">
+  <figcaption><span class="capnum">Figure 27.1.</span> <strong>The system around the front-end.</strong> On chip, the front-end and converters feed a processing block that computes features, runs small classifiers and compresses raw data; three regulators supply the analog, converter and digital sections from a battery or harvester; an optional stimulator drives current back into the electrodes. Off chip, a radio carries the data at a cost of nanojoules per bit, which is why features (solid) rather than raw samples (dashed) should cross the link by default.</figcaption>
+</figure>
 
 ## <span class="secnum">27.1</span>Feature extraction and edge ML in silicon
 
@@ -39,17 +44,17 @@ Every bit that leaves the chip costs energy in the radio; every operation on chi
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 27.1 · What raw data costs in the radio</div>
 
-Eight channels of raw samples need 64 kb/s for ECG (500 S/s, 16 bits), 33 kb/s for EEG (256 S/s, 16 bits) and 192 kb/s for EMG (2 kS/s, 12 bits); one spike channel at 30 kS/s and 12 bits needs 360 kb/s. The features of the previous chapters need 0.3 kb/s (RR intervals and rhythm flags), 0.4 kb/s (six band powers per 2 s window and channel), 2.6 kb/s (four features per channel at five windows per second) and 6.7 kb/s (spike times and 16-sample snippets): **54 to 190 times less** ([Figure 27.1](#fig-27-1)a).
+Eight channels of raw samples need 64 kb/s for ECG (500 S/s, 16 bits), 33 kb/s for EEG (256 S/s, 16 bits) and 192 kb/s for EMG (2 kS/s, 12 bits); one spike channel at 30 kS/s and 12 bits needs 360 kb/s. The features of the previous chapters need 0.3 kb/s (RR intervals and rhythm flags), 0.4 kb/s (six band powers per 2 s window and channel), 2.6 kb/s (four features per channel at five windows per second) and 6.7 kb/s (spike times and 16-sample snippets): **54 to 190 times less** ([Figure 27.2](#fig-27-2)a).
 
-A Bluetooth-Low-Energy-class radio costs of the order of 5 nJ per transmitted bit, all overheads included. Raw EMG then costs 960 µW in the radio, twelve times the 80 µW of the whole eight-channel front-end; raw ECG 320 µW; the features 2–13 µW ([Figure 27.1](#fig-27-1)b).
+A Bluetooth-Low-Energy-class radio costs of the order of 5 nJ per transmitted bit, all overheads included. Raw EMG then costs 960 µW in the radio, twelve times the 80 µW of the whole eight-channel front-end; raw ECG 320 µW; the features 2–13 µW ([Figure 27.2](#fig-27-2)b).
 
 </div>
 
 The features cost little to compute. Band power is a filter, a squarer and an accumulator per band; MAV, WL, ZC and SSC are additions and comparisons; Pan–Tompkins is a few filters and a threshold. In a 130 nm process these operations cost picojoules each, and the feature path runs on the decimated, reduced-word-length data of Part IV. Small classifiers, such as a linear discriminant, a decision tree or a support-vector machine with a handful of support vectors, fit as well, especially with per-patient training done offline and only the parameters loaded on chip.
 
-<figure id="fig-27-1">
+<figure id="fig-27-2">
   <img src="{{ '/assets/figs/ch27_soc.svg' | relative_url }}" style="width:720px" alt="Data rate per mode for raw samples and on-chip features, and radio power versus energy per bit for raw and feature data compared with the analog front-end power">
-  <figcaption><span class="capnum">Figure 27.1.</span> <strong>Features cut the data by 50 to 200 times, and the radio power with it.</strong> (a) Data rate of eight channels of raw samples and of the on-chip features of Chapters 24–26 for each mode (spikes: one channel). (b) Radio power against the radio's energy per transmitted bit for raw data (solid) and features (dashed), with the 80 µW of the eight-channel analog front-end; the dotted lines mark a BLE-class radio and a backscatter link. Computed in <code>figsrc/ch27_figs.py</code>; the energy-per-bit values are order-of-magnitude assumptions.</figcaption>
+  <figcaption><span class="capnum">Figure 27.2.</span> <strong>Features cut the data by 50 to 200 times, and the radio power with it.</strong> (a) Data rate of eight channels of raw samples and of the on-chip features of Chapters 24–26 for each mode (spikes: one channel). (b) Radio power against the radio's energy per transmitted bit for raw data (solid) and features (dashed), with the 80 µW of the eight-channel analog front-end; the dotted lines mark a BLE-class radio and a backscatter link. Computed in <code>figsrc/ch27_figs.py</code>; the energy-per-bit values are order-of-magnitude assumptions.</figcaption>
 </figure>
 
 ## <span class="secnum">27.2</span>Case study: an EEG seizure-detection SoC
