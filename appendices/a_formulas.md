@@ -1,0 +1,334 @@
+---
+title: A. Formula Sheet
+parent: Appendices
+nav_order: 1
+permalink: /appendix/a/
+---
+
+# <span class="chapnum">Appendix A</span>Formula Sheet
+
+Every key equation of the tutorial on one page, in the order of the chapters, each with a link to the chapter that derives it and explains its terms.
+{: .chapterlead }
+
+This page is generated from the chapters by `tools/build_formula_sheet.py`; the symbols are defined where each equation first appears.
+
+## Part I · Foundations
+
+### [1. Why Biomedical ICs?]({% link chapters/01_why.md %})
+
+**Battery lifetime**
+
+$$
+T = \frac{E_\mathrm{batt}}{N P_\mathrm{ch} + P_\mathrm{dig} + P_\mathrm{radio}}
+$$
+
+### [2. Bioelectric Signals]({% link chapters/02_signals.md %})
+
+**Nernst potential of an ion of charge z**
+
+$$
+E = \frac{kT}{zq}\,\ln\frac{c_\mathrm{out}}{c_\mathrm{in}}
+$$
+
+**Ideal converter SQNR, and the bits a dynamic range needs**
+
+$$
+\mathrm{SQNR} = 6.02\,N + 1.76\ \text{dB}
+\qquad\Rightarrow\qquad
+N = \frac{\mathrm{DR} - 1.76}{6.02}
+$$
+
+### [3. Electrodes and the Body as a Circuit]({% link chapters/03_electrodes.md %})
+
+**Simplified electrode impedance**
+
+$$
+Z_\mathrm{e}(f) = R_\mathrm{s} + \frac{R_\mathrm{p}}{1 + j2\pi f R_\mathrm{p} C_\mathrm{p}},
+\qquad f_\mathrm{p} = \frac{1}{2\pi R_\mathrm{p} C_\mathrm{p}}
+$$
+
+**Thermal noise of an electrode**
+
+$$
+v_\mathrm{n}^2 = \int_{f_1}^{f_2} 4kT\,\mathrm{Re}\{Z_\mathrm{e}(f)\}\,df
+$$
+
+**Loss to the input divider**
+
+$$
+\frac{V_\mathrm{in}}{V_\mathrm{electrode}} = \frac{Z_\mathrm{in}}{Z_\mathrm{e} + Z_\mathrm{in}}
+$$
+
+### [4. Interference, Safety and Standards]({% link chapters/04_interference.md %})
+
+**Body common-mode voltage**
+
+$$
+i_\mathrm{d} = 2\pi f\,C_\mathrm{pow}\,V_\mathrm{mains},
+\qquad
+V_\mathrm{cm} \approx i_\mathrm{d}\,\lvert Z_3\rvert
+\quad\text{(with a ground electrode)}
+$$
+
+**Common mode to differential mode, and the effective CMRR**
+
+$$
+V_\mathrm{dm} \approx V_\mathrm{cm}\,\frac{\Delta Z}{Z_\mathrm{cm}},
+\qquad
+\frac{1}{\mathrm{CMRR}_\mathrm{eff}} = \frac{1}{\mathrm{CMRR}_\mathrm{amp}} + \frac{\Delta Z}{Z_\mathrm{cm}}
+$$
+
+## Part II · The analog front-end
+
+### [5. Devices for Microwatt Design]({% link chapters/05_devices.md %})
+
+**Transconductance efficiency across inversion**
+
+$$
+\frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{1}{nU_T}\cdot\frac{2}{1 + \sqrt{1 + 4\,IC}}
+$$
+
+**Flicker noise and its corner frequency**
+
+$$
+\overline{v_{n,1/f}^2}(f) = \frac{K}{W L\, f}, \qquad f_\mathrm{c} = \frac{K}{WL\,\overline{v_{n,\mathrm{th}}^2}}
+$$
+
+**Pelgrom's law**
+
+$$
+\sigma(\Delta V_\mathrm{T}) = \frac{A_{V_T}}{\sqrt{WL}}, \qquad \sigma\!\left(\frac{\Delta\beta}{\beta}\right) = \frac{A_\beta}{\sqrt{WL}}
+$$
+
+### [6. Noise and the Noise–Power Trade-off]({% link chapters/06_noise.md %})
+
+**Noise bandwidth and 1/f integration**
+
+$$
+B_n = \frac{\pi}{2} f_\mathrm{c}\ \text{(1st order)}, \qquad B_n = \frac{\pi}{2\sqrt2} f_\mathrm{c} = 1.11 f_\mathrm{c}\ \text{(2nd-order Butterworth)}, \qquad \int_{f_\mathrm{L}}^{f_\mathrm{H}} \frac{K}{WL\,f}\,df = \frac{K}{WL}\ln\frac{f_\mathrm{H}}{f_\mathrm{L}}
+$$
+
+**Noise efficiency factor and power efficiency factor**
+
+$$
+\mathrm{NEF} = V_\mathrm{ni,rms}\sqrt{\frac{2\,I_\mathrm{tot}}{\pi\, U_T\, 4kT\, \mathrm{BW}}}, \qquad \mathrm{PEF} = \mathrm{NEF}^2\,V_\mathrm{DD}
+$$
+
+**NEF limit of a weak-inversion MOS pair**
+
+$$
+\mathrm{NEF}_\mathrm{min} = \sqrt2\,n \approx 1.73 \quad \text{for SG13G2 } (n = 1.22)
+$$
+
+### [7. Instrumentation Amplifier Architectures]({% link chapters/07_ia.md %})
+
+**CMRR of the three-op-amp IA**
+
+$$
+\mathrm{CMRR_{DA}} \approx \frac{1 + G_2}{4t}, \qquad \frac{1}{\mathrm{CMRR}_\mathrm{IA}} \approx \frac{1}{G_1}\left(\frac{1}{\mathrm{CMRR_{DA}}} + \frac{1}{\mathrm{CMRR_{op}}}\right)
+$$
+
+**Gain of a capacitively coupled IA**
+
+$$
+G = \frac{C_\mathrm{in}}{C_\mathrm{fb}}, \qquad f_\mathrm{HP} = \frac{1}{2\pi R_\mathrm{fb} C_\mathrm{fb}}
+$$
+
+### [8. The AC-Coupled Biopotential LNA]({% link chapters/08_lna.md %})
+
+**Gain and band edges of the capacitive-feedback LNA**
+
+$$
+A_\mathrm{M} = \frac{C_1}{C_2}, \qquad f_\mathrm{L} = \frac{1}{2\pi R_\mathrm{pr} C_2}, \qquad f_\mathrm{H} = \frac{g_\mathrm{m}}{2\pi A_\mathrm{M} C_\mathrm{L}}
+$$
+
+**Capacitive noise gain**
+
+$$
+v_{ni} = v_\mathrm{n,OTA}\,\frac{C_1 + C_2 + C_\mathrm{in}}{C_1}
+$$
+
+### [9. Chopper Stabilisation and Offset Cancellation]({% link chapters/09_chopper.md %})
+
+**What chopping leaves at baseband**
+
+$$
+S_\mathrm{out}(f) = \sum_{k\ \mathrm{odd}} \frac{4}{\pi^2 k^2}\Bigl[S_\mathrm{amp}(kf_\mathrm{ch} - f) + S_\mathrm{amp}(kf_\mathrm{ch} + f)\Bigr] \;\approx\; S_\mathrm{white}\Bigl(1 + \frac{f_\mathrm{c}}{f_\mathrm{ch}}\cdot 0.85\Bigr)
+$$
+
+**Input impedance of a chopped capacitively coupled IA**
+
+$$
+Z_\mathrm{in,diff} \approx \frac{1}{2 f_\mathrm{ch} C_\mathrm{in}}
+$$
+
+### [10. Input Impedance, DC Servo Loops and Offset Rejection]({% link chapters/10_dsl.md %})
+
+**Input impedance before and after chopping**
+
+$$
+Z_\mathrm{in,diff} = \frac{2}{j\omega C_\mathrm{in}}\ \text{(unchopped)}, \qquad Z_\mathrm{in,diff} \approx \frac{1}{2 f_\mathrm{ch} C_\mathrm{in}}\ \text{(chopped)}
+$$
+
+**DC servo loop range and high-pass corner**
+
+$$
+C_\mathrm{DSL} \ge \frac{V_\mathrm{off}}{V_\mathrm{DSL}}\,C_\mathrm{in}, \qquad f_\mathrm{HP} = \frac{C_\mathrm{DSL}}{C_\mathrm{fb}}\cdot\frac{1}{2\pi\tau_\mathrm{int}}
+$$
+
+### [11. Filters, PGAs and Anti-Aliasing]({% link chapters/11_filters.md %})
+
+**Gm-C and switched-capacitor corners**
+
+$$
+f_\mathrm{c} = \frac{g_\mathrm{m}}{2\pi C}\ \text{(Gm-C)}, \qquad f_\mathrm{c} \approx \frac{f_\mathrm{s}}{2\pi}\,\frac{C_1}{C_2}\ \text{(switched-capacitor integrator)}
+$$
+
+### [12. Common-Mode Control and Electrode Monitoring]({% link chapters/12_cmcontrol.md %})
+
+**Common mode with a right-leg drive**
+
+$$
+V_\mathrm{cm,RLD} = \frac{V_\mathrm{cm}}{1 + A(f)}, \qquad V_\mathrm{dm} = \frac{V_\mathrm{cm}}{1 + A}\left(\frac{\Delta Z}{Z_\mathrm{cm}} + \frac{1}{\mathrm{CMRR_{int}}}\right)
+$$
+
+## Part III · Data converters
+
+### [13. Sampling and Quantisation]({% link chapters/13_sampling.md %})
+
+**Where a tone lands after sampling**
+
+$$
+f_\mathrm{alias} = \bigl\lvert f - k f_\mathrm{s} \bigr\rvert, \qquad k = \mathrm{round}\!\left(\frac{f}{f_\mathrm{s}}\right), \qquad 0 \le f_\mathrm{alias} \le \frac{f_\mathrm{s}}{2}
+$$
+
+**Quantisation-limited SNR and effective number of bits**
+
+$$
+\mathrm{SQNR} = 6.02N + 1.76\ \mathrm{dB}, \qquad \mathrm{ENOB} = \frac{\mathrm{SNDR} - 1.76}{6.02}
+$$
+
+**Jitter-limited SNR**
+
+$$
+\mathrm{SNR}_\mathrm{jitter} = -20\log_{10}\!\left(2\pi f_\mathrm{in}\,\sigma_t\right)
+$$
+
+### [14. Specifications, Figures of Merit and Architecture Choice]({% link chapters/14_adcspecs.md %})
+
+**Spectral metrics of a converter**
+
+$$
+\mathrm{SNR} = 10\log_{10}\frac{P_\mathrm{sig}}{P_\mathrm{noise}}, \quad
+\mathrm{THD} = 10\log_{10}\frac{P_\mathrm{harm}}{P_\mathrm{sig}}, \quad
+\mathrm{SNDR} = 10\log_{10}\frac{P_\mathrm{sig}}{P_\mathrm{noise} + P_\mathrm{harm}}, \quad
+\mathrm{SFDR} = 10\log_{10}\frac{P_\mathrm{sig}}{P_\mathrm{largest\ spur}}
+$$
+
+**Walden and Schreier figures of merit**
+
+$$
+\mathrm{FoM_W} = \frac{P}{f_\mathrm{s}\,2^{\mathrm{ENOB}}}, \qquad \mathrm{FoM_S} = \mathrm{SNDR} + 10\log_{10}\!\frac{\mathrm{BW}}{P}
+$$
+
+with $$\mathrm{BW} = f_\mathrm{s}/2$$ for a Nyquist converter and the signal bandwidth for an oversampled one.
+
+**kT/C-limited capacitance and the thermal energy bound**
+
+$$
+C \ge \frac{12\,kT\,2^{2N}}{V_\mathrm{FS}^2\;\mathrm{OSR}}, \qquad E_\mathrm{sample} \ge 8\,kT\cdot\mathrm{SNR}
+$$
+
+### [15. Sample-and-Hold Circuits and Switches]({% link chapters/15_switches.md %})
+
+**Sampling capacitor for N bits (differential)**
+
+$$
+\frac{2kT}{C_\mathrm{s}} \le \frac{\Delta^2}{12} \quad\Rightarrow\quad C_\mathrm{s} \ge \frac{24\,kT}{\Delta^2}, \qquad \Delta = \frac{V_\mathrm{FS,diff}}{2^N}
+$$
+
+### [16. Comparators]({% link chapters/16_comparators.md %})
+
+**Input-referred noise of an integrating comparator (weak inversion)**
+
+$$
+\sigma_v = 2\,nU_T\sqrt{\frac{q}{Q_\mathrm{int}}} = \sqrt{\frac{kT}{C_\mathrm{L}}\cdot\frac{4n^2U_T}{\Delta V}}, \qquad Q_\mathrm{int} = C_\mathrm{L}\Delta V
+$$
+
+### [17. Capacitive DACs and References]({% link chapters/17_cdac.md %})
+
+**Unit capacitor from matching**
+
+$$
+\sigma_\mathrm{DNL,mid} \approx \sigma_u\sqrt{2^N}, \qquad \sigma_u = \frac{A_C}{\sqrt{A_\mathrm{unit}}} \quad\Rightarrow\quad A_\mathrm{unit} \ge \left(\frac{A_C\sqrt{2^N}}{\sigma_\mathrm{DNL,max}}\right)^2
+$$
+
+### [18. The SAR ADC]({% link chapters/18_sar.md %})
+
+**SAR timing**
+
+$$
+T_\mathrm{conv} = T_\mathrm{sample} + M\,(t_\mathrm{DAC} + t_\mathrm{comp} + t_\mathrm{logic}), \qquad M \ge N
+$$
+
+### [19. ΔΣ Modulation: Theory]({% link chapters/19_dstheory.md %})
+
+**Peak SQNR of an order-\(L\) modulator (linear model)**
+
+$$
+\mathrm{SQNR}_{L} \approx 6.02N + 1.76 - 10\log_{10}\!\frac{\pi^{2L}}{2L+1} + (20L+10)\log_{10}\mathrm{OSR}\ \mathrm{dB}
+$$
+
+**Error of a second-order incremental converter**
+
+$$
+\lvert u - \hat u \rvert \le \frac{\lvert x_2\rvert_\mathrm{max}}{a_1 a_2\,M(M-1)/2}, \qquad \hat u = \frac{\sum_n v[n] + a_1 \sum_n \sum_{k<n} v[k]}{a_1\,M(M-1)/2}
+$$
+
+### [20. ΔΣ Circuits: Discrete-Time, Continuous-Time and Incremental]({% link chapters/20_dscircuits.md %})
+
+**Sampling capacitor and OTA of an incremental integrator**
+
+$$
+C_\mathrm{s} \ge \frac{16\,kT}{3M\,\sigma_\mathrm{target}^2}, \qquad \mathrm{GBW}\cdot\beta \ge \frac{n_\tau}{2\pi\,T_\mathrm{clk}/2}
+$$
+
+### [22. Testing and Characterising ADCs]({% link chapters/22_adctest.md %})
+
+**Coherent input frequency**
+
+$$
+f_\mathrm{in} = \frac{M}{N_\mathrm{FFT}}\,f_\mathrm{s}, \qquad M \text{ and } N_\mathrm{FFT} \text{ co-prime (an odd } M \text{ with } N_\mathrm{FFT} = 2^k\text{)}
+$$
+
+## Part IV · Biosignal processing and systems
+
+### [23. A DSP Toolkit for Biosignals]({% link chapters/23_dsp.md %})
+
+**Why narrow filters need long words**
+
+$$
+\text{pole radius } r \approx 1 - \frac{2\pi f_\mathrm{c}}{f_\mathrm{s}} \quad\Rightarrow\quad \text{coefficients must resolve } 1 - r \approx 6\times10^{-3}\ (f_\mathrm{c} = 0.5\ \text{Hz},\ f_\mathrm{s} = 500\ \text{S/s})
+$$
+
+### [26. EMG and Neural Spike Processing]({% link chapters/26_emg.md %})
+
+**Nonlinear energy operator**
+
+$$
+\psi[n] = x[n]^2 - x[n-1]\,x[n+1]
+$$
+
+### [28. Bioimpedance Sensing and IQ Demodulation]({% link chapters/28_bioz.md %})
+
+**Cole model of tissue impedance**
+
+$$
+Z(f) = R_\infty + \frac{R_0 - R_\infty}{1 + (jf/f_\mathrm{c})^{\alpha}}
+$$
+
+**IQ demodulation**
+
+$$
+I = \frac{\lvert Z\rvert I_\mathrm{exc}}{2}\cos\varphi, \quad Q = \frac{\lvert Z\rvert I_\mathrm{exc}}{2}\sin\varphi, \qquad \lvert Z\rvert = \frac{2\sqrt{I^2 + Q^2}}{I_\mathrm{exc}}, \quad \varphi = \operatorname{atan2}(Q, I)
+$$

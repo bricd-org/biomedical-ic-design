@@ -1,0 +1,16 @@
+{%- comment -%}
+  Full entries for a list of reference keys, in the given order:
+  {% include reflist.html keys="webster,pallasareny" %}
+  Each entry carries its number from _data/references.yml and links to the References page.
+{%- endcomment -%}
+{%- assign rl_keys = include.keys | split: "," -%}
+<ul class="reflist">
+{%- for k in rl_keys -%}
+  {%- assign rl_key = k | strip -%}
+  {%- for r in site.data.references -%}
+    {%- if r.key == rl_key %}
+  <li><a href="{{ "/references/" | relative_url }}#ref-{{ rl_key }}">[{{ forloop.index }}]</a> {{ r.text | markdownify | remove: "<p>" | remove: "</p>" | strip }}</li>
+    {%- break -%}{%- endif -%}
+  {%- endfor -%}
+{%- endfor %}
+</ul>

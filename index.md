@@ -40,10 +40,11 @@ Every wearable ECG patch, EEG headset, prosthetic-control armband and neural imp
 
 <div class="card-grid">
   <div class="card"><span class="card-label">Part I · Ch 1–4 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-1.md %}">Foundations</a></h3><p>Why biomedical ICs, bioelectric signals, electrodes and the body as a circuit, interference, safety and standards.</p></div>
-  <div class="card"><span class="card-label">Part II · Ch 5–12 <span class="status status-outline">outline</span></span><h3><a href="{% link parts/part-2.md %}">The analog front-end</a></h3><p>Devices in weak inversion, noise and power, instrumentation amplifiers, the AC-coupled LNA, chopping, DC servo loops, filters and common-mode control.</p></div>
-  <div class="card"><span class="card-label">Part III · Ch 13–22 <span class="status status-outline">outline</span></span><h3><a href="{% link parts/part-3.md %}">Data converters</a></h3><p>Sampling, specifications, switches, comparators, capacitive DACs, the SAR ADC, ΔΣ theory and circuits, and ADC testing.</p></div>
-  <div class="card"><span class="card-label">Part IV · Ch 23–28 <span class="status status-outline">outline</span></span><h3><a href="{% link parts/part-4.md %}">Biosignal processing and systems</a></h3><p>DSP for biosignals, ECG, EEG and EMG processing on open datasets, on-chip features and bioimpedance sensing.</p></div>
-  <div class="card"><span class="card-label">Part V · Ch 29–31 <span class="status status-outline">outline</span></span><h3><a href="{% link parts/part-5.md %}">Putting it together</a></h3><p>The full architecture and its budgets, the open-source flow to an IHP OpenMPW tape-out, and fifteen hands-on labs.</p></div>
+  <div class="card"><span class="card-label">Part II · Ch 5–12 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-2.md %}">The analog front-end</a></h3><p>Devices in weak inversion, noise and power, instrumentation amplifiers, the AC-coupled LNA, chopping, DC servo loops, filters and common-mode control.</p></div>
+  <div class="card"><span class="card-label">Part III · Ch 13–22 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-3.md %}">Data converters</a></h3><p>Sampling, specifications, switches, comparators, capacitive DACs, the SAR ADC, ΔΣ theory and circuits, and ADC testing.</p></div>
+  <div class="card"><span class="card-label">Part IV · Ch 23–28 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-4.md %}">Biosignal processing and systems</a></h3><p>DSP for biosignals, ECG, EEG and EMG processing on open datasets, on-chip features and bioimpedance sensing.</p></div>
+  <div class="card"><span class="card-label">Part V · Ch 29–31 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-5.md %}">Putting it together</a></h3><p>The full architecture and its budgets, the open-source flow to an IHP OpenMPW tape-out, and fifteen hands-on labs.</p></div>
+  <div class="card"><span class="card-label">Appendices A–E <span class="status status-written">written</span></span><h3><a href="{% link appendices/index.md %}">Reference material</a></h3><p>A formula sheet, reference tables, design-review checklists, a glossary and further reading.</p></div>
 </div>
 
 ## Hands-on labs
@@ -56,4 +57,4 @@ The tutorial is written for the Open-BioAFE project at [BRICD](https://www.thebr
 
 **How this tutorial is made.** The Open-BioAFE Tutorial is being developed with the help of AI tools, and this draft may contain mistakes. If you spot one, please email [bricd.org@gmail.com](mailto:bricd.org@gmail.com) and we will correct it.
 
-This is a living draft (v0.1, November 2026): Part I is written, and the other chapters are outlines that are being filled in. Corrections and contributions are welcome through [GitHub issues](https://github.com/bricd-org/biomedical-ic-design/issues).
+This is a living draft (v0.1, November 2026): all thirty chapters and the appendices are written, and the labs of Chapter 31 are being completed one by one. Corrections and contributions are welcome through [GitHub issues](https://github.com/bricd-org/biomedical-ic-design/issues).

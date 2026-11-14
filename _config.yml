@@ -78,9 +78,14 @@ defaults:
       path: "references.md"
     values:
       layout: "default"
+  - scope:
+      path: "appendices"
+    values:
+      layout: "default"
 
 exclude:
   - figsrc/
+  - tools/
   - labs/
   - data/
   - README.md
