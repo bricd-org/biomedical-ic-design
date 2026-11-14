@@ -7,12 +7,13 @@ The signal path is that of Figure 10.1, fully differential: SG13G2 transmission-
 4 kHz (20 ns non-overlap), Cin = 20 pF, Cfb = 200 fF with 10 GOhm across it (enough when chopped,
 and the most that gate leakage allows, Chapter 8; the unchopped run uses 10 TOhm), and a DC servo loop that integrates the demodulated
 output and feeds it back, chopped, through C_DSL = 4 pF. The amplifier itself is behavioural: gain
-10^4 with one pole, 1 mV of input offset and an input noise of 30 nV/rtHz white plus 1/f noise
-(ngspice trnoise), so that the run shows what chopping does to them. The electrode carries a DC
+10^4 with one pole (GBW 10 MHz), 1 mV of input offset and an input noise of 30 nV/rtHz white plus
+1/f noise with a corner near 200 Hz (ngspice trnoise), so that the run shows what chopping does to them. The electrode carries a DC
 offset (default 300 mV) and a 1 mV, 37 Hz test tone. Each run is simulated twice: chopped, and with
 the choppers held in the straight-through position.
 
-Reported: gain at 37 Hz, the output's residual offset, the input-referred noise over 0.5-100 Hz,
+Reported: gain at 37 Hz, the output's residual offset, the input-referred noise over 4-100 Hz
+(after subtracting the tone),
 the chopper ripple at 4 kHz before any low-pass filter, the servo's output, and the input
 impedance from the average current drawn from the electrode (expected 1/(2 f_ch Cin) = 6.25 MOhm).
 Needs Docker and hpretl/iic-osic-tools:2026.10.
@@ -70,11 +71,12 @@ Ven en 0 dc {VCM - voff/2} sin({VCM - voff/2} {-A_SIG/2} {F_SIG})
 XCH1 ep en ap an phi phb phin phbn chopper
 Cinp ap xp {CIN}
 Cinn an xn {CIN}
-* behavioural amplifier: inverting, gain 1e4, pole at 100 Hz (GBW 1 MHz), offset and noise at its input
-Vos nos 0 dc 1m trnoise({white} {NT} 1 {white*1.5})
+* behavioural amplifier: inverting, gain 1e4, pole at 1 kHz (GBW 10 MHz: the chopped signal
+* needs bandwidth well above f_ch times the noise gain), offset and noise at its input
+Vos nos 0 dc 1m trnoise({white} {NT} 1 0.5u)
 Bamp n1 0 v = -1e4 * (v(xp) - v(xn) + v(nos))
 Rp n1 n2 1k
-Cp n2 0 {1/(2*np.pi*1e3*100)}
+Cp n2 0 {1/(2*np.pi*1e3*1e3)}
 Bod od 0 v = max(min(v(n2), 0.6), -0.6)
 Bop op 0 v = {VCM} + v(od)/2
 Bon on 0 v = {VCM} - v(od)/2
@@ -86,6 +88,11 @@ Rfbn on xn {rfb}
 XCH2 op on yp yn phi phb phin phbn chopper
 Rlp yp 0 100G
 Rln yn 0 100G
+* 500 Hz anti-alias filter after the demodulator (the measurement reads its output)
+Rfp yp yfp 1meg
+Cfp yfp 0 318p
+Rfn yn yfn 1meg
+Cfn yfn 0 318p
 * DC servo: non-inverting integrator of the demodulated output, chopped back through C_DSL
 Bint 0 nint i = {k_int} * (v(yp) - v(yn))
 Cint nint 0 1
@@ -98,20 +105,22 @@ Cdn dcn xn {CDSL}
 .control
 tran 1u {T_SIM} 0 2u
 let vy = v(yp) - v(yn)
+let vf = v(yfp) - v(yfn)
 let ie = i(Vep)
-wrdata /work/out/{tag}.txt vy ie v(nint)
+wrdata /work/out/{tag}.txt vy ie v(nint) vf
 .endc
 .end
 """
 
 
 def analyse(tag):
-    t, vy, ie, vd = ch.load(tag, 3)
+    t, vy, ie, vd, vf = ch.load(tag, 4)
     sel = t >= T_START
-    t, vy, ie, vd = t[sel], vy[sel], ie[sel], vd[sel]
+    t, vy, ie, vd, vf = t[sel], vy[sel], ie[sel], vd[sel], vf[sel]
     fs = 200e3
     tu = np.arange(t[0], t[-1], 1 / fs)
-    y = np.interp(tu, t, vy)
+    y = np.interp(tu, t, vf)                     # filtered output: gain, offset, noise
+    yr = np.interp(tu, t, vy)                    # raw demodulator output: ripple
     n = len(y)
     f = np.fft.rfftfreq(n, 1 / fs)
     Y = np.fft.rfft((y - y.mean()) * np.hanning(n))
@@ -119,13 +128,23 @@ def analyse(tag):
     k_sig = np.argmin(abs(f - F_SIG))
     gain = amp[k_sig - 2:k_sig + 3].max() / A_SIG
     k_ch = np.argmin(abs(f - FCH))
-    ripple = amp[k_ch - 3:k_ch + 4].max()
-    psd = np.abs(Y) ** 2 / (fs * np.sum(np.hanning(n) ** 2)) * 2
-    band = (f >= 0.5) & (f <= 100) & (np.abs(f - F_SIG) > 3)
-    vn_out = np.sqrt(np.sum(psd[band]) * (f[1] - f[0]) * (99.5 / (99.5 - 6)))   # fill the tone's gap
+    ampr = np.abs(np.fft.rfft((yr - yr.mean()) * np.hanning(n))) * 2 / np.sum(np.hanning(n))
+    ripple = ampr[k_ch - 3:k_ch + 4].max()
+    # noise: subtract a least-squares fit of the tone, DC, drift and the servo's settling exponential,
+    # then integrate the residual's
+    # spectrum over 4-100 Hz (the 0.25 s record cannot resolve lower frequencies)
+    tt = np.arange(n) / fs
+    tau = 1 / (2 * np.pi * F_HP)                 # the servo loop's settling, still visible at T_START
+    basis = np.column_stack([np.sin(2 * np.pi * F_SIG * tt), np.cos(2 * np.pi * F_SIG * tt), np.ones(n), tt,
+                             np.exp(-tt / tau)])
+    res = y - basis @ np.linalg.lstsq(basis, y, rcond=None)[0]
+    w = np.hanning(n)
+    psd = np.abs(np.fft.rfft(res * w)) ** 2 / (fs * np.sum(w ** 2)) * 2
+    band = (f >= 4) & (f <= 100)
+    vn_out = np.sqrt(np.sum(psd[band]) * (f[1] - f[0]))
     # low-pass the output (brick wall at 200 Hz) for the residual offset
     resid = np.mean(y)
-    i_avg = np.mean(ie)
+    i_avg = np.trapz(ie, t) / (t[-1] - t[0])      # time-weighted: ngspice steps cluster at the edges
     return dict(gain=gain, ripple=ripple, vn=vn_out / gain, offset=resid, dsl=np.mean(vd), i_avg=i_avg,
                 f=f, psd=psd)
 
@@ -133,15 +152,19 @@ def analyse(tag):
 def main():
     ap = argparse.ArgumentParser(description="Lab 5: chopped CCIA with a DC servo loop")
     ap.add_argument("--voff", type=float, default=0.3, help="electrode DC offset (V)")
+    ap.add_argument("--parse-only", action="store_true", help="analyse the outputs of the last run")
     args = ap.parse_args()
     nl = {"lab5_chop": netlist(True, args.voff, "lab5_chop"), "lab5_nochop": netlist(False, args.voff, "lab5_nochop")}
-    ch.run(nl)
+    if not args.parse_only:
+        from concurrent.futures import ThreadPoolExecutor
+        with ThreadPoolExecutor(2) as ex:
+            list(ex.map(lambda kv: ch.run({kv[0]: kv[1]}), nl.items()))
     r = {k: analyse(k) for k in nl}
     print(f"Electrode offset {args.voff*1e3:.0f} mV, test tone {A_SIG*1e3:g} mV at {F_SIG:g} Hz:")
     print("                       chopped     unchopped")
     print(f"  gain at {F_SIG:g} Hz        {r['lab5_chop']['gain']:8.1f}    {r['lab5_nochop']['gain']:8.1f}")
     print(f"  output offset (mV)    {r['lab5_chop']['offset']*1e3:8.2f}    {r['lab5_nochop']['offset']*1e3:8.2f}")
-    print(f"  input noise 0.5-100 Hz (µVrms) {r['lab5_chop']['vn']*1e6:6.2f}    {r['lab5_nochop']['vn']*1e6:8.2f}")
+    print(f"  input noise 4-100 Hz (µVrms) {r['lab5_chop']['vn']*1e6:7.2f}    {r['lab5_nochop']['vn']*1e6:8.2f}")
     print(f"  ripple at 4 kHz (mV)  {r['lab5_chop']['ripple']*1e3:8.2f}    {r['lab5_nochop']['ripple']*1e3:8.2f}")
     print(f"  servo output (V)      {r['lab5_chop']['dsl']:8.3f}    {r['lab5_nochop']['dsl']:8.3f}"
           f"   (expected {-args.voff*CIN/CDSL:.3f} V)")

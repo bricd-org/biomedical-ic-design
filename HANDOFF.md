@@ -1,7 +1,8 @@
 # HANDOFF — Open-BioAFE Tutorial (pick up here)
 
-Last updated: 14 November 2026 (**all chapters 1–30 written**; Ch 31 set-up + all Python labs (1, 2, 6,
-9, 11, 12, 13, 15 part 1) and Lab 3 written with scripts; next: the other labs, appendices; outline review against lecture material, section 2a). On
+Last updated: 14 November 2026 (**all chapters 1–30, appendices A–E, 22 architecture/circuit diagrams and
+all 15 labs with scripts are written**; see section 2 and Step 3 for the lab results and the corrections they
+forced; outline review against lecture material in section 2a). On
 10 November the tutorial was switched from a LaTeX book (with a generated website) to **a website
 written directly in Markdown**. There is no LaTeX book and no PDF any more; `book/` and
 `tools/build_site.py` were removed.
@@ -224,7 +225,19 @@ A telescopic OTA cannot hold its output at the input CM in the Harrison loop (we
   **Finding:** smallest MIM cell 1.14×1.14 µm = 1.95 fF > Ch 17's 0.98 fF unit → Ch 17 now says MOM (or 8 pF MIM).
 - **Lab 15b** (`lab15_bioz_sg13.py`): single PMOS source + TG H-bridge returning to VCM, 150 kΩ in the reference
   electrode, .ic balanced blocking caps; reads 37.2 Ω −17.0° vs ideal square/square 38.0 Ω −15.7° (−2.1 %).
-- **Labs 5, 7, 10**: see the rows below once their runs are written up.
+- **Lab 7** (\`lab7_comparator.py\`, MC ~15–60 min): StrongARM 4/1 µm pair; delay 0.38–0.66 ns fast / 4.1–5.4 ns
+  low-noise (τ ≈ 40 ps); 0.08 / 1.06 pJ; σ_v 61 µV from Q_int; offset MC (triangle ramp, buffered NOR latch, 0.1 ns
+  steps, 50 MHz MC clock — 1 ns steps gave wrong decisions) σ = 4.5 mV over 29 samples (latch mismatch; Ch 16 note
+  added), thresholds 2 mV apart leaning away from previous decisions; \`--parse-only\`.
+- **Lab 10** (\`lab10_scds.py\`, ~40 min, 3 cases in parallel): single-ended SC CIFB loop, TG switches, behavioural OTA,
+  VREF 0.25 V (stands for ±0.5 V diff); SQNR at OSR 128: ideal 92.4, A0 60 dB/5 MHz 88.3, 40 dB 83.3, 0.5 MHz 84.5;
+  swings match ideal after start-up (clip only in the first 9/3/123 cycles); \`--parse-only\`.
+- **Lab 5** (\`lab5_chopper.py\`, ~40 min, 2 cases in parallel): TG choppers 4 kHz, 10 GΩ across C_fb (10 TΩ
+  unchopped), behavioural amp (GBW 10 MHz, 1 mV offset, trnoise 30 nV/√Hz + 1/f amplitude 0.5u ≈ 200 Hz corner),
+  servo 4 pF; gain 91.7/94.5; noise 4–100 Hz 0.35 vs 1.17 µVrms (fit out the tone AND the servo's settling
+  exponential, else ~1.6 µV); ripple 1.2 mV; servo −1.500 V; Z_in 6.5 MΩ (time-weighted current!); \`--parse-only\`.
+**All 15 labs are now complete.** Possible next steps: run the real-data paths of Labs 1, 11–13 once wfdb is
+installed; a transistor-level OTA for Labs 5/10; routing the Lab 14 array; the capstone.
 Original plan:
 The outline has the lab table and a short section per lab. Write the set-up section, Lab 1 and
 Lab 2 in full (goal, code, expected figure and numbers, questions); keep the anchors
