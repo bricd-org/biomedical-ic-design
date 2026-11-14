@@ -39,11 +39,16 @@ In a charge-redistribution SAR the input is sampled onto an array of binary-weig
 
 **C-2C.** A ladder of unit and double-unit capacitors, the capacitive analogue of an R-2R ladder. Its total grows only linearly with $$N$$, but parasitics at every node spoil its linearity beyond 8–10 bits.
 
-For 12 bits the binary array is the honest choice, provided its unit can be small. Section 17.3 shows how small.
+<figure id="fig-17-1">
+  <img src="{{ '/assets/figs/ch17_arrays.svg' | relative_url }}" style="width:720px" alt="A binary-weighted capacitor array and a split array with a bridge capacitor, each capacitor's bottom plate switching between three references">
+  <figcaption><span class="capnum">Figure 17.1.</span> <strong>Two ways to build the capacitive DAC.</strong> (a) Binary-weighted: the input is sampled on the common top plate, which also drives the comparator; each bottom plate switches between \(V_\mathrm{ref+}\) (+), \(V_\mathrm{cm}\) (c) and \(V_\mathrm{ref-}\) (−), and a dummy unit completes the \(2^N\) units. (b) Split: a bridge capacitor \(C_\mathrm{b}\) attenuates the LSB sub-array, so each half needs only \(2^{N/2}\) units; for exact weights \(C_\mathrm{b}\) must equal the LSB sub-array's total divided by \(2^{N/2} - 1\) (4C/3 here), including the top-plate parasitics. The Open-BioAFE SAR uses a binary-style array with radix-1.8 weights and \(V_\mathrm{cm}\)-based switching.</figcaption>
+</figure>
+
+For 12 bits the binary array is the honest choice, provided its unit can be small. Section 17.3 shows how small. [Figure 17.1](#fig-17-1) draws the binary and split arrays.
 
 ## <span class="secnum">17.2</span>Switching schemes and energy
 
-Every conversion charges and discharges parts of the array from the references, and that charge, times the reference voltage, is the DAC's energy. `figsrc/ch17_figs.py` computes it by charge conservation on the floating top plate, for every output code, in units of $$C_uV_\mathrm{ref}^2$$ ([Figure 17.1](#fig-17-1)a):
+Every conversion charges and discharges parts of the array from the references, and that charge, times the reference voltage, is the DAC's energy. `figsrc/ch17_figs.py` computes it by charge conservation on the floating top plate, for every output code, in units of $$C_uV_\mathrm{ref}^2$$ ([Figure 17.2](#fig-17-2)a):
 
 - **Conventional**: each bit is first tried by switching its capacitor to $$V_\mathrm{ref}$$; if the trial was too high, it is switched back, wasting the charge. Average **1193** at 10 bits, 4777 at 12 bits.
 - **Monotonic**: the input is sampled on the top plates and every step only lowers one side, so no charge is ever thrown away, and the array needs one bit fewer. Average **256** at 10 bits, which matches the 255.5 usually quoted for this scheme, and 1024 at 12 bits. Its drawback is that the common-mode voltage at the comparator falls during the conversion.
@@ -80,7 +85,7 @@ $$
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 17.2 · What 12-bit matching costs in SG13G2</div>
 
-SG13G2 MIM capacitors have $$A_C = 1$$ %·µm and 1.5 fF/µm² ([Chapter 5]({% link chapters/05_devices.md %})). For a mid-scale DNL within ±0.5 LSB at three standard deviations, $$\sigma_u \le 0.26$$ %, which needs 14.8 µm² per unit: **22 fF**, and **91 pF** per side for the whole array ([Figure 17.1](#fig-17-1)b). That is 23 times the noise requirement, and 23 times the switching energy.
+SG13G2 MIM capacitors have $$A_C = 1$$ %·µm and 1.5 fF/µm² ([Chapter 5]({% link chapters/05_devices.md %})). For a mid-scale DNL within ±0.5 LSB at three standard deviations, $$\sigma_u \le 0.26$$ %, which needs 14.8 µm² per unit: **22 fF**, and **91 pF** per side for the whole array ([Figure 17.2](#fig-17-2)b). That is 23 times the noise requirement, and 23 times the switching energy.
 
 The 4 pF array has 0.98 fF units, 0.65 µm² of MIM, with $$\sigma_u = 1.24$$ % and a mid-scale DNL of 0.79 LSB at one standard deviation. It will have missing codes unless something corrects it.
 
@@ -88,9 +93,9 @@ The 4 pF array has 0.98 fF units, 0.65 µm² of MIM, with $$\sigma_u = 1.24$$ % 
 
 The resolution is to keep the small array and correct its errors digitally: redundant, non-binary weights that tolerate a wrong decision, and a foreground calibration that measures each weight once and stores it ([Chapter 18]({% link chapters/18_sar.md %})). Matching then has to be good enough only for the redundancy to absorb, which is a factor of several looser.
 
-<figure id="fig-17-1">
+<figure id="fig-17-2">
   <img src="{{ '/assets/figs/ch17_cdac.svg' | relative_url }}" style="width:720px" alt="Switching energy versus output code for conventional, monotonic and Vcm-based CDAC switching, and mid-scale DNL versus unit capacitor size with the total array capacitance">
-  <figcaption><span class="capnum">Figure 17.1.</span> <strong>Smart switching cuts the energy fivefold; matching asks for 23 times the capacitance noise needs.</strong> (a) Energy drawn from the reference per conversion of a differential 10-bit array against the output code, for three switching schemes (charge-conservation model). (b) Mid-scale DNL standard deviation of a 12-bit binary array against the unit capacitor in SG13G2 MIM (top axis: total capacitance per side), with the kT/C and leakage sizes of Chapter 15 and the 0.5 LSB (3σ) criterion. Computed in <code>figsrc/ch17_figs.py</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 17.2.</span> <strong>Smart switching cuts the energy fivefold; matching asks for 23 times the capacitance noise needs.</strong> (a) Energy drawn from the reference per conversion of a differential 10-bit array against the output code, for three switching schemes (charge-conservation model). (b) Mid-scale DNL standard deviation of a 12-bit binary array against the unit capacitor in SG13G2 MIM (top axis: total capacitance per side), with the kT/C and leakage sizes of Chapter 15 and the 0.5 LSB (3σ) criterion. Computed in <code>figsrc/ch17_figs.py</code>.</figcaption>
 </figure>
 
 ## <span class="secnum">17.4</span>Capacitors in SG13G2

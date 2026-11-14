@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 720 240" width="720" height="240" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>Binary-weighted and split capacitor arrays with three-way bottom-plate switches</title>
+  <defs>
+    <marker id="da" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
+    </marker>
+    <!-- capacitor hanging from a top plate at (0,0): bottom-plate wire ends at y = 52 -->
+    <g id="cap">
+      <path d="M0 0 V18 M0 26 V52" stroke="#1D2A30" stroke-width="1.8" fill="none"/>
+      <path d="M-12 18 H12 M-12 26 H12" stroke="#1D2A30" stroke-width="2.6"/>
+    </g>
+    <!-- single-pole, triple-throw switch: pivot at (0,0) -->
+    <g id="sw">
+      <circle cx="0" cy="0" r="2.4" fill="#fff" stroke="#1D2A30" stroke-width="1.4"/>
+      <path d="M0 2 L8 17" stroke="#1D2A30" stroke-width="1.6"/>
+      <circle cx="-10" cy="20" r="2" fill="#1D2A30"/><circle cx="0" cy="20" r="2" fill="#1D2A30"/><circle cx="10" cy="20" r="2" fill="#1D2A30"/>
+      <text x="-10" y="33" font-size="8.5" fill="#56656B" text-anchor="middle">+</text>
+      <text x="0" y="33" font-size="8.5" fill="#56656B" text-anchor="middle">c</text>
+      <text x="10" y="33" font-size="8.5" fill="#56656B" text-anchor="middle">−</text>
+    </g>
+  </defs>
+  <text x="10" y="20" font-size="12" font-weight="700" fill="#1D2A30">(a) binary-weighted array</text>
+  <text x="400" y="20" font-size="12" font-weight="700" fill="#1D2A30">(b) split array with a bridge capacitor</text>
+  <path d="M385 30 V225" stroke="#E1E8E8" stroke-width="1.5"/>
+
+  <!-- (a) -->
+  <text x="10" y="64" font-size="12" fill="#1D2A30" font-style="italic">v<tspan font-size="8" dy="3">in</tspan></text>
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <path d="M26 60 H40 M64 60 H340"/>
+    <path d="M340 60 H372" marker-end="url(#da)"/>
+    <path d="M42 60 L60 51"/>
+  </g>
+  <g fill="#fff" stroke="#1D2A30" stroke-width="1.4"><circle cx="42" cy="60" r="2.4"/><circle cx="62" cy="60" r="2.4"/></g>
+  <text x="52" y="44" font-size="10" fill="#9A6212" text-anchor="middle" font-style="italic">φ<tspan font-size="7" dy="2">s</tspan></text>
+  <text x="372" y="48" font-size="9.5" fill="#56656B" text-anchor="end">to the comparator</text>
+  <g fill="#1D2A30"><circle cx="105" cy="60" r="2.6"/><circle cx="160" cy="60" r="2.6"/><circle cx="215" cy="60" r="2.6"/><circle cx="265" cy="60" r="2.6"/><circle cx="315" cy="60" r="2.6"/></g>
+  <use xlink:href="#cap" x="105" y="60"/><use xlink:href="#cap" x="160" y="60"/><use xlink:href="#cap" x="215" y="60"/>
+  <use xlink:href="#cap" x="265" y="60"/><use xlink:href="#cap" x="315" y="60"/>
+  <use xlink:href="#sw" x="105" y="114"/><use xlink:href="#sw" x="160" y="114"/><use xlink:href="#sw" x="215" y="114"/><use xlink:href="#sw" x="265" y="114"/>
+  <path d="M315 112 V122" stroke="#1D2A30" stroke-width="1.8"/>
+  <text x="315" y="136" font-size="9.5" fill="#56656B" text-anchor="middle">V<tspan font-size="7" dy="2">cm</tspan></text>
+  <g font-size="11" fill="#1D2A30" font-style="italic">
+    <text x="121" y="88">8C</text><text x="176" y="88">4C</text><text x="231" y="88">2C</text><text x="281" y="88">C</text><text x="331" y="88">C</text>
+  </g>
+  <g font-size="10" fill="#56656B" text-anchor="middle">
+    <text x="105" y="175">MSB</text><text x="315" y="175">dummy</text>
+  </g>
+  <text x="195" y="200" font-size="10" fill="#56656B" text-anchor="middle">2<tspan font-size="7" dy="-4">N</tspan><tspan dy="4"> units in all: 4096 at 12 bits, about 1 fF each</tspan></text>
+
+  <!-- (b) -->
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <path d="M410 60 H545 M553 60 H690"/>
+    <path d="M690 60 H714" marker-end="url(#da)"/>
+  </g>
+  <path d="M545 46 V74 M553 46 V74" stroke="#9A6212" stroke-width="2.6"/>
+  <text x="549" y="38" font-size="11" fill="#9A6212" text-anchor="middle" font-style="italic">C<tspan font-size="8" dy="3">b</tspan></text>
+  <g fill="#1D2A30"><circle cx="420" cy="60" r="2.6"/><circle cx="465" cy="60" r="2.6"/><circle cx="510" cy="60" r="2.6"/><circle cx="605" cy="60" r="2.6"/><circle cx="660" cy="60" r="2.6"/></g>
+  <use xlink:href="#cap" x="420" y="60"/><use xlink:href="#cap" x="465" y="60"/><use xlink:href="#cap" x="510" y="60"/>
+  <use xlink:href="#cap" x="605" y="60"/><use xlink:href="#cap" x="660" y="60"/>
+  <path d="M420 112 V122" stroke="#1D2A30" stroke-width="1.8"/>
+  <text x="420" y="136" font-size="9.5" fill="#56656B" text-anchor="middle">V<tspan font-size="7" dy="2">cm</tspan></text>
+  <use xlink:href="#sw" x="465" y="114"/><use xlink:href="#sw" x="510" y="114"/>
+  <use xlink:href="#sw" x="605" y="114"/><use xlink:href="#sw" x="660" y="114"/>
+  <g font-size="11" fill="#1D2A30" font-style="italic">
+    <text x="435" y="88">C</text><text x="480" y="88">C</text><text x="525" y="88">2C</text>
+    <text x="620" y="88">2C</text><text x="675" y="88">C</text>
+  </g>
+  <g font-size="10" fill="#56656B" text-anchor="middle">
+    <text x="465" y="175">LSB sub-array</text><text x="632" y="175">MSB sub-array</text>
+  </g>
+  <text x="555" y="200" font-size="10" fill="#56656B" text-anchor="middle">2 + 2 bits drawn; at 12 bits, two halves of 64 units, 30 times</text>
+  <text x="555" y="214" font-size="10" fill="#56656B" text-anchor="middle">smaller, but C<tspan font-size="7" dy="2">b</tspan><tspan dy="-2"> and the top-plate parasitics must be accurate</tspan></text>
+</svg>

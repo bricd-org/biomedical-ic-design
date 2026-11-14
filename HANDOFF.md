@@ -135,9 +135,9 @@ secondary text #56656B). Insert with the placeholder number NEW (id fig-N-NEW, "
 - Ch 20: incremental ΔΣ with reset and CoI decimator — **DONE** (Fig 20.1, `ch20_incr_arch.svg`; old 20.1 → 20.2);
   SC integrator — **DONE** (Fig 20.2, `ch20_scint.svg`)
 - Ch 19: ΔΣ loop and its linear model — **DONE** (Fig 19.1, `ch19_loop.svg`)
-- Ch 17: binary vs split CDAC; Vcm-based switching steps
-- Ch 16: StrongARM latch schematic with its phases
-- Ch 15: sampling switch + kT/C; bootstrapped switch schematic
+- Ch 17: binary vs split CDAC — **DONE** (Fig 17.1, `ch17_arrays.svg`)
+- Ch 16: StrongARM latch schematic with its phases — **DONE** (Fig 16.1, `ch16_strongarm.svg`)
+- Ch 15: sampling switch + bootstrapped switch — **DONE** (Fig 15.1, `ch15_switches.svg`)
 - Ch 13: sampling chain (AAF, S/H, quantiser, decimation)
 - Ch 21: direct digitisation, VCO ADC; Ch 22: test bench
 - Part II: Harrison LNA, chopper IA with DSL and boosting loops, RLD loop (check which ch07–ch12 figures

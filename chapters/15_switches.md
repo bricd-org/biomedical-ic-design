@@ -29,7 +29,12 @@ How large must the sampling capacitor be, and how should the switch be built, fo
 
 </div>
 
-A SAR converter begins every conversion by sampling: a switch connects the input to a capacitor, then opens and holds the voltage while the comparator and DAC work through the bits. For the Open-BioAFE SAR the input range is ±0.5 V differential, 1 V in all ([Chapter 11]({% link chapters/11_filters.md %})), so a 12-bit LSB is **244 µV**. Eight channels at 2 kS/s each share the converter, which therefore runs at 16 kS/s, 62.5 µs per conversion. The numbers below come from SG13G2 simulations in `labs/spice/sg13_switch.py`.
+A SAR converter begins every conversion by sampling: a switch connects the input to a capacitor, then opens and holds the voltage while the comparator and DAC work through the bits. For the Open-BioAFE SAR the input range is ±0.5 V differential, 1 V in all ([Chapter 11]({% link chapters/11_filters.md %})), so a 12-bit LSB is **244 µV**. Eight channels at 2 kS/s each share the converter, which therefore runs at 16 kS/s, 62.5 µs per conversion. The numbers below come from SG13G2 simulations in `labs/spice/sg13_switch.py`; [Figure 15.1](#fig-15-1) shows the switch and the effects that limit it.
+
+<figure id="fig-15-1">
+  <img src="{{ '/assets/figs/ch15_switches.svg' | relative_url }}" style="width:720px" alt="A MOS sampling switch with its capacitor annotated with on-resistance, charge injection, kT/C noise and leakage, and a bootstrapped switch built from a capacitor and five switches">
+  <figcaption><span class="capnum">Figure 15.1.</span> <strong>The sampling switch and its bootstrapped version.</strong> (a) Four effects limit a simple MOS switch: its on-resistance, which depends on the input voltage, sets the settling; the thermal noise of the channel is frozen on the capacitor as \(kT/C\); the channel charge and the clock edge are dumped partly onto the capacitor when it opens; and leakage drains the held voltage. (b) A bootstrapped switch charges \(C_\mathrm{B}\) to \(V_\mathrm{DD}\) while holding, with the gate of \(M_\mathrm{s}\) grounded; while tracking it places \(C_\mathrm{B}\) between the input and the gate, so \(V_\mathrm{GS} = V_\mathrm{DD}\) and the on-resistance no longer depends on the input. The ideal switches stand for the five or six small transistors of a real circuit.</figcaption>
+</figure>
 
 ## <span class="secnum">15.1</span>kT/C noise and capacitor size
 
@@ -50,16 +55,16 @@ For 12 bits over 1 V, $$C_\mathrm{s} \ge 24 \times 4.14\times10^{-21}/(244\ \tex
 
 The capacitor charges through the switch's on-resistance with time constant $$\tau = R_\mathrm{on}C_\mathrm{s}$$. To settle within half an LSB of a full-scale step takes $$(N+1)\ln2 \approx 9\tau$$ for 12 bits. With an acquisition time of 1 µs and 4 pF, $$R_\mathrm{on}$$ must stay below 28 kΩ over the whole input range.
 
-That is a loose requirement at biosignal rates, and the question is only whether the switch stays on at all. [Figure 15.1](#fig-15-1)a shows the SG13G2 options at 1.2 V:
+That is a loose requirement at biosignal rates, and the question is only whether the switch stays on at all. [Figure 15.2](#fig-15-2)a shows the SG13G2 options at 1.2 V:
 
 - an **NMOS** (0.5/0.13 µm) is 1.5 kΩ at 0 V but 28 kΩ at 0.6 V, and switches off above about 0.8 V, because its gate overdrive vanishes;
 - a **PMOS** does the opposite;
 - a **transmission gate** (both in parallel) covers the range, with a peak of 11 kΩ at mid-supply, but its resistance, and so its charge injection and distortion, varies with the input;
 - a **bootstrapped NMOS**, whose gate is held at the input voltage plus 1.2 V, stays between 1.5 and 2.0 kΩ everywhere: $$\tau = 8$$ ns on 4 pF.
 
-<figure id="fig-15-1">
+<figure id="fig-15-2">
   <img src="{{ '/assets/figs/ch15_switch.svg' | relative_url }}" style="width:720px" alt="On-resistance of SG13G2 NMOS, PMOS, transmission-gate and bootstrapped switches versus input voltage, and hold droop from switch leakage versus sampling capacitance">
-  <figcaption><span class="capnum">Figure 15.1.</span> <strong>At biosignal rates the switch must stay on and must not leak.</strong> (a) On-resistance against input voltage at 1.2 V: the NMOS and PMOS each cover half the range, the transmission gate covers it with a mid-supply peak, and the bootstrapped NMOS is flat; the dashed line is the most a switch may have to settle 12 bits in 1 µs on 4 pF. (b) Droop during a 50 µs hold from the off-state leakage of a single or two stacked 0.5/0.13 µm NMOS switches at 37 and 85 °C, against the sampling capacitance, with the differential kT/C limit. Simulated with ngspice in SG13G2 (tt corner).</figcaption>
+  <figcaption><span class="capnum">Figure 15.2.</span> <strong>At biosignal rates the switch must stay on and must not leak.</strong> (a) On-resistance against input voltage at 1.2 V: the NMOS and PMOS each cover half the range, the transmission gate covers it with a mid-supply peak, and the bootstrapped NMOS is flat; the dashed line is the most a switch may have to settle 12 bits in 1 µs on 4 pF. (b) Droop during a 50 µs hold from the off-state leakage of a single or two stacked 0.5/0.13 µm NMOS switches at 37 and 85 °C, against the sampling capacitance, with the differential kT/C limit. Simulated with ngspice in SG13G2 (tt corner).</figcaption>
 </figure>
 
 ## <span class="secnum">15.3</span>Charge injection and clock feedthrough
@@ -86,7 +91,7 @@ The SG13G2 low-voltage devices have a low threshold voltage, so even with its ga
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 15.2 · Leakage sets the capacitor</div>
 
-During the 50 µs a conversion lasts, a leakage $$I$$ moves the held voltage by $$I \cdot 50\ \text{µs}/C_\mathrm{s}$$ ([Figure 15.1](#fig-15-1)b). With a single switch at 37 °C on the 1.7 pF that $$kT/C$$ allows, the droop is 1.3 LSB. With two stacked switches on **4 pF** it is 0.17 LSB at 37 °C, but 1.6 LSB at 85 °C. Differential sampling cancels the part of the droop that is common to both sides, so what matters is the mismatch of the two leakages, typically a fraction of either. For the 85 °C qualification corner, a larger capacitor, a longer switch or a small negative gate bias in the off state restores the margin.
+During the 50 µs a conversion lasts, a leakage $$I$$ moves the held voltage by $$I \cdot 50\ \text{µs}/C_\mathrm{s}$$ ([Figure 15.2](#fig-15-2)b). With a single switch at 37 °C on the 1.7 pF that $$kT/C$$ allows, the droop is 1.3 LSB. With two stacked switches on **4 pF** it is 0.17 LSB at 37 °C, but 1.6 LSB at 85 °C. Differential sampling cancels the part of the droop that is common to both sides, so what matters is the mismatch of the two leakages, typically a fraction of either. For the 85 °C qualification corner, a larger capacitor, a longer switch or a small negative gate bias in the off state restores the margin.
 
 </div>
 

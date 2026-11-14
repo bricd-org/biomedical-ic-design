@@ -35,7 +35,12 @@ The comparator of the Open-BioAFE SAR must resolve the 244 µV LSB of [Chapter 1
 
 **Static preamplifier plus latch.** A continuous-time preamplifier gains up the input difference, and a latch regenerates it to logic levels when clocked. The preamplifier draws current all the time, which a microwatt converter cannot afford, but it shields the input from the latch's kickback and can be auto-zeroed.
 
-**StrongARM latch.** A single clocked stage: when the clock rises, a tail switch lets the input pair discharge two precharged nodes at rates set by the input difference, and a cross-coupled inverter pair then regenerates the difference to full logic levels. It draws no static current, only the charge of each decision, and it is the standard comparator of low-power SARs.
+**StrongARM latch.** A single clocked stage: when the clock rises, a tail switch lets the input pair discharge two precharged nodes at rates set by the input difference, and a cross-coupled inverter pair then regenerates the difference to full logic levels. It draws no static current, only the charge of each decision, and it is the standard comparator of low-power SARs ([Figure 16.1](#fig-16-1)).
+
+<figure id="fig-16-1">
+  <img src="{{ '/assets/figs/ch16_strongarm.svg' | relative_url }}" style="width:720px" alt="Transistor schematic of the StrongARM latch: clocked tail transistor, input pair, cross-coupled NMOS and PMOS pairs, and four clocked reset transistors">
+  <figcaption><span class="capnum">Figure 16.1.</span> <strong>The StrongARM latch.</strong> While CLK is low, four PMOS switches precharge the internal nodes P and Q and the outputs to \(V_\mathrm{DD}\), and the tail M0 is off. When CLK rises, M0 turns on and the input pair M1–M2 discharges P and Q at rates set by \(v_\mathrm{in+}\) and \(v_\mathrm{in-}\). Once the outputs have fallen by about a threshold, the cross-coupled pairs M3–M6 take over and regenerate the difference to full logic levels. Only the charge of the nodes is drawn per decision; an SR latch (not drawn) holds the result while the comparator resets.</figcaption>
+</figure>
 
 **Double-tail.** The integrating input stage and the regenerating latch get separate tails and clocks. The input stage can integrate longer and with a lower common mode, which improves noise and works at low supplies, at the price of a second clock phase.
 
@@ -43,7 +48,7 @@ For a 1.2 V, 16 kS/s, 12-bit converter, a dynamic comparator, StrongARM or doubl
 
 ## <span class="secnum">16.2</span>Offset and calibration
 
-The comparator's offset is the input-pair mismatch of Pelgrom's law, plus the latch's mismatch divided by the gain of the integration phase. With the SG13G2 coefficients ([Chapter 5]({% link chapters/05_devices.md %})), a 4 µm² input pair has $$\sigma(V_\mathrm{os}) = 3.9/\sqrt4 = 2.0$$ mV (NMOS) or 1.1 mV (PMOS), eight and four LSBs ([Figure 16.1](#fig-16-1)b).
+The comparator's offset is the input-pair mismatch of Pelgrom's law, plus the latch's mismatch divided by the gain of the integration phase. With the SG13G2 coefficients ([Chapter 5]({% link chapters/05_devices.md %})), a 4 µm² input pair has $$\sigma(V_\mathrm{os}) = 3.9/\sqrt4 = 2.0$$ mV (NMOS) or 1.1 mV (PMOS), eight and four LSBs ([Figure 16.2](#fig-16-2)b).
 
 In a SAR this matters much less than it seems. The comparator compares every bit against the *same* threshold, so its offset shifts the whole transfer curve. It is a converter offset, not a nonlinearity, and [Chapter 14]({% link chapters/14_adcspecs.md %}) showed that offset is harmless in a biomedical channel whose DC level is removed anyway. Two cases still need care. A pipelined or two-comparator scheme compares against two thresholds, and there the offsets must match. And a large offset eats into the input range. A foreground calibration at power-up, shorting the inputs and trimming a small capacitor DAC on the comparator's internal nodes until the output toggles, brings it below an LSB.
 
@@ -65,7 +70,7 @@ The second form uses the load capacitance $$C_\mathrm{L}$$ that the input pair d
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 16.1 · Noise and energy of the 12-bit comparator</div>
 
-Aim for $$\sigma_v \le$$ LSB/4 = 61 µV, so that noise adds less than 0.1 bit of error. With $$n = 1.22$$, the input pair must integrate $$Q_\mathrm{int} = q(2nU_T/\sigma_v)^2 = 171$$ fC per device ([Figure 16.1](#fig-16-1)a). Discharging the integration nodes by 0.5 V, that is $$C_\mathrm{L} = 342$$ fF.
+Aim for $$\sigma_v \le$$ LSB/4 = 61 µV, so that noise adds less than 0.1 bit of error. With $$n = 1.22$$, the input pair must integrate $$Q_\mathrm{int} = q(2nU_T/\sigma_v)^2 = 171$$ fC per device ([Figure 16.2](#fig-16-2)a). Discharging the integration nodes by 0.5 V, that is $$C_\mathrm{L} = 342$$ fF.
 
 The energy per decision is about $$2C_\mathrm{L}V_\mathrm{DD}^2 = 0.99$$ pJ, or 11.8 pJ for twelve decisions, 0.19 µW at 16 kS/s. That is more than half of the 20 pJ budget of a 10 fJ/step SAR ([Chapter 14]({% link chapters/14_adcspecs.md %})). A 10-bit comparator needs sixteen times less: 10.7 fC, 21 fF and 62 fJ per decision.
 
@@ -75,9 +80,9 @@ The example points to the standard trick. Only the last few decisions of a conve
 
 Verify noise with a **transient-noise** simulation: apply a small DC input, run many comparisons with noise enabled, and fit the fraction of "1" decisions against the input to a Gaussian error function. Its standard deviation is the input-referred noise. An AC noise analysis cannot do this, because the comparator is a time-varying, regenerative circuit.
 
-<figure id="fig-16-1">
+<figure id="fig-16-2">
   <img src="{{ '/assets/figs/ch16_comparator.svg' | relative_url }}" style="width:720px" alt="Input-referred noise of an integrating comparator versus integrated charge, and comparator offset versus input-device area for SG13G2 NMOS and PMOS pairs">
-  <figcaption><span class="capnum">Figure 16.1.</span> <strong>Noise is bought with charge; offset is bought with area.</strong> (a) Input-referred noise of an integrating comparator with a weak-inversion input pair (n = 1.22) against the charge each input device integrates per decision; 12 bits at LSB/4 needs about 170 fC, 10 bits about 11 fC. (b) Offset standard deviation of an SG13G2 input pair against device area, with one 12-bit LSB. In a SAR the offset is a static converter offset and can be calibrated. Computed in <code>figsrc/ch16_figs.py</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 16.2.</span> <strong>Noise is bought with charge; offset is bought with area.</strong> (a) Input-referred noise of an integrating comparator with a weak-inversion input pair (n = 1.22) against the charge each input device integrates per decision; 12 bits at LSB/4 needs about 170 fC, 10 bits about 11 fC. (b) Offset standard deviation of an SG13G2 input pair against device area, with one 12-bit LSB. In a SAR the offset is a static converter offset and can be calibrated. Computed in <code>figsrc/ch16_figs.py</code>.</figcaption>
 </figure>
 
 ## <span class="secnum">16.4</span>Kickback and metastability
@@ -114,7 +119,7 @@ Measuring comparator noise with a single transient run. One run gives one decisi
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 7]({% link chapters/31_labs.md %}#lab-7) designs the StrongARM comparator in SG13G2, finds its offset with Monte Carlo and its input-referred noise with transient noise, and measures its energy per decision. Compare your noise with [Figure 16.1](#fig-16-1)a at the charge your design integrates.
+[Lab 7]({% link chapters/31_labs.md %}#lab-7) designs the StrongARM comparator in SG13G2, finds its offset with Monte Carlo and its input-referred noise with transient noise, and measures its energy per decision. Compare your noise with [Figure 16.2](#fig-16-2)a at the charge your design integrates.
 
 </div>
 

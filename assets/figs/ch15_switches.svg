@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 720 260" width="720" height="260" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>A sampling switch and its limits, and a bootstrapped switch</title>
+  <defs>
+    <g id="nmh" stroke="#1D2A30" fill="none" transform="rotate(90)">
+      <path d="M0 -26 V-10 H-8 M0 26 V10 H-8" stroke-width="1.8"/>
+      <path d="M-8 -14 V14" stroke-width="2.4"/>
+      <path d="M-14 -12 V12" stroke-width="2.4"/>
+      <path d="M-14 0 H-30" stroke-width="1.8"/>
+    </g>
+    <g id="gnd" stroke="#1D2A30" stroke-width="1.6"><path d="M-10 0 H10 M-6 5 H6 M-2 10 H2"/></g>
+    <g id="capv">
+      <path d="M-12 0 H12 M-12 8 H12" stroke="#1D2A30" stroke-width="2.6"/>
+    </g>
+    <!-- vertical switch between (0,0) and (0,30) -->
+    <g id="swv">
+      <circle cx="0" cy="3" r="2.4" fill="#fff" stroke="#1D2A30" stroke-width="1.4"/>
+      <circle cx="0" cy="27" r="2.4" fill="#fff" stroke="#1D2A30" stroke-width="1.4"/>
+      <path d="M0 5 L-10 24" stroke="#1D2A30" stroke-width="1.6"/>
+    </g>
+    <!-- horizontal switch between (0,0) and (30,0) -->
+    <g id="swh">
+      <circle cx="3" cy="0" r="2.4" fill="#fff" stroke="#1D2A30" stroke-width="1.4"/>
+      <circle cx="27" cy="0" r="2.4" fill="#fff" stroke="#1D2A30" stroke-width="1.4"/>
+      <path d="M5 0 L24 -10" stroke="#1D2A30" stroke-width="1.6"/>
+    </g>
+  </defs>
+  <text x="10" y="20" font-size="12" font-weight="700" fill="#1D2A30">(a) a sampling switch and what limits it</text>
+  <text x="372" y="20" font-size="12" font-weight="700" fill="#1D2A30">(b) a bootstrapped switch</text>
+  <path d="M358 30 V245" stroke="#E1E8E8" stroke-width="1.5"/>
+
+  <!-- (a) -->
+  <text x="12" y="144" font-size="12" fill="#1D2A30" font-style="italic">v<tspan font-size="8" dy="3">in</tspan></text>
+  <use xlink:href="#nmh" x="0" y="0" transform="translate(130 150)"/>
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <path d="M28 150 H104 M156 150 H230 V170 M230 178 V196"/>
+  </g>
+  <use xlink:href="#capv" transform="translate(230 170)"/>
+  <use xlink:href="#gnd" transform="translate(230 196)"/>
+  <circle cx="230" cy="150" r="3" fill="#1D2A30"/>
+  <text x="130" y="112" font-size="11" fill="#9A6212" text-anchor="middle" font-style="italic">φ<tspan font-size="8" dy="3">s</tspan></text>
+  <text x="250" y="178" font-size="12" fill="#1D2A30" font-style="italic">C</text>
+  <text x="238" y="144" font-size="11" fill="#1D2A30" font-style="italic">v<tspan font-size="8" dy="3">s</tspan></text>
+  <g font-size="9.5" fill="#56656B">
+    <text x="130" y="62" text-anchor="middle">on-resistance R<tspan font-size="7" dy="2">on</tspan><tspan dy="-2"> sets the settling,</tspan></text>
+    <text x="130" y="75" text-anchor="middle">τ = R<tspan font-size="7" dy="2">on</tspan><tspan dy="-2">C, and varies with v</tspan><tspan font-size="7" dy="2">in</tspan><tspan dy="-2"> (§15.2)</tspan></text>
+    <text x="110" y="182" text-anchor="middle">channel charge and clock</text>
+    <text x="110" y="195" text-anchor="middle">feedthrough land on C (§15.3)</text>
+    <text x="270" y="124">kT/C frozen</text>
+    <text x="270" y="137">on C (§15.1)</text>
+    <text x="270" y="214">leakage drains</text>
+    <text x="270" y="227">C in hold (§15.5)</text>
+  </g>
+
+  <!-- (b) -->
+  <path d="M400 44 H560" stroke="#1D2A30" stroke-width="2.2"/>
+  <text x="396" y="48" font-size="10.5" fill="#1D2A30" text-anchor="end">V<tspan font-size="7" dy="2">DD</tspan></text>
+  <text x="380" y="184" font-size="12" fill="#1D2A30" font-style="italic">v<tspan font-size="8" dy="3">in</tspan></text>
+  <use xlink:href="#nmh" transform="translate(580 190)"/>
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <!-- input to Ms, Ms to sampling cap -->
+    <path d="M396 190 H554 M606 190 H680 V202 M680 210 V226"/>
+    <!-- C_B and its switches -->
+    <path d="M480 44 V46 M480 76 V92 M480 108 V118 H440 V130 M440 160 V170 M480 118 V150 M480 180 V190"/>
+    <path d="M480 82 H516 M546 82 H580 V160"/>
+    <path d="M580 120 H630 V130 M630 160 V170"/>
+  </g>
+  <path d="M468 92 H492 M468 100 H492" stroke="#9A6212" stroke-width="2.6"/>
+  <use xlink:href="#swv" transform="translate(480 46)"/>
+  <use xlink:href="#swv" transform="translate(440 130)"/>
+  <use xlink:href="#swv" transform="translate(480 150)"/>
+  <use xlink:href="#swv" transform="translate(630 130)"/>
+  <use xlink:href="#swh" transform="translate(516 82)"/>
+  <use xlink:href="#gnd" transform="translate(440 170)"/>
+  <use xlink:href="#gnd" transform="translate(630 170)"/>
+  <use xlink:href="#capv" transform="translate(680 202)"/>
+  <use xlink:href="#gnd" transform="translate(680 226)"/>
+  <g fill="#1D2A30">
+    <circle cx="480" cy="82" r="3"/><circle cx="480" cy="118" r="3"/><circle cx="480" cy="190" r="3"/>
+    <circle cx="580" cy="120" r="3"/><circle cx="680" cy="190" r="3"/>
+  </g>
+  <text x="458" y="102" font-size="11" fill="#9A6212" text-anchor="end" font-style="italic">C<tspan font-size="8" dy="3">B</tspan></text>
+  <text x="596" y="214" font-size="10" fill="#56656B" text-anchor="middle">M<tspan font-size="7" dy="2">s</tspan></text>
+  <text x="694" y="210" font-size="11" fill="#1D2A30" font-style="italic">C</text>
+  <text x="590" y="114" font-size="10" fill="#1D2A30" font-style="italic">gate</text>
+  <g font-size="9.5" fill="#9A6212">
+    <text x="466" y="66" text-anchor="end">hold</text>
+    <text x="424" y="148" text-anchor="end">hold</text>
+    <text x="492" y="168">track</text>
+    <text x="531" y="70" text-anchor="middle">track</text>
+    <text x="642" y="148">hold</text>
+  </g>
+  <g font-size="9.5" fill="#56656B">
+    <text x="372" y="226">hold: C<tspan font-size="7" dy="2">B</tspan><tspan dy="-2"> charges to V</tspan><tspan font-size="7" dy="2">DD</tspan><tspan dy="-2">, gate grounded</tspan></text>
+    <text x="372" y="240">track: C<tspan font-size="7" dy="2">B</tspan><tspan dy="-2"> sits between v</tspan><tspan font-size="7" dy="2">in</tspan><tspan dy="-2"> and gate, V</tspan><tspan font-size="7" dy="2">GS</tspan><tspan dy="-2"> = V</tspan><tspan font-size="7" dy="2">DD</tspan></text>
+  </g>
+</svg>

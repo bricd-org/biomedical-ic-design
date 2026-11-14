@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 720 340" width="720" height="340" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>StrongARM latch comparator with its reset transistors and operating phases</title>
+  <defs>
+    <!-- MOS symbols at the origin: top terminal (0,-26), bottom terminal (0,26), gate end (-30,0) -->
+    <g id="nm" stroke="#1D2A30" fill="none">
+      <path d="M0 -26 V-10 H-8 M0 26 V10 H-8" stroke-width="1.8"/>
+      <path d="M-8 -14 V14" stroke-width="2.4"/>
+      <path d="M-14 -12 V12" stroke-width="2.4"/>
+      <path d="M-14 0 H-30" stroke-width="1.8"/>
+    </g>
+    <g id="pm" stroke="#1D2A30" fill="none">
+      <path d="M0 -26 V-10 H-8 M0 26 V10 H-8" stroke-width="1.8"/>
+      <path d="M-8 -14 V14" stroke-width="2.4"/>
+      <path d="M-14 -12 V12" stroke-width="2.4"/>
+      <circle cx="-18" cy="0" r="3.4" stroke-width="1.5" fill="#fff"/>
+      <path d="M-21.5 0 H-30" stroke-width="1.8"/>
+    </g>
+  </defs>
+
+  <!-- supply and ground -->
+  <path d="M150 24 H570" stroke="#1D2A30" stroke-width="2.4"/>
+  <text x="146" y="28" font-size="11" fill="#1D2A30" text-anchor="end">V<tspan font-size="8" dy="2">DD</tspan></text>
+  <g stroke="#1D2A30" stroke-width="1.6"><path d="M350 306 H370 M354 311 H366 M358 316 H362"/></g>
+
+  <!-- cross-coupled PMOS M5, M6 -->
+  <use xlink:href="#pm" transform="translate(300 64) scale(-1 1)"/>
+  <use xlink:href="#pm" transform="translate(420 64)"/>
+  <!-- cross-coupled NMOS M3, M4 -->
+  <use xlink:href="#nm" transform="translate(300 136) scale(-1 1)"/>
+  <use xlink:href="#nm" transform="translate(420 136)"/>
+  <!-- input pair M1, M2 -->
+  <use xlink:href="#nm" transform="translate(300 208)"/>
+  <use xlink:href="#nm" transform="translate(420 208) scale(-1 1)"/>
+  <!-- tail M0 -->
+  <use xlink:href="#nm" transform="translate(360 280)"/>
+  <!-- reset PMOS: X, P on the left; Y, Q on the right -->
+  <use xlink:href="#pm" transform="translate(235 64)"/>
+  <use xlink:href="#pm" transform="translate(175 64)"/>
+  <use xlink:href="#pm" transform="translate(485 64) scale(-1 1)"/>
+  <use xlink:href="#pm" transform="translate(545 64) scale(-1 1)"/>
+
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <!-- branch wires -->
+    <path d="M300 38 V24 M420 38 V24 M235 38 V24 M175 38 V24 M485 38 V24 M545 38 V24"/>
+    <path d="M300 90 V110 M420 90 V110"/>
+    <path d="M300 162 V182 M420 162 V182"/>
+    <path d="M300 234 V246 H420 V234 M360 246 V254"/>
+    <!-- resets to X, Y, P, Q -->
+    <path d="M235 90 V108 H300 M485 90 V92 H420"/>
+    <path d="M175 90 V172 H300 M545 90 V172 H420"/>
+    <!-- cross coupling: left gates to Y, right gates to X -->
+    <path d="M330 64 H345 V136 H330 M345 92 H420"/>
+    <path d="M390 64 H375 V136 H390 M375 108 H300"/>
+    <!-- inputs and clocks -->
+    <path d="M270 208 H246 M450 208 H474 M330 280 H310"/>
+  </g>
+  <g fill="#1D2A30">
+    <circle cx="300" cy="172" r="3"/><circle cx="420" cy="172" r="3"/>
+    <circle cx="360" cy="246" r="3"/><circle cx="345" cy="92" r="2.6"/><circle cx="375" cy="108" r="2.6"/>
+    <circle cx="420" cy="92" r="3"/><circle cx="300" cy="108" r="3"/>
+  </g>
+
+  <!-- labels -->
+  <g font-size="10" fill="#56656B">
+    <text x="270" y="60" text-anchor="end">M5</text><text x="450" y="60">M6</text>
+    <text x="270" y="140" text-anchor="end">M3</text><text x="450" y="140">M4</text>
+    <text x="312" y="226">M1</text><text x="396" y="226" text-anchor="end">M2</text>
+    <text x="372" y="298">M0</text>
+  </g>
+  <text x="242" y="208" font-size="12" fill="#1D2A30" text-anchor="end" font-style="italic">v<tspan font-size="8" dy="3">in+</tspan></text>
+  <text x="478" y="208" font-size="12" fill="#1D2A30" font-style="italic">v<tspan font-size="8" dy="3">in−</tspan></text>
+  <text x="306" y="284" font-size="11" fill="#9A6212" text-anchor="end">CLK</text>
+  <g font-size="10" fill="#9A6212">
+    <text x="205" y="58" text-anchor="end">CLK</text><text x="145" y="58" text-anchor="end">CLK</text>
+    <text x="515" y="58">CLK</text><text x="575" y="58">CLK</text>
+  </g>
+  <g font-size="11" fill="#1D2A30" font-style="italic">
+    <text x="250" y="103">out−</text><text x="434" y="87">out+</text>
+    <text x="226" y="167">P</text><text x="488" y="167">Q</text>
+  </g>
+
+  <!-- phases -->
+  <g font-size="10" fill="#1D2A30">
+    <text x="600" y="110" font-weight="700">CLK low: reset</text>
+    <text x="600" y="124" fill="#56656B">P, Q and out± to V<tspan font-size="7" dy="2">DD</tspan></text>
+    <text x="600" y="152" font-weight="700">CLK high: amplify</text>
+    <text x="600" y="166" fill="#56656B">M1, M2 discharge P, Q</text>
+    <text x="600" y="180" fill="#56656B">at rates set by v<tspan font-size="7" dy="2">in</tspan></text>
+    <text x="600" y="208" font-weight="700">then regenerate</text>
+    <text x="600" y="222" fill="#56656B">M3–M6 latch out±</text>
+    <text x="600" y="236" fill="#56656B">to the rails</text>
+    <text x="600" y="264" fill="#56656B">no static current</text>
+    <text x="600" y="278" fill="#56656B">between decisions</text>
+  </g>
+</svg>
