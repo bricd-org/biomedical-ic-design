@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 430" width="720" height="430" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>Open-BioAFE package concept: QFN-40 pinout with the inputs on two adjacent sides and the digital pins in the opposite corner</title>
+  <text x="10" y="16" font-size="11.5" font-weight="700" fill="#1D2A30">Inputs round one corner, digital round the other (QFN-40 concept, top view)</text>
+  <rect x="110" y="84" width="280" height="280" rx="6" fill="#2E3A40" stroke="#1D2A30" stroke-width="1.5"/>
+  <rect x="180" y="154" width="140" height="140" rx="2" fill="#56656B" opacity="0.65"/>
+  <rect x="203.5" y="189.0" width="93.0" height="70.0" fill="#B9C6C9" stroke="#fff" stroke-width="0.8"/>
+  <text x="250" y="222" font-size="8.5" font-weight="700" fill="#1D2A30" text-anchor="middle">die</text>
+  <text x="250" y="234" font-size="7.5" fill="#1D2A30" text-anchor="middle">2.0 × 1.5 mm</text>
+  <text x="250.0" y="286" font-size="7.5" fill="#fff" text-anchor="middle">exposed pad = VSSA</text>
+  <circle cx="124" cy="98" r="4" fill="#fff"/>
+  <path d="M203.5 189.0 L120.0 119.0" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="102" y="113.0" width="18" height="12" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text x="97" y="122.0" font-size="8.5" fill="#1D2A30" text-anchor="end" font-weight="700">IN5+</text>
+  <text x="124" y="121.5" font-size="6.5" fill="#B9C6C9" text-anchor="start">1</text>
+  <path d="M203.5 196.8 L120.0 142.3" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="102" y="136.333" width="18" height="12" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text x="97" y="145.333" font-size="8.5" fill="#1D2A30" text-anchor="end" font-weight="700">IN5−</text>
+  <text x="124" y="144.833" font-size="6.5" fill="#B9C6C9" text-anchor="start">2</text>
+  <path d="M203.5 204.6 L120.0 165.7" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="102" y="159.666" width="18" height="12" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text x="97" y="168.666" font-size="8.5" fill="#1D2A30" text-anchor="end" font-weight="700">IN6+</text>
+  <text x="124" y="168.166" font-size="6.5" fill="#B9C6C9" text-anchor="start">3</text>
+  <path d="M203.5 212.3 L120.0 189.0" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="102" y="182.999" width="18" height="12" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text x="97" y="191.999" font-size="8.5" fill="#1D2A30" text-anchor="end" font-weight="700">IN6−</text>
+  <text x="124" y="191.499" font-size="6.5" fill="#B9C6C9" text-anchor="start">4</text>
+  <path d="M203.5 220.1 L120.0 212.3" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="102" y="206.332" width="18" height="12" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text x="97" y="215.332" font-size="8.5" fill="#1D2A30" text-anchor="end" font-weight="700">IN7+</text>
+  <text x="124" y="214.832" font-size="6.5" fill="#B9C6C9" text-anchor="start">5</text>
+  <path d="M203.5 227.9 L120.0 235.7" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="102" y="229.665" width="18" height="12" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text x="97" y="238.665" font-size="8.5" fill="#1D2A30" text-anchor="end" font-weight="700">IN7−</text>
+  <text x="124" y="238.165" font-size="6.5" fill="#B9C6C9" text-anchor="start">6</text>
+  <path d="M203.5 235.7 L120.0 259.0" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="102" y="252.998" width="18" height="12" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text x="97" y="261.998" font-size="8.5" fill="#1D2A30" text-anchor="end" font-weight="700">IN8+</text>
+  <text x="124" y="261.498" font-size="6.5" fill="#B9C6C9" text-anchor="start">7</text>
+  <path d="M203.5 243.4 L120.0 282.3" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="102" y="276.331" width="18" height="12" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text x="97" y="285.331" font-size="8.5" fill="#1D2A30" text-anchor="end" font-weight="700">IN8−</text>
+  <text x="124" y="284.831" font-size="6.5" fill="#B9C6C9" text-anchor="start">8</text>
+  <path d="M203.5 251.2 L120.0 305.7" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="102" y="299.664" width="18" height="12" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text x="97" y="308.664" font-size="8.5" fill="#1D2A30" text-anchor="end" font-weight="700">SHLD</text>
+  <text x="124" y="308.164" font-size="6.5" fill="#B9C6C9" text-anchor="start">9</text>
+  <path d="M203.5 259.0 L120.0 329.0" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="102" y="322.99699999999996" width="18" height="12" fill="#8C9A9F" stroke="#fff" stroke-width="0.6"/>
+  <text x="97" y="331.99699999999996" font-size="8.5" fill="#1D2A30" text-anchor="end">VDD33</text>
+  <text x="124" y="331.49699999999996" font-size="6.5" fill="#B9C6C9" text-anchor="start">10</text>
+  <path d="M203.5 259.0 L145.0 354.0" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="139.0" y="354" width="12" height="18" fill="#8C9A9F" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(148.0,377) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="end">VDDA</text>
+  <text x="145.0" y="351" font-size="6.5" fill="#B9C6C9" text-anchor="middle">11</text>
+  <path d="M213.8 259.0 L168.3 354.0" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="162.333" y="354" width="12" height="18" fill="#8C9A9F" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(171.333,377) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="end">VSSA</text>
+  <text x="168.333" y="351" font-size="6.5" fill="#B9C6C9" text-anchor="middle">12</text>
+  <path d="M224.2 259.0 L191.7 354.0" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="185.666" y="354" width="12" height="18" fill="#7FA7CF" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(194.666,377) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="end">REF</text>
+  <text x="191.666" y="351" font-size="6.5" fill="#B9C6C9" text-anchor="middle">13</text>
+  <path d="M234.5 259.0 L215.0 354.0" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="208.999" y="354" width="12" height="18" fill="#7FA7CF" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(217.999,377) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="end">TESTA</text>
+  <text x="214.999" y="351" font-size="6.5" fill="#B9C6C9" text-anchor="middle">14</text>
+  <path d="M244.8 259.0 L238.3 354.0" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="232.332" y="354" width="12" height="18" fill="#7FA7CF" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(241.332,377) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="end">TESTB</text>
+  <text x="238.332" y="351" font-size="6.5" fill="#B9C6C9" text-anchor="middle">15</text>
+  <path d="M255.2 259.0 L261.7 354.0" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="255.66499999999996" y="354" width="12" height="18" fill="#8C9A9F" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(264.66499999999996,377) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="end">VSSD</text>
+  <text x="261.66499999999996" y="351" font-size="6.5" fill="#B9C6C9" text-anchor="middle">16</text>
+  <path d="M265.5 259.0 L285.0 354.0" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="278.998" y="354" width="12" height="18" fill="#8C9A9F" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(287.998,377) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="end">VDDD</text>
+  <text x="284.998" y="351" font-size="6.5" fill="#B9C6C9" text-anchor="middle">17</text>
+  <path d="M275.8 259.0 L308.3 354.0" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="302.331" y="354" width="12" height="18" fill="#C98A1C" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(311.331,377) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="end">RESETn</text>
+  <text x="308.331" y="351" font-size="6.5" fill="#B9C6C9" text-anchor="middle">18</text>
+  <path d="M286.2 259.0 L331.7 354.0" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="325.664" y="354" width="12" height="18" fill="#C98A1C" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(334.664,377) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="end">CLKIN</text>
+  <text x="331.664" y="351" font-size="6.5" fill="#B9C6C9" text-anchor="middle">19</text>
+  <path d="M296.5 259.0 L355.0 354.0" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="348.99699999999996" y="354" width="12" height="18" fill="#C98A1C" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(357.99699999999996,377) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="end">DRDY</text>
+  <text x="354.99699999999996" y="351" font-size="6.5" fill="#B9C6C9" text-anchor="middle">20</text>
+  <path d="M296.5 259.0 L380.0 329.0" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="380" y="323.0" width="18" height="12" fill="#C98A1C" stroke="#fff" stroke-width="0.6"/>
+  <text x="403" y="332.0" font-size="8.5" fill="#1D2A30" text-anchor="start">MISO</text>
+  <text x="376" y="331.5" font-size="6.5" fill="#B9C6C9" text-anchor="end">21</text>
+  <path d="M296.5 251.2 L380.0 305.7" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="380" y="299.66700000000003" width="18" height="12" fill="#C98A1C" stroke="#fff" stroke-width="0.6"/>
+  <text x="403" y="308.66700000000003" font-size="8.5" fill="#1D2A30" text-anchor="start">MOSI</text>
+  <text x="376" y="308.16700000000003" font-size="6.5" fill="#B9C6C9" text-anchor="end">22</text>
+  <path d="M296.5 243.4 L380.0 282.3" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="380" y="276.334" width="18" height="12" fill="#C98A1C" stroke="#fff" stroke-width="0.6"/>
+  <text x="403" y="285.334" font-size="8.5" fill="#1D2A30" text-anchor="start">SCLK</text>
+  <text x="376" y="284.834" font-size="6.5" fill="#B9C6C9" text-anchor="end">23</text>
+  <path d="M296.5 235.7 L380.0 259.0" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="380" y="253.00099999999998" width="18" height="12" fill="#C98A1C" stroke="#fff" stroke-width="0.6"/>
+  <text x="403" y="262.001" font-size="8.5" fill="#1D2A30" text-anchor="start">CSn</text>
+  <text x="376" y="261.501" font-size="6.5" fill="#B9C6C9" text-anchor="end">24</text>
+  <path d="M296.5 227.9 L380.0 235.7" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="380" y="229.668" width="18" height="12" fill="#8C9A9F" stroke="#fff" stroke-width="0.6"/>
+  <text x="403" y="238.668" font-size="8.5" fill="#1D2A30" text-anchor="start">VDDIO</text>
+  <text x="376" y="238.168" font-size="6.5" fill="#B9C6C9" text-anchor="end">25</text>
+  <path d="M296.5 220.1 L380.0 212.3" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="380" y="206.335" width="18" height="12" fill="#8C9A9F" stroke="#fff" stroke-width="0.6"/>
+  <text x="403" y="215.335" font-size="8.5" fill="#1D2A30" text-anchor="start">VSSIO</text>
+  <text x="376" y="214.835" font-size="6.5" fill="#B9C6C9" text-anchor="end">26</text>
+  <path d="M296.5 212.3 L380.0 189.0" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="380" y="183.002" width="18" height="12" fill="#8C9A9F" stroke="#fff" stroke-width="0.6"/>
+  <text x="403" y="192.002" font-size="8.5" fill="#1D2A30" text-anchor="start">VSSA</text>
+  <text x="376" y="191.502" font-size="6.5" fill="#B9C6C9" text-anchor="end">27</text>
+  <path d="M296.5 204.6 L380.0 165.7" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="380" y="159.669" width="18" height="12" fill="#8C9A9F" stroke="#fff" stroke-width="0.6"/>
+  <text x="403" y="168.669" font-size="8.5" fill="#1D2A30" text-anchor="start">VDDA</text>
+  <text x="376" y="168.169" font-size="6.5" fill="#B9C6C9" text-anchor="end">28</text>
+  <path d="M296.5 196.8 L380.0 142.3" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="380" y="136.336" width="18" height="12" fill="#7FA7CF" stroke="#fff" stroke-width="0.6"/>
+  <text x="403" y="145.336" font-size="8.5" fill="#1D2A30" text-anchor="start">BIOZ−</text>
+  <text x="376" y="144.836" font-size="6.5" fill="#B9C6C9" text-anchor="end">29</text>
+  <path d="M296.5 189.0 L380.0 119.0" stroke="#D9C9A0" stroke-width="0.8"/>
+  <rect x="380" y="113.00300000000001" width="18" height="12" fill="#7FA7CF" stroke="#fff" stroke-width="0.6"/>
+  <text x="403" y="122.00300000000001" font-size="8.5" fill="#1D2A30" text-anchor="start">BIOZ+</text>
+  <text x="376" y="121.50300000000001" font-size="6.5" fill="#B9C6C9" text-anchor="end">30</text>
+  <path d="M296.5 189.0 L355.0 94.0" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="349.0" y="76" width="12" height="18" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(358.0,71) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="start" font-weight="700">RLD</text>
+  <text x="355.0" y="102" font-size="6.5" fill="#B9C6C9" text-anchor="middle">31</text>
+  <path d="M286.2 189.0 L331.7 94.0" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="325.66700000000003" y="76" width="12" height="18" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(334.66700000000003,71) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="start" font-weight="700">SHLD</text>
+  <text x="331.66700000000003" y="102" font-size="6.5" fill="#B9C6C9" text-anchor="middle">32</text>
+  <path d="M275.8 189.0 L308.3 94.0" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="302.334" y="76" width="12" height="18" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(311.334,71) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="start" font-weight="700">IN1+</text>
+  <text x="308.334" y="102" font-size="6.5" fill="#B9C6C9" text-anchor="middle">33</text>
+  <path d="M265.5 189.0 L285.0 94.0" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="279.001" y="76" width="12" height="18" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(288.001,71) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="start" font-weight="700">IN1−</text>
+  <text x="285.001" y="102" font-size="6.5" fill="#B9C6C9" text-anchor="middle">34</text>
+  <path d="M255.2 189.0 L261.7 94.0" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="255.668" y="76" width="12" height="18" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(264.668,71) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="start" font-weight="700">IN2+</text>
+  <text x="261.668" y="102" font-size="6.5" fill="#B9C6C9" text-anchor="middle">35</text>
+  <path d="M244.8 189.0 L238.3 94.0" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="232.335" y="76" width="12" height="18" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(241.335,71) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="start" font-weight="700">IN2−</text>
+  <text x="238.335" y="102" font-size="6.5" fill="#B9C6C9" text-anchor="middle">36</text>
+  <path d="M234.5 189.0 L215.0 94.0" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="209.002" y="76" width="12" height="18" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(218.002,71) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="start" font-weight="700">IN3+</text>
+  <text x="215.002" y="102" font-size="6.5" fill="#B9C6C9" text-anchor="middle">37</text>
+  <path d="M224.2 189.0 L191.7 94.0" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="185.669" y="76" width="12" height="18" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(194.669,71) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="start" font-weight="700">IN3−</text>
+  <text x="191.669" y="102" font-size="6.5" fill="#B9C6C9" text-anchor="middle">38</text>
+  <path d="M213.8 189.0 L168.3 94.0" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="162.336" y="76" width="12" height="18" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(171.336,71) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="start" font-weight="700">IN4+</text>
+  <text x="168.336" y="102" font-size="6.5" fill="#B9C6C9" text-anchor="middle">39</text>
+  <path d="M203.5 189.0 L145.0 94.0" stroke="#9DBBDD" stroke-width="0.8"/>
+  <rect x="139.00300000000001" y="76" width="12" height="18" fill="#1F64A8" stroke="#fff" stroke-width="0.6"/>
+  <text transform="translate(148.00300000000001,71) rotate(-90)" font-size="8.5" fill="#1D2A30" text-anchor="start" font-weight="700">IN4−</text>
+  <text x="145.00300000000001" y="102" font-size="6.5" fill="#B9C6C9" text-anchor="middle">40</text>
+  <path d="M96 70 L62 36" stroke="#1F64A8" stroke-width="2" fill="none"/>
+  <path d="M62 36 l11 2 l-9 9 z" fill="#1F64A8"/>
+  <text x="14" y="30" font-size="8.5" font-weight="700" fill="#1F64A8">to the electrode</text>
+  <text x="14" y="41" font-size="8.5" font-weight="700" fill="#1F64A8">connector</text>
+  <path d="M404 378 L438 412" stroke="#9A6212" stroke-width="2" fill="none"/>
+  <path d="M438 412 l-11 -2 l9 -9 z" fill="#9A6212"/>
+  <text x="444" y="420" font-size="8.5" font-weight="700" fill="#9A6212">to the FPGA or host</text>
+  <text x="480" y="96" font-size="10.5" font-weight="700" fill="#1D2A30">QFN-40, 6 × 6 mm, 0.5 mm pitch</text>
+  <rect x="480" y="106" width="10" height="10" fill="#1F64A8"/>
+  <text x="496" y="115" font-size="8.8" fill="#1D2A30">electrode inputs, shields, RLD (19)</text>
+  <rect x="480" y="122" width="10" height="10" fill="#7FA7CF"/>
+  <text x="496" y="131" font-size="8.8" fill="#1D2A30">bioZ, reference, analog test (5)</text>
+  <rect x="480" y="138" width="10" height="10" fill="#8C9A9F"/>
+  <text x="496" y="147" font-size="8.8" fill="#1D2A30">supplies and grounds (9)</text>
+  <rect x="480" y="154" width="10" height="10" fill="#C98A1C"/>
+  <text x="496" y="163" font-size="8.8" fill="#1D2A30">SPI, clock, reset, DRDY (7)</text>
+  <text x="480" y="192" font-size="8.8" fill="#1D2A30" font-weight="700">Inputs wrap round the top-left corner,</text>
+  <text x="480" y="204" font-size="8.8" fill="#56656B">one SHLD pin at each end of the group:</text>
+  <text x="480" y="216" font-size="8.8" fill="#56656B">the driven shield of Chapter 12 guards</text>
+  <text x="480" y="228" font-size="8.8" fill="#56656B">the traces on the board as well.</text>
+  <text x="480" y="252" font-size="8.8" fill="#1D2A30" font-weight="700">SPI, clock and reset sit in the opposite</text>
+  <text x="480" y="264" font-size="8.8" fill="#56656B">corner, with their own VDDIO and VSSIO.</text>
+  <text x="480" y="288" font-size="8.8" fill="#1D2A30" font-weight="700">Analog supplies separate the groups;</text>
+  <text x="480" y="300" font-size="8.8" fill="#56656B">the exposed pad is VSSA, and REF takes</text>
+  <text x="480" y="312" font-size="8.8" fill="#56656B">1 µF to VSSA right at the pin.</text>
+  <text x="480" y="336" font-size="8.8" fill="#1D2A30" font-weight="700">Concept only: the pin count follows the</text>
+  <text x="480" y="348" font-size="8.8" fill="#56656B">test chip above; a product would drop</text>
+  <text x="480" y="360" font-size="8.8" fill="#56656B">the TEST pins.</text>
+</svg>

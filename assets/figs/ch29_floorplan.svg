@@ -1,0 +1,251 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" width="720" height="440" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>Open-BioAFE floorplan concept: input pads and channel strips at one edge, shared analog in the middle, digital behind a guard ring at the opposite edge</title>
+  <text x="20" y="16" font-size="11.5" font-weight="700" fill="#1D2A30">Microvolts at one edge, clocks at the other (concept, core to scale)</text>
+  <rect x="20" y="26" width="490" height="380" rx="4" fill="#fff" stroke="#1D2A30" stroke-width="1.8"/>
+  <rect x="25" y="31" width="480" height="370" rx="3" fill="none" stroke="#B9C6C9" stroke-width="1"/>
+  <rect x="68" y="78" width="394" height="280" fill="#F7F9F9" stroke="#56656B" stroke-width="0.8" stroke-dasharray="3 2"/>
+  <g stroke="#1D2A30" stroke-width="0.9">
+    <rect x="74" y="82" width="46" height="14" fill="#DCE5E8"/>
+    <rect x="74" y="96" width="46" height="82" fill="#E4EEF8"/>
+    <rect x="74" y="178" width="46" height="44" fill="#D6E6F5"/>
+    <rect x="74" y="222" width="46" height="28" fill="#C6DAEF"/>
+  </g>
+  <g fill="#9DBBDD" stroke="#1F64A8" stroke-width="0.7"><rect x="79" y="102" width="16" height="16"/><rect x="99" y="102" width="16" height="16"/></g>
+  <text x="97" y="140" font-size="9" font-weight="700" fill="#1D2A30" text-anchor="middle">CH1</text>
+  <text x="97" y="154" font-size="7.5" fill="#56656B" text-anchor="middle">LNA</text>
+  <text x="97" y="198" font-size="7.5" fill="#56656B" text-anchor="middle">PGA</text>
+  <text x="97" y="208" font-size="7.5" fill="#56656B" text-anchor="middle">filter</text>
+  <text x="97" y="240" font-size="8.5" fill="#1D2A30" text-anchor="middle">ΔΣ</text>
+  <path d="M87 68 V82" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="79" y="38" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(90,53) rotate(-90)" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">IN1+</text>
+  <path d="M107 68 V82" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="99" y="38" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(110,53) rotate(-90)" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">IN1−</text>
+  <g stroke="#1D2A30" stroke-width="0.9">
+    <rect x="122" y="82" width="46" height="14" fill="#DCE5E8"/>
+    <rect x="122" y="96" width="46" height="82" fill="#E4EEF8"/>
+    <rect x="122" y="178" width="46" height="44" fill="#D6E6F5"/>
+    <rect x="122" y="222" width="46" height="28" fill="#C6DAEF"/>
+  </g>
+  <g fill="#9DBBDD" stroke="#1F64A8" stroke-width="0.7"><rect x="127" y="102" width="16" height="16"/><rect x="147" y="102" width="16" height="16"/></g>
+  <text x="145" y="140" font-size="9" font-weight="700" fill="#1D2A30" text-anchor="middle">CH2</text>
+  <text x="145" y="154" font-size="7.5" fill="#56656B" text-anchor="middle">LNA</text>
+  <text x="145" y="198" font-size="7.5" fill="#56656B" text-anchor="middle">PGA</text>
+  <text x="145" y="208" font-size="7.5" fill="#56656B" text-anchor="middle">filter</text>
+  <text x="145" y="240" font-size="8.5" fill="#1D2A30" text-anchor="middle">ΔΣ</text>
+  <path d="M135 68 V82" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="127" y="38" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(138,53) rotate(-90)" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">IN2+</text>
+  <path d="M155 68 V82" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="147" y="38" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(158,53) rotate(-90)" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">IN2−</text>
+  <g stroke="#1D2A30" stroke-width="0.9">
+    <rect x="170" y="82" width="46" height="14" fill="#DCE5E8"/>
+    <rect x="170" y="96" width="46" height="82" fill="#E4EEF8"/>
+    <rect x="170" y="178" width="46" height="44" fill="#D6E6F5"/>
+    <rect x="170" y="222" width="46" height="28" fill="#C6DAEF"/>
+  </g>
+  <g fill="#9DBBDD" stroke="#1F64A8" stroke-width="0.7"><rect x="175" y="102" width="16" height="16"/><rect x="195" y="102" width="16" height="16"/></g>
+  <text x="193" y="140" font-size="9" font-weight="700" fill="#1D2A30" text-anchor="middle">CH3</text>
+  <text x="193" y="154" font-size="7.5" fill="#56656B" text-anchor="middle">LNA</text>
+  <text x="193" y="198" font-size="7.5" fill="#56656B" text-anchor="middle">PGA</text>
+  <text x="193" y="208" font-size="7.5" fill="#56656B" text-anchor="middle">filter</text>
+  <text x="193" y="240" font-size="8.5" fill="#1D2A30" text-anchor="middle">ΔΣ</text>
+  <path d="M183 68 V82" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="175" y="38" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(186,53) rotate(-90)" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">IN3+</text>
+  <path d="M203 68 V82" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="195" y="38" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(206,53) rotate(-90)" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">IN3−</text>
+  <g stroke="#1D2A30" stroke-width="0.9">
+    <rect x="218" y="82" width="46" height="14" fill="#DCE5E8"/>
+    <rect x="218" y="96" width="46" height="82" fill="#E4EEF8"/>
+    <rect x="218" y="178" width="46" height="44" fill="#D6E6F5"/>
+    <rect x="218" y="222" width="46" height="28" fill="#C6DAEF"/>
+  </g>
+  <g fill="#9DBBDD" stroke="#1F64A8" stroke-width="0.7"><rect x="223" y="102" width="16" height="16"/><rect x="243" y="102" width="16" height="16"/></g>
+  <text x="241" y="140" font-size="9" font-weight="700" fill="#1D2A30" text-anchor="middle">CH4</text>
+  <text x="241" y="154" font-size="7.5" fill="#56656B" text-anchor="middle">LNA</text>
+  <text x="241" y="198" font-size="7.5" fill="#56656B" text-anchor="middle">PGA</text>
+  <text x="241" y="208" font-size="7.5" fill="#56656B" text-anchor="middle">filter</text>
+  <text x="241" y="240" font-size="8.5" fill="#1D2A30" text-anchor="middle">ΔΣ</text>
+  <path d="M231 68 V82" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="223" y="38" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(234,53) rotate(-90)" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">IN4+</text>
+  <path d="M251 68 V82" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="243" y="38" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(254,53) rotate(-90)" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">IN4−</text>
+  <g stroke="#1D2A30" stroke-width="0.9">
+    <rect x="266" y="82" width="46" height="14" fill="#DCE5E8"/>
+    <rect x="266" y="96" width="46" height="82" fill="#E4EEF8"/>
+    <rect x="266" y="178" width="46" height="44" fill="#D6E6F5"/>
+    <rect x="266" y="222" width="46" height="28" fill="#C6DAEF"/>
+  </g>
+  <g fill="#9DBBDD" stroke="#1F64A8" stroke-width="0.7"><rect x="271" y="102" width="16" height="16"/><rect x="291" y="102" width="16" height="16"/></g>
+  <text x="289" y="140" font-size="9" font-weight="700" fill="#1D2A30" text-anchor="middle">CH5</text>
+  <text x="289" y="154" font-size="7.5" fill="#56656B" text-anchor="middle">LNA</text>
+  <text x="289" y="198" font-size="7.5" fill="#56656B" text-anchor="middle">PGA</text>
+  <text x="289" y="208" font-size="7.5" fill="#56656B" text-anchor="middle">filter</text>
+  <text x="289" y="240" font-size="8.5" fill="#1D2A30" text-anchor="middle">ΔΣ</text>
+  <path d="M279 68 V82" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="271" y="38" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(282,53) rotate(-90)" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">IN5+</text>
+  <path d="M299 68 V82" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="291" y="38" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(302,53) rotate(-90)" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">IN5−</text>
+  <g stroke="#1D2A30" stroke-width="0.9">
+    <rect x="314" y="82" width="46" height="14" fill="#DCE5E8"/>
+    <rect x="314" y="96" width="46" height="82" fill="#E4EEF8"/>
+    <rect x="314" y="178" width="46" height="44" fill="#D6E6F5"/>
+    <rect x="314" y="222" width="46" height="28" fill="#C6DAEF"/>
+  </g>
+  <g fill="#9DBBDD" stroke="#1F64A8" stroke-width="0.7"><rect x="319" y="102" width="16" height="16"/><rect x="339" y="102" width="16" height="16"/></g>
+  <text x="337" y="140" font-size="9" font-weight="700" fill="#1D2A30" text-anchor="middle">CH6</text>
+  <text x="337" y="154" font-size="7.5" fill="#56656B" text-anchor="middle">LNA</text>
+  <text x="337" y="198" font-size="7.5" fill="#56656B" text-anchor="middle">PGA</text>
+  <text x="337" y="208" font-size="7.5" fill="#56656B" text-anchor="middle">filter</text>
+  <text x="337" y="240" font-size="8.5" fill="#1D2A30" text-anchor="middle">ΔΣ</text>
+  <path d="M327 68 V82" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="319" y="38" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(330,53) rotate(-90)" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">IN6+</text>
+  <path d="M347 68 V82" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="339" y="38" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(350,53) rotate(-90)" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">IN6−</text>
+  <g stroke="#1D2A30" stroke-width="0.9">
+    <rect x="362" y="82" width="46" height="14" fill="#DCE5E8"/>
+    <rect x="362" y="96" width="46" height="82" fill="#E4EEF8"/>
+    <rect x="362" y="178" width="46" height="44" fill="#D6E6F5"/>
+    <rect x="362" y="222" width="46" height="28" fill="#C6DAEF"/>
+  </g>
+  <g fill="#9DBBDD" stroke="#1F64A8" stroke-width="0.7"><rect x="367" y="102" width="16" height="16"/><rect x="387" y="102" width="16" height="16"/></g>
+  <text x="385" y="140" font-size="9" font-weight="700" fill="#1D2A30" text-anchor="middle">CH7</text>
+  <text x="385" y="154" font-size="7.5" fill="#56656B" text-anchor="middle">LNA</text>
+  <text x="385" y="198" font-size="7.5" fill="#56656B" text-anchor="middle">PGA</text>
+  <text x="385" y="208" font-size="7.5" fill="#56656B" text-anchor="middle">filter</text>
+  <text x="385" y="240" font-size="8.5" fill="#1D2A30" text-anchor="middle">ΔΣ</text>
+  <path d="M375 68 V82" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="367" y="38" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(378,53) rotate(-90)" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">IN7+</text>
+  <path d="M395 68 V82" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="387" y="38" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(398,53) rotate(-90)" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">IN7−</text>
+  <g stroke="#1D2A30" stroke-width="0.9">
+    <rect x="410" y="82" width="46" height="14" fill="#DCE5E8"/>
+    <rect x="410" y="96" width="46" height="82" fill="#E4EEF8"/>
+    <rect x="410" y="178" width="46" height="44" fill="#D6E6F5"/>
+    <rect x="410" y="222" width="46" height="28" fill="#C6DAEF"/>
+  </g>
+  <g fill="#9DBBDD" stroke="#1F64A8" stroke-width="0.7"><rect x="415" y="102" width="16" height="16"/><rect x="435" y="102" width="16" height="16"/></g>
+  <text x="433" y="140" font-size="9" font-weight="700" fill="#1D2A30" text-anchor="middle">CH8</text>
+  <text x="433" y="154" font-size="7.5" fill="#56656B" text-anchor="middle">LNA</text>
+  <text x="433" y="198" font-size="7.5" fill="#56656B" text-anchor="middle">PGA</text>
+  <text x="433" y="208" font-size="7.5" fill="#56656B" text-anchor="middle">filter</text>
+  <text x="433" y="240" font-size="8.5" fill="#1D2A30" text-anchor="middle">ΔΣ</text>
+  <path d="M423 68 V82" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="415" y="38" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(426,53) rotate(-90)" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">IN8+</text>
+  <path d="M443 68 V82" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="435" y="38" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(446,53) rotate(-90)" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">IN8−</text>
+  <rect x="74" y="258" width="54" height="42" fill="#E4EEF8" stroke="#1D2A30" stroke-width="0.9"/>
+  <text x="101.0" y="276" font-size="8.5" font-weight="700" fill="#1D2A30" text-anchor="middle">RLD</text>
+  <text x="101.0" y="289" font-size="7.5" fill="#56656B" text-anchor="middle">drive</text>
+  <rect x="132" y="258" width="90" height="42" fill="#E4EEF8" stroke="#1D2A30" stroke-width="0.9"/>
+  <text x="177.0" y="276" font-size="8.5" font-weight="700" fill="#1D2A30" text-anchor="middle">MUX + SAR</text>
+  <text x="177.0" y="289" font-size="7.5" fill="#56656B" text-anchor="middle">12 b</text>
+  <rect x="226" y="258" width="64" height="42" fill="#E4EEF8" stroke="#1D2A30" stroke-width="0.9"/>
+  <text x="258.0" y="276" font-size="8.5" font-weight="700" fill="#1D2A30" text-anchor="middle">bandgap,</text>
+  <text x="258.0" y="289" font-size="7.5" fill="#56656B" text-anchor="middle">bias</text>
+  <rect x="294" y="258" width="56" height="42" fill="#E4EEF8" stroke="#1D2A30" stroke-width="0.9"/>
+  <text x="322.0" y="276" font-size="8.5" font-weight="700" fill="#1D2A30" text-anchor="middle">references</text>
+  <text x="322.0" y="289" font-size="7.5" fill="#56656B" text-anchor="middle">and buffers</text>
+  <rect x="354" y="258" width="50" height="42" fill="#E4EEF8" stroke="#1D2A30" stroke-width="0.9"/>
+  <text x="379.0" y="282" font-size="8.5" font-weight="700" fill="#1D2A30" text-anchor="middle">3 LDOs</text>
+  <rect x="408" y="258" width="48" height="42" fill="#E4EEF8" stroke="#1D2A30" stroke-width="0.9"/>
+  <text x="432.0" y="276" font-size="8.5" font-weight="700" fill="#1D2A30" text-anchor="middle">bioZ</text>
+  <text x="432.0" y="289" font-size="7.5" fill="#56656B" text-anchor="middle">source</text>
+  <rect x="70" y="307" width="390" height="48" fill="none" stroke="#1A7A4C" stroke-width="2.4" stroke-dasharray="6 2"/>
+  <rect x="76" y="313" width="64" height="36" fill="#FBF1DF" stroke="#9A6212" stroke-width="0.9"/>
+  <text x="108.0" y="334" font-size="8.5" font-weight="700" fill="#1D2A30" text-anchor="middle">clocks</text>
+  <rect x="144" y="313" width="116" height="36" fill="#FBF1DF" stroke="#9A6212" stroke-width="0.9"/>
+  <text x="202.0" y="334" font-size="8.5" font-weight="700" fill="#1D2A30" text-anchor="middle">decimators</text>
+  <rect x="264" y="313" width="116" height="36" fill="#FBF1DF" stroke="#9A6212" stroke-width="0.9"/>
+  <text x="322.0" y="334" font-size="8.5" font-weight="700" fill="#1D2A30" text-anchor="middle">features, coding</text>
+  <rect x="384" y="313" width="70" height="36" fill="#FBF1DF" stroke="#9A6212" stroke-width="0.9"/>
+  <text x="419.0" y="334" font-size="8.5" font-weight="700" fill="#1D2A30" text-anchor="middle">SPI, regs</text>
+  <rect x="29" y="91" width="34" height="18" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text x="46" y="103" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">RLD</text>
+  <rect x="29" y="117" width="34" height="18" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text x="46" y="129" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">SHLD</text>
+  <rect x="29" y="143" width="34" height="18" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text x="46" y="155" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">BIOZ+</text>
+  <rect x="29" y="191" width="34" height="18" rx="2" fill="#8C9A9F" stroke="#9A6212" stroke-width="0.8"/>
+  <text x="46" y="203" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">VDDA</text>
+  <rect x="29" y="217" width="34" height="18" rx="2" fill="#8C9A9F" stroke="#9A6212" stroke-width="0.8"/>
+  <text x="46" y="229" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">VSSA</text>
+  <rect x="29" y="267" width="34" height="18" rx="2" fill="#8C9A9F" stroke="#9A6212" stroke-width="0.8"/>
+  <text x="46" y="279" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">VDD33</text>
+  <rect x="29" y="321" width="34" height="18" rx="2" fill="#8C9A9F" stroke="#9A6212" stroke-width="0.8"/>
+  <text x="46" y="333" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">VDDD</text>
+  <rect x="467" y="91" width="34" height="18" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text x="484" y="103" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">BIOZ−</text>
+  <rect x="467" y="143" width="34" height="18" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text x="484" y="155" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">REF</text>
+  <rect x="467" y="191" width="34" height="18" rx="2" fill="#8C9A9F" stroke="#9A6212" stroke-width="0.8"/>
+  <text x="484" y="203" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">VDDA</text>
+  <rect x="467" y="217" width="34" height="18" rx="2" fill="#8C9A9F" stroke="#9A6212" stroke-width="0.8"/>
+  <text x="484" y="229" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">VSSA</text>
+  <rect x="467" y="255" width="34" height="18" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text x="484" y="267" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">TESTA</text>
+  <rect x="467" y="281" width="34" height="18" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text x="484" y="293" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">TESTB</text>
+  <rect x="467" y="321" width="34" height="18" rx="2" fill="#8C9A9F" stroke="#9A6212" stroke-width="0.8"/>
+  <text x="484" y="333" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">VSSD</text>
+  <rect x="104" y="364" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(115,379) rotate(-90)" font-size="6.5" font-weight="700" fill="#fff" text-anchor="middle">CLKIN</text>
+  <rect x="142" y="364" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(153,379) rotate(-90)" font-size="6.5" font-weight="700" fill="#fff" text-anchor="middle">RESETn</text>
+  <rect x="180" y="364" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(191,379) rotate(-90)" font-size="6.5" font-weight="700" fill="#fff" text-anchor="middle">CSn</text>
+  <rect x="218" y="364" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(229,379) rotate(-90)" font-size="6.5" font-weight="700" fill="#fff" text-anchor="middle">SCLK</text>
+  <rect x="256" y="364" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(267,379) rotate(-90)" font-size="6.5" font-weight="700" fill="#fff" text-anchor="middle">MOSI</text>
+  <rect x="294" y="364" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(305,379) rotate(-90)" font-size="6.5" font-weight="700" fill="#fff" text-anchor="middle">MISO</text>
+  <rect x="332" y="364" width="16" height="30" rx="2" fill="#C98A1C" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(343,379) rotate(-90)" font-size="6.5" font-weight="700" fill="#fff" text-anchor="middle">DRDY</text>
+  <rect x="370" y="364" width="16" height="30" rx="2" fill="#8C9A9F" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(381,379) rotate(-90)" font-size="6.5" font-weight="700" fill="#fff" text-anchor="middle">VDDIO</text>
+  <rect x="408" y="364" width="16" height="30" rx="2" fill="#8C9A9F" stroke="#9A6212" stroke-width="0.8"/>
+  <text transform="translate(419,379) rotate(-90)" font-size="6.5" font-weight="700" fill="#fff" text-anchor="middle">VSSIO</text>
+  <path d="M516 38 H521 V68 H516" stroke="#56656B" stroke-width="1" fill="none"/>
+  <text x="528" y="50" font-size="8.8" font-weight="700" fill="#1D2A30">16 input pads on one edge</text>
+  <text x="528" y="61" font-size="8.8" fill="#56656B">short, guarded traces (Ch 12)</text>
+  <path d="M516 82 H521 V250 H516" stroke="#56656B" stroke-width="1" fill="none"/>
+  <text x="528" y="80" font-size="8.8" font-weight="700" fill="#1D2A30">8 channel strips, 0.2 × 0.7 mm</text>
+  <path d="M521 89 H525" stroke="#56656B" stroke-width="1"/>
+  <text x="528" y="92" font-size="8.5" fill="#56656B">protection, 2 × 5 kΩ</text>
+  <path d="M521 110 H525" stroke="#56656B" stroke-width="1"/>
+  <text x="540" y="113" font-size="8.5" fill="#56656B">2 × 20 pF MIM input capacitors</text>
+  <path d="M521 147 H525" stroke="#56656B" stroke-width="1"/>
+  <text x="528" y="150" font-size="8.5" fill="#56656B">LNA, servo and boosting</text>
+  <path d="M521 200 H525" stroke="#56656B" stroke-width="1"/>
+  <text x="528" y="203" font-size="8.5" fill="#56656B">PGA, 4th-order Gm-C filter</text>
+  <path d="M521 236 H525" stroke="#56656B" stroke-width="1"/>
+  <text x="528" y="239" font-size="8.5" fill="#56656B">16-b incremental ΔΣ</text>
+  <rect x="528" y="105" width="8" height="8" fill="#9DBBDD" stroke="#1F64A8" stroke-width="0.7"/>
+  <path d="M516 258 H521 V300 H516" stroke="#56656B" stroke-width="1" fill="none"/>
+  <text x="528" y="276" font-size="8.8" font-weight="700" fill="#1D2A30">shared analog, quiet</text>
+  <text x="528" y="287" font-size="8.8" fill="#56656B">SAR, references, LDOs, RLD</text>
+  <path d="M516 307 H521 V355 H516" stroke="#56656B" stroke-width="1" fill="none"/>
+  <text x="528" y="322" font-size="8.8" font-weight="700" fill="#1D2A30">guard ring, wide gap,</text>
+  <text x="528" y="333" font-size="8.8" fill="#56656B">own supply and substrate ties:</text>
+  <text x="528" y="344" font-size="8.8" fill="#56656B">clocks, decimators, features, SPI</text>
+  <path d="M516 364 H521 V394 H516" stroke="#56656B" stroke-width="1" fill="none"/>
+  <text x="528" y="377" font-size="8.8" font-weight="700" fill="#1D2A30">digital and supply pads</text>
+  <text x="528" y="388" font-size="8.8" fill="#56656B">on the far edge</text>
+  <text x="20" y="424" font-size="8.5" fill="#56656B">Core about 1.6 × 1.06 mm ≈ 1.7 mm² (Section 29.3), drawn to scale: the eight strips take two thirds of it. Pad count and positions are illustrative.</text>
+  <text x="20" y="436" font-size="8.5" fill="#56656B">blue: analog · gold: digital · green: guard ring · gold pads: signals · grey pads: supplies</text>
+</svg>

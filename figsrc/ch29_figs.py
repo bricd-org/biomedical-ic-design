@@ -66,6 +66,56 @@ def fig():
     savefig(fig, "ch29_budgets")
 
 
+# Gain plan (Table 11.1) and converters (Chapters 13-20): largest signal (V peak at the electrodes),
+# LNA and PGA gain, converter bits; the converters' full scale is 0.5 V peak (+-0.5 V differential).
+MODES = [("ECG", 4e-3, 100, 1, 16, C1), ("EEG", 300e-6, 100, 8, 16, C3), ("EMG", 5e-3, 10, 8, 12, C4)]
+VFS = 0.5
+
+
+def level_diagram():
+    """Signal peak and noise at every node of the chain, in dBV, for the three modes; the EEG noise
+    accumulates the input-referred contributions of the NOISE table (wet electrodes)."""
+    nodes = ["electrodes", "LNA out", "PGA out", "filter out", "converter"]
+    x = np.arange(len(nodes))
+    db = lambda v: 20 * np.log10(v)
+    fig, ax = plt.subplots(figsize=(6.3, 3.4))
+    for name, vpk, g1, g2, nb, c in MODES:
+        sig = [vpk, vpk * g1, vpk * g1 * g2, vpk * g1 * g2, vpk * g1 * g2]
+        ax.plot(x, db(np.array(sig)), "o-", color=c, lw=1.4, ms=3.5, label=f"{name}: largest signal (peak)")
+        lsb = 2 * VFS / 2 ** nb
+        ax.plot([x[-1] - 0.25, x[-1] + 0.25], [db(lsb / np.sqrt(12))] * 2, color=c, lw=2.2)
+    # EEG noise: electrode + LNA + input resistors at the input, then PGA and filter added after gain
+    nz = dict((k.split(" (")[0], w) for k, w, _ in NOISE)
+    g1, g2 = 100, 8
+    n_in = np.sqrt(0.34 ** 2 + 0.36 ** 2 + 0.13 ** 2) * 1e-6
+    n_lna = n_in * g1
+    n_pga = np.sqrt(n_in ** 2 + (0.02e-6) ** 2) * g1 * g2
+    n_flt = np.sqrt(n_in ** 2 + (0.02e-6) ** 2 + (0.05e-6) ** 2) * g1 * g2
+    noise = [n_in, n_lna, n_pga, n_flt, n_flt]
+    ax.plot(x, db(np.array(noise)), "s--", color=C3, lw=1.1, ms=3, label="EEG: noise, 0.5–100 Hz, wet electrodes (rms)")
+    ax.axhline(db(VFS), color=AMBER, ls="--", lw=0.9)
+    ax.text(0.05, db(VFS) + 2, "converter full scale, 0.5 V peak (ECG and EMG both reach 0.4 V)", fontsize=6.8, color=AMBERDK)
+    ax.text(x[-1] + 0.3, db(2 * VFS / 2 ** 16 / np.sqrt(12)), "16-b ΔΣ\nquantisation", fontsize=6.3, va="center", color=C3)
+    ax.text(x[-1] + 0.3, db(2 * VFS / 2 ** 12 / np.sqrt(12)), "12-b SAR\nquantisation", fontsize=6.3, va="center", color=C4)
+    # annotate the EEG margins at the converter
+    s_eeg = 300e-6 * 800
+    ax.annotate("", xy=(x[-1] - 0.05, db(VFS)), xytext=(x[-1] - 0.05, db(s_eeg)),
+                arrowprops=dict(arrowstyle="<->", color=GRAPHITE, lw=0.8))
+    ax.text(x[-1] - 0.12, db(VFS) + 2.5, f"EEG: {db(VFS) - db(s_eeg):.0f} dB headroom", fontsize=6.3, ha="right", va="bottom")
+    ax.annotate("", xy=(x[-1] - 0.05, db(n_flt)), xytext=(x[-1] - 0.05, db(2 * VFS / 2 ** 16 / np.sqrt(12))),
+                arrowprops=dict(arrowstyle="<->", color=GRAPHITE, lw=0.8))
+    ax.text(x[-1] - 0.12, db(2 * VFS / 2 ** 16 / np.sqrt(12)) + 12,
+            f"{db(n_flt) - db(2 * VFS / 2 ** 16 / np.sqrt(12)):.0f} dB:\nquantisation\nnegligible", fontsize=6.3, ha="right", va="center")
+    ax.set_xticks(x); ax.set_xticklabels(nodes)
+    ax.set_xlim(-0.3, len(nodes) - 0.1); ax.set_ylim(-140, 10)
+    finish(ax, ylabel="Level (dBV)", legend=True, loc="lower right")
+    ax.legend(loc="lower center", fontsize=6.2, bbox_to_anchor=(0.52, 0.02))
+    savefig(fig, "ch29_levels")
+    return dict(headroom=db(VFS) - db(s_eeg), q_margin=db(n_flt) - db(2 * VFS / 2 ** 16 / np.sqrt(12)),
+                n_conv=n_flt, q16=2 * VFS / 2 ** 16 / np.sqrt(12), q12=2 * VFS / 2 ** 12 / np.sqrt(12))
+
+
 if __name__ == "__main__":
     print("wet %.2f dry %.2f uVrms; power ECG/EEG %.2f EMG %.2f uW" % totals())
     fig()
+    print(level_diagram())

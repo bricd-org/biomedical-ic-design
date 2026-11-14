@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 366" width="720" height="366" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>The Open-BioAFE test chip concept: the chip, its test access and the test board</title>
+  <defs>
+    <marker id="tc" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
+    </marker>
+    <marker id="tk3" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#9A6212"/>
+    </marker>
+  </defs>
+  <!-- die -->
+  <rect x="64" y="24" width="468" height="302" rx="6" fill="#F7F9F9" stroke="#1D2A30" stroke-width="1.8"/>
+  <text x="76" y="42" font-size="10.5" font-weight="700" fill="#1F64A8">OPEN-BIOAFE TEST CHIP · IHP SG13G2 (concept)</text>
+
+  <!-- pads -->
+  <g fill="#C98A1C" stroke="#9A6212" stroke-width="1">
+    <rect x="16" y="70" width="48" height="58" rx="3"/>
+    <rect x="16" y="217" width="48" height="22" rx="3"/>
+    <rect x="16" y="267" width="48" height="22" rx="3"/>
+    <rect x="532" y="70" width="44" height="58" rx="3"/>
+    <rect x="532" y="205" width="44" height="20" rx="3"/>
+    <rect x="532" y="231" width="44" height="20" rx="3"/>
+    <rect x="532" y="267" width="44" height="22" rx="3"/>
+  </g>
+  <g font-size="8.5" fill="#fff" text-anchor="middle" font-weight="700">
+    <text x="40" y="92">IN1±</text><text x="40" y="104">…</text><text x="40" y="116">IN8±</text>
+    <text x="40" y="232">RLD</text><text x="40" y="282">BIOZ±</text>
+    <text x="554" y="88">SPI</text><text x="554" y="100">+ DRDY</text><text x="554" y="112">CLKIN</text>
+    <text x="554" y="219">TESTA</text><text x="554" y="245">TESTB</text><text x="554" y="282">REF</text>
+  </g>
+
+  <!-- signal path and support blocks -->
+  <g stroke="#1D2A30" stroke-width="1.4">
+    <rect x="84" y="62" width="150" height="74" rx="3" fill="#E4EEF8"/>
+    <rect x="252" y="62" width="104" height="74" rx="3" fill="#E4EEF8"/>
+    <rect x="374" y="62" width="140" height="74" rx="3" fill="#FBF1DF"/>
+    <rect x="252" y="152" width="104" height="44" rx="3" fill="#E4EEF8"/>
+    <rect x="84" y="210" width="150" height="36" rx="3" fill="#E4EEF8"/>
+    <rect x="84" y="260" width="150" height="36" rx="3" fill="#E4EEF8"/>
+    <rect x="252" y="260" width="104" height="36" rx="3" fill="#F2F5F5"/>
+    <rect x="374" y="260" width="140" height="36" rx="3" fill="#F2F5F5"/>
+  </g>
+  <g font-size="10" fill="#1D2A30" text-anchor="middle">
+    <text x="159" y="82" font-weight="700">8 channels</text>
+    <text x="159" y="96" font-size="8.5" fill="#56656B">chopped LNA, servo, boost,</text>
+    <text x="159" y="108" font-size="8.5" fill="#56656B">PGA, Gm-C filter</text>
+    <text x="159" y="122" font-size="8.5" fill="#56656B">(Ch 7–12)</text>
+    <text x="304" y="88" font-weight="700">8 × ΔΣ</text>
+    <text x="304" y="102" font-size="8.5" fill="#56656B">16 b, 500 S/s</text>
+    <text x="304" y="116" font-size="8.5" fill="#56656B">(Ch 20)</text>
+    <text x="444" y="82" font-weight="700">digital back end</text>
+    <text x="444" y="96" font-size="8.5" fill="#56656B">decimators, features,</text>
+    <text x="444" y="108" font-size="8.5" fill="#56656B">coding, SPI registers</text>
+    <text x="444" y="122" font-size="8.5" fill="#56656B">(Ch 23–27)</text>
+    <text x="304" y="171" font-weight="700">MUX + SAR</text>
+    <text x="304" y="185" font-size="8.5" fill="#56656B">12 b, 16 kS/s (Ch 18)</text>
+    <text x="159" y="226" font-weight="700">right-leg drive</text>
+    <text x="159" y="239" font-size="8.5" fill="#56656B">loop gain 100, 150 kΩ</text>
+    <text x="159" y="276" font-weight="700">bioZ source + I/Q</text>
+    <text x="159" y="289" font-size="8.5" fill="#56656B">51.2 kHz, 10–50 µA</text>
+    <text x="304" y="276" font-weight="700">clock dividers</text>
+    <text x="304" y="289" font-size="8.5" fill="#56656B">1.024 MHz from CLKIN</text>
+    <text x="444" y="276" font-weight="700">references, LDOs</text>
+    <text x="444" y="289" font-size="8.5" fill="#56656B">1 µF off chip at REF</text>
+  </g>
+  <g stroke="#1D2A30" stroke-width="1.6" fill="none">
+    <path d="M64 99 H82" marker-end="url(#tc)"/>
+    <path d="M234 99 H250" marker-end="url(#tc)"/>
+    <path d="M356 99 H372" marker-end="url(#tc)"/>
+    <path d="M514 99 H530" marker-end="url(#tc)"/>
+    <path d="M243 99 V174 H250" marker-end="url(#tc)"/>
+    <path d="M356 174 H365 V122 H372" marker-end="url(#tc)"/>
+    <path d="M84 228 H66" marker-end="url(#tc)"/>
+    <path d="M84 278 H66" marker-end="url(#tc)"/>
+    <path d="M514 278 H530"/>
+  </g>
+  <circle cx="243" cy="99" r="2.6" fill="#1D2A30"/>
+
+  <!-- test features (dashed) -->
+  <g stroke="#9A6212" stroke-width="1.3" fill="#fff" stroke-dasharray="4 3">
+    <rect x="84" y="152" width="150" height="44" rx="3"/>
+    <rect x="374" y="152" width="140" height="44" rx="3"/>
+    <rect x="374" y="210" width="140" height="36" rx="3"/>
+  </g>
+  <g font-size="8.8" fill="#9A6212" text-anchor="middle">
+    <text x="159" y="170" font-weight="700">test-signal generator</text>
+    <text x="159" y="184">and lead-off currents</text>
+    <text x="444" y="166" font-weight="700">test modes over SPI</text>
+    <text x="444" y="178">raw ΔΣ bits, raw SAR codes,</text>
+    <text x="444" y="190">bypass decimation and features</text>
+    <text x="444" y="225" font-weight="700">analog test MUX</text>
+    <text x="444" y="238">any LNA, PGA or filter output</text>
+    <text x="304" y="222">taps inside each channel</text>
+  </g>
+  <g stroke="#9A6212" stroke-width="1.2" fill="none" stroke-dasharray="4 3">
+    <path d="M159 152 V138" marker-end="url(#tk3)"/>
+    <path d="M444 152 V138" marker-end="url(#tk3)"/>
+    <path d="M243 174 V228 H372" marker-end="url(#tk3)"/>
+    <path d="M514 215 H530" marker-end="url(#tk3)"/>
+    <path d="M514 241 H530" marker-end="url(#tk3)"/>
+  </g>
+  <text x="76" y="316" font-size="8.5" fill="#56656B">blue: analog signal path · gold: digital · grey: support · dashed: test access, removed or idle in the product</text>
+
+  <!-- test board -->
+  <rect x="600" y="40" width="112" height="260" rx="8" fill="#1D2A30"/>
+  <g font-size="9" fill="#fff" text-anchor="middle">
+    <text x="656" y="62" font-weight="700" font-size="10.5">Test PCB</text>
+    <text x="656" y="86">electrode simulator</text><text x="656" y="98" fill="#B9C6C9">51 kΩ ‖ 47 nF,</text><text x="656" y="110" fill="#B9C6C9">300 mV offset</text>
+    <text x="656" y="134">precision DAC</text><text x="656" y="146" fill="#B9C6C9">plays MIT-BIH and</text><text x="656" y="158" fill="#B9C6C9">CHB-MIT records</text>
+    <text x="656" y="182">CMRR fixture</text><text x="656" y="194" fill="#B9C6C9">common-mode drive</text><text x="656" y="206" fill="#B9C6C9">through 200 pF</text>
+    <text x="656" y="230">FPGA on SPI</text><text x="656" y="242" fill="#B9C6C9">raw streams, FFT</text>
+    <text x="656" y="266">clean supplies</text><text x="656" y="278" fill="#B9C6C9">current per rail</text>
+  </g>
+  <g stroke="#1D2A30" stroke-width="1.4" fill="none">
+    <path d="M598 99 H578" marker-end="url(#tc)"/>
+    <path d="M578 112 H598" marker-end="url(#tc)"/>
+  </g>
+  <path d="M656 300 V342 H8 V99 H14" stroke="#1D2A30" stroke-width="1.3" fill="none" stroke-dasharray="2 2" marker-end="url(#tc)"/>
+  <text x="332" y="358" font-size="8.5" fill="#56656B" text-anchor="middle">simulated electrodes and recorded biosignals from the test board into IN1± … IN8± (Chapter 22)</text>
+</svg>
