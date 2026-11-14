@@ -123,6 +123,25 @@ op-amp circuits, slew rate, offset trimming, electrode chemistry details, electr
 
 ## 4. Next steps, in order
 
+### Step 1c — Architecture and circuit diagrams (user's request, 14 Nov 2026)
+
+The user asked for more figures that explain the chapters, "a lot of architecture diagrams are missing in
+the data converter section". Every Part III figure so far is a data plot. Draw diagrams as **hand-written
+SVG** in `assets/figs/` like `ch04_mains_coupling.svg` (viewBox 720 wide, Libre Franklin, palette from
+`figsrc/bricdstyle.py`: strokes #1D2A30, analog boxes #E4EEF8, digital boxes #FBF1DF, clocks #9A6212,
+secondary text #56656B). Insert as the chapter's first figure where it belongs and renumber the later
+figures (ids and "Figure N.M" in the chapter and in cross-links). Planned, in order of value:
+- Ch 18: SAR architecture (S/H, differential CDAC, comparator, async logic, self-timed clock, output) — **DONE** (Fig 18.1, `ch18_sar_arch.svg`; old 18.1 → 18.2)
+- Ch 20: incremental ΔΣ with reset and CoI decimator; SC integrator (two-phase); 2nd-order CIFB loop
+- Ch 19: ΔΣ loop and its linear model (loop filter, quantiser + E, DAC; NTF/STF)
+- Ch 17: binary vs split CDAC; Vcm-based switching steps
+- Ch 16: StrongARM latch schematic with its phases
+- Ch 15: sampling switch + kT/C; bootstrapped switch schematic
+- Ch 13: sampling chain (AAF, S/H, quantiser, decimation)
+- Ch 21: direct digitisation, VCO ADC; Ch 22: test bench
+- Part II: Harrison LNA, chopper IA with DSL and boosting loops, RLD loop (check which ch07–ch12 figures
+  are already schematics before drawing)
+
 ### Step 1 — Chapters 1–4: DONE (11 Nov 2026)
 
 Written from the plan that was here (the numbers are also in section 8 and in `biosig.py`). Use

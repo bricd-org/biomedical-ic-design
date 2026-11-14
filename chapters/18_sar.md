@@ -33,7 +33,7 @@ Chapters [15]({% link chapters/15_switches.md %})–[17]({% link chapters/17_cda
 
 ## <span class="secnum">18.1</span>The binary search algorithm
 
-After sampling, the converter knows only that the input lies somewhere in the full range. It tries the midpoint: the MSB capacitor is switched so that the top plate moves by half the reference, and the comparator says whether the input is above or below. The MSB is kept or removed accordingly, and the next bit tries half of what remains. After $$N$$ comparisons the DAC's code is the input to within an LSB.
+After sampling, the converter knows only that the input lies somewhere in the full range. It tries the midpoint: the MSB capacitor is switched so that the top plate moves by half the reference, and the comparator says whether the input is above or below. The MSB is kept or removed accordingly, and the next bit tries half of what remains. After $$N$$ comparisons the DAC's code is the input to within an LSB. [Figure 18.1](#fig-18-1) shows the blocks that carry out this search in the Open-BioAFE converter.
 
 <div class="tbox tbox-keyeq" markdown="1">
 <div class="tbox-title">Key equation · SAR timing</div>
@@ -45,6 +45,11 @@ $$
 </div>
 
 $$M$$ is the number of comparison cycles: $$N$$ for a binary array, more with redundancy. For the Open-BioAFE SAR, eight channels at 2 kS/s mean 16 000 conversions per second, 62.5 µs each. Each cycle could take up to 4 µs, a hundred times more than the circuits need, so the SAR converts in a short burst and sleeps for the rest of the period (section 18.5).
+
+<figure id="fig-18-1">
+  <img src="{{ '/assets/figs/ch18_sar_arch.svg' | relative_url }}" style="width:720px" alt="Block diagram of the differential asynchronous SAR converter: bootstrapped sampling switches, two capacitive DACs, a comparator, asynchronous SAR logic with a self-timed comparator clock, and the digital output">
+  <figcaption><span class="capnum">Figure 18.1.</span> <strong>The Open-BioAFE SAR converter.</strong> Bootstrapped switches sample the differential input onto the top plates of two capacitive DACs (\(v_{x+}\), \(v_{x-}\)). The comparator decides the sign of their difference; the asynchronous logic stores the decision and switches the next bottom plates of the two arrays in opposite directions between \(V_\mathrm{ref+}\), \(V_\mathrm{cm}\) and \(V_\mathrm{ref-}\), then triggers the next comparison as soon as the last one has resolved, with no fast external clock. After 14 decisions with radix-1.8 weights, a weighted sum turns the raw bits into the 12-bit code.</figcaption>
+</figure>
 
 ## <span class="secnum">18.2</span>Synchronous versus asynchronous timing
 
@@ -83,7 +88,7 @@ assign done = (ptr == 0);
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 18.1 · What calibration and redundancy recover</div>
 
-A behavioural Monte Carlo (`figsrc/ch18_figs.py`) converts a near-full-scale sine with SG13G2-sized units ($$\sigma_u = 1.24$$ %) and a comparator with LSB/4 of noise ([Figure 18.1](#fig-18-1)a). The median effective resolution is:
+A behavioural Monte Carlo (`figsrc/ch18_figs.py`) converts a near-full-scale sine with SG13G2-sized units ($$\sigma_u = 1.24$$ %) and a comparator with LSB/4 of noise ([Figure 18.2](#fig-18-2)a). The median effective resolution is:
 
 - binary, 12 cycles: **11.5 bits** uncalibrated, 11.8 bits with calibrated weights;
 - radix 1.8, 14 cycles: 11.3 bits uncalibrated, **11.8 bits** calibrated.
@@ -92,9 +97,9 @@ Uncalibrated, the redundant array is worse, because its non-binary weights do no
 
 </div>
 
-<figure id="fig-18-1">
+<figure id="fig-18-2">
   <img src="{{ '/assets/figs/ch18_sar.svg' | relative_url }}" style="width:720px" alt="Effective number of bits versus unit-capacitor mismatch for binary and redundant SAR arrays with and without calibration, and the estimated energy per conversion broken down by block">
-  <figcaption><span class="capnum">Figure 18.1.</span> <strong>Calibration recovers the small DAC; the comparator dominates the energy.</strong> (a) Median ENOB of a behavioural 12-bit SAR against unit-capacitor mismatch, for a binary array (12 cycles) and a radix-1.8 array (14 cycles), with ideal (solid) and calibrated (dashed) weights; the dotted line marks the 0.98 fF SG13G2 unit. (b) Estimated energy per conversion of the Open-BioAFE SAR: comparator with the noise-mode trick (Chapter 16), CDAC switching and average reference charge (Chapter 17), SAR logic and sampler. Computed in <code>figsrc/ch18_figs.py</code>; the logic and sampler figures are estimates.</figcaption>
+  <figcaption><span class="capnum">Figure 18.2.</span> <strong>Calibration recovers the small DAC; the comparator dominates the energy.</strong> (a) Median ENOB of a behavioural 12-bit SAR against unit-capacitor mismatch, for a binary array (12 cycles) and a radix-1.8 array (14 cycles), with ideal (solid) and calibrated (dashed) weights; the dotted line marks the 0.98 fF SG13G2 unit. (b) Estimated energy per conversion of the Open-BioAFE SAR: comparator with the noise-mode trick (Chapter 16), CDAC switching and average reference charge (Chapter 17), SAR logic and sampler. Computed in <code>figsrc/ch18_figs.py</code>; the logic and sampler figures are estimates.</figcaption>
 </figure>
 
 ## <span class="secnum">18.5</span>Power gating and duty cycling
@@ -104,7 +109,7 @@ A biosignal SAR spends most of its time doing nothing. With asynchronous timing 
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 18.2 · The SAR's power budget</div>
 
-The energy per conversion adds up to about **7.6 pJ** ([Figure 18.1](#fig-18-1)b): comparator 3.9 pJ, SAR logic 1.5 pJ, CDAC switching 0.84 pJ, average reference charge 0.84 pJ, sampler and timing 0.5 pJ. At 16 kS/s that is **0.12 µW** for all eight channels, 15 nW per channel. With 11 effective bits the Walden figure of merit is $$7.6\ \text{pJ}/2^{11} = 3.7$$ fJ per step, inside the 10 fJ/step target of [Chapter 14]({% link chapters/14_adcspecs.md %}).
+The energy per conversion adds up to about **7.6 pJ** ([Figure 18.2](#fig-18-2)b): comparator 3.9 pJ, SAR logic 1.5 pJ, CDAC switching 0.84 pJ, average reference charge 0.84 pJ, sampler and timing 0.5 pJ. At 16 kS/s that is **0.12 µW** for all eight channels, 15 nW per channel. With 11 effective bits the Walden figure of merit is $$7.6\ \text{pJ}/2^{11} = 3.7$$ fJ per step, inside the 10 fJ/step target of [Chapter 14]({% link chapters/14_adcspecs.md %}).
 
 </div>
 
