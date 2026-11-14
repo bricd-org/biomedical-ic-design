@@ -35,7 +35,7 @@ How much right-leg-drive gain and which protection network let the Open-BioAFE c
 
 ## <span class="secnum">12.1</span>The right-leg drive loop
 
-A passive ground electrode lets the mains displacement current set the body's common-mode voltage, 9 mV in [Worked Example 4.1]({% link chapters/04_interference.md %}). A **right-leg drive** (RLD) instead senses the average of the input common-mode voltages, compares it with the amplifier's mid-supply, and drives the third electrode with the inverted, amplified error. The loop forces the body towards mid-supply, and the common mode left at the electrodes is reduced by one plus the loop gain {% include cite.html keys="winter1983" %}:
+A passive ground electrode lets the mains displacement current set the body's common-mode voltage, 9 mV in [Worked Example 4.1]({% link chapters/04_interference.md %}). A **right-leg drive** (RLD) instead senses the average of the input common-mode voltages, compares it with the amplifier's mid-supply, and drives the third electrode with the inverted, amplified error. The loop forces the body towards mid-supply, and the common mode left at the electrodes is reduced by one plus the loop gain {% include cite.html keys="winter1983" %} ([Figure 12.1](#fig-12-1)):
 
 <div class="tbox tbox-keyeq" markdown="1">
 <div class="tbox-title">Key equation · Common mode with a right-leg drive</div>
@@ -46,6 +46,11 @@ $$
 
 </div>
 
+<figure id="fig-12-1">
+  <img src="{{ '/assets/figs/ch12_rld_loop.svg' | relative_url }}" style="width:720px" alt="Right-leg drive loop: the body coupled to the mains and to earth, two signal electrodes into the front-end, the front-end's common-mode output into an integrator, and the integrator driving the right-leg electrode through a safety resistor">
+  <figcaption><span class="capnum">Figure 12.1.</span> <strong>The right-leg drive loop.</strong> The mains couples to the body through about 3 pF, and the body to earth through about 200 pF. The front-end senses the average of its inputs, \(v_\mathrm{cm}\); the RLD integrator compares it with mid-supply and drives the inverted, amplified error into the body through the safety resistor \(R_\mathrm{o}\) and the right-leg electrode, pulling the body towards \(V_\mathrm{mid}\). The patient is inside the loop: \(C_\mathrm{body}\), \(R_\mathrm{o}\) and \(Z_\mathrm{e3}\) set its second pole.</figcaption>
+</figure>
+
 Every requirement on the common-mode input impedance falls by the same factor.
 
 <div class="tbox tbox-example" markdown="1">
@@ -53,11 +58,11 @@ Every requirement on the common-mode input impedance falls by the same factor.
 
 The test applies 10 Vrms of common mode at 50 Hz with a 40.7 kΩ imbalance in one lead, and allows 1 mVpp at the output referred to the input ([Chapter 4]({% link chapters/04_interference.md %})). Without an RLD that needs $$Z_\mathrm{cm} \ge 1.15$$ GΩ. With a loop gain of 100 at 50 Hz it needs only **11.4 MΩ**.
 
-With the amplifier's 100 dB of intrinsic CMRR included ([Figure 12.1](#fig-12-1)a): the chopped but unboosted front-end (6.25 MΩ) leaves 1.8 mVpp and fails; the boosted front-end (200 MΩ) leaves **0.06 mVpp**, 24 dB inside the limit. A loop gain of 10 would leave 0.55 mVpp with the boosted front-end, a pass with only 5 dB of margin.
+With the amplifier's 100 dB of intrinsic CMRR included ([Figure 12.2](#fig-12-2)a): the chopped but unboosted front-end (6.25 MΩ) leaves 1.8 mVpp and fails; the boosted front-end (200 MΩ) leaves **0.06 mVpp**, 24 dB inside the limit. A loop gain of 10 would leave 0.55 mVpp with the boosted front-end, a pass with only 5 dB of margin.
 
 </div>
 
-**Stability.** The RLD loop contains the patient. The amplifier, usually an integrator for high gain at 50 Hz, drives the body's capacitance to ground (about 200 pF, varying from person to person) through the RL electrode and a series resistor $$R_\mathrm{o}$$. That forms a second pole at $$1/[2\pi C_\mathrm{body}(R_\mathrm{o} + Z_\mathrm{e})]$$. A loop gain of 100 at 50 Hz means an integrator crossover at 5 kHz, and the phase margin depends on where the second pole falls ([Figure 12.1](#fig-12-1)b).
+**Stability.** The RLD loop contains the patient. The amplifier, usually an integrator for high gain at 50 Hz, drives the body's capacitance to ground (about 200 pF, varying from person to person) through the RL electrode and a series resistor $$R_\mathrm{o}$$. That forms a second pole at $$1/[2\pi C_\mathrm{body}(R_\mathrm{o} + Z_\mathrm{e})]$$. A loop gain of 100 at 50 Hz means an integrator crossover at 5 kHz, and the phase margin depends on where the second pole falls ([Figure 12.2](#fig-12-2)b).
 
 **Safety.** A large transient, a lead falling off or a defibrillation pulse drives the RLD amplifier to its rail. The body then sees the rail through $$R_\mathrm{o}$$ alone, so $$R_\mathrm{o}$$ must keep that current below the 10 µA patient-current limit for DC ([Chapter 4]({% link chapters/04_interference.md %})): at 1.2 V, $$R_\mathrm{o} \ge 120$$ kΩ. A larger $$R_\mathrm{o}$$ is safer but moves the second pole down. With 390 kΩ the phase margin at a 5 kHz crossover is 35°; with 1 MΩ, 23°.
 
@@ -68,9 +73,9 @@ $$R_\mathrm{o} = 150$$ kΩ limits the saturated current to 8 µA and gives a pha
 
 </div>
 
-<figure id="fig-12-1">
+<figure id="fig-12-2">
   <img src="{{ '/assets/figs/ch12_rld.svg' | relative_url }}" style="width:720px" alt="Residual differential interference in the ECG CMRR test versus right-leg-drive loop gain for three common-mode input impedances, and phase margin of the right-leg-drive loop versus its unity-gain frequency for four safety resistors">
-  <figcaption><span class="capnum">Figure 12.1.</span> <strong>Loop gain buys CMRR; the safety resistor costs stability.</strong> (a) The input-referred residual in the 10 Vrms ECG CMRR test at 50 Hz against the RLD loop gain, for three common-mode input impedances and 100 dB of intrinsic CMRR. With a loop gain of 100 the boosted front-end (200 MΩ) passes with 24 dB of margin. (b) Phase margin of an integrating RLD loop driving 200 pF of body capacitance through the RL electrode and a safety resistor, against the integrator's unity-gain frequency; the legend gives the current each resistor allows when the amplifier saturates at 1.2 V. Computed in <code>figsrc/ch12_figs.py</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 12.2.</span> <strong>Loop gain buys CMRR; the safety resistor costs stability.</strong> (a) The input-referred residual in the 10 Vrms ECG CMRR test at 50 Hz against the RLD loop gain, for three common-mode input impedances and 100 dB of intrinsic CMRR. With a loop gain of 100 the boosted front-end (200 MΩ) passes with 24 dB of margin. (b) Phase margin of an integrating RLD loop driving 200 pF of body capacitance through the RL electrode and a safety resistor, against the integrator's unity-gain frequency; the legend gives the current each resistor allows when the amplifier saturates at 1.2 V. Computed in <code>figsrc/ch12_figs.py</code>.</figcaption>
 </figure>
 
 ## <span class="secnum">12.2</span>Common-mode feedback
@@ -133,7 +138,7 @@ Testing the RLD loop with a single body capacitance. People differ, a patient ly
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 2]({% link chapters/31_labs.md %}#lab-2) already adds a behavioural right-leg drive to the body model of [Chapter 4]({% link chapters/04_interference.md %}). Extend it with `figsrc/ch12_figs.py`: add the integrator, the safety resistor and the body capacitance, and reproduce [Figure 12.1](#fig-12-1).
+[Lab 2]({% link chapters/31_labs.md %}#lab-2) already adds a behavioural right-leg drive to the body model of [Chapter 4]({% link chapters/04_interference.md %}). Extend it with `figsrc/ch12_figs.py`: add the integrator, the safety resistor and the body capacitance, and reproduce [Figure 12.2](#fig-12-2).
 
 </div>
 

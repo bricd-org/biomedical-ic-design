@@ -145,7 +145,7 @@ It also plots the interference against the imbalance for four values of $$Z_\mat
 
 1. Why does an amplifier with 120 dB of CMRR barely relax the $$Z_\mathrm{cm}$$ requirement compared with one of 100 dB? Find the amplifier CMRR below which no $$Z_\mathrm{cm}$$ reaches 90 dB.
 2. Run at 60 Hz. Which numbers change, and by how much? Is a 60 Hz country harder or easier for the front-end?
-3. Find the smallest right-leg-drive loop gain with which the boosted front-end still passes the CMRR test with 6 dB of margin. Compare it with the stability limit of [Figure 12.1]({% link chapters/12_cmcontrol.md %}#fig-12-1)b.
+3. Find the smallest right-leg-drive loop gain with which the boosted front-end still passes the CMRR test with 6 dB of margin. Compare it with the stability limit of [Figure 12.2]({% link chapters/12_cmcontrol.md %}#fig-12-2)b.
 4. Replace the wet electrodes by dry ones (`biosig.z_electrode(f, "dry")`) for the ground electrode and the imbalance. What happens to the body's common mode and to the interference?
 5. How many picofarads of input capacitance can the front-end afford, from pads, ESD diodes and wiring, before $$Z_\mathrm{cm}$$ falls below the 11.4 MΩ that the right-leg drive allows?
 

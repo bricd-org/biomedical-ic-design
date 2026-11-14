@@ -29,7 +29,12 @@ How do you tolerate ±300 mV of electrode offset and keep the input impedance hi
 
 </div>
 
-[Chapter 9]({% link chapters/09_chopper.md %}) chopped the capacitively coupled IA and paid for it twice. Its input impedance fell to 6.25 MΩ, and something less obvious happened too: the input chopper sits *in front of* the input capacitors, so it turns the electrode's DC offset into a square wave at the chopping frequency, which the capacitors pass. The chopped CCIA no longer blocks the offset. This chapter restores both properties, with an impedance-boosting loop and a DC servo loop.
+[Chapter 9]({% link chapters/09_chopper.md %}) chopped the capacitively coupled IA and paid for it twice. Its input impedance fell to 6.25 MΩ, and something less obvious happened too: the input chopper sits *in front of* the input capacitors, so it turns the electrode's DC offset into a square wave at the chopping frequency, which the capacitors pass. The chopped CCIA no longer blocks the offset. This chapter restores both properties, with an impedance-boosting loop and a DC servo loop ([Figure 10.1](#fig-10-1)).
+
+<figure id="fig-10-1">
+  <img src="{{ '/assets/figs/ch10_ccia_loops.svg' | relative_url }}" style="width:720px" alt="Chopped capacitively coupled amplifier with input and output choppers, a positive-feedback impedance-boosting loop through Cpf and a DC servo loop with an integrator through CDSL, all summing at the input node">
+  <figcaption><span class="capnum">Figure 10.1.</span> <strong>The Open-BioAFE front-end and its two loops.</strong> Between the choppers (CH) the signal sits at the chopping frequency. The impedance-boosting loop chops the output and feeds it back through \(C_\mathrm{pf}\), pre-charging the input capacitors at every chopper transition. The DC servo loop integrates the output's offset and feeds it back, chopped, through \(C_\mathrm{DSL}\), cancelling the electrode's offset at the input node. Both loops, and the gain-setting \(C_\mathrm{fb}\), sum their charge at the same node. One half of the differential circuit is drawn.</figcaption>
+</figure>
 
 ## <span class="secnum">10.1</span>Input impedance of chopped CCIAs
 
@@ -44,7 +49,7 @@ $$
 
 </div>
 
-The chopped impedance is flat with frequency up to the chopping frequency, so at low frequencies it is far lower than the unchopped one ([Figure 10.1](#fig-10-1)a). With $$C_\mathrm{in} = 20$$ pF at 4 kHz it is 6.25 MΩ. That passes the 2.5 MΩ the ECG standards require, but a 1 MΩ dry electrode in front of it loses 14 % of the signal, and an imbalance between two dry electrodes turns common mode into differential mode through the divider ([Chapter 4]({% link chapters/04_interference.md %})).
+The chopped impedance is flat with frequency up to the chopping frequency, so at low frequencies it is far lower than the unchopped one ([Figure 10.2](#fig-10-2)a). With $$C_\mathrm{in} = 20$$ pF at 4 kHz it is 6.25 MΩ. That passes the 2.5 MΩ the ECG standards require, but a 1 MΩ dry electrode in front of it loses 14 % of the signal, and an imbalance between two dry electrodes turns common mode into differential mode through the divider ([Chapter 4]({% link chapters/04_interference.md %})).
 
 The pads add a second, frequency-dependent load. Bond pad, ESD protection and wiring add a few picofarads to ground at each input: 5 pF is 640 MΩ at 50 Hz and 32 MΩ at 1 kHz. That caps whatever the amplifier achieves, and it is also part of the common-mode input impedance of [Chapter 4]({% link chapters/04_interference.md %}).
 
@@ -63,7 +68,7 @@ $$\varepsilon$$ is set by the matching of $$C_\mathrm{pf}A_\mathrm{M}$$ to $$C_\
 
 From 6.25 MΩ to the 100 MΩ target is a factor of 16, so the loop must leave less than 6 % of the charge to the electrode. With a 10 % residual the impedance is 62 MΩ; with 3 %, 208 MΩ at 10 Hz.
 
-The pads then take over at higher frequencies. With 5 pF per input, the 3 % design falls to 61 MΩ at 1 kHz; with 1 pF it stays near 200 MΩ to a few hundred hertz ([Figure 10.1](#fig-10-1)a). Keeping the input pads small, and guarding them with a driven shield ([Chapter 12]({% link chapters/12_cmcontrol.md %}#shielding)), is part of the input-impedance design.
+The pads then take over at higher frequencies. With 5 pF per input, the 3 % design falls to 61 MΩ at 1 kHz; with 1 pF it stays near 200 MΩ to a few hundred hertz ([Figure 10.2](#fig-10-2)a). Keeping the input pads small, and guarding them with a driven shield ([Chapter 12]({% link chapters/12_cmcontrol.md %}#shielding)), is part of the input-impedance design.
 
 </div>
 
@@ -91,15 +96,15 @@ The price is noise. $$C_\mathrm{DSL}$$ hangs on the OTA's input nodes, and it ad
 
 With a 1.2 V integrator swinging ±0.5 V around mid-supply, $$C_\mathrm{DSL} \ge 0.3/0.5 \times 20\ \text{pF} = 12$$ pF. The noise gain rises from 1.12 to **1.72**, which raises the 0.27 µVrms chopped input noise of [Chapter 9]({% link chapters/09_chopper.md %}) by 54 %.
 
-With an integrator built from the 3.3 V thick-oxide devices, swinging ±1.5 V, $$C_\mathrm{DSL} = 4$$ pF and the noise gain is **1.32**, 18 % above the case without a loop ([Figure 10.1](#fig-10-1)b). Its current is tiny, because the loop works at DC, so the higher supply costs well under a microwatt.
+With an integrator built from the 3.3 V thick-oxide devices, swinging ±1.5 V, $$C_\mathrm{DSL} = 4$$ pF and the noise gain is **1.32**, 18 % above the case without a loop ([Figure 10.2](#fig-10-2)b). Its current is tiny, because the loop works at DC, so the higher supply costs well under a microwatt.
 
 The high-pass corner: with $$C_\mathrm{DSL}/C_\mathrm{fb} = 4\ \text{pF}/200\ \text{fF} = 20$$, a 0.5 Hz corner needs $$\tau_\mathrm{int} = 20/(2\pi \times 0.5) = 6.4$$ s. An active-RC integrator with 1 pF and a thick-oxide pseudo-resistor (about $$10^{13}$$ Ω at body temperature) gives about 10 s. A small integrating current from a subthreshold transconductor does the same.
 
 </div>
 
-<figure id="fig-10-1">
+<figure id="fig-10-2">
   <img src="{{ '/assets/figs/ch10_zin.svg' | relative_url }}" style="width:720px" alt="Input impedance of the chopped CCIA with and without positive-feedback boosting and pad capacitance, and the capacitive noise gain of a DC servo loop versus the offset it cancels">
-  <figcaption><span class="capnum">Figure 10.1.</span> <strong>Boosting buys back the impedance; the servo loop's range costs noise.</strong> (a) Differential input impedance of the chopped CCIA (C<sub>in</sub> = 20 pF, f<sub>ch</sub> = 4 kHz) without and with positive-feedback boosting (10 % and 3 % residual), including the capacitance of the input pads, against the unchopped CCIA. (b) Capacitive noise gain of the LNA with a DC servo loop sized to cancel a given electrode offset, for integrator swings of ±0.5 V and ±1.5 V (dotted: the servo capacitor's share alone). Computed in <code>figsrc/ch10_figs.py</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 10.2.</span> <strong>Boosting buys back the impedance; the servo loop's range costs noise.</strong> (a) Differential input impedance of the chopped CCIA (C<sub>in</sub> = 20 pF, f<sub>ch</sub> = 4 kHz) without and with positive-feedback boosting (10 % and 3 % residual), including the capacitance of the input pads, against the unchopped CCIA. (b) Capacitive noise gain of the LNA with a DC servo loop sized to cancel a given electrode offset, for integrator swings of ±0.5 V and ±1.5 V (dotted: the servo capacitor's share alone). Computed in <code>figsrc/ch10_figs.py</code>.</figcaption>
 </figure>
 
 ## <span class="secnum">10.4</span>DC-coupled versus AC-coupled front-ends

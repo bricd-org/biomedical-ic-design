@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" width="720" height="300" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>The chopped capacitively coupled LNA with its impedance-boosting and DC servo loops</title>
+  <defs>
+    <marker id="ea" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
+    </marker>
+  </defs>
+  <!-- chopped domain -->
+  <rect x="96" y="74" width="218" height="134" rx="6" fill="#FBF1DF" opacity="0.55"/>
+  <text x="178" y="194" font-size="9.5" fill="#9A6212">chopped domain: the signal</text><text x="178" y="205" font-size="9.5" fill="#9A6212">sits at f<tspan font-size="7" dy="2">ch</tspan><tspan dy="-2"> = 4 kHz</tspan></text>
+
+  <!-- main path -->
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <path d="M24 150 H54 M88 150 H116 M126 150 H206"/>
+    <path d="M276 150 H322 M356 150 H560"/>
+    <path d="M560 150 H600" marker-end="url(#ea)"/>
+    <!-- C_fb -->
+    <path d="M300 150 V112 H246 M236 112 H170"/>
+    <!-- positive feedback (boost) -->
+    <path d="M440 150 V40 H372 M338 40 H246 M236 40 H170 V250"/>
+    <!-- DC servo -->
+    <path d="M440 150 V250 H404 M344 250 H312 M278 250 H246 M236 250 H170"/>
+  </g>
+  <g stroke="#1D2A30" stroke-width="2.6">
+    <path d="M116 136 V164 M126 136 V164"/>
+    <path d="M236 98 V126 M246 98 V126"/>
+    <path d="M236 26 V54 M246 26 V54"/>
+    <path d="M236 236 V264 M246 236 V264"/>
+  </g>
+  <!-- choppers and blocks -->
+  <g stroke="#1D2A30" stroke-width="1.6" fill="#fff">
+    <rect x="56" y="134" width="32" height="32" rx="3"/>
+    <rect x="322" y="134" width="34" height="32" rx="3"/>
+    <rect x="338" y="24" width="34" height="32" rx="3"/>
+    <rect x="278" y="234" width="34" height="32" rx="3"/>
+  </g>
+  <rect x="344" y="232" width="60" height="36" rx="3" fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.6"/>
+  <path d="M206 116 L206 184 L276 150 Z" fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.8"/>
+  <text x="228" y="154" font-size="10.5" fill="#1D2A30" text-anchor="middle">OTA</text>
+  <g font-size="10" fill="#9A6212" text-anchor="middle" font-weight="700">
+    <text x="72" y="154">CH</text><text x="339" y="154">CH</text><text x="355" y="44">CH</text><text x="295" y="254">CH</text>
+  </g>
+  <text x="374" y="248" font-size="10" fill="#1D2A30" text-anchor="middle">integrator</text>
+  <text x="374" y="261" font-size="9" fill="#56656B" text-anchor="middle">3.3 V</text>
+  <g fill="#1D2A30">
+    <circle cx="170" cy="150" r="3"/><circle cx="170" cy="112" r="3"/><circle cx="300" cy="150" r="3"/><circle cx="440" cy="150" r="3"/>
+  </g>
+
+  <!-- labels -->
+  <g font-size="11" fill="#1D2A30" font-style="italic">
+    <text x="12" y="142">v<tspan font-size="8" dy="3">e</tspan></text>
+    <text x="121" y="130" text-anchor="middle">C<tspan font-size="8" dy="3">in</tspan></text>
+    <text x="241" y="94" text-anchor="middle">C<tspan font-size="8" dy="3">fb</tspan><tspan dy="-3" font-style="normal" font-size="9.5" fill="#56656B"> = 200 fF</tspan></text>
+    <text x="241" y="22" text-anchor="middle">C<tspan font-size="8" dy="3">pf</tspan></text>
+    <text x="241" y="282" text-anchor="middle">C<tspan font-size="8" dy="3">DSL</tspan></text>
+    <text x="580" y="142">v<tspan font-size="8" dy="3">out</tspan></text>
+  </g>
+  <g font-size="9.5" fill="#56656B">
+    <text x="108" y="182">20 pF</text>
+    <text x="606" y="166">to the PGA</text>
+    <text x="606" y="179">(Chapter 11)</text>
+  </g>
+  <g font-size="10">
+    <text x="456" y="34" fill="#1D2A30" font-weight="700">impedance boosting (§10.2)</text>
+    <text x="456" y="48" fill="#56656B">C<tspan font-size="7" dy="2">pf</tspan><tspan dy="-2"> A</tspan><tspan font-size="7" dy="2">M</tspan><tspan dy="-2"> ≈ C</tspan><tspan font-size="7" dy="2">in</tspan><tspan dy="-2">: the loop, not the electrode,</tspan></text>
+    <text x="456" y="61" fill="#56656B">supplies the chopper's charge; Z<tspan font-size="7" dy="2">in</tspan><tspan dy="-2"> ≈ 200 MΩ</tspan></text>
+    <text x="456" y="238" fill="#1D2A30" font-weight="700">DC servo loop (§10.3)</text>
+    <text x="456" y="252" fill="#56656B">integrates the output offset and cancels</text>
+    <text x="456" y="265" fill="#56656B">±300 mV of electrode offset at the input;</text>
+    <text x="456" y="278" fill="#56656B">C<tspan font-size="7" dy="2">DSL</tspan><tspan dy="-2"> = 4 pF (noise gain 1.32)</tspan></text>
+  </g>
+</svg>
