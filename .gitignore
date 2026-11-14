@@ -26,3 +26,4 @@ data/ninapro/
 
 # ngspice working files written by labs/spice/sg13_char.py
 labs/spice/char/
+labs/spice/out/

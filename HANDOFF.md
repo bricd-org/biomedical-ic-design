@@ -207,8 +207,12 @@ paths are untested here (no wfdb, no data downloaded): test them first when wfdb
 watch out: a literal `|` in a list item (|V<sub>DS</sub>|) makes kramdown build a table, use `&#124;`.
 **Lab 4** written (14 Nov): Part 1 = `sg13_lna.py` pseudo-resistor table (Ch 8 numbers), Part 2 =
 student-built LNA with Ch 8 targets (C1 20 pF, C2 200 fF, 40 dB, f_H ≈ 24 kHz at 2 pF, 6200 µm²
-unchopped optimum, NEF limit 1.73). No full-LNA testbench script exists yet: adding
-`labs/spice/lab4_lna.py` (OTA + caps + pseudo-R, AC/noise/tran/NEF sweep) would make it complete.
+unchopped optimum, NEF limit 1.73). **Now complete** with `labs/spice/lab4_lna.py` (folded-cascode OTA, 250/4 µm **thick-oxide** input pair,
+hv pseudo-resistor; 39.4 dB, f_L 0.014 Hz, f_H 5–32 kHz, EEG-band noise 2.8–4.4 µVrms, NEF ≈ 4.1).
+**Finding (Ch 5, 8, 10, B.3 updated):** thin-oxide 250/4 µm NMOS gate leakage is 3–25 pA, more than the
+thick-oxide pseudo-resistor carries (0.35 pA at 0.6 V), so an unchopped teraohm-biased LNA needs thick-oxide
+inputs (leak ~1e-20 A, ~2.7× flicker power); chopped designs bias the input node through ~10 GΩ instead.
+A telescopic OTA cannot hold its output at the input CM in the Harrison loop (weak-inversion pair, V_GS ~ 50 mV).
 **Next: the SG13G2 labs 5, 7, 8, 10, 14 and Lab 15 part 2** (need Docker), then the appendices.
 Original plan:
 The outline has the lab table and a short section per lab. Write the set-up section, Lab 1 and

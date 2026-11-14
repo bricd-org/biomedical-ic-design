@@ -52,6 +52,8 @@ The numbers the chapters design with, collected in one place. The biosignal and 
 | MIM capacitor density; matching | 1.5 fF/µm²; 1 %·µm | [17]({% link chapters/17_cdac.md %}) |
 | Gate capacitance in weak inversion | about 2.2 fF/µm² | [8]({% link chapters/08_lna.md %}) |
 | npn13G2 at 1 µA: gm/I<sub>C</sub>, β, input noise | 37.7 V⁻¹, about 680, 15.1 nV/√Hz | 5 |
+| Gate leakage, 250/4 µm NMOS: thin / thick oxide | 3–25 pA / about 10⁻²⁰ A | [5]({% link chapters/05_devices.md %}), [8]({% link chapters/08_lna.md %}) |
+| Flicker noise, thick-oxide NMOS | about 2.7 × the thin-oxide power at equal area | 5, 8 |
 | Pseudo-resistor near 0 V: one / four thin-oxide pairs | 2 × 10¹¹ / 7.6 × 10¹¹ Ω | 8 |
 | Pseudo-resistor, one thick-oxide pair, 27 °C | 5.6 × 10¹³ Ω | 8 |
 | Core supply; thick-oxide supply | 1.2 V; 3.3 V | [30]({% link chapters/30_flow.md %}) |

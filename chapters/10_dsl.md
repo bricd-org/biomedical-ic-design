@@ -87,7 +87,7 @@ $$
 
 </div>
 
-The loop also sets the amplifier's high-pass corner, now through an integrator with a well-defined time constant $$\tau_\mathrm{int}$$ rather than through a pseudo-resistor's uncertain one ([Chapter 8]({% link chapters/08_lna.md %})).
+The loop also sets the amplifier's high-pass corner, now through an integrator with a well-defined time constant $$\tau_\mathrm{int}$$ rather than through a pseudo-resistor's uncertain one ([Chapter 8]({% link chapters/08_lna.md %})). The pseudo-resistors then only bias the OTA's input nodes, and because the signal there sits at the chopping frequency they can be as small as about 10 GΩ, far above the 200 MΩ of $$C_\mathrm{fb}$$ at 4 kHz. That matters in SG13G2: the thin-oxide input devices leak picoamperes through their gates, which a 10 GΩ bias turns into tens of millivolts but a teraohm pseudo-resistor cannot carry ([Chapter 8]({% link chapters/08_lna.md %}), Section 8.5).
 
 The price is noise. $$C_\mathrm{DSL}$$ hangs on the OTA's input nodes, and it adds to the capacitive noise gain $$(C_\mathrm{in} + C_\mathrm{fb} + C_\mathrm{gate} + C_\mathrm{DSL})/C_\mathrm{in}$$. The integrator's own noise also reaches the input, attenuated by $$C_\mathrm{DSL}/C_\mathrm{in}$$.
 

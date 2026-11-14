@@ -144,6 +144,8 @@ But a bipolar transistor draws base current, and that current flows through the 
 
 [Figure 5.3](#fig-5-3) puts the trade-off on one axis. With wet electrodes and no chopping, the HBT is the quieter input device by almost a factor of ten at 10 Hz. Above about 6 MΩ of electrode impedance, its base current makes it noisier. It also loads the electrode with 18 MΩ and needs a DC path for its base current, which a capacitively coupled input does not provide. Open-BioAFE must support dry electrodes and uses a capacitively coupled, chopped input ([Chapter 7]({% link chapters/07_ia.md %}), [Chapter 9]({% link chapters/09_chopper.md %})), so its input pair is MOS. The HBTs still earn their place in the bandgap reference and in bias circuits.
 
+**Gate leakage.** At 130 nm the thin gate oxide conducts. A 250/4 µm thin-oxide NMOS biased like an input device leaks 3–25 pA through its gate in the SG13G2 models, depending on its gate–drain voltage; a thick-oxide device of the same size leaks about 10⁻²⁰ A. A few picoamperes are harmless in most circuits, but not on a node biased through a teraohm pseudo-resistor ([Chapter 8]({% link chapters/08_lna.md %}), Section 8.5). The thick-oxide device pays with about 2.7 times the flicker-noise power of the thin-oxide one at the same area.
+
 ## <span class="secnum">5.5</span>Matching
 
 Two transistors drawn identically are never identical. Random variations in dopant number, oxide charge and edge roughness give each device a slightly different threshold voltage and current factor. Pelgrom's law {% include cite.html keys="pelgrom" %} says the spread of the *difference* between two devices falls with the square root of their area:
