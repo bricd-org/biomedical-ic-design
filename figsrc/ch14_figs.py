@@ -75,6 +75,41 @@ def power_per_bit():
     savefig(fig, "ch14_power")
 
 
+def arch_map():
+    """Where each converter architecture sits in resolution and sample rate (qualitative regions, as in
+    published surveys), with the Open-BioAFE signals marked. Regions are drawn as rotated ellipses in
+    (log10 fs, bits)."""
+    from matplotlib.patches import Ellipse
+    fig, ax = plt.subplots(figsize=(6.3, 3.3))
+    regions = [  # (centre log10 fs, centre bits, width in decades, height in bits, angle, colour, label, label xy)
+        (3.6, 18.5, 5.4, 6.0, -12, C1, "ΔΣ (oversampled)", (2.2, 22.3)),
+        (5.0, 11.5, 6.4, 5.0, -18, C3, "SAR", (6.3, 13.9)),
+        (8.0, 11.0, 2.8, 4.0, -20, C5, "pipelined", (8.6, 13.6)),
+        (9.4, 6.0, 2.2, 3.2, -10, C4, "flash", (9.6, 3.9)),
+        (6.5, 9.5, 3.0, 3.6, -15, C2, "VCO / time-domain", (6.6, 6.6)),
+    ]
+    for cx, cy, w, h, ang, c, lab, (lx, ly) in regions:
+        ax.add_patch(Ellipse((cx, cy), w, h, angle=ang, facecolor=c, alpha=0.16, edgecolor=c, lw=1.2))
+        ax.text(lx, ly, lab, color=c, fontsize=7.5, ha="center", fontweight="bold")
+    signals = [  # (fs, bits, label, ha)
+        (500, 16, "ECG, EEG\n500 S/s, 16 b", "right"),
+        (2000, 12, "EMG\n2 kS/s, 12 b", "left"),
+        (30000, 10, "spikes\n30 kS/s, 10 b", "left"),
+        (20, 13, "bioimpedance IQ\ntens of S/s", "left"),
+    ]
+    for f, b, lab, ha in signals:
+        ax.plot(np.log10(f), b, "s", color=GRAPHITE, ms=5, zorder=5)
+        dx = -0.15 if ha == "right" else 0.15
+        ax.text(np.log10(f) + dx, b, lab, fontsize=6.8, ha=ha, va="center", color=GRAPHITE)
+    ax.axvspan(0.5, 4.7, color=AMBERLT, alpha=0.12, zorder=0)
+    ax.text(2.6, 25.0, "biosignals", fontsize=7, color=AMBERDK, ha="center")
+    ax.set_xlim(0.5, 10.5); ax.set_ylim(2, 26)
+    ax.set_xticks(range(1, 11)); ax.set_xticklabels(["10", "100", "1k", "10k", "100k", "1M", "10M", "100M", "1G", "10G"])
+    finish(ax, xlabel="Sample rate (S/s)", ylabel="Resolution (bits)")
+    savefig(fig, "ch14_archmap")
+
+
 if __name__ == "__main__":
     sar_spectrum_dnl()
     power_per_bit()
+    arch_map()

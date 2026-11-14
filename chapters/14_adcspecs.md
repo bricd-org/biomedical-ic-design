@@ -154,7 +154,12 @@ Oversampling is what makes 16 bits affordable: the same capacitor budget that gi
 
 ## <span class="secnum">14.4</span>Architecture choice for biosignals
 
-[Table 14.1](#tab-14-1) summarises the options. Each row is a different answer to the same trade-off between energy per conversion, resolution, the analog filtering it needs and how much of it is digital.
+[Table 14.1](#tab-14-1) summarises the options. Each row is a different answer to the same trade-off between energy per conversion, resolution, the analog filtering it needs and how much of it is digital. [Figure 14.3](#fig-14-3) places them on a map of resolution against sample rate.
+
+<figure id="fig-14-3">
+  <img src="{{ '/assets/figs/ch14_archmap.svg' | relative_url }}" style="width:720px" alt="Map of resolution against sample rate with regions for delta-sigma, SAR, pipelined, flash and VCO-based converters, and the biosignals marked in the low-rate corner">
+  <figcaption><span class="capnum">Figure 14.3.</span> <strong>Biosignals sit where SAR and ΔΣ converters overlap.</strong> Approximate regions where each architecture is used, in the spirit of published surveys {% include cite.html keys="murmannsurvey" %}, with the Open-BioAFE signals marked. Every biosignal needs fewer than 50 kS/s, so the choice is set by resolution and energy, not by speed: ΔΣ for the 16-bit ECG and EEG channel, SAR for EMG and spikes. The regions are qualitative. Drawn in <code>figsrc/ch14_figs.py</code>.</figcaption>
+</figure>
 
 **Table 14.1. Converter architectures for biosignals.** The two converters built in this tutorial are the SAR and the incremental ΔΣ; the others appear in [Chapter 21]({% link chapters/21_bioadc.md %}) or only for contrast.
 {: .tabcaption #tab-14-1 }

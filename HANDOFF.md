@@ -145,7 +145,9 @@ secondary text #56656B). Insert with the placeholder number NEW (id fig-N-NEW, "
   Ch 10 CCIA with DC-servo and impedance-boosting loops — **DONE** (Fig 10.1); Ch 12 RLD loop — **DONE**
   (Fig 12.1); Ch 7 IA topologies — **DONE** (Fig 7.1); Ch 11 gain plan and two paths — **DONE** (Fig 11.1)
 - Ch 29 full-chip block diagram (Fig 29.1), Ch 28 tetrapolar + IQ readout (Fig 28.2), Ch 24 Pan–Tompkins
-  pipeline (Fig 24.1), Ch 27 system partition (Fig 27.1) — **DONE**; still to draw: Ch 14 architecture map
+  pipeline (Fig 24.1), Ch 27 system partition (Fig 27.1) — **DONE**; Ch 14 architecture map (Fig 14.3, matplotlib in `figsrc/ch14_figs.py`) — **DONE**.
+  **All planned diagrams are drawn (22 new figures, 14 Nov 2026).** Possible extras: SAR async timing waveform
+  (Ch 18), level-crossing sampler (Ch 21), lead-off detection (Ch 12), electrode circuit models (Ch 3 has one)
 
 ### Step 1 — Chapters 1–4: DONE (11 Nov 2026)
 
