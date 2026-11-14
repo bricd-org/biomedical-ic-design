@@ -1,7 +1,7 @@
 # HANDOFF — Open-BioAFE Tutorial (pick up here)
 
-Last updated: 14 November 2026 (**all chapters 1–30 written**; next: Ch 31 labs, lab scripts,
-appendices; outline review against lecture material, section 2a). On
+Last updated: 14 November 2026 (**all chapters 1–30 written**; Ch 31 set-up + Labs 1–2 and their
+scripts written; next: Labs 3–15, appendices; outline review against lecture material, section 2a). On
 10 November the tutorial was switched from a LaTeX book (with a generated website) to **a website
 written directly in Markdown**. There is no LaTeX book and no PDF any more; `book/` and
 `tools/build_site.py` were removed.
@@ -155,12 +155,20 @@ Notes for the next chapters:
 - Ch 13 figure 13.3a: plain-oversampling simulation falls ~3 dB under the line at high OSR
   (pure-sine quantisation error is not white); the text says so — keep it if redrawing.
 
-### Step 2 — Chapter 31 `chapters/31_labs.md` — Hands-on Labs
+### Step 2 — Chapter 31 `chapters/31_labs.md` — Hands-on Labs: set-up, Lab 1, Lab 2 DONE (14 Nov 2026)
+Done: set-up (venv + `labs/python/requirements.txt`, container pull), Lab 1 and Lab 2 in full with
+expected-results tables (synthetic numbers for Lab 1; Lab 2 matches WE 4.1–4.4 and Ch 12 exactly),
+questions and deliverables; "Lab status" box replaces the outline box. **Next: Labs 3–15 in full**
+(Lab 6 and 9 are Python-only and cheapest; Labs 3–4 reuse `labs/spice/sg13_char.py`/`sg13_lna.py`).
+Original plan:
 The outline has the lab table and a short section per lab. Write the set-up section, Lab 1 and
 Lab 2 in full (goal, code, expected figure and numbers, questions); keep the anchors
 (`{#lab-1}` … `{#lab-15}`, `{#setup}`, `{#capstone}`) because other pages link to them.
 
-### Step 3 — Lab scripts in `labs/python/`
+### Step 3 — Lab scripts in `labs/python/`: lab1 + lab2 DONE (14 Nov 2026)
+`lab1_biosignal_explorer.py` (wfdb optional, falls back to synthetic; CHB-MIT via `wfdb.rdrecord`
+on the EDF — not tested here because wfdb is not installed in the anaconda env and nothing was
+downloaded) and `lab2_electrodes_interference.py` (verified). Original plan:
 - `lab1_biosignal_explorer.py`: load MIT-BIH record 100 (`wfdb.rdrecord('100', pn_dir='mitdb')`),
   a CHB-MIT EDF (e.g. `chb01/chb01_03.edf`, ~40 MB) and NinaPro (needs a manual download → accept
   a local `.mat` path); **fall back to `biosig.py` synthetic signals** if offline; plot traces and

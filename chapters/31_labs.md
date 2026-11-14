@@ -12,7 +12,11 @@ Fifteen labs in three tracks, and a capstone: Python models first, then SG13G2 c
 {: .chapterlead }
 
 <div class="tbox tbox-specnote" markdown="1">
-<div class="tbox-title">Chapter status: outline</div>
+<div class="tbox-title">Lab status</div>
+
+The set-up, Lab 1 and Lab 2 are complete, with their scripts in `labs/python/`. The other labs give their goal and deliverable; their scripts are being added. The SG13G2 characterisation scripts used for Chapters 5, 8 and 15 are already in `labs/spice/` and are the starting point for Labs 3 and 4.
+
+</div>
 
 This chapter is an outline. Labs 1 and 2 will be written in full in build stage 1; every other lab is written in the stage of its chapters. The goals and deliverables below are fixed.
 
@@ -43,15 +47,109 @@ The labs use only free tools. **Track A** (Python) models signals, interference 
 
 ## Setting up {#setup}
 
-A Python virtual environment for Track A and C (NumPy, SciPy, Matplotlib, wfdb), and the IIC-OSIC-TOOLS container {% include cite.html keys="iicosic" %} with the SG13G2 PDK for Track B and Lab 14.
+**Track A and C (Python).** Any Python 3.9 or newer works. From the repository root:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r labs/python/requirements.txt
+```
+
+This installs NumPy, SciPy, Matplotlib and wfdb, which streams PhysioNet records {% include cite.html keys="mitbih,chbmit" %} without a manual download. Every lab imports `labs/python/biosig.py`, the same module that computes the numbers and figures in the chapters, and writes its plots and tables to `labs/python/out/`. Each lab also runs offline: a recording that cannot be loaded is replaced by the synthetic signal of `biosig.py`, and the output says which was used.
+
+**Track B and Lab 14 (SG13G2).** Install Docker and pull the IIC-OSIC-TOOLS container {% include cite.html keys="iicosic" %}, which includes the IHP-Open-PDK {% include cite.html keys="ihppdk" %}, Xschem, ngspice and KLayout:
+
+```bash
+docker pull hpretl/iic-osic-tools:2026.10
+```
+
+The scripts in `labs/spice/` start the container themselves, write a `.spiceinit` that loads the PSP and resistor models, run ngspice in batch mode and parse the results ([Chapter 30]({% link chapters/30_flow.md %})). Run `python labs/spice/sg13_char.py` once: if it reproduces the gm/ID curves of [Chapter 5]({% link chapters/05_devices.md %}), your set-up is complete. For interactive work with Xschem and KLayout, start the container with its desktop as described in its documentation.
 
 ## Lab 1 · Biosignal explorer {#lab-1}
 
-Load MIT-BIH record 100 {% include cite.html keys="mitbih" %}, a CHB-MIT EEG recording {% include cite.html keys="chbmit" %} and NinaPro EMG {% include cite.html keys="ninapro" %} (or the synthetic signals of `biosig.py` when offline); plot traces and spectra; measure amplitude and bandwidth; write your own version of the Chapter 2 table. Goes with [Chapter 2]({% link chapters/02_signals.md %}).
+**Goal.** Measure real biosignals and check the amplitude and bandwidth ranges of [Table 2.1]({% link chapters/02_signals.md %}#tab-2-1), which set every specification of the front-end. Goes with [Chapter 2]({% link chapters/02_signals.md %}).
+
+**Data.** MIT-BIH Arrhythmia Database record 100, lead MLII, 360 S/s {% include cite.html keys="mitbih" %}; a CHB-MIT scalp EEG recording such as `chb01_03.edf` (256 S/s, about 40 MB) {% include cite.html keys="chbmit" %}; a NinaPro EMG file (2 kS/s; NinaPro asks you to register before downloading) {% include cite.html keys="ninapro" %}.
+
+**Run.**
+
+```bash
+cd labs/python
+python lab1_biosignal_explorer.py                                  # streams ECG and EEG
+python lab1_biosignal_explorer.py --chbmit chb01_03.edf --ninapro S1_E1_A1.mat
+python lab1_biosignal_explorer.py --offline                        # synthetic signals only
+```
+
+The script high-passes each signal at the lower edge of its band to remove baseline wander and electrode drift, then measures:
+
+- the **amplitude** as a robust peak-to-peak value, between the 0.5th and 99.5th percentiles, and the RMS (`biosig.amplitude_stats`);
+- the **power bandwidth**, the band that holds 95 % of the signal's power, from a Welch spectrum (`biosig.psd`, `biosig.band_edges`).
+
+It plots five seconds of each trace next to its spectrum (`out/lab1_explorer.png`) and writes your version of Table 2.1 to `out/lab1_table.md`.
+
+**Expected results.** With the synthetic signals (`--offline`) the script prints:
+
+| Signal | p-p | RMS | 95 % power band | Table 2.1 |
+|---|---|---|---|---|
+| ECG | 1.21 mV | 168 µV | 1.2–21.5 Hz | 0.5–4 mV, 0.05–150 Hz |
+| EEG | 105 µV | 19.7 µV | 0.5–21.8 Hz | 5–300 µV, 0.5–100 Hz |
+| EMG (bursts) | 1.38 mV | 216 µV | 30–441 Hz | 0.05–5 mV, 10–500 Hz |
+
+The real recordings give different numbers: compare them with the same columns.
+
+**Questions.**
+
+1. Does each measured amplitude fall inside the Table 2.1 range? Which recording comes closest to an edge of its range, and what does that mean for the gain plan of [Chapter 11]({% link chapters/11_filters.md %})?
+2. The ECG's 95 % power band ends near 20–40 Hz, yet diagnostic ECG needs 150 Hz. Which features of the waveform live in the last few per cent of the power? (Hint: look at the QRS complex and at pacemaker spikes, [Chapter 24]({% link chapters/24_ecg.md %}).)
+3. Find the mains line in the real ECG and EEG spectra. How large is it in microvolts, and how does it compare with the 1.5 µVrms noise target?
+4. Change the high-pass corner from 0.05 Hz to 0.5 Hz for the ECG. What happens to the amplitude, and why does the standard ask for 0.05 Hz in diagnostic mode?
+5. From your table, which signal sets the input-referred noise, which sets the input range, and which sets the sample rate?
+
+**Deliverable.** Your version of Table 2.1 with the source of each row, and one paragraph on where your numbers differ from the chapter's and why.
 
 ## Lab 2 · Electrodes and interference {#lab-2}
 
-A phasor model of the body, the electrodes and the amplifier: inject 10 Vrms of mains common mode, sweep CMRR, common-mode impedance and imbalance, add a behavioural right-leg drive, and print the CMRR the design needs. Goes with Chapters [3]({% link chapters/03_electrodes.md %}) and [4]({% link chapters/04_interference.md %}).
+**Goal.** Rebuild the interference model of Figure 4.1 and find the common-mode input impedance, amplifier CMRR and right-leg-drive loop gain the front-end needs. Goes with Chapters [3]({% link chapters/03_electrodes.md %}), [4]({% link chapters/04_interference.md %}) and [12]({% link chapters/12_cmcontrol.md %}).
+
+**Run.**
+
+```bash
+cd labs/python
+python lab2_electrodes_interference.py                     # 50 Hz, 100 dB amplifier, RLD loop gain 100
+python lab2_electrodes_interference.py --f 60 --rld 40 --cmrr 110
+```
+
+The model is a chain of phasors. The mains couples 230 V to the body through 3 pF; the displacement current leaves through the ground electrode (1 kΩ plus 51 kΩ‖47 nF) and sets the body's common mode (`biosig.body_cm_voltage`). One lead carries the standards' 51 kΩ‖47 nF imbalance, and each input forms a divider with the common-mode input impedance $$Z_\mathrm{cm}$$, which turns common mode into differential interference (`biosig.cm_to_dm`). The amplifier's own CMRR adds to that, worst case in phase, and a behavioural right-leg drive divides the common mode at the electrodes by one plus its loop gain. The script works through five steps:
+
+1. the body's common mode, floating and with a ground electrode;
+2. the interference for $$Z_\mathrm{cm}$$ from 10 MΩ to 10 GΩ;
+3. the $$Z_\mathrm{cm}$$ that 90 dB of effective CMRR needs, with and without the right-leg drive;
+4. the 10 Vrms CMRR test of the ECG standards for the unboosted and the boosted front-ends of Chapter 10;
+5. a grounded against a driven shield on one metre of lead.
+
+**Expected results.** With the defaults the script prints, among others:
+
+| Quantity | Value | Where in the text |
+|---|---|---|
+| Body common mode, floating / with ground electrode / with RLD | 3.40 V / 9.0 mV / 89 µV | Worked Example 4.1, Section 12.1 |
+| Interference at $$Z_\mathrm{cm}$$ = 10 MΩ / 1 GΩ | 36.6 µVrms / 0.37 µVrms | Worked Example 4.2 |
+| $$Z_\mathrm{cm}$$ for 90 dB with a 100 dB / 120 dB amplifier | 1.88 GΩ / 1.33 GΩ | Worked Example 4.4 |
+| CMRR the test implies; $$Z_\mathrm{cm}$$ bound without / with RLD | 89.0 dB; 1.15 GΩ / 11.4 MΩ | Worked Example 4.3, Chapter 12 |
+| Test residual, boosted front-end (200 MΩ), RLD loop gain 100 | 0.060 mVpp, 24 dB margin | Chapters 12 and 29 |
+| Test residual, unboosted front-end (6.25 MΩ), RLD loop gain 100 | 1.83 mVpp, fails | Chapter 12 |
+| Interference with a grounded / driven (1 % error) shield | 11.7 µVrms / 0.30 µVrms | Chapter 4 pitfall |
+
+It also plots the interference against the imbalance for four values of $$Z_\mathrm{cm}$$, and the effective CMRR against $$Z_\mathrm{cm}$$ with and without the right-leg drive (`out/lab2_interference.png`), as in [Figure 4.2]({% link chapters/04_interference.md %}#fig-4-2).
+
+**Questions.**
+
+1. Why does an amplifier with 120 dB of CMRR barely relax the $$Z_\mathrm{cm}$$ requirement compared with one of 100 dB? Find the amplifier CMRR below which no $$Z_\mathrm{cm}$$ reaches 90 dB.
+2. Run at 60 Hz. Which numbers change, and by how much? Is a 60 Hz country harder or easier for the front-end?
+3. Find the smallest right-leg-drive loop gain with which the boosted front-end still passes the CMRR test with 6 dB of margin. Compare it with the stability limit of [Figure 12.1]({% link chapters/12_cmcontrol.md %}#fig-12-1)b.
+4. Replace the wet electrodes by dry ones (`biosig.z_electrode(f, "dry")`) for the ground electrode and the imbalance. What happens to the body's common mode and to the interference?
+5. How many picofarads of input capacitance can the front-end afford, from pads, ESD diodes and wiring, before $$Z_\mathrm{cm}$$ falls below the 11.4 MΩ that the right-leg drive allows?
+
+**Deliverable.** The two plots, the CMRR the design needs, and a recommendation for the split between amplifier CMRR, $$Z_\mathrm{cm}$$ and loop gain, with the margin each leaves in the CMRR test.
 
 ## Lab 3 · Devices in weak inversion {#lab-3}
 
