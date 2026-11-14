@@ -105,7 +105,7 @@ Use a dynamic comparator, StrongARM or double-tail, with no static current. Size
 <div class="tbox tbox-specnote" markdown="1">
 <div class="tbox-title">Open-BioAFE target</div>
 
-Comparator: double-tail dynamic latch, weak-inversion NMOS input pair, noise ≤ 61 µVrms (LSB/4) in the final-bit mode, offset calibrated at power-up to below 1 LSB, about 1 pJ per low-noise decision and about 0.1 pJ in the fast mode: three low-noise and nine fast decisions give about 4 pJ per conversion.
+Comparator: double-tail dynamic latch, weak-inversion NMOS input pair, noise ≤ 61 µVrms (LSB/4) in the final-bit mode, offset calibrated at power-up to below 1 LSB, about 1 pJ per low-noise decision and about 0.1 pJ in the fast mode (1.06 and 0.08 pJ in the SG13G2 StrongARM of Lab 7). The fast mode's noise, about 0.6 mV, is more than the lowest decisions' redundancy can absorb, so the radix-1.8 SAR uses seven low-noise and seven fast decisions, about 8 pJ per conversion ([Chapter 18]({% link chapters/18_sar.md %}), Lab 8).
 
 </div>
 

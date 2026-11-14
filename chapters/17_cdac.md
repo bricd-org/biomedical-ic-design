@@ -87,7 +87,7 @@ $$
 
 SG13G2 MIM capacitors have $$A_C = 1$$ %·µm and 1.5 fF/µm² ([Chapter 5]({% link chapters/05_devices.md %})). For a mid-scale DNL within ±0.5 LSB at three standard deviations, $$\sigma_u \le 0.26$$ %, which needs 14.8 µm² per unit: **22 fF**, and **91 pF** per side for the whole array ([Figure 17.2](#fig-17-2)b). That is 23 times the noise requirement, and 23 times the switching energy.
 
-The 4 pF array has 0.98 fF units, 0.65 µm² of MIM, with $$\sigma_u = 1.24$$ % and a mid-scale DNL of 0.79 LSB at one standard deviation. It will have missing codes unless something corrects it.
+The 4 pF array has 0.98 fF units. With MIM matching they would have $$\sigma_u = 1.24$$ % and a mid-scale DNL of 0.79 LSB at one standard deviation, so the array will have missing codes unless something corrects it. And 0.65 µm² is only half the smallest MIM capacitor the PDK draws (Section 17.4).
 
 </div>
 
@@ -100,7 +100,7 @@ The resolution is to keep the small array and correct its errors digitally: redu
 
 ## <span class="secnum">17.4</span>Capacitors in SG13G2
 
-SG13G2 offers two kinds of capacitor. **MIM** capacitors are a dielectric layer between two dedicated metal plates near the top of the stack: 1.5 fF/µm², 1 %·µm matching, low parasitic capacitance to the substrate, but a minimum size of the order of a square micrometre, so a 1 fF unit is at the limit of what can be drawn. **MOM** capacitors are interdigitated fingers in the ordinary metal layers (the `cap_cmom` models): they can be made far smaller, down to a fraction of a femtofarad, at lower density and with matching that must be taken from the PDK's statistical models and from layout care.
+SG13G2 offers two kinds of capacitor. **MIM** capacitors are a dielectric layer between two dedicated metal plates near the top of the stack: 1.5 fF/µm², 1 %·µm matching, low parasitic capacitance to the substrate, but a minimum size: the PDK's `cmim` cell is at least 1.14 × 1.14 µm², about 1.95 fF ([Lab 14]({% link chapters/31_labs.md %}#lab-14)). A 1 fF unit is therefore below what can be drawn as MIM: it must be a MOM capacitor, or the array must use 1.95 fF units and 8 pF per side, which doubles the switching energy and halves the mismatch. **MOM** capacitors are interdigitated fingers in the ordinary metal layers (the `cap_cmom` models): they can be made far smaller, down to a fraction of a femtofarad, at lower density and with matching that must be taken from the PDK's statistical models and from layout care.
 
 Whichever is used, the layout decides the matching as much as the device does:
 
@@ -128,7 +128,7 @@ Use a binary array of about 1 fF units, 4 pF per side, sized by noise and leakag
 <div class="tbox tbox-specnote" markdown="1">
 <div class="tbox-title">Open-BioAFE target</div>
 
-12-bit binary CDAC, about 1 fF units (MOM or minimum MIM), 4 pF per side, $$V_\mathrm{cm}$$-based switching (0.84 pJ per conversion), common-centroid layout with dummies, redundancy and foreground calibration in the SAR logic. Reference: bandgap and low-power buffer (average current about 13 nA) with an off-chip 1 µF decoupling capacitor on the reference pin.
+12-bit binary CDAC, about 1 fF MOM units (the smallest MIM cell, 1.95 fF, would double the array to 8 pF per side), 4 pF per side, $$V_\mathrm{cm}$$-based switching (0.84 pJ per conversion), common-centroid layout with dummies, redundancy and foreground calibration in the SAR logic. Reference: bandgap and low-power buffer (average current about 13 nA) with an off-chip 1 µF decoupling capacitor on the reference pin.
 
 </div>
 

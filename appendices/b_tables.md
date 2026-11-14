@@ -49,7 +49,7 @@ The numbers the chapters design with, collected in one place. The biosignal and 
 | Flicker coefficient K, NMOS / PMOS | 1.6 × 10⁻¹⁰ / 5.4 × 10⁻¹⁰ V²·µm² | 5 |
 | Pelgrom A<sub>VT</sub>, NMOS / PMOS | 3.9 / 2.2 mV·µm | 5 |
 | Pelgrom A<sub>β</sub>, NMOS / PMOS | 0.5 / 0.33 %·µm | 5 |
-| MIM capacitor density; matching | 1.5 fF/µm²; 1 %·µm | [17]({% link chapters/17_cdac.md %}) |
+| MIM capacitor density; matching; smallest cell | 1.5 fF/µm²; 1 %·µm; 1.14 × 1.14 µm² (1.95 fF) | [17]({% link chapters/17_cdac.md %}) |
 | Gate capacitance in weak inversion | about 2.2 fF/µm² | [8]({% link chapters/08_lna.md %}) |
 | npn13G2 at 1 µA: gm/I<sub>C</sub>, β, input noise | 37.7 V⁻¹, about 680, 15.1 nV/√Hz | 5 |
 | Gate leakage, 250/4 µm NMOS: thin / thick oxide | 3–25 pA / about 10⁻²⁰ A | [5]({% link chapters/05_devices.md %}), [8]({% link chapters/08_lna.md %}) |
@@ -80,7 +80,7 @@ The numbers the chapters design with, collected in one place. The biosignal and 
 | Servo and boosting loops | 3.3 V integrator, C<sub>DSL</sub> 4 pF (noise gain 1.32); input impedance about 200 MΩ | [10]({% link chapters/10_dsl.md %}) |
 | Gain plan | ECG 100 × 1, EEG 100 × 8, EMG 10 × 8 onto ±0.5 V differential | [11]({% link chapters/11_filters.md %}) |
 | Right-leg drive | loop gain 100 at 50 Hz, R<sub>o</sub> 150 kΩ, 53° phase margin; CMRR-test residual 0.06 mVpp | [12]({% link chapters/12_cmcontrol.md %}) |
-| SAR converter | 12-bit asynchronous, 14 cycles at radix 1.8, about 1 fF units, 4 pF per side, V<sub>cm</sub> switching, about 7.6 pJ per conversion, 16 kS/s shared by 8 channels | [15]({% link chapters/15_switches.md %})–[18]({% link chapters/18_sar.md %}) |
+| SAR converter | 12-bit asynchronous, 14 cycles at radix 1.8, about 1 fF units, 4 pF per side, V<sub>cm</sub> switching, seven low-noise comparator decisions, about 11.7 pJ per conversion, 16 kS/s shared by 8 channels | [15]({% link chapters/15_switches.md %})–[18]({% link chapters/18_sar.md %}) |
 | ΔΣ converter | second-order incremental, M = 1024 at 512 kHz, a<sub>1</sub> 0.5, a<sub>2</sub> 0.25, C<sub>s</sub> 1.1 pF, 16.5 bits worst case, about 1.9 µW per channel | [19]({% link chapters/19_dstheory.md %})–[20]({% link chapters/20_dscircuits.md %}) |
 | Reference | off-chip 1 µF reservoir capacitor | [17]({% link chapters/17_cdac.md %}) |
 | Budgets | noise 0.51 µVrms (wet) / 1.26 µVrms (dry); power 6.8 µW per channel (ECG/EEG), 4.9 µW (EMG); about 1.7 mm² of core | [29]({% link chapters/29_arch.md %}) |

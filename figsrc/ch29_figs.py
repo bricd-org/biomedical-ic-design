@@ -22,7 +22,7 @@ POWER = [  # (block, uW in ECG/EEG mode, uW in EMG mode)
     ("impedance boosting (Ch 10)", 0.3, 0.3),
     ("features and decimation (Ch 27)", 0.3, 0.3),
     ("Gm-C filter (Ch 11)", 0.05, 0.05),
-    ("SAR share (Ch 18)", 0.0, 0.015),
+    ("SAR share (Ch 18)", 0.0, 0.023),
 ]
 
 

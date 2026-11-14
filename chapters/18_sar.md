@@ -93,7 +93,7 @@ A behavioural Monte Carlo (`figsrc/ch18_figs.py`) converts a near-full-scale sin
 - binary, 12 cycles: **11.5 bits** uncalibrated, 11.8 bits with calibrated weights;
 - radix 1.8, 14 cycles: 11.3 bits uncalibrated, **11.8 bits** calibrated.
 
-Uncalibrated, the redundant array is worse, because its non-binary weights do not add up to a uniform code. Calibrated, both reach the noise limit. Redundancy pays for its two extra cycles elsewhere: it guarantees a gap-free curve for every die, not just the median one, and it lets the first ten decisions use the fast, noisy comparator mode of [Chapter 16]({% link chapters/16_comparators.md %}), which saves most of the comparator's energy.
+Uncalibrated, the redundant array is worse, because its non-binary weights do not add up to a uniform code. Calibrated, both reach the noise limit. Redundancy pays for its two extra cycles elsewhere: it guarantees a gap-free curve for every die, not just the median one, and it lets the early decisions use the fast, noisy comparator mode of [Chapter 16]({% link chapters/16_comparators.md %}). Only as many as the redundancy allows, though: with integer weights of 1, 2, 3, 5, 9, 17, 30, 55, … units, the lowest decisions can absorb only 0–4 LSB of error, less than the fast mode's 0.6 mV (2.5 LSB) of noise. [Lab 8]({% link chapters/31_labs.md %}#lab-8) finds a median of 10.0 effective bits with three low-noise decisions, 11.0 with seven and 11.4 with all fourteen (comparator and kT/C noise included); seven low-noise decisions are the design point.
 
 </div>
 
@@ -109,7 +109,7 @@ A biosignal SAR spends most of its time doing nothing. With asynchronous timing 
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 18.2 · The SAR's power budget</div>
 
-The energy per conversion adds up to about **7.6 pJ** ([Figure 18.2](#fig-18-2)b): comparator 3.9 pJ, SAR logic 1.5 pJ, CDAC switching 0.84 pJ, average reference charge 0.84 pJ, sampler and timing 0.5 pJ. At 16 kS/s that is **0.12 µW** for all eight channels, 15 nW per channel. With 11 effective bits the Walden figure of merit is $$7.6\ \text{pJ}/2^{11} = 3.7$$ fJ per step, inside the 10 fJ/step target of [Chapter 14]({% link chapters/14_adcspecs.md %}).
+The energy per conversion adds up to about **11.7 pJ** ([Figure 18.2](#fig-18-2)b): comparator 8.0 pJ (seven low-noise decisions at 1.06 pJ and seven fast ones at 0.08 pJ, from the SG13G2 StrongARM of [Lab 7]({% link chapters/31_labs.md %}#lab-7)), SAR logic 1.5 pJ, CDAC switching 0.84 pJ, average reference charge 0.84 pJ, sampler and timing 0.5 pJ. At 16 kS/s that is **0.19 µW** for all eight channels, 23 nW per channel. With 11 effective bits the Walden figure of merit is $$11.7\ \text{pJ}/2^{11} = 5.7$$ fJ per step, inside the 10 fJ/step target of [Chapter 14]({% link chapters/14_adcspecs.md %}).
 
 </div>
 
@@ -120,14 +120,14 @@ The EEG acquisition SoC of Verma et al. {% include cite.html keys="verma2010" %}
 <div class="tbox tbox-insight" markdown="1">
 <div class="tbox-title">What this means for your design</div>
 
-Convert in a fast asynchronous burst and sleep for the rest of the period, so nothing with static current runs between samples. Build the DAC from small units, about 1 fF, and recover the linearity digitally: 14 redundant cycles of radix 1.8 and weights calibrated at power-up give 11.8 bits for every die and allow the early decisions to be fast and noisy. Expect the comparator to dominate the energy, then the logic. A converter at about 8 pJ per conversion, 0.12 µW for eight channels, is negligible beside the front-ends.
+Convert in a fast asynchronous burst and sleep for the rest of the period, so nothing with static current runs between samples. Build the DAC from small units, about 1 fF, and recover the linearity digitally: 14 redundant cycles of radix 1.8 and weights calibrated at power-up give 11 bits or more for every die and allow the early decisions to be fast and noisy, as many as the redundancy can absorb. Expect the comparator to dominate the energy, then the logic. A converter at about 12 pJ per conversion, 0.19 µW for eight channels, is negligible beside the front-ends.
 
 </div>
 
 <div class="tbox tbox-specnote" markdown="1">
 <div class="tbox-title">Open-BioAFE target</div>
 
-12-bit asynchronous SAR, 14 cycles at radix 1.8 with foreground weight calibration, 16 kS/s shared by eight channels (2 kS/s each; 25 kS/s for one channel in spike mode), ENOB ≥ 11, about 7.6 pJ per conversion (3.7 fJ/step), duty-cycled with a burst of a few microseconds per sample.
+12-bit asynchronous SAR, 14 cycles at radix 1.8 with foreground weight calibration, 16 kS/s shared by eight channels (2 kS/s each; 25 kS/s for one channel in spike mode), ENOB ≥ 11 with seven low-noise comparator decisions, about 11.7 pJ per conversion (5.7 fJ/step), duty-cycled with a burst of a few microseconds per sample.
 
 </div>
 
@@ -153,6 +153,6 @@ Calibrating with the converter's own noise in the loop. A weight measured from a
 - A SAR makes $$M \ge N$$ comparisons per conversion; at 16 kS/s there is time for a hundred times slower circuits, so the converter runs in bursts and sleeps.
 - Asynchronous timing removes the fast clock and adapts each cycle to its decision; it needs a metastability timeout.
 - Calibrated weights recover the small DAC (0.98 fF units) to 11.8 bits; a redundant radix-1.8 array with 14 cycles guarantees it for every die and tolerates noisy early decisions.
-- The energy is about 7.6 pJ per conversion, dominated by the comparator: 3.7 fJ/step and 0.12 µW for eight channels.
+- The energy is about 11.7 pJ per conversion, dominated by the comparator: 5.7 fJ/step and 0.19 µW for eight channels. The redundancy sets how many decisions may use the fast comparator mode: seven of fourteen.
 
 </div>

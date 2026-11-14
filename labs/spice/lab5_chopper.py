@@ -1,0 +1,170 @@
+"""lab5_chopper.py -- Lab 5: a chopped capacitively coupled amplifier with a DC servo loop (Chapters 9, 10).
+
+    python labs/spice/lab5_chopper.py              # chopped and unchopped runs, 0.4 s each
+    python labs/spice/lab5_chopper.py --voff 0.1   # another electrode offset
+
+The signal path is that of Figure 10.1, fully differential: SG13G2 transmission-gate choppers at
+4 kHz (20 ns non-overlap), Cin = 20 pF, Cfb = 200 fF with 10 GOhm across it (enough when chopped,
+and the most that gate leakage allows, Chapter 8; the unchopped run uses 10 TOhm), and a DC servo loop that integrates the demodulated
+output and feeds it back, chopped, through C_DSL = 4 pF. The amplifier itself is behavioural: gain
+10^4 with one pole, 1 mV of input offset and an input noise of 30 nV/rtHz white plus 1/f noise
+(ngspice trnoise), so that the run shows what chopping does to them. The electrode carries a DC
+offset (default 300 mV) and a 1 mV, 37 Hz test tone. Each run is simulated twice: chopped, and with
+the choppers held in the straight-through position.
+
+Reported: gain at 37 Hz, the output's residual offset, the input-referred noise over 0.5-100 Hz,
+the chopper ripple at 4 kHz before any low-pass filter, the servo's output, and the input
+impedance from the average current drawn from the electrode (expected 1/(2 f_ch Cin) = 6.25 MOhm).
+Needs Docker and hpretl/iic-osic-tools:2026.10.
+"""
+import argparse
+import os
+import sys
+
+import numpy as np
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import sg13_char as ch  # noqa: E402
+
+PLOTS = os.path.join(HERE, "out")
+VDD, VCM = 1.2, 0.6
+FCH, CIN, CFB, CDSL = 4e3, 20e-12, 200e-15, 4e-12
+F_SIG, A_SIG = 37.0, 1e-3
+T_SIM, T_START = 0.4, 0.15
+F_HP = 2.0                       # servo high-pass corner (Hz); 0.5 Hz in the chip, faster here to settle
+NT = 2e-6                        # noise source update step (white noise up to 250 kHz)
+
+
+def netlist(chop, voff, tag):
+    tch = 1 / FCH
+    if chop:
+        clk = (f"Vphi phi 0 pulse(0 {VDD} 0 5n 5n {tch/2-30e-9} {tch})\n"
+               f"Vphb phb 0 pulse(0 {VDD} {tch/2} 5n 5n {tch/2-30e-9} {tch})\n")
+    else:
+        clk = f"Vphi phi 0 {VDD}\nVphb phb 0 0\n"
+    k_int = 2 * np.pi * F_HP * CFB / CDSL          # integrator gain (1/s) for a high-pass corner at F_HP
+    v_dsl0 = -voff * CIN / CDSL if chop else 0.0   # servo output that cancels the (chopped) electrode offset
+    rfb = '10G' if chop else '10T'                 # chopped: 10 GOhm is enough; unchopped needs teraohms
+    white = 30e-9 * np.sqrt(1 / (2 * NT))          # rms per step for 30 nV/rtHz
+    return f"""* Lab 5 chopped CCIA, chop={chop}, electrode offset {voff} V
+.lib cornerMOSlv.lib mos_tt
+.option method=gear
+.subckt tg a b c cb
+XN a c b 0 sg13_lv_nmos w=2u l=0.13u ng=1 m=1
+XP a cb b vdd sg13_lv_pmos w=4u l=0.13u ng=1 m=1
+.ends
+.subckt chopper ip in op on phi phb phin phbn
+X1 ip op phi phin tg
+X2 in on phi phin tg
+X3 ip on phb phbn tg
+X4 in op phb phbn tg
+.ends
+Vdd vdd 0 {VDD}
+{clk}Bphin phin 0 v = {VDD} - v(phi)
+Bphbn phbn 0 v = {VDD} - v(phb)
+* electrodes: offset + test tone
+Vep ep 0 dc {VCM + voff/2} sin({VCM + voff/2} {A_SIG/2} {F_SIG})
+Ven en 0 dc {VCM - voff/2} sin({VCM - voff/2} {-A_SIG/2} {F_SIG})
+* input chopper and coupling capacitors
+XCH1 ep en ap an phi phb phin phbn chopper
+Cinp ap xp {CIN}
+Cinn an xn {CIN}
+* behavioural amplifier: inverting, gain 1e4, pole at 100 Hz (GBW 1 MHz), offset and noise at its input
+Vos nos 0 dc 1m trnoise({white} {NT} 1 {white*1.5})
+Bamp n1 0 v = -1e4 * (v(xp) - v(xn) + v(nos))
+Rp n1 n2 1k
+Cp n2 0 {1/(2*np.pi*1e3*100)}
+Bod od 0 v = max(min(v(n2), 0.6), -0.6)
+Bop op 0 v = {VCM} + v(od)/2
+Bon on 0 v = {VCM} - v(od)/2
+Cfbp op xp {CFB}
+Cfbn on xn {CFB}
+Rfbp op xp {rfb}
+Rfbn on xn {rfb}
+* output chopper (demodulator)
+XCH2 op on yp yn phi phb phin phbn chopper
+Rlp yp 0 100G
+Rln yn 0 100G
+* DC servo: non-inverting integrator of the demodulated output, chopped back through C_DSL
+Bint 0 nint i = {k_int} * (v(yp) - v(yn))
+Cint nint 0 1
+.ic v(nint)={v_dsl0}
+Bdp dp 0 v = {VCM} + v(nint)/2
+Bdn dn 0 v = {VCM} - v(nint)/2
+XCH3 dp dn dcp dcn phi phb phin phbn chopper
+Cdp dcp xp {CDSL}
+Cdn dcn xn {CDSL}
+.control
+tran 1u {T_SIM} 0 2u
+let vy = v(yp) - v(yn)
+let ie = i(Vep)
+wrdata /work/out/{tag}.txt vy ie v(nint)
+.endc
+.end
+"""
+
+
+def analyse(tag):
+    t, vy, ie, vd = ch.load(tag, 3)
+    sel = t >= T_START
+    t, vy, ie, vd = t[sel], vy[sel], ie[sel], vd[sel]
+    fs = 200e3
+    tu = np.arange(t[0], t[-1], 1 / fs)
+    y = np.interp(tu, t, vy)
+    n = len(y)
+    f = np.fft.rfftfreq(n, 1 / fs)
+    Y = np.fft.rfft((y - y.mean()) * np.hanning(n))
+    amp = np.abs(Y) * 2 / np.sum(np.hanning(n))
+    k_sig = np.argmin(abs(f - F_SIG))
+    gain = amp[k_sig - 2:k_sig + 3].max() / A_SIG
+    k_ch = np.argmin(abs(f - FCH))
+    ripple = amp[k_ch - 3:k_ch + 4].max()
+    psd = np.abs(Y) ** 2 / (fs * np.sum(np.hanning(n) ** 2)) * 2
+    band = (f >= 0.5) & (f <= 100) & (np.abs(f - F_SIG) > 3)
+    vn_out = np.sqrt(np.sum(psd[band]) * (f[1] - f[0]) * (99.5 / (99.5 - 6)))   # fill the tone's gap
+    # low-pass the output (brick wall at 200 Hz) for the residual offset
+    resid = np.mean(y)
+    i_avg = np.mean(ie)
+    return dict(gain=gain, ripple=ripple, vn=vn_out / gain, offset=resid, dsl=np.mean(vd), i_avg=i_avg,
+                f=f, psd=psd)
+
+
+def main():
+    ap = argparse.ArgumentParser(description="Lab 5: chopped CCIA with a DC servo loop")
+    ap.add_argument("--voff", type=float, default=0.3, help="electrode DC offset (V)")
+    args = ap.parse_args()
+    nl = {"lab5_chop": netlist(True, args.voff, "lab5_chop"), "lab5_nochop": netlist(False, args.voff, "lab5_nochop")}
+    ch.run(nl)
+    r = {k: analyse(k) for k in nl}
+    print(f"Electrode offset {args.voff*1e3:.0f} mV, test tone {A_SIG*1e3:g} mV at {F_SIG:g} Hz:")
+    print("                       chopped     unchopped")
+    print(f"  gain at {F_SIG:g} Hz        {r['lab5_chop']['gain']:8.1f}    {r['lab5_nochop']['gain']:8.1f}")
+    print(f"  output offset (mV)    {r['lab5_chop']['offset']*1e3:8.2f}    {r['lab5_nochop']['offset']*1e3:8.2f}")
+    print(f"  input noise 0.5-100 Hz (µVrms) {r['lab5_chop']['vn']*1e6:6.2f}    {r['lab5_nochop']['vn']*1e6:8.2f}")
+    print(f"  ripple at 4 kHz (mV)  {r['lab5_chop']['ripple']*1e3:8.2f}    {r['lab5_nochop']['ripple']*1e3:8.2f}")
+    print(f"  servo output (V)      {r['lab5_chop']['dsl']:8.3f}    {r['lab5_nochop']['dsl']:8.3f}"
+          f"   (expected {-args.voff*CIN/CDSL:.3f} V)")
+    z = abs(args.voff / 2 / r['lab5_chop']['i_avg']) if r['lab5_chop']['i_avg'] else np.inf
+    print(f"  input impedance (chopped): {abs(args.voff / r['lab5_chop']['i_avg'])/1e6:.2f} MOhm differential"
+          f" (1/(2 f_ch Cin) = {1/(2*FCH*CIN)/1e6:.2f} MOhm)")
+    os.makedirs(PLOTS, exist_ok=True)
+    try:
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        fig, ax = plt.subplots(figsize=(7, 4.2), constrained_layout=True)
+        for k, lab in (("lab5_nochop", "unchopped"), ("lab5_chop", "chopped")):
+            g = r[k]["gain"]
+            ax.loglog(r[k]["f"][1:], np.sqrt(r[k]["psd"][1:]) / g * 1e9, lw=0.6, label=lab)
+        ax.set(xlabel="frequency (Hz)", ylabel="input-referred noise (nV/√Hz)", xlim=(1, 2e4),
+               title="Chopping moves the amplifier's 1/f noise and offset to 4 kHz")
+        ax.legend(fontsize=8)
+        fig.savefig(os.path.join(PLOTS, "lab5_chopper.png"), dpi=130)
+        print("wrote", os.path.join(PLOTS, "lab5_chopper.png"))
+    except ImportError:
+        pass
+
+
+if __name__ == "__main__":
+    main()

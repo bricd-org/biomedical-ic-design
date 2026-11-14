@@ -60,14 +60,14 @@ def fig():
     finish(a1, xlabel=r"Unit-capacitor mismatch $\sigma_u$ (%)", ylabel="ENOB (bits)", legend=True, loc="lower left")
     a1.legend(loc="lower left", fontsize=5.8)
     panel(a1, "a")
-    parts = [("comparator", 3.9, C4), ("CDAC switching", 0.84, C1), ("SAR logic", 1.5, C2),
+    parts = [("comparator", 8.0, C4), ("CDAC switching", 0.84, C1), ("SAR logic", 1.5, C2),
              ("sampler & clock", 0.5, C3), ("reference (avg.)", 0.84, C5)]
     left = 0.0
     for name, e, c in parts:
         a2.barh([0], [e], left=left, color=c, height=0.45, label=f"{name}: {e:g} pJ")
         left += e
     a2.text(left + 0.15, 0, f"{left:.1f} pJ", va="center", fontsize=7.5, color=GRAPHITE)
-    a2.set_xlim(0, 10); a2.set_ylim(-0.6, 1.6); a2.set_yticks([])
+    a2.set_xlim(0, 15); a2.set_ylim(-0.6, 1.6); a2.set_yticks([])
     finish(a2, xlabel="Energy per conversion (pJ)", legend=True, loc="upper left")
     a2.legend(loc="upper left", fontsize=6.0, ncol=2)
     panel(a2, "b")
@@ -80,6 +80,6 @@ if __name__ == "__main__":
         print(radix, cyc, "units", nom.tolist(), "sum", nom.sum())
         for cal in (False, True):
             print("  cal", cal, "ENOB at 1.24%%: %.2f" % np.median([enob_for(0.0124, radix, cyc, cal, sd) for sd in range(6)]))
-    tot = 3.9 + 0.84 + 1.5 + 0.5 + 0.84
+    tot = 8.0 + 0.84 + 1.5 + 0.5 + 0.84
     print("total %.2f pJ, FoM_W at ENOB 11: %.1f fJ/step; power at 16 kS/s %.3f uW" % (tot, tot / 2 ** 11 * 1e3, tot * 16e3 * 1e-6))
     fig()
