@@ -35,11 +35,16 @@ The simulations in this chapter use `biosig.simulate_dsm()`, a 1-bit modulator w
 
 ## <span class="secnum">19.1</span>Noise shaping
 
-Put an integrator in front of a quantiser and feed the quantised output back, subtracting it from the input. Model the quantiser as an adder that injects an error $$E$$, as in [Chapter 13]({% link chapters/13_sampling.md %}), and let the integrator be $$z^{-1}/(1 - z^{-1})$$. Then the output $$V$$ obeys
+Put an integrator in front of a quantiser and feed the quantised output back, subtracting it from the input ([Figure 19.1](#fig-19-1)a). Model the quantiser as an adder that injects an error $$E$$ ([Figure 19.1](#fig-19-1)b), as in [Chapter 13]({% link chapters/13_sampling.md %}), and let the integrator be $$z^{-1}/(1 - z^{-1})$$. Then the output $$V$$ obeys
 
 $$V = \frac{z^{-1}}{1 - z^{-1}}\,(U - V) + E \quad\Rightarrow\quad V = z^{-1}\,U + (1 - z^{-1})\,E.$$
 
-The input reaches the output delayed but otherwise untouched: the **signal transfer function** is $$\mathrm{STF}(z) = z^{-1}$$. The quantisation error is filtered by the **noise transfer function** $$\mathrm{NTF}(z) = 1 - z^{-1}$$, a differentiator. Its magnitude, $$\lvert\mathrm{NTF}\rvert = 2\sin(\pi f/f_\mathrm{s})$$, is zero at DC, about $$2\pi f/f_\mathrm{s}$$ in a narrow band, and 2 at $$f_\mathrm{s}/2$$. The error power is unchanged, but it has been moved from low frequencies to high ones ([Figure 19.1](#fig-19-1)).
+The input reaches the output delayed but otherwise untouched: the **signal transfer function** is $$\mathrm{STF}(z) = z^{-1}$$. The quantisation error is filtered by the **noise transfer function** $$\mathrm{NTF}(z) = 1 - z^{-1}$$, a differentiator. Its magnitude, $$\lvert\mathrm{NTF}\rvert = 2\sin(\pi f/f_\mathrm{s})$$, is zero at DC, about $$2\pi f/f_\mathrm{s}$$ in a narrow band, and 2 at $$f_\mathrm{s}/2$$. The error power is unchanged, but it has been moved from low frequencies to high ones ([Figure 19.2](#fig-19-2)).
+
+<figure id="fig-19-1">
+  <img src="{{ '/assets/figs/ch19_loop.svg' | relative_url }}" style="width:720px" alt="A delta-sigma modulator with loop filter, quantiser and feedback DAC, and its linear model in which the quantiser is replaced by an added error E">
+  <figcaption><span class="capnum">Figure 19.1.</span> <strong>A ΔΣ modulator and its linear model.</strong> (a) A loop filter \(H(z)\), a coarse quantiser and a DAC in a feedback loop, clocked at OSR times the Nyquist rate. (b) The linear model replaces the quantiser by an added error \(E\). The input sees the signal transfer function \(H/(1+H)\), the error the noise transfer function \(1/(1+H)\): where the loop gain is high, in the signal band, the error is suppressed. With one delaying integrator, \(H = z^{-1}/(1-z^{-1})\), these are \(z^{-1}\) and \(1 - z^{-1}\).</figcaption>
+</figure>
 
 Two integrators in the loop give $$\mathrm{NTF} = (1 - z^{-1})^2$$, three give the cube, and an order-$$L$$ loop with a pure differentiator NTF shapes the noise as $$\lvert\mathrm{NTF}\rvert^2 \approx (2\pi f/f_\mathrm{s})^{2L}$$ in band. Integrate the white error density $$\sigma_e^2/(f_\mathrm{s}/2)$$ times this shape from 0 to the band edge $$f_\mathrm{B} = f_\mathrm{s}/(2\,\mathrm{OSR})$$:
 
@@ -56,9 +61,9 @@ $$
 
 </div>
 
-<figure id="fig-19-1">
+<figure id="fig-19-2">
   <img src="{{ '/assets/figs/ch19_ntf.svg' | relative_url }}" style="width:720px" alt="Magnitude of first-, second- and third-order noise transfer functions and of a synthesised third-order NTF, and the output spectrum of a second-order modulator">
-  <figcaption><span class="capnum">Figure 19.1.</span> <strong>The loop moves the quantisation noise out of the band.</strong> (a) The NTF magnitude of pure differentiators of order 1–3, which reach 2, 4 and 8 at half the sample rate, and of a synthesised third-order NTF whose gain is limited to 1.5 and whose zeros are spread across the band (the notch). (b) The output spectrum of a second-order 1-bit modulator with a −6 dBFS sine: the noise rises at 40 dB per decade, and the band at an OSR of 128 (dotted line) holds almost none of it. Computed with <code>biosig.ntf_response()</code> and <code>biosig.simulate_dsm()</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 19.2.</span> <strong>The loop moves the quantisation noise out of the band.</strong> (a) The NTF magnitude of pure differentiators of order 1–3, which reach 2, 4 and 8 at half the sample rate, and of a synthesised third-order NTF whose gain is limited to 1.5 and whose zeros are spread across the band (the notch). (b) The output spectrum of a second-order 1-bit modulator with a −6 dBFS sine: the noise rises at 40 dB per decade, and the band at an OSR of 128 (dotted line) holds almost none of it. Computed with <code>biosig.ntf_response()</code> and <code>biosig.simulate_dsm()</code>.</figcaption>
 </figure>
 
 <div class="tbox tbox-example" markdown="1">
@@ -88,13 +93,13 @@ The formula's most useful message is in its last term: every doubling of the OSR
 | 3 | 46.9 | 67.8 | 88.9 | **108.1** | 121* |
 | 4 | 50.1 | 76.5 | 103.3 | 121* | 122* |
 
-[Table 19.1](#tab-19-1) and [Figure 19.2](#fig-19-2)a show the slopes, and also the diminishing returns. The higher-order NTFs gain less per octave than $$6L + 3$$ dB suggests, because their gain must be held down to keep the loop stable, which leaves more noise in band than a pure differentiator would. They also accept a smaller input before overloading. At low OSR the extra order buys little: at an OSR of 16 the four loops lie within 19 dB of each other.
+[Table 19.1](#tab-19-1) and [Figure 19.3](#fig-19-3)a show the slopes, and also the diminishing returns. The higher-order NTFs gain less per octave than $$6L + 3$$ dB suggests, because their gain must be held down to keep the loop stable, which leaves more noise in band than a pure differentiator would. They also accept a smaller input before overloading. At low OSR the extra order buys little: at an OSR of 16 the four loops lie within 19 dB of each other.
 
 To meet 16 bits, the converter's total noise must sit 98 dB below full scale. If quantisation noise is to take no more than a tenth of that budget, leaving the rest for thermal noise, the modulator needs **108 dB** at the largest input it will see. From the table: a third-order loop reaches it at an OSR of 128, a fourth-order one between 64 and 128, and a second-order one would need about 512.
 
-<figure id="fig-19-2">
+<figure id="fig-19-3">
   <img src="{{ '/assets/figs/ch19_sqnr.svg' | relative_url }}" style="width:720px" alt="Simulated SQNR versus oversampling ratio for loop orders 1 to 4, and SQNR versus input amplitude at OSR 128 showing overload and instability">
-  <figcaption><span class="capnum">Figure 19.2.</span> <strong>Order buys SQNR, but costs input range.</strong> (a) Simulated SQNR at −6 dBFS against OSR for orders 1–4 (solid), with the linear-model prediction for orders 1 and 2 (dotted) and the 108 dB target. The points above 120 dB are limited by the record length. (b) SQNR against input amplitude at an OSR of 128. The second-order loop stays stable but overloads at full scale; the third-order loop goes unstable at 0 dBFS and the fourth-order loop at −4 dBFS (crosses). Computed with <code>biosig.simulate_dsm()</code>, <code>biosig.synth_ntf()</code> and <code>biosig.dsm_sqnr()</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 19.3.</span> <strong>Order buys SQNR, but costs input range.</strong> (a) Simulated SQNR at −6 dBFS against OSR for orders 1–4 (solid), with the linear-model prediction for orders 1 and 2 (dotted) and the 108 dB target. The points above 120 dB are limited by the record length. (b) SQNR against input amplitude at an OSR of 128. The second-order loop stays stable but overloads at full scale; the third-order loop goes unstable at 0 dBFS and the fourth-order loop at −4 dBFS (crosses). Computed with <code>biosig.simulate_dsm()</code>, <code>biosig.synth_ntf()</code> and <code>biosig.dsm_sqnr()</code>.</figcaption>
 </figure>
 
 ## <span class="secnum">19.3</span>Stability, idle tones and dither
@@ -105,26 +110,26 @@ There is no exact test. The practical rule, the **Lee criterion**, says that a 1
 
 $$\lVert \mathrm{NTF} \rVert_\infty = \max_f \lvert\mathrm{NTF}(e^{j2\pi f/f_\mathrm{s}})\rvert < 1.5.$$
 
-A pure differentiator of order $$L$$ reaches $$2^L$$ at half the sample rate ([Figure 19.1](#fig-19-1)a). First order (2) and second order (4) break the rule but are stable anyway, which is why they are the workhorses. The pure third-order loop (8) goes unstable in simulation at every amplitude tried, −6 and −3 dBFS. Higher-order loops therefore use an NTF with poles as well as zeros, designed so that its out-of-band gain is 1.5 (section 19.4). Even then, the maximum stable input falls with order: −4 dBFS for the third-order loop and −8 dBFS for the fourth-order one at an OSR of 128 ([Figure 19.2](#fig-19-2)b).
+A pure differentiator of order $$L$$ reaches $$2^L$$ at half the sample rate ([Figure 19.2](#fig-19-2)a). First order (2) and second order (4) break the rule but are stable anyway, which is why they are the workhorses. The pure third-order loop (8) goes unstable in simulation at every amplitude tried, −6 and −3 dBFS. Higher-order loops therefore use an NTF with poles as well as zeros, designed so that its out-of-band gain is 1.5 (section 19.4). Even then, the maximum stable input falls with order: −4 dBFS for the third-order loop and −8 dBFS for the fourth-order one at an OSR of 128 ([Figure 19.3](#fig-19-3)b).
 
 The second hazard concerns slow inputs, which is exactly what biosignals are. With a DC input the loop has nothing to randomise its behaviour, and its output settles into a repeating pattern. A repeating pattern is a set of spectral lines, **idle tones**, and some of them can fall in band.
 
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 19.2 · Idle tones in an ECG baseline</div>
 
-A first-order loop with a constant input $$u$$ produces a pattern whose period is about $$2/u$$ samples. For $$u = 0.002$$, 0.2 % of full scale, a small electrode offset after the DC servo loop, the output repeats every 1000 samples and its spectrum has lines at multiples of $$0.001\,f_\mathrm{s}$$, the largest near −50 dBFS ([Figure 19.3](#fig-19-3)a).
+A first-order loop with a constant input $$u$$ produces a pattern whose period is about $$2/u$$ samples. For $$u = 0.002$$, 0.2 % of full scale, a small electrode offset after the DC servo loop, the output repeats every 1000 samples and its spectrum has lines at multiples of $$0.001\,f_\mathrm{s}$$, the largest near −50 dBFS ([Figure 19.4](#fig-19-4)a).
 
 Run that loop at the 38.4 kHz an OSR of 128 implies for a 150 Hz band and the lines fall at 38, 77 and 115 Hz, inside the ECG band and some 50 dB above a 16-bit noise floor. A cardiologist would see them as noise that comes and goes with the baseline, because the tone frequencies move whenever the offset drifts.
 
 </div>
 
-Three remedies exist, and Open-BioAFE uses all of them. Higher-order loops have busier internal states and much weaker tones. **Dither**, a small random signal added at the quantiser input, breaks the patterns; added there, it is shaped by the NTF exactly like the quantisation noise, so it costs little in band ([Figure 19.3](#fig-19-3)a). And the incremental converter of section 19.5 resets the loop before every conversion, so no pattern can build up over time.
+Three remedies exist, and Open-BioAFE uses all of them. Higher-order loops have busier internal states and much weaker tones. **Dither**, a small random signal added at the quantiser input, breaks the patterns; added there, it is shaped by the NTF exactly like the quantisation noise, so it costs little in band ([Figure 19.4](#fig-19-4)a). And the incremental converter of section 19.5 resets the loop before every conversion, so no pattern can build up over time.
 
 ## <span class="secnum">19.4</span>NTF synthesis
 
 Choosing an NTF is the central design step. Schreier's `synthesizeNTF` {% include cite.html keys="schreier" %}, available in python-deltasigma {% include cite.html keys="pydeltasigma" %}, takes the order, the OSR and the out-of-band gain, and returns zeros and poles. Its two decisions are worth understanding.
 
-**Zeros.** Putting all $$L$$ zeros at DC gives the most attenuation at DC. Spreading them across the band gives less at DC but more over the band as a whole. The optimal positions, which minimise the integrated in-band noise, are the roots of the Legendre polynomial of degree $$L$$ scaled to the band edge: $$\pm f_\mathrm{B}/\sqrt3$$ for $$L = 2$$, and $$0$$ and $$\pm\sqrt{3/5}\,f_\mathrm{B}$$ for $$L = 3$$. The notch in the synthesised NTF of [Figure 19.1](#fig-19-1)a is one of these zeros. In simulation at an OSR of 64, spreading the zeros gains 2.4 dB at second order, 8.3 dB at third and 11.5 dB at fourth.
+**Zeros.** Putting all $$L$$ zeros at DC gives the most attenuation at DC. Spreading them across the band gives less at DC but more over the band as a whole. The optimal positions, which minimise the integrated in-band noise, are the roots of the Legendre polynomial of degree $$L$$ scaled to the band edge: $$\pm f_\mathrm{B}/\sqrt3$$ for $$L = 2$$, and $$0$$ and $$\pm\sqrt{3/5}\,f_\mathrm{B}$$ for $$L = 3$$. The notch in the synthesised NTF of [Figure 19.2](#fig-19-2)a is one of these zeros. In simulation at an OSR of 64, spreading the zeros gains 2.4 dB at second order, 8.3 dB at third and 11.5 dB at fourth.
 
 **Poles.** The poles flatten the NTF above the band so that $$\lVert\mathrm{NTF}\rVert_\infty$$ meets the Lee criterion. `biosig.synth_ntf()` does what `synthesizeNTF` does in its simplest form: it takes the poles of a Butterworth high-pass of the same order and moves their corner until the peak gain is exactly 1.5. A lower peak gain gives a more stable loop with a larger input range and more in-band noise; a higher one the opposite. Values between 1.3 and 1.6 are common.
 
@@ -151,11 +156,11 @@ $$
 
 </div>
 
-Each doubling of $$M$$ now gains two bits instead of one ([Figure 19.3](#fig-19-3)b).
+Each doubling of $$M$$ now gains two bits instead of one ([Figure 19.4](#fig-19-4)b).
 
-<figure id="fig-19-3">
+<figure id="fig-19-4">
   <img src="{{ '/assets/figs/ch19_tones_incr.svg' | relative_url }}" style="width:720px" alt="Output spectra showing idle tones from a first-order loop with a DC input and a clean spectrum from a dithered second-order loop, and resolution versus cycles per conversion for first- and second-order incremental converters">
-  <figcaption><span class="capnum">Figure 19.3.</span> <strong>DC inputs make tones; reset and a second integrator make bits.</strong> (a) Output spectra for a DC input of 0.2 % of full scale: the first-order loop (red) produces lines at multiples of 0.001 f<sub>s</sub>, several of them inside the band at an OSR of 128, while a second-order loop with dither (blue) shows only shaped noise. (b) Resolution of incremental converters against the number of cycles per conversion. First order gains one bit per doubling of M; second order gains two, and passes 16 bits (worst-case error) at M = 1024. Computed with <code>biosig.simulate_dsm()</code> and <code>biosig.incremental2()</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 19.4.</span> <strong>DC inputs make tones; reset and a second integrator make bits.</strong> (a) Output spectra for a DC input of 0.2 % of full scale: the first-order loop (red) produces lines at multiples of 0.001 f<sub>s</sub>, several of them inside the band at an OSR of 128, while a second-order loop with dither (blue) shows only shaped noise. (b) Resolution of incremental converters against the number of cycles per conversion. First order gains one bit per doubling of M; second order gains two, and passes 16 bits (worst-case error) at M = 1024. Computed with <code>biosig.simulate_dsm()</code> and <code>biosig.incremental2()</code>.</figcaption>
 </figure>
 
 <div class="tbox tbox-example" markdown="1">

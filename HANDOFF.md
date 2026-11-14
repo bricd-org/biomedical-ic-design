@@ -129,12 +129,12 @@ The user asked for more figures that explain the chapters, "a lot of architectur
 the data converter section". Every Part III figure so far is a data plot. Draw diagrams as **hand-written
 SVG** in `assets/figs/` like `ch04_mains_coupling.svg` (viewBox 720 wide, Libre Franklin, palette from
 `figsrc/bricdstyle.py`: strokes #1D2A30, analog boxes #E4EEF8, digital boxes #FBF1DF, clocks #9A6212,
-secondary text #56656B). Insert as the chapter's first figure where it belongs and renumber the later
-figures (ids and "Figure N.M" in the chapter and in cross-links). Planned, in order of value:
+secondary text #56656B). Insert with the placeholder number NEW (id fig-N-NEW, "Figure N.NEW") and run
+`python tools/renumber_figs.py N`, which renumbers ids, captions and cross-links in all chapters. Planned, in order of value:
 - Ch 18: SAR architecture (S/H, differential CDAC, comparator, async logic, self-timed clock, output) — **DONE** (Fig 18.1, `ch18_sar_arch.svg`; old 18.1 → 18.2)
 - Ch 20: incremental ΔΣ with reset and CoI decimator — **DONE** (Fig 20.1, `ch20_incr_arch.svg`; old 20.1 → 20.2);
-  still to draw: SC integrator (two-phase), 2nd-order CIFB loop
-- Ch 19: ΔΣ loop and its linear model (loop filter, quantiser + E, DAC; NTF/STF)
+  SC integrator — **DONE** (Fig 20.2, `ch20_scint.svg`)
+- Ch 19: ΔΣ loop and its linear model — **DONE** (Fig 19.1, `ch19_loop.svg`)
 - Ch 17: binary vs split CDAC; Vcm-based switching steps
 - Ch 16: StrongARM latch schematic with its phases
 - Ch 15: sampling switch + kT/C; bootstrapped switch schematic

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" width="720" height="260" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>Parasitic-insensitive switched-capacitor integrator and its two clock phases</title>
+  <defs>
+    <marker id="ca" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
+    </marker>
+  </defs>
+
+  <!-- wires -->
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <path d="M14 110 H60 M94 110 H172 M182 110 H260 M294 110 H384"/>
+    <path d="M130 110 V136 M130 168 V186"/>
+    <path d="M230 110 V136 M230 168 V186"/>
+    <path d="M340 110 V50 H419 M429 50 H510 V140"/>
+    <path d="M384 150 H366 V186"/>
+    <path d="M464 140 H560" marker-end="url(#ca)"/>
+  </g>
+  <!-- capacitors -->
+  <g stroke="#1D2A30" stroke-width="2.6">
+    <path d="M172 94 V126 M182 94 V126"/>
+    <path d="M419 34 V66 M429 34 V66"/>
+  </g>
+  <!-- switches: horizontal -->
+  <g fill="#fff" stroke="#1D2A30" stroke-width="1.5">
+    <circle cx="63" cy="110" r="2.6"/><circle cx="91" cy="110" r="2.6"/>
+    <circle cx="263" cy="110" r="2.6"/><circle cx="291" cy="110" r="2.6"/>
+    <circle cx="130" cy="139" r="2.6"/><circle cx="130" cy="165" r="2.6"/>
+    <circle cx="230" cy="139" r="2.6"/><circle cx="230" cy="165" r="2.6"/>
+  </g>
+  <g stroke="#1D2A30" stroke-width="1.8">
+    <path d="M63 110 L88 100 M263 110 L288 100 M130 139 L120 162 M230 139 L220 162"/>
+  </g>
+  <!-- grounds -->
+  <g stroke="#1D2A30" stroke-width="1.6">
+    <path d="M120 186 H140 M124 191 H136 M128 196 H132"/>
+    <path d="M220 186 H240 M224 191 H236 M228 196 H232"/>
+    <path d="M356 186 H376 M360 191 H372 M364 196 H368"/>
+  </g>
+  <!-- nodes -->
+  <g fill="#1D2A30"><circle cx="130" cy="110" r="3"/><circle cx="230" cy="110" r="3"/><circle cx="340" cy="110" r="3"/><circle cx="510" cy="140" r="3"/></g>
+  <!-- op-amp -->
+  <path d="M386 92 L386 188 L464 140 Z" fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.8"/>
+  <text x="392" y="115" font-size="12" fill="#1D2A30">−</text>
+  <text x="392" y="155" font-size="12" fill="#1D2A30">+</text>
+  <text x="404" y="207" font-size="9.5" fill="#56656B" text-anchor="middle">OTA, about 1 µA (§20.1)</text>
+
+  <!-- labels -->
+  <text x="12" y="102" font-size="12" fill="#1D2A30" font-style="italic">v<tspan font-size="8" dy="3">in</tspan></text>
+  <text x="77" y="92" font-size="11" fill="#9A6212" text-anchor="middle" font-style="italic">φ<tspan font-size="8" dy="3">1</tspan></text>
+  <text x="277" y="92" font-size="11" fill="#9A6212" text-anchor="middle" font-style="italic">φ<tspan font-size="8" dy="3">2</tspan></text>
+  <text x="108" y="157" font-size="11" fill="#9A6212" text-anchor="middle" font-style="italic">φ<tspan font-size="8" dy="3">2</tspan></text>
+  <text x="208" y="157" font-size="11" fill="#9A6212" text-anchor="middle" font-style="italic">φ<tspan font-size="8" dy="3">1</tspan></text>
+  <text x="177" y="86" font-size="12" fill="#1D2A30" text-anchor="middle" font-style="italic">C<tspan font-size="8" dy="3">s</tspan></text>
+  <text x="424" y="26" font-size="12" fill="#1D2A30" text-anchor="middle" font-style="italic">C<tspan font-size="8" dy="3">int</tspan></text>
+  <text x="138" y="102" font-size="10" fill="#56656B">A</text>
+  <text x="238" y="102" font-size="10" fill="#56656B">B</text>
+  <text x="300" y="130" font-size="10" fill="#56656B">virtual ground</text>
+  <text x="540" y="132" font-size="12" fill="#1D2A30" font-style="italic">v<tspan font-size="8" dy="3">out</tspan></text>
+  <text x="130" y="218" font-size="9.5" fill="#56656B" text-anchor="middle">DAC: in φ₂, node A goes</text>
+  <text x="130" y="230" font-size="9.5" fill="#56656B" text-anchor="middle">to ±V<tspan font-size="7" dy="2">ref</tspan><tspan dy="-2"> instead of ground</tspan></text>
+
+  <!-- clock phases -->
+  <text x="590" y="40" font-size="10" fill="#56656B">non-overlapping phases</text>
+  <g stroke="#9A6212" stroke-width="1.6" fill="none">
+    <path d="M590 80 H600 V58 H630 V80 H660 V58 H690 V80 H710"/>
+    <path d="M590 120 H634 V98 H656 V120 H694 V98 H710"/>
+  </g>
+  <text x="582" y="74" font-size="11" fill="#9A6212" text-anchor="end" font-style="italic">φ<tspan font-size="8" dy="3">1</tspan></text>
+  <text x="582" y="114" font-size="11" fill="#9A6212" text-anchor="end" font-style="italic">φ<tspan font-size="8" dy="3">2</tspan></text>
+  <text x="650" y="140" font-size="9.5" fill="#56656B" text-anchor="middle">512 kHz: 0.98 µs per phase</text>
+
+  <!-- equation -->
+  <text x="430" y="238" font-size="11.5" fill="#1D2A30" text-anchor="middle" font-style="italic">v<tspan font-size="8" dy="3">out</tspan><tspan dy="-3">[n] = v</tspan><tspan font-size="8" dy="3">out</tspan><tspan dy="-3">[n−1] + (C</tspan><tspan font-size="8" dy="3">s</tspan><tspan dy="-3">/C</tspan><tspan font-size="8" dy="3">int</tspan><tspan dy="-3">) v</tspan><tspan font-size="8" dy="3">in</tspan><tspan dy="-3">[n−1]   ⇒   a z</tspan><tspan font-size="8" dy="-5">−1</tspan><tspan dy="5"> / (1 − z</tspan><tspan font-size="8" dy="-5">−1</tspan><tspan dy="5">),  a = C</tspan><tspan font-size="8" dy="3">s</tspan><tspan dy="-3">/C</tspan><tspan font-size="8" dy="3">int</tspan></text>
+</svg>

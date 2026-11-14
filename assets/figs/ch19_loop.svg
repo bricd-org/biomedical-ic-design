@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 250" width="720" height="250" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>A delta-sigma modulator and its linear model</title>
+  <defs>
+    <marker id="la" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
+    </marker>
+    <marker id="lk" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#B5473A"/>
+    </marker>
+  </defs>
+  <text x="10" y="22" font-size="12" font-weight="700" fill="#1D2A30">(a) the modulator</text>
+  <text x="380" y="22" font-size="12" font-weight="700" fill="#1D2A30">(b) its linear model</text>
+  <path d="M362 30 V230" stroke="#E1E8E8" stroke-width="1.5"/>
+
+  <!-- (a) -->
+  <text x="10" y="104" font-size="12" fill="#1D2A30" font-style="italic">U</text>
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <path d="M24 110 H52" marker-end="url(#la)"/>
+    <path d="M78 110 H100" marker-end="url(#la)"/>
+    <path d="M176 110 H204" marker-end="url(#la)"/>
+    <path d="M250 110 H336" marker-end="url(#la)"/>
+    <path d="M290 110 V180 H222 M174 180 H65 V124" />
+    <path d="M65 128 V124" marker-end="url(#la)"/>
+  </g>
+  <circle cx="65" cy="110" r="12" fill="#fff" stroke="#1D2A30" stroke-width="1.6"/>
+  <path d="M59 110 H71 M65 104 V116" stroke="#1D2A30" stroke-width="1.4"/>
+  <text x="46" y="102" font-size="11" fill="#1D2A30">+</text>
+  <text x="71" y="138" font-size="12" fill="#1D2A30">−</text>
+  <rect x="102" y="88" width="74" height="44" rx="3" fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.6"/>
+  <text x="139" y="115" font-size="13" fill="#1D2A30" text-anchor="middle" font-style="italic">H(z)</text>
+  <text x="139" y="150" font-size="9.5" fill="#56656B" text-anchor="middle">loop filter</text>
+  <rect x="206" y="88" width="44" height="44" rx="3" fill="#fff" stroke="#1D2A30" stroke-width="1.6"/>
+  <path d="M215 120 H228 V100 H241" stroke="#1D2A30" stroke-width="1.6" fill="none"/>
+  <text x="228" y="80" font-size="9.5" fill="#56656B" text-anchor="middle">quantiser</text>
+  <circle cx="290" cy="110" r="3" fill="#1D2A30"/>
+  <text x="318" y="102" font-size="12" fill="#1D2A30" font-style="italic">V</text>
+  <rect x="174" y="166" width="48" height="28" rx="3" fill="#fff" stroke="#1D2A30" stroke-width="1.6"/>
+  <text x="198" y="184" font-size="10" fill="#1D2A30" text-anchor="middle">DAC</text>
+  <text x="180" y="222" font-size="10" fill="#56656B" text-anchor="middle">clocked at f<tspan font-size="7" dy="2">s</tspan><tspan dy="-2"> = OSR · 2f</tspan><tspan font-size="7" dy="2">B</tspan></text>
+
+  <!-- (b) -->
+  <text x="380" y="104" font-size="12" fill="#1D2A30" font-style="italic">U</text>
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <path d="M394 110 H422" marker-end="url(#la)"/>
+    <path d="M448 110 H470" marker-end="url(#la)"/>
+    <path d="M546 110 H580" marker-end="url(#la)"/>
+    <path d="M606 110 H696" marker-end="url(#la)"/>
+    <path d="M650 110 V180 H435 V124" />
+    <path d="M435 128 V124" marker-end="url(#la)"/>
+  </g>
+  <circle cx="435" cy="110" r="12" fill="#fff" stroke="#1D2A30" stroke-width="1.6"/>
+  <path d="M429 110 H441 M435 104 V116" stroke="#1D2A30" stroke-width="1.4"/>
+  <text x="416" y="102" font-size="11" fill="#1D2A30">+</text>
+  <text x="441" y="138" font-size="12" fill="#1D2A30">−</text>
+  <rect x="472" y="88" width="74" height="44" rx="3" fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.6"/>
+  <text x="509" y="115" font-size="13" fill="#1D2A30" text-anchor="middle" font-style="italic">H(z)</text>
+  <circle cx="593" cy="110" r="12" fill="#fff" stroke="#B5473A" stroke-width="1.6"/>
+  <path d="M587 110 H599 M593 104 V116" stroke="#B5473A" stroke-width="1.4"/>
+  <path d="M593 62 V96" stroke="#B5473A" stroke-width="1.8" fill="none" marker-end="url(#lk)"/>
+  <text x="593" y="55" font-size="12" fill="#B5473A" text-anchor="middle" font-style="italic">E</text>
+  <text x="612" y="78" font-size="9.5" fill="#B5473A">quantisation error,</text>
+  <text x="612" y="90" font-size="9.5" fill="#B5473A">treated as added noise</text>
+  <circle cx="650" cy="110" r="3" fill="#1D2A30"/>
+  <text x="680" y="102" font-size="12" fill="#1D2A30" font-style="italic">V</text>
+  <text x="540" y="208" font-size="12" fill="#1D2A30" text-anchor="middle" font-style="italic">V = STF·U + NTF·E</text>
+  <text x="540" y="228" font-size="11" fill="#1D2A30" text-anchor="middle" font-style="italic">STF = H / (1 + H),   NTF = 1 / (1 + H)</text>
+</svg>
