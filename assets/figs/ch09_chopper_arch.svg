@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 270" width="720" height="270" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>A chopper amplifier and the spectra at its four nodes</title>
+  <defs>
+    <marker id="pa" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
+    </marker>
+    <!-- spectrum axes: origin (0,0) bottom-left, 120 wide, 56 high; f_ch at x = 70 -->
+    <g id="ax" stroke="#56656B" stroke-width="1.1" fill="none">
+      <path d="M0 0 H122 M0 0 V-58"/>
+      <path d="M70 0 V4" />
+    </g>
+  </defs>
+
+  <!-- block chain -->
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <path d="M14 60 H70" marker-end="url(#pa)"/>
+    <path d="M118 60 H180" marker-end="url(#pa)"/>
+    <path d="M296 60 H372" marker-end="url(#pa)"/>
+    <path d="M420 60 H492" marker-end="url(#pa)"/>
+    <path d="M572 60 H700" marker-end="url(#pa)"/>
+    <path d="M238 20 V44" marker-end="url(#pa)"/>
+  </g>
+  <g stroke="#1D2A30" stroke-width="1.6">
+    <rect x="72" y="40" width="46" height="40" rx="3" fill="#FBF1DF"/>
+    <rect x="374" y="40" width="46" height="40" rx="3" fill="#FBF1DF"/>
+    <rect x="494" y="40" width="78" height="40" rx="3" fill="#E4EEF8"/>
+  </g>
+  <path d="M182 34 L182 86 L296 60 Z" fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.8"/>
+  <g font-size="16" fill="#1D2A30" text-anchor="middle"><text x="95" y="66">×</text><text x="397" y="66">×</text></g>
+  <text x="95" y="96" font-size="9.5" fill="#9A6212" text-anchor="middle">m(t) = ±1</text>
+  <text x="397" y="96" font-size="9.5" fill="#9A6212" text-anchor="middle">m(t) = ±1</text>
+  <text x="226" y="64" font-size="11" fill="#1D2A30" text-anchor="middle">A</text>
+  <text x="238" y="14" font-size="9.5" fill="#B5473A" text-anchor="middle">offset and 1/f noise enter here</text>
+  <text x="533" y="58" font-size="10.5" fill="#1D2A30" text-anchor="middle">low-pass</text>
+  <text x="533" y="72" font-size="9.5" fill="#56656B" text-anchor="middle">filter</text>
+  <text x="246" y="104" font-size="9.5" fill="#56656B" text-anchor="middle">f<tspan font-size="7" dy="2">ch</tspan><tspan dy="-2"> = 4 kHz in Open-BioAFE</tspan></text>
+  <g font-size="12" fill="#1D2A30" font-weight="700" text-anchor="middle">
+    <text x="40" y="52">①</text><text x="148" y="52">②</text><text x="336" y="52">③</text><text x="456" y="52">④</text><text x="640" y="52">⑤</text>
+  </g>
+
+  <!-- spectra: signal (blue), amplifier offset and 1/f (red) -->
+  <g transform="translate(14 222)">
+    <use href="#ax"/>
+    <path d="M2 0 Q6 -40 12 -40 Q18 -40 22 0" fill="#1F64A8" opacity="0.85"/>
+    <text x="0" y="16" font-size="9.5" fill="#56656B">① input</text>
+  </g>
+  <g transform="translate(156 222)">
+    <use href="#ax"/>
+    <path d="M60 0 Q64 -34 70 -34 Q76 -34 80 0 Z" fill="#1F64A8" opacity="0.85"/>
+    <text x="0" y="16" font-size="9.5" fill="#56656B">② up to f<tspan font-size="7" dy="2">ch</tspan></text>
+  </g>
+  <g transform="translate(298 222)">
+    <use href="#ax"/>
+    <path d="M60 0 Q64 -34 70 -34 Q76 -34 80 0 Z" fill="#1F64A8" opacity="0.85"/>
+    <path d="M2 -54 Q8 -18 24 -10 Q50 -5 122 -4" stroke="#B5473A" stroke-width="1.8" fill="none"/>
+    <path d="M3 0 V-50" stroke="#B5473A" stroke-width="3"/>
+    <text x="0" y="16" font-size="9.5" fill="#56656B">③ plus offset, 1/f</text>
+  </g>
+  <g transform="translate(440 222)">
+    <use href="#ax"/>
+    <path d="M2 0 Q6 -40 12 -40 Q18 -40 22 0" fill="#1F64A8" opacity="0.85"/>
+    <path d="M70 -54 V0" stroke="#B5473A" stroke-width="3"/>
+    <path d="M44 -6 Q58 -12 64 -36 Q70 -54 76 -36 Q82 -12 96 -6" stroke="#B5473A" stroke-width="1.8" fill="none"/>
+    <text x="0" y="16" font-size="9.5" fill="#56656B">④ swapped</text>
+  </g>
+  <g transform="translate(582 222)">
+    <use href="#ax"/>
+    <path d="M2 0 Q6 -40 12 -40 Q18 -40 22 0" fill="#1F64A8" opacity="0.85"/>
+    <path d="M70 -12 V0" stroke="#B5473A" stroke-width="3"/>
+    <path d="M30 -50 Q40 -50 48 -30 Q56 -8 122 -4" stroke="#56656B" stroke-width="1.2" stroke-dasharray="3 2" fill="none"/>
+    <text x="0" y="16" font-size="9.5" fill="#56656B">⑤ filtered: ripple left</text>
+  </g>
+  <g font-size="9.5">
+    <text x="300" y="150" fill="#1F64A8">signal</text>
+    <text x="350" y="150" fill="#B5473A">amplifier offset and 1/f noise</text>
+  </g>
+</svg>

@@ -35,7 +35,12 @@ Chapters [5]({% link chapters/05_devices.md %}), [7]({% link chapters/07_ia.md %
 
 A **chopper** is four switches that either pass a differential signal straight through or cross it over, swapping the two wires. Driven by a clock at $$f_\mathrm{ch}$$, it multiplies the signal by a square wave $$m(t) = \pm1$$. Put one chopper at the amplifier's input and an identical one at its output, and the signal is multiplied twice, $$m^2 = 1$$: it passes through unchanged, apart from the amplifier's gain. The amplifier's own offset and flicker noise enter *after* the input chopper, so they are multiplied only once.
 
-In the frequency domain, multiplying by a square wave copies a spectrum to the odd harmonics of $$f_\mathrm{ch}$$, with weights $$4/(\pi k)$$ for harmonic $$k$$. The input chopper moves the biosignal from baseband up around $$f_\mathrm{ch}$$, where the amplifier is quiet. The output chopper moves it back down. At the same time it moves the amplifier's offset and $$1/f$$ noise up to $$f_\mathrm{ch}$$, where a low-pass filter removes them.
+In the frequency domain, multiplying by a square wave copies a spectrum to the odd harmonics of $$f_\mathrm{ch}$$, with weights $$4/(\pi k)$$ for harmonic $$k$$. The input chopper moves the biosignal from baseband up around $$f_\mathrm{ch}$$, where the amplifier is quiet. The output chopper moves it back down. At the same time it moves the amplifier's offset and $$1/f$$ noise up to $$f_\mathrm{ch}$$, where a low-pass filter removes them ([Figure 9.1](#fig-9-1)).
+
+<figure id="fig-9-1">
+  <img src="{{ '/assets/figs/ch09_chopper_arch.svg' | relative_url }}" style="width:720px" alt="Chopper amplifier block diagram with input chopper, amplifier, output chopper and low-pass filter, and sketches of the spectrum at each of five nodes">
+  <figcaption><span class="capnum">Figure 9.1.</span> <strong>Chopping in the frequency domain.</strong> The input chopper moves the biosignal ① up to the chopping frequency ②, marked by the tick on each axis. The amplifier adds its offset and \(1/f\) noise at baseband ③. The output chopper swaps the two: the signal returns to baseband and the offset and \(1/f\) noise move up to \(f_\mathrm{ch}\) ④. A low-pass filter (dashed response) removes most of them, leaving a small ripple ⑤ that Sections 9.2 and 9.3 deal with.</figcaption>
+</figure>
 
 <div class="tbox tbox-keyeq" markdown="1">
 <div class="tbox-title">Key equation · What chopping leaves at baseband</div>
@@ -51,22 +56,22 @@ The baseband noise of a chopped amplifier is its white noise plus whatever flick
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 9.1 · Chopping the SG13G2 input pair</div>
 
-The 1000 µm² NMOS pair at 1 µA per device has a flicker corner of $$1.58\times10^{-13}/(18.5\ \text{nV})^2 = 460$$ Hz. Unchopped, its noise over 0.5–100 Hz is 1.29 µVrms, nearly all flicker. Chopped at 4 kHz, the baseband spectrum is flat at the thermal floor ([Figure 9.1](#fig-9-1)a) and the noise falls to **0.273 µVrms**, 5 % above the 0.26 µVrms thermal floor of the pair.
+The 1000 µm² NMOS pair at 1 µA per device has a flicker corner of $$1.58\times10^{-13}/(18.5\ \text{nV})^2 = 460$$ Hz. Unchopped, its noise over 0.5–100 Hz is 1.29 µVrms, nearly all flicker. Chopped at 4 kHz, the baseband spectrum is flat at the thermal floor ([Figure 9.2](#fig-9-2)a) and the noise falls to **0.273 µVrms**, 5 % above the 0.26 µVrms thermal floor of the pair.
 
-A 100 µm² pair has a corner of 4.6 kHz. Chopped at the same 4 kHz it gives 0.367 µVrms, 40 % above the floor; it needs about 10 kHz to come within 20 % ([Figure 9.2](#fig-9-2)b).
+A 100 µm² pair has a corner of 4.6 kHz. Chopped at the same 4 kHz it gives 0.367 µVrms, 40 % above the floor; it needs about 10 kHz to come within 20 % ([Figure 9.3](#fig-9-3)b).
 
 </div>
 
-<figure id="fig-9-1">
+<figure id="fig-9-2">
   <img src="{{ '/assets/figs/ch09_chop.svg' | relative_url }}" style="width:720px" alt="Noise spectrum of an input pair unchopped and chopped at 4 kHz, and the output of a chopper amplifier before and after low-pass filtering">
-  <figcaption><span class="capnum">Figure 9.1.</span> <strong>Chopping trades flicker noise in the band for ripple at the chopping frequency.</strong> (a) Input-referred noise of the SG13G2 NMOS pair (1000 µm² and 1 µA per device): unchopped, flicker noise dominates the EEG band (shaded); chopped at 4 kHz, the band is at the thermal floor and the flicker noise sits at f<sub>ch</sub> and its harmonics. (b) A 50 µV, 10 Hz input through a chopper amplifier of gain 100 whose input pair has 0.39 mV of offset: after the output chopper the offset is a ±39 mV square wave at 4 kHz (grey band); a second-order low-pass filter at 200 Hz reduces it to about 0.1 mV and leaves the 5 mV signal (blue) on the ideal output (dashed). Computed in <code>figsrc/ch09_figs.py</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 9.2.</span> <strong>Chopping trades flicker noise in the band for ripple at the chopping frequency.</strong> (a) Input-referred noise of the SG13G2 NMOS pair (1000 µm² and 1 µA per device): unchopped, flicker noise dominates the EEG band (shaded); chopped at 4 kHz, the band is at the thermal floor and the flicker noise sits at f<sub>ch</sub> and its harmonics. (b) A 50 µV, 10 Hz input through a chopper amplifier of gain 100 whose input pair has 0.39 mV of offset: after the output chopper the offset is a ±39 mV square wave at 4 kHz (grey band); a second-order low-pass filter at 200 Hz reduces it to about 0.1 mV and leaves the 5 mV signal (blue) on the ideal output (dashed). Computed in <code>figsrc/ch09_figs.py</code>.</figcaption>
 </figure>
 
 ## <span class="secnum">9.2</span>Residual offset and ripple
 
 Chopping does not make the offset vanish. It moves it, and it adds a small offset of its own.
 
-**Ripple.** The amplifier's offset, multiplied by the output chopper, becomes a square wave at $$f_\mathrm{ch}$$ whose amplitude is the offset times the gain. For a 100 µm² pair, $$\sigma(V_\mathrm{os}) = 3.9/\sqrt{100} = 0.39$$ mV, and at a gain of 100 the ripple is ±39 mV ([Figure 9.1](#fig-9-1)b). That is ten times the largest EEG at the output, and it eats a large part of the 1.2 V swing. A second-order low-pass filter at 200 Hz attenuates it by $$(4000/200)^2 = 400$$, to about 0.1 mV. Inside the amplifier, however, the ripple is still there, and its slewing and the following stage's linear range must cope with it.
+**Ripple.** The amplifier's offset, multiplied by the output chopper, becomes a square wave at $$f_\mathrm{ch}$$ whose amplitude is the offset times the gain. For a 100 µm² pair, $$\sigma(V_\mathrm{os}) = 3.9/\sqrt{100} = 0.39$$ mV, and at a gain of 100 the ripple is ±39 mV ([Figure 9.2](#fig-9-2)b). That is ten times the largest EEG at the output, and it eats a large part of the 1.2 V swing. A second-order low-pass filter at 200 Hz attenuates it by $$(4000/200)^2 = 400$$, to about 0.1 mV. Inside the amplifier, however, the ripple is still there, and its slewing and the following stage's linear range must cope with it.
 
 **Residual offset.** The input chopper's switches inject charge on every transition. If the two halves inject slightly different charges $$\Delta q$$, the mismatch flows through the source impedance $$R_\mathrm{s}$$ twice per period, and the average current $$2f_\mathrm{ch}\Delta q$$ produces a DC error:
 
@@ -104,15 +109,15 @@ $$
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 9.2 · The impedance a 4 kHz chopper leaves</div>
 
-With $$C_\mathrm{in} = 20$$ pF, the differential input impedance is 25 MΩ at 1 kHz, **6.25 MΩ at 4 kHz** and 2.5 MΩ at 10 kHz ([Figure 9.2](#fig-9-2)a). At 10 kHz the amplifier just meets the 2.5 MΩ the ECG standards require ([Chapter 3]({% link chapters/03_electrodes.md %})). At 4 kHz it has a margin of 2.5 over the standard, but it is sixteen times below the 100 MΩ that dry electrodes need. A 1 MΩ dry electrode in front of 6.25 MΩ loses 14 % of the signal and converts common mode into differential mode through any imbalance.
+With $$C_\mathrm{in} = 20$$ pF, the differential input impedance is 25 MΩ at 1 kHz, **6.25 MΩ at 4 kHz** and 2.5 MΩ at 10 kHz ([Figure 9.3](#fig-9-3)a). At 10 kHz the amplifier just meets the 2.5 MΩ the ECG standards require ([Chapter 3]({% link chapters/03_electrodes.md %})). At 4 kHz it has a margin of 2.5 over the standard, but it is sixteen times below the 100 MΩ that dry electrodes need. A 1 MΩ dry electrode in front of 6.25 MΩ loses 14 % of the signal and converts common mode into differential mode through any imbalance.
 
 </div>
 
 Every choice of chopping frequency is therefore a three-way trade. Higher $$f_\mathrm{ch}$$ removes more flicker noise; lower $$f_\mathrm{ch}$$ keeps the input impedance and the residual offset in check. The amplifier's bandwidth must exceed $$f_\mathrm{ch}$$ by a comfortable factor, which costs current. [Chapter 10]({% link chapters/10_dsl.md %}) restores the impedance with a positive-feedback boosting loop.
 
-<figure id="fig-9-2">
+<figure id="fig-9-3">
   <img src="{{ '/assets/figs/ch09_tradeoff.svg' | relative_url }}" style="width:720px" alt="Input impedance of a chopped capacitively coupled IA versus chopping frequency, and in-band noise versus chopping frequency for two input device sizes">
-  <figcaption><span class="capnum">Figure 9.2.</span> <strong>The chopping frequency trades input impedance against flicker noise.</strong> (a) Differential input impedance 1/(2f<sub>ch</sub>C<sub>in</sub>) for three input capacitors, against the 2.5 MΩ of the ECG standards and the 100 MΩ dry electrodes need. (b) Noise over 0.5–100 Hz of a chopped NMOS pair at 1 µA per device, against the chopping frequency, for 100 and 1000 µm² devices. Large devices reach the thermal floor at a few kilohertz; small ones need ten. Computed in <code>figsrc/ch09_figs.py</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 9.3.</span> <strong>The chopping frequency trades input impedance against flicker noise.</strong> (a) Differential input impedance 1/(2f<sub>ch</sub>C<sub>in</sub>) for three input capacitors, against the 2.5 MΩ of the ECG standards and the 100 MΩ dry electrodes need. (b) Noise over 0.5–100 Hz of a chopped NMOS pair at 1 µA per device, against the chopping frequency, for 100 and 1000 µm² devices. Large devices reach the thermal floor at a few kilohertz; small ones need ten. Computed in <code>figsrc/ch09_figs.py</code>.</figcaption>
 </figure>
 
 <div class="tbox tbox-insight" markdown="1">
@@ -139,7 +144,7 @@ Simulating a chopper amplifier only with AC and noise analyses. Chopping is a ti
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 5]({% link chapters/31_labs.md %}#lab-5) adds input and output choppers and a DC servo loop to your LNA: $$1/f$$ removal, ripple, input-impedance loss and ±300 mV offset tolerance. Reproduce [Figure 9.2](#fig-9-2)b first with `figsrc/ch09_figs.py`, then compare it with a transient-noise simulation of your amplifier.
+[Lab 5]({% link chapters/31_labs.md %}#lab-5) adds input and output choppers and a DC servo loop to your LNA: $$1/f$$ removal, ripple, input-impedance loss and ±300 mV offset tolerance. Reproduce [Figure 9.3](#fig-9-3)b first with `figsrc/ch09_figs.py`, then compare it with a transient-noise simulation of your amplifier.
 
 </div>
 

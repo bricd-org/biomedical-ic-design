@@ -33,7 +33,7 @@ How do you size the capacitors, pseudo-resistors and OTA so that one AC-coupled 
 
 ## <span class="secnum">8.1</span>The Harrison topology
 
-A fully differential OTA has an input capacitor $$C_1$$ in series with each input and a feedback capacitor $$C_2$$ from each output back to its input. Across each $$C_2$$ sits a pseudo-resistor $$R_\mathrm{pr}$$ of teraohms, which sets the DC level of the OTA's inputs without loading the signal. Three numbers describe the response:
+A fully differential OTA has an input capacitor $$C_1$$ in series with each input and a feedback capacitor $$C_2$$ from each output back to its input. Across each $$C_2$$ sits a pseudo-resistor $$R_\mathrm{pr}$$ of teraohms, which sets the DC level of the OTA's inputs without loading the signal ([Figure 8.1](#fig-8-1)). Three numbers describe the response:
 
 <div class="tbox tbox-keyeq" markdown="1">
 <div class="tbox-title">Key equation · Gain and band edges of the capacitive-feedback LNA</div>
@@ -43,6 +43,11 @@ A_\mathrm{M} = \frac{C_1}{C_2}, \qquad f_\mathrm{L} = \frac{1}{2\pi R_\mathrm{pr
 $$
 
 </div>
+
+<figure id="fig-8-1">
+  <img src="{{ '/assets/figs/ch08_lna_schem.svg' | relative_url }}" style="width:720px" alt="Fully differential capacitive-feedback LNA with input capacitors C1, feedback capacitors C2 and pseudo-resistors across them, and a pseudo-resistor made of two diode-connected PMOS transistors">
+  <figcaption><span class="capnum">Figure 8.1.</span> <strong>The capacitive-feedback LNA.</strong> (a) The input capacitors \(C_1\) block the electrode offset; the gain is the ratio \(C_1/C_2\); the pseudo-resistors \(R_\mathrm{pr}\) across \(C_2\) set the DC level of the OTA's inputs (node X) and, with \(C_2\), the low corner; the OTA's transconductance and the load \(C_\mathrm{L}\) set the high corner. (b) A pseudo-resistor: two diode-connected PMOS transistors in series with a shared source and bulk, far below threshold for small voltages across them.</figcaption>
+</figure>
 
 The midband gain is a capacitor ratio. Below $$f_\mathrm{L}$$ the pseudo-resistor takes over from $$C_2$$ and the gain falls, which removes the electrode offset and slow drift. Above $$f_\mathrm{H}$$ the OTA, whose transconductance $$g_\mathrm{m}$$ drives the load $$C_\mathrm{L}$$ with a loop gain of $$1/A_\mathrm{M}$$, runs out of bandwidth. Harrison and Charles's original amplifier covered 0.025 Hz to 7.2 kHz with 2.2 µVrms of input noise from 80 µW {% include cite.html keys="harrison2003" %}.
 
@@ -64,7 +69,7 @@ A high-pass corner below 0.5 Hz with $$C_2 = 200$$ fF needs $$R_\mathrm{pr} > 1/
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 8.2 · Three SG13G2 pseudo-resistors</div>
 
-`labs/spice/sg13_lna.py` simulates back-to-back pairs of $$W/L = 1/10$$ µm PMOS devices ([Figure 8.1](#fig-8-1)). The small-signal resistance at 20 mV and the corner with $$C_2 = 200$$ fF are:
+`labs/spice/sg13_lna.py` simulates back-to-back pairs of $$W/L = 1/10$$ µm PMOS devices ([Figure 8.2](#fig-8-2)). The small-signal resistance at 20 mV and the corner with $$C_2 = 200$$ fF are:
 
 - **one thin-oxide pair**: $$2\times10^{11}$$ Ω, $$f_\mathrm{L} = 4.1$$ Hz at 27 °C; $$1.2\times10^{10}$$ Ω, 68 Hz at 85 °C;
 - **four thin-oxide pairs** in series: $$7.6\times10^{11}$$ Ω, 1.05 Hz at 27 °C, almost independent of voltage; 17.5 Hz at 85 °C;
@@ -81,9 +86,9 @@ ngspice adds a conductance $$g_\mathrm{min}$$, $$10^{-12}$$ S by default, across
 
 </div>
 
-<figure id="fig-8-1">
+<figure id="fig-8-2">
   <img src="{{ '/assets/figs/ch08_pseudo.svg' | relative_url }}" style="width:720px" alt="Current versus voltage and high-pass corner versus voltage for three SG13G2 pseudo-resistor variants at 27 and 85 degrees Celsius">
-  <figcaption><span class="capnum">Figure 8.1.</span> <strong>Pseudo-resistors span seven decades with voltage, temperature and oxide.</strong> (a) Current against voltage for one and four pairs of thin-oxide PMOS and one pair of thick-oxide PMOS (W/L = 1/10 µm), at 27 °C (solid) and 85 °C (dashed). (b) The high-pass corner each gives with C<sub>2</sub> = 200 fF. Only the thick-oxide pair stays below the 0.5 Hz EEG edge at room temperature, and its corner rises a hundredfold with voltage and seventyfold with temperature. Simulated with ngspice, tt corner, g<sub>min</sub> = 10<sup>−15</sup> S.</figcaption>
+  <figcaption><span class="capnum">Figure 8.2.</span> <strong>Pseudo-resistors span seven decades with voltage, temperature and oxide.</strong> (a) Current against voltage for one and four pairs of thin-oxide PMOS and one pair of thick-oxide PMOS (W/L = 1/10 µm), at 27 °C (solid) and 85 °C (dashed). (b) The high-pass corner each gives with C<sub>2</sub> = 200 fF. Only the thick-oxide pair stays below the 0.5 Hz EEG edge at room temperature, and its corner rises a hundredfold with voltage and seventyfold with temperature. Simulated with ngspice, tt corner, g<sub>min</sub> = 10<sup>−15</sup> S.</figcaption>
 </figure>
 
 ## <span class="secnum">8.3</span>OTA design
@@ -106,7 +111,7 @@ $$C_\mathrm{in}$$ is the gate capacitance of the OTA's input device. That puts t
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 8.3 · The best input-device size, with and without chopping</div>
 
-At 1 µA per device and $$C_1 = 20$$ pF, sweep the area of each NMOS input device and add the capacitive penalty to the pair noise of [Chapter 5]({% link chapters/05_devices.md %}) ([Figure 8.2](#fig-8-2)a):
+At 1 µA per device and $$C_1 = 20$$ pF, sweep the area of each NMOS input device and add the capacitive penalty to the pair noise of [Chapter 5]({% link chapters/05_devices.md %}) ([Figure 8.3](#fig-8-3)a):
 
 - **Unchopped**, flicker noise falls with area while the penalty grows. The best area is about 6200 µm² per device, where the noise gain is 1.68 and the input noise **0.98 µVrms**. With $$C_1 = 10$$ pF the optimum is 3600 µm² and 1.31 µVrms; with 40 pF, 10 200 µm² and 0.75 µVrms.
 - **Chopped**, only thermal noise is left, which does not fall with area, so small devices win: 0.27 µVrms at 100 µm² and 0.29 µVrms at 1000 µm².
@@ -125,18 +130,18 @@ One LNA must serve three modes whose signals differ by three orders of magnitude
 
 **Input impedance.** $$C_1$$ also sets the load on the electrodes: 20 pF is 160 MΩ at 50 Hz and 16 MΩ at 500 Hz, per input. That is enough for wet electrodes and marginal for dry ones at EMG frequencies; chopping lowers it further, which [Chapter 10]({% link chapters/10_dsl.md %}) repairs.
 
-**Bandwidth.** The LNA's band runs to $$f_\mathrm{H} \approx 5$$–24 kHz depending on its load ([Figure 8.2](#fig-8-2)b), but its noise must be counted only over the signal band. That holds only if something removes the rest before the converter samples. Integrated up to 24 kHz with a first-order roll-off, the thermal noise of the chopped pair is about 5 µVrms. Folded into a Nyquist-rate converter it would swamp the 1.5 µVrms target ([Chapter 13]({% link chapters/13_sampling.md %})). The anti-alias filtering of [Chapter 11]({% link chapters/11_filters.md %}) is part of the noise budget, not an afterthought.
+**Bandwidth.** The LNA's band runs to $$f_\mathrm{H} \approx 5$$–24 kHz depending on its load ([Figure 8.3](#fig-8-3)b), but its noise must be counted only over the signal band. That holds only if something removes the rest before the converter samples. Integrated up to 24 kHz with a first-order roll-off, the thermal noise of the chopped pair is about 5 µVrms. Folded into a Nyquist-rate converter it would swamp the 1.5 µVrms target ([Chapter 13]({% link chapters/13_sampling.md %})). The anti-alias filtering of [Chapter 11]({% link chapters/11_filters.md %}) is part of the noise budget, not an afterthought.
 
-<figure id="fig-8-2">
+<figure id="fig-8-3">
   <img src="{{ '/assets/figs/ch08_lna.svg' | relative_url }}" style="width:720px" alt="LNA input noise versus input device area for three input capacitors, chopped and unchopped, and closed-loop gain versus frequency for two loads and two temperatures">
-  <figcaption><span class="capnum">Figure 8.2.</span> <strong>Chopping changes the best input device; the load sets the upper band edge.</strong> (a) Input noise over 0.5–100 Hz of a C<sub>1</sub>/C<sub>2</sub> LNA with 1 µA per input device, against the area of each SG13G2 NMOS input device, including the capacitive noise gain: unchopped (solid, optimum marked) and chopped (dashed). (b) Closed-loop gain with C<sub>1</sub> = 20 pF, C<sub>2</sub> = 200 fF, g<sub>m</sub> = 30 µS and the thick-oxide pseudo-resistor, for two load capacitances, at 37 °C (solid) and 85 °C (dashed). Computed from the SG13G2 simulations.</figcaption>
+  <figcaption><span class="capnum">Figure 8.3.</span> <strong>Chopping changes the best input device; the load sets the upper band edge.</strong> (a) Input noise over 0.5–100 Hz of a C<sub>1</sub>/C<sub>2</sub> LNA with 1 µA per input device, against the area of each SG13G2 NMOS input device, including the capacitive noise gain: unchopped (solid, optimum marked) and chopped (dashed). (b) Closed-loop gain with C<sub>1</sub> = 20 pF, C<sub>2</sub> = 200 fF, g<sub>m</sub> = 30 µS and the thick-oxide pseudo-resistor, for two load capacitances, at 37 °C (solid) and 85 °C (dashed). Computed from the SG13G2 simulations.</figcaption>
 </figure>
 
 ## <span class="secnum">8.5</span>Linearity and pseudo-resistor problems
 
 Pseudo-resistors are what make the Harrison amplifier small, and they are its weakest part.
 
-- **Voltage dependence.** The resistance falls steeply once more than a few hundred millivolts appear across it ([Figure 8.1](#fig-8-1)b). A large motion artefact or a stimulation pulse drives the OTA output, and with it the pseudo-resistor, far from its rest point. The corner then jumps from 0.03 Hz to about 1 Hz, and the baseline recovers first quickly, then very slowly. Large EMG signals at the output modulate the corner in the same way, which shows up as low-frequency distortion.
+- **Voltage dependence.** The resistance falls steeply once more than a few hundred millivolts appear across it ([Figure 8.2](#fig-8-2)b). A large motion artefact or a stimulation pulse drives the OTA output, and with it the pseudo-resistor, far from its rest point. The corner then jumps from 0.03 Hz to about 1 Hz, and the baseline recovers first quickly, then very slowly. Large EMG signals at the output modulate the corner in the same way, which shows up as low-frequency distortion.
 - **Temperature and leakage.** Every variant loses one to two decades of resistance between 27 and 85 °C, as junction leakage grows. A wearable at skin temperature is fine with the thick-oxide pair; the same chip at 85 °C during a qualification test has its corner at 1 Hz.
 - **Process.** Subthreshold and leakage currents vary by large factors between corners and wafers, so the corner is uncertain by more than a decade.
 

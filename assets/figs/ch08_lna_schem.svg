@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 720 290" width="720" height="290" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>The capacitive-feedback (Harrison) LNA and its PMOS pseudo-resistor</title>
+  <defs>
+    <marker id="ha" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
+    </marker>
+    <g id="pmh" stroke="#1D2A30" fill="none" transform="rotate(90)">
+      <path d="M0 -26 V-10 H-8 M0 26 V10 H-8" stroke-width="1.8"/>
+      <path d="M-8 -14 V14" stroke-width="2.4"/>
+      <path d="M-14 -12 V12" stroke-width="2.4"/>
+      <circle cx="-18" cy="0" r="3.4" stroke-width="1.5" fill="#fff"/>
+      <path d="M-21.5 0 H-30" stroke-width="1.8"/>
+    </g>
+  </defs>
+  <text x="10" y="16" font-size="12" font-weight="700" fill="#1D2A30">(a) the capacitive-feedback LNA</text>
+  <text x="482" y="16" font-size="12" font-weight="700" fill="#1D2A30">(b) a pseudo-resistor</text>
+  <path d="M468 26 V278" stroke="#E1E8E8" stroke-width="1.5"/>
+
+  <!-- OTA -->
+  <path d="M230 80 L230 200 L318 162 L318 118 Z" fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.8"/>
+  <text x="237" y="114" font-size="12" fill="#1D2A30">+</text>
+  <text x="237" y="176" font-size="12" fill="#1D2A30">−</text>
+  <text x="306" y="132" font-size="10" fill="#1D2A30" text-anchor="end">−</text>
+  <text x="306" y="156" font-size="10" fill="#1D2A30" text-anchor="end">+</text>
+  <text x="266" y="144" font-size="11" fill="#1D2A30" text-anchor="middle">OTA</text>
+
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <!-- inputs through C1 -->
+    <path d="M24 110 H106 M116 110 H230"/>
+    <path d="M24 170 H106 M116 170 H230"/>
+    <!-- top feedback: C2 and Rpr from X1 to out- -->
+    <path d="M170 110 V22 H244 M304 22 H370 V128"/>
+    <path d="M170 52 H266 M276 52 H370"/>
+    <!-- bottom feedback -->
+    <path d="M170 170 V258 H244 M304 258 H370 V152"/>
+    <path d="M170 228 H266 M276 228 H370"/>
+    <!-- outputs and load -->
+    <path d="M318 128 H370 M318 152 H370"/>
+    <path d="M370 128 H410 V134 M410 144 V152 H370"/>
+    <path d="M410 128 H454" marker-end="url(#ha)"/>
+    <path d="M410 152 H454" marker-end="url(#ha)"/>
+  </g>
+  <g stroke="#1D2A30" stroke-width="2.6">
+    <path d="M106 96 V124 M116 96 V124 M106 156 V184 M116 156 V184"/>
+    <path d="M266 38 V66 M276 38 V66 M266 214 V242 M276 214 V242"/>
+    <path d="M398 134 H422 M398 144 H422"/>
+  </g>
+  <g fill="#fff" stroke="#9A6212" stroke-width="1.6">
+    <rect x="244" y="14" width="60" height="16" rx="2"/>
+    <rect x="244" y="250" width="60" height="16" rx="2"/>
+  </g>
+  <g fill="#1D2A30">
+    <circle cx="170" cy="110" r="3"/><circle cx="170" cy="170" r="3"/><circle cx="170" cy="52" r="3"/><circle cx="170" cy="228" r="3"/>
+    <circle cx="370" cy="52" r="3"/><circle cx="370" cy="228" r="3"/><circle cx="370" cy="128" r="3"/><circle cx="370" cy="152" r="3"/>
+    <circle cx="410" cy="128" r="3"/><circle cx="410" cy="152" r="3"/>
+  </g>
+  <g font-size="12" fill="#1D2A30" font-style="italic">
+    <text x="12" y="102">v<tspan font-size="8" dy="3">in+</tspan></text>
+    <text x="12" y="162">v<tspan font-size="8" dy="3">in−</tspan></text>
+    <text x="111" y="88" text-anchor="middle">C<tspan font-size="8" dy="3">1</tspan></text>
+    <text x="111" y="200" text-anchor="middle">C<tspan font-size="8" dy="3">1</tspan></text>
+    <text x="271" y="80" text-anchor="middle">C<tspan font-size="8" dy="3">2</tspan></text>
+    <text x="271" y="210" text-anchor="middle">C<tspan font-size="8" dy="3">2</tspan></text>
+    <text x="428" y="146">C<tspan font-size="8" dy="3">L</tspan></text>
+    <text x="440" y="120" font-size="11">v<tspan font-size="8" dy="3">out</tspan></text>
+  </g>
+  <g font-size="10" fill="#9A6212" text-anchor="middle" font-style="italic">
+    <text x="274" y="26">R<tspan font-size="7" dy="2">pr</tspan></text>
+    <text x="274" y="262">R<tspan font-size="7" dy="2">pr</tspan></text>
+  </g>
+  <text x="178" y="125" font-size="9.5" fill="#56656B">X</text>
+  <g font-size="9.5" fill="#56656B">
+    <text x="14" y="232">C₁ = 20 pF, MIM</text>
+    <text x="14" y="245">C₂ = 200 fF</text>
+    <text x="14" y="258">C<tspan font-size="7" dy="2">L</tspan><tspan dy="-2"> = 2 pF (EEG mode)</tspan></text>
+  </g>
+
+  <!-- (b) pseudo-resistor -->
+  <use xlink:href="#pmh" transform="translate(560 100)"/>
+  <use xlink:href="#pmh" transform="translate(640 100) scale(-1 1)"/>
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <path d="M490 100 H534 M586 100 H614 M666 100 H710"/>
+    <path d="M560 70 V58 H520 V100 M640 70 V58 H680 V100"/>
+    <path d="M600 100 V126"/>
+  </g>
+  <g fill="#1D2A30"><circle cx="520" cy="100" r="3"/><circle cx="680" cy="100" r="3"/><circle cx="600" cy="100" r="3"/></g>
+  <text x="488" y="92" font-size="11" fill="#1D2A30" font-style="italic">A</text>
+  <text x="704" y="92" font-size="11" fill="#1D2A30" font-style="italic">B</text>
+  <text x="600" y="140" font-size="9.5" fill="#56656B" text-anchor="middle">shared source and bulk</text>
+  <g font-size="9.5" fill="#56656B">
+    <text x="482" y="166">two diode-connected PMOS, W/L = 1/10 µm;</text>
+    <text x="482" y="179">near 0 V both are far below threshold:</text>
+    <text x="482" y="192">2 × 10¹¹ Ω (thin oxide) to 5.6 × 10¹³ Ω</text>
+    <text x="482" y="205">(thick oxide, 27 °C), Section 8.2</text>
+  </g>
+  <g font-size="11" fill="#1D2A30" font-style="italic">
+    <text x="482" y="236">A<tspan font-size="8" dy="3">M</tspan><tspan dy="-3"> = C</tspan><tspan font-size="8" dy="3">1</tspan><tspan dy="-3">/C</tspan><tspan font-size="8" dy="3">2</tspan><tspan dy="-3"> = 100 (40 dB)</tspan></text>
+    <text x="482" y="254">f<tspan font-size="8" dy="3">L</tspan><tspan dy="-3"> = 1/(2π R</tspan><tspan font-size="8" dy="3">pr</tspan><tspan dy="-3"> C</tspan><tspan font-size="8" dy="3">2</tspan><tspan dy="-3">)</tspan></text>
+    <text x="482" y="272">f<tspan font-size="8" dy="3">H</tspan><tspan dy="-3"> = g</tspan><tspan font-size="8" dy="3">m</tspan><tspan dy="-3">/(2π A</tspan><tspan font-size="8" dy="3">M</tspan><tspan dy="-3"> C</tspan><tspan font-size="8" dy="3">L</tspan><tspan dy="-3">)</tspan></text>
+  </g>
+</svg>

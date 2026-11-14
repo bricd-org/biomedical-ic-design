@@ -140,8 +140,12 @@ secondary text #56656B). Insert with the placeholder number NEW (id fig-N-NEW, "
 - Ch 15: sampling switch + bootstrapped switch — **DONE** (Fig 15.1, `ch15_switches.svg`)
 - Ch 13: sampling chain — **DONE** (Fig 13.1, `ch13_chain.svg`)
 - Ch 21: direct digitisation, VCO ADC — **DONE** (Fig 21.1, `ch21_arch.svg`); Ch 22: test bench — **DONE** (Fig 22.2, `ch22_bench.svg`)
-- Part II: Harrison LNA, chopper IA with DSL and boosting loops, RLD loop (check which ch07–ch12 figures
-  are already schematics before drawing)
+- Part II (all current figures are data plots): Ch 8 Harrison LNA — **DONE** (Fig 8.1); Ch 9 chopper
+  amplifier with spectra — **DONE** (Fig 9.1);
+  Ch 10 CCIA with DC-servo and impedance-boosting loops; Ch 7 IA topologies (3-op-amp, CFIA, CCIA);
+  Ch 12 RLD loop; Ch 11 PGA + filter gain plan
+- Ch 14 architecture map; Ch 29 full-chip block diagram; Ch 28 tetrapolar + IQ readout; Ch 24 Pan–Tompkins
+  pipeline; Ch 27 SoC partition
 
 ### Step 1 — Chapters 1–4: DONE (11 Nov 2026)
 
