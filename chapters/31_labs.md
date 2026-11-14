@@ -18,10 +18,6 @@ All fifteen labs are written, each with its script: the Python labs in `labs/pyt
 
 </div>
 
-This chapter is an outline. Labs 1 and 2 will be written in full in build stage 1; every other lab is written in the stage of its chapters. The goals and deliverables below are fixed.
-
-</div>
-
 The labs use only free tools. **Track A** (Python) models signals, interference and converters with NumPy, SciPy, wfdb and python-deltasigma {% include cite.html keys="pydeltasigma" %}. **Track B** (SG13G2) designs transistor-level circuits with Xschem and ngspice in the IHP open PDK {% include cite.html keys="ihppdk" %}. **Track C** (systems) runs the whole chain on real recordings and takes blocks to layout. The Python labs live in [`labs/python/`](https://github.com/bricd-org/biomedical-ic-design/tree/main/labs/python) and share one module, `biosig.py`.
 
 **Table 31.1. The fifteen labs.**
