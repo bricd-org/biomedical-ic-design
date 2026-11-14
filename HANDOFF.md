@@ -1,7 +1,7 @@
 # HANDOFF — Open-BioAFE Tutorial (pick up here)
 
-Last updated: 13 November 2026 (Ch 5–11, 13, 14, 19 written; outline review against lecture
-material, section 2a). On
+Last updated: 14 November 2026 (**all chapters 1–30 written**; next: Ch 31 labs, lab scripts,
+appendices; outline review against lecture material, section 2a). On
 10 November the tutorial was switched from a LaTeX book (with a generated website) to **a website
 written directly in Markdown**. There is no LaTeX book and no PDF any more; `book/` and
 `tools/build_site.py` were removed.
@@ -57,7 +57,7 @@ user works directly on `main`.
 | Ch 27 | **written** (14 Nov 2026): data rates raw vs features (8 ch: ECG 64 vs 0.34 kb/s, EEG 33 vs 0.38, EMG 192 vs 2.6, 1 spike ch 360 vs 6.7 → 54–190×); radio at ~5 nJ/b: raw EMG 960 µW (12× the 80 µW AFE), features 2–13 µW; Verma 2010 qualitative; compression; LDO/PSRR (80 dB: 30 µV → 3 nV); BLE/backscatter/inductive; stimulation & charge balance; spec: features out over SPI, raw on demand; 1 figure `figsrc/ch27_figs.py` (energy/bit values are order-of-magnitude assumptions) |
 | Ch 28 | **written** (14 Nov 2026): applications; Cole model (example R0 60, R∞ 30, fc 30 kHz, α 0.7 → 42 Ω −12° at 50 kHz); bipolar adds 2Z_e (≈2 kΩ wet, 10 kΩ dry at 50 kHz) → tetrapolar; excitation options; CF limit 500 µA at 50 kHz; IQ demod, resolution 50 nV/√Hz·√10 Hz/I → 16 mΩ at 10 µA, 3.2 mΩ at 50 µA; square-wave demod odd harmonics; ECG+Z frequency separation; impedance-aware mode spec; 1 figure `figsrc/ch28_figs.py` |
 | Ch 29 | **written** (14 Nov 2026): noise budget 0.51 µVrms wet / 1.26 dry (electrodes 91 % of dry noise power); CMRR test 0.06 mVpp (24 dB margin), Z_cm need ≈ 12 MΩ with RLD; power 6.8 µW/ch ECG/EEG, 4.9 EMG; ~1.7 mm² core; Table 29.1 spec vs designed; bioZ channel ~5 µW; floorplan; budgets live in `figsrc/ch29_figs.py` (NOISE/POWER tables). **Table 1.2 Z_cm row updated; Ch 3 and Ch 4 sentences aligned** |
-| Ch 30 | outline. **Next: Ch 30 (open-source flow)**, then Ch 15–18, 20–22 (stage 4), Part IV 23–28 (stage 5), Part V 29–30 (stage 6). User (13 Nov): "continue working until all the missing chapters are done" |
+| Ch 30 | **written** (14 Nov 2026): Table 30.1 tool set (Xschem, ngspice/Xyce, Python, Verilog/Icarus/Verilator, Yosys/OpenROAD, KLayout, JKU template); `.spiceinit` OSDI + corner lib + subcircuits; gmin/abstol/time-varying traps from this tutorial; XSPICE+Verilator co-sim; corners (tt/ss/ff/sf/fs, ±10 % supply, 0–45 °C use, −20–85 °C qual) + mismatch MC; DRC/LVS/PEX; tape-out checklist; no figure. **All outline chapters 1–30 are now written. Next: Step 2 (Ch 31 labs), Step 3 (lab scripts), appendices** |
 | Ch 31 `chapters/31_labs.md` | outline: lab table + one short section per lab (anchors `#lab-1`…`#lab-15`, `#setup`, `#capstone`) |
 | Appendices | **missing** (no pages yet, not in the menu) |
 | `references.md` + `_data/references.yml` (48 entries; `rich1983`, `ott2009` added 12 Nov) | done |
@@ -132,7 +132,7 @@ key equations, worked examples with the project's numbers, insight/pitfall/specn
 captions use `{: .tabcaption #tab-N-M }`. Maths inside a `<figure>` caption or a box title must be
 written `\( ... \)`, not `$$...$$` (kramdown does not convert maths inside raw HTML).
 
-### Step 1b — Write the outline chapters (user's request, 12 Nov 2026)
+### Step 1b — Write the outline chapters: DONE (12–14 Nov 2026)
 
 The user asked to "continue writing the empty chapters". Order: the curriculum's build stages
 (section 8), because stage 2 needs only Python: **Ch 13 (done) → Ch 14 → Ch 19**, then Part II
