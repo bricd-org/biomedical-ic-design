@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 250" width="720" height="250" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>Second-order incremental delta-sigma converter with its cascade-of-integrators decimator</title>
+  <defs>
+    <marker id="ia2" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
+    </marker>
+    <marker id="ik2" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#9A6212"/>
+    </marker>
+  </defs>
+
+  <!-- forward path -->
+  <text x="12" y="104" font-size="12" fill="#1D2A30" font-style="italic">u</text>
+  <text x="12" y="130" font-size="9.5" fill="#56656B">from the PGA</text>
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <path d="M24 110 H66" marker-end="url(#ia2)"/>
+    <path d="M92 110 H118" marker-end="url(#ia2)"/>
+    <path d="M222 110 H246" marker-end="url(#ia2)"/>
+    <path d="M272 110 H298" marker-end="url(#ia2)"/>
+    <path d="M402 110 H428" marker-end="url(#ia2)"/>
+    <path d="M478 110 H528" marker-end="url(#ia2)"/>
+  </g>
+  <!-- summing nodes -->
+  <g fill="#fff" stroke="#1D2A30" stroke-width="1.6">
+    <circle cx="80" cy="110" r="12"/><circle cx="260" cy="110" r="12"/>
+  </g>
+  <g stroke="#1D2A30" stroke-width="1.4"><path d="M74 110 H86 M80 104 V116 M254 110 H266 M260 104 V116"/></g>
+  <text x="62" y="102" font-size="11" fill="#1D2A30">+</text>
+  <text x="86" y="138" font-size="12" fill="#1D2A30">−</text>
+  <text x="242" y="102" font-size="11" fill="#1D2A30">+</text>
+  <text x="266" y="138" font-size="12" fill="#1D2A30">−</text>
+
+  <!-- integrators -->
+  <g fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.6">
+    <rect x="120" y="86" width="100" height="48" rx="3"/>
+    <rect x="300" y="86" width="100" height="48" rx="3"/>
+  </g>
+  <text x="170" y="108" font-size="12" fill="#1D2A30" text-anchor="middle" font-style="italic">a<tspan font-size="8" dy="3">1</tspan><tspan dy="-3"> z</tspan><tspan font-size="8" dy="-5">−1</tspan><tspan dy="5"> / (1 − z</tspan><tspan font-size="8" dy="-5">−1</tspan><tspan dy="5">)</tspan></text>
+  <text x="170" y="125" font-size="9.5" fill="#56656B" text-anchor="middle">a₁ = 0.5, C<tspan font-size="7" dy="2">s1</tspan><tspan dy="-2"> = 1.1 pF</tspan></text>
+  <text x="350" y="108" font-size="12" fill="#1D2A30" text-anchor="middle" font-style="italic">a<tspan font-size="8" dy="3">2</tspan><tspan dy="-3"> z</tspan><tspan font-size="8" dy="-5">−1</tspan><tspan dy="5"> / (1 − z</tspan><tspan font-size="8" dy="-5">−1</tspan><tspan dy="5">)</tspan></text>
+  <text x="350" y="125" font-size="9.5" fill="#56656B" text-anchor="middle">a₂ = 0.25</text>
+  <text x="170" y="152" font-size="9.5" fill="#56656B" text-anchor="middle">SC integrator 1 (§20.1)</text>
+  <text x="350" y="152" font-size="9.5" fill="#56656B" text-anchor="middle">SC integrator 2</text>
+
+  <!-- quantiser -->
+  <rect x="430" y="88" width="46" height="44" rx="3" fill="#fff" stroke="#1D2A30" stroke-width="1.6"/>
+  <path d="M440 120 H453 V100 H466" stroke="#1D2A30" stroke-width="1.6" fill="none"/>
+  <text x="453" y="80" font-size="9.5" fill="#56656B" text-anchor="middle">1-bit</text>
+  <text x="508" y="102" font-size="12" fill="#1D2A30" font-style="italic">v</text>
+  <circle cx="494" cy="110" r="3" fill="#1D2A30"/>
+
+  <!-- DAC feedback -->
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <path d="M494 110 V192 H452"/>
+    <path d="M404 192 H80 V124" marker-end="url(#ia2)"/>
+    <path d="M260 192 V124" marker-end="url(#ia2)"/>
+  </g>
+  <circle cx="260" cy="192" r="3" fill="#1D2A30"/>
+  <rect x="404" y="178" width="48" height="28" rx="3" fill="#fff" stroke="#1D2A30" stroke-width="1.6"/>
+  <text x="428" y="196" font-size="10" fill="#1D2A30" text-anchor="middle">DAC</text>
+  <text x="428" y="222" font-size="9.5" fill="#56656B" text-anchor="middle">±V<tspan font-size="7" dy="2">ref</tspan></text>
+
+  <!-- reset and clock -->
+  <path d="M170 48 H350" stroke="#9A6212" stroke-width="1.5" stroke-dasharray="5 3" fill="none"/>
+  <path d="M170 48 V84 M350 48 V84" stroke="#9A6212" stroke-width="1.5" stroke-dasharray="5 3" fill="none" marker-end="url(#ik2)"/>
+  <text x="260" y="40" font-size="10" fill="#9A6212" text-anchor="middle">reset both integrators before each conversion</text>
+  <text x="453" y="152" font-size="10" fill="#9A6212" text-anchor="middle" font-style="italic">f<tspan font-size="7" dy="2">clk</tspan><tspan dy="-2"> = 512 kHz</tspan></text>
+
+  <!-- decimator -->
+  <rect x="530" y="78" width="176" height="64" rx="3" fill="#FBF1DF" stroke="#1D2A30" stroke-width="1.6"/>
+  <text x="618" y="99" font-size="12" font-weight="700" fill="#1D2A30" text-anchor="middle">CoI decimator</text>
+  <text x="618" y="116" font-size="9.5" fill="#56656B" text-anchor="middle">two accumulators (12 and 20 bits)</text>
+  <text x="618" y="130" font-size="9.5" fill="#56656B" text-anchor="middle">result = (2s₁ + s₂) / [M(M−1)/2]</text>
+  <path d="M618 142 V186" stroke="#1D2A30" stroke-width="1.8" fill="none" marker-end="url(#ia2)"/>
+  <text x="618" y="204" font-size="10.5" fill="#1D2A30" text-anchor="middle">16-bit result every M = 1024 cycles</text>
+  <text x="618" y="219" font-size="10.5" fill="#1D2A30" text-anchor="middle">500 S/s, 16.5 bits worst case</text>
+</svg>

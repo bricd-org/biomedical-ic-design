@@ -29,7 +29,12 @@ How do you implement the 2nd-order incremental modulator of Open-BioAFE and its 
 
 </div>
 
-[Chapter 19]({% link chapters/19_dstheory.md %}) settled the theory: a second-order incremental modulator with a 1-bit quantiser, 1024 cycles per conversion and a 512 kHz clock gives 16.5 bits. This chapter builds it, with the converter range of ±0.5 V differential used throughout Part III, and checks it against the 1–3 µW per channel that [Chapter 14]({% link chapters/14_adcspecs.md %}) estimated.
+[Chapter 19]({% link chapters/19_dstheory.md %}) settled the theory: a second-order incremental modulator with a 1-bit quantiser, 1024 cycles per conversion and a 512 kHz clock gives 16.5 bits. This chapter builds it, with the converter range of ±0.5 V differential used throughout Part III, and checks it against the 1–3 µW per channel that [Chapter 14]({% link chapters/14_adcspecs.md %}) estimated. [Figure 20.1](#fig-20-1) shows the converter as it is built here.
+
+<figure id="fig-20-1">
+  <img src="{{ '/assets/figs/ch20_incr_arch.svg' | relative_url }}" style="width:720px" alt="Block diagram of the second-order incremental delta-sigma converter: two switched-capacitor integrators with reset, a 1-bit quantiser, a DAC feeding back to both integrators, and a cascade-of-integrators decimator">
+  <figcaption><span class="capnum">Figure 20.1.</span> <strong>The Open-BioAFE incremental ΔΣ converter.</strong> Two switched-capacitor integrators (coefficients \(a_1 = 0.5\), \(a_2 = 0.25\)) are reset before each conversion. The 1-bit quantiser runs at 512 kHz, and its output \(v\) is fed back through a 1-bit DAC to both integrators. A cascade-of-integrators decimator accumulates \(v\) twice (\(s_1\) and \(s_2\)) and, after \(M = 1024\) cycles, combines the sums into a 16-bit result, 500 times a second. Built from the integrators of Section 20.1, the incremental operation of Section 20.4 and the decimator of Section 20.5.</figcaption>
+</figure>
 
 ## <span class="secnum">20.1</span>Switched-capacitor integrators
 
@@ -55,7 +60,7 @@ The first condition is $$kT/C$$ noise averaged over a conversion. The incrementa
 
 </div>
 
-The integrators must also swing. Simulating the loop (`figsrc/ch20_figs.py`) with $$a_1 = a_2 = 0.5$$ over inputs of ±0.8 of the reference, the first integrator peaks at 1.7 times the reference and the second at 2.25 times ([Figure 20.1](#fig-20-1)a). At 1.2 V a fully differential OTA swings about ±0.9 V differential, so with a 0.5 V reference the second integrator would overload. Halving $$a_2$$ (and adjusting the decimator's weights to match) halves its swing.
+The integrators must also swing. Simulating the loop (`figsrc/ch20_figs.py`) with $$a_1 = a_2 = 0.5$$ over inputs of ±0.8 of the reference, the first integrator peaks at 1.7 times the reference and the second at 2.25 times ([Figure 20.2](#fig-20-2)a). At 1.2 V a fully differential OTA swings about ±0.9 V differential, so with a 0.5 V reference the second integrator would overload. Halving $$a_2$$ (and adjusting the decimator's weights to match) halves its swing.
 
 ## <span class="secnum">20.2</span>Continuous-time ΔΣ
 
@@ -75,13 +80,13 @@ The decimator for a second-order incremental converter is a **cascade of two int
 
 ## <span class="secnum">20.5</span>Decimation
 
-The decimator is a digital filter, and its frequency response matters ([Figure 20.1](#fig-20-1)b). A free-running modulator usually uses a **sinc$$^K$$** (CIC) filter, a cascade of $$K$$ moving averages, followed by half-band FIR stages. A moving average over a conversion has exact notches at every multiple of the output rate. The incremental CoI filter weights the samples by a ramp instead, and has no exact notches: its response falls as about $$1/(\pi k)$$ at the $$k$$-th multiple of the output rate. At 4 kHz, the eighth multiple of 500 S/s, it gives **−28 dB**. It droops by 0.9 dB at 150 Hz, the top of the ECG band, which a small digital equaliser can correct.
+The decimator is a digital filter, and its frequency response matters ([Figure 20.2](#fig-20-2)b). A free-running modulator usually uses a **sinc$$^K$$** (CIC) filter, a cascade of $$K$$ moving averages, followed by half-band FIR stages. A moving average over a conversion has exact notches at every multiple of the output rate. The incremental CoI filter weights the samples by a ramp instead, and has no exact notches: its response falls as about $$1/(\pi k)$$ at the $$k$$-th multiple of the output rate. At 4 kHz, the eighth multiple of 500 S/s, it gives **−28 dB**. It droops by 0.9 dB at 150 Hz, the top of the ECG band, which a small digital equaliser can correct.
 
 The chopper's ripple at 4 kHz is the one in-band-adjacent tone the decimator must handle. Because the chopper clock is locked to the conversion rate, the ripple aliases exactly to DC, where it adds to the offset and the high-pass removes it; the decimator's 28 dB of attenuation reduces it further. A longer, smoother decimator (a sinc² over the same window, for example) adds attenuation at the cost of resolution per cycle.
 
-<figure id="fig-20-1">
+<figure id="fig-20-2">
   <img src="{{ '/assets/figs/ch20_incremental.svg' | relative_url }}" style="width:720px" alt="Peak integrator states of a second-order incremental modulator versus DC input, and the frequency response of its cascade-of-integrators decimator against sinc filters">
-  <figcaption><span class="capnum">Figure 20.1.</span> <strong>Size the integrators for their swing; know what the decimator does at the chopper frequency.</strong> (a) Peak state of the two integrators of the second-order incremental modulator (a<sub>1</sub> = a<sub>2</sub> = 0.5, 1024 cycles) against the DC input, in units of the reference; within ±0.8 the second integrator reaches 2.25. (b) Frequency response of the cascade-of-integrators decimator (ramp weights) against a boxcar sinc and a sinc² of the same length at 512 kHz: the CoI filter has no exact notches and attenuates the 4 kHz chopper ripple by 28 dB. Computed in <code>figsrc/ch20_figs.py</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 20.2.</span> <strong>Size the integrators for their swing; know what the decimator does at the chopper frequency.</strong> (a) Peak state of the two integrators of the second-order incremental modulator (a<sub>1</sub> = a<sub>2</sub> = 0.5, 1024 cycles) against the DC input, in units of the reference; within ±0.8 the second integrator reaches 2.25. (b) Frequency response of the cascade-of-integrators decimator (ramp weights) against a boxcar sinc and a sinc² of the same length at 512 kHz: the CoI filter has no exact notches and attenuates the 4 kHz chopper ripple by 28 dB. Computed in <code>figsrc/ch20_figs.py</code>.</figcaption>
 </figure>
 
 ## <span class="secnum">20.6</span>The reference design
