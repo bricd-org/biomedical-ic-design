@@ -1,7 +1,7 @@
 # HANDOFF — Open-BioAFE Tutorial (pick up here)
 
-Last updated: 14 November 2026 (**all chapters 1–30 written**; Ch 31 set-up + Labs 1, 2, 6, 9, 11
-and 15 (Python part) written with scripts; next: the other labs, appendices; outline review against lecture material, section 2a). On
+Last updated: 14 November 2026 (**all chapters 1–30 written**; Ch 31 set-up + Labs 1, 2, 6, 9, 11,
+12 and 15 (Python part) written with scripts; next: the other labs, appendices; outline review against lecture material, section 2a). On
 10 November the tutorial was switched from a LaTeX book (with a generated website) to **a website
 written directly in Markdown**. There is no LaTeX book and no PDF any more; `book/` and
 `tools/build_site.py` were removed.
@@ -169,8 +169,11 @@ skirt (−41 dBc) caps SNDR at ~41 dB unless ~30 bins are excluded; the incremen
 noise stress, SNR from QRS p-p²/8) and **Lab 15 Python part** (`lab15_bioz.py`: Cole, bipolar vs
 tetrapolar, time-domain digital IQ confirms WE 28.1 16/3.2/0.32 mΩ with rms currents; square-wave
 excitation+demod reads 3.6 % low) also DONE (14 Nov).
-**Next: Labs 12, 13 (Python + CHB-MIT/NinaPro, synthetic fallback), then the SG13G2 labs 3, 4, 5,
-7, 8, 10, 14 and Lab 15 part 2** (Labs 3–4 reuse `labs/spice/sg13_char.py`/`sg13_lna.py`).
+**Lab 12** (`lab12_eeg_seizure.py`: theta threshold vs LDA on log band powers, bits × decimation,
+latency, false detections/h, power proxy (fs/256)·2^(N-12); theta 99.6 % down to 6 b and 64 S/s;
+line length 75 %, as WE 25.1) DONE (14 Nov).
+**Next: Lab 13 (Python + NinaPro, synthetic fallback), then the SG13G2 labs 3, 4, 5, 7, 8, 10, 14
+and Lab 15 part 2** (Labs 3–4 reuse `labs/spice/sg13_char.py`/`sg13_lna.py`).
 Original plan:
 The outline has the lab table and a short section per lab. Write the set-up section, Lab 1 and
 Lab 2 in full (goal, code, expected figure and numbers, questions); keep the anchors

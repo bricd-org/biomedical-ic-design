@@ -14,7 +14,7 @@ Fifteen labs in three tracks, and a capstone: Python models first, then SG13G2 c
 <div class="tbox tbox-specnote" markdown="1">
 <div class="tbox-title">Lab status</div>
 
-The set-up and Labs 1, 2, 6, 9 and 11 are complete, with their scripts in `labs/python/`, and so is the Python part of Lab 15. The other labs give their goal and deliverable; their scripts are being added. The SG13G2 characterisation scripts used for Chapters 5, 8 and 15 are already in `labs/spice/` and are the starting point for Labs 3 and 4.
+The set-up and Labs 1, 2, 6, 9, 11 and 12 are complete, with their scripts in `labs/python/`, and so is the Python part of Lab 15. The other labs give their goal and deliverable; their scripts are being added. The SG13G2 characterisation scripts used for Chapters 5, 8 and 15 are already in `labs/spice/` and are the starting point for Labs 3 and 4.
 
 </div>
 
@@ -294,7 +294,47 @@ With electrode motion at 12 bits: 100 % at 24 dB SNR, 98.6 % at 18 dB, 87 % at 1
 
 ## Lab 12 · EEG seizure detection {#lab-12}
 
-Band-power features on CHB-MIT, a simple classifier, and the cost of reducing word length and sample rate. Goes with Chapters [25]({% link chapters/25_eeg.md %}) and [27]({% link chapters/27_soc.md %}).
+**Goal.** Detect seizures from band-power features, and find how far the converter's word length and sample rate can fall before the detector suffers, as a first step towards on-chip detection. Goes with Chapters [25]({% link chapters/25_eeg.md %}) and [27]({% link chapters/27_soc.md %}).
+
+**Data.** Offline, the synthetic EEG of Worked Example 25.1: two-minute records of 20 µVrms background with three 10 s rhythmic discharges (3–6 Hz, 60 µV) each. For real data, download a CHB-MIT record with a seizure {% include cite.html keys="chbmit" %} (the record's summary file on PhysioNet gives the seizure's onset and end) and pass it with `--chbmit`.
+
+**Run.**
+
+```bash
+cd labs/python
+python lab12_eeg_seizure.py
+python lab12_eeg_seizure.py --noise 15e-6
+python lab12_eeg_seizure.py --chbmit chb01_03.edf --seizure 2996 3036
+```
+
+Each record passes through input noise, an optional decimation (the converter at 128 or 64 S/s instead of 256), and an N-bit converter over the ±0.625 mV range of the EEG gain setting. Per 2 s window the script computes line length and the power in the delta, theta, alpha and beta bands. Two detectors run on the features:
+
+- a **threshold** on theta power at three times its median, as in Chapter 25;
+- a **linear discriminant** on the four log band powers, trained on two records at full resolution and tested on four others.
+
+For each detector the script reports window accuracy, event sensitivity, the mean detection latency after onset and the false detections per hour. The power proxy, $$(f_\mathrm{s}/256) \times 2^{N-12}$$, assumes the converter's energy per conversion doubles per bit ([Chapter 14]({% link chapters/14_adcspecs.md %})).
+
+**Expected results.** Offline, at 1.5 µVrms of input noise:
+
+| Bits, rate | Power proxy | Theta threshold: accuracy, latency | LDA: accuracy, latency |
+|---|---|---|---|
+| 12 b, 256 S/s | 1 | 99.6 %, 2.0 s | 99.2 %, 2.2 s |
+| 6 b, 256 S/s | 0.016 | 99.6 %, 2.0 s | 97.9 %, 2.5 s |
+| 4 b, 256 S/s | 0.004 | 91.2 %, 3.8 s | 94.6 %, 2.5 s, 30 false detections per hour |
+| 12 b, 64 S/s | 0.25 | 99.6 %, 2.0 s | 99.2 %, 2.2 s |
+| 6 b, 64 S/s | 0.004 | 99.2 %, 2.0 s | 95.4 %, 3.0 s |
+
+Every discharge is found in every case. Line length stays at 75 % window accuracy, no better than always answering "no seizure", as [Worked Example 25.1]({% link chapters/25_eeg.md %}) found. Theta power needs only 6 bits and 64 S/s: a detection-only mode could run the converter at a fraction of a per cent of the diagnostic mode's energy. The latency of 2 s is set by the window length.
+
+**Questions.**
+
+1. Why does a single threshold on theta power do as well as the discriminant here? Construct a case where it would not, for example a record with strong alpha or eye-movement artefacts.
+2. Halve the window to 1 s. What happens to latency, accuracy and false detections?
+3. Raise the input noise to 15 µVrms, ten times the EEG target. Which detector degrades first, and why does band power tolerate noise better than line length?
+4. Run a real CHB-MIT seizure. Train on one record of a patient and test on another of the same patient, then on a different patient. What happens to the false detections per hour, the number that decides whether a wearable detector is usable?
+5. Count the operations per window of the theta-power detector at 64 S/s and 6 bits, and estimate its energy with the picojoule-per-operation figures of [Chapter 27]({% link chapters/27_soc.md %}).
+
+**Deliverable.** Latency and accuracy against bits and sample rate, with the power proxy, for both detectors, and a proposed detection mode for the chip.
 
 ## Lab 13 · EMG gesture recognition {#lab-13}
 
