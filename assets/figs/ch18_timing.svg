@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 372" width="720" height="372" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>Timing of the asynchronous SAR: a self-timed burst of fourteen decisions, then sleep</title>
+  <text x="10" y="16" font-size="11.5" font-weight="700" fill="#1D2A30">(a) One conversion: each decision triggers the next DAC step</text>
+  <text x="120" y="56" font-size="9.5" fill="#1D2A30" text-anchor="end">sample</text>
+  <text x="120" y="90" font-size="9.5" fill="#1D2A30" text-anchor="end">comparator clock</text>
+  <text x="120" y="122" font-size="9.5" fill="#1D2A30" text-anchor="end">decision ready</text>
+  <text x="120" y="176" font-size="9.5" fill="#1D2A30" text-anchor="end">DAC residue vₓ</text>
+  <text x="120" y="228" font-size="9.5" fill="#1D2A30" text-anchor="end">done, data out</text>
+  <path d="M130 52 H130 V40 H176 V52 H700" stroke="#1F64A8" stroke-width="1.5" fill="none"/>
+  <path d="M130 86 H184 V74 H198 V86 H210 V74 H224 V86 H236 V74 H250 V86 H262 V74 H276 V86 H288 V74 H302 V86 H314 V74 H328 V86 H340 V74 H354 V86 H366 V74 H398 V86 H412 V74 H444 V86 H458 V74 H490 V86 H504 V74 H536 V86 H550 V74 H582 V86 H596 V74 H628 V86 H642 V74 H674 V86 H700" stroke="#9A6212" stroke-width="1.5" fill="none"/>
+  <path d="M130 118 H198 V106 H202 V118 H224 V106 H228 V118 H250 V106 H254 V118 H276 V106 H280 V118 H302 V106 H306 V118 H328 V106 H332 V118 H354 V106 H358 V118 H398 V106 H402 V118 H444 V106 H448 V118 H490 V106 H494 V118 H536 V106 H540 V118 H582 V106 H586 V118 H628 V106 H632 V118 H674 V106 H678 V118 H700" stroke="#1D2A30" stroke-width="1.5" fill="none"/>
+  <path d="M130 224 H680 V212 H700 V224 H700" stroke="#1A7A4C" stroke-width="1.5" fill="none"/>
+  <path d="M130 172 H700" stroke="#B9C6C9" stroke-width="0.8" stroke-dasharray="3 2"/>
+  <path d="M130 172 L176 137.3 H198 V161.9 H224 V175.6 H250 V168.0 H276 V172.2 H302 V169.9 H328 V171.2 H354 V171.9 H398 V172.3 H444 V172.1 H490 V172.0 H536 V172.0 H582 V172.0 H628 V172.0 H674 V172.0 H700" stroke="#1F64A8" stroke-width="1.5" fill="none"/>
+  <text x="134" y="134" font-size="8" fill="#1F64A8">tracks −vᵢₙ</text>
+  <path d="M354 169.8 H398 V179.8 H444 V174.2 H490 V171.1 H536 V172.8 H582 V171.9 H628 V172.4 H674 V172.1 H700" stroke="#7FA7CF" stroke-width="1.2" fill="none" stroke-dasharray="4 2"/>
+  <text x="450" y="202" font-size="8" fill="#5C88B8">dashed: the same residue × 25</text>
+  <path d="M176 38 V34 H358 V38" stroke="#9A6212" stroke-width="1" fill="none"/>
+  <text x="267.0" y="30" font-size="8.8" fill="#9A6212" text-anchor="middle">7 fast decisions: large residue, noise does not matter</text>
+  <path d="M358 38 V34 H680 V38" stroke="#9A6212" stroke-width="1" fill="none"/>
+  <text x="519.0" y="30" font-size="8.8" fill="#9A6212" text-anchor="middle">7 low-noise decisions: residue near zero, integrate longer (Ch 16)</text>
+  <path d="M252 120 C 260 132, 250 136, 256 150" stroke="#B5473A" stroke-width="1" fill="none" marker-end="url(#ar)"/>
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#B5473A"/></marker></defs>
+  <text x="176" y="250" font-size="8.8" fill="#B5473A">each ready switches the DAC; a delay cell waits for it to settle (clock low), then the next comparison starts (clock high)</text>
+  <text x="176" y="264" font-size="8.8" fill="#56656B">a watchdog timeout ends any decision that hangs near metastability, so the burst always finishes</text>
+  <text x="10" y="292" font-size="11.5" font-weight="700" fill="#1D2A30">(b) One 62.5 µs period at 16 kS/s: burst, then sleep</text>
+  <text x="120" y="342" font-size="9.5" fill="#1D2A30" text-anchor="end">supply current</text>
+  <path d="M130 350 V316 H136 V324 H156 V347 H680 V316 H686 V324 H706 V347 H710" stroke="#1D2A30" stroke-width="1.5" fill="#E4EEF8"/>
+  <path d="M130 350 H710" stroke="#B9C6C9" stroke-width="0.8"/>
+  <text x="162" y="322" font-size="8.8" fill="#1D2A30">sample and 14 decisions: a few µs</text>
+  <text x="445.0" y="340" font-size="8.8" fill="#56656B" text-anchor="middle">asleep: the dynamic comparator and logic draw only leakage, nanoamperes</text>
+  <text x="676" y="312" font-size="8.8" fill="#1D2A30" text-anchor="end">next sample, next channel</text>
+  <path d="M130 350 V354" stroke="#56656B" stroke-width="0.8"/>
+  <text x="130" y="364" font-size="8" fill="#56656B" text-anchor="middle">0</text>
+  <path d="M680 350 V354" stroke="#56656B" stroke-width="0.8"/>
+  <text x="680" y="364" font-size="8" fill="#56656B" text-anchor="middle">62.5 µs</text>
+  <text x="710" y="16" font-size="8" fill="#56656B" text-anchor="end">a timing sketch, not to scale</text>
+</svg>
