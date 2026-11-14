@@ -87,7 +87,7 @@ Why two converters? A DC-coupled ECG or EEG channel has to resolve microvolts on
 | Input-referred noise | < 1.5 µVrms, 0.5–100 Hz (EEG mode) | 2, 3, 6 |
 | CMRR | > 90 dB at 50/60 Hz | 4 |
 | Electrode DC offset | ±300 mV tolerated | 3, 10 |
-| Input impedance | ≥ 2.5 MΩ per input; common-mode goal > 1 GΩ at 50 Hz | 3, 4 |
+| Input impedance | ≥ 2.5 MΩ per input (≥ 100 MΩ with dry electrodes); common mode > 12 MΩ at 50 Hz with the right-leg drive (> 1.15 GΩ without) | 3, 4, 10, 12 |
 | Converters | 12-bit SAR for EMG and spikes; 16-bit incremental ΔΣ for ECG and EEG | 13–20 |
 | Front-end power | < 10 µW per channel | 6, 29 |
 | Supply | 1.2 V | 5 |

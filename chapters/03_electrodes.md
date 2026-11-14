@@ -171,7 +171,7 @@ At 40 Hz the source is 500 kΩ and the requirement 2.0 MΩ. The low-frequency ca
 <div class="tbox tbox-insight" markdown="1">
 <div class="tbox-title">What this means for your design</div>
 
-2.5 MΩ is the floor the standards set for wet electrodes. Open-BioAFE aims much higher: 100 MΩ or more for dry electrodes, and a common-mode input impedance above 1 GΩ at 50 Hz, which [Chapter 4]({% link chapters/04_interference.md %}) derives from interference. A plain MOS gate is easily that high; what pulls the input impedance down is the chopper's input capacitors, which [Chapter 10]({% link chapters/10_dsl.md %}) has to boost back up.
+2.5 MΩ is the floor the standards set for wet electrodes. Open-BioAFE aims much higher: 100 MΩ or more for dry electrodes, and a common-mode input impedance that keeps mains interference below the noise, which [Chapter 4]({% link chapters/04_interference.md %}) derives (above 1 GΩ at 50 Hz on its own, about 12 MΩ with the right-leg drive of [Chapter 12]({% link chapters/12_cmcontrol.md %})). A plain MOS gate is easily that high; what pulls the input impedance down is the chopper's input capacitors, which [Chapter 10]({% link chapters/10_dsl.md %}) has to boost back up.
 
 </div>
 

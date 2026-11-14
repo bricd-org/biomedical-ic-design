@@ -148,7 +148,7 @@ With a 120 dB amplifier the requirement eases only to 1.3 GΩ. The input impedan
 <div class="tbox tbox-specnote" markdown="1">
 <div class="tbox-title">Open-BioAFE target</div>
 
-Effective CMRR above 90 dB at 50 and 60 Hz with the standards' imbalance network. This needs an amplifier CMRR of 100 dB or more and a common-mode input impedance of about 2 GΩ at 50 Hz, about twice the 1 GΩ goal of [Table 1.2]({% link chapters/01_why.md %}#tab-1-2); the budgets of [Chapter 29]({% link chapters/29_arch.md %}) will settle the split.
+Effective CMRR above 90 dB at 50 and 60 Hz with the standards' imbalance network. This needs an amplifier CMRR of 100 dB or more and a common-mode input impedance of about 2 GΩ at 50 Hz if nothing reduces the body's common mode. The right-leg drive of [Chapter 12]({% link chapters/12_cmcontrol.md %}) divides that requirement by its loop gain, to about 12 MΩ, and [Chapter 29]({% link chapters/29_arch.md %}) confirms the split.
 
 </div>
 
