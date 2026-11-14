@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 210" width="720" height="210" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>The signal chain from the electrodes to the numbers, with the converter blocks this chapter idealises</title>
+  <defs>
+    <marker id="qa" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
+    </marker>
+  </defs>
+  <!-- bracket: this chapter -->
+  <path d="M262 52 V44 H586 V52" stroke="#9A6212" stroke-width="1.5" stroke-dasharray="5 3" fill="none"/>
+  <text x="424" y="36" font-size="10.5" fill="#9A6212" text-anchor="middle">this chapter: an ideal converter that only samples and rounds</text>
+  <text x="128" y="36" font-size="10" fill="#56656B" text-anchor="middle">Part II</text>
+  <text x="672" y="36" font-size="10" fill="#56656B" text-anchor="middle">Part IV</text>
+
+  <!-- blocks -->
+  <g stroke="#1D2A30" stroke-width="1.6">
+    <rect x="34" y="62" width="92" height="50" rx="3" fill="#E4EEF8"/>
+    <rect x="146" y="62" width="96" height="50" rx="3" fill="#E4EEF8"/>
+    <rect x="262" y="62" width="92" height="50" rx="3" fill="#E4EEF8"/>
+    <rect x="374" y="62" width="92" height="50" rx="3" fill="#fff"/>
+    <rect x="486" y="62" width="100" height="50" rx="3" fill="#FBF1DF"/>
+  </g>
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <path d="M6 87 H32" marker-end="url(#qa)"/>
+    <path d="M126 87 H144" marker-end="url(#qa)"/>
+    <path d="M242 87 H260" marker-end="url(#qa)"/>
+    <path d="M354 87 H372" marker-end="url(#qa)"/>
+    <path d="M466 87 H484" marker-end="url(#qa)"/>
+    <path d="M586 87 H630" marker-end="url(#qa)"/>
+  </g>
+  <g font-size="11.5" font-weight="700" fill="#1D2A30" text-anchor="middle">
+    <text x="80" y="84">LNA</text>
+    <text x="194" y="80">PGA and</text><text x="194" y="94">anti-alias filter</text>
+    <text x="308" y="80">sample</text><text x="308" y="94">and hold</text>
+    <text x="420" y="84">quantiser</text>
+    <text x="536" y="80">digital filter,</text><text x="536" y="94">decimation</text>
+  </g>
+  <g font-size="9.5" fill="#56656B" text-anchor="middle">
+    <text x="80" y="104">Ch 8–10</text><text x="194" y="106">Ch 11</text>
+    <text x="308" y="106">f<tspan font-size="7" dy="2">s</tspan><tspan dy="-2">, Ch 15</tspan></text>
+    <text x="420" y="104">N bits, Ch 16–18</text><text x="536" y="106">Ch 20, 23</text>
+  </g>
+  <text x="4" y="56" font-size="9.5" fill="#56656B">electrodes</text>
+  <text x="640" y="84" font-size="11.5" fill="#1D2A30">numbers,</text>
+  <text x="640" y="98" font-size="11.5" fill="#1D2A30">features</text>
+
+  <!-- what each costs -->
+  <g font-size="9.5" fill="#1D2A30" text-anchor="middle">
+    <text x="194" y="136">attenuates what</text><text x="194" y="149">would alias (§13.1)</text>
+    <text x="308" y="136">f<tspan font-size="7" dy="2">s</tspan><tspan dy="-2"> ≥ 2f</tspan><tspan font-size="7" dy="2">B</tspan><tspan dy="-2">; clock jitter</tspan></text>
+    <text x="308" y="149">σ<tspan font-size="7" dy="2">t</tspan><tspan dy="-2"> (§13.1, §13.4)</tspan></text>
+    <text x="420" y="136">error Δ²/12 →</text><text x="420" y="149">6.02N + 1.76 dB (§13.2)</text>
+    <text x="536" y="136">oversampling and</text><text x="536" y="149">dither buy bits (§13.3)</text>
+  </g>
+  <path d="M146 162 H586" stroke="#E1E8E8" stroke-width="1.2"/>
+  <text x="366" y="182" font-size="10" fill="#56656B" text-anchor="middle">Open-BioAFE: 12-bit SAR at 2 kS/s per channel (EMG) and 16-bit incremental ΔΣ at 500 S/s (ECG, EEG); §13.5</text>
+</svg>

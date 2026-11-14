@@ -28,7 +28,12 @@ What sample rate and how many bits does each Open-BioAFE mode need, before any c
 
 </div>
 
-Part II ends with an amplified, filtered biosignal of a few hundred millivolts. Part III turns it into numbers. This chapter treats the converter as an ideal black box that samples and rounds, and asks only what those two operations cost. Every real converter in Chapters 15–21 adds errors on top of the ones found here, so these are the best numbers you can hope for.
+Part II ends with an amplified, filtered biosignal of a few hundred millivolts. Part III turns it into numbers. This chapter treats the converter as an ideal black box that samples and rounds, and asks only what those two operations cost. Every real converter in Chapters 15–21 adds errors on top of the ones found here, so these are the best numbers you can hope for ([Figure 13.1](#fig-13-1)).
+
+<figure id="fig-13-1">
+  <img src="{{ '/assets/figs/ch13_chain.svg' | relative_url }}" style="width:720px" alt="Signal chain from electrodes through LNA, PGA and anti-alias filter, sample-and-hold, quantiser and digital filter, with the blocks of the ideal converter marked">
+  <figcaption><span class="capnum">Figure 13.1.</span> <strong>Where this chapter sits in the chain.</strong> The analog front-end of Part II amplifies and band-limits the signal; the converter samples it at \(f_\mathrm{s}\), rounds each sample to \(N\) bits, and a digital filter may trade rate for resolution. Below each block is the limit this chapter derives for it, with no circuit imperfections yet.</figcaption>
+</figure>
 
 ## <span class="secnum">13.1</span>Sampling and aliasing with ExG examples
 
@@ -59,9 +64,9 @@ With 60 Hz mains, 240 Hz lands at 16 Hz and 300 Hz at 44 Hz. A 50 Hz notch filte
 
 </div>
 
-<figure id="fig-13-1">
+<figure id="fig-13-2">
   <img src="{{ '/assets/figs/ch13_alias.svg' | relative_url }}" style="width:720px" alt="Mains harmonics folded into the 0 to 128 Hz band by sampling at 256 S/s, and Butterworth filter responses against the 56 dB needed at 350 Hz">
-  <figcaption><span class="capnum">Figure 13.1.</span> <strong>Out-of-band interference decides the anti-alias filter.</strong> (a) Where the first ten 50 Hz harmonics land after sampling at 256 S/s. Only 50 and 100 Hz (blue) belong there; the rest (red) fold into the EEG band, the 250 Hz harmonic onto 6 Hz. (b) An ECG channel sampled at 500 S/s with a 150 Hz band: anything at 350 Hz folds onto the band edge. Pushing a 1 mVrms interferer below the 1.5 µVrms floor takes 56 dB, which only the 8th-order Butterworth filter reaches. Computed with <code>biosig.alias_freq()</code> and <code>biosig.butter_atten_db()</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 13.2.</span> <strong>Out-of-band interference decides the anti-alias filter.</strong> (a) Where the first ten 50 Hz harmonics land after sampling at 256 S/s. Only 50 and 100 Hz (blue) belong there; the rest (red) fold into the EEG band, the 250 Hz harmonic onto 6 Hz. (b) An ECG channel sampled at 500 S/s with a 150 Hz band: anything at 350 Hz folds onto the band edge. Pushing a 1 mVrms interferer below the 1.5 µVrms floor takes 56 dB, which only the 8th-order Butterworth filter reaches. Computed with <code>biosig.alias_freq()</code> and <code>biosig.butter_atten_db()</code>.</figcaption>
 </figure>
 
 An **anti-alias filter** in front of the sampler must therefore attenuate every interferer that could fold into the band until it is below the noise floor. The first frequency that folds into the band is $$f_\mathrm{s} - f_\mathrm{B}$$, so that is where the filter has to be steep.
@@ -73,7 +78,7 @@ Sample an ECG with a 150 Hz band at 500 S/s. A tone at $$f_\mathrm{s} - f_\mathr
 
 $$A \ge 20\log_{10}\frac{1\ \text{mV}}{1.5\ \text{µV}} \approx 56\ \text{dB at 350 Hz}.$$
 
-A Butterworth low-pass with its corner at 150 Hz gives $$10\log_{10}\!\left[1 + (350/150)^{2n}\right]$$: 15 dB for order 2, 29 dB for order 4, 44 dB for order 6 and **59 dB for order 8** ([Figure 13.1](#fig-13-1)b). An 8th-order filter with a corner set this precisely is a large analog block.
+A Butterworth low-pass with its corner at 150 Hz gives $$10\log_{10}\!\left[1 + (350/150)^{2n}\right]$$: 15 dB for order 2, 29 dB for order 4, 44 dB for order 6 and **59 dB for order 8** ([Figure 13.2](#fig-13-2)b). An 8th-order filter with a corner set this precisely is a large analog block.
 
 Sample at 2 kS/s instead and the first folding frequency moves to 1850 Hz, more than twelve times the band edge. A 3rd-order filter now gives 65 dB, and a digital filter after the converter removes everything between 150 Hz and 1 kHz before the rate is reduced to 500 S/s. This trade, a faster converter for a simpler analog filter, is the start of oversampling.
 
@@ -87,7 +92,7 @@ A converter with $$N$$ bits divides its full-scale range $$V_\mathrm{FS}$$ (peak
 
 $$\Delta = \frac{V_\mathrm{FS}}{2^N}.$$
 
-Rounding the input to the nearest level leaves an error between $$-\Delta/2$$ and $$+\Delta/2$$ ([Figure 13.2](#fig-13-2)a). If the input is busy, crossing many levels in a way unrelated to the sampling, the error behaves like a random variable spread evenly over that interval, with a mean of zero and a power of
+Rounding the input to the nearest level leaves an error between $$-\Delta/2$$ and $$+\Delta/2$$ ([Figure 13.3](#fig-13-3)a). If the input is busy, crossing many levels in a way unrelated to the sampling, the error behaves like a random variable spread evenly over that interval, with a mean of zero and a power of
 
 $$\overline{e^2} = \frac{1}{\Delta}\int_{-\Delta/2}^{\Delta/2} e^2\,de = \frac{\Delta^2}{12}.$$
 
@@ -119,20 +124,20 @@ The analog noise in the EMG band (10–500 Hz) is about $$1.5\sqrt{490/99.5} \ap
 
 A useful rule follows: keep the quantisation noise **at most a third of the analog noise** at the converter input. Then it adds about 5 % ($$\sqrt{1 + 1/9} = 1.054$$), and more bits buy nothing.
 
-<figure id="fig-13-2">
+<figure id="fig-13-3">
   <img src="{{ '/assets/figs/ch13_quant.svg' | relative_url }}" style="width:720px" alt="A 3-bit quantiser staircase with its sawtooth error, and spectra of a small sine quantised with and without dither">
-  <figcaption><span class="capnum">Figure 13.2.</span> <strong>The noise model holds only when the error is busy.</strong> (a) A 3-bit quantiser: the output (blue) follows the input in steps, and the error (red, shifted down by 6 LSB) is a sawtooth between −½ and +½ LSB, then grows without bound once the input leaves the range. (b) A sine of 1.3 LSB amplitude on a 12-bit quantiser. Without dither (red) the error is a deterministic function of the input and appears as harmonics up to −83 dBFS; with triangular dither (blue) the harmonics vanish into a flat floor that is a little higher. Computed with <code>biosig.quantize()</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 13.3.</span> <strong>The noise model holds only when the error is busy.</strong> (a) A 3-bit quantiser: the output (blue) follows the input in steps, and the error (red, shifted down by 6 LSB) is a sawtooth between −½ and +½ LSB, then grows without bound once the input leaves the range. (b) A sine of 1.3 LSB amplitude on a 12-bit quantiser. Without dither (red) the error is a deterministic function of the input and appears as harmonics up to −83 dBFS; with triangular dither (blue) the harmonics vanish into a flat floor that is a little higher. Computed with <code>biosig.quantize()</code>.</figcaption>
 </figure>
 
 The model fails whenever the error is *not* busy:
 
-- **Small signals.** An input that spans only a few LSB crosses the same few levels in a regular pattern, so the error is a function of the input and repeats with it. It shows up as harmonics, not noise ([Figure 13.2](#fig-13-2)b).
+- **Small signals.** An input that spans only a few LSB crosses the same few levels in a regular pattern, so the error is a function of the input and repeats with it. It shows up as harmonics, not noise ([Figure 13.3](#fig-13-3)b).
 - **DC and slow signals.** A constant input gives a constant error, up to half an LSB of offset that no averaging removes. An ECG baseline or a slow EEG drift spends a long time near a few codes.
 - **Overload.** Beyond full scale the error is no longer bounded at all. With an electrode offset or a motion artefact this is a real case, which is why [Chapter 10]({% link chapters/10_dsl.md %}) removes the offset before the converter.
 
 ## <span class="secnum">13.3</span>Dither and oversampling
 
-The cure for a quantiser whose error is not busy is to make it busy. Adding a small random signal, **dither**, before the quantiser moves the input across levels at random, so the error decorrelates from the signal. Triangular dither of 1 LSB peak to peak removes the dependence of the error's mean and power on the input entirely; Gaussian dither of about half an LSB rms or more does nearly as well. The price is the dither's own noise, visible in [Figure 13.2](#fig-13-2)b as a higher floor.
+The cure for a quantiser whose error is not busy is to make it busy. Adding a small random signal, **dither**, before the quantiser moves the input across levels at random, so the error decorrelates from the signal. Triangular dither of 1 LSB peak to peak removes the dependence of the error's mean and power on the input entirely; Gaussian dither of about half an LSB rms or more does nearly as well. The price is the dither's own noise, visible in [Figure 13.3](#fig-13-3)b as a higher floor.
 
 A biomedical front-end usually gets dither for free. In Worked Example 13.3 the analog noise at the converter is 3.3 µVrms, which is 1.4 LSB rms. That is more than enough to keep the error white, as long as the gain stages are designed so that the amplifier's noise, and not the quantiser, sets the floor. Choose the LSB by the one-third rule and the quantiser behaves like the model.
 
@@ -149,15 +154,15 @@ A 12-bit converter samples an EEG with a 100 Hz band. At 256 S/s its SQNR is 74 
 
 $$\mathrm{SQNR} = 74.0 + 10\log_{10}128 = 74.0 + 21.1 = 95.1\ \text{dB} \;\approx\; 15.5\ \text{bits}.$$
 
-Four extra bits, but at a hundred times as many conversions, and so roughly a hundred times the converter energy. And it works only if the error is white: the simulated points in [Figure 13.3](#fig-13-3)a fall up to 3 dB short at high OSR because a pure sine's quantisation error has harmonics that stay in band.
+Four extra bits, but at a hundred times as many conversions, and so roughly a hundred times the converter energy. And it works only if the error is white: the simulated points in [Figure 13.4](#fig-13-4)a fall up to 3 dB short at high OSR because a pure sine's quantisation error has harmonics that stay in band.
 
 A **noise-shaping** loop does far better at the same OSR. With a *1-bit* quantiser, plain oversampling by 128 gives only 29 dB; a second-order noise-shaping loop gives about 100 dB in the linear model of [Chapter 19]({% link chapters/19_dstheory.md %}) and 85 dB in simulation at −6 dBFS, because it pushes the quantisation noise out of the band instead of only spreading it.
 
 </div>
 
-<figure id="fig-13-3">
+<figure id="fig-13-4">
   <img src="{{ '/assets/figs/ch13_os_jitter.svg' | relative_url }}" style="width:720px" alt="SQNR versus oversampling ratio for plain oversampling and for first- and second-order noise shaping, and jitter-limited SNR versus input frequency">
-  <figcaption><span class="capnum">Figure 13.3.</span> <strong>Oversampling is weak alone; jitter is harmless at ExG rates.</strong> (a) In-band SQNR of an 8-bit quantiser versus OSR: plain oversampling gains 3 dB per octave (line, and simulated points with an ideal decimation filter), while first- and second-order noise shaping gain 9 and 15 dB per octave (dashed, from Chapter 19). (b) The SNR limit set by sampling-clock jitter. Even 10 ns of jitter stays above the ideal 16-bit line up to about 200 Hz, and 1 ns stays above it across the whole ExG band. Computed with <code>biosig.sqnr_os_db()</code> and <code>biosig.jitter_snr_db()</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 13.4.</span> <strong>Oversampling is weak alone; jitter is harmless at ExG rates.</strong> (a) In-band SQNR of an 8-bit quantiser versus OSR: plain oversampling gains 3 dB per octave (line, and simulated points with an ideal decimation filter), while first- and second-order noise shaping gain 9 and 15 dB per octave (dashed, from Chapter 19). (b) The SNR limit set by sampling-clock jitter. Even 10 ns of jitter stays above the ideal 16-bit line up to about 200 Hz, and 1 ns stays above it across the whole ExG band. Computed with <code>biosig.sqnr_os_db()</code> and <code>biosig.jitter_snr_db()</code>.</figcaption>
 </figure>
 
 ## <span class="secnum">13.4</span>Clock jitter
@@ -228,7 +233,7 @@ A 50 Hz notch filter after the converter does not remove mains interference that
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 6]({% link chapters/31_labs.md %}#lab-6) quantises sine waves, applies coherent sampling and windows, and builds the `adctest.py` module every later converter lab uses. Start from `biosig.quantize()` and `biosig.tone_metrics()`, then reproduce [Figure 13.2](#fig-13-2) and the 6.02N + 1.76 dB line.
+[Lab 6]({% link chapters/31_labs.md %}#lab-6) quantises sine waves, applies coherent sampling and windows, and builds the `adctest.py` module every later converter lab uses. Start from `biosig.quantize()` and `biosig.tone_metrics()`, then reproduce [Figure 13.3](#fig-13-3) and the 6.02N + 1.76 dB line.
 
 </div>
 

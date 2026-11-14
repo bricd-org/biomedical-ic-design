@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 250" width="720" height="250" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>A bench for testing a returned Open-BioAFE die</title>
+  <defs>
+    <marker id="ta" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
+    </marker>
+    <marker id="tk" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#9A6212"/>
+    </marker>
+  </defs>
+
+  <!-- sources -->
+  <g stroke="#1D2A30" stroke-width="1.6">
+    <rect x="14" y="40" width="120" height="44" rx="3" fill="#fff"/>
+    <rect x="14" y="104" width="120" height="44" rx="3" fill="#fff"/>
+    <rect x="160" y="40" width="96" height="44" rx="3" fill="#E4EEF8"/>
+    <rect x="160" y="104" width="96" height="44" rx="3" fill="#E4EEF8"/>
+    <rect x="290" y="56" width="150" height="110" rx="4" fill="#F2F5F5" stroke-width="2"/>
+    <rect x="320" y="82" width="90" height="58" rx="3" fill="#FBF1DF"/>
+    <rect x="480" y="68" width="100" height="44" rx="3" fill="#FBF1DF"/>
+    <rect x="610" y="68" width="96" height="44" rx="3" fill="#fff"/>
+    <rect x="266" y="196" width="198" height="34" rx="3" fill="#fff"/>
+  </g>
+  <g font-size="11" fill="#1D2A30" text-anchor="middle">
+    <text x="74" y="59" font-weight="700">low-distortion</text><text x="74" y="74">sine generator</text>
+    <text x="74" y="123" font-weight="700">precision DAC</text><text x="74" y="138">recorded ECG/EEG</text>
+    <text x="208" y="59" font-weight="700">passive</text><text x="208" y="74">band-pass</text>
+    <text x="208" y="123" font-weight="700">electrode</text><text x="208" y="138">simulator</text>
+    <text x="365" y="74" font-size="10" fill="#56656B">test board</text>
+    <text x="365" y="106" font-weight="700">Open-BioAFE</text><text x="365" y="122">die</text>
+    <text x="530" y="87" font-weight="700">FPGA or</text><text x="530" y="102">logic analyser</text>
+    <text x="658" y="87" font-weight="700">PC</text><text x="658" y="102" font-size="10">FFT, histograms</text>
+    <text x="365" y="212" font-weight="700">clean supplies and reference</text><text x="365" y="225" font-size="10" fill="#56656B">current measured per rail</text>
+  </g>
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <path d="M134 62 H158" marker-end="url(#ta)"/>
+    <path d="M134 126 H158" marker-end="url(#ta)"/>
+    <path d="M256 62 H272 V100 H318" marker-end="url(#ta)"/>
+    <path d="M256 126 H272 V120 H318" marker-end="url(#ta)"/>
+    <path d="M410 100 H478" marker-end="url(#ta)"/>
+    <path d="M580 90 H608" marker-end="url(#ta)"/>
+    <path d="M365 196 V142" marker-end="url(#ta)"/>
+  </g>
+  <!-- clock -->
+  <rect x="476" y="150" width="108" height="36" rx="3" fill="#fff" stroke="#9A6212" stroke-width="1.6"/>
+  <text x="530" y="166" font-size="11" fill="#9A6212" text-anchor="middle" font-weight="700">low-jitter clock</text>
+  <text x="530" y="179" font-size="9.5" fill="#9A6212" text-anchor="middle">locked to the generator</text>
+  <path d="M476 168 H428 V140 H412" stroke="#9A6212" stroke-width="1.6" fill="none" marker-end="url(#tk)"/>
+  <path d="M530 150 V114" stroke="#9A6212" stroke-width="1.6" stroke-dasharray="4 3" fill="none" marker-end="url(#tk)"/>
+  <!-- notes -->
+  <g font-size="9.5" fill="#56656B">
+    <text x="14" y="172">dynamic tests: a filtered, coherent sine for</text>
+    <text x="14" y="185">SNDR, SFDR and ENOB (§22.1–22.2)</text>
+    <text x="14" y="208">static tests: shorted inputs, slow sine or</text>
+    <text x="14" y="221">ramp for offset, noise, DNL, INL (§22.3)</text>
+    <text x="14" y="236">system tests: recorded signals, CMRR (Ch 4)</text>
+    <text x="606" y="140">report the conditions</text>
+    <text x="606" y="153">and the spread over</text>
+    <text x="606" y="166">dies, not the best one</text>
+  </g>
+</svg>

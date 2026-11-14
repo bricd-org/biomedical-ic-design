@@ -88,13 +88,20 @@ A model is useful only if it has been checked. Validate it at the transistor lev
 
 ## <span class="secnum">22.5</span>Testing a returned die
 
-An OpenMPW die arrives months after tape-out with a few dozen pins and no second chance. Plan the bench before tape-out ([Chapter 30]({% link chapters/30_flow.md %})):
+An OpenMPW die arrives months after tape-out with a few dozen pins and no second chance. Plan the bench before tape-out ([Chapter 30]({% link chapters/30_flow.md %}); [Figure 22.2](#fig-22-2)):
+
+
 
 1. **Power and bias first.** Measure each supply's current against simulation, with the converters idle and running.
 2. **Static tests.** Short the inputs and record the output codes: offset and noise (the code histogram's width). Then a slow sine or ramp for the histogram DNL and INL.
 3. **Dynamic tests.** A filtered, coherent sine near full scale for SNDR, SFDR and ENOB, at several input frequencies across the band, and the converter's power at the same time for the figure of merit.
 4. **System tests.** The whole channel with a recorded ECG or EEG played through a precision DAC and an electrode simulator (the imbalance network of [Chapter 4]({% link chapters/04_interference.md %})), including the CMRR test.
 5. **Report honestly.** State the conditions (supply, temperature, clock, input frequency and amplitude, record length, window) with every number, and report the distribution over the dies measured, not the best one.
+
+<figure id="fig-22-2">
+  <img src="{{ '/assets/figs/ch22_bench.svg' | relative_url }}" style="width:720px" alt="Test bench: sine generator and band-pass filter, precision DAC and electrode simulator feeding the die on its test board, clean supplies, a low-jitter clock, an FPGA capturing the codes and a PC for the analysis">
+  <figcaption><span class="capnum">Figure 22.2.</span> <strong>A bench for a returned die.</strong> A low-distortion generator, cleaned by a passive filter, drives the dynamic tests; a precision DAC plays recorded biosignals through an electrode simulator for the system tests. The die sits on a test board with clean, separately measured supplies and reference, and a low-jitter clock locked to the generator keeps the sampling coherent. An FPGA or logic analyser captures the output codes, and the analysis of this chapter runs on a PC.</figcaption>
+</figure>
 
 <div class="tbox tbox-insight" markdown="1">
 <div class="tbox-title">What this means for your design</div>

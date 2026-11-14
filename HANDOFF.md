@@ -138,8 +138,8 @@ secondary text #56656B). Insert with the placeholder number NEW (id fig-N-NEW, "
 - Ch 17: binary vs split CDAC — **DONE** (Fig 17.1, `ch17_arrays.svg`)
 - Ch 16: StrongARM latch schematic with its phases — **DONE** (Fig 16.1, `ch16_strongarm.svg`)
 - Ch 15: sampling switch + bootstrapped switch — **DONE** (Fig 15.1, `ch15_switches.svg`)
-- Ch 13: sampling chain (AAF, S/H, quantiser, decimation)
-- Ch 21: direct digitisation, VCO ADC; Ch 22: test bench
+- Ch 13: sampling chain — **DONE** (Fig 13.1, `ch13_chain.svg`)
+- Ch 21: direct digitisation, VCO ADC — **DONE** (Fig 21.1, `ch21_arch.svg`); Ch 22: test bench — **DONE** (Fig 22.2, `ch22_bench.svg`)
 - Part II: Harrison LNA, chopper IA with DSL and boosting loops, RLD loop (check which ch07–ch12 figures
   are already schematics before drawing)
 

@@ -33,7 +33,12 @@ Open-BioAFE follows the classic partition: a chopped LNA, a PGA and filter, then
 
 ## <span class="secnum">21.1</span>Direct digitisation
 
-A **direct-digitisation** front-end has no separate LNA. A ΔΣ modulator takes the electrode voltage as its input, through input capacitors or a transconductor, and its loop gain does the amplifying. The first integrator acts as the low-noise stage, chopped to remove its flicker noise, and the DAC feedback sits at the input.
+A **direct-digitisation** front-end has no separate LNA. A ΔΣ modulator takes the electrode voltage as its input, through input capacitors or a transconductor, and its loop gain does the amplifying. The first integrator acts as the low-noise stage, chopped to remove its flicker noise, and the DAC feedback sits at the input ([Figure 21.1](#fig-21-1)a).
+
+<figure id="fig-21-1">
+  <img src="{{ '/assets/figs/ch21_arch.svg' | relative_url }}" style="width:720px" alt="A direct-digitisation front-end, a delta-sigma loop whose DAC feeds back to the electrode input, and a VCO-based ADC made of an oscillator, an edge counter and a first difference">
+  <figcaption><span class="capnum">Figure 21.1.</span> <strong>Two ways to blur the line between amplifier and converter.</strong> (a) Direct digitisation: the electrode drives a ΔΣ loop through \(C_\mathrm{in}\), and the DAC feeds back at the same summing node, so the loop, not a separate LNA, provides the gain and the input range. (b) A VCO-based ADC: the oscillator's frequency follows the input; counting its edges in each sampling period and taking the first difference gives a first-order noise-shaped output from almost purely digital circuits.</figcaption>
+</figure>
 
 The motivation is dynamic range. A conventional chain applies a gain of 100 or more before the converter, so a 30 mV motion artefact or a 300 mV electrode offset saturates it, and the channel loses data until the high-pass recovers ([Chapter 10]({% link chapters/10_dsl.md %})). A direct-digitising loop has no gain before the quantiser to saturate. Its input range is set by the DAC and can be hundreds of millivolts, while its noise is set by the first integrator, so it can tolerate the artefact and still resolve the microvolt EEG under it. [Chapter 2]({% link chapters/02_signals.md %}) found that a DC-coupled channel needs about 103 dB, almost 17 bits; direct digitisation is how recent designs reach that at microwatts.
 
@@ -41,7 +46,7 @@ The costs: the first integrator must meet the front-end's noise specification *a
 
 ## <span class="secnum">21.2</span>VCO- and time-domain ADCs
 
-A voltage-controlled oscillator turns its input voltage into a frequency. Counting its cycles in each sampling period integrates that frequency, and the count's quantisation error is carried over to the next period, so a **VCO-based ADC** is a first-order noise-shaping quantiser built almost entirely from digital gates. It needs no precise capacitors, scales with technology, and uses very little area.
+A voltage-controlled oscillator turns its input voltage into a frequency. Counting its cycles in each sampling period integrates that frequency, and the count's quantisation error is carried over to the next period, so a **VCO-based ADC** is a first-order noise-shaping quantiser built almost entirely from digital gates ([Figure 21.1](#fig-21-1)b). It needs no precise capacitors, scales with technology, and uses very little area.
 
 Its limit is the VCO's tuning curve: frequency is not a linear function of voltage, so an open-loop VCO-ADC distorts beyond about 40–60 dB. Putting the VCO inside a ΔΣ loop, where the loop gain suppresses its nonlinearity, or using it only as the quantiser of a conventional loop, recovers the linearity. Supply sensitivity is the other weakness: a ring oscillator's frequency follows its supply, so the supply must be clean or the measurement made differential with two matched oscillators.
 
@@ -52,7 +57,7 @@ A uniform sampler takes 500 samples per second of an ECG whether the heart is be
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 21.1 · Level-crossing sampling of an ECG</div>
 
-`figsrc/ch21_figs.py` applies an ideal level-crossing sampler to the synthetic 1 mV ECG of `biosig.ecg()` and reconstructs it by linear interpolation ([Figure 21.1](#fig-21-1)):
+`figsrc/ch21_figs.py` applies an ideal level-crossing sampler to the synthetic 1 mV ECG of `biosig.ecg()` and reconstructs it by linear interpolation ([Figure 21.2](#fig-21-2)):
 
 - $$\delta = 7.6$$ µV: 562 samples per second and 2.4 µVrms of error, about the same rate as uniform sampling;
 - $$\delta = 27$$ µV: **156 samples per second**, three times fewer than 500 S/s, with 9.5 µVrms of error, 1 % of the R wave;
@@ -64,9 +69,9 @@ Most of the samples fall on the QRS complex, where the signal changes quickly; t
 
 The saving depends entirely on the signal. A sparse ECG or a spike train with long quiet periods benefits; an EEG, which is busy all the time, does not. The samples are non-uniform in time, so the digital processing that follows must either work with irregular samples or resample, and the threshold sets a resolution floor that, at useful compression, is far above the 1.5 µVrms noise target. Level crossing suits feature extraction (heart rate, spike detection) more than diagnostic recording.
 
-<figure id="fig-21-1">
+<figure id="fig-21-2">
   <img src="{{ '/assets/figs/ch21_levelcrossing.svg' | relative_url }}" style="width:720px" alt="An ECG sampled by a level-crossing ADC with a 50 microvolt threshold, and samples per second and reconstruction error versus threshold">
-  <figcaption><span class="capnum">Figure 21.1.</span> <strong>Event-driven sampling spends samples where the signal moves.</strong> (a) A synthetic ECG and the samples a level-crossing ADC with δ = 50 µV takes: dense on the QRS complexes, sparse on the flat segments. (b) Samples per second (left axis) and rms reconstruction error with linear interpolation (right axis) against the crossing threshold, with the 500 S/s of uniform sampling. Computed in <code>figsrc/ch21_figs.py</code> with <code>biosig.ecg()</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 21.2.</span> <strong>Event-driven sampling spends samples where the signal moves.</strong> (a) A synthetic ECG and the samples a level-crossing ADC with δ = 50 µV takes: dense on the QRS complexes, sparse on the flat segments. (b) Samples per second (left axis) and rms reconstruction error with linear interpolation (right axis) against the crossing threshold, with the 500 S/s of uniform sampling. Computed in <code>figsrc/ch21_figs.py</code> with <code>biosig.ecg()</code>.</figcaption>
 </figure>
 
 ## <span class="secnum">21.4</span>Compressive sensing
@@ -102,7 +107,7 @@ Open-BioAFE keeps the classic partition (chopped LNA, PGA, SAR or incremental Δ
 <div class="tbox tbox-pitfall" markdown="1">
 <div class="tbox-title">Common pitfall</div>
 
-Comparing an event-driven converter with a uniform one by samples per second alone. Each level-crossing sample carries a time stamp as well as a value, and its accuracy depends on the timing resolution; the reconstruction error, not the sample count, is the fair measure. Compare both at the same error, as in [Figure 21.1](#fig-21-1)b.
+Comparing an event-driven converter with a uniform one by samples per second alone. Each level-crossing sample carries a time stamp as well as a value, and its accuracy depends on the timing resolution; the reconstruction error, not the sample count, is the fair measure. Compare both at the same error, as in [Figure 21.2](#fig-21-2)b.
 
 </div>
 

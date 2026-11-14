@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 240" width="720" height="240" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>A direct-digitisation front-end and a VCO-based ADC</title>
+  <defs>
+    <marker id="va" viewBox="0 0 12 12" refX="11" refY="6" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0 0 L12 6 L0 12 z" fill="#1D2A30"/>
+    </marker>
+  </defs>
+  <text x="10" y="20" font-size="12" font-weight="700" fill="#1D2A30">(a) direct digitisation: no separate LNA</text>
+  <text x="378" y="20" font-size="12" font-weight="700" fill="#1D2A30">(b) VCO-based ADC</text>
+  <path d="M364 30 V225" stroke="#E1E8E8" stroke-width="1.5"/>
+
+  <!-- (a) -->
+  <text x="10" y="94" font-size="12" fill="#1D2A30" font-style="italic">v<tspan font-size="8" dy="3">e</tspan></text>
+  <text x="10" y="122" font-size="9.5" fill="#56656B">electrode</text>
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <path d="M24 100 H46 M56 100 H92"/>
+    <path d="M80 100 H92" marker-end="url(#va)"/>
+    <path d="M168 100 H180" marker-end="url(#va)"/>
+    <path d="M232 100 H244" marker-end="url(#va)"/>
+    <path d="M282 100 H350" marker-end="url(#va)"/>
+    <path d="M308 100 V170 H232 M188 170 H80 V104"/>
+  </g>
+  <path d="M46 86 V114 M56 86 V114" stroke="#1D2A30" stroke-width="2.6"/>
+  <text x="51" y="78" font-size="10" fill="#1D2A30" text-anchor="middle" font-style="italic">C<tspan font-size="7" dy="2">in</tspan></text>
+  <circle cx="80" cy="100" r="3" fill="#1D2A30"/>
+  <circle cx="308" cy="100" r="3" fill="#1D2A30"/>
+  <rect x="94" y="80" width="74" height="40" rx="3" fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.6"/>
+  <text x="131" y="98" font-size="11" fill="#1D2A30" text-anchor="middle">integrator 1</text>
+  <text x="131" y="112" font-size="9.5" fill="#9A6212" text-anchor="middle">chopped</text>
+  <rect x="182" y="80" width="50" height="40" rx="3" fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.6"/>
+  <text x="207" y="104" font-size="11" fill="#1D2A30" text-anchor="middle">int. 2</text>
+  <rect x="246" y="80" width="36" height="40" rx="3" fill="#fff" stroke="#1D2A30" stroke-width="1.6"/>
+  <path d="M253 110 H264 V90 H275" stroke="#1D2A30" stroke-width="1.6" fill="none"/>
+  <text x="330" y="92" font-size="12" fill="#1D2A30" font-style="italic">v</text>
+  <rect x="188" y="156" width="44" height="28" rx="3" fill="#fff" stroke="#1D2A30" stroke-width="1.6"/>
+  <text x="210" y="174" font-size="10" fill="#1D2A30" text-anchor="middle">DAC</text>
+  <g font-size="9.5" fill="#56656B">
+    <text x="88" y="64">summing node at the input</text>
+    <text x="10" y="204">the loop gain amplifies; integrator 1 is the low-noise</text>
+    <text x="10" y="217">stage; feedback at the input gives a range of tens to</text>
+    <text x="10" y="230">hundreds of millivolts, for offsets and artefacts</text>
+  </g>
+
+  <!-- (b) -->
+  <text x="378" y="94" font-size="12" fill="#1D2A30" font-style="italic">v<tspan font-size="8" dy="3">in</tspan></text>
+  <g stroke="#1D2A30" stroke-width="1.8" fill="none">
+    <path d="M394 100 H410" marker-end="url(#va)"/>
+    <path d="M478 100 H498" marker-end="url(#va)"/>
+    <path d="M590 100 H608" marker-end="url(#va)"/>
+    <path d="M662 100 H710" marker-end="url(#va)"/>
+  </g>
+  <rect x="412" y="76" width="66" height="48" rx="3" fill="#E4EEF8" stroke="#1D2A30" stroke-width="1.6"/>
+  <text x="445" y="97" font-size="11.5" font-weight="700" fill="#1D2A30" text-anchor="middle">VCO</text>
+  <text x="445" y="113" font-size="9" fill="#56656B" text-anchor="middle">f = f<tspan font-size="6.5" dy="2">0</tspan><tspan dy="-2"> + K v</tspan><tspan font-size="6.5" dy="2">in</tspan></text>
+  <rect x="500" y="76" width="90" height="48" rx="3" fill="#FBF1DF" stroke="#1D2A30" stroke-width="1.6"/>
+  <text x="545" y="97" font-size="11" fill="#1D2A30" text-anchor="middle">edge counter,</text>
+  <text x="545" y="112" font-size="9.5" fill="#56656B" text-anchor="middle">read every 1/f<tspan font-size="6.5" dy="2">s</tspan></text>
+  <rect x="610" y="76" width="52" height="48" rx="3" fill="#FBF1DF" stroke="#1D2A30" stroke-width="1.6"/>
+  <text x="636" y="104" font-size="11" fill="#1D2A30" text-anchor="middle" font-style="italic">1 − z<tspan font-size="7" dy="-5">−1</tspan></text>
+  <text x="690" y="92" font-size="12" fill="#1D2A30" font-style="italic">D</text>
+  <!-- ring-oscillator waveform -->
+  <path d="M414 160 h8 v-14 h8 v14 h8 v-14 h8 v14 h6 v-14 h6 v14 h5 v-14 h5 v14 h5 v-14 h5 v14 h8" stroke="#9A6212" stroke-width="1.4" fill="none"/>
+  <text x="414" y="178" font-size="9" fill="#9A6212">frequency follows v<tspan font-size="6.5" dy="2">in</tspan></text>
+  <g font-size="9.5" fill="#56656B">
+    <text x="378" y="204">the phase integrates the frequency, so the count's rounding</text>
+    <text x="378" y="217">error carries over: first-order noise shaping, built</text>
+    <text x="378" y="230">almost entirely from digital gates</text>
+  </g>
+</svg>
