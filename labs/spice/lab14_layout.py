@@ -9,8 +9,12 @@ common-centroid order (8 + 4 + 2 + 1 units and one termination unit), the outer 
 Step 2: the PDK's KLayout DRC (run_drc.py), minimum rule set without the density rules, which
 apply to the whole chip after metal fill, not to a block.
 Step 3: the PDK's KLayout LVS (run_lvs.py) against a schematic netlist of the 36 capacitors.
-The plates are left unrouted: routing the common top plate and the bit bottom plates, and
-re-running DRC and LVS, is the exercise. Outputs go to labs/spice/char/l14/ (git-ignored).
+By default the plates are left unrouted: routing them is the exercise. --route builds the reference
+solution instead: TopMetal1 straps and a spine join every top plate; each bottom plate drops through a
+Metal3-Metal5 via_stack placed in its Metal5 margin (outside the MIM) onto a Metal3 stub, which lands
+on its net's Metal2 track under the row; Metal3 spines on the left join each net's tracks. LVS then
+compares against six nets: top, bits 0-3 and the termination net that also takes the dummies.
+Outputs go to labs/spice/char/l14/ (git-ignored).
 Needs Docker and hpretl/iic-osic-tools:2026.10.
 """
 import argparse
@@ -47,8 +51,56 @@ pitch = p["pitch"]
 for r in range(6):
     for c in range(6):
         top.insert(pya.CellInstArray(pc.cell_index(), pya.Trans(pya.Point(int(c * pitch / dbu), int(-r * pitch / dbu)))))
+if p.get("route"):
+    um = lambda v: int(round(v / dbu))
+    def box(layer, x0, y0, x1, y1):
+        top.shapes(ly.layer(*layer)).insert(pya.Box(um(min(x0, x1)), um(min(y0, y1)), um(max(x0, x1)), um(max(y0, y1))))
+    def label(layer, x, y, t):
+        top.shapes(ly.layer(*layer)).insert(pya.Text(t, pya.Trans(pya.Point(um(x), um(y)))))
+    M2, M3, TM1 = (10, 0), (30, 0), (126, 0)
+    v35 = ly.create_cell("via_stack", "SG13_dev", {"b_layer": "Metal3", "t_layer": "Metal5", "vn_columns": 1, "vn_rows": 1})
+    v23 = ly.create_cell("via_stack", "SG13_dev", {"b_layer": "Metal2", "t_layer": "Metal3", "vn_columns": 1, "vn_rows": 1})
+    def via(cell, x, y):                       # place a via_stack centred on (x, y)
+        c = cell.dbbox().center()
+        top.insert(pya.CellInstArray(cell.cell_index(), pya.Trans(pya.Point(um(x - c.x), um(y - c.y)))))
+    nets = p["nets"]                           # 6 x 6 map of net names: b0..b3, T
+    order = ["b0", "b1", "b2", "b3", "T"]
+    W3, W2, TP = 0.3, 0.3, 0.55                # stub and track widths, track pitch
+    x_right = 5 * pitch + 1.74
+    spine_x = {n: -2.0 - 0.8 * k for k, n in enumerate(order)}
+    track_y = {}
+    for r in range(6):
+        y_gap = -r * pitch - 0.6 - (pitch - 2.34) / 2
+        for k, n in enumerate(order):
+            track_y[(r, n)] = y_gap + (k - 2) * TP
+    # top plate: one TopMetal1 strap per row, a spine on the right
+    xs = 5 * pitch + 2.4
+    for r in range(6):
+        box(TM1, -0.25, -r * pitch - 0.25, xs + 1.64, -r * pitch + 1.39)
+    box(TM1, xs, -5 * pitch - 0.25, xs + 1.64, 1.39)
+    label((126, 25), xs + 0.82, 0.57, "top")
+    # bottom plates: via in the Metal5 margin below the MIM, Metal3 stub down to the net's Metal2 track
+    used = {n: [] for n in order}
+    for r in range(6):
+        for c in range(6):
+            n = nets[r][c]
+            x, y0 = c * pitch + 0.57, -r * pitch - 0.38
+            via(v35, x, y0)
+            ty = track_y[(r, n)]
+            box(M3, x - W3 / 2, y0, x + W3 / 2, ty)
+            via(v23, x, ty)
+            used[n].append(r)
+    for n in order:
+        for r in sorted(set(used[n])):
+            ty = track_y[(r, n)]
+            box(M2, spine_x[n] - 0.3, ty - W2 / 2, x_right, ty + W2 / 2)
+            via(v23, spine_x[n], ty)
+        rows = sorted(set(used[n]))
+        y_hi, y_lo = track_y[(rows[0], n)], track_y[(rows[-1], n)]
+        box(M3, spine_x[n] - W3 / 2, y_lo - 0.3, spine_x[n] + W3 / 2, y_hi + 0.3)
+        label((30, 25), spine_x[n], y_hi, n)
 ly.write("/work/cdac_cc.gds")
-print("cells placed:", 36, "bbox um:", top.dbbox())
+print("cells placed:", 36, "routed:", bool(p.get("route")), "bbox um:", top.dbbox())
 '''
 
 
@@ -68,19 +120,24 @@ for cp in x.each_circuit_pair():
 def main():
     ap = argparse.ArgumentParser(description="Lab 14: MIM array layout, DRC and LVS")
     ap.add_argument("--pitch", type=float, default=5.0, help="unit pitch (um)")
+    ap.add_argument("--route", action="store_true", help="build and check the routed reference solution")
     args = ap.parse_args()
     os.makedirs(WORK, exist_ok=True)
     import shutil
     for d in ("drc", "lvs"):                     # results of earlier runs
         shutil.rmtree(os.path.join(WORK, d), ignore_errors=True)
     import json
-    json.dump({"unit": UNIT, "pitch": args.pitch}, open(os.path.join(WORK, "params.json"), "w"))
+    nets = [["T"] * 6 if r in (0, 5) else ["T"] + [("T" if x == "T" else "b" + x) for x in CC[r - 1]] + ["T"]
+            for r in range(6)]
+    json.dump({"unit": UNIT, "pitch": args.pitch, "route": args.route, "nets": nets},
+              open(os.path.join(WORK, "params.json"), "w"))
     open(os.path.join(WORK, "gen.py"), "w").write(GEN)
     open(os.path.join(WORK, "xref.py"), "w").write(XREF)
     # schematic: 36 unconnected capacitors (each with its own two nets, as in the unrouted layout)
-    lines = [".SUBCKT cdac_cc"]
+    lines = [".SUBCKT cdac_cc top b0 b1 b2 b3 T" if args.route else ".SUBCKT cdac_cc"]
     for k in range(36):
-        lines.append(f"C{k} t{k} b{k} cap_cmim w={UNIT}u l={UNIT}u A={UNIT**2:.4f}p P={4*UNIT:.2f}u m=1")
+        t, b = ("top", nets[k // 6][k % 6]) if args.route else (f"t{k}", f"b{k}")
+        lines.append(f"C{k} {t} {b} cap_cmim w={UNIT}u l={UNIT}u A={UNIT**2:.4f}p P={4*UNIT:.2f}u m=1")
     lines.append(".ENDS")
     open(os.path.join(WORK, "cdac_cc.cdl"), "w").write("\n".join(lines) + "\n")
     tech = "/foss/pdks/ihp-sg13g2/libs.tech/klayout/tech"
@@ -100,7 +157,7 @@ def main():
     if m:
         st, nd, md, nn, ex, amb = m.groups()
         print(f"LVS: circuit {st}; {md} of {nd} devices paired; {nn} nets, {ex} exact, {amb} ambiguous")
-        if int(amb):
+        if int(amb) and not args.route:
             print("     (unrouted plates are interchangeable, so the runner reports a failed comparison;"
                   " route and label the plates and it resolves)")
     print("Unit:", f"{UNIT} x {UNIT} um, {UNIT**2*1.5:.2f} fF; array of 36 units at {args.pitch} um pitch")
