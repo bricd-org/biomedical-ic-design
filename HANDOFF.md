@@ -271,6 +271,20 @@ sinks and mirror dominate the noise. Next: (1) Lab 10 `--ota transistor` using F
 .noise fit (white + 1/f), report gain/ripple/Zin/noise against the behavioural run; (3) Ch 31 Lab 5
 and Lab 10 text + numbers. Then: route the Lab 14 array, a capstone reference run with expected
 numbers, the full-site check (light, dark, phone width), push and tag v0.1.
+**Progress 15 Nov (second window):** Lab 10 `--ota sg13` done (85.3 dB SQNR, x1 squeezed to 0.27 V by the
+OTA's 0.37–0.86 V swing; Ch 31 table + text updated). LOWNOISE OTA re-sized for gain (input 100/10, sinks
+8/20, mirror 8/20, cascodes 16/4 and 32/4, dvn 0.1, dvp 0.15): A0 62.4 dB, UGF 0.99 MHz, white 93 nV/√Hz,
+corner ~0.9 kHz, swing 0.44–0.83 V. Lab 5 `--ota sg13` = two OTAs pseudo-differential, trnoise from .noise;
+first run gave gain 0.4 because the 1 MΩ/318 pF measurement filter loaded the OTAs → test-bench E-buffers
+added (sg13 case only); rerun pending, then update Ch 31 Lab 5. Lab 14 `--route` reference solution DONE
+(DRC 0, LVS 6/6 nets exact, Fig 31.1 `assets/figs/lab14_routed.png`). `labs/spice/capstone_chain.py`
+(corners tt/ss/ff + real ECG 3 s / EEG 2 s as PWL through the Lab 5 LNA; run with `.venv/bin/python`)
+running; then write its results into the Ch 31 capstone section (and maybe a figure from out/capstone.npz).
+Demos DONE (shared `assets/css/demos.css`, `assets/js/demos.js`, `_includes/demos/assets.html`; BD.observe
+draws synchronously first): Ch 4 mains (58 µVpp at the design point), Ch 6 NEF (0.43 µV at 2 µA), Ch 8 LNA,
+Ch 9 chopper (0.272 vs 1.31 µVrms), Ch 11 anti-alias (31.9 dB), Ch 13 sampling, Ch 19 ΔΣ (84.3 dB 2nd
+order), Ch 20 incremental (16.5 b at M = 1024, 8001-point sweep ±0.8), Ch 22 FFT leakage. Still to build:
+Ch 24 Pan–Tompkins, Ch 28 Cole/IQ, Ch 29 budget playground. Then site check and v0.1 tag.
 **Interactive demos (user asked for many more, 15 Nov):** same pattern as `_includes/demos/sar.html`
 (navy panel like the www.thebricd.org hero, scoped CSS, one IIFE, included inside `{::nomarkdown}`);
 first move the shared CSS into `_includes/demos/base.html`. Planned: Ch 4 mains interference vs
