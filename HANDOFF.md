@@ -293,6 +293,15 @@ maths, no horizontal overflow; 504 internal links/anchors resolve; light and dar
 resistor both passes 37 Hz unchopped and survives the leakage. Capstone: corners tt/ss/ff gain 91.7/91.7/91.8,
 offset 2.7/2.9/2.4 mV, ripple 1.2 mV, Zin 6.5 MΩ, noise 0.35 µV; EEG (seizure onset, 2 s) SNR 31.1 dB, error
 1.06 µVrms on 37.8 µVrms, gain 772, compared over 3–40 Hz against the designed 2 Hz servo high-pass.
+**15 Nov (third window):** Ch 11 demo: fold shown as an arrowed arc to a hollow alias marker, band above fs/2 tinted;
+Ch 13 demo: sample-rate slider (100 S/s–4 kS/s) and a "held output vs tone" rms readout. Lab 5 `--ota sg13`
+result written into Ch 31 (gain 82.0, noise 1.82 µVrms, ripple 2.2 mV, Zin 6.4 MΩ; gate-leakage lesson).
+Ch 3 gained, from a second pass over the course material as a checklist only (never cited or named): electrode
+catalogue (floating, suction, flexible, dry pins, ear, needle, helical, subcutaneous, micro), Nernst for Ag/AgCl
+(61 mV per decade of chloride at 37 °C), overpotential and polarisable vs non-polarisable materials, stratum
+corneum and skin preparation, same-metal and lead strain-relief rules; all cited to Webster. Still open: the
+capstone reference write-up in Ch 31 (EEG done; ECG run `cap_ecg` was restarted after Docker crashed). The
+op-amp, biopotential-amplifier and signal-conditioning decks were not re-read in this pass (weekly limit).
 Docker has 7.75 GiB: at most ~3 long ngspice runs at once (7 at once → exit 137, OOM); lab5 netlist now saves
 only the vectors it needs.
 **Interactive demos (user asked for many more, 15 Nov):** same pattern as `_includes/demos/sar.html`

@@ -37,9 +37,19 @@ In the body, current is carried by ions; in the wire, by electrons. An electrode
 - **Dry electrodes** (metal, conductive polymer, or spiked contacts) touch the skin directly, which suits long-term wearables and EEG headsets. Without gel the contact impedance is ten to a hundred times higher, it varies between electrodes, and it is more sensitive to motion {% include cite.html keys="chi2010" %}.
 - **Implanted microelectrodes** are tens of micrometres across and sit in the tissue, where there is no skin. Their tiny area makes them strongly capacitive, with impedances of hundreds of kilohms at 1 kHz.
 
+Beyond these three families, the shape of an electrode follows where it goes {% include cite.html keys="webster" %}:
+
+- **On the skin.** Metal plates strapped to the limbs (the oldest ECG electrode); metal discs held with tape; **floating** electrodes, recessed in a gel-filled cup so that the metal never touches the skin, which keeps the double layer still and cuts motion artefact; suction cups for short chest recordings; flexible electrodes of carbon-filled silicone or printed conductors for curved or fragile skin, as on infants; dry-contact pins that reach through hair for EEG; and small coated-metal electrodes in a soft earpiece for ear-EEG.
+- **Through or under the skin.** Needle electrodes for EMG and short EEG sessions; helical electrodes that screw a few millimetres into the scalp, for fetal ECG during labour; subcutaneous implants for long-term EEG.
+- **In the tissue.** Metal microelectrodes and microfabricated arrays in one, two or three dimensions for extracellular spikes, and electrolyte-filled glass micropipettes for recording inside a cell.
+
 ## <span class="secnum">3.2</span>Half-cell potential and DC offset
 
 Every electrode in an electrolyte develops a **half-cell potential** $$E_\mathrm{hc}$$, the voltage across its surface reaction. For Ag/AgCl it is about +0.222 V against the standard hydrogen electrode. Two identical electrodes would cancel, but in practice they never are identical: the skin under each one, the gel, the chloride concentration and the pressure all differ. The skin itself adds a potential of its own, $$E_\mathrm{se}$$, across its outer layer, which changes when the skin is stretched.
+
+The half-cell potential is set by chemistry and temperature, through the **Nernst equation**. For Ag/AgCl, $$E_\mathrm{hc} = E^0 - (RT/F)\ln a_\mathrm{Cl^-}$$: the electrode responds to the chloride activity of the gel, not to the silver. At 37 °C, $$RT/F$$ = 26.7 mV, so a tenfold change in chloride shifts the potential by 61 mV. Two electrodes on gels of different chloride concentration therefore start tens of millivolts apart, and drift as sweat changes the gel.
+
+Once current flows, the electrode moves away from its half-cell potential by an **overpotential** with three parts {% include cite.html keys="webster" %}: an ohmic drop in the electrolyte, a concentration term as the ions near the surface are used up, and an activation term, the extra voltage the reaction needs to run at that rate. How large it gets separates two ideals. A **perfectly polarisable** electrode passes no charge across its surface and behaves as a capacitor: noble metals such as platinum and gold, and stainless steel, come close. A **perfectly non-polarisable** electrode passes charge freely and behaves as a resistor: Ag/AgCl comes close. The DC lead-off currents of [Chapter 12]({% link chapters/12_cmcontrol.md %}) and every stimulation current pass through this interface, which is why their size matters.
 
 The difference between two electrodes is a **DC offset** of tens to hundreds of millivolts, much larger than any biopotential and slowly drifting. The ECG standards require an electrocardiograph to work with ±300 mV of offset at its input {% include cite.html keys="iec60601-2-25" %}. [Figure 3.1](#fig-3-1) shows what that looks like: an offset of about 120 mV on which the 1 mV ECG is invisible, plus baseline wander and a motion artefact.
 
@@ -94,6 +104,8 @@ Across the ExG band the dry electrode is about twenty times worse, and its imped
   <figcaption><span class="capnum">Figure 3.3.</span> <strong>Electrode impedance falls with frequency.</strong> (a) Magnitude and (b) phase of the three electrode models of <code>biosig.z_electrode()</code>, with the ExG band shaded. Wet and dry electrodes are resistive at low frequency and capacitive above their corner; the implanted microelectrode is capacitive everywhere.</figcaption>
 </figure>
 
+Most of the skin's resistance sits in its outermost layer, the **stratum corneum**, a few tens of micrometres of dead, dry cells. Its impedance per unit area is of the order of hundreds of kilohm-square-centimetres at 1 Hz, falling to hundreds of ohm-square-centimetres at 1 MHz as its capacitance takes over {% include cite.html keys="webster" %}. That is why gel matters, and why clinical practice lightly abrades the skin before applying an electrode: removing part of the stratum corneum lowers the impedance by an order of magnitude and also reduces the potential that appears when the skin is stretched.
+
 ## <span class="secnum">3.4</span>Electrode noise
 
 Any resistance at temperature $$T$$ produces thermal noise, and the electrode is no exception: its noise comes from the real part of its impedance. The noise voltage of one electrode over a band from $$f_1$$ to $$f_2$$ is
@@ -136,6 +148,8 @@ When the skin stretches or the electrode shifts, the skin potential $$E_\mathrm{
 
 
 The two electrodes of a pair also never have the same impedance. This **impedance mismatch** matters more than the impedance itself, because it turns the common-mode interference on the body into a differential signal that the amplifier cannot reject ([Chapter 4]({% link chapters/04_interference.md %})). The 51 kΩ‖47 nF network in one lead is how the standards create this mismatch on purpose when they test an ECG.
+
+Two practical rules follow from the chemistry {% include cite.html keys="webster" %}. Every part of an electrode that the electrolyte can reach, the contact, its plating and any solder or clip, must be the same metal; two metals in one electrolyte form a galvanic cell, with its own offset and noise. And the lead wire must not pull on the electrode: a light, flexible lead taped in a loop near the electrode means that a tug moves the loop, not the double layer.
 
 ## <span class="secnum">3.6</span>Input impedance
 
