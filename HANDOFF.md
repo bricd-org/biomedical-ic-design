@@ -283,8 +283,18 @@ running; then write its results into the Ch 31 capstone section (and maybe a fig
 Demos DONE (shared `assets/css/demos.css`, `assets/js/demos.js`, `_includes/demos/assets.html`; BD.observe
 draws synchronously first): Ch 4 mains (58 µVpp at the design point), Ch 6 NEF (0.43 µV at 2 µA), Ch 8 LNA,
 Ch 9 chopper (0.272 vs 1.31 µVrms), Ch 11 anti-alias (31.9 dB), Ch 13 sampling, Ch 19 ΔΣ (84.3 dB 2nd
-order), Ch 20 incremental (16.5 b at M = 1024, 8001-point sweep ±0.8), Ch 22 FFT leakage. Still to build:
-Ch 24 Pan–Tompkins, Ch 28 Cole/IQ, Ch 29 budget playground. Then site check and v0.1 tag.
+order), Ch 20 incremental (16.5 b at M = 1024, 8001-point sweep ±0.8), Ch 22 FFT leakage, Ch 24 Pan–Tompkins (100 %/100 % at 100 µVrms, fails at 3 bits or 400 µVrms), Ch 28 Cole/IQ
+(42.3 Ω −12.0° at 50 kHz), Ch 29 budget playground (0.51 µVrms, 6.8 µW). All 13 demos (with Ch 18 SAR) done.
+**Site check 15 Nov:** all 45 pages at 375 px in iframes: no broken images, no KaTeX errors, no raw Liquid or
+maths, no horizontal overflow; 504 internal links/anchors resolve; light and dark mode checked on a demo page.
+**Lab 5 + SG13G2 finding:** the OTA outputs sat at the rail because the 1000 µm² thin-oxide PMOS input gates leak
+~60 pA, i.e. 0.6 V across 10 GΩ (the behavioural amp had no gate current; Ch 8 met the same leakage).
+`--ota sg13` now uses Rfb = 1 GΩ (60 mV shift, corner 800 Hz < 4 kHz) and runs the chopped case only: no
+resistor both passes 37 Hz unchopped and survives the leakage. Capstone: corners tt/ss/ff gain 91.7/91.7/91.8,
+offset 2.7/2.9/2.4 mV, ripple 1.2 mV, Zin 6.5 MΩ, noise 0.35 µV; EEG (seizure onset, 2 s) SNR 31.1 dB, error
+1.06 µVrms on 37.8 µVrms, gain 772, compared over 3–40 Hz against the designed 2 Hz servo high-pass.
+Docker has 7.75 GiB: at most ~3 long ngspice runs at once (7 at once → exit 137, OOM); lab5 netlist now saves
+only the vectors it needs.
 **Interactive demos (user asked for many more, 15 Nov):** same pattern as `_includes/demos/sar.html`
 (navy panel like the www.thebricd.org hero, scoped CSS, one IIFE, included inside `{::nomarkdown}`);
 first move the shared CSS into `_includes/demos/base.html`. Planned: Ch 4 mains interference vs
