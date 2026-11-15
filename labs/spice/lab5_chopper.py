@@ -27,6 +27,7 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import sg13_char as ch  # noqa: E402
+import sg13_ota  # noqa: E402
 
 PLOTS = os.path.join(HERE, "out")
 VDD, VCM = 1.2, 0.6
@@ -37,7 +38,7 @@ F_HP = 2.0                       # servo high-pass corner (Hz); 0.5 Hz in the ch
 NT = 2e-6                        # noise source update step (white noise up to 250 kHz)
 
 
-def netlist(chop, voff, tag):
+def netlist(chop, voff, tag, ota=None):
     tch = 1 / FCH
     if chop:
         clk = (f"Vphi phi 0 pulse(0 {VDD} 0 5n 5n {tch/2-30e-9} {tch})\n"
@@ -47,7 +48,34 @@ def netlist(chop, voff, tag):
     k_int = 2 * np.pi * F_HP * CFB / CDSL          # integrator gain (1/s) for a high-pass corner at F_HP
     v_dsl0 = -voff * CIN / CDSL if chop else 0.0   # servo output that cancels the (chopped) electrode offset
     rfb = '10G' if chop else '10T'                 # chopped: 10 GOhm is enough; unchopped needs teraohms
-    white = 30e-9 * np.sqrt(1 / (2 * NT))          # rms per step for 30 nV/rtHz
+    if ota is None:                                # behavioural: 30 nV/rtHz, 1/f corner near 200 Hz
+        white = 30e-9 * np.sqrt(1 / (2 * NT))      # rms per step for 30 nV/rtHz
+        namp = 0.5e-6
+    else:                                          # the SG13G2 OTA pair: sqrt(2) x one OTA's .noise result
+        wd = np.sqrt(2) * ota["white"]
+        white = wd * np.sqrt(1 / (2 * NT))
+        namp = 0.5e-6 * np.sqrt(wd ** 2 * ota["corner"] / (30e-9 ** 2 * 200))   # 0.5u <-> (30 nV)^2 x 200 Hz
+    if ota is None:
+        amp = f"""* behavioural amplifier: inverting, gain 1e4, pole at 1 kHz (GBW 10 MHz: the chopped signal
+* needs bandwidth well above f_ch times the noise gain), offset and noise at its input
+Vos nos 0 dc 1m trnoise({white} {NT} 1 {namp})
+Bamp n1 0 v = -1e4 * (v(xp) - v(xn) + v(nos))
+Rp n1 n2 1k
+Cp n2 0 {1/(2*np.pi*1e3*1e3)}
+Bod od 0 v = max(min(v(n2), 0.6), -0.6)
+Bop op 0 v = {VCM} + v(od)/2
+Bon on 0 v = {VCM} - v(od)/2"""
+    else:
+        amp = f"""{sg13_ota.SUBCKT}
+* two SG13G2 folded-cascode OTAs as a pseudo-differential pair (1 uA tail each, 2 uA per OTA);
+* offset and the pair's input-referred noise (from sg13_ota's .noise) sit at one non-inverting input
+Vcm cm 0 {VCM}
+Vos cmn cm dc 1m trnoise({white} {NT} 1 {namp})
+XAP cmn xp op vdd ota_fc ib=1u {sg13_ota.LOWNOISE}
+XAN cm xn on vdd ota_fc ib=1u {sg13_ota.LOWNOISE}
+* test-bench buffers: the 1 MOhm measurement filter must not load the OTAs (on chip they drive the PGA's capacitors)
+Ebp opb 0 op 0 1
+Ebn onb 0 on 0 1"""
     return f"""* Lab 5 chopped CCIA, chop={chop}, electrode offset {voff} V
 .lib cornerMOSlv.lib mos_tt
 .option method=gear
@@ -71,21 +99,13 @@ Ven en 0 dc {VCM - voff/2} sin({VCM - voff/2} {-A_SIG/2} {F_SIG})
 XCH1 ep en ap an phi phb phin phbn chopper
 Cinp ap xp {CIN}
 Cinn an xn {CIN}
-* behavioural amplifier: inverting, gain 1e4, pole at 1 kHz (GBW 10 MHz: the chopped signal
-* needs bandwidth well above f_ch times the noise gain), offset and noise at its input
-Vos nos 0 dc 1m trnoise({white} {NT} 1 0.5u)
-Bamp n1 0 v = -1e4 * (v(xp) - v(xn) + v(nos))
-Rp n1 n2 1k
-Cp n2 0 {1/(2*np.pi*1e3*1e3)}
-Bod od 0 v = max(min(v(n2), 0.6), -0.6)
-Bop op 0 v = {VCM} + v(od)/2
-Bon on 0 v = {VCM} - v(od)/2
+{amp}
 Cfbp op xp {CFB}
 Cfbn on xn {CFB}
 Rfbp op xp {rfb}
 Rfbn on xn {rfb}
 * output chopper (demodulator)
-XCH2 op on yp yn phi phb phin phbn chopper
+XCH2 {"opb onb" if ota is not None else "op on"} yp yn phi phb phin phbn chopper
 Rlp yp 0 100G
 Rln yn 0 100G
 * 500 Hz anti-alias filter after the demodulator (the measurement reads its output)
@@ -153,13 +173,22 @@ def main():
     ap = argparse.ArgumentParser(description="Lab 5: chopped CCIA with a DC servo loop")
     ap.add_argument("--voff", type=float, default=0.3, help="electrode DC offset (V)")
     ap.add_argument("--parse-only", action="store_true", help="analyse the outputs of the last run")
+    ap.add_argument("--ota", choices=["behavioural", "sg13"], default="behavioural",
+                    help="behavioural amplifier, or two SG13G2 folded-cascode OTAs (sg13_ota.py)")
     args = ap.parse_args()
-    nl = {"lab5_chop": netlist(True, args.voff, "lab5_chop"), "lab5_nochop": netlist(False, args.voff, "lab5_nochop")}
+    ota, sfx = None, ""
+    if args.ota == "sg13":
+        ota = sg13_ota.characterise("1u", "1p", "lownoise")
+        sfx = "_sg13"
+        print(f"SG13G2 OTA (one of two): A0 {ota['a0']:.1f} dB, unity gain {ota['ugf']/1e6:.2f} MHz, "
+              f"white {ota['white']*1e9:.0f} nV/√Hz, 1/f corner {ota['corner']:.0f} Hz")
+    nl = {"lab5_chop" + sfx: netlist(True, args.voff, "lab5_chop" + sfx, ota),
+          "lab5_nochop" + sfx: netlist(False, args.voff, "lab5_nochop" + sfx, ota)}
     if not args.parse_only:
         from concurrent.futures import ThreadPoolExecutor
         with ThreadPoolExecutor(2) as ex:
             list(ex.map(lambda kv: ch.run({kv[0]: kv[1]}), nl.items()))
-    r = {k: analyse(k) for k in nl}
+    r = {k.replace(sfx, "") if sfx else k: analyse(k) for k in nl}
     print(f"Electrode offset {args.voff*1e3:.0f} mV, test tone {A_SIG*1e3:g} mV at {F_SIG:g} Hz:")
     print("                       chopped     unchopped")
     print(f"  gain at {F_SIG:g} Hz        {r['lab5_chop']['gain']:8.1f}    {r['lab5_nochop']['gain']:8.1f}")
@@ -183,8 +212,8 @@ def main():
         ax.set(xlabel="frequency (Hz)", ylabel="input-referred noise (nV/√Hz)", xlim=(1, 2e4),
                title="Chopping moves the amplifier's 1/f noise and offset to 4 kHz")
         ax.legend(fontsize=8)
-        fig.savefig(os.path.join(PLOTS, "lab5_chopper.png"), dpi=130)
-        print("wrote", os.path.join(PLOTS, "lab5_chopper.png"))
+        fig.savefig(os.path.join(PLOTS, f"lab5_chopper{sfx}.png"), dpi=130)
+        print("wrote", os.path.join(PLOTS, f"lab5_chopper{sfx}.png"))
     except ImportError:
         pass
 

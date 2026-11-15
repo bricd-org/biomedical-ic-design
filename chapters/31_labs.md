@@ -470,7 +470,8 @@ The plot (`out/lab9_deltasigma.png`) shows the NTFs and the SQNR against OSR, si
 **Run.**
 
 ```bash
-python labs/spice/lab10_scds.py             # three OTA cases in parallel, 20-40 minutes
+python labs/spice/lab10_scds.py             # three behavioural OTAs and the SG13G2 OTA, in parallel
+python labs/spice/lab10_scds.py --ota sg13  # only the transistor-level OTA (labs/spice/sg13_ota.py)
 python labs/spice/lab10_scds.py --n 8192
 ```
 
@@ -484,8 +485,9 @@ The loop is the second-order CIFB structure of [Figure 20.1]({% link chapters/20
 | SC loop, A<sub>0</sub> = 60 dB, GBW = 5 MHz | 88.3 dB | 0.32 / 0.12 V |
 | SC loop, A<sub>0</sub> = 40 dB, GBW = 5 MHz | 83.3 dB | 0.30 / 0.10 V |
 | SC loop, A<sub>0</sub> = 60 dB, GBW = 0.5 MHz | 84.5 dB | 0.26 / 0.10 V |
+| SC loop, SG13G2 folded-cascode OTAs, 2 µA each | 85.3 dB | 0.27 / 0.11 V |
 
-With a good OTA the transistor-switch loop comes within 4 dB of the ideal model, and its integrators swing exactly as the model predicts once the loop has started. A 40 dB OTA turns each integrator into a leaky one and costs 9 dB. A 0.5 MHz OTA cannot settle in a 0.98 µs phase and costs 8 dB; it also takes 123 cycles to recover from start-up, during which its integrators sit on the rails, compared with 9 cycles for the 5 MHz OTA. Chapter 20's estimate of about 1 µA for a 1.2 MHz OTA sits between the two cases (the record's window suppresses the start-up cycles, so they do not affect the SQNR). The swings are given as 99.9th percentiles after the first 200 cycles; the plot is `labs/spice/out/lab10_scds.png`.
+With a good OTA the transistor-switch loop comes within 4 dB of the ideal model, and its integrators swing exactly as the model predicts once the loop has started. A 40 dB OTA turns each integrator into a leaky one and costs 9 dB. A 0.5 MHz OTA cannot settle in a 0.98 µs phase and costs 8 dB; it also takes 123 cycles to recover from start-up, during which its integrators sit on the rails, compared with 9 cycles for the 5 MHz OTA. The last row replaces the behavioural OTAs with the transistor-level folded cascode of `labs/spice/sg13_ota.py`: a PMOS input pair at a 1 µA tail, NMOS folding sinks, cascodes and a wide-swing PMOS mirror, 2 µA in all, with an ideal bias network inside the subcircuit. `python labs/spice/sg13_ota.py` characterises it: 57.9 dB of gain, 1.96 MHz of unity-gain frequency into 1 pF, 78° of phase margin and an output range of 0.37–0.86 V. That range is the catch: integrator 1 wants to swing ±0.31 V around 0.6 V, the OTA gives about ±0.25 V, so the peaks are squeezed (0.27 V) and the loop loses 3 dB against the behavioural OTA of the same gain. Scale $$a_1$$ down, or give the first OTA a two-stage output, and it comes back. Chapter 20's estimate of about 1 µA for a 1.2 MHz OTA sits between the two cases (the record's window suppresses the start-up cycles, so they do not affect the SQNR). The swings are given as 99.9th percentiles after the first 200 cycles; the plot is `labs/spice/out/lab10_scds.png`.
 
 **Questions.**
 

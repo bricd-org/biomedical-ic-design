@@ -1,0 +1,55 @@
+{% include demos/assets.html %}
+<div class="bd" id="bdAaf" role="group" aria-label="Interactive demo: anti-alias filter order against aliasing">
+  <div class="bd-head"><span>// try it · what folds back, and how much</span></div>
+  <div class="bd-sliders">
+    <label class="bd-sl"><span>sample rate f<sub>s</sub> <b data-v="fs"></b></span><input type="range" data-k="fs" min="0" max="100" step="0.1" value="47.5" aria-label="Sample rate"></label>
+    <label class="bd-sl"><span>Butterworth order <b data-v="n"></b></span><input type="range" data-k="n" min="1" max="8" step="1" value="4" aria-label="Filter order"></label>
+    <label class="bd-sl"><span>filter corner f<sub>c</sub> <b data-v="fc"></b></span><input type="range" data-k="fc" min="0" max="100" step="0.1" value="46.9" aria-label="Corner"></label>
+    <label class="bd-sl"><span>interferer frequency <b data-v="fi"></b></span><input type="range" data-k="fi" min="0" max="100" step="0.1" value="56.8" aria-label="Interferer frequency"></label>
+  </div>
+  <div class="bd-scope tall"><canvas data-c="p" aria-hidden="true"></canvas><span class="bd-tag">filter response, and where the interferer lands after sampling</span></div>
+  <div class="bd-read" aria-live="polite"><span>attenuation at the interferer <b data-o="att">–</b></span><span>it aliases to <b data-o="al">–</b></span><span>droop at 500 Hz <b data-o="dr">–</b></span></div>
+  <p class="bd-caption" data-o="cap"></p>
+</div>
+<script>
+(function () {
+  var root = document.getElementById('bdAaf'); if (!root || !window.BD) return;
+  var S = BD.bind(root, {
+    fs: { map: function (v) { return Math.round(25 * Math.pow(10, 1.9 * v / 100)) * 10; }, fmt: function (x) { return BD.eng(x) + 'S/s'; } },
+    n:  { fmt: function (x) { return x.toFixed(0); } },
+    fc: { map: function (v) { return Math.round(5 * Math.pow(10, 2.3 * v / 100)) * 10; }, fmt: function (x) { return BD.eng(x) + 'Hz'; } },
+    fi: { map: function (v) { return Math.round(5 * Math.pow(10, 2.6 * v / 100)) * 10; }, fmt: function (x) { return BD.eng(x) + 'Hz'; } }
+  }, function () { draw(); });
+  var q = function (s) { return root.querySelector(s); };
+  var att = function (f, fc, n) { return 10 * Math.log10(1 + Math.pow(f / fc, 2 * n)); };
+  function alias(f, fs) { var r = f % fs; return r > fs / 2 ? fs - r : r; }
+  function draw() {
+    var fs = S.fs, n = S.n, fc = S.fc, fi = S.fi, fa = alias(fi, fs), A = att(fi, fc, n);
+    var d = BD.setup(q('[data-c="p"]')), f = BD.frame(d, { x: [10, 3e4], y: [-80, 5], xlog: true,
+      xt: [[10, '10 Hz'], [100, '100 Hz'], [1e3, '1 kHz'], [1e4, '10 kHz']], yt: [[0, '0 dB'], [-20, '−20'], [-40, '−40'], [-60, '−60'], [-80, '−80']], pad: { l: 50 } });
+    var g = d.g;
+    g.fillStyle = 'rgba(224,184,90,.10)'; g.fillRect(f.X(10), f.p.t, f.X(Math.min(500, fs / 2)) - f.X(10), d.h - f.p.t - f.p.b);
+    g.fillStyle = 'rgba(233,208,143,.7)'; g.fillText('EMG band', f.X(12), d.h - f.p.b - 6);
+    var xs = [], ys = [];
+    for (var k = 0; k <= 300; k++) { var fr = 10 * Math.pow(10, 3.48 * k / 300); xs.push(fr); ys.push(-att(fr, fc, n)); }
+    BD.line(f, xs, ys, BD.C.blue, 2);
+    BD.vline(f, fs / 2, BD.C.gold, [4, 3], 'fs/2');
+    if (fs < 3e4) BD.vline(f, fs, 'rgba(224,184,90,.5)', [2, 3], 'fs');
+    // interferer and its alias
+    var yi = -A;
+    g.strokeStyle = BD.C.red; g.lineWidth = 2; g.beginPath(); g.moveTo(f.X(fi), f.Y(-80)); g.lineTo(f.X(fi), f.Y(Math.max(yi, -80))); g.stroke();
+    BD.dot(f, fi, Math.max(yi, -80), BD.C.red, 4);
+    if (fa >= 10) { g.setLineDash([3, 3]); g.beginPath(); g.moveTo(f.X(fi), f.Y(Math.max(yi, -80)) - 6); g.lineTo(f.X(fa), f.Y(Math.max(yi, -80)) - 6); g.stroke(); g.setLineDash([]);
+      BD.dot(f, fa, Math.max(yi, -80), 'rgba(240,138,106,.6)', 4); }
+    q('[data-o="att"]').textContent = A.toFixed(1) + ' dB';
+    q('[data-o="al"]').textContent = BD.eng(fa) + 'Hz' + (fa <= 500 && fi > fs / 2 ? ' (in band!)' : '');
+    q('[data-o="dr"]').textContent = att(500, fc, n).toFixed(2) + ' dB';
+    var c = fi <= fs / 2 ? 'The interferer is below f<sub>s</sub>/2, so it does not alias; it simply stays in the record, attenuated by ' + A.toFixed(0) + ' dB.'
+      : 'Sampling folds the interferer at ' + BD.eng(fi) + 'Hz down to ' + BD.eng(fa) + 'Hz' + (fa <= 500 ? ', inside the EMG band, where no digital filter can remove it.' : ', outside the band, so a digital filter can still remove it.') +
+        ' The analog filter attenuates it by ' + A.toFixed(0) + ' dB before it folds.';
+    c += ' A Butterworth filter gives 6n dB per octave above its corner: each extra order buys attenuation, but costs area, power and droop in the band.';
+    q('[data-o="cap"]').innerHTML = c;
+  }
+  BD.observe(root, draw);
+})();
+</script>

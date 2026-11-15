@@ -81,6 +81,12 @@ With $$\Delta q = 1$$ fC and $$f_\mathrm{ch} = 4$$ kHz, that is 0.4 µV for a 50
 
 **Clock errors.** A chopper clock whose duty cycle is not exactly 50 %, or whose two phases overlap or leave a gap, demodulates the signal imperfectly: the effective gain drops and a residue of the ripple appears at baseband. Non-overlapping clocks with a short, well-defined gap and a symmetric layout keep this small. Synchronising the chopper clock with the converter's sampling clock keeps the ripple and its harmonics from aliasing into the band ([Chapter 13]({% link chapters/13_sampling.md %})).
 
+The demo below puts the two sections together. It starts at Open-BioAFE's choice, 1000 µm² input devices (corner 460 Hz, 26 nV/√Hz) chopped at 4 kHz; switch the chopper off, slide f<sub>ch</sub> below the corner, or move to dry electrodes and watch the residual offset.
+
+{::nomarkdown}
+{% include demos/chop.html %}
+{:/}
+
 ## <span class="secnum">9.3</span>Ripple-reduction loops
 
 Filtering the ripple after the amplifier works, but it leaves the ripple inside it. A **ripple-reduction loop** removes the offset at its source. It senses the ripple at the amplifier output, before the output chopper has turned the signal back to baseband, where the ripple is a square wave at $$f_\mathrm{ch}$$ and the signal is still up-modulated. A third chopper demodulates the ripple to DC, an integrator accumulates it, and the result is fed back as a correction current into the amplifier's first stage until the ripple disappears. The loop's gain is high only at DC, so it nulls the static offset without touching the signal. The reference design of Yazicioglu et al. {% include cite.html keys="yazicioglu2007" %} combined a chopper, a ripple-reduction loop and a DC servo loop in a 60 µW ExG front-end with 60 nV/√Hz of input noise.

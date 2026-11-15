@@ -137,6 +137,12 @@ One LNA must serve three modes whose signals differ by three orders of magnitude
   <figcaption><span class="capnum">Figure 8.3.</span> <strong>Chopping changes the best input device; the load sets the upper band edge.</strong> (a) Input noise over 0.5–100 Hz of a C<sub>1</sub>/C<sub>2</sub> LNA with 1 µA per input device, against the area of each SG13G2 NMOS input device, including the capacitive noise gain: unchopped (solid, optimum marked) and chopped (dashed). (b) Closed-loop gain with C<sub>1</sub> = 20 pF, C<sub>2</sub> = 200 fF, g<sub>m</sub> = 30 µS and the thick-oxide pseudo-resistor, for two load capacitances, at 37 °C (solid) and 85 °C (dashed). Computed from the SG13G2 simulations.</figcaption>
 </figure>
 
+Move the capacitors, the OTA's transconductance and the pseudo-resistor below and watch the pass band. It starts at this chapter's design: 20 pF / 200 fF, 2 pF of load, 30 µS and one pair of thin-oxide pseudo-resistors.
+
+{::nomarkdown}
+{% include demos/lna.html %}
+{:/}
+
 ## <span class="secnum">8.5</span>Linearity and pseudo-resistor problems
 
 Pseudo-resistors are what make the Harrison amplifier small, and they are its weakest part.

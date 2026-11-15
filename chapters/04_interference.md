@@ -159,6 +159,12 @@ Datasheet CMRR is measured with the inputs shorted together, with no imbalance n
 
 </div>
 
+Try the budget below. It starts at the design point this chapter and Chapter 12 arrive at: the standards' 40.7 kΩ imbalance, 200 MΩ of boosted input impedance, 100 dB of CMRR and a right-leg drive with a loop gain of 100. Then switch the right-leg drive off, or lower $$Z_\mathrm{cm}$$, and watch which term takes over.
+
+{::nomarkdown}
+{% include demos/mains.html %}
+{:/}
+
 ## <span class="secnum">4.4</span>Patient safety
 
 A front-end connects conductors to a person, so it must limit the current that can flow through them. IEC 60601-1 {% include cite.html keys="iec60601-1" %} classifies the parts that touch the patient, the **applied parts**: type **B** (body), type **BF** (body, floating: the patient connection is isolated, as for skin ECG) and type **CF** (cardiac, floating: suitable for direct contact with the heart, the strictest). It then limits the **patient leakage current** and the **patient auxiliary current** (current that flows between electrodes by design, such as lead-off detection or bioimpedance excitation). In summary, for a.c. in normal condition, 100 µA for types B and BF and 10 µA for type CF; under a single fault, 500 µA and 50 µA; and 10 µA of d.c. The body is less sensitive at higher frequencies, so above 1 kHz the limits rise in proportion to frequency, up to 100 kHz, but never above 10 mA ([Figure 4.4](#fig-4-4)). These are summaries for teaching: always work from the edition of the standard that applies to your device.

@@ -1,0 +1,56 @@
+{% include demos/assets.html %}
+<div class="bd" id="bdLna" role="group" aria-label="Interactive demo: the Harrison LNA's frequency response">
+  <div class="bd-head"><span>// try it · the capacitive-feedback LNA</span>
+    <span class="bd-seg" role="group" aria-label="Pseudo-resistor"><button type="button" data-pr="2e11" aria-pressed="true">thin oxide, 1 pair</button><button type="button" data-pr="7.6e11" aria-pressed="false">4 pairs</button><button type="button" data-pr="5.6e13" aria-pressed="false">thick oxide, 27 °C</button><button type="button" data-pr="8e11" aria-pressed="false">thick, 85 °C</button></span></div>
+  <div class="bd-sliders">
+    <label class="bd-sl"><span>input capacitor C<sub>1</sub> <b data-v="c1"></b></span><input type="range" data-k="c1" min="2" max="40" step="0.5" value="20" aria-label="C1"></label>
+    <label class="bd-sl"><span>feedback capacitor C<sub>2</sub> <b data-v="c2"></b></span><input type="range" data-k="c2" min="0" max="100" step="0.1" value="46.3" aria-label="C2"></label>
+    <label class="bd-sl"><span>load capacitor C<sub>L</sub> <b data-v="cl"></b></span><input type="range" data-k="cl" min="0" max="100" step="0.1" value="37.6" aria-label="CL"></label>
+    <label class="bd-sl"><span>OTA transconductance g<sub>m</sub> <b data-v="gm"></b></span><input type="range" data-k="gm" min="0" max="100" step="0.1" value="59.9" aria-label="gm"></label>
+  </div>
+  <div class="bd-scope tall"><canvas data-c="p" aria-hidden="true"></canvas><span class="bd-tag">closed-loop gain (dB) against frequency</span></div>
+  <div class="bd-read" aria-live="polite"><span>A<sub>M</sub> <b data-o="am">–</b></span><span>f<sub>L</sub> <b data-o="fl">–</b></span><span>f<sub>H</sub> <b data-o="fh">–</b></span></div>
+  <p class="bd-caption" data-o="cap"></p>
+</div>
+<script>
+(function () {
+  var root = document.getElementById('bdLna'); if (!root || !window.BD) return;
+  var R = 2e11;
+  var S = BD.bind(root, {
+    c1: { map: function (v) { return v * 1e-12; }, fmt: function (x) { return BD.eng(x) + 'F'; } },
+    c2: { map: function (v) { return 50e-15 * Math.pow(10, 1.3 * v / 100); }, fmt: function (x) { return BD.eng(x) + 'F'; } },
+    cl: { map: function (v) { return 0.5e-12 * Math.pow(10, 1.6 * v / 100); }, fmt: function (x) { return BD.eng(x) + 'F'; } },
+    gm: { map: function (v) { return 5e-6 * Math.pow(10, 1.3 * v / 100); }, fmt: function (x) { return BD.eng(x) + 'S'; } }
+  }, function () { draw(); });
+  BD.seg(root, 'pr', function (v) { R = parseFloat(v); draw(); });
+  var q = function (s) { return root.querySelector(s); };
+  function draw() {
+    var am = S.c1 / S.c2, fl = 1 / (2 * Math.PI * R * S.c2), fh = S.gm / (2 * Math.PI * am * S.cl);
+    var d = BD.setup(q('[data-c="p"]')), f = BD.frame(d, { x: [1e-3, 1e6], y: [-20, 60], xlog: true,
+      xt: [[1e-3, '1 mHz'], [1e-1, '0.1 Hz'], [10, '10 Hz'], [1e3, '1 kHz'], [1e5, '100 kHz']],
+      yt: [[-20, '−20'], [0, '0'], [20, '20'], [40, '40'], [60, '60 dB']], pad: { l: 46 } });
+    var g = d.g; g.fillStyle = 'rgba(224,184,90,.10)';
+    g.fillRect(f.X(0.5), f.p.t, f.X(100) - f.X(0.5), d.h - f.p.t - f.p.b);
+    g.fillStyle = 'rgba(233,208,143,.7)'; g.fillText('EEG band', f.X(0.6), d.h - f.p.b - 6);
+    var xs = [], ys = [];
+    for (var k = 0; k <= 400; k++) {
+      var fr = 1e-3 * Math.pow(10, 9 * k / 400), x = fr / fl, y = fr / fh;
+      var mag = am * (x / Math.sqrt(1 + x * x)) / Math.sqrt(1 + y * y);
+      xs.push(fr); ys.push(20 * Math.log10(mag));
+    }
+    BD.line(f, xs, ys, BD.C.blue, 2);
+    BD.vline(f, fl, BD.C.teal, [4, 3], 'f_L');
+    BD.vline(f, fh, BD.C.gold, [4, 3], 'f_H');
+    q('[data-o="am"]').textContent = am.toFixed(0) + ' (' + (20 * Math.log10(am)).toFixed(1) + ' dB)';
+    q('[data-o="fl"]').textContent = BD.eng(fl) + 'Hz';
+    q('[data-o="fh"]').textContent = BD.eng(fh) + 'Hz';
+    var c = 'Mid-band gain is C<sub>1</sub>/C<sub>2</sub>; the pseudo-resistor and C<sub>2</sub> set f<sub>L</sub> = 1/(2πRC<sub>2</sub>), and g<sub>m</sub>/(2πA<sub>M</sub>C<sub>L</sub>) sets f<sub>H</sub>. ';
+    if (fl > 0.5) c += '<b style="color:#f39a7c">f<sub>L</sub> is above 0.5 Hz: the EEG\'s delta band is lost.</b> A higher-value pseudo-resistor or a larger C<sub>2</sub> fixes it, at a gain cost for the latter.';
+    else if (fl < 0.01) c += 'f<sub>L</sub> is so low that the amplifier needs minutes to recover from a step such as an electrode movement.';
+    else c += 'Both corners sit outside the EEG band.';
+    if (R === 8e11) c += ' The thick-oxide device at 85 °C shows how strongly a pseudo-resistor depends on temperature (Chapter 8).';
+    q('[data-o="cap"]').innerHTML = c;
+  }
+  BD.observe(root, draw);
+})();
+</script>

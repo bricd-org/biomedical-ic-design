@@ -126,6 +126,12 @@ These currents are tiny next to the 8 µA a 10 µW channel can draw. Thermal noi
   <figcaption><span class="capnum">Figure 6.2.</span> <strong>Thermal noise is cheap; flicker noise is not for sale.</strong> (a) Total current needed to reach an amplifier noise budget over 0.5–100 Hz, for NEF from √2 to 6, with the wet- and dry-electrode budgets marked. (b) Input noise of an SG13G2 NMOS pair (W/L = 100/10 µm per device) against its total current: thermal noise alone follows the weak-inversion limit until the devices leave weak inversion; with the flicker noise of an unchopped 1000 or 1800 µm² pair, the noise flattens at 1.3 and 1.0 µVrms. Computed from the Chapter 5 device data.</figcaption>
 </figure>
 
+The demo below draws the same equation for any band, current and NEF. The dashed lines are amplifiers at NEF 1.73, 3 and 6; the dot is yours.
+
+{::nomarkdown}
+{% include demos/nef.html %}
+{:/}
+
 ## <span class="secnum">6.4</span>The physical limit
 
 How low can the NEF go? Consider a differential pair whose only noise is that of its two input transistors, each carrying half of $$I_\mathrm{tot}$$. For ideal bipolar transistors, each contributes $$2kT/g_\mathrm{m}$$ with $$g_\mathrm{m} = I_\mathrm{tot}/(2U_T)$$, and the pair's input noise is the sum of the two:

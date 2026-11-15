@@ -27,6 +27,7 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, "..", "python"))
 import biosig  # noqa: E402
 import sg13_char as ch  # noqa: E402
+import sg13_ota  # noqa: E402
 
 PLOTS = os.path.join(HERE, "out")
 FCLK, VCM, VREF = 512e3, 0.6, 0.25   # single-ended: +-0.25 V stands for the chip's +-0.5 V differential
@@ -34,12 +35,17 @@ A1, A2 = 0.5, 0.25
 OSR, M_TONE, AMP = 128, 11, 0.5
 
 
-def netlist(a0_db, gbw, n, tag):
+def netlist(a0_db, gbw, n, tag, ota="beh"):
     tc = 1 / FCLK
     a0 = 10 ** (a0_db / 20)
     fin = M_TONE * FCLK / n
     tw = tc / 2 - 40e-9
-    return f"""* Lab 10 SC delta-sigma, A0 = {a0_db} dB, GBW = {gbw/1e6:g} MHz
+    if ota == "sg13":
+        amp1 = f"XO1 vcm g1 x1 vdd ota_fc ib=1u {sg13_ota.FAST}"
+        amp2 = f"XO2 vcm g2 x2 vdd ota_fc ib=1u {sg13_ota.FAST}"
+    else:
+        amp1, amp2 = f"XO1 g1 x1 ota a0={a0} gbw={gbw}", f"XO2 g2 x2 ota a0={a0} gbw={gbw}"
+    return f"""* Lab 10 SC delta-sigma, OTA {ota}, A0 = {a0_db} dB, GBW = {gbw/1e6:g} MHz
 .lib cornerMOSlv.lib mos_tt
 .subckt tg a b c cb
 XN a c b 0 sg13_lv_nmos w=2u l=0.13u ng=1 m=1
@@ -52,7 +58,7 @@ R1 n1 n2 1k
 C1 n2 0 {{a0 / (6.2832 * gbw * 1e3)}}
 B2 out 0 v = max(min({VCM} + v(n2), 1.15), 0.05)
 .ends
-Vdd vdd 0 1.2
+{sg13_ota.SUBCKT if ota == "sg13" else ""}Vdd vdd 0 1.2
 Vcm vcm 0 {VCM}
 Vp1 p1 0 pulse(0 1.2 20n 2n 2n {tw} {tc})
 Vp2 p2 0 pulse(0 1.2 {tc/2 + 20e-9} 2n 2n {tw} {tc})
@@ -74,7 +80,7 @@ Cs1 a1 b1 1.1p
 X13 b1 vcm p1 p1n tg
 X14 b1 g1 p2 p2n tg
 Ci1 g1 x1 2.2p
-XO1 g1 x1 ota a0={a0} gbw={gbw}
+{amp1}
 * integrator 2: Cs2 samples x1 in phase 1, connects to the DAC level in phase 2
 X21 x1 a2 p1 p1n tg
 X22 a2 dac p2 p2n tg
@@ -82,7 +88,7 @@ Cs2 a2 b2 0.25p
 X23 b2 vcm p1 p1n tg
 X24 b2 g2 p2 p2n tg
 Ci2 g2 x2 1p
-XO2 g2 x2 ota a0={a0} gbw={gbw}
+{amp2}
 .ic v(x1)={VCM} v(x2)={VCM} v(q)=1
 .control
 tran 20n {(n + 8) * tc} 0 40n
@@ -118,10 +124,14 @@ def main():
     ap = argparse.ArgumentParser(description="Lab 10: switched-capacitor delta-sigma loop")
     ap.add_argument("--n", type=int, default=4096)
     ap.add_argument("--parse-only", action="store_true", help="analyse the outputs of the last run")
+    ap.add_argument("--ota", choices=["behavioural", "sg13", "all"], default="all",
+                    help="behavioural OTAs (three cases), the SG13G2 folded cascode, or all four")
     args = ap.parse_args()
     n = args.n
-    cases = [(60, 5e6), (40, 5e6), (60, 0.5e6)]
+    cases = [] if args.ota == "sg13" else [(60, 5e6), (40, 5e6), (60, 0.5e6)]
     nl = {f"lab10_{a}dB_{g/1e6:g}MHz": netlist(a, g, n, f"lab10_{a}dB_{g/1e6:g}MHz") for a, g in cases}
+    if args.ota != "behavioural":
+        nl["lab10_sg13ota"] = netlist(0, 0, n, "lab10_sg13ota", ota="sg13")
     if not args.parse_only:
         from concurrent.futures import ThreadPoolExecutor      # one container per case, in parallel
         with ThreadPoolExecutor(len(nl)) as ex:
@@ -132,14 +142,15 @@ def main():
     print(f"   ideal difference equations      : SQNR {biosig.dsm_sqnr(vi, M_TONE, OSR):5.1f} dB; "
           f"swing (99.9 %) |x1| {p999(i1[200:]):.2f} V, |x2| {p999(i2[200:]):.2f} V")
     rows = {}
-    for a, g in cases:
-        tag = f"lab10_{a}dB_{g/1e6:g}MHz"
+    for tag in nl:
+        a, g = (tag.split("_")[1], tag.split("_")[2]) if "sg13" not in tag else ("", "")
         v, x1, x2 = bits_from(tag, n)
         sq = biosig.dsm_sqnr(v, M_TONE, OSR)
         rows[tag] = (v, sq)
         clipped = np.nonzero((np.abs(x1) > 0.54) | (np.abs(x2) > 0.54))[0]
         start = int(clipped.max()) + 1 if len(clipped) else 0
-        print(f"   SC loop, A0 = {a} dB, GBW = {g/1e6:3g} MHz: SQNR {sq:5.1f} dB; "
+        name = "SG13G2 folded-cascode OTAs, 2 µA each" if "sg13" in tag else f"A0 = {a}, GBW = {g}"
+        print(f"   SC loop, {name}: SQNR {sq:5.1f} dB; "
               f"swing after start-up (99.9 %) |x1| {p999(x1[200:]):.2f} V, |x2| {p999(x2[200:]):.2f} V; "
               f"integrators clip only in the first {start} cycles")
     os.makedirs(PLOTS, exist_ok=True)

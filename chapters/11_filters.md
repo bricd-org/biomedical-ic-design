@@ -92,6 +92,12 @@ The chopper ripple sits at 4 kHz, twice the SAR's sample rate. Because the two c
   <figcaption><span class="capnum">Figure 11.2.</span> <strong>Biosignal filters run on nanoamperes, and the SAR path needs fourth order.</strong> (a) Bias current per transconductor of a Gm-C filter against its corner frequency, for 10 and 50 pF at g<sub>m</sub>/I<sub>D</sub> = 25 V⁻¹. Sub-hertz corners need picoamperes, comparable to junction leakage. (b) Butterworth filters at 600 Hz for the EMG path of the SAR at 2 kS/s: fourth order meets the 30 dB needed at 1.5 kHz, which folds to the 500 Hz band edge, and suppresses the 4 kHz chopper ripple, which aliases to DC, by 66 dB. Computed in <code>figsrc/ch11_figs.py</code>.</figcaption>
 </figure>
 
+Try the trade-off below. It starts with the SAR path's choice: 2 kS/s, a fourth-order Butterworth at 600 Hz, and an interferer at 1.5 kHz, which folds back to 500 Hz attenuated by 32 dB.
+
+{::nomarkdown}
+{% include demos/aafilter.html %}
+{:/}
+
 ## <span class="secnum">11.4</span>Mains notch filtering
 
 It is tempting to add an analog 50 Hz notch before the converter. It is a bad idea. A notch deep enough to matter, 40 dB, must sit within a fraction of a percent of the mains frequency, and on-chip resistors and capacitors drift by more than that over temperature and process. The mains frequency itself wanders by up to a few tenths of a hertz. A notch also distorts the ECG: its phase response smears the QRS complex, and its narrow band rings after artefacts.

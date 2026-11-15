@@ -1,0 +1,68 @@
+{% include demos/assets.html %}
+<div class="bd" id="bdChop" role="group" aria-label="Interactive demo: what chopping does to 1/f noise and offset">
+  <div class="bd-head"><span>// try it · chopping</span>
+    <span class="bd-seg" role="group" aria-label="Electrodes"><button type="button" data-rs="5e4" aria-pressed="true">wet electrodes</button><button type="button" data-rs="1e6" aria-pressed="false">dry electrodes</button></span></div>
+  <div class="bd-sliders">
+    <label class="bd-sl"><span>chopper frequency f<sub>ch</sub> <b data-v="fch"></b></span><input type="range" data-k="fch" min="0" max="100" step="0.5" value="45.2" aria-label="Chopper frequency"></label>
+    <label class="bd-sl"><span>amplifier 1/f corner f<sub>c</sub> <b data-v="fc"></b></span><input type="range" data-k="fc" min="0" max="100" step="0.5" value="51.8" aria-label="1/f corner"></label>
+    <label class="bd-sl"><span>white noise floor <b data-v="sw"></b></span><input type="range" data-k="sw" min="10" max="100" step="1" value="26" aria-label="White noise"></label>
+    <label class="bd-sl"><span>input offset <b data-v="vos"></b></span><input type="range" data-k="vos" min="0" max="2" step="0.01" value="0.39" aria-label="Input offset"></label>
+  </div>
+  <div class="bd-scope tall"><canvas data-c="p" aria-hidden="true"></canvas><span class="bd-tag">input-referred noise density at the output, before the low-pass</span></div>
+  <div class="bd-read" aria-live="polite"><span>noise 0.5–100 Hz <b data-o="vn">–</b></span><span>unchopped <b data-o="vu">–</b></span><span>ripple at f<sub>ch</sub>, gain 100 <b data-o="rip">–</b></span><span>residual offset <b data-o="ro">–</b></span></div>
+  <div class="bd-controls"><button type="button" class="bd-toggle" data-t="chop" aria-pressed="true">chopper on</button></div>
+  <p class="bd-caption" data-o="cap"></p>
+</div>
+<script>
+(function () {
+  var root = document.getElementById('bdChop'); if (!root || !window.BD) return;
+  var rs = 5e4, chop = true;
+  var S = BD.bind(root, {
+    fch: { map: function (v) { return 500 * Math.pow(10, 2 * v / 100); }, fmt: function (x) { return BD.eng(x) + 'Hz'; } },
+    fc:  { map: function (v) { return 10 * Math.pow(10, 3.2 * v / 100); }, fmt: function (x) { return BD.eng(x) + 'Hz'; } },
+    sw:  { fmt: function (x) { return x.toFixed(0) + ' nV/√Hz'; } },
+    vos: { fmt: function (x) { return x.toFixed(2) + ' mV'; } }
+  }, function () { draw(); });
+  BD.seg(root, 'rs', function (v) { rs = parseFloat(v); draw(); });
+  var tb = root.querySelector('[data-t="chop"]');
+  BD.toggle(tb, function (on) { chop = on; tb.textContent = on ? 'chopper on' : 'chopper off'; draw(); });
+  var q = function (s) { return root.querySelector(s); };
+  function draw() {
+    var sw = S.sw * 1e-9, fc = S.fc, fch = S.fch, fL = 0.5, fH = 100;
+    var vu = sw * Math.sqrt((fH - fL) + fc * Math.log(fH / fL));
+    var vc = sw * Math.sqrt((fH - fL) * (1 + 0.85 * fc / fch));
+    var d = BD.setup(q('[data-c="p"]')), f = BD.frame(d, { x: [0.1, 1e5], y: [3e-9, 3e-6], xlog: true, ylog: true,
+      xt: [[0.1, '0.1 Hz'], [1, '1 Hz'], [10, '10'], [100, '100'], [1e3, '1 kHz'], [1e4, '10 kHz'], [1e5, '100 kHz']],
+      yt: [[1e-8, '10 nV'], [1e-7, '100 nV'], [1e-6, '1 µV/√Hz']], pad: { l: 58 } });
+    var g = d.g; g.fillStyle = 'rgba(224,184,90,.10)'; g.fillRect(f.X(fL), f.p.t, f.X(fH) - f.X(fL), d.h - f.p.t - f.p.b);
+    g.fillStyle = 'rgba(233,208,143,.75)'; g.fillText('signal band', f.X(0.7), d.h - f.p.b - 6);
+    var xs = [], amp = [], out = [];
+    for (var k = 0; k <= 500; k++) {
+      var fr = 0.1 * Math.pow(10, 6 * k / 500); xs.push(fr);
+      var s0 = sw * Math.sqrt(1 + fc / fr); amp.push(s0);
+      if (chop) {                                    // amplifier noise moved to f_ch and its odd harmonics
+        var p = sw * sw * (1 + 0.85 * fc / fch);     // baseband floor
+        for (var h = 1; h <= 7; h += 2) { var df = Math.abs(fr - h * fch) + 0.05; p += sw * sw * fc / df * (4 / (Math.PI * Math.PI * h * h)); }
+        out.push(Math.sqrt(p));
+      } else out.push(s0);
+    }
+    if (chop) BD.line(f, xs, amp, 'rgba(240,138,106,.45)', 1.2, [4, 3]);
+    BD.line(f, xs, out, chop ? BD.C.blue : BD.C.red, 2);
+    if (chop) { BD.vline(f, fch, BD.C.gold, [4, 3], 'f_ch'); }
+    g.fillStyle = chop ? 'rgba(240,138,106,.7)' : BD.C.red;
+    g.fillText(chop ? 'amplifier noise without chopping' : 'amplifier noise: 1/f lands on the signal', f.X(0.15), f.Y(sw * Math.sqrt(1 + fc / 0.15)) - 6);
+    var fmt = function (v) { return (v * 1e6).toFixed(v < 1e-6 ? 3 : 2) + ' µVrms'; };
+    q('[data-o="vn"]').textContent = fmt(chop ? vc : vu);
+    q('[data-o="vu"]').textContent = fmt(vu);
+    q('[data-o="rip"]').textContent = chop ? (S.vos * 100).toFixed(0) + ' mV' : '–';
+    var ro = 2 * fch * 1e-15 * rs;                  // 1 fC of charge-injection mismatch through the electrode impedance
+    q('[data-o="ro"]').textContent = chop ? (ro * 1e6).toFixed(ro < 1e-6 ? 2 : 1) + ' µV' : (S.vos).toFixed(2) + ' mV';
+    q('[data-o="cap"]').innerHTML = chop
+      ? 'Chopping moves the offset and the 1/f noise up to f<sub>ch</sub>, where a low-pass removes them; what stays in the band is the white floor, raised by 1 + 0.85 f<sub>c</sub>/f<sub>ch</sub>. ' +
+        (fch < fc ? '<b style="color:#f39a7c">f<sub>ch</sub> is below the 1/f corner, so much of the 1/f noise is still folded in.</b> ' : '') +
+        'A higher f<sub>ch</sub> folds in less, but the switches inject more charge per second: the residual offset 2f<sub>ch</sub>Δq·R<sub>s</sub> grows with f<sub>ch</sub> and with the electrode impedance.'
+      : 'Without chopping, the amplifier\'s offset and 1/f noise sit on top of the signal: ' + fmt(vu) + ' in 0.5–100 Hz, and the full ' + S.vos.toFixed(2) + ' mV offset.';
+  }
+  BD.observe(root, draw);
+})();
+</script>

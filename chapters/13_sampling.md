@@ -135,6 +135,12 @@ The model fails whenever the error is *not* busy:
 - **DC and slow signals.** A constant input gives a constant error, up to half an LSB of offset that no averaging removes. An ECG baseline or a slow EEG drift spends a long time near a few codes.
 - **Overload.** Beyond full scale the error is no longer bounded at all. With an electrode offset or a motion artefact this is a real case, which is why [Chapter 10]({% link chapters/10_dsl.md %}) removes the offset before the converter.
 
+The demo below shows both effects of this and the previous section on a 500 S/s converter. Push the tone above 250 Hz and watch it alias; drop the bits to 2 or 3 and watch the error stop looking like noise.
+
+{::nomarkdown}
+{% include demos/sampling.html %}
+{:/}
+
 ## <span class="secnum">13.3</span>Dither and oversampling
 
 The cure for a quantiser whose error is not busy is to make it busy. Adding a small random signal, **dither**, before the quantiser moves the input across levels at random, so the error decorrelates from the signal. Triangular dither of 1 LSB peak to peak removes the dependence of the error's mean and power on the input entirely; Gaussian dither of about half an LSB rms or more does nearly as well. The price is the dither's own noise, visible in [Figure 13.3](#fig-13-3)b as a higher floor.

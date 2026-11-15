@@ -25,14 +25,14 @@ import sg13_char as ch  # noqa: E402
 
 VDD, VCM = 1.2, 0.6
 
-SUBCKT = """.subckt ota_fc inp inm out vdd ib=1u wi=10u li=1u ws=2u ls=4u wm=4u lm=4u
+SUBCKT = """.subckt ota_fc inp inm out vdd ib=1u wi=10u li=1u ws=2u ls=4u wm=4u lm=4u wcn=4u lcn=1u wcp=8u lcp=1u dvn=0.2 dvp=0.2
 * bias: reference current into diode-connected replicas; cascode gates 0.2 V inside the rails
 Ibp vbp 0 {ib}
 XMBP vbp vbp vdd vdd sg13_lv_pmos w=4u l=4u ng=1 m=1
 Ibn vdd vbn {ib}
 XMBN vbn vbn 0 0 sg13_lv_nmos w={ws} l={ls} ng=1 m=1
-Bvcn vcn 0 v = v(vbn) + 0.2
-Bvcp vcp 0 v = v(vbp) - 0.2
+Bvcn vcn 0 v = v(vbn) + {dvn}
+Bvcp vcp 0 v = v(vbp) - {dvp}
 * PMOS input pair and tail (tail = IB)
 XM0 tail vbp vdd vdd sg13_lv_pmos w=4u l=4u ng=1 m=1
 XM1 f1 inp tail vdd sg13_lv_pmos w={wi} l={li} ng=1 m=1
@@ -40,18 +40,18 @@ XM2 f2 inm tail vdd sg13_lv_pmos w={wi} l={li} ng=1 m=1
 * NMOS folding sinks (IB each) and cascodes
 XM3 f1 vbn 0 0 sg13_lv_nmos w={ws} l={ls} ng=1 m=1
 XM4 f2 vbn 0 0 sg13_lv_nmos w={ws} l={ls} ng=1 m=1
-XM5 a vcn f1 0 sg13_lv_nmos w=4u l=1u ng=1 m=1
-XM6 out vcn f2 0 sg13_lv_nmos w=4u l=1u ng=1 m=1
+XM5 a vcn f1 0 sg13_lv_nmos w={wcn} l={lcn} ng=1 m=1
+XM6 out vcn f2 0 sg13_lv_nmos w={wcn} l={lcn} ng=1 m=1
 * wide-swing PMOS cascode mirror
 XM9 d9 a vdd vdd sg13_lv_pmos w={wm} l={lm} ng=1 m=1
 XM10 d10 a vdd vdd sg13_lv_pmos w={wm} l={lm} ng=1 m=1
-XM7 a vcp d9 vdd sg13_lv_pmos w=8u l=1u ng=1 m=1
-XM8 out vcp d10 vdd sg13_lv_pmos w=8u l=1u ng=1 m=1
+XM7 a vcp d9 vdd sg13_lv_pmos w={wcp} l={lcp} ng=1 m=1
+XM8 out vcp d10 vdd sg13_lv_pmos w={wcp} l={lcp} ng=1 m=1
 .ends
 """
 # presets: the fast OTA of Lab 10 and the low-noise LNA OTA of Lab 5 (1000 um2 input devices, Chapter 9)
 FAST = "wi=10u li=1u ws=2u ls=4u wm=4u lm=4u"
-LOWNOISE = "wi=100u li=10u ws=2u ls=20u wm=2u lm=20u"
+LOWNOISE = "wi=100u li=10u ws=8u ls=20u wm=8u lm=20u wcn=16u lcn=4u wcp=32u lcp=4u dvn=0.1 dvp=0.15"
 
 
 def bench(ib, cl, tag, sizes=FAST):
@@ -102,7 +102,7 @@ def characterise(ib="1u", cl="1p", preset="fast"):
     pm = 180 - (phd[0] - np.interp(ugf, f, phd))          # phase lag at unity gain, from the low-f phase
     fn, vn = ch.load(tag + "_noise", 1)
     white = float(np.median(vn[(fn > 2e4) & (fn < 1e5)]))
-    corner = float(np.interp(np.sqrt(2) * white, vn[::-1], fn[::-1]))   # where 1/f adds as much power
+    corner = float(fn[np.argmax(vn <= np.sqrt(2) * white)])           # where 1/f adds as much power as white
     sw, vo = ch.load(tag + "_dc", 1)
     gain = np.gradient(vo, sw)
     ok = gain > 0.5 * gain.max()

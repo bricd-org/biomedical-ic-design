@@ -1,0 +1,65 @@
+{% include demos/assets.html %}
+<div class="bd" id="bdMains" role="group" aria-label="Interactive demo: mains interference at the electrodes">
+  <div class="bd-head"><span>// try it · mains interference</span>
+    <span class="bd-seg" role="group" aria-label="Common-mode level"><button type="button" data-test="10" aria-pressed="true">CMRR test · 10 Vrms</button><button type="button" data-test="1" aria-pressed="false">everyday · 1 Vrms</button></span></div>
+  <div class="bd-sliders">
+    <label class="bd-sl"><span>electrode imbalance |ΔZ| <b data-v="dz"></b></span><input type="range" data-k="dz" min="0" max="100" step="0.5" value="53.7" aria-label="Electrode imbalance"></label>
+    <label class="bd-sl"><span>common-mode input impedance Z<sub>cm</sub> <b data-v="zcm"></b></span><input type="range" data-k="zcm" min="0" max="100" step="0.5" value="57.5" aria-label="Common-mode input impedance"></label>
+    <label class="bd-sl"><span>amplifier CMRR <b data-v="cmrr"></b></span><input type="range" data-k="cmrr" min="60" max="130" step="1" value="100" aria-label="Amplifier CMRR"></label>
+    <label class="bd-sl"><span>right-leg drive loop gain <b data-v="a"></b></span><input type="range" data-k="a" min="0" max="100" step="1" value="67" aria-label="Right-leg drive loop gain"></label>
+  </div>
+  <div class="bd-row">
+    <div class="bd-scope"><canvas data-c="bars" aria-hidden="true"></canvas><span class="bd-tag">differential residual at the input (log)</span></div>
+    <div class="bd-scope"><canvas data-c="ecg" aria-hidden="true"></canvas><span class="bd-tag">a 1 mV ECG with that 50 Hz residual</span></div>
+  </div>
+  <div class="bd-read" aria-live="polite"><span>residual <b data-o="tot">–</b></span><span>limit <b>1 mVpp</b></span><span data-o="pass"></span></div>
+  <p class="bd-caption" data-o="cap"></p>
+</div>
+<script>
+(function () {
+  var root = document.getElementById('bdMains'); if (!root || !window.BD) return;
+  var test = 10;
+  var S = BD.bind(root, {
+    dz:   { map: function (v) { return 1e3 * Math.pow(10, 3 * v / 100); }, fmt: function (x) { return BD.eng(x) + 'Ω'; } },
+    zcm:  { map: function (v) { return 1e6 * Math.pow(10, 4 * v / 100); }, fmt: function (x) { return BD.eng(x) + 'Ω'; } },
+    cmrr: { fmt: function (x) { return x.toFixed(0) + ' dB'; } },
+    a:    { map: function (v) { return v === 0 ? 0 : Math.pow(10, 3 * v / 100); }, fmt: function (x) { return x === 0 ? 'off' : x.toFixed(x < 10 ? 1 : 0); } }
+  }, function () { draw(); });
+  BD.seg(root, 'test', function (v) { test = parseFloat(v); draw(); });
+  var q = function (s) { return root.querySelector(s); };
+  function ecg(t) {                    // synthetic 1 mV ECG, 72 bpm
+    var ph = (t * 1.2) % 1, g = function (c, w, a) { return a * Math.exp(-Math.pow((ph - c) / w, 2)); };
+    return 1e-3 * (g(0.18, 0.025, 0.12) - g(0.29, 0.008, 0.1) + g(0.31, 0.01, 1) - g(0.33, 0.008, 0.22) + g(0.55, 0.05, 0.3));
+  }
+  function draw() {
+    var vcm = test * 2 * Math.SQRT2, red = 1 / (1 + S.a);
+    var tImb = vcm * red * S.dz / S.zcm, tCm = vcm * red * Math.pow(10, -S.cmrr / 20), tot = tImb + tCm;
+    // bars
+    var d = BD.setup(q('[data-c="bars"]')), f = BD.frame(d, { x: [0, 3], y: [1e-7, 10], ylog: true,
+      yt: [[1e-6, '1 µV'], [1e-4, '0.1 mV'], [1e-2, '10 mV'], [1, '1 V']], pad: { l: 52, b: 30 } });
+    var bars = [[0.5, tImb, 'ΔZ / Zcm', BD.C.blue], [1.5, tCm, '1 / CMRR', BD.C.teal], [2.5, tot, 'total', tot > 1e-3 && test === 10 ? BD.C.red : BD.C.green]];
+    bars.forEach(function (b) {
+      var x0 = f.X(b[0] - 0.3), x1 = f.X(b[0] + 0.3), y = f.Y(Math.max(b[1], 1.01e-7));
+      d.g.fillStyle = b[3]; d.g.fillRect(x0, y, x1 - x0, f.Y(1e-7) - y);
+      d.g.fillStyle = BD.C.axis; d.g.textAlign = 'center'; d.g.fillText(b[2], (x0 + x1) / 2, d.h - 14); d.g.textAlign = 'left';
+    });
+    BD.hline(f, 1e-3, BD.C.gold, [5, 4], '1 mVpp limit');
+    // ECG with interference
+    var e = BD.setup(q('[data-c="ecg"]')), lim = Math.max(1.3e-3, 0.65e-3 + tot / 2);
+    var fe = BD.frame(e, { x: [0, 1.5], y: [-lim, lim], xt: [[0, '0'], [0.5, '0.5 s'], [1, '1 s'], [1.5, '1.5 s']],
+      yt: [[-1e-3, '−1 mV'], [0, '0'], [1e-3, '1 mV']], pad: { l: 44 } });
+    var ts = [], ys = [];
+    for (var i = 0; i <= 1500; i++) { var t = i / 1000; ts.push(t); ys.push(ecg(t + 0.1) - 0.15e-3 + tot / 2 * Math.sin(2 * Math.PI * 50 * t)); }
+    BD.line(fe, ts, ys, BD.C.blue, 1.2);
+    var fmtV = function (v) { return v >= 1e-3 ? (v * 1e3).toFixed(v >= 1e-2 ? 1 : 2) + ' mVpp' : (v * 1e6).toFixed(v >= 1e-5 ? 0 : 1) + ' µVpp'; };
+    q('[data-o="tot"]').textContent = fmtV(tot);
+    var pass = q('[data-o="pass"]');
+    if (test === 10) { pass.innerHTML = tot <= 1e-3 ? '<b class="ok">passes the test</b>' : '<b class="bad">fails the test</b>'; }
+    else pass.innerHTML = '<span>(the test applies at 10 Vrms)</span>';
+    var dom = tImb > tCm ? 'The electrode imbalance dominates: ΔZ and Z<sub>cm</sub> form a divider that turns ' + (S.dz / S.zcm * 100).toPrecision(2) + ' % of the common mode into a differential signal, whatever the amplifier\'s CMRR. Raise Z<sub>cm</sub> (boosting, Chapter 10) or reduce the common mode with the right-leg drive.'
+      : 'The amplifier\'s own CMRR dominates: the imbalance term is already smaller, so more Z<sub>cm</sub> buys nothing until the CMRR improves (chopping, Chapter 9).';
+    q('[data-o="cap"]').innerHTML = (S.a > 0 ? 'The right-leg drive divides the body\'s ' + (vcm).toFixed(1) + ' Vpp common mode by ' + (1 + S.a).toFixed(0) + '. ' : 'No right-leg drive: the full ' + vcm.toFixed(1) + ' Vpp common mode reaches the electrodes. ') + dom;
+  }
+  BD.observe(root, draw);
+})();
+</script>
