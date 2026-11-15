@@ -48,6 +48,8 @@ def netlist(chop, voff, tag, ota=None):
     k_int = 2 * np.pi * F_HP * CFB / CDSL          # integrator gain (1/s) for a high-pass corner at F_HP
     v_dsl0 = -voff * CIN / CDSL if chop else 0.0   # servo output that cancels the (chopped) electrode offset
     rfb = '10G' if chop else '10T'                 # chopped: 10 GOhm is enough; unchopped needs teraohms
+    if ota is not None:                            # the SG13G2 input pair leaks ~60 pA through its 1000 um2 thin-oxide
+        rfb = '1G'                                 # gates: 1 GOhm keeps the shift at ~60 mV (corner 800 Hz < f_ch)
     if ota is None:                                # behavioural: 30 nV/rtHz, 1/f corner near 200 Hz
         white = 30e-9 * np.sqrt(1 / (2 * NT))      # rms per step for 30 nV/rtHz
         namp = 0.5e-6
@@ -123,6 +125,7 @@ XCH3 dp dn dcp dcn phi phb phin phbn chopper
 Cdp dcp xp {CDSL}
 Cdn dcn xn {CDSL}
 .control
+save v(yp) v(yn) v(yfp) v(yfn) v(nint) vep#branch
 tran 1u {T_SIM} 0 2u
 let vy = v(yp) - v(yn)
 let vf = v(yfp) - v(yfn)
@@ -182,21 +185,23 @@ def main():
         sfx = "_sg13"
         print(f"SG13G2 OTA (one of two): A0 {ota['a0']:.1f} dB, unity gain {ota['ugf']/1e6:.2f} MHz, "
               f"white {ota['white']*1e9:.0f} nV/√Hz, 1/f corner {ota['corner']:.0f} Hz")
-    nl = {"lab5_chop" + sfx: netlist(True, args.voff, "lab5_chop" + sfx, ota),
-          "lab5_nochop" + sfx: netlist(False, args.voff, "lab5_nochop" + sfx, ota)}
+    nl = {"lab5_chop" + sfx: netlist(True, args.voff, "lab5_chop" + sfx, ota)}
+    if ota is None:          # unchopped with the SG13G2 OTAs is impossible: no feedback resistor both passes 37 Hz and
+        nl["lab5_nochop"] = netlist(False, args.voff, "lab5_nochop", ota)   # survives the gates' leakage
     if not args.parse_only:
         from concurrent.futures import ThreadPoolExecutor
         with ThreadPoolExecutor(2) as ex:
             list(ex.map(lambda kv: ch.run({kv[0]: kv[1]}), nl.items()))
     r = {k.replace(sfx, "") if sfx else k: analyse(k) for k in nl}
     print(f"Electrode offset {args.voff*1e3:.0f} mV, test tone {A_SIG*1e3:g} mV at {F_SIG:g} Hz:")
+    c, u = r["lab5_chop"], r.get("lab5_nochop")
+    col = lambda key, sc, fmt: (fmt % (u[key] * sc)) if u else "       –"
     print("                       chopped     unchopped")
-    print(f"  gain at {F_SIG:g} Hz        {r['lab5_chop']['gain']:8.1f}    {r['lab5_nochop']['gain']:8.1f}")
-    print(f"  output offset (mV)    {r['lab5_chop']['offset']*1e3:8.2f}    {r['lab5_nochop']['offset']*1e3:8.2f}")
-    print(f"  input noise 4-100 Hz (µVrms) {r['lab5_chop']['vn']*1e6:7.2f}    {r['lab5_nochop']['vn']*1e6:8.2f}")
-    print(f"  ripple at 4 kHz (mV)  {r['lab5_chop']['ripple']*1e3:8.2f}    {r['lab5_nochop']['ripple']*1e3:8.2f}")
-    print(f"  servo output (V)      {r['lab5_chop']['dsl']:8.3f}    {r['lab5_nochop']['dsl']:8.3f}"
-          f"   (expected {-args.voff*CIN/CDSL:.3f} V)")
+    print(f"  gain at {F_SIG:g} Hz        {c['gain']:8.1f}    {col('gain', 1, '%8.1f')}")
+    print(f"  output offset (mV)    {c['offset']*1e3:8.2f}    {col('offset', 1e3, '%8.2f')}")
+    print(f"  input noise 4-100 Hz (µVrms) {c['vn']*1e6:7.2f}    {col('vn', 1e6, '%8.2f')}")
+    print(f"  ripple at 4 kHz (mV)  {c['ripple']*1e3:8.2f}    {col('ripple', 1e3, '%8.2f')}")
+    print(f"  servo output (V)      {c['dsl']:8.3f}    {col('dsl', 1, '%8.3f')}   (expected {-args.voff*CIN/CDSL:.3f} V)")
     z = abs(args.voff / 2 / r['lab5_chop']['i_avg']) if r['lab5_chop']['i_avg'] else np.inf
     print(f"  input impedance (chopped): {abs(args.voff / r['lab5_chop']['i_avg'])/1e6:.2f} MOhm differential"
           f" (1/(2 f_ch Cin) = {1/(2*FCH*CIN)/1e6:.2f} MOhm)")
@@ -206,7 +211,7 @@ def main():
         matplotlib.use("Agg")
         import matplotlib.pyplot as plt
         fig, ax = plt.subplots(figsize=(7, 4.2), constrained_layout=True)
-        for k, lab in (("lab5_nochop", "unchopped"), ("lab5_chop", "chopped")):
+        for k, lab in [(k, l) for k, l in (("lab5_nochop", "unchopped"), ("lab5_chop", "chopped")) if k in r]:
             g = r[k]["gain"]
             ax.loglog(r[k]["f"][1:], np.sqrt(r[k]["psd"][1:]) / g * 1e9, lw=0.6, label=lab)
         ax.set(xlabel="frequency (Hz)", ylabel="input-referred noise (nV/√Hz)", xlim=(1, 2e4),

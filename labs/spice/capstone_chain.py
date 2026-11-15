@@ -10,7 +10,7 @@
    and 2 s of CHB-MIT chb01_03, FP1-F7, from the seizure onset at 2996 s (EEG), each on top of the
    300 mV offset. Python then applies the PGA (x1 for ECG, x8 for EEG), decimates to 500 S/s and
    quantises to 16 bits over +-0.5 V (the incremental-DS path of Chapter 20), and compares the result
-   with the input filtered the same way: gain, error and SNR over 0.5-40 Hz, and, for the ECG, the R
+   with the input filtered the same way: gain, error and SNR over 3-40 Hz (above the lab's 2 Hz servo corner), and, for the ECG, the R
    peaks that Lab 11's Pan-Tompkins detector finds.
 Needs Docker, hpretl/iic-osic-tools:2026.10, wfdb and the local PhysioNet copies of the set-up
 (data/physionet/). Outputs go to labs/spice/out/ (git-ignored).
@@ -72,9 +72,12 @@ def load_eeg(seconds, start=2996.0):
     return np.arange(len(x)) / fs, x - np.mean(x)
 
 
+BAND = (3.0, 40.0)            # above the lab netlist's 2 Hz servo corner (the chip's is 0.5 Hz)
+
+
 def band(y, fs):
-    """The comparison band: 0.5-40 Hz (zero-phase, so that delays do not count as error)."""
-    sos = sps.butter(2, [0.5, 40], "band", fs=fs, output="sos")
+    """The comparison band (zero-phase, so that delays do not count as error)."""
+    sos = sps.butter(2, list(BAND), "band", fs=fs, output="sos")
     return sps.sosfiltfilt(sos, y)
 
 
@@ -87,14 +90,19 @@ def chain(tag, t_in, x_in, g_pga, seconds):
     y = sps.decimate(sps.decimate(y, 4, ftype="fir"), 8, ftype="fir")       # 16 kHz -> 500 S/s
     y = biosig.quantize(y, 16, 0.5)
     to = T0 + np.arange(len(y)) / FS_OUT
-    ref = np.interp(to, t_in, x_in)
+    # the designed linear response, the servo's first-order high-pass at F_HP, applied causally from t = 0 as in
+    # the circuit (the 500 Hz measurement pole adds only 0.3 ms of delay below 40 Hz); what remains is the error
+    tf = np.arange(0, seconds, 1 / FS_OUT)
+    bh, ah = sps.butter(1, L5.F_HP, "high", fs=FS_OUT)
+    r0 = sps.lfilter(bh, ah, np.interp(tf, t_in, x_in))
+    ref = np.interp(to, tf, r0)
     yb, rb = band(y, FS_OUT), band(ref, FS_OUT)
-    trim = slice(int(0.25 * FS_OUT), -int(0.25 * FS_OUT))                  # filter edges
+    trim = slice(int(0.3 * FS_OUT), -int(0.3 * FS_OUT))                    # filter edges
     yb, rb = yb[trim], rb[trim]
     g = float(np.dot(yb, rb) / np.dot(rb, rb))
     err = yb - g * rb
     snr = 20 * np.log10(np.std(g * rb) / np.std(err))
-    return dict(t=to, y=y, ref=ref, g=g, snr=snr, err_in=np.std(err) / g, sig_in=np.std(rb))
+    return dict(t=to, y=y, ref=ref, g=g, snr=snr, err_in=np.std(err) / abs(g), sig_in=np.std(rb))   # g < 0: the LNA inverts
 
 
 def main():
@@ -127,11 +135,11 @@ def main():
     tb = beats[(beats > T0 + 0.3) & (beats < T_ECG - 0.3)]
     pk = pk[(pk > T0 + 0.3) & (pk < T_ECG - 0.3)]
     found = sum(np.any(np.abs(pk - b) < 0.075) for b in tb)
-    print("2. Real signals through the LNA (tt), PGA, decimation to 500 S/s and 16 bits; 0.5-40 Hz band:")
-    print(f"   ECG, MIT-BIH 100, 3 s: chain gain {e['g']:.1f} (LNA x PGA x1), SNR {e['snr']:.1f} dB, "
+    print(f"2. Real signals through the LNA (tt), PGA, decimation to 500 S/s and 16 bits; {BAND[0]:g}-{BAND[1]:g} Hz band:")
+    print(f"   ECG, MIT-BIH 100, 3 s: chain gain {abs(e['g']):.1f} (LNA x PGA x1), SNR {e['snr']:.1f} dB, "
           f"error {e['err_in']*1e6:.1f} µVrms referred to the input; R peaks found {found} of {len(tb)}, "
           f"extra detections {len(pk) - found}")
-    print(f"   EEG, CHB-MIT chb01_03 FP1-F7 at 2996 s, 2 s: chain gain {g['g']:.0f} (LNA x PGA x8), "
+    print(f"   EEG, CHB-MIT chb01_03 FP1-F7 at 2996 s, 2 s: chain gain {abs(g['g']):.0f} (LNA x PGA x8), "
           f"SNR {g['snr']:.1f} dB, error {g['err_in']*1e6:.2f} µVrms for a {g['sig_in']*1e6:.1f} µVrms signal")
     try:
         import matplotlib
@@ -141,7 +149,7 @@ def main():
         fig, (a1, a2) = plt.subplots(1, 2, figsize=(11, 3.8), constrained_layout=True)
         for ax, d, sc, lab in ((a1, e, 1e3, "ECG (mV)"), (a2, g, 1e6, "EEG (µV)")):
             k = d["t"] > T0 + 0.25
-            ax.plot(d["t"][k], band(d["ref"], FS_OUT)[k] * sc, color="0.6", lw=2.2, label="input, 0.5–40 Hz")
+            ax.plot(d["t"][k], band(d["ref"], FS_OUT)[k] * sc, color="0.6", lw=2.2, label=f"input, {BAND[0]:g}–{BAND[1]:g} Hz")
             ax.plot(d["t"][k], band(d["y"], FS_OUT)[k] / d["g"] * sc, lw=0.9, label="chain output / gain")
             ax.set(xlabel="time (s)", ylabel=lab)
             ax.legend(fontsize=8, loc="upper right")
