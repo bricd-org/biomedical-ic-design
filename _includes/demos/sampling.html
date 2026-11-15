@@ -2,20 +2,21 @@
 <div class="bd" id="bdSmp" role="group" aria-label="Interactive demo: sampling and quantisation">
   <div class="bd-head"><span>// try it · sampling and rounding</span></div>
   <div class="bd-sliders">
-    <label class="bd-sl"><span>tone frequency (f<sub>s</sub> = 500 S/s) <b data-v="f"></b></span><input type="range" data-k="f" min="1" max="1000" step="1" value="40" aria-label="Tone frequency"></label>
+    <label class="bd-sl"><span>sample rate f<sub>s</sub> <b data-v="fs"></b></span><input type="range" data-k="fs" min="0" max="100" step="0.5" value="43.6" aria-label="Sample rate"></label>
+    <label class="bd-sl"><span>tone frequency <b data-v="f"></b></span><input type="range" data-k="f" min="1" max="1000" step="1" value="40" aria-label="Tone frequency"></label>
     <label class="bd-sl"><span>converter bits N <b data-v="nb"></b></span><input type="range" data-k="nb" min="1" max="16" step="1" value="4" aria-label="Bits"></label>
     <label class="bd-sl"><span>tone amplitude <b data-v="amp"></b></span><input type="range" data-k="amp" min="-40" max="0" step="1" value="-1" aria-label="Amplitude"></label>
   </div>
   <div class="bd-scope"><canvas data-c="t" aria-hidden="true"></canvas><span class="bd-tag">the tone, its samples and what they describe</span></div>
   <div class="bd-scope short"><canvas data-c="q" aria-hidden="true"></canvas><span class="bd-tag">quantisation error, in LSB</span></div>
-  <div class="bd-read" aria-live="polite"><span>samples describe <b data-o="fa">–</b></span><span>SQNR measured <b data-o="sq">–</b></span><span>6.02N + 1.76 dB <b data-o="th">–</b></span></div>
+  <div class="bd-read" aria-live="polite"><span>samples describe <b data-o="fa">–</b></span><span>held output vs tone <b data-o="he">–</b></span><span>SQNR measured <b data-o="sq">–</b></span><span>6.02N + 1.76 dB <b data-o="th">–</b></span></div>
   <p class="bd-caption" data-o="cap"></p>
 </div>
 <script>
 (function () {
   var root = document.getElementById('bdSmp'); if (!root || !window.BD) return;
-  var FS = 500;
   var S = BD.bind(root, {
+    fs:  { map: function (v) { return Math.round(10 * Math.pow(10, 1.602 * v / 100)) * 10; }, fmt: function (x) { return BD.eng(x) + 'S/s'; } },
     f:   { fmt: function (x) { return x.toFixed(0) + ' Hz'; } },
     nb:  { fmt: function (x) { return x.toFixed(0) + ' bits'; } },
     amp: { fmt: function (x) { return x.toFixed(0) + ' dBFS'; } }
@@ -23,7 +24,7 @@
   var q = function (s) { return root.querySelector(s); };
   function quant(v, nb) { var L = Math.pow(2, nb), d = 2 / L; return Math.max(-1 + d / 2, Math.min(1 - d / 2, (Math.floor(v / d) + 0.5) * d)); }
   function draw() {
-    var f0 = S.f, nb = S.nb, A = Math.pow(10, S.amp / 20) * 0.999;
+    var FS = S.fs, f0 = S.f, nb = S.nb, A = Math.pow(10, S.amp / 20) * 0.999;
     var r = f0 % FS, fa = r > FS / 2 ? FS - r : r, sgn = r > FS / 2 ? -1 : 1;
     // time panel: 40 ms
     var T = 0.04, d = BD.setup(q('[data-c="t"]')), f = BD.frame(d, { x: [0, T], y: [-1.15, 1.15], xt: [[0, '0'], [0.01, '10 ms'], [0.02, '20 ms'], [0.03, '30 ms'], [0.04, '40 ms']],
@@ -44,12 +45,16 @@
     var sq = 10 * Math.log10(ss / se);
     var e2 = BD.setup(q('[data-c="q"]')), fq = BD.frame(e2, { x: [0, 400], y: [-0.7, 0.7], yt: [[-0.5, '−0.5'], [0, '0'], [0.5, '+0.5']], xt: [[0, '0'], [200, '200'], [380, '380 samples']], pad: { l: 40 } });
     BD.line(fq, es.map(function (_, i) { return i; }), es, BD.C.teal, 1);
+    var he = 0, nh = 0;                        // rms gap between the held, rounded output and the tone itself
+    for (k = 0; k <= 2000; k++) { var tk = T * k / 2000, idx = Math.min(qs.length - 1, Math.floor(tk * FS + 1e-9)); he += Math.pow(qs[idx] - ys[k], 2); nh++; }
+    he = Math.sqrt(he / nh) / Math.max(A, 1e-9) * 100;
+    q('[data-o="he"]').textContent = he.toFixed(he < 1 ? 2 : 1) + ' % rms of the tone';
     q('[data-o="fa"]').textContent = fa.toFixed(0) + ' Hz' + (fa !== f0 ? ' (aliased)' : '');
     q('[data-o="sq"]').textContent = sq.toFixed(1) + ' dB';
     q('[data-o="th"]').textContent = (6.02 * nb + 1.76 + S.amp).toFixed(1) + ' dB at this amplitude';
-    var c = f0 > FS / 2 ? 'The tone is above f<sub>s</sub>/2 = 250 Hz: its samples (blue dots) are exactly those of a ' + fa.toFixed(0) + ' Hz tone (dashed). Nothing after the sampler can tell the two apart; only a filter before it can. '
+    var c = f0 > FS / 2 ? 'The tone is above f<sub>s</sub>/2 = ' + (FS / 2).toFixed(0) + ' Hz: its samples (blue dots) are exactly those of a ' + fa.toFixed(0) + ' Hz tone (dashed). Nothing after the sampler can tell the two apart; only a filter before it can. '
       : 'Below f<sub>s</sub>/2 the samples describe the tone itself. ';
-    c += 'Rounding to ' + nb + ' bits adds an error that stays within ±½ LSB; for a busy signal it behaves like noise of LSB²/12, which gives 6.02N + 1.76 dB for a full-scale sine and 1 dB less per dB of back-off.' + (nb <= 3 ? ' At so few bits the error is visibly correlated with the signal: it is distortion, not noise.' : '');
+    c += 'Rounding to ' + nb + ' bits adds an error that stays within ±½ LSB; for a busy signal it behaves like noise of LSB²/12, which gives 6.02N + 1.76 dB for a full-scale sine and 1 dB less per dB of back-off. The held output (white staircase) follows the tone more closely with both a faster rate and more bits: the rate shrinks the steps in time, the bits shrink them in amplitude.' + (nb <= 3 ? ' At so few bits the error is visibly correlated with the signal: it is distortion, not noise.' : '');
     q('[data-o="cap"]').innerHTML = c;
   }
   BD.observe(root, draw);

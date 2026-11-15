@@ -35,12 +35,25 @@
     BD.line(f, xs, ys, BD.C.blue, 2);
     BD.vline(f, fs / 2, BD.C.gold, [4, 3], 'fs/2');
     if (fs < 3e4) BD.vline(f, fs, 'rgba(224,184,90,.5)', [2, 3], 'fs');
-    // interferer and its alias
-    var yi = -A;
-    g.strokeStyle = BD.C.red; g.lineWidth = 2; g.beginPath(); g.moveTo(f.X(fi), f.Y(-80)); g.lineTo(f.X(fi), f.Y(Math.max(yi, -80))); g.stroke();
-    BD.dot(f, fi, Math.max(yi, -80), BD.C.red, 4);
-    if (fa >= 10) { g.setLineDash([3, 3]); g.beginPath(); g.moveTo(f.X(fi), f.Y(Math.max(yi, -80)) - 6); g.lineTo(f.X(fa), f.Y(Math.max(yi, -80)) - 6); g.stroke(); g.setLineDash([]);
-      BD.dot(f, fa, Math.max(yi, -80), 'rgba(240,138,106,.6)', 4); }
+    // the band above fs/2 folds back: tint it
+    g.fillStyle = 'rgba(240,138,106,.07)'; g.fillRect(f.X(fs / 2), f.p.t, d.w - f.p.r - f.X(fs / 2), d.h - f.p.t - f.p.b);
+    g.fillStyle = 'rgba(243,154,124,.8)'; g.textAlign = 'right'; g.fillText('above fs/2: folds back', d.w - f.p.r - 4, f.p.t + 22); g.textAlign = 'left';
+    // interferer (solid stem) and, if it is above fs/2, the alias it becomes (dashed stem, hollow ring) with a fold arrow
+    var ya = Math.max(-A, -80), X1 = f.X(fi), Y1 = f.Y(ya);
+    g.strokeStyle = BD.C.red; g.lineWidth = 2; g.beginPath(); g.moveTo(X1, f.Y(-80)); g.lineTo(X1, Y1); g.stroke();
+    BD.dot(f, fi, ya, BD.C.red, 4);
+    if (fi > fs / 2 && fa >= 10) {
+      var X2 = f.X(fa);
+      g.setLineDash([3, 3]); g.lineWidth = 1.6; g.beginPath(); g.moveTo(X2, f.Y(-80)); g.lineTo(X2, Y1); g.stroke(); g.setLineDash([]);
+      g.lineWidth = 1.6; g.beginPath(); g.arc(X2, Y1, 4.5, 0, 7); g.stroke();
+      var ytop = Math.max(f.p.t + 30, Y1 - 60), cx = (X1 + X2) / 2;
+      g.lineWidth = 1.5; g.beginPath(); g.moveTo(X1, Y1 - 9); g.quadraticCurveTo(cx, ytop, X2, Y1 - 9); g.stroke();
+      var ang = Math.atan2((Y1 - 9) - ytop, X2 - cx), hx = X2, hy = Y1 - 9;
+      g.fillStyle = BD.C.red; g.beginPath(); g.moveTo(hx, hy);
+      g.lineTo(hx - 8 * Math.cos(ang - 0.4), hy - 8 * Math.sin(ang - 0.4)); g.lineTo(hx - 8 * Math.cos(ang + 0.4), hy - 8 * Math.sin(ang + 0.4)); g.closePath(); g.fill();
+      g.fillStyle = '#f39a7c'; g.textAlign = 'center'; g.fillText('folds to ' + BD.eng(fa) + 'Hz', cx, (Y1 - 9 + ytop) / 2 - (Y1 - ytop) / 4 - 8); g.textAlign = 'left';
+    }
+    g.fillStyle = '#f39a7c'; g.fillText('interferer', X1 + 6, Math.min(Y1 + 14, d.h - f.p.b - 4));
     q('[data-o="att"]').textContent = A.toFixed(1) + ' dB';
     q('[data-o="al"]').textContent = BD.eng(fa) + 'Hz' + (fa <= 500 && fi > fs / 2 ? ' (in band!)' : '');
     q('[data-o="dr"]').textContent = att(500, fc, n).toFixed(2) + ' dB';
