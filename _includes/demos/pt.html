@@ -1,0 +1,84 @@
+{% include demos/assets.html %}
+<div class="bd" id="bdPt" role="group" aria-label="Interactive demo: the Pan-Tompkins QRS detector, stage by stage">
+  <div class="bd-head"><span>// try it · Pan–Tompkins, stage by stage</span>
+    <span class="bd-seg" role="group" aria-label="Stage"><button type="button" data-st="0" aria-pressed="false">input</button><button type="button" data-st="1" aria-pressed="false">band-pass</button><button type="button" data-st="2" aria-pressed="false">derivative²</button><button type="button" data-st="3" aria-pressed="true">integral + threshold</button></span></div>
+  <div class="bd-sliders">
+    <label class="bd-sl"><span>added noise <b data-v="nz"></b></span><input type="range" data-k="nz" min="0" max="400" step="10" value="100" aria-label="Noise"></label>
+    <label class="bd-sl"><span>ADC bits over ±5 mV <b data-v="nb"></b></span><input type="range" data-k="nb" min="2" max="12" step="1" value="12" aria-label="Bits"></label>
+  </div>
+  <div class="bd-scope tall"><canvas data-c="p" aria-hidden="true"></canvas><span class="bd-tag" data-o="tag">stage output, 6 s of a 20 s record</span></div>
+  <div class="bd-read" aria-live="polite"><span>beats <b data-o="nb">–</b></span><span>sensitivity <b data-o="se">–</b></span><span>positive predictivity <b data-o="ppv">–</b></span></div>
+  <div class="bd-controls"><button type="button" class="bd-btn" data-b="new">new record</button><button type="button" class="bd-toggle" data-t="bw" aria-pressed="true">baseline wander</button></div>
+  <p class="bd-caption" data-o="cap"></p>
+</div>
+<script>
+(function () {
+  var root = document.getElementById('bdPt'); if (!root || !window.BD) return;
+  var FS = 200, T = 20, N = FS * T, st = 3, seed = 7, wander = true;
+  var S = BD.bind(root, { nz: { fmt: function (x) { return x.toFixed(0) + ' µVrms'; } }, nb: { fmt: function (x) { return x.toFixed(0) + ' bits'; } } }, function () { draw(); });
+  BD.seg(root, 'st', function (v) { st = parseInt(v, 10); draw(); });
+  BD.toggle(root.querySelector('[data-t="bw"]'), function (on) { wander = on; draw(); });
+  root.querySelector('[data-b="new"]').addEventListener('click', function () { seed++; draw(); });
+  var q = function (s) { return root.querySelector(s); };
+  function record() {                        // synthetic ECG with heart-rate variability; R times returned
+    var r = BD.rng(seed), x = new Float64Array(N), beats = [], t = 0.4;
+    while (t < T - 0.3) { beats.push(t); t += 60 / (70 + 12 * (r() - 0.5)) ; }
+    for (var n = 0; n < N; n++) {
+      var tt = n / FS, v = 0;
+      for (var b = 0; b < beats.length; b++) { var d = tt - beats[b]; if (d < -0.35 || d > 0.5) continue;
+        v += 0.12 * Math.exp(-Math.pow((d + 0.18) / 0.03, 2)) - 0.1 * Math.exp(-Math.pow((d + 0.025) / 0.01, 2)) + 1.0 * Math.exp(-Math.pow(d / 0.011, 2))
+           - 0.22 * Math.exp(-Math.pow((d - 0.03) / 0.01, 2)) + 0.3 * Math.exp(-Math.pow((d - 0.25) / 0.05, 2)); }
+      x[n] = 1e-3 * v;
+    }
+    return { x: x, beats: beats, r: r };
+  }
+  function draw() {
+    var R = record(), x = R.x, nz = S.nz * 1e-6, L = Math.pow(2, S.nb), dq = 10e-3 / L, y = new Float64Array(N), g = BD.rng(seed * 31 + 1);
+    var gs = function () { var u = 1 - g(), v = g(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+    for (var n = 0; n < N; n++) {
+      var v = x[n] + nz * gs() + (wander ? 200e-6 * Math.sin(2 * Math.PI * 0.3 * n / FS) : 0);
+      y[n] = Math.max(-5e-3, Math.min(5e-3 - dq, (Math.floor(v / dq) + 0.5) * dq));
+    }
+    // Pan-Tompkins integer filters at 200 S/s
+    var lp = new Float64Array(N), hp = new Float64Array(N), dv = new Float64Array(N), sq = new Float64Array(N), mw = new Float64Array(N), p = 0;
+    for (n = 0; n < N; n++) {
+      lp[n] = (n >= 1 ? 2 * lp[n - 1] : 0) - (n >= 2 ? lp[n - 2] : 0) + y[n] - (n >= 6 ? 2 * y[n - 6] : 0) + (n >= 12 ? y[n - 12] : 0);
+      p += lp[n] - (n >= 32 ? lp[n - 32] : 0);
+      hp[n] = (n >= 16 ? lp[n - 16] : 0) - p / 32;
+      dv[n] = (2 * hp[n] + (n >= 1 ? hp[n - 1] : 0) - (n >= 3 ? hp[n - 3] : 0) - (n >= 4 ? 2 * hp[n - 4] : 0)) / 8;
+      sq[n] = dv[n] * dv[n];
+      var s = 0; for (var k = 0; k < 30 && n - k >= 0; k++) s += sq[n - k]; mw[n] = s / 30;
+    }
+    // peaks of the integral, adaptive threshold, 200 ms refractory period; delay of the chain ~ 5 + 16 + 2 + 15 samples
+    var spk = 0, npk = 0, det = [], thr = [], last = -1e9, init = 2 * FS;
+    for (n = 0; n < init; n++) spk = Math.max(spk, mw[n]);
+    spk *= 0.5; for (n = 0; n < init; n++) npk += mw[n] / init; npk *= 0.5;
+    for (n = 1; n < N - 1; n++) {
+      var th = npk + 0.25 * (spk - npk); thr.push(th);
+      if (mw[n] > mw[n - 1] && mw[n] >= mw[n + 1] && n - last > 0.2 * FS) {
+        if (mw[n] > th) { det.push((n - 38) / FS); spk = 0.125 * mw[n] + 0.875 * spk; last = n; }
+        else npk = 0.125 * mw[n] + 0.875 * npk;
+      }
+    }
+    var tp = 0, used = {};
+    R.beats.forEach(function (b) { for (var i = 0; i < det.length; i++) if (!used[i] && Math.abs(det[i] - b) < 0.15) { used[i] = 1; tp++; break; } });
+    var se = tp / R.beats.length, ppv = det.length ? tp / det.length : 0;
+    // plot 6 s from t = 2 s
+    var t0 = 2, t1 = 8, sig = [y, hp, sq, mw][st], xs = [], ys = [], mx = 0;
+    for (n = t0 * FS; n < t1 * FS; n++) { xs.push(n / FS); ys.push(sig[n]); mx = Math.max(mx, Math.abs(sig[n])); }
+    var lo = st >= 2 ? 0 : -mx * 1.1, hi = mx * 1.15 || 1;
+    var d = BD.setup(q('[data-c="p"]')), f = BD.frame(d, { x: [t0, t1], y: [lo, hi], xt: [[2, '2 s'], [4, '4 s'], [6, '6 s'], [8, '8 s']], yt: [], pad: { l: 14 } });
+    BD.line(f, xs, ys, BD.C.blue, 1.2);
+    if (st === 3) { var tx = [], ty = []; for (n = t0 * FS; n < t1 * FS; n++) { tx.push(n / FS); ty.push(thr[n - 1]); } BD.line(f, tx, ty, BD.C.red, 1, [4, 3]); }
+    R.beats.forEach(function (b) { if (b > t0 && b < t1) { var xx = f.X(b); d.g.fillStyle = 'rgba(224,184,90,.8)'; d.g.fillRect(xx - 1, f.p.t, 2, 6); } });
+    det.forEach(function (t) { if (t > t0 && t < t1) BD.dot(f, t, lo + (hi - lo) * 0.06, BD.C.green, 3.5); });
+    q('[data-o="tag"]').textContent = ['input after the converter', 'band-pass 5–15 Hz', 'derivative, squared', 'moving-window integral (150 ms) and adaptive threshold'][st] + ' · gold: true beats · green: detections';
+    q('[data-o="nb"]').textContent = R.beats.length;
+    q('[data-o="se"]').textContent = (se * 100).toFixed(1) + ' %';
+    q('[data-o="ppv"]').textContent = (ppv * 100).toFixed(1) + ' %';
+    q('[data-o="cap"]').innerHTML = 'The band-pass keeps the QRS complex\'s 5–15 Hz and drops the P and T waves, wander and much of the noise; the derivative and the square make every steep slope a positive peak; the 150 ms integral turns each QRS into one hump, and the threshold follows the signal and noise peak levels. ' +
+      (S.nb <= 4 ? 'At ' + S.nb + ' bits the quantisation step is ' + (dq * 1e6).toFixed(0) + ' µV: Chapter 24 finds the detector still works down to about 5 bits.' : 'Push the noise to 300–400 µVrms, or the bits down to 3, to make it fail.');
+  }
+  BD.observe(root, draw);
+})();
+</script>

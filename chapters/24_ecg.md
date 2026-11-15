@@ -48,6 +48,12 @@ The detector of Pan and Tompkins {% include cite.html keys="pantompkins1985" %} 
 
 The original paper reported detecting 99.3 % of the beats in the MIT-BIH Arrhythmia Database {% include cite.html keys="mitbih" %}. `figsrc/ch24_figs.py` contains a compact version, and [Figure 24.2](#fig-24-2)a shows its stages.
 
+The demo below runs the detector of [Figure 24.1](#fig-24-1) on a 20 s synthetic ECG with heart-rate variability, using the original integer filters at 200 S/s. Step through the stages, then add noise or take bits away and watch the sensitivity and positive predictivity.
+
+{::nomarkdown}
+{% include demos/pt.html %}
+{:/}
+
 ## <span class="secnum">24.2</span>Heart rate and HRV
 
 The intervals between successive R peaks, the **RR intervals**, give the instantaneous heart rate. Their variation, **heart-rate variability**, reflects the autonomic nervous system. Time-domain metrics are SDNN (the standard deviation of normal RR intervals) and RMSSD (the rms of successive differences). Frequency-domain metrics are the power in the low-frequency (0.04–0.15 Hz) and high-frequency (0.15–0.4 Hz) bands of the RR series, after resampling it to a uniform rate. HRV needs R-peak times accurate to a few milliseconds, which 500 S/s and a peak refinement on the band-passed signal provide; 125 S/s with parabolic interpolation of the peak is almost as good.
