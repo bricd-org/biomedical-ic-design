@@ -1,0 +1,58 @@
+{% include demos/assets.html %}
+<div class="bd" id="bdFft" role="group" aria-label="Interactive demo: coherent sampling and window leakage">
+  <div class="bd-head"><span>// try it · testing a converter with an FFT</span>
+    <span class="bd-seg" role="group" aria-label="Window"><button type="button" data-win="rect" aria-pressed="true">no window</button><button type="button" data-win="hann" aria-pressed="false">Hann</button><button type="button" data-win="bh" aria-pressed="false">Blackman–Harris</button></span></div>
+  <div class="bd-sliders">
+    <label class="bd-sl"><span>tone: cycles in the 4096-point record <b data-v="cyc"></b></span><input type="range" data-k="cyc" min="60" max="70" step="0.05" value="67" aria-label="Cycles in record"></label>
+    <label class="bd-sl"><span>converter bits <b data-v="nb"></b></span><input type="range" data-k="nb" min="6" max="16" step="1" value="12" aria-label="Bits"></label>
+  </div>
+  <div class="bd-scope tall"><canvas data-c="p" aria-hidden="true"></canvas><span class="bd-tag">FFT of the converter output (dBFS)</span></div>
+  <div class="bd-read" aria-live="polite"><span>SNR read from the FFT <b data-o="snr">–</b></span><span>ideal 6.02N + 1.76 <b data-o="th">–</b></span><span data-o="coh"></span></div>
+  <p class="bd-caption" data-o="cap"></p>
+</div>
+<script>
+(function () {
+  var root = document.getElementById('bdFft'); if (!root || !window.BD) return;
+  var N = 4096, win = 'rect';
+  var S = BD.bind(root, { cyc: { fmt: function (x) { return x.toFixed(2); } }, nb: { fmt: function (x) { return x.toFixed(0) + ' bits'; } } }, function () { draw(); });
+  BD.seg(root, 'win', function (v) { win = v; draw(); });
+  var q = function (s) { return root.querySelector(s); };
+  function w(n) {
+    var x = 2 * Math.PI * n / N;
+    if (win === 'hann') return 0.5 - 0.5 * Math.cos(x);
+    if (win === 'bh') return 0.35875 - 0.48829 * Math.cos(x) + 0.14128 * Math.cos(2 * x) - 0.01168 * Math.cos(3 * x);
+    return 1;
+  }
+  function draw() {
+    var nb = S.nb, L = Math.pow(2, nb), dq = 2 / L, A = 0.999 - dq;
+    var re = new Float64Array(N), im = new Float64Array(N), sw = 0, sw2 = 0;
+    for (var n = 0; n < N; n++) {
+      var v = A * Math.sin(2 * Math.PI * S.cyc * n / N + 0.4), y = (Math.floor(v / dq) + 0.5) * dq, ww = w(n);
+      re[n] = y * ww; sw += ww; sw2 += ww * ww;
+    }
+    BD.fft(re, im);
+    var P = [], tot = 0, sig = 0, k0 = Math.round(S.cyc), span = win === 'rect' ? 1 : win === 'hann' ? 2 : 4;
+    for (var k = 0; k < N / 2; k++) {
+      var p = (re[k] * re[k] + im[k] * im[k]) / (sw * sw / 4); P.push(p);
+      if (k >= 1) { tot += p; if (Math.abs(k - k0) <= span) sig += p; }
+    }
+    var snr = 10 * Math.log10(sig / Math.max(tot - sig, 1e-30));
+    var d = BD.setup(q('[data-c="p"]')), f = BD.frame(d, { x: [0, N / 2], y: [-160, 5],
+      xt: [[0, '0'], [512, '512'], [1024, '1024'], [1536, '1536'], [2048, '2048 = fs/2']], yt: [[0, '0'], [-40, '−40'], [-80, '−80'], [-120, '−120'], [-160, '−160']], pad: { l: 46 } });
+    var xs = [], ys = [];
+    for (k = 1; k < N / 2; k++) { xs.push(k); ys.push(10 * Math.log10(P[k] + 1e-30)); }
+    BD.line(f, xs, ys, BD.C.blue, 0.8);
+    var floor = 10 * Math.log10(dq * dq / 12 * 2 / N * (sw2 * N) / (sw * sw));
+    BD.hline(f, floor, BD.C.gold, [5, 4], 'quantisation floor per bin');
+    var coh = Math.abs(S.cyc - Math.round(S.cyc)) < 1e-9;
+    q('[data-o="snr"]').textContent = snr.toFixed(1) + ' dB';
+    q('[data-o="th"]').textContent = (6.02 * nb + 1.76).toFixed(1) + ' dB';
+    q('[data-o="coh"]').innerHTML = coh ? '<b class="ok">coherent</b>' : '<b class="bad">not coherent</b>';
+    q('[data-o="cap"]').innerHTML = coh
+      ? 'An integer number of cycles fits the record, so the tone falls in one bin and the rest of the spectrum is the quantisation noise, spread over 2048 bins: the floor sits 10 log<sub>10</sub>(2048) = 33 dB below the noise power. ' + (win !== 'rect' ? 'A window is not needed here; it only widens the tone.' : '') +
+        (S.cyc % 2 === 0 ? ' But an even number of cycles shares a factor with 4096: the codes repeat, and the noise is not noise. Prime cycle counts (61, 67) avoid that.' : '')
+      : 'A fractional number of cycles leaks the tone into every bin. Without a window the leakage skirt buries the quantisation noise and the SNR reads far too low; a Hann or Blackman–Harris window confines the tone to a few bins, at the cost of a slightly higher floor. Better still, make the record coherent.';
+  }
+  BD.observe(root, draw);
+})();
+</script>

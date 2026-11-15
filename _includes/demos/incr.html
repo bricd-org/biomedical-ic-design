@@ -1,0 +1,47 @@
+{% include demos/assets.html %}
+<div class="bd" id="bdIncr" role="group" aria-label="Interactive demo: resolution of an incremental delta-sigma converter">
+  <div class="bd-head"><span>// try it · an incremental ΔΣ, reset every conversion</span>
+    <span class="bd-seg" role="group" aria-label="Loop and decimator"><button type="button" data-ord="1" aria-pressed="false">1st order + counter</button><button type="button" data-ord="2" aria-pressed="true">2nd order + CoI</button></span></div>
+  <div class="bd-sliders">
+    <label class="bd-sl"><span>cycles per conversion M <b data-v="m"></b></span><input type="range" data-k="m" min="4" max="11" step="1" value="10" aria-label="Cycles per conversion"></label>
+  </div>
+  <div class="bd-scope tall"><canvas data-c="p" aria-hidden="true"></canvas><span class="bd-tag">conversion error against DC input over ±0.8 of the reference, 8001 inputs (log)</span></div>
+  <div class="bd-read" aria-live="polite"><span>worst error <b data-o="e">–</b></span><span>resolution log<sub>2</sub>(1/err) <b data-o="b">–</b></span><span>at 512 kHz <b data-o="r">–</b></span></div>
+  <p class="bd-caption" data-o="cap"></p>
+</div>
+<script>
+(function () {
+  var root = document.getElementById('bdIncr'); if (!root || !window.BD) return;
+  var ord = 2;
+  var S = BD.bind(root, { m: { map: function (v) { return Math.pow(2, v); }, fmt: function (x) { return x.toFixed(0); } } }, function () { draw(); });
+  BD.seg(root, 'ord', function (v) { ord = parseInt(v, 10); draw(); });
+  var q = function (s) { return root.querySelector(s); };
+  function convert(u, M, L) {
+    if (L === 1) {                       // first order, counter: mean of the bits
+      var x = 0, s = 0;
+      for (var n = 0; n < M; n++) { var v = x >= 0 ? 1 : -1; s += v; x += u - v; }
+      return s / M;
+    }
+    var a1 = 0.5, a2 = 0.5, x1 = 0, x2 = 0, s1 = 0, s2 = 0, run = 0;   // as biosig.incremental2 (Chapter 19)
+    for (n = 0; n < M; n++) { v = x2 >= 0 ? 1 : -1; s2 += run; run += v; s1 += v; x2 += a2 * (x1 - v); x1 += a1 * (u - v); }
+    return (s1 + a1 * s2) / (a1 * M * (M - 1) / 2);
+  }
+  function draw() {
+    var M = S.m, xs = [], ys = [], worst = 0;
+    for (var i = 0; i <= 8000; i++) { var u = -0.8 + 1.6 * i / 8000, e = Math.abs(convert(u, M, ord) - u); xs.push(u); ys.push(Math.max(e, 1e-9)); worst = Math.max(worst, e); }
+    var d = BD.setup(q('[data-c="p"]')), f = BD.frame(d, { x: [-0.85, 0.85], y: [1e-8, 1], ylog: true,
+      xt: [[-0.8, '−0.8'], [-0.4, '−0.4'], [0, '0'], [0.4, '+0.4'], [0.8, '+0.8']], yt: [[1e-7, '1e−7'], [1e-5, '1e−5'], [1e-3, '1e−3'], [1e-1, '0.1']], pad: { l: 50 } });
+    BD.line(f, xs, ys, BD.C.blue, 1);
+    BD.hline(f, worst, BD.C.gold, [5, 4], 'worst case');
+    BD.hline(f, Math.pow(2, -16), 'rgba(127,224,160,.6)', [2, 3], '16 bits');
+    var bits = Math.log2(1 / worst);
+    q('[data-o="e"]').textContent = worst.toExponential(2);
+    q('[data-o="b"]').textContent = bits.toFixed(1) + ' bits';
+    q('[data-o="r"]').textContent = (512e3 / M).toFixed(0) + ' S/s';
+    q('[data-o="cap"]').innerHTML = ord === 1
+      ? 'A first-order loop read by a counter resolves only 1/M: each doubling of M buys one bit, so 16 bits would need 65 536 cycles per sample.'
+      : 'With a second-order loop and a cascade-of-integrators filter the error falls as 1/M²: two bits per doubling. Open-BioAFE uses M = 1024 at 512 kHz for 500 S/s and gets ' + (M === 1024 ? bits.toFixed(1) : '16.5') + ' bits worst case, the number Chapter 19 derives.';
+  }
+  BD.observe(root, draw);
+})();
+</script>

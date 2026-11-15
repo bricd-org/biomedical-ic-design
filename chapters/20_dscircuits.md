@@ -83,6 +83,12 @@ The incremental converter resets both integrators at the start of each conversio
 
 The decimator for a second-order incremental converter is a **cascade of two integrators** (CoI): an accumulator of the output bits, and an accumulator of that accumulator, whose final values combine into the estimate of [Chapter 19]({% link chapters/19_dstheory.md %}). It needs about $$\log_2(M(M-1)/2) = 19$$ bits of word length, two adders and two registers per channel, a few hundred gates clocked at 512 kHz.
 
+The demo below converts 8001 DC inputs with the loop of [Chapter 19]({% link chapters/19_dstheory.md %}) and plots the error of each. Compare a first-order loop read by a counter with the second-order loop and its cascade-of-integrators filter as M grows.
+
+{::nomarkdown}
+{% include demos/incr.html %}
+{:/}
+
 ## <span class="secnum">20.5</span>Decimation
 
 The decimator is a digital filter, and its frequency response matters ([Figure 20.3](#fig-20-3)b). A free-running modulator usually uses a **sinc$$^K$$** (CIC) filter, a cascade of $$K$$ moving averages, followed by half-band FIR stages. A moving average over a conversion has exact notches at every multiple of the output rate. The incremental CoI filter weights the samples by a ramp instead, and has no exact notches: its response falls as about $$1/(\pi k)$$ at the $$k$$-th multiple of the output rate. At 4 kHz, the eighth multiple of 500 S/s, it gives **−28 dB**. It droops by 0.9 dB at 150 Hz, the top of the ECG band, which a small digital equaliser can correct.

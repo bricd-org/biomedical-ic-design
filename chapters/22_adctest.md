@@ -50,6 +50,12 @@ Co-prime cycles also make every sample fall at a different phase, so the codes v
 
 When coherence is impossible, for example with a free-running generator or a real ECG, a **window** tapers the record's ends. A Hann window brings the leakage of a non-coherent tone from −80 dBc at a few hundred hertz away down below the 12-bit noise floor, at the price of spreading the tone over three bins and widening the noise bandwidth by 1.5. Sum the power of the bins under the main lobe for the signal, and exclude them from the noise. Close to the tone, though, the Hann sidelobes fall slowly: within a few tens of bins of a full-scale tone they still hold about −41 dBc, which caps the SNDR of an ideal 12-bit converter near 41 dB if only the main lobe is excluded. Exclude about 30 bins either side, or use a four-term Blackman–Harris window, whose leakage stays below the 12-bit floor outside its main lobe ([Lab 6]({% link chapters/31_labs.md %}#lab-6)).
 
+Try it below with an ideal converter: a 4096-point record, a tone of 67 cycles (prime, so coherent) and 12 bits. Slide the tone to 67.3 cycles, read the SNR, then add a window.
+
+{::nomarkdown}
+{% include demos/fftleak.html %}
+{:/}
+
 ## <span class="secnum">22.2</span>FFT-based SNDR and SFDR
 
 With the bins sorted into signal, harmonics, DC and noise, SNDR, SNR, THD and SFDR follow as in [Chapter 14]({% link chapters/14_adcspecs.md %}). Three practical points:
