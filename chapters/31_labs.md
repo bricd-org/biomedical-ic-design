@@ -267,6 +267,7 @@ The gain is 0.6 dB below $$C_1/C_2$$ because of the input devices' gate capacita
 ```bash
 python labs/spice/lab5_chopper.py              # chopped and unchopped, in parallel, 20-40 minutes
 python labs/spice/lab5_chopper.py --voff 0.1   # another electrode offset
+python labs/spice/lab5_chopper.py --ota sg13   # the chopped case with transistor-level SG13G2 OTAs
 ```
 
 The signal path is that of [Figure 10.1]({% link chapters/10_dsl.md %}#fig-10-1), fully differential. Its parts:
@@ -287,6 +288,8 @@ The amplifier is behavioural, so that its imperfections are known exactly: gain 
 | Ripple at 4 kHz, before the filter | 1.2 mV | — |
 | Servo output for 300 mV of electrode offset | −1.500 V (expected −1.500 V) | — |
 | Input impedance, differential | 6.5 MΩ (1/(2 f<sub>ch</sub> C<sub>in</sub>) = 6.25 MΩ) | about 18 GΩ |
+
+**With transistor-level OTAs.** `--ota sg13` replaces the behavioural amplifier with two low-noise SG13G2 folded cascodes from `labs/spice/sg13_ota.py` (1000 µm² PMOS input pair, 2 µA each), used as a pseudo-differential pair, with their measured input noise (93 nV/√Hz white, 1/f corner about 0.9 kHz, per OTA) copied into the trnoise source. The first run failed instructively: both outputs sat at the bottom rail, because the thin-oxide input gates leak about 60 pA, which is 0.6 V across the 10 GΩ feedback resistor (the leakage Chapter 8 met in pseudo-resistors). With 1 GΩ the shift drops to 60 mV and the R<sub>fb</sub>C<sub>fb</sub> corner, 800 Hz, stays below f<sub>ch</sub>. The chopped amplifier then gives a gain of 82.0 at 37 Hz (the OTA's 62 dB leaves a loop gain of only about 10 at this feedback factor), 2.2 mV of ripple, 6.4 MΩ of input impedance, the servo at −1.500 V, and 1.82 µVrms of input noise: five times the behavioural amplifier's, because this folded cascode's sinks and mirror more than double the input pair's noise and two OTAs add √2. The unchopped case cannot be run at all: no feedback resistor both passes 37 Hz and survives the leakage. Redesigning the OTA for the chip's 0.36 µVrms, with a current-reuse or telescopic input stage and thick-oxide or smaller input devices, is the exercise.
 
 Chopping moves the amplifier's 1/f noise up to 4 kHz, where the filter removes it, and leaves its white floor: the in-band noise falls 3.3 times. The price is the 1.2 mV of ripple, the amplifier's 1 mV offset chopped up to 4 kHz, and an input impedance that falls from gigaohms to 6.5 MΩ, as Chapter 9 predicts. The servo loop cancels the 300 mV electrode offset with exactly the −1.5 V that $$C_\mathrm{in}/C_\mathrm{DSL}$$ requires; at 3.3 V it has room for about ±0.6 V. The chopped gain is slightly lower than the unchopped one, because the chopped signal passes through the amplifier at 4 kHz and its harmonics, where the 10 MHz bandwidth divided by the noise gain of 121 is no longer far away.
 
