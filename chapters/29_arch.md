@@ -80,6 +80,12 @@ The channel's CMRR has an intrinsic part and a part lost to the source ([Chapter
   <figcaption><span class="capnum">Figure 29.3.</span> <strong>The chip meets its noise and power targets; dry electrodes use most of the noise budget.</strong> (a) Noise power over 0.5–100 Hz of one channel, by source, with wet and dry electrodes, against the 1.5 µVrms target (2.25 µV²). (b) Power per channel by block in ECG/EEG mode (with the ΔΣ converter) and EMG mode (with a share of the SAR), against the 10 µW target. From the chapter numbers collected in <code>figsrc/ch29_figs.py</code>.</figcaption>
 </figure>
 
+The demo below holds the two budgets of [Figure 29.3](#fig-29-3). Change the LNA current, the electrodes and the mode, and watch which term limits which budget.
+
+{::nomarkdown}
+{% include demos/budget.html %}
+{:/}
+
 ## <span class="secnum">29.4</span>SAR or ΔΣ per mode
 
 **Table 29.1. The Open-BioAFE specification against the designed chain.**

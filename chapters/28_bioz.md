@@ -61,6 +61,12 @@ The electrodes are in series with the tissue, and they are far larger. In a **bi
 
 The dynamic range follows: a $$\Delta Z$$ of a tenth of an ohm (cardiac) on 42 Ω of tissue, which may itself sit on kilohms of electrode impedance, is a change of a few parts in ten thousand. A readout that subtracts the baseline before amplifying it, like the servo loop of [Chapter 10]({% link chapters/10_dsl.md %}), is what makes it measurable.
 
+The demo below draws the Cole model and the point a 10 µA readout measures. It starts at this section's example (R<sub>0</sub> = 60 Ω, R<sub>∞</sub> = 30 Ω, f<sub>c</sub> = 30 kHz, α = 0.7: 42 Ω at −12° at 50 kHz); switch to a bipolar measurement and see what the electrodes do to it.
+
+{::nomarkdown}
+{% include demos/cole.html %}
+{:/}
+
 ## <span class="secnum">28.3</span>Excitation
 
 The excitation should be a current, so that the voltage measured is the impedance times a known value. The options:

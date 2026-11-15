@@ -1,0 +1,65 @@
+{% include demos/assets.html %}
+<div class="bd" id="bdCole" role="group" aria-label="Interactive demo: tissue impedance and its measurement">
+  <div class="bd-head"><span>// try it · tissue impedance, Cole model</span>
+    <span class="bd-seg" role="group" aria-label="Electrode configuration"><button type="button" data-cfg="tetra" aria-pressed="true">tetrapolar</button><button type="button" data-cfg="wet" aria-pressed="false">bipolar, wet</button><button type="button" data-cfg="dry" aria-pressed="false">bipolar, dry</button></span></div>
+  <div class="bd-sliders">
+    <label class="bd-sl"><span>R<sub>0</sub> (low frequency) <b data-v="r0"></b></span><input type="range" data-k="r0" min="20" max="200" step="1" value="60" aria-label="R0"></label>
+    <label class="bd-sl"><span>R<sub>∞</sub> (high frequency) <b data-v="ri"></b></span><input type="range" data-k="ri" min="5" max="150" step="1" value="30" aria-label="R infinity"></label>
+    <label class="bd-sl"><span>characteristic frequency f<sub>c</sub> <b data-v="fc"></b></span><input type="range" data-k="fc" min="0" max="100" step="0.5" value="49.2" aria-label="Characteristic frequency"></label>
+    <label class="bd-sl"><span>dispersion α <b data-v="al"></b></span><input type="range" data-k="al" min="0.4" max="1" step="0.01" value="0.7" aria-label="Alpha"></label>
+    <label class="bd-sl"><span>excitation frequency <b data-v="f"></b></span><input type="range" data-k="f" min="0" max="100" step="0.5" value="56.6" aria-label="Excitation frequency"></label>
+  </div>
+  <div class="bd-row">
+    <div class="bd-scope tall"><canvas data-c="ny" aria-hidden="true"></canvas><span class="bd-tag">Nyquist plot: −X against R (Ω)</span></div>
+    <div class="bd-scope tall"><canvas data-c="iq" aria-hidden="true"></canvas><span class="bd-tag">what the I/Q demodulator sees at 10 µA</span></div>
+  </div>
+  <div class="bd-read" aria-live="polite"><span>tissue <b data-o="z">–</b></span><span>measured <b data-o="m">–</b></span><span>I, Q at 10 µA <b data-o="iq">–</b></span></div>
+  <p class="bd-caption" data-o="cap"></p>
+</div>
+<script>
+(function () {
+  var root = document.getElementById('bdCole'); if (!root || !window.BD) return;
+  var cfg = 'tetra';
+  var S = BD.bind(root, {
+    r0: { fmt: function (x) { return x.toFixed(0) + ' Ω'; } }, ri: { fmt: function (x) { return x.toFixed(0) + ' Ω'; } },
+    fc: { map: function (v) { return 1e3 * Math.pow(10, 3 * v / 100); }, fmt: function (x) { return BD.eng(x) + 'Hz'; } },
+    al: { fmt: function (x) { return x.toFixed(2); } },
+    f:  { map: function (v) { return 1e3 * Math.pow(10, 3 * v / 100); }, fmt: function (x) { return BD.eng(x) + 'Hz'; } }
+  }, function () { draw(); });
+  BD.seg(root, 'cfg', function (v) { cfg = v; draw(); });
+  var q = function (s) { return root.querySelector(s); };
+  function cole(f, r0, ri, fc, a) {          // Z = R_inf + (R0 - R_inf) / (1 + (j f/fc)^a)
+    var m = Math.pow(f / fc, a), th = a * Math.PI / 2, dr = 1 + m * Math.cos(th), di = m * Math.sin(th), den = dr * dr + di * di;
+    return [ri + (r0 - ri) * dr / den, -(r0 - ri) * di / den];
+  }
+  function draw() {
+    var r0 = S.r0, ri = Math.min(S.ri, S.r0 - 1), fc = S.fc, a = S.al, f0 = S.f;
+    var ze = cfg === 'wet' ? 1000 : cfg === 'dry' ? 5000 : 0;        // per electrode at tens of kHz (Chapter 28)
+    var z = cole(f0, r0, ri, fc, a), zm = [z[0] + 2 * ze, z[1]];
+    var d = BD.setup(q('[data-c="ny"]')), span = r0 * 1.15;
+    var f = BD.frame(d, { x: [0, span], y: [0, span * 0.55], xt: [[0, '0'], [Math.round(r0 / 2), String(Math.round(r0 / 2))], [r0, String(r0)]], yt: [[0, '0'], [Math.round(r0 / 4), String(Math.round(r0 / 4))]], pad: { l: 36 } });
+    var xs = [], ys = [];
+    for (var k = 0; k <= 200; k++) { var fr = 10 * Math.pow(10, 7 * k / 200), zz = cole(fr, r0, ri, fc, a); xs.push(zz[0]); ys.push(-zz[1]); }
+    BD.line(f, xs, ys, BD.C.blue, 2);
+    BD.dot(f, z[0], -z[1], BD.C.gold, 5);
+    var fcz = cole(fc, r0, ri, fc, a); BD.dot(f, fcz[0], -fcz[1], 'rgba(127,224,160,.8)', 3);
+    d.g.fillStyle = 'rgba(127,224,160,.8)'; d.g.fillText('f_c', f.X(fcz[0]) + 5, f.Y(-fcz[1]) - 5);
+    d.g.fillStyle = BD.C.gold; d.g.fillText(BD.eng(f0) + 'Hz', f.X(z[0]) + 6, f.Y(-z[1]) + 12);
+    // IQ plane
+    var e = BD.setup(q('[data-c="iq"]')), I = 10e-6, vi = zm[0] * I, vq = -zm[1] * I, lim = Math.max(Math.hypot(vi, vq) * 1.25, 1e-4);
+    var g = BD.frame(e, { x: [-lim * 0.1, lim], y: [-lim * 0.1, lim * 0.7], xt: [[0, '0'], [lim / 2, BD.eng(lim / 2) + 'V']], yt: [[0, '0']], xl: 'I', pad: { l: 28 } });
+    var c = e.g; c.strokeStyle = BD.C.gold; c.lineWidth = 2; c.beginPath(); c.moveTo(g.X(0), g.Y(0)); c.lineTo(g.X(vi), g.Y(vq)); c.stroke();
+    BD.dot(g, vi, vq, BD.C.gold, 4);
+    c.fillStyle = BD.C.axis; c.fillText('Q', g.X(0) + 4, g.p.t + 10);
+    var mag = Math.hypot(z[0], z[1]), ph = Math.atan2(z[1], z[0]) * 180 / Math.PI, magm = Math.hypot(zm[0], zm[1]), phm = Math.atan2(zm[1], zm[0]) * 180 / Math.PI;
+    q('[data-o="z"]').textContent = mag.toFixed(1) + ' Ω, ' + ph.toFixed(1) + '°';
+    q('[data-o="m"]').textContent = magm.toFixed(magm > 100 ? 0 : 1) + ' Ω, ' + phm.toFixed(1) + '°';
+    q('[data-o="iq"]').textContent = BD.eng(vi) + 'V, ' + BD.eng(vq) + 'V';
+    q('[data-o="cap"]').innerHTML = (cfg === 'tetra'
+      ? 'Tetrapolar: the outer pair carries the current and the inner pair senses with no current in its electrodes, so the demodulator sees the tissue alone. '
+      : 'Bipolar: the same two electrodes carry the current and sense, so their impedance, about ' + (2 * ze / 1000).toFixed(0) + ' kΩ for the pair, adds to the ' + mag.toFixed(0) + ' Ω of tissue and buries it. ') +
+      'The arc runs from R<sub>0</sub> at low frequency to R<sub>∞</sub> at high frequency; α < 1 flattens it below the real axis. Near f<sub>c</sub> the phase is largest, which is where the I/Q readout separates resistance from reactance best.';
+  }
+  BD.observe(root, draw);
+})();
+</script>

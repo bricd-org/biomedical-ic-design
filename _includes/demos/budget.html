@@ -1,0 +1,59 @@
+{% include demos/assets.html %}
+<div class="bd" id="bdBud" role="group" aria-label="Interactive demo: the channel's noise and power budgets">
+  <div class="bd-head"><span>// try it · the Open-BioAFE budgets</span>
+    <span class="bd-seg" role="group" aria-label="Electrodes"><button type="button" data-el="wet" aria-pressed="true">wet electrodes</button><button type="button" data-el="dry" aria-pressed="false">dry electrodes</button></span>
+    <span class="bd-seg" role="group" aria-label="Mode"><button type="button" data-mode="eeg" aria-pressed="true">ECG/EEG · ΔΣ</button><button type="button" data-mode="emg" aria-pressed="false">EMG · SAR</button></span></div>
+  <div class="bd-sliders">
+    <label class="bd-sl"><span>LNA current <b data-v="i"></b></span><input type="range" data-k="i" min="0.25" max="8" step="0.25" value="2" aria-label="LNA current"></label>
+  </div>
+  <div class="bd-row">
+    <div class="bd-scope tall"><canvas data-c="n" aria-hidden="true"></canvas><span class="bd-tag">noise power, 0.5–100 Hz (µV²)</span></div>
+    <div class="bd-scope tall"><canvas data-c="p" aria-hidden="true"></canvas><span class="bd-tag">power per channel (µW)</span></div>
+  </div>
+  <div class="bd-read" aria-live="polite"><span>noise <b data-o="n">–</b></span><span>power <b data-o="p">–</b></span><span data-o="v"></span></div>
+  <p class="bd-caption" data-o="cap"></p>
+</div>
+<script>
+(function () {
+  var root = document.getElementById('bdBud'); if (!root || !window.BD) return;
+  var el = 'wet', mode = 'eeg';
+  var S = BD.bind(root, { i: { fmt: function (x) { return x.toFixed(2) + ' µA'; } } }, function () { draw(); });
+  BD.seg(root, 'el', function (v) { el = v; draw(); });
+  BD.seg(root, 'mode', function (v) { mode = v; draw(); });
+  var q = function (s) { return root.querySelector(s); };
+  var COL = ['#7fb8f0', '#e0b85a', '#7fd0b8', '#c79ef0', '#f08a6a', '#9fd0ff', '#b8c4cc', '#f3d48a', '#8fe0a8', '#e9a0c0'];
+  function stack(d, items, target, tlabel, unit) {
+    var tot = items.reduce(function (a, b) { return a + b[1]; }, 0), top = Math.max(target * 1.35, tot * 1.1);
+    var f = BD.frame(d, { x: [0, 1], y: [0, top], yt: [[0, '0'], [target, tlabel]], pad: { l: 44, r: 150, b: 12 } });
+    var g = d.g, y = 0, x0 = f.X(0.15), x1 = f.X(0.85);
+    items.forEach(function (it, k) {
+      if (it[1] <= 0) return;
+      var ya = f.Y(y), yb = f.Y(y + it[1]); g.fillStyle = COL[k % COL.length]; g.fillRect(x0, yb, x1 - x0, ya - yb);
+      if (ya - yb > 9) { g.fillStyle = COL[k % COL.length]; g.fillText(it[0] + ' ' + it[1].toFixed(it[1] < 0.1 ? 3 : 2), x1 + 8, (ya + yb) / 2 + 3); }
+      y += it[1];
+    });
+    BD.hline(f, target, '#f39a7c', [5, 4], '');
+    return tot;
+  }
+  function draw() {
+    var i = S.i, lna = 0.36 * Math.sqrt(2 / i);               // the chopped LNA scales as 1/sqrt(I) (Chapter 6)
+    var noise = [['electrodes', el === 'wet' ? 0.34 : 1.20], ['LNA', lna], ['input resistors', 0.13], ['filter kT/C', 0.05], ['PGA', 0.02], ['ΔΣ', 0.006]]
+      .map(function (n) { return [n[0], n[1] * n[1]]; });
+    var pw = [['LNA', 1.2 * i], ['ΔΣ', mode === 'eeg' ? 1.9 : 0], ['PGA', 0.6], ['shared RLD, bias, LDOs', 0.6], ['servo', 0.33], ['choppers', 0.3],
+              ['boosting', 0.3], ['features', 0.3], ['filter', 0.05], ['SAR share', mode === 'emg' ? 0.023 : 0]];
+    var vn2 = stack(BD.setup(q('[data-c="n"]')), noise, 2.25, '1.5² µV²');
+    var p = stack(BD.setup(q('[data-c="p"]')), pw, 10, '10 µW');
+    var vn = Math.sqrt(vn2);
+    q('[data-o="n"]').textContent = vn.toFixed(2) + ' µVrms';
+    q('[data-o="p"]').textContent = p.toFixed(1) + ' µW';
+    var ok = vn <= 1.5 && p <= 10;
+    q('[data-o="v"]').innerHTML = ok ? '<b class="ok">meets both targets</b>' : '<b class="bad">misses ' + (vn > 1.5 ? 'the noise target' : 'the power target') + '</b>';
+    var share = noise[0][1] / vn2 * 100;
+    q('[data-o="cap"]').innerHTML = 'Noise adds in power, so the bars stack µV²; the electrodes take ' + share.toFixed(0) + ' % of it. ' +
+      (el === 'dry' ? 'With dry electrodes more LNA current buys almost nothing: the electrodes dominate whatever the amplifier does. '
+                    : 'With wet electrodes the LNA is the largest term, and its current is the main lever. ') +
+      'The LNA\'s noise falls as 1/√I while its power grows as I; Chapter 29\'s 2 µA leaves ' + (10 - 6.8).toFixed(1) + ' µW of the 10 µW for everything not yet measured.';
+  }
+  BD.observe(root, draw);
+})();
+</script>
