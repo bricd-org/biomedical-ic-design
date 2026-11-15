@@ -302,10 +302,12 @@ catalogue (floating, suction, flexible, dry pins, ear, needle, helical, subcutan
 corneum and skin preparation, same-metal and lead strain-relief rules; all cited to Webster. Still open: the
 capstone reference write-up in Ch 31 (EEG done; ECG run `cap_ecg` was restarted after Docker crashed). The
 op-amp, biopotential-amplifier and signal-conditioning decks were not re-read in this pass (weekly limit).
-**Next, after the weekly usage reset (17 Nov 00:00 UTC), user said yes:** second pass over
-`3.1_Kappel_Operational amplifiers` (.pptx/.pdf), `3.2_Kappel_Biopotential amplifiers.pptx` and
-`3.2_Signal conditioning.pdf` as a checklist (extract slide text with zipfile/regex as done for the electrodes
-deck; never cite, name or copy them), compare with Ch 5–7, 10–12, add missing concepts cited to public sources.
+**Second pass DONE (15 Nov, user asked):** op-amp deck (62 slides), biopotential-amplifier deck (52) and the
+signal-conditioning PDF (50 pages; text via Ghostscript txtwrite in the EDA container, scratch copy deleted).
+Everything substantive was already covered (Ch 4 interference and magnetic pickup, Ch 7 CMRR and resistor
+mismatch, Ch 9 chopper duty cycle and residual offset, Ch 12 shielding, guarding, RLD, active electrodes, Ch 3
+non-contact electrodes; input bias current in seven chapters); op-amp basics stay out by design. Added: Ch 4
+opening paragraph on transmitted, interference and inherent noise (cited Webster).
 Docker has 7.75 GiB: at most ~3 long ngspice runs at once (7 at once → exit 137, OOM); lab5 netlist now saves
 only the vectors it needs.
 **Interactive demos (user asked for many more, 15 Nov):** same pattern as `_includes/demos/sar.html`
