@@ -70,6 +70,12 @@ The textbook way to find the phase of a rhythm, a zero-phase band-pass filter an
 
 All three degrade when the rhythm is weak or irregular. A good loop measures its own accuracy, by logging the true phase afterwards with a zero-phase filter, and acts only when the rhythm is present and the signal-quality index of [Chapter 32]({% link chapters/32_quality.md %}) says the data can be trusted.
 
+The demo below runs the simplest real-time scheme, event detection: a causal band-pass at the target frequency, an upward zero crossing as the event, and a stimulus aimed at the next peak a quarter period later, delivered after the loop's latency and jitter. The true phase of each stimulus is found afterwards with a zero-phase filter and the Hilbert transform. It starts at a 0.75 Hz slow oscillation and 60 ms through a radio link; move the frequency to alpha.
+
+{::nomarkdown}
+{% include demos/phase.html %}
+{:/}
+
 ## <span class="secnum">34.4</span>Acting without corrupting the recording
 
 The stimulus must be timed by the same clock as the samples. An audio codec clocked from the front-end's reference ([Chapter 29]({% link chapters/29_arch.md %})) plays its sounds on known samples, so every stimulus can be placed exactly in the recording; a codec on its own crystal drifts against the EEG by a sample every few tens of seconds.

@@ -116,6 +116,14 @@ op-amp circuits, slew rate, offset trimming, electrode chemistry details, electr
   - Ch 34 Closed-Loop Systems (`34_closedloop.md`, Fig 34.1 from `ch34_figs.py`: phase error 360·f·τ; ASSR
     epochs 2 / 15 / 58 for 0.3 / 0.1 / 0.05 µV at dry ear-EEG noise).
   - Home card, preface (six parts, v0.1 state rewritten), formula sheet (45 key equations; builder knows Part VI).
+  - Demos (16 Nov, user asked): Ch 32 `_includes/demos/nlms.html` (JS NLMS on a synthetic walking artefact;
+    references, μ, taps, impedance share, regularisation toggle: both 9.6 dB, unregularised −1.9 dB), Ch 33
+    `eareeg.html` (electrode, reference, band, LNA current, scalp alpha → stacked noise, SNR, trace; dry same-ear
+    alpha 18.9 dB; reference amplitude factors ¼, ½, 0.8 flagged illustrative), Ch 34 `phase.html` (causal
+    band-pass + zero-crossing event detection, latency, jitter, noise, compensation that stays causal; truth by
+    forward-backward band-pass + FFT Hilbert; SO 60 ms +17° ±16°, alpha −143° uncompensated).
+  - demos.css: `.bd-row` columns are `minmax(0,1fr)` (a canvas's pixel buffer otherwise sets the column's
+    min-content width and can squeeze its neighbour to zero).
   - New refs: widrow1975, haykin2014, looney2012, mikkelsen2015, kappel2019, debener2015, kidmose2013, allen2007,
     ngo2013, zrenner2018, picton2003.
 

@@ -87,6 +87,12 @@ The **normalised LMS** (NLMS) update makes the step independent of the reference
 
 Three conditions make it work on real data. The references must be sampled on the same clock as the signal, or their delay changes and the filter chases it; this is one more argument for measuring impedance on the recording chip. The references must not contain the biosignal: an impedance trace demodulated out of band is clean, but an accelerometer on the head picks up the ballistocardiogram, the tiny motion of each heartbeat, and can cancel part of a cardiac signal. And the filter must be stopped from adapting when there is no movement, or reset after a large one, or it drifts.
 
+Try it below on the same kind of synthetic recording. Change the references, the step size and the number of taps, slide how much of the artefact comes through the impedance, and switch the regularisation off to see the filter fail between movements.
+
+{::nomarkdown}
+{% include demos/nlms.html %}
+{:/}
+
 ## <span class="secnum">32.4</span>A signal-quality index
 
 Cancellation reduces artefacts; it does not abolish them. A wearable should therefore say, for each window of data, how far it can be trusted. A **signal-quality index** combines the indicators of section 32.2 into a number or a few classes: good, usable with care, unusable. The simplest version is a set of thresholds (impedance above a limit, servo step, clipping, mains power, acceleration above a limit); a better one is a classifier trained on recordings labelled by experts, with the indicators as its features.

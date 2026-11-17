@@ -1,0 +1,61 @@
+{% include demos/assets.html %}
+<div class="bd" id="bdEar" role="group" aria-label="Interactive demo: signal-to-noise ratio of an ear-EEG channel">
+  <div class="bd-head"><span>// try it · how much alpha survives at the ear?</span>
+    <span class="bd-seg" role="group" aria-label="Electrode"><button type="button" data-el="0.34" aria-pressed="false">wet gel</button><button type="button" data-el="0.8" aria-pressed="false">good dry</button><button type="button" data-el="1.2" aria-pressed="true">dry</button></span></div>
+  <div class="bd-head" style="margin-top:-4px">
+    <span class="bd-seg" role="group" aria-label="Reference"><button type="button" data-rf="0.25" aria-pressed="true">same ear</button><button type="button" data-rf="0.5" aria-pressed="false">behind the ear</button><button type="button" data-rf="0.8" aria-pressed="false">other ear</button></span>
+    <span class="bd-seg" role="group" aria-label="Band"><button type="button" data-bw="0.5,100" aria-pressed="false">0.5–100 Hz</button><button type="button" data-bw="1,40" aria-pressed="false">1–40 Hz</button><button type="button" data-bw="8,13" aria-pressed="true">alpha 8–13 Hz</button></span></div>
+  <div class="bd-sliders">
+    <label class="bd-sl"><span>LNA supply current <b data-v="i"></b></span><input type="range" data-k="i" min="0.25" max="8" step="0.25" value="2" aria-label="LNA current"></label>
+    <label class="bd-sl"><span>alpha on the scalp <b data-v="a"></b></span><input type="range" data-k="a" min="2" max="30" step="1" value="10" aria-label="Scalp alpha"></label>
+  </div>
+  <div class="bd-row">
+    <div class="bd-scope"><canvas data-c="bars" aria-hidden="true"></canvas><span class="bd-tag">noise power in the band (µV²)</span></div>
+    <div class="bd-scope"><canvas data-c="tr" aria-hidden="true"></canvas><span class="bd-tag">3 s of the channel, in the band</span></div>
+  </div>
+  <div class="bd-read" aria-live="polite"><span>alpha at the ear <b data-o="s">–</b></span><span>noise <b data-o="n">–</b></span><span>SNR <b data-o="snr">–</b></span></div>
+  <p class="bd-caption" data-o="cap"></p>
+</div>
+<script>
+(function () {
+  var root = document.getElementById('bdEar'); if (!root || !window.BD) return;
+  var el = 1.2, rf = 0.25, bw = [8, 13];
+  var S = BD.bind(root, { i: { fmt: function (x) { return x.toFixed(2) + ' µA'; } }, a: { fmt: function (x) { return x.toFixed(0) + ' µVrms'; } } }, function () { draw(); });
+  BD.seg(root, 'el', function (v) { el = parseFloat(v); draw(); });
+  BD.seg(root, 'rf', function (v) { rf = parseFloat(v); draw(); });
+  BD.seg(root, 'bw', function (v) { bw = v.split(',').map(parseFloat); draw(); });
+  var q = function (s) { return root.querySelector(s); };
+  var COL = ['#7fd0b8', '#7fb8f0', '#e0b85a', '#b8c4cc'];
+  function draw() {
+    var k = Math.sqrt((bw[1] - bw[0]) / 99.5);                      // white terms scale with sqrt(bandwidth)
+    var src = [['electrodes', el * k], ['LNA', 0.36 * Math.sqrt(2 / S.i) * k], ['input resistors', 0.13 * k], ['filter, PGA, ADC', 0.054 * k]];
+    var n2 = 0; src.forEach(function (s) { n2 += s[1] * s[1]; });
+    var noise = Math.sqrt(n2), sig = S.a * rf * (bw[0] <= 10 && bw[1] >= 10 ? 1 : 0), snr = 20 * Math.log10(Math.max(sig, 1e-9) / noise);
+    // stacked bar
+    var d = BD.setup(q('[data-c="bars"]')), top = Math.max(n2 * 1.3, 0.3);
+    var f = BD.frame(d, { x: [0, 1], y: [0, top], yt: [[0, '0'], [top / 2, (top / 2).toFixed(2)], [top, top.toFixed(2)]], pad: { l: 40, r: 110 } });
+    var y = 0, x0 = f.X(0.15), x1 = f.X(0.6);
+    src.forEach(function (s, j) { var p = s[1] * s[1], ya = f.Y(y), yb = f.Y(y + p); d.g.fillStyle = COL[j]; d.g.fillRect(x0, yb, x1 - x0, ya - yb);
+      if (ya - yb > 9) d.g.fillText(s[0] + ' ' + s[1].toFixed(2) + ' µV', x1 + 6, (ya + yb) / 2 + 3); y += p; });
+    // trace: alpha bursts at the ear plus band-limited noise
+    var e = BD.setup(q('[data-c="tr"]')), FS = 256, NS = 3 * FS, r = BD.rng(11), xs = [], ys = [];
+    var lim = Math.max(3 * noise, 2.2 * sig * Math.SQRT2, 1);
+    var fe = BD.frame(e, { x: [0, 3], y: [-lim, lim], xt: [[0, '0'], [1, '1 s'], [2, '2 s'], [3, '3 s']], yt: [[0, '0']], yl: 'µV', pad: { l: 30 } });
+    var g1 = function () { var u = 1 - r(), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+    var w0 = 2 * Math.PI * Math.sqrt(bw[0] * bw[1]) / FS, Q = Math.sqrt(bw[0] * bw[1]) / (bw[1] - bw[0]), c = Math.cos(w0), al = Math.sin(w0) / (2 * Q);
+    var b0 = al, b2 = -al, a0 = 1 + al, a1 = -2 * c, a2 = 1 - al, x1v = 0, x2v = 0, y1 = 0, y2 = 0, raw = [], ss = 0;
+    for (var i = 0; i < NS + 200; i++) { var xin = g1(), v = (b0 * xin + b2 * x2v - a1 * y1 - a2 * y2) / a0; x2v = x1v; x1v = xin; y2 = y1; y1 = v; if (i >= 200) { raw.push(v); ss += v * v; } }
+    var sc = noise / Math.sqrt(ss / NS);
+    for (i = 0; i < NS; i++) { var t = i / FS, env = 0.6 + 0.4 * Math.sin(2 * Math.PI * 0.4 * t); xs.push(t); ys.push(raw[i] * sc + sig * Math.SQRT2 * env * Math.sin(2 * Math.PI * 10 * t)); }
+    BD.line(fe, xs, ys, BD.C.blue, 1);
+    q('[data-o="s"]').textContent = sig.toFixed(2) + ' µVrms';
+    q('[data-o="n"]').textContent = noise.toFixed(2) + ' µVrms';
+    q('[data-o="snr"]').innerHTML = (snr >= 6 ? '<b class="ok">' : snr >= 0 ? '<b>' : '<b class="bad">') + snr.toFixed(1) + ' dB</b>';
+    var share = src[0][1] * src[0][1] / n2 * 100;
+    q('[data-o="cap"]').innerHTML = 'The electrodes take ' + share.toFixed(0) + ' % of the noise power. ' +
+      (share > 70 ? 'More LNA current barely helps: improve the contact, or narrow the band. ' : 'Here the amplifier still matters: its noise falls as 1/√I. ') +
+      'Noise scales with the square root of the bandwidth, so the alpha band alone is far quieter than the full EEG band; the reference sets how much of the scalp alpha reaches the pair. The amplitude factors (¼ in one ear, ½ behind it, 0.8 across the head) are illustrative.';
+  }
+  BD.observe(root, draw);
+})();
+</script>

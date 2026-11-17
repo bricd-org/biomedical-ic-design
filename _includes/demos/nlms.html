@@ -1,0 +1,98 @@
+{% include demos/assets.html %}
+<div class="bd" id="bdNlms" role="group" aria-label="Interactive demo: adaptive cancellation of a motion artefact">
+  <div class="bd-head"><span>// try it · cancelling a motion artefact (synthetic)</span>
+    <span class="bd-seg" role="group" aria-label="References"><button type="button" data-ref="acc" aria-pressed="false">accelerometer</button><button type="button" data-ref="dz" aria-pressed="false">impedance</button><button type="button" data-ref="both" aria-pressed="true">both</button></span></div>
+  <div class="bd-sliders">
+    <label class="bd-sl"><span>step size μ <b data-v="mu"></b></span><input type="range" data-k="mu" min="0" max="100" step="1" value="40" aria-label="Step size"></label>
+    <label class="bd-sl"><span>taps per reference L <b data-v="L"></b></span><input type="range" data-k="L" min="1" max="32" step="1" value="8" aria-label="Taps"></label>
+    <label class="bd-sl"><span>impedance share of the artefact <b data-v="mix"></b></span><input type="range" data-k="mix" min="0" max="100" step="5" value="60" aria-label="Impedance share"></label>
+  </div>
+  <div class="bd-scope tall"><canvas data-c="p" aria-hidden="true"></canvas><span class="bd-tag">error against the clean EEG: the artefact (grey) and what is left (blue)</span></div>
+  <div class="bd-read" aria-live="polite"><span>artefact removed <b data-o="db">–</b></span><span>accel. alone <b data-o="a">–</b></span><span>impedance alone <b data-o="z">–</b></span><span>both <b data-o="b">–</b></span></div>
+  <div class="bd-controls"><button type="button" class="bd-toggle" data-t="reg" aria-pressed="true">regularised (δ ≈ reference power)</button><button type="button" class="bd-btn" data-b="new">new recording</button></div>
+  <p class="bd-caption" data-o="cap"></p>
+</div>
+<script>
+(function () {
+  var root = document.getElementById('bdNlms'); if (!root || !window.BD) return;
+  var FS = 128, N = 128 * 40, ref = 'both', reg = true, seed = 5, scene = null;
+  var S = BD.bind(root, {
+    mu:  { map: function (v) { return 0.001 * Math.pow(10, 2.3 * v / 100); }, fmt: function (x) { return x.toPrecision(2); } },
+    L:   { fmt: function (x) { return x.toFixed(0); } },
+    mix: { map: function (v) { return v / 100; }, fmt: function (x) { return (x * 100).toFixed(0) + ' %'; } }
+  }, function (k) { if (k === 'mix') scene = null; draw(); });
+  BD.seg(root, 'ref', function (v) { ref = v; draw(); });
+  BD.toggle(root.querySelector('[data-t="reg"]'), function (on) { reg = on; draw(); });
+  root.querySelector('[data-b="new"]').addEventListener('click', function () { seed++; scene = null; draw(); });
+  var q = function (s) { return root.querySelector(s); };
+  function biquad(x, type, f0, Q) {           // RBJ biquad, causal
+    var w = 2 * Math.PI * f0 / FS, c = Math.cos(w), al = Math.sin(w) / (2 * Q), b0, b1, b2;
+    if (type === 'lp') { b0 = (1 - c) / 2; b1 = 1 - c; b2 = b0; } else if (type === 'hp') { b0 = (1 + c) / 2; b1 = -(1 + c); b2 = b0; } else { b0 = al; b1 = 0; b2 = -al; }
+    var a0 = 1 + al, a1 = -2 * c, a2 = 1 - al, y = new Float64Array(x.length), x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+    for (var i = 0; i < x.length; i++) { var v = (b0 * x[i] + b1 * x1 + b2 * x2 - a1 * y1 - a2 * y2) / a0; x2 = x1; x1 = x[i]; y2 = y1; y1 = v; y[i] = v; }
+    return y;
+  }
+  var band = function (x) { return biquad(biquad(x, 'hp', 0.5, 0.707), 'lp', 40, 0.707); };
+  function make() {
+    var r = BD.rng(seed), g = function () { var u = 1 - r(), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+    var w = new Float64Array(N), acc = new Float64Array(N), i;
+    for (i = 0; i < N; i++) w[i] = g();
+    var eeg = biquad(w, 'lp', 20, 0.707), al = biquad(Float64Array.from(w, function () { return g(); }), 'bp', 10, 4);
+    var se = 0, sa = 0; for (i = 0; i < N; i++) { se += eeg[i] * eeg[i]; sa += al[i] * al[i]; }
+    for (i = 0; i < N; i++) eeg[i] = 18e-6 * eeg[i] / Math.sqrt(se / N) + 10e-6 * al[i] / Math.sqrt(sa / N);
+    [[6, 18, 1.8], [24, 32, 1.6]].forEach(function (b) {
+      for (i = Math.floor(b[0] * FS); i < Math.floor(b[1] * FS); i++) {
+        var t = i / FS, env = Math.pow(Math.sin(Math.PI * (t - b[0]) / (b[1] - b[0])), 2);
+        acc[i] += env * (Math.sin(2 * Math.PI * b[2] * t) + 0.4 * Math.sin(4 * Math.PI * b[2] * t + 0.7));
+      }
+    });
+    var nz = biquad(Float64Array.from(w, function () { return g(); }), 'lp', 3, 0.707);
+    for (i = 0; i < N; i++) acc[i] += 0.05 * nz[i];
+    var dzin = new Float64Array(N); for (i = 0; i < N; i++) dzin[i] = Math.pow(Math.abs(acc[i]), 1.3) + 0.3 * acc[i];
+    var dz = biquad(dzin, 'lp', 1.5, 0.707), accd = biquad(acc, 'lp', 4, 0.707), resid = biquad(Float64Array.from(w, function () { return g(); }), 'lp', 2, 0.707);
+    var art = new Float64Array(N), m = S.mix;
+    for (i = 0; i < N; i++) art[i] = m * 6e-9 * dz[i] * 20e3 + (1 - m) * 120e-6 * accd[i] + 6e-6 * resid[i];
+    return { eeg: band(eeg), acc: band(acc), dz: band(dz), art: band(art) };
+  }
+  function nlms(d, refs, L, mu, delta) {
+    var R = refs.map(function (x) { var s = 0, m = 0, i; for (i = 0; i < x.length; i++) m += x[i]; m /= x.length; for (i = 0; i < x.length; i++) s += (x[i] - m) * (x[i] - m);
+      var sd = Math.sqrt(s / x.length) || 1; return Float64Array.from(x, function (v) { return (v - m) / sd; }); });
+    var K = L * R.length, wv = new Float64Array(K), xv = new Float64Array(K), e = new Float64Array(d.length);
+    for (var n = 0; n < d.length; n++) {
+      var y = 0, p = 0, j = 0;
+      for (var r = 0; r < R.length; r++) for (var k = 0; k < L; k++, j++) { var v = n - k >= 0 ? R[r][n - k] : 0; xv[j] = v; y += wv[j] * v; p += v * v; }
+      e[n] = d[n] - y;
+      var s = mu * e[n] / (delta + p);
+      for (j = 0; j < K; j++) wv[j] += s * xv[j];
+    }
+    return e;
+  }
+  function reduction(sc, refs) {
+    var d = Float64Array.from(sc.eeg, function (v, i) { return v + sc.art[i]; });
+    var L = S.L, e = nlms(d, refs, L, S.mu, reg ? L * refs.length : 1e-6), pa = 0, pr = 0;
+    for (var i = 4 * FS; i < N; i++) { pa += sc.art[i] * sc.art[i]; var r = e[i] - sc.eeg[i]; pr += r * r; }
+    return { db: 10 * Math.log10(pa / pr), e: e };
+  }
+  function draw() {
+    if (!scene) scene = make();
+    var sc = scene, sets = { acc: [sc.acc], dz: [sc.dz], both: [sc.acc, sc.dz] };
+    var res = { acc: reduction(sc, sets.acc), dz: reduction(sc, sets.dz), both: reduction(sc, sets.both) }, cur = res[ref];
+    var d = BD.setup(q('[data-c="p"]')), lim = 0;
+    for (var i = 4 * FS; i < N; i++) lim = Math.max(lim, Math.abs(sc.art[i]));
+    lim = Math.max(lim * 1.15, 20e-6);
+    var f = BD.frame(d, { x: [4, 36], y: [-lim * 1e6, lim * 1e6], xt: [[5, '5 s'], [15, '15 s'], [25, '25 s'], [35, '35 s']], yt: [[0, '0']], yl: 'µV', pad: { l: 36 } });
+    var xs = [], ya = [], yr = [];
+    for (i = 4 * FS; i < 36 * FS; i++) { xs.push(i / FS); ya.push(sc.art[i] * 1e6); yr.push((cur.e[i] - sc.eeg[i]) * 1e6); }
+    BD.line(f, xs, ya, 'rgba(185,198,201,.55)', 1.2);
+    BD.line(f, xs, yr, BD.C.blue, 1.2);
+    d.g.fillStyle = BD.C.axis; d.g.fillText('±' + (lim * 1e6).toFixed(0) + ' µV', 4, f.p.t + 10);
+    var fmt = function (r) { return (r.db >= 0 ? '' : '−') + Math.abs(r.db).toFixed(1) + ' dB'; };
+    q('[data-o="db"]').textContent = fmt(cur); q('[data-o="a"]').textContent = fmt(res.acc); q('[data-o="z"]').textContent = fmt(res.dz); q('[data-o="b"]').textContent = fmt(res.both);
+    var c = !reg ? '<b style="color:#f39a7c">Without regularisation the filter divides by a nearly zero reference power between movements</b>, so the EEG alone kicks the weights about, and they are wrong when the next movement starts. '
+      : cur.db < 0 ? 'The filter is adding error: the step is too large for the EEG it must ignore, or the references do not explain this artefact. ' : '';
+    c += 'Each reference removes the part of the artefact it is related to: the impedance trace follows the lead-off current through the moving contact, the accelerometer the part that follows the movement directly. Slide the impedance share and watch the two trade places; "both" is best wherever the artefact has both parts. A larger μ tracks faster but lets the EEG jitter the weights.';
+    q('[data-o="cap"]').innerHTML = c;
+  }
+  BD.observe(root, draw);
+})();
+</script>

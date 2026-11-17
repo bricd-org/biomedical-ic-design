@@ -61,6 +61,12 @@ Start from the channel budget of [Chapter 29]({% link chapters/29_arch.md %}), a
   <figcaption><span class="capnum">Figure 33.1.</span> <strong>At the ear, the contact sets the noise; the pulse oximeter is a ratio.</strong> (a) Input-referred noise power of one channel, from the Chapter 29 budget, for wet and dry electrodes over the full EEG band and over 1–40 Hz, against the 0.5 µVrms an ear-EEG channel should aim for. (b) The empirical calibration of pulse oximetry, SpO<sub>2</sub> ≈ 110 − 25 R, where R is the ratio of the red and infrared pulse amplitudes, each divided by its steady level; each oximeter is calibrated on its own. From <code>figsrc/ch33_figs.py</code>.</figcaption>
 </figure>
 
+The demo below puts the budget and the referencing together for alpha, the rhythm most ear-EEG studies start with. It starts with dry contacts in one ear and the alpha band alone; try wet gel, a reference behind the ear, and the full EEG band.
+
+{::nomarkdown}
+{% include demos/eareeg.html %}
+{:/}
+
 ## <span class="secnum">33.4</span>More than EEG at the ear
 
 An earpiece reaches more than the brain {% include cite.html keys="allen2007" %}.
