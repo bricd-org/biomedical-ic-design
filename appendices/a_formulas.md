@@ -340,3 +340,21 @@ $$
 $$
 I = \frac{\lvert Z\rvert I_\mathrm{exc}}{2}\cos\varphi, \quad Q = \frac{\lvert Z\rvert I_\mathrm{exc}}{2}\sin\varphi, \qquad \lvert Z\rvert = \frac{2\sqrt{I^2 + Q^2}}{I_\mathrm{exc}}, \quad \varphi = \operatorname{atan2}(Q, I)
 $$
+
+## Part VI · Wearable systems
+
+### [32. Signal Quality and Motion Artefacts]({% link chapters/32_quality.md %})
+
+**Normalised LMS**
+
+$$e[n] = d[n] - \mathbf{w}^\mathsf{T}\mathbf{x}[n], \qquad \mathbf{w} \leftarrow \mathbf{w} + \frac{\mu\, e[n]\, \mathbf{x}[n]}{\delta + \mathbf{x}^\mathsf{T}[n]\,\mathbf{x}[n]}$$
+
+$$\mathbf{x}$$ holds the last $$L$$ samples of every reference, $$0 < \mu < 2$$ is the step size and $$\delta$$ regularises the division.
+
+### [34. Closed-Loop Systems]({% link chapters/34_closedloop.md %})
+
+**Phase error from latency**
+
+$$\Delta\varphi = 360^\circ \cdot f \cdot \tau$$
+
+A latency $$\tau$$ that is not compensated becomes a phase error $$\Delta\varphi$$ at the rhythm's frequency $$f$$; a jitter in $$\tau$$ becomes a phase jitter by the same rule.

@@ -101,3 +101,25 @@
   text: "Bluetooth SIG. *Bluetooth Core Specification*, version 5.4. Bluetooth Special Interest Group, 2023."
 - key: gomez2012
   text: "Carles Gomez, Joaquim Oller and Josep Paradells. “Overview and evaluation of Bluetooth Low Energy: an emerging low-power wireless technology.” *Sensors*, 12(9):11734–11753, 2012."
+- key: widrow1975
+  text: "Bernard Widrow, John R. Glover, John M. McCool, John Kaunitz, Charles S. Williams, Robert H. Hearn, James R. Zeidler, Eugene Dong and Robert C. Goodlin. “Adaptive noise cancelling: principles and applications.” *Proceedings of the IEEE*, 63(12):1692–1716, 1975."
+- key: haykin2014
+  text: "Simon Haykin. *Adaptive Filter Theory*, 5th edition. Pearson, 2014."
+- key: looney2012
+  text: "David Looney, Preben Kidmose, Cheolsoo Park, Michael Ungstrup, Mike Lind Rank, Karin Rosenkranz and Danilo P. Mandic. “The in-the-ear recording concept: user-centered and wearable brain monitoring.” *IEEE Pulse*, 3(6):32–42, 2012."
+- key: mikkelsen2015
+  text: "Kaare B. Mikkelsen, Simon L. Kappel, Danilo P. Mandic and Preben Kidmose. “EEG recorded from the ear: characterizing the ear-EEG method.” *Frontiers in Neuroscience*, 9:438, 2015."
+- key: kappel2019
+  text: "Simon L. Kappel, Mike L. Rank, Hans O. Toft, Mikael Andersen and Preben Kidmose. “Dry-contact electrode ear-EEG.” *IEEE Transactions on Biomedical Engineering*, 66(1):150–158, 2019."
+- key: debener2015
+  text: "Stefan Debener, Reiner Emkes, Maarten De Vos and Martin Bleichner. “Unobtrusive ambulatory EEG using a smartphone and flexible printed electrodes around the ear.” *Scientific Reports*, 5:16743, 2015."
+- key: kidmose2013
+  text: "Preben Kidmose, David Looney, Michael Ungstrup, Mike Lind Rank and Danilo P. Mandic. “A study of evoked potentials from ear-EEG.” *IEEE Transactions on Biomedical Engineering*, 60(10):2824–2830, 2013."
+- key: allen2007
+  text: "John Allen. “Photoplethysmography and its application in clinical physiological measurement.” *Physiological Measurement*, 28(3):R1–R39, 2007."
+- key: ngo2013
+  text: "Hong-Viet V. Ngo, Thomas Martinetz, Jan Born and Matthias Mölle. “Auditory closed-loop stimulation of the sleep slow oscillation enhances memory.” *Neuron*, 78(3):545–553, 2013."
+- key: zrenner2018
+  text: "Christoph Zrenner, Debora Desideri, Paolo Belardinelli and Ulf Ziemann. “Real-time EEG-defined excitability states determine efficacy of TMS-induced plasticity in human motor cortex.” *Brain Stimulation*, 11(2):374–389, 2018."
+- key: picton2003
+  text: "Terence W. Picton, M. Sasha John, Andrew Dimitrijevic and David Purcell. “Human auditory steady-state responses.” *International Journal of Audiology*, 42(4):177–219, 2003."

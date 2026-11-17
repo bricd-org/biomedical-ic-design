@@ -44,6 +44,7 @@ Every wearable ECG patch, EEG headset, prosthetic-control armband and neural imp
   <div class="card"><span class="card-label">Part III · Ch 13–22 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-3.md %}">Data converters</a></h3><p>Sampling, specifications, switches, comparators, capacitive DACs, the SAR ADC, ΔΣ theory and circuits, and ADC testing.</p></div>
   <div class="card"><span class="card-label">Part IV · Ch 23–28 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-4.md %}">Biosignal processing and systems</a></h3><p>DSP for biosignals, ECG, EEG and EMG processing on open datasets, on-chip features and bioimpedance sensing.</p></div>
   <div class="card"><span class="card-label">Part V · Ch 29–31 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-5.md %}">Putting it together</a></h3><p>The full architecture and its budgets, the open-source flow to an IHP OpenMPW tape-out, and fifteen hands-on labs.</p></div>
+  <div class="card"><span class="card-label">Part VI · Ch 32–34 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-6.md %}">Wearable systems</a></h3><p>Signal quality and motion-artefact cancellation, ear-EEG and multimodal sensing at the ear, and closed-loop systems that act on what they measure.</p></div>
   <div class="card"><span class="card-label">Appendices A–E <span class="status status-written">written</span></span><h3><a href="{% link appendices/index.md %}">Reference material</a></h3><p>A formula sheet, reference tables, design-review checklists, a glossary and further reading.</p></div>
 </div>
 
@@ -57,4 +58,4 @@ The tutorial is written for the Open-BioAFE project at [BRICD](https://www.thebr
 
 **How this tutorial is made.** The Open-BioAFE Tutorial is being developed with the help of AI tools, and this draft may contain mistakes. If you spot one, please email [bricd.org@gmail.com](mailto:bricd.org@gmail.com) and we will correct it.
 
-This is a living draft (v0.1, November 2026): all thirty chapters and the appendices are written, and the labs of Chapter 31 are being completed one by one. Corrections and contributions are welcome through [GitHub issues](https://github.com/bricd-org/biomedical-ic-design/issues).
+This is a living draft (v0.1, November 2026): all thirty-four chapters, the appendices and the fifteen labs of Chapter 31 are written, and most chapters have an interactive demo. Corrections and contributions are welcome through [GitHub issues](https://github.com/bricd-org/biomedical-ic-design/issues).

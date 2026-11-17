@@ -99,6 +99,26 @@ filled:
 Not used (already covered, or op-amp basics that *The Art of Analog IC Design* covers): ideal
 op-amp circuits, slew rate, offset trimming, electrode chemistry details, electrode catalogue.
 
+## 2b. BLE section and Part VI (16 Nov 2026)
+
+- **Ch 27 · 27.6 Getting the data out over BLE** (Stimulation is now 27.7): throughput from the link-layer timing
+  (key equation; WE 27.2: 780 kb/s at 1M, 1.4 Mb/s at 2M, 21 kb/s with 20-byte payloads and 4 packets per 30 ms),
+  a BLE setting per Open-BioAFE stream, power model P ≈ E_b·R + E_ev/T_CI (5 or 3 nJ/b, 10 µJ per event, flagged
+  as order-of-magnitude), FIFO sizing, framing (sequence number + sample counter, 232-byte ECG notification,
+  3.4 % overhead), two-device sync. Demo `_includes/demos/ble.html`. Refs `btcore`, `gomez2012`.
+- **Part VI · Wearable Systems** (`parts/part-6.md`, nav 7; Appendices now 8, References 9): user asked for it
+  *without any NeurEar details*; written from general principles and published work only.
+  - Ch 32 Signal Quality and Motion Artefacts (`chapters/32_quality.md`, Fig 32.1 from `figsrc/ch32_figs.py`:
+    regularised NLMS on a synthetic walking artefact, 7.5 / 5.7 / 12.2 dB with accelerometer / impedance / both,
+    LS ceiling 18 dB; δ must be ~ the references' power or bursty references blow the filter up).
+  - Ch 33 Ear-EEG and Multimodal Sensing at the Ear (`33_ear.md`, Fig 33.1 from `ch33_figs.py`: ear-EEG noise
+    0.32 µV wet / 0.79 µV dry over 1–40 Hz; SpO2 ≈ 110 − 25R).
+  - Ch 34 Closed-Loop Systems (`34_closedloop.md`, Fig 34.1 from `ch34_figs.py`: phase error 360·f·τ; ASSR
+    epochs 2 / 15 / 58 for 0.3 / 0.1 / 0.05 µV at dry ear-EEG noise).
+  - Home card, preface (six parts, v0.1 state rewritten), formula sheet (45 key equations; builder knows Part VI).
+  - New refs: widrow1975, haykin2014, looney2012, mikkelsen2015, kappel2019, debener2015, kidmose2013, allen2007,
+    ngo2013, zrenner2018, picton2003.
+
 ## 3. Decisions already made (do not re-litigate)
 
 - **No LaTeX book, no PDF.** The Markdown pages are the source; edit them directly.
