@@ -319,6 +319,14 @@ $$
 \psi[n] = x[n]^2 - x[n-1]\,x[n+1]
 $$
 
+### [27. On-Chip Processing and System Integration]({% link chapters/27_soc.md %})
+
+**BLE throughput**
+
+$$R = \frac{N_\mathrm{pkt}\, 8 L}{T_\mathrm{CI}}, \qquad N_\mathrm{pkt} \le \frac{T_\mathrm{CI}}{t_\mathrm{data} + t_\mathrm{IFS} + t_\mathrm{ack} + t_\mathrm{IFS}}$$
+
+$$L$$ is the ATT payload (20 or 244 bytes), $$N_\mathrm{pkt}$$ the packets per event, $$t_\mathrm{IFS}$$ = 150 µs the gap between packets. In practice the phone also caps $$N_\mathrm{pkt}$$, often at four to seven, and sets a minimum interval, often 15 ms.
+
 ### [28. Bioimpedance Sensing and IQ Demodulation]({% link chapters/28_bioz.md %})
 
 **Cole model of tissue impedance**

@@ -97,3 +97,7 @@
   text: "Alan Rich. “Shielding and guarding: how to exclude interference-type noise.” *Analog Dialogue*, 17(1), 1983."
 - key: ott2009
   text: "Henry W. Ott. *Electromagnetic Compatibility Engineering*. Wiley, 2009."
+- key: btcore
+  text: "Bluetooth SIG. *Bluetooth Core Specification*, version 5.4. Bluetooth Special Interest Group, 2023."
+- key: gomez2012
+  text: "Carles Gomez, Joaquim Oller and Josep Paradells. “Overview and evaluation of Bluetooth Low Energy: an emerging low-power wireless technology.” *Sensors*, 12(9):11734–11753, 2012."

@@ -1,0 +1,88 @@
+{% include demos/assets.html %}
+<div class="bd" id="bdBle" role="group" aria-label="Interactive demo: sizing a Bluetooth Low Energy link">
+  <div class="bd-head"><span>// try it · will it fit over BLE?</span>
+    <span class="bd-seg" role="group" aria-label="Stream"><button type="button" data-st="feat" aria-pressed="false">features</button><button type="button" data-st="eeg" aria-pressed="false">raw EEG</button><button type="button" data-st="ecg" aria-pressed="true">raw ECG</button><button type="button" data-st="emg" aria-pressed="false">raw EMG</button><button type="button" data-st="spk" aria-pressed="false">1 spike ch</button></span></div>
+  <div class="bd-head" style="margin-top:-4px">
+    <span class="bd-seg" role="group" aria-label="PHY"><button type="button" data-phy="1" aria-pressed="true">LE 1M</button><button type="button" data-phy="2" aria-pressed="false">LE 2M</button></span>
+    <button type="button" class="bd-toggle" data-t="dle" aria-pressed="true">data length extension (244-byte payload)</button></div>
+  <div class="bd-sliders">
+    <label class="bd-sl"><span>connection interval <b data-v="ci"></b></span><input type="range" data-k="ci" min="0" max="100" step="0.1" value="33.0" aria-label="Connection interval"></label>
+    <label class="bd-sl"><span>packets per event (phone's limit) <b data-v="np"></b></span><input type="range" data-k="np" min="1" max="8" step="1" value="2" aria-label="Packets per event"></label>
+  </div>
+  <div class="bd-row">
+    <div class="bd-scope"><canvas data-c="ev" aria-hidden="true"></canvas><span class="bd-tag">one connection event, to scale</span></div>
+    <div class="bd-scope"><canvas data-c="cap" aria-hidden="true"></canvas><span class="bd-tag">link capacity against the stream (log)</span></div>
+  </div>
+  <div class="bd-read" aria-live="polite"><span>capacity <b data-o="cap">–</b></span><span>needed <b data-o="req">–</b></span><span data-o="fit"></span><span>radio <b data-o="p">–</b></span><span>FIFO <b data-o="fifo">–</b></span><span>100 mAh lasts <b data-o="life">–</b></span></div>
+  <p class="bd-caption" data-o="cap2"></p>
+</div>
+<script>
+(function () {
+  var root = document.getElementById('bdBle'); if (!root || !window.BD) return;
+  var RATES = { feat: [5e3, 'features'], eeg: [32.8e3, 'raw EEG'], ecg: [64e3, 'raw ECG'], emg: [192e3, 'raw EMG'], spk: [360e3, 'one spike channel'] };
+  var st = 'ecg', phy = 1, dle = true;
+  var S = BD.bind(root, {
+    ci: { map: function (v) { return Math.round(7.5 * Math.pow(10, 1.824 * v / 100) / 1.25) * 1.25e-3; }, fmt: function (x) { return (x * 1e3).toFixed(x < 0.01 ? 2 : 1).replace(/\.0+$/, '') + ' ms'; } },
+    np: { fmt: function (x) { return x.toFixed(0); } }
+  }, function () { draw(); });
+  BD.seg(root, 'st', function (v) { st = v; draw(); });
+  BD.seg(root, 'phy', function (v) { phy = parseInt(v, 10); draw(); });
+  BD.toggle(root.querySelector('[data-t="dle"]'), function (on) { dle = on; draw(); });
+  var q = function (s) { return root.querySelector(s); };
+  function link() {
+    var L = dle ? 244 : 20, bytes = (phy === 1 ? 1 : 2) + 4 + 2 + (L + 7) + 4 + 3;   // preamble, AA, header, L2CAP+ATT+data, MIC, CRC
+    var us = phy === 1 ? 8 : 4, tData = bytes * us, tAck = (phy === 1 ? 10 : 11) * us, cyc = tData + 150 + tAck + 150;
+    var T = S.ci, nFit = Math.max(0, Math.floor(T * 1e6 / cyc)), n = Math.min(S.np, nFit);
+    return { L: L, tData: tData, tAck: tAck, cyc: cyc, n: n, nFit: nFit, cap: n * L * 8 / T };
+  }
+  function draw() {
+    var k = link(), req = RATES[st][0] * 1.04, T = S.ci, fits = k.cap >= req;
+    var eb = phy === 1 ? 5e-9 : 3e-9, p = eb * Math.min(req, k.cap) + 10e-6 / T, life = 0.1 * 3.7 * 3600 / (80e-6 + p) / 86400;
+    // one event
+    var span = Math.max(k.n * k.cyc * 1.25, 3000), d = BD.setup(q('[data-c="ev"]'));
+    var f = BD.frame(d, { x: [0, span / 1000], y: [0, 3], xt: [[0, '0'], [span / 2000, (span / 2000).toFixed(1) + ' ms'], [span / 1000, (span / 1000).toFixed(1) + ' ms']], yt: [], pad: { l: 10, b: 24 } });
+    var g = d.g, t = 0;
+    for (var i = 0; i < k.n; i++) {
+      g.fillStyle = BD.C.blue; g.fillRect(f.X(t / 1000), f.Y(2.2), f.X((t + k.tData) / 1000) - f.X(t / 1000), f.Y(1.2) - f.Y(2.2));
+      t += k.tData + 150;
+      g.fillStyle = BD.C.gold; g.fillRect(f.X(t / 1000), f.Y(1.0), Math.max(1.5, f.X((t + k.tAck) / 1000) - f.X(t / 1000)), f.Y(0.4) - f.Y(1.0));
+      t += k.tAck + 150;
+    }
+    g.fillStyle = BD.C.axis; g.fillText('sensor → phone, ' + k.L + ' B each', f.X(0) + 4, f.Y(2.45));
+    g.fillStyle = 'rgba(233,208,143,.8)'; g.fillText('phone acks', f.X(0) + 4, f.Y(0.15));
+    g.fillStyle = 'rgba(170,205,240,.55)'; g.textAlign = 'right'; g.fillText('then sleep for ' + ((T * 1e6 - k.n * k.cyc) / 1000).toFixed(1) + ' ms', d.w - f.p.r - 2, f.Y(2.45)); g.textAlign = 'left';
+    // capacity against need
+    var e = BD.setup(q('[data-c="cap"]')), fc = BD.frame(e, { x: [0, 1], y: [1e3, 3e6], ylog: true,
+      yt: [[1e3, '1 kb/s'], [1e4, '10 k'], [1e5, '100 k'], [1e6, '1 Mb/s']], pad: { l: 50, r: 96 } });
+    var x0 = fc.X(0.2), x1 = fc.X(0.55), yc = fc.Y(Math.max(k.cap, 1001));
+    e.g.fillStyle = fits ? 'rgba(127,224,160,.75)' : 'rgba(240,138,106,.75)'; e.g.fillRect(x0, yc, x1 - x0, fc.Y(1e3) - yc);
+    Object.keys(RATES).forEach(function (s) {
+      var y = fc.Y(RATES[s][0] * 1.04), on = s === st;
+      e.g.strokeStyle = on ? BD.C.white : 'rgba(170,205,240,.45)'; e.g.lineWidth = on ? 2 : 1; e.g.setLineDash(on ? [] : [3, 3]);
+      e.g.beginPath(); e.g.moveTo(fc.X(0.1), y); e.g.lineTo(fc.X(0.65), y); e.g.stroke(); e.g.setLineDash([]);
+      e.g.fillStyle = on ? BD.C.white : 'rgba(170,205,240,.6)'; e.g.fillText(RATES[s][1], fc.X(0.68), y + 3);
+    });
+    var kb = function (r) { return r >= 1e6 ? (r / 1e6).toFixed(2) + ' Mb/s' : (r / 1e3).toFixed(r < 1e4 ? 1 : 0) + ' kb/s'; };
+    q('[data-o="cap"]').textContent = kb(k.cap);
+    q('[data-o="req"]').textContent = kb(req);
+    q('[data-o="fit"]').innerHTML = fits ? '<b class="ok">fits, ' + (req / k.cap * 100).toFixed(0) + ' % used</b>' : '<b class="bad">does not fit</b>';
+    q('[data-o="p"]').textContent = (p * 1e3).toFixed(p < 1e-4 ? 3 : 2) + ' mW';
+    q('[data-o="fifo"]').textContent = (req * T * 4 / 8 / 1024).toFixed(2) + ' kB';
+    q('[data-o="life"]').textContent = life.toFixed(life < 10 ? 1 : 0) + ' days';
+    var c;
+    if (!fits) {
+      c = 'The link carries ' + kb(k.cap) + ', short of ' + kb(req) + '. ' + (!dle ? 'Turn on data length extension: 244 instead of 20 bytes per packet is twelve times the throughput. '
+        : k.n < S.np ? 'Only ' + k.nFit + ' packets fit in a ' + (T * 1e3).toFixed(1) + ' ms interval; lengthen it or use the 2M PHY. '
+        : phy === 1 ? 'Try the 2M PHY, more packets per event or a shorter interval. ' : 'More packets per event or a shorter interval would do it, if the phone allows. ') +
+        (st === 'spk' ? '' : '');
+    } else if (10e-6 / T > eb * req) {
+      c = 'It fits with room to spare, and most of the radio\'s ' + (p * 1e3).toFixed(2) + ' mW goes on waking up ' + (1 / T).toFixed(0) + ' times a second. A longer interval with more packets per event moves the same bits for less, at the price of a bigger FIFO and more latency.';
+    } else {
+      c = 'It fits, and the bits themselves now dominate the radio\'s ' + (p * 1e3).toFixed(2) + ' mW: only fewer bits (features, compression) or a cheaper bit (the 2M PHY) save more.';
+    }
+    c += ' Power model: ' + (eb * 1e9).toFixed(0) + ' nJ per bit plus 10 µJ per connection event, order-of-magnitude values; battery life adds an 80 µW front-end and assumes a 100 mAh, 3.7 V cell.';
+    q('[data-o="cap2"]').innerHTML = c;
+  }
+  BD.observe(root, draw);
+})();
+</script>
