@@ -483,6 +483,6 @@ indico.cern.ch/event/1381495/contributions/5988502/ · MEDTEQ CMRR and Zin artic
 
 ## 9. Open questions for the user
 
-- Keep Lab 14 in Track C as the curriculum says, or move it to Track B?
+- ~~Keep Lab 14 in Track C or move it to Track B?~~ **Decided 16 Nov: keep it in Track C.**
 - NinaPro downloads may need registration: is a "bring your own file + synthetic fallback"
   approach acceptable for Lab 1/13?
