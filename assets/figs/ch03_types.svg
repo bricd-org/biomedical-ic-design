@@ -1,0 +1,206 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" width="720" height="340" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>Six biopotential electrodes in cross-section: metal plate, disposable Ag/AgCl, floating, dry pins, needle and microelectrode array</title>
+  <rect x="4" y="4" width="232" height="160" rx="5" fill="#FCFDFD" stroke="#E1E7E9" stroke-width="1"/>
+  <text x="14" y="22" font-size="10.5" fill="#1D2A30" text-anchor="start" font-weight="700">(a) Metal plate</text>
+  <text x="14" y="142" font-size="8.3" fill="#56656B" text-anchor="start">Paste under a reusable metal plate,</text>
+  <text x="14" y="154" font-size="8.3" fill="#56656B" text-anchor="start">strapped to a limb: the oldest ECG lead.</text>
+  <rect x="14" y="120" width="212" height="8" rx="0" fill="#F9EDE9" stroke="none" stroke-width="1"/>
+  <rect x="14" y="108" width="212" height="12" rx="0" fill="#F7E3D6" stroke="none" stroke-width="1"/>
+  <rect x="14" y="102" width="212" height="6" rx="0" fill="#F5E6C8" stroke="none" stroke-width="1"/>
+  <ellipse cx="22" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="36" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="50" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="64" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="78" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="92" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="106" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="120" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="134" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="148" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="162" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="176" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="190" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="204" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="218" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <path d="M14 102 H226" stroke="#D9BE8C" stroke-width="1"/>
+  <rect x="64" y="96" width="112" height="6" rx="0" fill="#E4EEF8" stroke="none" stroke-width="1"/>
+  <rect x="70" y="87" width="100" height="9" rx="1" fill="#C9D0D3" stroke="#1D2A30" stroke-width="1.1"/>
+  <path d="M18 102 Q44.0 80 70 84" stroke="#C9A86A" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M222 102 Q196.0 80 170 84" stroke="#C9A86A" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M120 87 V48 H224" stroke="#1D2A30" stroke-width="2" fill="none" stroke-linejoin="round"/>
+  <text x="180" y="101" font-size="7.5" fill="#1F64A8" text-anchor="start">paste</text>
+  <text x="28" y="80" font-size="7.5" fill="#9A6212" text-anchor="start">strap</text>
+  <rect x="242" y="4" width="232" height="160" rx="5" fill="#FCFDFD" stroke="#E1E7E9" stroke-width="1"/>
+  <text x="252" y="22" font-size="10.5" fill="#1D2A30" text-anchor="start" font-weight="700">(b) Disposable Ag/AgCl</text>
+  <text x="252" y="142" font-size="8.3" fill="#56656B" text-anchor="start">Snap, Ag/AgCl disc, gel sponge, foam</text>
+  <text x="252" y="154" font-size="8.3" fill="#56656B" text-anchor="start">and adhesive: the clinical standard.</text>
+  <rect x="252" y="120" width="212" height="8" rx="0" fill="#F9EDE9" stroke="none" stroke-width="1"/>
+  <rect x="252" y="108" width="212" height="12" rx="0" fill="#F7E3D6" stroke="none" stroke-width="1"/>
+  <rect x="252" y="102" width="212" height="6" rx="0" fill="#F5E6C8" stroke="none" stroke-width="1"/>
+  <ellipse cx="260" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="274" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="288" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="302" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="316" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="330" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="344" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="358" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="372" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="386" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="400" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="414" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="428" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="442" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="456" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <path d="M252 102 H464" stroke="#D9BE8C" stroke-width="1"/>
+  <rect x="282" y="76" width="152" height="26" rx="2" fill="#EEF1F2" stroke="#B9C6C9" stroke-width="1"/>
+  <rect x="328" y="82" width="60" height="20" rx="0" fill="#E4EEF8" stroke="#B9C6C9" stroke-width="0.8"/>
+  <rect x="328" y="76" width="60" height="6" rx="0" fill="#C9D0D3" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="328" y="80" width="60" height="2" rx="0" fill="#8E979B" stroke="none" stroke-width="1"/>
+  <path d="M282 100.8 H328" stroke="#C9A86A" stroke-width="2.4"/>
+  <path d="M388 100.8 H434" stroke="#C9A86A" stroke-width="2.4"/>
+  <rect x="348" y="60" width="20" height="16" rx="4" fill="#C9D0D3" stroke="#1D2A30" stroke-width="1"/>
+  <path d="M348 66 H256" stroke="#1D2A30" stroke-width="2" fill="none" stroke-linejoin="round"/>
+  <text x="358" y="96" font-size="7.5" fill="#1F64A8" text-anchor="middle">gel</text>
+  <text x="305" y="93" font-size="7.5" fill="#56656B" text-anchor="middle">foam</text>
+  <text x="374" y="70" font-size="7.5" fill="#56656B" text-anchor="start">snap</text>
+  <text x="392" y="73" font-size="7.5" fill="#56656B" text-anchor="start">Ag/AgCl</text>
+  <rect x="480" y="4" width="232" height="160" rx="5" fill="#FCFDFD" stroke="#E1E7E9" stroke-width="1"/>
+  <text x="490" y="22" font-size="10.5" fill="#1D2A30" text-anchor="start" font-weight="700">(c) Floating (recessed)</text>
+  <text x="490" y="142" font-size="8.3" fill="#56656B" text-anchor="start">The disc sits back in a gel-filled cup,</text>
+  <text x="490" y="154" font-size="8.3" fill="#56656B" text-anchor="start">off the skin: less motion artefact.</text>
+  <rect x="490" y="120" width="212" height="8" rx="0" fill="#F9EDE9" stroke="none" stroke-width="1"/>
+  <rect x="490" y="108" width="212" height="12" rx="0" fill="#F7E3D6" stroke="none" stroke-width="1"/>
+  <rect x="490" y="102" width="212" height="6" rx="0" fill="#F5E6C8" stroke="none" stroke-width="1"/>
+  <ellipse cx="498" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="512" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="526" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="540" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="554" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="568" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="582" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="596" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="610" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="624" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="638" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="652" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="666" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="680" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="694" cy="114" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <path d="M490 102 H702" stroke="#D9BE8C" stroke-width="1"/>
+  <path d="M544 102 V56 H648 V102 H632 V66 H560 V102 Z" fill="#DDE3E5" stroke="#1D2A30" stroke-width="1"/>
+  <rect x="560" y="66" width="72" height="36" rx="0" fill="#E4EEF8" stroke="none" stroke-width="1"/>
+  <rect x="566" y="66" width="60" height="6" rx="0" fill="#C9D0D3" stroke="#1D2A30" stroke-width="1"/>
+  <path d="M544 100.8 H560" stroke="#C9A86A" stroke-width="2.4"/>
+  <path d="M632 100.8 H648" stroke="#C9A86A" stroke-width="2.4"/>
+  <path d="M596 56 V38 H700" stroke="#1D2A30" stroke-width="2" fill="none" stroke-linejoin="round"/>
+  <text x="596" y="90" font-size="7.5" fill="#1F64A8" text-anchor="middle">gel</text>
+  <text x="652" y="72" font-size="7.5" fill="#56656B" text-anchor="start">metal disc</text>
+  <text x="652" y="82" font-size="7.5" fill="#56656B" text-anchor="start">held off</text>
+  <text x="652" y="92" font-size="7.5" fill="#56656B" text-anchor="start">the skin</text>
+  <rect x="4" y="172" width="232" height="160" rx="5" fill="#FCFDFD" stroke="#E1E7E9" stroke-width="1"/>
+  <text x="14" y="190" font-size="10.5" fill="#1D2A30" text-anchor="start" font-weight="700">(d) Dry pins</text>
+  <text x="14" y="310" font-size="8.3" fill="#56656B" text-anchor="start">Pins part the hair to reach the skin:</text>
+  <text x="14" y="322" font-size="8.3" fill="#56656B" text-anchor="start">no gel, but high, unstable impedance.</text>
+  <rect x="14" y="292" width="212" height="4" rx="0" fill="#F9EDE9" stroke="none" stroke-width="1"/>
+  <rect x="14" y="280" width="212" height="12" rx="0" fill="#F7E3D6" stroke="none" stroke-width="1"/>
+  <rect x="14" y="274" width="212" height="6" rx="0" fill="#F5E6C8" stroke="none" stroke-width="1"/>
+  <ellipse cx="22" cy="286" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="36" cy="286" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="50" cy="286" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="64" cy="286" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="78" cy="286" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="92" cy="286" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="106" cy="286" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="120" cy="286" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="134" cy="286" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="148" cy="286" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="162" cy="286" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="176" cy="286" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="190" cy="286" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="204" cy="286" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="218" cy="286" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <path d="M14 274 H226" stroke="#D9BE8C" stroke-width="1"/>
+  <path d="M54 274 q8 -20.0 4.0 -40" stroke="#5B4636" stroke-width="1.1" fill="none"/>
+  <path d="M80 274 q-6 -23.0 -3.0 -46" stroke="#5B4636" stroke-width="1.1" fill="none"/>
+  <path d="M102 274 q6 -15.0 3.0 -30" stroke="#5B4636" stroke-width="1.1" fill="none"/>
+  <path d="M128 274 q-8 -22.0 -4.0 -44" stroke="#5B4636" stroke-width="1.1" fill="none"/>
+  <path d="M154 274 q7 -17.0 3.5 -34" stroke="#5B4636" stroke-width="1.1" fill="none"/>
+  <path d="M182 274 q-5 -23.0 -2.5 -46" stroke="#5B4636" stroke-width="1.1" fill="none"/>
+  <path d="M200 274 q6 -15.0 3.0 -30" stroke="#5B4636" stroke-width="1.1" fill="none"/>
+  <rect x="60" y="218" width="120" height="12" rx="2" fill="#C9D0D3" stroke="#1D2A30" stroke-width="1"/>
+  <path d="M65.4 230 V271 Q68 275 70.6 271 V230 Z" fill="#A9B2B6" stroke="#1D2A30" stroke-width="0.8"/>
+  <path d="M82.7 230 V271 Q85.3 275 87.9 271 V230 Z" fill="#A9B2B6" stroke="#1D2A30" stroke-width="0.8"/>
+  <path d="M100 230 V271 Q102.6 275 105.2 271 V230 Z" fill="#A9B2B6" stroke="#1D2A30" stroke-width="0.8"/>
+  <path d="M117.3 230 V271 Q119.9 275 122.5 271 V230 Z" fill="#A9B2B6" stroke="#1D2A30" stroke-width="0.8"/>
+  <path d="M134.6 230 V271 Q137.2 275 139.8 271 V230 Z" fill="#A9B2B6" stroke="#1D2A30" stroke-width="0.8"/>
+  <path d="M151.9 230 V271 Q154.5 275 157.1 271 V230 Z" fill="#A9B2B6" stroke="#1D2A30" stroke-width="0.8"/>
+  <path d="M169.2 230 V271 Q171.8 275 174.4 271 V230 Z" fill="#A9B2B6" stroke="#1D2A30" stroke-width="0.8"/>
+  <path d="M120 218 V206 H224" stroke="#1D2A30" stroke-width="2" fill="none" stroke-linejoin="round"/>
+  <text x="218" y="248" font-size="7.5" fill="#5B4636" text-anchor="end">hair</text>
+  <rect x="242" y="172" width="232" height="160" rx="5" fill="#FCFDFD" stroke="#E1E7E9" stroke-width="1"/>
+  <text x="252" y="190" font-size="10.5" fill="#1D2A30" text-anchor="start" font-weight="700">(e) Needle</text>
+  <text x="252" y="310" font-size="8.3" fill="#56656B" text-anchor="start">Through the skin into the muscle, for</text>
+  <text x="252" y="322" font-size="8.3" fill="#56656B" text-anchor="start">EMG: no stratum corneum in the path.</text>
+  <rect x="252" y="242" width="212" height="54" rx="0" fill="#F9EDE9" stroke="none" stroke-width="1"/>
+  <rect x="252" y="230" width="212" height="12" rx="0" fill="#F7E3D6" stroke="none" stroke-width="1"/>
+  <rect x="252" y="224" width="212" height="6" rx="0" fill="#F5E6C8" stroke="none" stroke-width="1"/>
+  <ellipse cx="260" cy="236" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="274" cy="236" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="288" cy="236" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="302" cy="236" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="316" cy="236" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="330" cy="236" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="344" cy="236" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="358" cy="236" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="372" cy="236" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="386" cy="236" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="400" cy="236" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="414" cy="236" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="428" cy="236" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="442" cy="236" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <ellipse cx="456" cy="236" rx="5" ry="2.8" fill="none" stroke="#E2C3B0" stroke-width="0.8"/>
+  <rect x="252" y="256" width="212" height="40" rx="0" fill="#F1D2CC" stroke="none" stroke-width="1"/>
+  <path d="M252 261 H464" stroke="#E0B0A8" stroke-width="0.8"/>
+  <path d="M252 267 H464" stroke="#E0B0A8" stroke-width="0.8"/>
+  <path d="M252 273 H464" stroke="#E0B0A8" stroke-width="0.8"/>
+  <path d="M252 279 H464" stroke="#E0B0A8" stroke-width="0.8"/>
+  <path d="M252 285 H464" stroke="#E0B0A8" stroke-width="0.8"/>
+  <path d="M252 291 H464" stroke="#E0B0A8" stroke-width="0.8"/>
+  <path d="M252 224 H464" stroke="#D9BE8C" stroke-width="1"/>
+  <path d="M314 203 L393 278 L318 199 Z" fill="#8E979B" stroke="#1D2A30" stroke-width="0.8" stroke-linejoin="round"/>
+  <rect x="290" y="194" width="28" height="12" rx="3" fill="#DCC9A0" stroke="#1D2A30" stroke-width="1"/>
+  <circle cx="388" cy="273" r="3" fill="#9A6212"/>
+  <path d="M290 200 H256" stroke="#1D2A30" stroke-width="2" fill="none" stroke-linejoin="round"/>
+  <text x="456" y="290" font-size="7.5" fill="#B5473A" text-anchor="end">muscle</text>
+  <text x="400" y="270" font-size="7.5" fill="#9A6212" text-anchor="start">recording site</text>
+  <rect x="480" y="172" width="232" height="160" rx="5" fill="#FCFDFD" stroke="#E1E7E9" stroke-width="1"/>
+  <text x="490" y="190" font-size="10.5" fill="#1D2A30" text-anchor="start" font-weight="700">(f) Microelectrode array</text>
+  <text x="490" y="310" font-size="8.3" fill="#56656B" text-anchor="start">Implanted shanks, sites tens of µm</text>
+  <text x="490" y="322" font-size="8.3" fill="#56656B" text-anchor="start">across: capacitive, hundreds of kΩ at 1 kHz.</text>
+  <rect x="490" y="242" width="212" height="54" rx="0" fill="#F3DDD8" stroke="none" stroke-width="1"/>
+  <path d="M490 242 H702" stroke="#D9A9A0" stroke-width="1.2"/>
+  <path d="M510 260 L514 267 L506 267 Z" fill="#B5473A" fill-opacity=".45"/>
+  <path d="M524 280 L528 287 L520 287 Z" fill="#B5473A" fill-opacity=".45"/>
+  <path d="M568 254 L572 261 L564 261 Z" fill="#B5473A" fill-opacity=".45"/>
+  <path d="M598 284 L602 291 L594 291 Z" fill="#B5473A" fill-opacity=".45"/>
+  <path d="M632 258 L636 265 L628 265 Z" fill="#B5473A" fill-opacity=".45"/>
+  <path d="M666 276 L670 283 L662 283 Z" fill="#B5473A" fill-opacity=".45"/>
+  <path d="M680 252 L684 259 L676 259 Z" fill="#B5473A" fill-opacity=".45"/>
+  <path d="M547 230 L553 230 L550 284 Z" fill="#B7BEC2" stroke="#1D2A30" stroke-width="0.7" stroke-linejoin="round"/>
+  <circle cx="550" cy="276" r="2" fill="#9A6212"/>
+  <path d="M566 230 L572 230 L569 284 Z" fill="#B7BEC2" stroke="#1D2A30" stroke-width="0.7" stroke-linejoin="round"/>
+  <circle cx="569" cy="276" r="2" fill="#9A6212"/>
+  <path d="M585 230 L591 230 L588 284 Z" fill="#B7BEC2" stroke="#1D2A30" stroke-width="0.7" stroke-linejoin="round"/>
+  <circle cx="588" cy="276" r="2" fill="#9A6212"/>
+  <path d="M604 230 L610 230 L607 284 Z" fill="#B7BEC2" stroke="#1D2A30" stroke-width="0.7" stroke-linejoin="round"/>
+  <circle cx="607" cy="276" r="2" fill="#9A6212"/>
+  <path d="M623 230 L629 230 L626 284 Z" fill="#B7BEC2" stroke="#1D2A30" stroke-width="0.7" stroke-linejoin="round"/>
+  <circle cx="626" cy="276" r="2" fill="#9A6212"/>
+  <path d="M642 230 L648 230 L645 284 Z" fill="#B7BEC2" stroke="#1D2A30" stroke-width="0.7" stroke-linejoin="round"/>
+  <circle cx="645" cy="276" r="2" fill="#9A6212"/>
+  <rect x="540" y="218" width="114" height="12" rx="2" fill="#B7BEC2" stroke="#1D2A30" stroke-width="1"/>
+  <path d="M654 224 C676 224 676 208 700 208" stroke="#C9A86A" stroke-width="3" fill="none"/>
+  <text x="498" y="254" font-size="7.5" fill="#B5473A" text-anchor="start">cortex</text>
+  <text x="666" y="234" font-size="7.5" fill="#9A6212" text-anchor="start">flex cable</text>
+</svg>

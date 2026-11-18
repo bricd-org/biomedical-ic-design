@@ -1,6 +1,6 @@
 # HANDOFF — Open-BioAFE Tutorial (pick up here)
 
-Last updated: 14 November 2026 (**all chapters 1–30, appendices A–E, 22 architecture/circuit diagrams and
+Last updated: 18 November 2026 (Ch 3 diagrams, section 2c; before that 14 November: **all chapters 1–30, appendices A–E, 22 architecture/circuit diagrams and
 all 15 labs with scripts are written**; Labs 1, 11 and 12 also run on real PhysioNet data; Ch 29 has five
 more diagrams modelled on SerDes Ch 14; see section 2 and Step 3 for the lab results and the corrections they
 forced; outline review against lecture material in section 2a). On
@@ -126,6 +126,18 @@ op-amp circuits, slew rate, offset trimming, electrode chemistry details, electr
     min-content width and can squeeze its neighbour to zero).
   - New refs: widrow1975, haykin2014, looney2012, mikkelsen2015, kappel2019, debener2015, kidmose2013, allen2007,
     ngo2013, zrenner2018, picton2003.
+
+## 2c. Chapter 3 figures (18 Nov 2026)
+
+Three new figures, drawn by scripts and placed in `chapters/03_electrodes.md` (Ch 3 now has eight, renumbered with
+`tools/renumber_figs.py 3`): **3.1** six electrode types in cross-section (`ch03_types.svg` from
+`figsrc/ch03_types_svg.py`, §3.1); **3.2** electrode chemistry (`ch03_chemistry.svg` from `chemistry()` in
+`figsrc/ch03_figs.py`: Nernst 61 mV/decade at 37 °C, Butler–Volmer overpotential with illustrative i0 of
+10 µA/cm² and 1 nA/cm², a 6 nA lead-off over 1 cm² → 16 µV vs 97 mV, §3.2); **3.4** a gelled Ag/AgCl electrode in
+cross-section mapped to the circuit elements (`ch03_interface.svg` from `figsrc/ch03_interface_svg.py`, §3.3,
+before the model figure 3.5). Old 3.1–3.5 are now 3.3 and 3.5–3.8. No other page links to Ch 3 figures.
+`tools/check_arrows.py` passes on the new SVGs. Preview from the BRICD session: `preview_start bioafe-jekyll`
+(port 4000, `~/BRICD/.claude/launch.json`).
 
 ## 3. Decisions already made (do not re-litigate)
 

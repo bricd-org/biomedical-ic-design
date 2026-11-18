@@ -86,7 +86,41 @@ def offset_and_motion():
     savefig(fig, "ch03_offset")
 
 
+
+def chemistry():
+    """(a) Nernst: the Ag/AgCl half-cell potential against chloride activity, at 25 and 37 degC (E0 held at its
+    25 degC value). (b) Butler-Volmer: overpotential against current density for a non-polarisable and a
+    polarisable electrode (illustrative exchange current densities), with the 6 nA DC lead-off current over 1 cm^2."""
+    F, R = 96485.0, 8.314
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=FULL2)
+    a = np.logspace(-3, 0.5, 100)
+    for T, c, lab in ((298.15, C2, "25 °C"), (310.15, C1, "37 °C")):
+        a1.semilogx(a, (0.2223 - R * T / F * np.log(a)) * 1e3, color=c, lw=1.6, label=lab)
+    a1.annotate("", xy=(0.01, (0.2223 - R * 310.15 / F * np.log(0.01)) * 1e3), xytext=(0.1, (0.2223 - R * 310.15 / F * np.log(0.1)) * 1e3),
+                arrowprops=dict(arrowstyle="<->", color=GRAPHITE, lw=0.8))
+    a1.text(0.045, 338, "61 mV per decade\nat 37 °C", fontsize=6.6, ha="left")
+    finish(a1, xlabel="Chloride activity in the gel", ylabel="Ag/AgCl half-cell potential (mV)", legend=True, loc="upper right")
+    panel(a1, "a")
+    J = np.logspace(-12, -3, 300)
+    T = 310.15
+    for i0, c, lab in ((1e-5, C1, "non-polarisable, i$_0$ = 10 µA/cm² (Ag/AgCl-like)"), (1e-9, C2, "polarisable, i$_0$ = 1 nA/cm² (platinum-like)")):
+        eta = 2 * R * T / F * np.arcsinh(J / (2 * i0))
+        a2.loglog(J * 1e9, eta * 1e3, color=c, lw=1.6, label=lab)
+        e6 = 2 * R * T / F * np.arcsinh(6e-9 / (2 * i0)) * 1e3
+        a2.plot([6], [e6], "o", color=AMBER, ms=4)
+        a2.annotate(f"{e6:.3g} mV" if e6 >= 1 else f"{e6*1e3:.0f} µV", (6, e6), xytext=(9, e6 * 0.35), fontsize=6.6)
+    a2.axvline(6, color=AMBERDK, ls=":", lw=0.8)
+    a2.text(8, 1.0, "6 nA lead-off\nover 1 cm²", fontsize=6.3, color=AMBERDK)
+    a2.text(1.2e-3, 120, "polarisable (platinum-like)\ni$_0$ = 1 nA/cm²", fontsize=6.3, color=C2)
+    a2.text(6e5, 2e-4, "non-polarisable (Ag/AgCl-like)\ni$_0$ = 10 µA/cm²", fontsize=6.3, color=C1, ha="right")
+    a2.set_ylim(1e-4, 1e3)
+    finish(a2, xlabel="Current density (nA/cm²)", ylabel="Overpotential (mV)")
+    panel(a2, "b")
+    savefig(fig, "ch03_chemistry")
+
+
 if __name__ == "__main__":
+    chemistry()
     impedance()
     noise()
     loading()

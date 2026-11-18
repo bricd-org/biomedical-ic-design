@@ -37,25 +37,35 @@ In the body, current is carried by ions; in the wire, by electrons. An electrode
 - **Dry electrodes** (metal, conductive polymer, or spiked contacts) touch the skin directly, which suits long-term wearables and EEG headsets. Without gel the contact impedance is ten to a hundred times higher, it varies between electrodes, and it is more sensitive to motion {% include cite.html keys="chi2010" %}.
 - **Implanted microelectrodes** are tens of micrometres across and sit in the tissue, where there is no skin. Their tiny area makes them strongly capacitive, with impedances of hundreds of kilohms at 1 kHz.
 
-Beyond these three families, the shape of an electrode follows where it goes {% include cite.html keys="webster" %}:
+Beyond these three families, the shape of an electrode follows where it goes {% include cite.html keys="webster" %}; [Figure 3.1](#fig-3-1) sketches six of them:
 
 - **On the skin.** Metal plates strapped to the limbs (the oldest ECG electrode); metal discs held with tape; **floating** electrodes, recessed in a gel-filled cup so that the metal never touches the skin, which keeps the double layer still and cuts motion artefact; suction cups for short chest recordings; flexible electrodes of carbon-filled silicone or printed conductors for curved or fragile skin, as on infants; dry-contact pins that reach through hair for EEG; and small coated-metal electrodes in a soft earpiece for ear-EEG.
 - **Through or under the skin.** Needle electrodes for EMG and short EEG sessions; helical electrodes that screw a few millimetres into the scalp, for fetal ECG during labour; subcutaneous implants for long-term EEG.
 - **In the tissue.** Metal microelectrodes and microfabricated arrays in one, two or three dimensions for extracellular spikes, and electrolyte-filled glass micropipettes for recording inside a cell.
 
+<figure id="fig-3-1">
+  <img src="{{ '/assets/figs/ch03_types.svg' | relative_url }}" style="width:720px" alt="Six biopotential electrodes in cross-section: metal plate, disposable Ag/AgCl, floating, dry pins, needle and microelectrode array">
+  <figcaption><span class="capnum">Figure 3.1.</span> <strong>Six electrodes, from the skin surface into the cortex.</strong> (a) A reusable metal plate with paste, strapped to a limb. (b) A disposable Ag/AgCl electrode: snap, Ag/AgCl disc, gel sponge, foam and adhesive. (c) A floating electrode, its metal recessed in a gel-filled cup, off the skin. (d) Dry pins that part the hair to reach the skin. (e) A needle electrode through the skin into the muscle. (f) An implanted microelectrode array with recording sites along its shanks. Sketches, not to scale.</figcaption>
+</figure>
+
 ## <span class="secnum">3.2</span>Half-cell potential and DC offset
 
 Every electrode in an electrolyte develops a **half-cell potential** $$E_\mathrm{hc}$$, the voltage across its surface reaction. For Ag/AgCl it is about +0.222 V against the standard hydrogen electrode. Two identical electrodes would cancel, but in practice they never are identical: the skin under each one, the gel, the chloride concentration and the pressure all differ. The skin itself adds a potential of its own, $$E_\mathrm{se}$$, across its outer layer, which changes when the skin is stretched.
 
-The half-cell potential is set by chemistry and temperature, through the **Nernst equation**. For Ag/AgCl, $$E_\mathrm{hc} = E^0 - (RT/F)\ln a_\mathrm{Cl^-}$$: the electrode responds to the chloride activity of the gel, not to the silver. At 37 °C, $$RT/F$$ = 26.7 mV, so a tenfold change in chloride shifts the potential by 61 mV. Two electrodes on gels of different chloride concentration therefore start tens of millivolts apart, and drift as sweat changes the gel.
+The half-cell potential is set by chemistry and temperature, through the **Nernst equation**. For Ag/AgCl, $$E_\mathrm{hc} = E^0 - (RT/F)\ln a_\mathrm{Cl^-}$$: the electrode responds to the chloride activity of the gel, not to the silver. At 37 °C, $$RT/F$$ = 26.7 mV, so a tenfold change in chloride shifts the potential by 61 mV ([Figure 3.2](#fig-3-2)a). Two electrodes on gels of different chloride concentration therefore start tens of millivolts apart, and drift as sweat changes the gel.
 
-Once current flows, the electrode moves away from its half-cell potential by an **overpotential** with three parts {% include cite.html keys="webster" %}: an ohmic drop in the electrolyte, a concentration term as the ions near the surface are used up, and an activation term, the extra voltage the reaction needs to run at that rate. How large it gets separates two ideals. A **perfectly polarisable** electrode passes no charge across its surface and behaves as a capacitor: noble metals such as platinum and gold, and stainless steel, come close. A **perfectly non-polarisable** electrode passes charge freely and behaves as a resistor: Ag/AgCl comes close. The DC lead-off currents of [Chapter 12]({% link chapters/12_cmcontrol.md %}) and every stimulation current pass through this interface, which is why their size matters.
+Once current flows, the electrode moves away from its half-cell potential by an **overpotential** with three parts {% include cite.html keys="webster" %}: an ohmic drop in the electrolyte, a concentration term as the ions near the surface are used up, and an activation term, the extra voltage the reaction needs to run at that rate. How large it gets separates two ideals. A **perfectly polarisable** electrode passes no charge across its surface and behaves as a capacitor: noble metals such as platinum and gold, and stainless steel, come close. A **perfectly non-polarisable** electrode passes charge freely and behaves as a resistor: Ag/AgCl comes close ([Figure 3.2](#fig-3-2)b). The DC lead-off currents of [Chapter 12]({% link chapters/12_cmcontrol.md %}) and every stimulation current pass through this interface, which is why their size matters.
 
-The difference between two electrodes is a **DC offset** of tens to hundreds of millivolts, much larger than any biopotential and slowly drifting. The ECG standards require an electrocardiograph to work with ±300 mV of offset at its input {% include cite.html keys="iec60601-2-25" %}. [Figure 3.1](#fig-3-1) shows what that looks like: an offset of about 120 mV on which the 1 mV ECG is invisible, plus baseline wander and a motion artefact.
+<figure id="fig-3-2">
+  <img src="{{ '/assets/figs/ch03_chemistry.svg' | relative_url }}" style="width:720px" alt="Ag/AgCl half-cell potential versus chloride activity, and overpotential versus current density for a polarisable and a non-polarisable electrode">
+  <figcaption><span class="capnum">Figure 3.2.</span> <strong>Chemistry sets the offset, and the electrode's polarisability sets how far a current moves it.</strong> (a) The Ag/AgCl half-cell potential against the chloride activity of the gel, from the Nernst equation at 25 and 37 °C (\(E^0\) held at its 25 °C value): about 61 mV per decade at body temperature. (b) Activation overpotential against current density from the Butler–Volmer equation, for a non-polarisable electrode (Ag/AgCl-like, \(i_0\) = 10 µA/cm²) and a polarisable one (platinum-like, \(i_0\) = 1 nA/cm²); the exchange current densities are illustrative. A 6 nA lead-off current over 1 cm² moves the first by about 16 µV and the second by about 97 mV.</figcaption>
+</figure>
 
-<figure id="fig-3-1">
+The difference between two electrodes is a **DC offset** of tens to hundreds of millivolts, much larger than any biopotential and slowly drifting. The ECG standards require an electrocardiograph to work with ±300 mV of offset at its input {% include cite.html keys="iec60601-2-25" %}. [Figure 3.3](#fig-3-3) shows what that looks like: an offset of about 120 mV on which the 1 mV ECG is invisible, plus baseline wander and a motion artefact.
+
+<figure id="fig-3-3">
   <img src="{{ '/assets/figs/ch03_offset.svg' | relative_url }}" style="width:720px" alt="An ECG on a 120 mV electrode offset, and the same signal after removing the offset, with baseline wander and a motion artefact">
-  <figcaption><span class="capnum">Figure 3.1.</span> <strong>The offset is a hundred times larger than the signal.</strong> (a) Ten seconds at an electrode pair: about 120 mV of offset with the ECG invisible on top. (b) The same signal after subtracting 120 mV: the ECG rides on a few millivolts of baseline wander, and a motion artefact at 6 s is larger than the QRS complexes. Simulated.</figcaption>
+  <figcaption><span class="capnum">Figure 3.3.</span> <strong>The offset is a hundred times larger than the signal.</strong> (a) Ten seconds at an electrode pair: about 120 mV of offset with the ECG invisible on top. (b) The same signal after subtracting 120 mV: the ECG rides on a few millivolts of baseline wander, and a motion artefact at 6 s is larger than the QRS complexes. Simulated.</figcaption>
 </figure>
 
 <div class="tbox tbox-specnote" markdown="1">
@@ -67,11 +77,16 @@ Tolerate ±300 mV of electrode DC offset at every input without saturating. With
 
 ## <span class="secnum">3.3</span>The electrode–skin model
 
-[Figure 3.2](#fig-3-2) (top) is the standard equivalent circuit of a wet electrode on the skin. At the metal–gel interface, the half-cell potential $$E_\mathrm{hc}$$ is in series with the **Randles** network {% include cite.html keys="randles1947" %}: a charge-transfer resistance $$R_\mathrm{d}$$, through which the reaction passes current, in parallel with the double-layer capacitance $$C_\mathrm{d}$$, the thin layer of charge that forms at any electrode surface. The gel adds a series resistance $$R_\mathrm{s}$$. The outer layer of the skin, the epidermis, adds its own potential $$E_\mathrm{se}$$ and a resistance $$R_\mathrm{e}$$ in parallel with a capacitance $$C_\mathrm{e}$$. The dermis and the tissue below are almost purely resistive, $$R_\mathrm{u}$$.
+[Figure 3.4](#fig-3-4) cuts through a gelled electrode on the skin and joins each layer to an element of the standard equivalent circuit, which [Figure 3.5](#fig-3-5) (top) draws on its own. At the metal–gel interface, the half-cell potential $$E_\mathrm{hc}$$ is in series with the **Randles** network {% include cite.html keys="randles1947" %}: a charge-transfer resistance $$R_\mathrm{d}$$, through which the reaction passes current, in parallel with the double-layer capacitance $$C_\mathrm{d}$$, the thin layer of charge that forms at any electrode surface. The gel adds a series resistance $$R_\mathrm{s}$$. The outer layer of the skin, the epidermis, adds its own potential $$E_\mathrm{se}$$ and a resistance $$R_\mathrm{e}$$ in parallel with a capacitance $$C_\mathrm{e}$$. The dermis and the tissue below are almost purely resistive, $$R_\mathrm{u}$$.
 
-<figure id="fig-3-2">
+<figure id="fig-3-4">
+  <img src="{{ '/assets/figs/ch03_interface.svg' | relative_url }}" style="width:720px" alt="Cross-section of a gelled Ag/AgCl electrode on the skin, with each layer joined to its element of the equivalent circuit">
+  <figcaption><span class="capnum">Figure 3.4.</span> <strong>From layers to circuit elements.</strong> A gelled Ag/AgCl electrode on the skin in cross-section, each layer joined to its element of the electrode–skin model: the half-cell potential and the Randles network (charge transfer and double layer) at the silver chloride surface, the gel resistance, the skin potential and RC network of the stratum corneum, and the resistance of the dermis and deeper tissue. Sweat ducts form a parallel, lower-resistance path through the stratum corneum. Not to scale.</figcaption>
+</figure>
+
+<figure id="fig-3-5">
   <img src="{{ '/assets/figs/ch03_electrode_model.svg' | relative_url }}" style="width:720px" alt="Equivalent circuit of the electrode–skin interface and its simplified form">
-  <figcaption><span class="capnum">Figure 3.2.</span> <strong>The electrode–skin interface as a circuit.</strong> Top: the full model, with the half-cell potential and Randles network of the electrode, the gel resistance, and the skin potential and RC network of the epidermis. Bottom: the simplified model used in <code>biosig.py</code>, one series resistance and one parallel RC (or a constant-phase element for an implanted microelectrode), with the values of the three electrode types.</figcaption>
+  <figcaption><span class="capnum">Figure 3.5.</span> <strong>The electrode–skin interface as a circuit.</strong> Top: the full model, with the half-cell potential and Randles network of the electrode, the gel resistance, and the skin potential and RC network of the epidermis. Bottom: the simplified model used in <code>biosig.py</code>, one series resistance and one parallel RC (or a constant-phase element for an implanted microelectrode), with the values of the three electrode types.</figcaption>
 </figure>
 
 For design, the two parallel networks merge into one, giving the simplified model at the bottom of the figure. Its impedance is
@@ -95,13 +110,13 @@ Wet: $$f_\mathrm{p} = 1/(2\pi \cdot 51\ \text{kΩ} \cdot 47\ \text{nF}) = 66$$ H
 
 Dry: $$f_\mathrm{p} = 1/(2\pi \cdot 1\ \text{MΩ} \cdot 4.7\ \text{nF}) = 34$$ Hz. At 0.67 Hz, $$\lvert Z_\mathrm{e}\rvert \approx 1.0$$ MΩ; at 50 Hz, 564 kΩ.
 
-Across the ExG band the dry electrode is about twenty times worse, and its impedance changes more with frequency ([Figure 3.3](#fig-3-3)).
+Across the ExG band the dry electrode is about twenty times worse, and its impedance changes more with frequency ([Figure 3.6](#fig-3-6)).
 
 </div>
 
-<figure id="fig-3-3">
+<figure id="fig-3-6">
   <img src="{{ '/assets/figs/ch03_impedance.svg' | relative_url }}" style="width:720px" alt="Magnitude and phase of the impedance of wet, dry and implanted electrodes versus frequency">
-  <figcaption><span class="capnum">Figure 3.3.</span> <strong>Electrode impedance falls with frequency.</strong> (a) Magnitude and (b) phase of the three electrode models of <code>biosig.z_electrode()</code>, with the ExG band shaded. Wet and dry electrodes are resistive at low frequency and capacitive above their corner; the implanted microelectrode is capacitive everywhere.</figcaption>
+  <figcaption><span class="capnum">Figure 3.6.</span> <strong>Electrode impedance falls with frequency.</strong> (a) Magnitude and (b) phase of the three electrode models of <code>biosig.z_electrode()</code>, with the ExG band shaded. Wet and dry electrodes are resistive at low frequency and capacitive above their corner; the implanted microelectrode is capacitive everywhere.</figcaption>
 </figure>
 
 Most of the skin's resistance sits in its outermost layer, the **stratum corneum**, a few tens of micrometres of dead, dry cells. Its impedance per unit area is of the order of hundreds of kilohm-square-centimetres at 1 Hz, falling to hundreds of ohm-square-centimetres at 1 MHz as its capacitance takes over {% include cite.html keys="webster" %}. That is why gel matters, and why clinical practice lightly abrades the skin before applying an electrode: removing part of the stratum corneum lowers the impedance by an order of magnitude and also reduces the potential that appears when the skin is stretched.
@@ -122,7 +137,7 @@ $$
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 3.2 · How much of the noise budget do the electrodes use?</div>
 
-A wet electrode at 310 K is about 52 kΩ at low frequency, so its noise density is $$\sqrt{4kT \cdot 52\ \text{kΩ}} \approx 30$$ nV/√Hz. Over the 99.5 Hz of the EEG band that gives about 0.30 µVrms. The exact integral is a little lower, **0.24 µVrms**, because $$\mathrm{Re}\{Z_\mathrm{e}\}$$ falls above 66 Hz ([Figure 3.4](#fig-3-4)b).
+A wet electrode at 310 K is about 52 kΩ at low frequency, so its noise density is $$\sqrt{4kT \cdot 52\ \text{kΩ}} \approx 30$$ nV/√Hz. Over the 99.5 Hz of the EEG band that gives about 0.30 µVrms. The exact integral is a little lower, **0.24 µVrms**, because $$\mathrm{Re}\{Z_\mathrm{e}\}$$ falls above 66 Hz ([Figure 3.7](#fig-3-7)b).
 
 A channel has two electrodes, whose noise adds in power: $$\sqrt{2} \times 0.24 = 0.34$$ µVrms. That leaves $$\sqrt{1.5^2 - 0.34^2} = 1.46$$ µVrms for the amplifier, almost the whole budget.
 
@@ -130,9 +145,9 @@ A dry electrode gives 0.85 µVrms each, or **1.20 µVrms** for the pair. Only $$
 
 </div>
 
-<figure id="fig-3-4">
+<figure id="fig-3-7">
   <img src="{{ '/assets/figs/ch03_noise.svg' | relative_url }}" style="width:720px" alt="Thermal noise density of three electrode types, and their integrated noise versus bandwidth">
-  <figcaption><span class="capnum">Figure 3.4.</span> <strong>Electrode thermal noise.</strong> (a) Noise density of one electrode at 310 K. (b) The same noise integrated from 0.5 Hz up to the frequency on the axis, with the 100 Hz edge of the EEG band dotted and the 1.5 µVrms target of the whole chain dashed. The implanted microelectrode alone is above the target in this band, which is why spike recordings are judged in their own 300 Hz–7 kHz band (2.8 µVrms for this model).</figcaption>
+  <figcaption><span class="capnum">Figure 3.7.</span> <strong>Electrode thermal noise.</strong> (a) Noise density of one electrode at 310 K. (b) The same noise integrated from 0.5 Hz up to the frequency on the axis, with the 100 Hz edge of the EEG band dotted and the 1.5 µVrms target of the whole chain dashed. The implanted microelectrode alone is above the target in this band, which is why spike recordings are judged in their own 300 Hz–7 kHz band (2.8 µVrms for this model).</figcaption>
 </figure>
 
 <div class="tbox tbox-pitfall" markdown="1">
@@ -144,7 +159,7 @@ Thermal noise is only a lower bound. Real electrodes, dry ones above all, show *
 
 ## <span class="secnum">3.5</span>Motion artefacts and impedance mismatch
 
-When the skin stretches or the electrode shifts, the skin potential $$E_\mathrm{se}$$ and the charge in the double layer change, and the electrode voltage jumps by millivolts ([Figure 3.1](#fig-3-1)b). These **motion artefacts** fall in the same band as the ECG, so filtering cannot remove them; good skin preparation, firm contact and a stable gel reduce them, and the front-end must at least not saturate when they happen.
+When the skin stretches or the electrode shifts, the skin potential $$E_\mathrm{se}$$ and the charge in the double layer change, and the electrode voltage jumps by millivolts ([Figure 3.3](#fig-3-3)b). These **motion artefacts** fall in the same band as the ECG, so filtering cannot remove them; good skin preparation, firm contact and a stable gel reduce them, and the front-end must at least not saturate when they happen.
 
 
 The two electrodes of a pair also never have the same impedance. This **impedance mismatch** matters more than the impedance itself, because it turns the common-mode interference on the body into a differential signal that the amplifier cannot reject ([Chapter 4]({% link chapters/04_interference.md %})). The 51 kΩ‖47 nF network in one lead is how the standards create this mismatch on purpose when they test an ECG.
@@ -177,9 +192,9 @@ At 40 Hz the source is 500 kΩ and the requirement 2.0 MΩ. The low-frequency ca
 
 </div>
 
-<figure id="fig-3-5">
+<figure id="fig-3-8">
   <img src="{{ '/assets/figs/ch03_loading.svg' | relative_url }}" style="width:720px" alt="Percentage of the signal lost to the input divider versus amplifier input impedance for three electrode types">
-  <figcaption><span class="capnum">Figure 3.5.</span> <strong>2.5 MΩ passes the test, but not with a dry electrode.</strong> Signal lost to the divider versus a resistive input impedance, for a wet and a dry electrode at 10 Hz and an implanted microelectrode at 1 kHz. At 2.5 MΩ the wet electrode loses 2 % but the dry one 27 %; 100 MΩ brings the dry electrode below 1 %.</figcaption>
+  <figcaption><span class="capnum">Figure 3.8.</span> <strong>2.5 MΩ passes the test, but not with a dry electrode.</strong> Signal lost to the divider versus a resistive input impedance, for a wet and a dry electrode at 10 Hz and an implanted microelectrode at 1 kHz. At 2.5 MΩ the wet electrode loses 2 % but the dry one 27 %; 100 MΩ brings the dry electrode below 1 %.</figcaption>
 </figure>
 
 <div class="tbox tbox-insight" markdown="1">

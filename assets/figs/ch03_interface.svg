@@ -1,0 +1,257 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 350" width="720" height="350" font-family="'Libre Franklin', 'Helvetica Neue', Arial, sans-serif">
+  <title>Cross-section of a gelled Ag/AgCl electrode on the skin, each layer mapped to its element of the electrode–skin equivalent circuit</title>
+  <defs>
+    <marker id="ia" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1D2A30"/></marker>
+    <clipPath id="cs"><rect x="112" y="0" width="308" height="350"/></clipPath>
+  </defs>
+  <g clip-path="url(#cs)">
+  <rect x="112" y="232" width="308" height="98" fill="#F9EDE9"/>
+  <path d="M112 186 H420 V236 q-10 9 -20 0 q-10 9 -20 0 q-10 9 -20 0 q-10 9 -20 0 q-10 9 -20 0 q-10 9 -20 0 q-10 9 -20 0 q-10 9 -20 0 q-10 9 -20 0 q-10 9 -20 0 q-10 9 -20 0 q-10 9 -20 0 q-10 9 -20 0 q-10 9 -20 0 q-10 9 -20 0 q-10 9 -20 0 Z" fill="#F7E3D6"/>
+  <ellipse cx="120" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="136" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="152" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="168" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="184" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="200" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="216" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="232" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="248" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="264" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="280" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="296" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="312" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="328" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="344" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="360" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="376" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="392" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="408" cy="194" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="128" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="144" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="160" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="176" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="192" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="208" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="224" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="240" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="256" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="272" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="288" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="304" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="320" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="336" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="352" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="368" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="384" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="400" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="416" cy="206" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="120" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="136" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="152" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="168" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="184" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="200" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="216" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="232" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="248" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="264" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="280" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="296" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="312" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="328" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="344" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="360" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="376" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="392" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <ellipse cx="408" cy="218" rx="6.5" ry="3.6" fill="none" stroke="#E2C3B0" stroke-width="0.9"/>
+  <rect x="112" y="160" width="308" height="26" fill="#F5E6C8"/>
+  <rect x="101" y="162" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="123" y="162" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="145" y="162" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="167" y="162" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="189" y="162" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="211" y="162" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="233" y="162" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="255" y="162" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="277" y="162" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="299" y="162" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="321" y="162" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="343" y="162" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="365" y="162" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="387" y="162" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="409" y="162" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="112" y="168" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="134" y="168" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="156" y="168" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="178" y="168" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="200" y="168" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="222" y="168" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="244" y="168" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="266" y="168" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="288" y="168" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="310" y="168" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="332" y="168" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="354" y="168" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="376" y="168" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="398" y="168" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="101" y="174" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="123" y="174" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="145" y="174" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="167" y="174" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="189" y="174" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="211" y="174" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="233" y="174" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="255" y="174" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="277" y="174" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="299" y="174" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="321" y="174" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="343" y="174" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="365" y="174" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="387" y="174" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="409" y="174" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="112" y="180" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="134" y="180" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="156" y="180" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="178" y="180" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="200" y="180" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="222" y="180" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="244" y="180" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="266" y="180" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="288" y="180" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="310" y="180" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="332" y="180" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="354" y="180" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="376" y="180" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <rect x="398" y="180" width="21" height="4.6" rx="1.4" fill="none" stroke="#D9BE8C" stroke-width="0.8"/>
+  <path d="M154 330 V266 C154 250 178 250 178 266 V330" fill="none" stroke="#B5473A" stroke-width="2" stroke-opacity=".75"/>
+  <path d="M214 330 V266 C214 250 238 250 238 266 V330" fill="none" stroke="#B5473A" stroke-width="2" stroke-opacity=".75"/>
+  <text x="244" y="304" font-size="7.5" fill="#B5473A" text-anchor="start">blood vessels</text>
+  <path d="M314 306 c-14 0 -14 12 0 12 c14 0 14 -12 0 -12 c-10 0 -10 8 0 8" fill="none" stroke="#5E8FBF" stroke-width="2.6"/>
+  <path d="M314 306 C306 286 322 270 314 250 C308 236 320 226 314 212 C310 200 318 194 314 186 C306 180 322 174 314 168 C310 165 314 162 314 160" fill="none" stroke="#5E8FBF" stroke-width="2.6"/>
+  <text x="326" y="262" font-size="7.5" fill="#3E6E9E" text-anchor="start">sweat duct: a</text>
+  <text x="326" y="272" font-size="7.5" fill="#3E6E9E" text-anchor="start">parallel, lower-</text>
+  <text x="326" y="282" font-size="7.5" fill="#3E6E9E" text-anchor="start">resistance path</text>
+  </g>
+  <path d="M112 330 q8 -5 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t20 0" fill="none" stroke="#B9C6C9" stroke-width="1"/>
+  <path d="M112 160 H420 M112 160 V330 M420 160 V330" stroke="#B9C6C9" stroke-width="1" fill="none"/>
+  <rect x="122" y="52" width="54" height="108" fill="#EEF1F2" stroke="#B9C6C9" stroke-width="1"/>
+  <path d="M122 157 H176" stroke="#C9B27A" stroke-width="3"/>
+  <text x="149.0" y="112" font-size="8" fill="#56656B" text-anchor="middle">foam</text>
+  <text x="149.0" y="150" font-size="6.8" fill="#9A6212" text-anchor="middle">adhesive</text>
+  <rect x="356" y="52" width="54" height="108" fill="#EEF1F2" stroke="#B9C6C9" stroke-width="1"/>
+  <path d="M356 157 H410" stroke="#C9B27A" stroke-width="3"/>
+  <text x="383.0" y="112" font-size="8" fill="#56656B" text-anchor="middle">foam</text>
+  <text x="383.0" y="150" font-size="6.8" fill="#9A6212" text-anchor="middle">adhesive</text>
+  <rect x="176" y="86" width="180" height="74" fill="#E4EEF8"/>
+  <rect x="176" y="86" width="180" height="22" fill="#CFE0F1"/>
+  <rect x="176" y="58" width="180" height="18" fill="#C9D0D3" stroke="#1D2A30" stroke-width="1.2"/>
+  <rect x="176" y="76" width="180" height="10" fill="#8E979B" stroke="#1D2A30" stroke-width="1.2"/>
+  <rect x="252" y="30" width="28" height="28" rx="5" fill="#C9D0D3" stroke="#1D2A30" stroke-width="1.2"/>
+  <path d="M112 36 H252" stroke="#1D2A30" stroke-width="2.4"/>
+  <path d="M228 22 H140" stroke="#1D2A30" stroke-width="1.2" fill="none" marker-start="url(#ia)" marker-end="url(#ia)"/>
+  <text x="184" y="16" font-size="8" fill="#1D2A30" text-anchor="middle">electrons in the wire</text>
+  <text x="185" y="94" font-size="8" fill="#1D2A30" text-anchor="middle">+</text>
+  <circle cx="185" cy="102" r="3.4" fill="#fff" stroke="#1A7A4C" stroke-width="1.1"/>
+  <path d="M183.2 102 H186.8" stroke="#1A7A4C" stroke-width="1"/>
+  <text x="203" y="94" font-size="8" fill="#1D2A30" text-anchor="middle">+</text>
+  <circle cx="203" cy="102" r="3.4" fill="#fff" stroke="#1A7A4C" stroke-width="1.1"/>
+  <path d="M201.2 102 H204.8" stroke="#1A7A4C" stroke-width="1"/>
+  <text x="221" y="94" font-size="8" fill="#1D2A30" text-anchor="middle">+</text>
+  <circle cx="221" cy="102" r="3.4" fill="#fff" stroke="#1A7A4C" stroke-width="1.1"/>
+  <path d="M219.2 102 H222.8" stroke="#1A7A4C" stroke-width="1"/>
+  <text x="239" y="94" font-size="8" fill="#1D2A30" text-anchor="middle">+</text>
+  <circle cx="239" cy="102" r="3.4" fill="#fff" stroke="#1A7A4C" stroke-width="1.1"/>
+  <path d="M237.2 102 H240.8" stroke="#1A7A4C" stroke-width="1"/>
+  <text x="257" y="94" font-size="8" fill="#1D2A30" text-anchor="middle">+</text>
+  <circle cx="257" cy="102" r="3.4" fill="#fff" stroke="#1A7A4C" stroke-width="1.1"/>
+  <path d="M255.2 102 H258.8" stroke="#1A7A4C" stroke-width="1"/>
+  <text x="275" y="94" font-size="8" fill="#1D2A30" text-anchor="middle">+</text>
+  <circle cx="275" cy="102" r="3.4" fill="#fff" stroke="#1A7A4C" stroke-width="1.1"/>
+  <path d="M273.2 102 H276.8" stroke="#1A7A4C" stroke-width="1"/>
+  <text x="293" y="94" font-size="8" fill="#1D2A30" text-anchor="middle">+</text>
+  <circle cx="293" cy="102" r="3.4" fill="#fff" stroke="#1A7A4C" stroke-width="1.1"/>
+  <path d="M291.2 102 H294.8" stroke="#1A7A4C" stroke-width="1"/>
+  <text x="311" y="94" font-size="8" fill="#1D2A30" text-anchor="middle">+</text>
+  <circle cx="311" cy="102" r="3.4" fill="#fff" stroke="#1A7A4C" stroke-width="1.1"/>
+  <path d="M309.2 102 H312.8" stroke="#1A7A4C" stroke-width="1"/>
+  <text x="329" y="94" font-size="8" fill="#1D2A30" text-anchor="middle">+</text>
+  <circle cx="329" cy="102" r="3.4" fill="#fff" stroke="#1A7A4C" stroke-width="1.1"/>
+  <path d="M327.2 102 H330.8" stroke="#1A7A4C" stroke-width="1"/>
+  <text x="347" y="94" font-size="8" fill="#1D2A30" text-anchor="middle">+</text>
+  <circle cx="347" cy="102" r="3.4" fill="#fff" stroke="#1A7A4C" stroke-width="1.1"/>
+  <path d="M345.2 102 H348.8" stroke="#1A7A4C" stroke-width="1"/>
+  <circle cx="188" cy="118" r="4.6" fill="#fff" stroke="#1A7A4C" stroke-width="1.1"/>
+  <path d="M185.6 118 H190.4" stroke="#1A7A4C" stroke-width="1.1"/>
+  <circle cx="198" cy="136" r="4.6" fill="#fff" stroke="#1F64A8" stroke-width="1.1"/>
+  <path d="M195.6 136 H200.4 M198 133.6 V138.4" stroke="#1F64A8" stroke-width="1.1"/>
+  <circle cx="186" cy="150" r="4.6" fill="#fff" stroke="#1A7A4C" stroke-width="1.1"/>
+  <path d="M183.6 150 H188.4" stroke="#1A7A4C" stroke-width="1.1"/>
+  <circle cx="342" cy="120" r="4.6" fill="#fff" stroke="#1F64A8" stroke-width="1.1"/>
+  <path d="M339.6 120 H344.4 M342 117.6 V122.4" stroke="#1F64A8" stroke-width="1.1"/>
+  <circle cx="332" cy="138" r="4.6" fill="#fff" stroke="#1A7A4C" stroke-width="1.1"/>
+  <path d="M329.6 138 H334.4" stroke="#1A7A4C" stroke-width="1.1"/>
+  <circle cx="344" cy="152" r="4.6" fill="#fff" stroke="#1F64A8" stroke-width="1.1"/>
+  <path d="M341.6 152 H346.4 M344 149.6 V154.4" stroke="#1F64A8" stroke-width="1.1"/>
+  <rect x="210" y="114" width="112" height="32" rx="3" fill="#fff" fill-opacity=".75"/>
+  <text x="266" y="127" font-size="9" fill="#1D2A30" text-anchor="middle">Ag ⇌ Ag⁺ + e⁻</text>
+  <text x="266" y="140" font-size="9" fill="#1D2A30" text-anchor="middle">Ag⁺ + Cl⁻ ⇌ AgCl</text>
+  <text x="266" y="157" font-size="7.5" fill="#56656B" text-anchor="middle">Na⁺ and Cl⁻ ions in the gel</text>
+  <text x="104" y="40" font-size="8.5" fill="#1D2A30" text-anchor="end">lead wire, snap</text>
+  <text x="104" y="71" font-size="8.5" fill="#1D2A30" text-anchor="end">silver (Ag)</text>
+  <text x="104" y="85" font-size="8.5" fill="#1D2A30" text-anchor="end">silver chloride</text>
+  <text x="104" y="101" font-size="8.5" fill="#1D2A30" text-anchor="end">double layer</text>
+  <text x="104" y="136" font-size="8.5" fill="#1D2A30" text-anchor="end">electrolyte gel</text>
+  <text x="104" y="171" font-size="8.5" fill="#1D2A30" text-anchor="end">stratum corneum</text>
+  <text x="104" y="182" font-size="7.5" fill="#56656B" text-anchor="end">(dead, dry cells)</text>
+  <text x="104" y="214" font-size="8.5" fill="#1D2A30" text-anchor="end">living epidermis</text>
+  <text x="104" y="276" font-size="8.5" fill="#1D2A30" text-anchor="end">dermis and</text>
+  <text x="104" y="287" font-size="8.5" fill="#1D2A30" text-anchor="end">deeper tissue</text>
+  <circle cx="580" cy="26" r="4.5" fill="#fff" stroke="#1D2A30" stroke-width="1.8"/>
+  <path d="M580 30.5 V44 M580 50 V62 M580 110 V110" stroke="#1D2A30" stroke-width="1.8"/>
+  <path d="M568 44 H592" stroke="#1D2A30" stroke-width="2.4"/>
+  <path d="M573 50 H587" stroke="#1D2A30" stroke-width="4"/>
+  <path d="M562 62 H598 M562 110 H598 M598 62 V83 M598 89 V110 M562 62 v4 l3 3.33333 l-6 6.66667 l6 6.66667 l-6 6.66667 l6 6.66667 l-6 6.66667 l3 3.33333 v4" stroke="#1D2A30" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+  <path d="M588 83 H608 M588 89 H608" stroke="#1D2A30" stroke-width="2.4"/>
+  <circle cx="580" cy="62" r="2.6" fill="#1D2A30"/>
+  <circle cx="580" cy="110" r="2.6" fill="#1D2A30"/>
+  <path d="M580 110 v4 l3 3.16667 l-6 6.33333 l6 6.33333 l-6 6.33333 l6 6.33333 l-6 6.33333 l3 3.16667 v4 M580 156 V164 M580 170 V180" stroke="#1D2A30" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+  <path d="M568 164 H592" stroke="#1D2A30" stroke-width="2.4"/>
+  <path d="M573 170 H587" stroke="#1D2A30" stroke-width="4"/>
+  <path d="M562 180 H598 M562 230 H598 M598 180 V202 M598 208 V230 M562 180 v4 l3 3.5 l-6 7 l6 7 l-6 7 l6 7 l-6 7 l3 3.5 v4" stroke="#1D2A30" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+  <path d="M588 202 H608 M588 208 H608" stroke="#1D2A30" stroke-width="2.4"/>
+  <circle cx="580" cy="180" r="2.6" fill="#1D2A30"/>
+  <circle cx="580" cy="230" r="2.6" fill="#1D2A30"/>
+  <path d="M580 230 V246 M580 246 v4 l3 3.33333 l-6 6.66667 l6 6.66667 l-6 6.66667 l6 6.66667 l-6 6.66667 l3 3.33333 v4 M580 294 V309.5" stroke="#1D2A30" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+  <circle cx="580" cy="314" r="4.5" fill="#fff" stroke="#1D2A30" stroke-width="1.8"/>
+  <text x="612" y="30" font-size="8.5" fill="#56656B" text-anchor="start">to the amplifier</text>
+  <text x="612" y="52" font-size="13" fill="#1D2A30" text-anchor="start" font-style="italic">E<tspan dy="3" font-size="9.5">hc</tspan></text>
+  <text x="612" y="64" font-size="8" fill="#56656B" text-anchor="start">half-cell potential</text>
+  <text x="612" y="88" font-size="13" fill="#1D2A30" text-anchor="start" font-style="italic">R<tspan dy="3" font-size="9.5">d</tspan></text>
+  <text x="630" y="88" font-size="12" fill="#1D2A30" text-anchor="start">‖</text>
+  <text x="640" y="88" font-size="13" fill="#1D2A30" text-anchor="start" font-style="italic">C<tspan dy="3" font-size="9.5">d</tspan></text>
+  <text x="612" y="100" font-size="8" fill="#56656B" text-anchor="start">charge transfer,</text>
+  <text x="612" y="110" font-size="8" fill="#56656B" text-anchor="start">double layer</text>
+  <text x="612" y="138" font-size="13" fill="#1D2A30" text-anchor="start" font-style="italic">R<tspan dy="3" font-size="9.5">s</tspan></text>
+  <text x="612" y="150" font-size="8" fill="#56656B" text-anchor="start">gel</text>
+  <text x="612" y="172" font-size="13" fill="#1D2A30" text-anchor="start" font-style="italic">E<tspan dy="3" font-size="9.5">se</tspan></text>
+  <text x="612" y="184" font-size="8" fill="#56656B" text-anchor="start">skin potential</text>
+  <text x="612" y="208" font-size="13" fill="#1D2A30" text-anchor="start" font-style="italic">R<tspan dy="3" font-size="9.5">e</tspan></text>
+  <text x="630" y="208" font-size="12" fill="#1D2A30" text-anchor="start">‖</text>
+  <text x="640" y="208" font-size="13" fill="#1D2A30" text-anchor="start" font-style="italic">C<tspan dy="3" font-size="9.5">e</tspan></text>
+  <text x="612" y="220" font-size="8" fill="#56656B" text-anchor="start">stratum corneum</text>
+  <text x="612" y="274" font-size="13" fill="#1D2A30" text-anchor="start" font-style="italic">R<tspan dy="3" font-size="9.5">u</tspan></text>
+  <text x="612" y="286" font-size="8" fill="#56656B" text-anchor="start">dermis, tissue</text>
+  <text x="612" y="318" font-size="8.5" fill="#56656B" text-anchor="start">into the body</text>
+  <path d="M424 60 h4 V106 h-4" stroke="#B9C6C9" stroke-width="1.3" fill="none"/>
+  <path d="M550 42 h-4 V110 h4" stroke="#B9C6C9" stroke-width="1.3" fill="none"/>
+  <path d="M432 83 L542 76" stroke="#B9C6C9" stroke-width="1" stroke-dasharray="4 3" fill="none"/>
+  <path d="M424 110 h4 V158 h-4" stroke="#B9C6C9" stroke-width="1.3" fill="none"/>
+  <path d="M550 114 h-4 V156 h4" stroke="#B9C6C9" stroke-width="1.3" fill="none"/>
+  <path d="M432 134 L542 135" stroke="#B9C6C9" stroke-width="1" stroke-dasharray="4 3" fill="none"/>
+  <path d="M424 162 h4 V234 h-4" stroke="#B9C6C9" stroke-width="1.3" fill="none"/>
+  <path d="M550 162 h-4 V230 h4" stroke="#B9C6C9" stroke-width="1.3" fill="none"/>
+  <path d="M432 198 L542 196" stroke="#B9C6C9" stroke-width="1" stroke-dasharray="4 3" fill="none"/>
+  <path d="M424 238 h4 V328 h-4" stroke="#B9C6C9" stroke-width="1.3" fill="none"/>
+  <path d="M550 242 h-4 V298 h4" stroke="#B9C6C9" stroke-width="1.3" fill="none"/>
+  <path d="M432 283 L542 270" stroke="#B9C6C9" stroke-width="1" stroke-dasharray="4 3" fill="none"/>
+</svg>
