@@ -433,7 +433,7 @@ $$
 
 ## Part VI · Wearable systems
 
-### [32. Signal Quality and Motion Artefacts]({% link chapters/32_quality.md %})
+### [31. Signal Quality and Motion Artefacts]({% link chapters/31_quality.md %})
 
 **Normalised LMS**
 
@@ -441,7 +441,7 @@ $$e[n] = d[n] - \mathbf{w}^\mathsf{T}\mathbf{x}[n], \qquad \mathbf{w} \leftarrow
 
 $$\mathbf{x}$$ holds the last $$L$$ samples of every reference, $$0 < \mu < 2$$ is the step size and $$\delta$$ regularises the division.
 
-### [34. Closed-Loop Systems]({% link chapters/34_closedloop.md %})
+### [33. Closed-Loop Systems]({% link chapters/33_closedloop.md %})
 
 **Phase error from latency**
 

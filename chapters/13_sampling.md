@@ -239,7 +239,7 @@ A 50 Hz notch filter after the converter does not remove mains interference that
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 6]({% link chapters/31_labs.md %}#lab-6) quantises sine waves, applies coherent sampling and windows, and builds the `adctest.py` module every later converter lab uses. Start from `biosig.quantize()` and `biosig.tone_metrics()`, then reproduce [Figure 13.3](#fig-13-3) and the 6.02N + 1.76 dB line.
+[Lab 6]({% link labs/lab06_adctest.md %}) quantises sine waves, applies coherent sampling and windows, and builds the `adctest.py` module every later converter lab uses. Start from `biosig.quantize()` and `biosig.tone_metrics()`, then reproduce [Figure 13.3](#fig-13-3) and the 6.02N + 1.76 dB line.
 
 </div>
 

@@ -12,11 +12,12 @@ Part V
 # Putting It Together
 {: .part-title }
 
-The full Open-BioAFE architecture and its budgets, the open-source design and verification flow from schematic to an IHP OpenMPW submission, and fifteen hands-on labs with a capstone.
+The full Open-BioAFE architecture and its budgets, and the open-source design and verification flow from schematic to an IHP OpenMPW submission.
 {: .part-blurb }
 
 ## Chapters in this part
 
 - [29. The Full Architecture and Its Budgets]({% link chapters/29_arch.md %})
 - [30. Open-Source Design and Verification Flow]({% link chapters/30_flow.md %})
-- [31. Hands-on Labs]({% link chapters/31_labs.md %})
+
+The fifteen labs and the capstone that put these chapters to work have their own section, [Hands-On Labs]({% link labs.md %}).

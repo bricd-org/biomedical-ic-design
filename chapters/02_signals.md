@@ -187,7 +187,7 @@ Amplitudes in the literature are usually peak-to-peak or peak; noise is quoted i
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Lab 1: biosignal explorer</div>
 
-[Lab 1]({% link chapters/31_labs.md %}#lab-1) loads real ECG, EEG and EMG recordings from PhysioNet {% include cite.html keys="physionet" %} and NinaPro {% include cite.html keys="ninapro" %}, plots their traces and spectra, and measures their amplitude and bandwidth with the helpers in `biosig.py`. The result is your own version of Table 2.1.
+[Lab 1]({% link labs/lab01_explorer.md %}) loads real ECG, EEG and EMG recordings from PhysioNet {% include cite.html keys="physionet" %} and NinaPro {% include cite.html keys="ninapro" %}, plots their traces and spectra, and measures their amplitude and bandwidth with the helpers in `biosig.py`. The result is your own version of Table 2.1.
 
 </div>
 

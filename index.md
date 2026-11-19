@@ -13,7 +13,7 @@ permalink: /
     <p class="fs-5">A design tutorial for undergraduate and early-graduate engineers building an open-source biomedical analog front-end and data converters in 130&nbsp;nm SiGe BiCMOS. Bioelectric signals, electrodes and safety, low-noise amplifiers, chopping, SAR and ΔΣ ADCs, bioimpedance sensing, biosignal processing, the open-source flow, and hands-on labs.</p>
     <p>
       <a class="btn btn-primary mr-2" href="{% link preface.md %}">Start reading</a>
-      <a class="btn mr-2" href="{% link chapters/31_labs.md %}">Go to the labs</a>
+      <a class="btn mr-2" href="{% link labs.md %}">Go to the labs</a>
       <a class="btn" href="https://github.com/bricd-org/biomedical-ic-design">Source on GitHub</a>
     </p>
   </div>
@@ -43,14 +43,15 @@ Every wearable ECG patch, EEG headset, prosthetic-control armband and neural imp
   <div class="card"><span class="card-label">Part II · Ch 5–12 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-2.md %}">The analog front-end</a></h3><p>Devices in weak inversion, noise and power, instrumentation amplifiers, the AC-coupled LNA, chopping, DC servo loops, filters and common-mode control.</p></div>
   <div class="card"><span class="card-label">Part III · Ch 13–22 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-3.md %}">Data converters</a></h3><p>Sampling, specifications, switches, comparators, capacitive DACs, the SAR ADC, ΔΣ theory and circuits, and ADC testing.</p></div>
   <div class="card"><span class="card-label">Part IV · Ch 23–28 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-4.md %}">Biosignal processing and systems</a></h3><p>DSP for biosignals, ECG, EEG and EMG processing on open datasets, on-chip features and bioimpedance sensing.</p></div>
-  <div class="card"><span class="card-label">Part V · Ch 29–31 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-5.md %}">Putting it together</a></h3><p>The full architecture and its budgets, the open-source flow to an IHP OpenMPW tape-out, and fifteen hands-on labs.</p></div>
-  <div class="card"><span class="card-label">Part VI · Ch 32–34 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-6.md %}">Wearable systems</a></h3><p>Signal quality and motion-artefact cancellation, ear-EEG and multimodal sensing at the ear, and closed-loop systems that act on what they measure.</p></div>
+  <div class="card"><span class="card-label">Part V · Ch 29–30 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-5.md %}">Putting it together</a></h3><p>The full architecture and its budgets, and the open-source flow to an IHP OpenMPW tape-out.</p></div>
+  <div class="card"><span class="card-label">Part VI · Ch 31–33 <span class="status status-written">written</span></span><h3><a href="{% link parts/part-6.md %}">Wearable systems</a></h3><p>Signal quality and motion-artefact cancellation, ear-EEG and multimodal sensing at the ear, and closed-loop systems that act on what they measure.</p></div>
+  <div class="card"><span class="card-label">Labs 1–15 · Capstone <span class="status status-written">written</span></span><h3><a href="{% link labs.md %}">Hands-on labs</a></h3><p>Fifteen labs in three tracks with free tools: Python models, SG13G2 circuits, and the whole chain on real recordings, then a capstone that builds one Open-BioAFE channel.</p></div>
   <div class="card"><span class="card-label">Appendices A–E <span class="status status-written">written</span></span><h3><a href="{% link appendices/index.md %}">Reference material</a></h3><p>A formula sheet, reference tables, design-review checklists, a glossary and further reading.</p></div>
 </div>
 
 ## Hands-on labs
 
-Fifteen labs in three tracks use only free tools: Python for signal and system models, Xschem and ngspice for SG13G2 circuits, and KLayout for layout. They are listed in [Chapter 31]({% link chapters/31_labs.md %}); the scripts live in [`labs/python/`](https://github.com/bricd-org/biomedical-ic-design/tree/main/labs/python).
+Fifteen labs in three tracks use only free tools: Python for signal and system models, Xschem and ngspice for SG13G2 circuits, and KLayout for layout. They are listed on the [Hands-On Labs]({% link labs.md %}) page; the scripts live in [`labs/python/`](https://github.com/bricd-org/biomedical-ic-design/tree/main/labs/python).
 
 ## About
 
@@ -58,4 +59,4 @@ The tutorial is written for the Open-BioAFE project at [BRICD](https://www.thebr
 
 **How this tutorial is made.** The Open-BioAFE Tutorial is being developed with the help of AI tools, and this draft may contain mistakes. If you spot one, please email [bricd.org@gmail.com](mailto:bricd.org@gmail.com) and we will correct it.
 
-This is a living draft (v0.1, November 2026): all thirty-four chapters, the appendices and the fifteen labs of Chapter 31 are written, and most chapters have an interactive demo. Corrections and contributions are welcome through [GitHub issues](https://github.com/bricd-org/biomedical-ic-design/issues).
+This is a living draft (v0.1, November 2026): all thirty-three chapters, the appendices and the fifteen [hands-on labs]({% link labs.md %}) are written, and most chapters have an interactive demo. Corrections and contributions are welcome through [GitHub issues](https://github.com/bricd-org/biomedical-ic-design/issues).

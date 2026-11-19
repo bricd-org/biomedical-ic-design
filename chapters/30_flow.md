@@ -121,7 +121,7 @@ Trusting a simulation because it converged. A converged result can still be wron
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 14]({% link chapters/31_labs.md %}#lab-14) lays out the comparator and the CDAC in KLayout, runs DRC, LVS and extraction with the JKU template, and compares post-layout with schematic simulation. Before it, run `labs/spice/sg13_char.py` and `labs/spice/sg13_lna.py` to check that your container reproduces the numbers of Chapters 5 and 8.
+[Lab 14]({% link labs/lab14_layout.md %}) lays out the comparator and the CDAC in KLayout, runs DRC, LVS and extraction with the JKU template, and compares post-layout with schematic simulation. Before it, run `labs/spice/sg13_char.py` and `labs/spice/sg13_lna.py` to check that your container reproduces the numbers of Chapters 5 and 8.
 
 </div>
 

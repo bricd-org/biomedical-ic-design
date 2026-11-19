@@ -207,7 +207,7 @@ Do not judge a modulator by the linear-model formula, or by a short simulation w
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 9]({% link chapters/31_labs.md %}#lab-9) synthesises first- to third-order NTFs, simulates SQNR versus OSR and the incremental mode, and designs a fixed-point CIC decimator. Start by reproducing [Table 19.1](#tab-19-1) with `biosig.simulate_dsm()`, then redo it with python-deltasigma's `synthesizeNTF`, `realizeNTF` and `simulateDSM` and compare.
+[Lab 9]({% link labs/lab09_deltasigma.md %}) synthesises first- to third-order NTFs, simulates SQNR versus OSR and the incremental mode, and designs a fixed-point CIC decimator. Start by reproducing [Table 19.1](#tab-19-1) with `biosig.simulate_dsm()`, then redo it with python-deltasigma's `synthesizeNTF`, `realizeNTF` and `simulateDSM` and compare.
 
 </div>
 

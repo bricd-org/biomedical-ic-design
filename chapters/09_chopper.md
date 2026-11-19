@@ -150,7 +150,7 @@ Simulating a chopper amplifier only with AC and noise analyses. Chopping is a ti
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 5]({% link chapters/31_labs.md %}#lab-5) adds input and output choppers and a DC servo loop to your LNA: $$1/f$$ removal, ripple, input-impedance loss and ±300 mV offset tolerance. Reproduce [Figure 9.3](#fig-9-3)b first with `figsrc/ch09_figs.py`, then compare it with a transient-noise simulation of your amplifier.
+[Lab 5]({% link labs/lab05_chopper.md %}) adds input and output choppers and a DC servo loop to your LNA: $$1/f$$ removal, ripple, input-impedance loss and ±300 mV offset tolerance. Reproduce [Figure 9.3](#fig-9-3)b first with `figsrc/ch09_figs.py`, then compare it with a transient-noise simulation of your amplifier.
 
 </div>
 

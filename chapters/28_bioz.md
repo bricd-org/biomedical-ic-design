@@ -157,7 +157,7 @@ Checking the excitation current against the DC patient-current limit, or only ag
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 15]({% link chapters/31_labs.md %}#lab-15) builds the impedance readout: a Cole tissue model, a tetrapolar measurement and digital IQ in Python, then an SG13G2 current source and a square-wave IQ demodulator. Start from `figsrc/ch28_figs.py`: add a respiration $$\Delta Z$$ of 0.5 Ω at 0.25 Hz to the tissue, demodulate it digitally, and compare analog square-wave demodulation with digital IQ.
+[Lab 15]({% link labs/lab15_bioz.md %}) builds the impedance readout: a Cole tissue model, a tetrapolar measurement and digital IQ in Python, then an SG13G2 current source and a square-wave IQ demodulator. Start from `figsrc/ch28_figs.py`: add a respiration $$\Delta Z$$ of 0.5 Ω at 0.25 Hz to the tissue, demodulate it digitally, and compare analog square-wave demodulation with digital IQ.
 
 </div>
 

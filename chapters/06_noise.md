@@ -188,7 +188,7 @@ NEF values are only comparable when they use the same bandwidth convention. The 
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 4]({% link chapters/31_labs.md %}#lab-4) computes the NEF of your Harrison LNA versus bias current. Before building it, reproduce [Figure 6.2](#fig-6-2)b from `figsrc/data/sg13_gmid.csv`: it tells you the best NEF your input pair can reach at each current.
+[Lab 4]({% link labs/lab04_lna.md %}) computes the NEF of your Harrison LNA versus bias current. Before building it, reproduce [Figure 6.2](#fig-6-2)b from `figsrc/data/sg13_gmid.csv`: it tells you the best NEF your input pair can reach at each current.
 
 </div>
 

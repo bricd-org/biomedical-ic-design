@@ -172,7 +172,7 @@ One missed beat in 70 gives Se = 69/70 = 98.6 %. Per class, a ventricular beat c
 
 ## <span class="secnum">24.4</span>Noise stress testing
 
-Real recordings carry baseline wander, muscle noise and electrode motion. The MIT-BIH Noise Stress Test Database {% include cite.html keys="nstdb" %} provides calibrated recordings of each noise type, to be added to clean ECG at chosen signal-to-noise ratios. Electrode-motion noise is the hardest, because its spectrum overlaps the QRS's. A detector, or a front-end, is characterised by how its sensitivity and positive predictivity fall as the SNR drops. [Lab 11]({% link chapters/31_labs.md %}#lab-11) runs this test: electrode motion breaks the detector long before the bits or the front-end noise do.
+Real recordings carry baseline wander, muscle noise and electrode motion. The MIT-BIH Noise Stress Test Database {% include cite.html keys="nstdb" %} provides calibrated recordings of each noise type, to be added to clean ECG at chosen signal-to-noise ratios. Electrode-motion noise is the hardest, because its spectrum overlaps the QRS's. A detector, or a front-end, is characterised by how its sensitivity and positive predictivity fall as the SNR drops. [Lab 11]({% link labs/lab11_ecg.md %}) runs this test: electrode motion breaks the detector long before the bits or the front-end noise do.
 
 ## <span class="secnum">24.5</span>Co-design: bits and noise versus sensitivity
 
@@ -239,7 +239,7 @@ Scoring a detector on a different time window from the reference annotations. De
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 11]({% link chapters/31_labs.md %}#lab-11) runs MIT-BIH records and the Noise Stress Test through a behavioural front-end and ADC with Pan–Tompkins detection, and plots sensitivity and positive predictivity against ADC bits and input noise. Start from `figsrc/ch24_figs.py`, replace `biosig.ecg()` with a record loaded by `wfdb`, and add electrode-motion noise at 6, 0 and −6 dB SNR. Then compute HRV from the detections with `hrv_time()` and `hrv_freq()` and compare it with the annotations' normal beats.
+[Lab 11]({% link labs/lab11_ecg.md %}) runs MIT-BIH records and the Noise Stress Test through a behavioural front-end and ADC with Pan–Tompkins detection, and plots sensitivity and positive predictivity against ADC bits and input noise. Start from `figsrc/ch24_figs.py`, replace `biosig.ecg()` with a record loaded by `wfdb`, and add electrode-motion noise at 6, 0 and −6 dB SNR. Then compute HRV from the detections with `hrv_time()` and `hrv_freq()` and compare it with the annotations' normal beats.
 
 </div>
 

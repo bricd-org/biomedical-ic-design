@@ -23,7 +23,7 @@ This tutorial teaches you to design one by following a single, concrete chip, **
 
 ## How the tutorial is organised
 
-The tutorial has six parts. **Part I, Foundations** (Chapters 1–4), explains where biopotentials come from, what the electrodes and the body do to them, and the interference, safety rules and standards every front-end must meet. **Part II, The Analog Front-End** (Chapters 5–12), designs the low-noise, low-power amplifier chain. **Part III, Data Converters** (Chapters 13–22), is the heart of the tutorial: it takes you from the quantiser to a measured SAR and ΔΣ converter. **Part IV, Biosignal Processing and Systems** (Chapters 23–28), processes real ECG, EEG and EMG data, puts processing on chip and adds bioimpedance sensing. **Part V, Putting It Together** (Chapters 29–31), assembles the architecture and its budgets, walks through the open-source flow and collects the fifteen labs. **Part VI, Wearable Systems** (Chapters 32–34), takes the chip onto a moving person: signal quality and motion artefacts, ear-EEG and multimodal sensing at the ear, and closed-loop systems.
+The tutorial has six parts and a section of hands-on labs. **Part I, Foundations** (Chapters 1–4), explains where biopotentials come from, what the electrodes and the body do to them, and the interference, safety rules and standards every front-end must meet. **Part II, The Analog Front-End** (Chapters 5–12), designs the low-noise, low-power amplifier chain. **Part III, Data Converters** (Chapters 13–22), is the heart of the tutorial: it takes you from the quantiser to a measured SAR and ΔΣ converter. **Part IV, Biosignal Processing and Systems** (Chapters 23–28), processes real ECG, EEG and EMG data, puts processing on chip and adds bioimpedance sensing. **Part V, Putting It Together** (Chapters 29–30), assembles the architecture and its budgets and walks through the open-source flow. **Part VI, Wearable Systems** (Chapters 31–33), takes the chip onto a moving person: signal quality and motion artefacts, ear-EEG and multimodal sensing at the ear, and closed-loop systems. The fifteen **[Hands-On Labs]({% link labs.md %})** and their capstone follow the parts, each lab on its own page.
 
 **Three reading paths.** Everyone should read Part I first. After that, [Figure P.1](#fig-reading-paths) suggests three routes. The **circuit path** (Parts I, II, III and V) is for students heading to a tape-out. The **signal path** (Part I, Part IV, the converter specifications of Chapters [13]({% link chapters/13_sampling.md %}) and [14]({% link chapters/14_adcspecs.md %}), then Part V) is for biomedical-engineering and DSP students who need to specify, not build, the hardware. The **converter-only path** ([Chapter 13]({% link chapters/13_sampling.md %}) to [Chapter 22]({% link chapters/22_adctest.md %}) with Labs 6–10) is a self-contained course on data converters.
 
@@ -69,7 +69,7 @@ A *pitfall* box warns about a common mistake, such as quoting an amplitude in rm
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Lab 1: biosignal explorer</div>
 
-A *try-it* box points to a lab script ([Lab 1]({% link chapters/31_labs.md %}#lab-1)).
+A *try-it* box points to a lab script ([Lab 1]({% link labs/lab01_explorer.md %})).
 
 </div>
 
@@ -84,11 +84,11 @@ Longer algebra sits in grey *derivation* boxes.
 
 ## How the labs work
 
-Fifteen labs in three tracks use only free tools: Python (NumPy, SciPy, wfdb, python-deltasigma) for signals and system models, Xschem and ngspice for transistor-level SG13G2 circuits, and KLayout for layout ([Chapter 31]({% link chapters/31_labs.md %})). The Python labs live in `labs/python/` and share one module, `biosig.py`, which holds the signal tables, the synthetic signals and the electrode and interference models. The figure scripts in `figsrc/` import the same module, so the numbers on these pages and the numbers your labs print come from the same code. Datasets stay on PhysioNet {% include cite.html keys="physionet" %} and NinaPro {% include cite.html keys="ninapro" %} under their own licences; the labs download them on first use.
+Fifteen labs in three tracks use only free tools: Python (NumPy, SciPy, wfdb, python-deltasigma) for signals and system models, Xschem and ngspice for transistor-level SG13G2 circuits, and KLayout for layout ([Hands-On Labs]({% link labs.md %})). The Python labs live in `labs/python/` and share one module, `biosig.py`, which holds the signal tables, the synthetic signals and the electrode and interference models. The figure scripts in `figsrc/` import the same module, so the numbers on these pages and the numbers your labs print come from the same code. Datasets stay on PhysioNet {% include cite.html keys="physionet" %} and NinaPro {% include cite.html keys="ninapro" %} under their own licences; the labs download them on first use.
 
 ## The state of this draft
 
-This is release v0.1 (November 2026). All thirty-four chapters, the five appendices and the fifteen labs of [Chapter 31]({% link chapters/31_labs.md %}) are written; the SG13G2 labs have scripts that run in the IIC-OSIC-TOOLS container, the real-data labs read PhysioNet recordings, and most chapters carry an interactive demo. Expect corrections as the labs are run on silicon.
+This is release v0.1 (November 2026). All thirty-three chapters, the five appendices and the fifteen [hands-on labs]({% link labs.md %}) are written; the SG13G2 labs have scripts that run in the IIC-OSIC-TOOLS container, the real-data labs read PhysioNet recordings, and most chapters carry an interactive demo. Expect corrections as the labs are run on silicon.
 
 ## Sources and acknowledgments
 

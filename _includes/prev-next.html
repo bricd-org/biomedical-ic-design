@@ -1,6 +1,7 @@
 {%- comment -%}
-  Previous / next links between the preface (chapter: 0) and Chapters 1–31, found from the
-  `chapter` number in each page's front matter. Included by footer_custom.html.
+  Previous / next links between the preface (chapter: 0) and Chapters 1–33, found from the
+  `chapter` number in each page's front matter. Included by footer_custom.html. The lab pages
+  (labs.md, labs/) have no `chapter` number; they link to each other in their own text.
 {%- endcomment -%}
 {%- if page.chapter != nil -%}
   {%- assign pn_prev_n = page.chapter | minus: 1 -%}

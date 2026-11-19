@@ -12,7 +12,7 @@ Its input devices are 250/4 um (1000 um^2, Table B.5), thick-oxide by default: a
 leaks 3-25 pA through its gate, more than the teraohm pseudo-resistor can carry, and the bias fails
 (run --input lv to see it; Chapter 8, Section 8.5). The tail current is mirrored from IBIAS.
 The cascode gates use ideal bias sources: replacing them with bias transistors is an exercise.
-Needs Docker and hpretl/iic-osic-tools:2026.10 (see the set-up section of Chapter 31).
+Needs Docker and hpretl/iic-osic-tools:2026.10 (see "Setting up" on the Hands-On Labs page, /labs/#setup).
 Outputs: labs/spice/char/out/lab4_*.txt and labs/spice/out/lab4_*.png (git-ignored).
 """
 import argparse

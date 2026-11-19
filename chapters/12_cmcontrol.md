@@ -145,7 +145,7 @@ Testing the RLD loop with a single body capacitance. People differ, a patient ly
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 2]({% link chapters/31_labs.md %}#lab-2) already adds a behavioural right-leg drive to the body model of [Chapter 4]({% link chapters/04_interference.md %}). Extend it with `figsrc/ch12_figs.py`: add the integrator, the safety resistor and the body capacitance, and reproduce [Figure 12.2](#fig-12-2).
+[Lab 2]({% link labs/lab02_interference.md %}) already adds a behavioural right-leg drive to the body model of [Chapter 4]({% link chapters/04_interference.md %}). Extend it with `figsrc/ch12_figs.py`: add the integrator, the safety resistor and the body capacitance, and reproduce [Figure 12.2](#fig-12-2).
 
 </div>
 

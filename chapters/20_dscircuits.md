@@ -140,7 +140,7 @@ Assuming the decimator removes every tone at a multiple of the output rate. Only
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 10]({% link chapters/31_labs.md %}#lab-10) builds the Lab 9 loop with switched-capacitor integrators and a 1-bit quantiser and compares it with the ideal model. Start by rerunning `figsrc/ch20_figs.py` with $$a_2 = 0.25$$ and the matching CoI weights, and check that the swing halves and the resolution holds.
+[Lab 10]({% link labs/lab10_scdeltasigma.md %}) builds the Lab 9 loop with switched-capacitor integrators and a 1-bit quantiser and compares it with the ideal model. Start by rerunning `figsrc/ch20_figs.py` with $$a_2 = 0.25$$ and the matching CoI weights, and check that the swing halves and the resolution holds.
 
 </div>
 

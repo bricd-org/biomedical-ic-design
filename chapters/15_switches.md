@@ -121,7 +121,7 @@ Simulating leakage with the simulator's defaults. The default $$g_\mathrm{min}$$
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 8]({% link chapters/31_labs.md %}#lab-8) builds the SAR, starting with its bootstrapped sample-and-hold. Run `labs/spice/sg13_switch.py`, add a hold capacitor and a transient, and measure the droop and the charge injection yourself at 27 and 85 °C.
+[Lab 8]({% link labs/lab08_sar.md %}) builds the SAR, starting with its bootstrapped sample-and-hold. Run `labs/spice/sg13_switch.py`, add a hold capacitor and a transient, and measure the droop and the charge injection yourself at 27 and 85 °C.
 
 </div>
 

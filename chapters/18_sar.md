@@ -106,7 +106,7 @@ A behavioural Monte Carlo (`figsrc/ch18_figs.py`) converts a near-full-scale sin
 - binary, 12 cycles: **11.5 bits** uncalibrated, 11.8 bits with calibrated weights;
 - radix 1.8, 14 cycles: 11.3 bits uncalibrated, **11.8 bits** calibrated.
 
-Uncalibrated, the redundant array is worse, because its non-binary weights do not add up to a uniform code. Calibrated, both reach the noise limit. Redundancy pays for its two extra cycles elsewhere: it guarantees a gap-free curve for every die, not just the median one, and it lets the early decisions use the fast, noisy comparator mode of [Chapter 16]({% link chapters/16_comparators.md %}). Only as many as the redundancy allows, though: with integer weights of 1, 2, 3, 5, 9, 17, 30, 55, … units, the lowest decisions can absorb only 0–4 LSB of error, less than the fast mode's 0.6 mV (2.5 LSB) of noise. [Lab 8]({% link chapters/31_labs.md %}#lab-8) finds a median of 10.0 effective bits with three low-noise decisions, 11.0 with seven and 11.4 with all fourteen (comparator and kT/C noise included); seven low-noise decisions are the design point.
+Uncalibrated, the redundant array is worse, because its non-binary weights do not add up to a uniform code. Calibrated, both reach the noise limit. Redundancy pays for its two extra cycles elsewhere: it guarantees a gap-free curve for every die, not just the median one, and it lets the early decisions use the fast, noisy comparator mode of [Chapter 16]({% link chapters/16_comparators.md %}). Only as many as the redundancy allows, though: with integer weights of 1, 2, 3, 5, 9, 17, 30, 55, … units, the lowest decisions can absorb only 0–4 LSB of error, less than the fast mode's 0.6 mV (2.5 LSB) of noise. [Lab 8]({% link labs/lab08_sar.md %}) finds a median of 10.0 effective bits with three low-noise decisions, 11.0 with seven and 11.4 with all fourteen (comparator and kT/C noise included); seven low-noise decisions are the design point.
 
 </div>
 
@@ -122,7 +122,7 @@ A biosignal SAR spends most of its time doing nothing. With asynchronous timing 
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 18.2 · The SAR's power budget</div>
 
-The energy per conversion adds up to about **11.7 pJ** ([Figure 18.3](#fig-18-3)b): comparator 8.0 pJ (seven low-noise decisions at 1.06 pJ and seven fast ones at 0.08 pJ, from the SG13G2 StrongARM of [Lab 7]({% link chapters/31_labs.md %}#lab-7)), SAR logic 1.5 pJ, CDAC switching 0.84 pJ, average reference charge 0.84 pJ, sampler and timing 0.5 pJ. At 16 kS/s that is **0.19 µW** for all eight channels, 23 nW per channel. With 11 effective bits the Walden figure of merit is $$11.7\ \text{pJ}/2^{11} = 5.7$$ fJ per step, inside the 10 fJ/step target of [Chapter 14]({% link chapters/14_adcspecs.md %}).
+The energy per conversion adds up to about **11.7 pJ** ([Figure 18.3](#fig-18-3)b): comparator 8.0 pJ (seven low-noise decisions at 1.06 pJ and seven fast ones at 0.08 pJ, from the SG13G2 StrongARM of [Lab 7]({% link labs/lab07_comparator.md %})), SAR logic 1.5 pJ, CDAC switching 0.84 pJ, average reference charge 0.84 pJ, sampler and timing 0.5 pJ. At 16 kS/s that is **0.19 µW** for all eight channels, 23 nW per channel. With 11 effective bits the Walden figure of merit is $$11.7\ \text{pJ}/2^{11} = 5.7$$ fJ per step, inside the 10 fJ/step target of [Chapter 14]({% link chapters/14_adcspecs.md %}).
 
 </div>
 
@@ -154,7 +154,7 @@ Calibrating with the converter's own noise in the loop. A weight measured from a
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 8]({% link chapters/31_labs.md %}#lab-8) builds the SAR: bootstrapped sample-and-hold, monotonic CDAC, Verilog SAR logic, mixed-signal simulation and `adctest.py`. Before the transistor-level work, run `figsrc/ch18_figs.py` with your own unit size and comparator noise to see what ENOB to expect.
+[Lab 8]({% link labs/lab08_sar.md %}) builds the SAR: bootstrapped sample-and-hold, monotonic CDAC, Verilog SAR logic, mixed-signal simulation and `adctest.py`. Before the transistor-level work, run `figsrc/ch18_figs.py` with your own unit size and comparator noise to see what ENOB to expect.
 
 </div>
 

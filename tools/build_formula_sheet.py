@@ -12,7 +12,7 @@ import re
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 PARTS = [(1, 4, "Part I · Foundations"), (5, 12, "Part II · The analog front-end"),
          (13, 22, "Part III · Data converters"), (23, 28, "Part IV · Biosignal processing and systems"),
-         (29, 31, "Part V · Putting it together"), (32, 34, "Part VI · Wearable systems")]
+         (29, 30, "Part V · Putting it together"), (31, 33, "Part VI · Wearable systems")]
 
 HEAD = """---
 title: A. Formula Sheet

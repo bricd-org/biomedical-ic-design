@@ -82,11 +82,20 @@ defaults:
       path: "appendices"
     values:
       layout: "default"
+  - scope:
+      path: "labs.md"
+    values:
+      layout: "default"
+  - scope:
+      path: "labs"
+    values:
+      layout: "default"
 
 exclude:
   - figsrc/
   - tools/
-  - labs/
+  - labs/python/   # lab scripts; the lab pages labs/*.md are built
+  - labs/spice/
   - data/
   - README.md
   - HANDOFF.md

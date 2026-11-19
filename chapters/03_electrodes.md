@@ -207,7 +207,7 @@ At 40 Hz the source is 500 kΩ and the requirement 2.0 MΩ. The low-frequency ca
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Lab 2: electrodes and interference</div>
 
-[Lab 2]({% link chapters/31_labs.md %}#lab-2) builds these electrode models with `biosig.z_electrode()`, computes their noise with `thermal_noise_rms()`, and then adds the body and the mains of Chapter 4 to find the CMRR and input impedance the amplifier needs.
+[Lab 2]({% link labs/lab02_interference.md %}) builds these electrode models with `biosig.z_electrode()`, computes their noise with `thermal_noise_rms()`, and then adds the body and the mains of Chapter 4 to find the CMRR and input impedance the amplifier needs.
 
 </div>
 

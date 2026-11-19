@@ -17,6 +17,6 @@ A front-end chip is only the start of a wearable. This part follows the signal o
 
 ## Chapters in this part
 
-- [32. Signal Quality and Motion Artefacts]({% link chapters/32_quality.md %})
-- [33. Ear-EEG and Multimodal Sensing at the Ear]({% link chapters/33_ear.md %})
-- [34. Closed-Loop Systems]({% link chapters/34_closedloop.md %})
+- [31. Signal Quality and Motion Artefacts]({% link chapters/31_quality.md %})
+- [32. Ear-EEG and Multimodal Sensing at the Ear]({% link chapters/32_ear.md %})
+- [33. Closed-Loop Systems]({% link chapters/33_closedloop.md %})

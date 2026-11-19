@@ -203,7 +203,7 @@ A figure of merit is only comparable within the regime it was made for. The Wald
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 6]({% link chapters/31_labs.md %}#lab-6) computes SNDR, SFDR and ENOB and histogram DNL/INL with injected capacitor mismatch. Reproduce Worked Example 14.1 with `biosig.cdac_weights()` and `biosig.sar_convert()`, then sweep $$\sigma_u$$ and find where the first missing code appears.
+[Lab 6]({% link labs/lab06_adctest.md %}) computes SNDR, SFDR and ENOB and histogram DNL/INL with injected capacitor mismatch. Reproduce Worked Example 14.1 with `biosig.cdac_weights()` and `biosig.sar_convert()`, then sweep $$\sigma_u$$ and find where the first missing code appears.
 
 </div>
 

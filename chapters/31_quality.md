@@ -1,12 +1,12 @@
 ---
-title: 32. Signal Quality and Motion Artefacts
+title: 31. Signal Quality and Motion Artefacts
 parent: "Part VI · Wearable Systems"
-nav_order: 32
-permalink: /part-6/ch32/
-chapter: 32
+nav_order: 31
+permalink: /part-6/ch31/
+chapter: 31
 ---
 
-# <span class="chapnum">Chapter 32</span>Signal Quality and Motion Artefacts
+# <span class="chapnum">Chapter 31</span>Signal Quality and Motion Artefacts
 
 On a moving person the hardest question is not how small a signal the chip can resolve, but whether the sample it just produced can be trusted.
 {: .chapterlead }
@@ -31,7 +31,7 @@ Which references, measured by the same chip on the same clock, let a wearable re
 
 Everything in Parts I to V assumed a still subject. A wearable is worn by someone who walks, talks, chews and turns their head, and every movement disturbs the electrodes. The resulting **motion artefacts** are often larger than the signal and, worse, they fall in the same band: from a fraction of a hertz to tens of hertz, exactly where the ECG, EEG and EMG live. No filter can separate what shares a band. This chapter shows how to recognise motion artefacts, how to measure the electrode contact while recording, and how to subtract the artefact using signals that are correlated with it but not with the biosignal.
 
-## <span class="secnum">32.1</span>How motion becomes voltage
+## <span class="secnum">31.1</span>How motion becomes voltage
 
 Four mechanisms dominate {% include cite.html keys="webster" %}.
 
@@ -41,13 +41,13 @@ Four mechanisms dominate {% include cite.html keys="webster" %}.
 - **The cables.** Flexing leads generates triboelectric charge, and moving leads change their capacitance to the body and to the mains. Short, light, shielded leads, or digitising close to the electrodes, reduce it.
 
 <div class="tbox tbox-example" markdown="1">
-<div class="tbox-title">Worked Example 32.1 · A lead-off current meets a moving electrode</div>
+<div class="tbox-title">Worked Example 31.1 · A lead-off current meets a moving electrode</div>
 
 The DC lead-off detector of [Chapter 12]({% link chapters/12_cmcontrol.md %}) passes 6 nA through each electrode. A dry electrode whose impedance swings by 20 kΩ as the wearer walks then produces $$6\ \text{nA} \times 20\ \text{k}\Omega = 120$$ µV of artefact, at the walking rhythm: six times a typical EEG. An AC impedance measurement at tens of kilohertz ([Chapter 28]({% link chapters/28_bioz.md %})) moves its own artefact out of band, and turning the DC lead-off current off while recording removes this term altogether.
 
 </div>
 
-## <span class="secnum">32.2</span>Measuring contact quality while recording
+## <span class="secnum">31.2</span>Measuring contact quality while recording
 
 The contact cannot be judged once at the start: it changes as the gel dries, as the wearer sweats, and with every movement. A wearable needs indicators that it can read *continuously*, on the same clock as the signal.
 
@@ -59,7 +59,7 @@ The contact cannot be judged once at the start: it changes as the gel dries, as 
 
 Each indicator costs little. The impedance channel costs a few microwatts ([Chapter 29]({% link chapters/29_arch.md %})); the rest are numbers the chip already computes.
 
-## <span class="secnum">32.3</span>Adaptive cancellation
+## <span class="secnum">31.3</span>Adaptive cancellation
 
 When a measured signal $$x$$ is correlated with the artefact but not with the biosignal, the artefact can be *predicted* from $$x$$ and subtracted. This is **adaptive noise cancelling** {% include cite.html keys="widrow1975" %}. The recorded signal is $$d = s + a$$, biosignal plus artefact. An adaptive FIR filter with weights $$\mathbf{w}$$ turns the last $$L$$ samples of each reference into an estimate $$y = \mathbf{w}^\mathsf{T}\mathbf{x}$$ of the artefact, and the output is $$e = d - y$$. Because $$s$$ is uncorrelated with $$\mathbf{x}$$, minimising the power of $$e$$ can only remove the part of $$d$$ that the references explain: the artefact.
 
@@ -78,11 +78,11 @@ The **normalised LMS** (NLMS) update makes the step independent of the reference
 - **The length** $$L$$ must cover the delay and the shape of the path from reference to artefact: a few samples for an impedance trace, tens for an accelerometer whose effect lags through the mechanics of the skin.
 - **The regularisation** $$\delta$$ matters more than it looks. Motion references are bursty, nearly zero between movements; dividing by a tiny $$\mathbf{x}^\mathsf{T}\mathbf{x}$$ then turns the EEG into huge weight jumps that ruin the next movement. Set $$\delta$$ of the order of the references' typical power.
 
-**References.** An accelerometer measures the cause of the artefact, not its electrical path: it sees the movement, but not how each electrode responds to it. The electrode impedance measures the interface itself, but not the parts of the artefact that bypass it, such as cable motion. The two are complementary. [Figure 32.1](#fig-32-1) cancels a synthetic artefact, built from an impedance-driven part (a lead-off current through the moving contact) and a part that follows acceleration directly, with each reference and with both.
+**References.** An accelerometer measures the cause of the artefact, not its electrical path: it sees the movement, but not how each electrode responds to it. The electrode impedance measures the interface itself, but not the parts of the artefact that bypass it, such as cable motion. The two are complementary. [Figure 31.1](#fig-31-1) cancels a synthetic artefact, built from an impedance-driven part (a lead-off current through the moving contact) and a part that follows acceleration directly, with each reference and with both.
 
-<figure id="fig-32-1">
-  <img src="{{ '/assets/figs/ch32_nlms.svg' | relative_url }}" style="width:720px" alt="Synthetic motion artefact during walking compared with the residual after NLMS cancellation using impedance and accelerometer references, and a bar chart of artefact reduction: 7.5 dB with the accelerometer, 5.7 dB with impedance and 12.2 dB with both">
-  <figcaption><span class="capnum">Figure 32.1.</span> <strong>Two references remove more than either alone.</strong> (a) A synthetic walking artefact on a 256 S/s EEG, and what is left after NLMS with both references (8 taps each, μ = 0.01, δ = one per tap), both against the clean EEG, all in the 0.5–40 Hz band. (b) Artefact power removed after convergence: 7.5 dB with the accelerometer alone, 5.7 dB with the electrode impedance alone, 12.2 dB with both; a least-squares fit, the ceiling for these references, reaches 18 dB. The model and its numbers are illustrative, not measured. From <code>figsrc/ch32_figs.py</code>.</figcaption>
+<figure id="fig-31-1">
+  <img src="{{ '/assets/figs/ch31_nlms.svg' | relative_url }}" style="width:720px" alt="Synthetic motion artefact during walking compared with the residual after NLMS cancellation using impedance and accelerometer references, and a bar chart of artefact reduction: 7.5 dB with the accelerometer, 5.7 dB with impedance and 12.2 dB with both">
+  <figcaption><span class="capnum">Figure 31.1.</span> <strong>Two references remove more than either alone.</strong> (a) A synthetic walking artefact on a 256 S/s EEG, and what is left after NLMS with both references (8 taps each, μ = 0.01, δ = one per tap), both against the clean EEG, all in the 0.5–40 Hz band. (b) Artefact power removed after convergence: 7.5 dB with the accelerometer alone, 5.7 dB with the electrode impedance alone, 12.2 dB with both; a least-squares fit, the ceiling for these references, reaches 18 dB. The model and its numbers are illustrative, not measured. From <code>figsrc/ch31_figs.py</code>.</figcaption>
 </figure>
 
 Three conditions make it work on real data. The references must be sampled on the same clock as the signal, or their delay changes and the filter chases it; this is one more argument for measuring impedance on the recording chip. The references must not contain the biosignal: an impedance trace demodulated out of band is clean, but an accelerometer on the head picks up the ballistocardiogram, the tiny motion of each heartbeat, and can cancel part of a cardiac signal. And the filter must be stopped from adapting when there is no movement, or reset after a large one, or it drifts.
@@ -93,13 +93,13 @@ Try it below on the same kind of synthetic recording. Change the references, the
 {% include demos/nlms.html %}
 {:/}
 
-## <span class="secnum">32.4</span>A signal-quality index
+## <span class="secnum">31.4</span>A signal-quality index
 
-Cancellation reduces artefacts; it does not abolish them. A wearable should therefore say, for each window of data, how far it can be trusted. A **signal-quality index** combines the indicators of section 32.2 into a number or a few classes: good, usable with care, unusable. The simplest version is a set of thresholds (impedance above a limit, servo step, clipping, mains power, acceleration above a limit); a better one is a classifier trained on recordings labelled by experts, with the indicators as its features.
+Cancellation reduces artefacts; it does not abolish them. A wearable should therefore say, for each window of data, how far it can be trusted. A **signal-quality index** combines the indicators of section 31.2 into a number or a few classes: good, usable with care, unusable. The simplest version is a set of thresholds (impedance above a limit, servo step, clipping, mains power, acceleration above a limit); a better one is a classifier trained on recordings labelled by experts, with the indicators as its features.
 
 The index belongs *with* the data, sample by sample or window by window, in the same packets ([Chapter 27]({% link chapters/27_soc.md %})). Downstream, it gates what the algorithms may conclude: a seizure detector ([Chapter 25]({% link chapters/25_eeg.md %})) should not alarm on a window flagged unusable, a sleep scorer should mark it, and an analysis of many nights can weight each window by its quality instead of throwing whole nights away.
 
-## <span class="secnum">32.5</span>What it costs the chip
+## <span class="secnum">31.5</span>What it costs the chip
 
 The hardware is mostly already there. The impedance channel of [Chapter 28]({% link chapters/28_bioz.md %}) adds of the order of 5 µW when running; an accelerometer adds tens of microwatts; the servo outputs, clipping counters and mains-power estimate are by-products. The computation is small: eight channels, two references of eight taps and 500 S/s need $$8 \times 16 \times 500 \times 2 = 128\,000$$ multiply-accumulates per second for the filter and as many for the update, well within a microcontroller and within reach of a small on-chip datapath. What matters more is *time*: impedance, motion and signal must share one sample clock, and the sample counter must travel with every packet.
 
@@ -120,7 +120,7 @@ Judging an artefact remover by how clean the output looks. A filter that removes
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Try it in Python</div>
 
-Run `figsrc/ch32_figs.py`, then change the artefact model in `scene()`: make it depend only on acceleration, or only on impedance, and watch which reference wins. Set δ back to a tiny number and see the filter blow up between movements.
+Run `figsrc/ch31_figs.py`, then change the artefact model in `scene()`: make it depend only on acceleration, or only on impedance, and watch which reference wins. Set δ back to a tiny number and see the filter blow up between movements.
 
 </div>
 

@@ -16,7 +16,9 @@ and published at <https://www.thebricd.org/biomedical-ic-design/>.
 | II. The analog front-end | 5–12 | outline |
 | III. Data converters | 13–22 | outline |
 | IV. Biosignal processing and systems | 23–28 | outline |
-| V. Putting it together | 29–31 (architecture, open-source flow, 15 labs) | outline |
+| V. Putting it together | 29–30 (architecture, open-source flow) | outline |
+| VI. Wearable systems | 31–33 (signal quality, ear-EEG, closed-loop systems) | written |
+| Hands-on labs | 15 labs and a capstone, one page each (`labs.md`, `labs/`) | written |
 | Appendices | A–E | to do |
 
 Each outline chapter lists its topics, the design question it answers, its labs and its reading.
@@ -28,13 +30,15 @@ index.md                home page
 preface.md              preface
 chapters/NN_name.md     one page per chapter (front matter sets its menu place and URL)
 parts/part-N.md         one page per part (the chapter list in the menu)
+labs.md, labs/labNN_name.md  the Hands-On Labs hub (/labs/) and one page per lab (/labs/lab-NN/)
+redirects/              stubs that send old URLs (e.g. /part-5/ch31/) to their new pages
 references.md           the reference list, drawn from _data/references.yml
 _data/references.yml    every reference; a citation's number is its position in this file
 _includes/cite.html     numbered citations: {% include cite.html keys="harrison2003" %}
 _includes/prev-next.html  previous/next links, from the `chapter:` number in the front matter
 assets/figs/            figures (SVG)
 figsrc/                 Python scripts that draw the plots into assets/figs/ (house style: bricdstyle.py)
-labs/python/            lab scripts; biosig.py is shared by the labs and the figure scripts
+labs/python/, labs/spice/  lab scripts (not built into the site); biosig.py is shared by the labs and the figure scripts
 data/                   download scripts only; datasets stay on PhysioNet/NinaPro
 _config.yml, _sass/, _includes/   Jekyll + just-the-docs theme settings (BRICD colours and fonts)
 .github/workflows/pages.yml       builds and deploys the site on every push to main
@@ -80,7 +84,7 @@ cd figsrc && for f in ch0*_figs.py; do python "$f"; done
 
 ## Next steps
 
-1. Write Chapter 31 Labs 1–2 in full, and the appendices.
+1. Write Labs 1–2 in full, and the appendices.
 2. Write `labs/python/lab1_biosignal_explorer.py` and `lab2_electrodes_interference.py`.
 
 ## AI assistance and corrections

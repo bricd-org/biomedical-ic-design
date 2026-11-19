@@ -132,7 +132,7 @@ That is **11 additions, compares or bit operations and no multiplication** per s
 <div class="tbox tbox-insight" markdown="1">
 <div class="tbox-title">What this means for your design</div>
 
-Build the EMG feature engine from block accumulators: no multiplier (MAV, not RMS), 16-bit sums from 8-bit inputs, and a programmable dead band a little above the noise. Choose the window for envelope noise and the hop for latency. The engine costs a fraction of a microwatt and saves most of a milliwatt of radio, so it belongs on the chip, and the classifier can follow it: [Lab 13]({% link chapters/31_labs.md %}#lab-13) keeps 100 % accuracy with 6-bit weights.
+Build the EMG feature engine from block accumulators: no multiplier (MAV, not RMS), 16-bit sums from 8-bit inputs, and a programmable dead band a little above the noise. Choose the window for envelope noise and the hop for latency. The engine costs a fraction of a microwatt and saves most of a milliwatt of radio, so it belongs on the chip, and the classifier can follow it: [Lab 13]({% link labs/lab13_gestures.md %}) keeps 100 % accuracy with 6-bit weights.
 
 </div>
 
@@ -239,7 +239,7 @@ Testing a gesture classifier on trials recorded in the same session as its train
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 13]({% link chapters/31_labs.md %}#lab-13) computes MAV, WL, ZC and SSC on NinaPro, trains LDA or SVM classifiers in fixed point, and plots accuracy against channels, sample rate and resolution. Run `figsrc/ch26_figs.py` first, then replace its synthetic windows with NinaPro recordings; if NinaPro needs registration, provide a local file or keep the synthetic fallback. For spikes, vary the amplitude, lag and smoothing in its detectors (`sigma_hat()`, `neo()`, `detect()`) and compare with [Figure 26.3](#fig-26-3)b.
+[Lab 13]({% link labs/lab13_gestures.md %}) computes MAV, WL, ZC and SSC on NinaPro, trains LDA or SVM classifiers in fixed point, and plots accuracy against channels, sample rate and resolution. Run `figsrc/ch26_figs.py` first, then replace its synthetic windows with NinaPro recordings; if NinaPro needs registration, provide a local file or keep the synthetic fallback. For spikes, vary the amplitude, lag and smoothing in its detectors (`sigma_hat()`, `neo()`, `detect()`) and compare with [Figure 26.3](#fig-26-3)b.
 
 </div>
 

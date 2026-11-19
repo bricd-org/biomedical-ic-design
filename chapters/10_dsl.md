@@ -148,7 +148,7 @@ Measuring input impedance with an AC analysis. The chopped input's impedance is 
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 5]({% link chapters/31_labs.md %}#lab-5) measures the input impedance with and without a chopper and verifies ±300 mV offset tolerance with the DC servo loop. Use `figsrc/ch10_figs.py` to predict the impedance and the noise gain before you simulate, then compare.
+[Lab 5]({% link labs/lab05_chopper.md %}) measures the input impedance with and without a chopper and verifies ±300 mV offset tolerance with the DC servo loop. Use `figsrc/ch10_figs.py` to predict the impedance and the noise gain before you simulate, then compare.
 
 </div>
 

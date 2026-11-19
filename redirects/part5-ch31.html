@@ -1,0 +1,43 @@
+---
+permalink: /part-5/ch31/
+layout: null
+nav_exclude: true
+search_exclude: true
+sitemap: false
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Hands-On Labs have moved</title>
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="{{ site.baseurl }}/labs/">
+  <script>
+    // The labs were Chapter 31 (/part-5/ch31/) until November 2026; send old links to their new pages.
+    (function () {
+      var base = "{{ site.baseurl }}";
+      var hash = window.location.hash;
+      var dest = base + "/labs/";
+      var m = /^#lab-(\d{1,2})$/.exec(hash);
+      if (m && +m[1] >= 1 && +m[1] <= 15) {
+        dest = base + "/labs/lab-" + (+m[1] < 10 ? "0" : "") + (+m[1]) + "/";
+      } else if (hash === "#setup") {
+        dest = base + "/labs/#setup";
+      } else if (hash === "#capstone") {
+        dest = base + "/labs/capstone/";
+      } else if (hash === "#fig-31-2") {
+        dest = base + "/labs/capstone/#fig-lc-1";
+      } else if (hash === "#fig-31-1") {
+        dest = base + "/labs/lab-14/#fig-l14-1";
+      } else if (hash === "#tab-31-1") {
+        dest = base + "/labs/#tab-l-1";
+      }
+      window.location.replace(dest);
+    })();
+  </script>
+  <noscript><meta http-equiv="refresh" content="0; url={{ site.baseurl }}/labs/"></noscript>
+</head>
+<body>
+  <p>The Hands-On Labs have moved to their own section: <a href="{{ site.baseurl }}/labs/">{{ site.baseurl }}/labs/</a>.</p>
+</body>
+</html>

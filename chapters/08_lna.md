@@ -171,7 +171,7 @@ LNA: $$C_1 = 20$$ pF, $$C_2 = 200$$ fF (gain 40 dB; 2 pF and 20 dB in EMG mode),
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 4]({% link chapters/31_labs.md %}#lab-4) designs the capacitive-feedback LNA with pseudo-resistors in SG13G2: AC, noise and transient simulations and the NEF versus bias current. Begin with `labs/spice/sg13_lna.py`: rerun the pseudo-resistors at the ss and ff corners, and at the default $$g_\mathrm{min}$$ to see the trap above for yourself.
+[Lab 4]({% link labs/lab04_lna.md %}) designs the capacitive-feedback LNA with pseudo-resistors in SG13G2: AC, noise and transient simulations and the NEF versus bias current. Begin with `labs/spice/sg13_lna.py`: rerun the pseudo-resistors at the ss and ff corners, and at the default $$g_\mathrm{min}$$ to see the trap above for yourself.
 
 </div>
 

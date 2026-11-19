@@ -196,7 +196,7 @@ Do not size a biomedical amplifier with square-law equations. At 100 nA per squa
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 3]({% link chapters/31_labs.md %}#lab-3) characterises $$g_\mathrm{m}/I_\mathrm{D}$$, flicker noise versus $$W\!\cdot\!L$$ and HBT versus MOS input noise in SG13G2; its lookup tables are reused in Labs 4 and 5. Start from `labs/spice/sg13_char.py`, which runs every simulation of this chapter in the IIC-OSIC-TOOLS container, and add the corners and lengths you need.
+[Lab 3]({% link labs/lab03_devices.md %}) characterises $$g_\mathrm{m}/I_\mathrm{D}$$, flicker noise versus $$W\!\cdot\!L$$ and HBT versus MOS input noise in SG13G2; its lookup tables are reused in Labs 4 and 5. Start from `labs/spice/sg13_char.py`, which runs every simulation of this chapter in the IIC-OSIC-TOOLS container, and add the corners and lengths you need.
 
 </div>
 

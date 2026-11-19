@@ -48,7 +48,7 @@ $$
 
 Co-prime cycles also make every sample fall at a different phase, so the codes visit as many levels as possible. In simulation coherence is free. On the bench it needs a signal generator locked to the converter's clock, with enough frequency resolution to hit $$f_\mathrm{in}$$ exactly.
 
-When coherence is impossible, for example with a free-running generator or a real ECG, a **window** tapers the record's ends. A Hann window brings the leakage of a non-coherent tone from −80 dBc at a few hundred hertz away down below the 12-bit noise floor, at the price of spreading the tone over three bins and widening the noise bandwidth by 1.5. Sum the power of the bins under the main lobe for the signal, and exclude them from the noise. Close to the tone, though, the Hann sidelobes fall slowly: within a few tens of bins of a full-scale tone they still hold about −41 dBc, which caps the SNDR of an ideal 12-bit converter near 41 dB if only the main lobe is excluded. Exclude about 30 bins either side, or use a four-term Blackman–Harris window, whose leakage stays below the 12-bit floor outside its main lobe ([Lab 6]({% link chapters/31_labs.md %}#lab-6)).
+When coherence is impossible, for example with a free-running generator or a real ECG, a **window** tapers the record's ends. A Hann window brings the leakage of a non-coherent tone from −80 dBc at a few hundred hertz away down below the 12-bit noise floor, at the price of spreading the tone over three bins and widening the noise bandwidth by 1.5. Sum the power of the bins under the main lobe for the signal, and exclude them from the noise. Close to the tone, though, the Hann sidelobes fall slowly: within a few tens of bins of a full-scale tone they still hold about −41 dBc, which caps the SNDR of an ideal 12-bit converter near 41 dB if only the main lobe is excluded. Exclude about 30 bins either side, or use a four-term Blackman–Harris window, whose leakage stays below the 12-bit floor outside its main lobe ([Lab 6]({% link labs/lab06_adctest.md %})).
 
 Try it below with an ideal converter: a 4096-point record, a tone of 67 cycles (prime, so coherent) and 12 bits. Slide the tone to 67.3 cycles, read the SNR, then add a window.
 
@@ -133,7 +133,7 @@ Testing a ΔΣ modulator's output with a plain Hann window and a short record. T
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 6]({% link chapters/31_labs.md %}#lab-6) builds `adctest.py`: coherent sampling, windows, SNDR, SFDR and ENOB, and histogram DNL/INL with injected capacitor mismatch. Check it against `figsrc/ch22_figs.py`, then reduce the record to $$2^{16}$$ samples and watch the DNL estimate degrade.
+[Lab 6]({% link labs/lab06_adctest.md %}) builds `adctest.py`: coherent sampling, windows, SNDR, SFDR and ENOB, and histogram DNL/INL with injected capacitor mismatch. Check it against `figsrc/ch22_figs.py`, then reduce the record to $$2^{16}$$ samples and watch the DNL estimate degrade.
 
 </div>
 

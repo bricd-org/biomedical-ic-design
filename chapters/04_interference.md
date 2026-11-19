@@ -207,7 +207,7 @@ For an implant, the limit is heat. Tissue is damaged by sustained temperature ri
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Lab 2: electrodes and interference</div>
 
-[Lab 2]({% link chapters/31_labs.md %}#lab-2) builds the circuit of Figure 4.1 with `biosig.body_cm_voltage()` and `cm_to_dm()`, injects 10 Vrms of mains common mode, sweeps the amplifier CMRR, the common-mode input impedance and the electrode imbalance, and adds a behavioural right-leg drive. It prints the CMRR the design needs, which should match Worked Examples 4.3 and 4.4.
+[Lab 2]({% link labs/lab02_interference.md %}) builds the circuit of Figure 4.1 with `biosig.body_cm_voltage()` and `cm_to_dm()`, injects 10 Vrms of mains common mode, sweeps the amplifier CMRR, the common-mode input impedance and the electrode imbalance, and adds a behavioural right-leg drive. It prints the CMRR the design needs, which should match Worked Examples 4.3 and 4.4.
 
 </div>
 

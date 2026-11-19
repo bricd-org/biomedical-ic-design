@@ -57,7 +57,7 @@ The eyes and muscles produce larger signals than the brain. **Eye movements and 
 - **regression** against dedicated EOG electrodes, which subtracts a scaled copy of the eye signal;
 - **independent component analysis** (ICA), which unmixes a multichannel recording into statistically independent sources; components that look like blinks or muscle are removed and the rest are mixed back.
 
-ICA needs many channels and offline computation. On chip, the practical approach is to detect artefacts, by amplitude, slope or the DC servo's offset monitor ([Chapter 10]({% link chapters/10_dsl.md %})), and flag or discard the affected windows rather than repair them. [Chapter 32]({% link chapters/32_quality.md %}) turns such flags into a signal-quality index.
+ICA needs many channels and offline computation. On chip, the practical approach is to detect artefacts, by amplitude, slope or the DC servo's offset monitor ([Chapter 10]({% link chapters/10_dsl.md %})), and flag or discard the affected windows rather than repair them. [Chapter 31]({% link chapters/31_quality.md %}) turns such flags into a signal-quality index.
 
 ## <span class="secnum">25.3</span>Seizure-onset detection
 
@@ -80,7 +80,7 @@ An epileptic seizure typically shows as a rhythmic discharge, often in the theta
 
 Real seizures are less clean than these. On CHB-MIT, patient-specific detectors that combine band powers from several channels perform far better than generic ones, and the useful figures are sensitivity per seizure, detection latency from onset, and false detections per hour. The synthetic study still makes the design point: the detector's features need far less resolution than the raw recording.
 
-Real EEG can even reverse the ranking. On one hour of a CHB-MIT record (`chb01_03`, FP1-F7, one seizure), [Lab 12]({% link chapters/31_labs.md %}#lab-12) finds the seizure with every detector, but real EEG holds far more theta outside seizures: the theta threshold fires 101 times an hour, line length 12 times. Word length still barely matters down to 6 bits. And even a stationary background crosses a threshold now and then, because a 2 s band power is itself a noisy estimate.
+Real EEG can even reverse the ranking. On one hour of a CHB-MIT record (`chb01_03`, FP1-F7, one seizure), [Lab 12]({% link labs/lab12_seizure.md %}) finds the seizure with every detector, but real EEG holds far more theta outside seizures: the theta threshold fires 101 times an hour, line length 12 times. Word length still barely matters down to 6 bits. And even a stationary background crosses a threshold now and then, because a 2 s band power is itself a noisy estimate.
 
 ## <span class="secnum">25.4</span>How precise is a band power? {#band-power-precision}
 
@@ -127,7 +127,7 @@ The estimator matters too ([Figure 25.2](#fig-25-2)b). Over 2 s, one Hann-window
 <div class="tbox tbox-insight" markdown="1">
 <div class="tbox-title">What this means for your design</div>
 
-For scalp EEG the brain's background, not the front-end, limits alpha and theta band powers; the 1.5 µVrms target matters for gamma, raw recordings and smaller signals such as ear-EEG ([Chapter 33]({% link chapters/33_ear.md %})). Feed the feature path 8-bit samples at 250 S/s, and use a filter and squarer rather than one windowed FFT per epoch: the estimator, not the converter, sets the false-detection floor.
+For scalp EEG the brain's background, not the front-end, limits alpha and theta band powers; the 1.5 µVrms target matters for gamma, raw recordings and smaller signals such as ear-EEG ([Chapter 32]({% link chapters/32_ear.md %})). Feed the feature path 8-bit samples at 250 S/s, and use a filter and squarer rather than one windowed FFT per epoch: the estimator, not the converter, sets the false-detection floor.
 
 </div>
 
@@ -149,7 +149,7 @@ $$
 
 </div>
 
-$$S_\mathrm{n}(f_0)$$ is the density of everything else at $$f_0$$, EEG and front-end noise together, and ENBW = 1.5 for a Hann window: 3 dB per doubling of $$T$$. Against ten neighbouring bins, 2 to 6 either side, noise alone exceeds 5.85 (7.7 dB) in 1 % of trials (an F distribution with 2 and 20 degrees of freedom), the test used for auditory steady-state responses {% include cite.html keys="picton2003" %} ([Chapter 34]({% link chapters/34_closedloop.md %})).
+$$S_\mathrm{n}(f_0)$$ is the density of everything else at $$f_0$$, EEG and front-end noise together, and ENBW = 1.5 for a Hann window: 3 dB per doubling of $$T$$. Against ten neighbouring bins, 2 to 6 either side, noise alone exceeds 5.85 (7.7 dB) in 1 % of trials (an F distribution with 2 and 20 degrees of freedom), the test used for auditory steady-state responses {% include cite.html keys="picton2003" %} ([Chapter 33]({% link chapters/33_closedloop.md %})).
 
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 25.4 · How long to look for a small SSVEP</div>
@@ -157,7 +157,7 @@ $$S_\mathrm{n}(f_0)$$ is the density of everything else at $$f_0$$, EEG and fron
 Take a 1 µVrms response at 15 Hz, a design assumption, on the synthetic EEG at 500 S/s with 1.5 µVrms of input noise.
 
 - **Time.** At 15 Hz the EEG gives 0.893 µV²/Hz and the noise $$1.5^2/99.5 = 0.023$$ µV²/Hz, so the expected ratio reaches 5.85 at $$T = 4.85 \times 1.5 \times 0.916 = 6.7$$ s. In simulation the line is found in 56 % of 8 s trials and 97 % of 24 s trials ([Figure 25.3](#fig-25-3)). A 2 µVrms response needs a quarter of the time.
-- **Front-end noise.** Removing it saves 2.5 % of the time; 5 µVrms adds 25 %. With EEG and response four times smaller, as between close electrodes ([Chapter 33]({% link chapters/33_ear.md %})), 1.5 µVrms costs 40 %.
+- **Front-end noise.** Removing it saves 2.5 % of the time; 5 µVrms adds 25 %. With EEG and response four times smaller, as between close electrodes ([Chapter 32]({% link chapters/32_ear.md %})), 1.5 µVrms costs 40 %.
 - **One long transform.** Over 8 s, one transform finds the line in 56 % of trials, four averaged 2 s spectra in 29 %, at equal false-alarm rates: averaging widens the bin that holds the line.
 
 </div>
@@ -167,7 +167,7 @@ Take a 1 µVrms response at 15 Hz, a design assumption, on the synthetic EEG at 
   <figcaption><span class="capnum">Figure 25.3.</span> <strong>A steady line grows out of the background with time.</strong> (a) Spectra of one synthetic EEG record with a 1 µVrms line at 15 Hz, over the expected background: lost after 2 s, clear after 8 s. (b) Ratio of the 15 Hz bin to ten neighbours: mean of 300 trials (dots), 10–90 % range (shaded) and \(1 + A_\mathrm{rms}^2 T/(1.5\,S_\mathrm{n})\) (lines); the dashed line is the 1 % false-alarm threshold (1.4 % measured). Computed in <code>figsrc/ch25_figs.py</code>.</figcaption>
 </figure>
 
-The stimulus and the sample clock must agree. A relative error $$\varepsilon$$ moves the line by $$\varepsilon f_0$$; at half a bin the Hann window loses 1.42 dB, at a whole bin 6 dB. At 15 Hz half a bin is 0.42 % for 8 s and 0.10 % for 32 s: clock the stimulus from the chip's reference, as for evoked responses in Chapter 34, or search the neighbouring bins.
+The stimulus and the sample clock must agree. A relative error $$\varepsilon$$ moves the line by $$\varepsilon f_0$$; at half a bin the Hann window loses 1.42 dB, at a whole bin 6 dB. At 15 Hz half a bin is 0.42 % for 8 s and 0.10 % for 32 s: clock the stimulus from the chip's reference, as for evoked responses in Chapter 33, or search the neighbouring bins.
 
 SSVEP and motor imagery both rely on band power, not on microvolt waveform detail, and both benefit more from more channels and better electrode contact than from more bits.
 
@@ -211,7 +211,7 @@ Reporting window accuracy on data where most windows are negative. With 75 % of 
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 12]({% link chapters/31_labs.md %}#lab-12) computes band-power features on CHB-MIT, trains a simple classifier, and plots latency and accuracy against word length and sample rate. Start by running `figsrc/ch25_figs.py` on a CHB-MIT record instead of the synthetic EEG, and replace window accuracy with per-seizure sensitivity and false detections per hour. `python figsrc/ch25_figs.py welch ssvep numbers` redraws the spectra and the SSVEP study and prints every number of sections 25.4–25.6.
+[Lab 12]({% link labs/lab12_seizure.md %}) computes band-power features on CHB-MIT, trains a simple classifier, and plots latency and accuracy against word length and sample rate. Start by running `figsrc/ch25_figs.py` on a CHB-MIT record instead of the synthetic EEG, and replace window accuracy with per-seizure sensitivity and false detections per hour. `python figsrc/ch25_figs.py welch ssvep numbers` redraws the spectra and the SSVEP study and prints every number of sections 25.4–25.6.
 
 </div>
 
