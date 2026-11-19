@@ -1,6 +1,6 @@
 # HANDOFF — Open-BioAFE Tutorial (pick up here)
 
-Last updated: 18 November 2026 (Ch 3 diagrams, section 2c; before that 14 November: **all chapters 1–30, appendices A–E, 22 architecture/circuit diagrams and
+Last updated: 18 November 2026 (Part IV deepened, section 2d; Ch 3 diagrams, section 2c; before that 14 November: **all chapters 1–30, appendices A–E, 22 architecture/circuit diagrams and
 all 15 labs with scripts are written**; Labs 1, 11 and 12 also run on real PhysioNet data; Ch 29 has five
 more diagrams modelled on SerDes Ch 14; see section 2 and Step 3 for the lab results and the corrections they
 forced; outline review against lecture material in section 2a). On
@@ -138,6 +138,32 @@ cross-section mapped to the circuit elements (`ch03_interface.svg` from `figsrc/
 before the model figure 3.5). Old 3.1–3.5 are now 3.3 and 3.5–3.8. No other page links to Ch 3 figures.
 `tools/check_arrows.py` passes on the new SVGs. Preview from the BRICD session: `preview_start bioafe-jekyll`
 (port 4000, `~/BRICD/.claude/launch.json`).
+
+## 2d. Part IV deepened: Chapters 23–26 (18 Nov 2026)
+
+The user asked to "continue writing the remaining chapters"; none were unwritten, so the four thinnest (Ch 23–26,
+1,300–1,600 words) were brought to Part I depth by four parallel agents (shared files edited only by the coordinator).
+All numbers are printed by `python figsrc/chNN_figs.py` (Ch 25: `... welch ssvep numbers`; Ch 26: `... numbers`).
+- **Ch 23** (3,325 words, 3 figs, 6 WE, 3 keyeq): new 23.6 *What the filters cost on chip*; FIR vs IIR delay
+  (`ch23_fir_iir.svg`: 0.5–40 Hz FIR 2,235 taps / 2.23 s at 500 S/s; causal IIR reads ST 0.082 vs 0.151 mV);
+  50 Hz notch (`ch23_notch.svg`: r = 0.99 → 1.60 Hz wide, τ 200 ms, 105 dB at 24 bits); cost per channel IIR chain
+  0.1 µW vs full-rate FIR 5.6 µW at an *assumed* 10 pJ/MAC. **Correction:** a median baseline filter can remove
+  most of the ST elevation and needs no beat detection (old text said otherwise).
+- **Ch 24** (3,389 words, 4 figs, 4 WE, 3 keyeq): new 24.6 *Detection on the chip*; Pan–Tompkins stages
+  (`ch24_ptstages.svg`, 188 ms delay at 200 S/s), HRV (`ch24_hrv.svg`: SDNN 45.2 / RMSSD 46.9 ms, LF/HF 0.32 over 5 min;
+  one missed beat → RMSSD 73.5 ms); RR intervals 20 b/s vs 64 kb/s raw. Old WE 24.1 is now **WE 24.3** (Ch 31 Lab 11
+  link updated). New ref `hrvtaskforce1996`.
+- **Ch 25** (3,394 words, 3 figs, 5 WE, 3 keyeq): new 25.4 *How precise is a band power?* `{#band-power-precision}`,
+  25.6 *Features instead of samples* `{#features-out}`; Welch scatter (`ch25_welch.svg`: ±1 dB needs 20 segments,
+  21 s), SSVEP (`ch25_ssvep.svg`: 1 µVrms line at 15 Hz detected at 6.7 s mean); band powers 384 b/s vs 64 kb/s.
+  Specnote now says 500 S/s decimated to 250 S/s (not 256). New ref `welch1967`. WE 25.1 kept (Lab 12 cites it).
+- **Ch 26** (3,934 words, 3 figs, 5 WE, 3 keyeq): new 26.3 *Windows, latency and the feature engine*
+  `{#feature-engine}`; features (`ch26_features.svg`), spike detection (`ch26_spikes.svg`). **Corrections:** plain
+  lag-1 NEO is far worse than an amplitude threshold on `biosig.spikes()` (10 % vs 96 % of small spikes at 1 false
+  alarm/s; lag-5 NEO 98 %), so the specnote's detector is now an amplitude threshold at −4.5σ̂ (median estimate)
+  with NEO optional; features reduce data 19–75×, not "hundreds". WE 26.1 kept (Lab 13 cites it). New refs
+  `hudgins1993`, `englehart2003`, `mukhopadhyay1998`, `choi2006`, `quiroga2004` (all checked on Crossref).
+- Appendix A regenerated (55 key equations). Site check: 49 pages, 1,566 links, 1,246 equations, 100 images, clean.
 
 ## 3. Decisions already made (do not re-litigate)
 
@@ -451,6 +477,15 @@ home page.
   box sits under "Noise sources" and repeats the formula in section 6.3); Ch 6 reading list says
   "Razavi (Chapter on noise)".
 - `figsrc/bricdstyle.py` still carries SerDes eye-diagram helpers (harmless).
+- **Bug, `biosig.spikes()` noise (found 18 Nov):** it divides the filtered noise by 0.37, but the filter's rms gain
+  is 0.614 at 30 kS/s (0.48 at 20 kS/s), so `noise_rms=8e-6` gives 13.3 µVrms (16.7 at 20 kS/s). Ch 2 Fig 2.4's
+  "8 µVrms" caption inherits it. `figsrc/ch26_figs.py` compensates with `_noise_gain()`; if `biosig.py` is fixed
+  (normalise by the measured std), remove that compensation and redraw Ch 2 Fig 2.4.
+- **Mismatch:** Ch 27 budgets spike snippets of 16 × 12-bit samples (0.53 ms at 30 kS/s); the Ch 26 specnote says
+  48 × 8-bit (1.6 ms). WE 26.5 gives both; align Ch 27.
+- **Environment:** `~/opt/anaconda3` lacks `libmkl_core.1.dylib`, so scipy routines that call LAPACK
+  (`CubicSpline`, `make_interp_spline`, `interp1d(kind="cubic")`, `welch(detrend="linear")`) abort. Use `splrep`,
+  `PchipInterpolator`, constant detrending.
 
 ## 8. Reference data from the curriculum (the PDF is gone — this is the record)
 

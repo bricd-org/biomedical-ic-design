@@ -123,3 +123,17 @@
   text: "Christoph Zrenner, Debora Desideri, Paolo Belardinelli and Ulf Ziemann. “Real-time EEG-defined excitability states determine efficacy of TMS-induced plasticity in human motor cortex.” *Brain Stimulation*, 11(2):374–389, 2018."
 - key: picton2003
   text: "Terence W. Picton, M. Sasha John, Andrew Dimitrijevic and David Purcell. “Human auditory steady-state responses.” *International Journal of Audiology*, 42(4):177–219, 2003."
+- key: hrvtaskforce1996
+  text: "Task Force of the European Society of Cardiology and the North American Society of Pacing and Electrophysiology. “Heart rate variability: standards of measurement, physiological interpretation, and clinical use.” *Circulation*, 93(5):1043–1065, 1996."
+- key: welch1967
+  text: "Peter D. Welch. “The use of fast Fourier transform for the estimation of power spectra: a method based on time averaging over short, modified periodograms.” *IEEE Transactions on Audio and Electroacoustics*, AU-15(2):70–73, 1967."
+- key: hudgins1993
+  text: "Bernard Hudgins, Philip Parker and Robert N. Scott. “A new strategy for multifunction myoelectric control.” *IEEE Transactions on Biomedical Engineering*, 40(1):82–94, 1993."
+- key: englehart2003
+  text: "Kevin Englehart and Bernard Hudgins. “A robust, real-time control scheme for multifunction myoelectric control.” *IEEE Transactions on Biomedical Engineering*, 50(7):848–854, 2003."
+- key: mukhopadhyay1998
+  text: "Sudipta Mukhopadhyay and G. C. Ray. “A new interpretation of nonlinear energy operator and its efficacy in spike detection.” *IEEE Transactions on Biomedical Engineering*, 45(2):180–187, 1998."
+- key: choi2006
+  text: "J. H. Choi, H. K. Jung and T. Kim. “A new action potential detector using the MTEO and its effects on spike sorting systems at low signal-to-noise ratios.” *IEEE Transactions on Biomedical Engineering*, 53(4):738–746, 2006."
+- key: quiroga2004
+  text: "R. Quian Quiroga, Z. Nadasdy and Y. Ben-Shaul. “Unsupervised spike detection and sorting with wavelets and superparamagnetic clustering.” *Neural Computation*, 16(8):1661–1687, 2004."

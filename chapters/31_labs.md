@@ -527,7 +527,7 @@ The chain adds white input noise and 200 µV of baseline wander, quantises over 
 | 100 µVrms | 56 / 56 | 96 / 96 | 100 / 100 | 100 / 100 | 100 / 100 |
 | 200 µVrms | 62 / 46 | 94 / 94 | 99 / 99 | 99.5 / 99.5 | 99.5 / 99.5 |
 
-With electrode motion at 12 bits: 100 % at 24 dB SNR, 98.6 % at 18 dB, 87 % at 12 dB, and below 65 % at 6 dB. These agree with [Worked Example 24.1]({% link chapters/24_ecg.md %}): five bits and 100 µVrms suffice for detection. Electrode motion, which shares the QRS band, breaks the detector long before the converter or the input noise does. Record 105, which is noisy, and records with many ectopic beats (for example 119 or 208) are harder than record 100.
+With electrode motion at 12 bits: 100 % at 24 dB SNR, 98.6 % at 18 dB, 87 % at 12 dB, and below 65 % at 6 dB. These agree with [Worked Example 24.3]({% link chapters/24_ecg.md %}): five bits and 100 µVrms suffice for detection. Electrode motion, which shares the QRS band, breaks the detector long before the converter or the input noise does. Record 105, which is noisy, and records with many ectopic beats (for example 119 or 208) are harder than record 100.
 
 On the real recordings (first five minutes, 371 and 417 beats), Se/PPV in per cent at 100 µVrms of input noise:
 

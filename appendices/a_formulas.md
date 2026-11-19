@@ -305,13 +305,103 @@ $$
 
 ### [23. A DSP Toolkit for Biosignals]({% link chapters/23_dsp.md %})
 
+**Delay of a linear-phase FIR**
+
+$$
+\tau_\mathrm{g} = \frac{N-1}{2f_\mathrm{s}}, \qquad N - 1 \approx \frac{(A - 7.95)\,f_\mathrm{s}}{14.36\,\Delta f} \quad\Rightarrow\quad \tau_\mathrm{g} \approx \frac{A - 7.95}{28.7\,\Delta f}
+$$
+
+**A second-order notch, its width and its time constant**
+
+$$
+H(z) = \frac{1 - 2\cos\omega_0\,z^{-1} + z^{-2}}{1 - 2r\cos\omega_0\,z^{-1} + r^2 z^{-2}}, \qquad \omega_0 = \frac{2\pi f_0}{f_\mathrm{s}}
+$$
+
+$$
+\Delta f_{-3\,\mathrm{dB}} \approx \frac{(1 - r)\,f_\mathrm{s}}{\pi}, \qquad \tau = \frac{1}{(1 - r)\,f_\mathrm{s}} = \frac{1}{\pi\,\Delta f_{-3\,\mathrm{dB}}}
+$$
+
 **Why narrow filters need long words**
 
 $$
 \text{pole radius } r \approx 1 - \frac{2\pi f_\mathrm{c}}{f_\mathrm{s}} \quad\Rightarrow\quad \text{coefficients must resolve } 1 - r \approx 6\times10^{-3}\ (f_\mathrm{c} = 0.5\ \text{Hz},\ f_\mathrm{s} = 500\ \text{S/s})
 $$
 
+### [24. ECG Processing]({% link chapters/24_ecg.md %})
+
+**The Pan–Tompkins detector at 200 S/s**
+
+$$
+H_\mathrm{LP}(z) = \frac{\left(1 - z^{-6}\right)^2}{\left(1 - z^{-1}\right)^2}, \qquad H_\mathrm{HP}(z) = z^{-16} - \frac{1}{32}\,\frac{1 - z^{-32}}{1 - z^{-1}}
+$$
+
+$$
+d[n] = \tfrac{1}{8}\bigl(2x[n] + x[n-1] - x[n-3] - 2x[n-4]\bigr), \qquad y[n] = \frac{1}{N}\sum_{k=0}^{N-1} d^2[n-k], \qquad N = 0.15\,f_\mathrm{s}
+$$
+
+$$
+\mathrm{THR} = \mathrm{NPKI} + 0.25\,(\mathrm{SPKI} - \mathrm{NPKI})
+$$
+
+$$
+\mathrm{SPKI} \leftarrow 0.125\,P + 0.875\,\mathrm{SPKI}\ \ (P > \mathrm{THR}), \qquad \text{else}\ \ \mathrm{NPKI} \leftarrow 0.125\,P + 0.875\,\mathrm{NPKI}
+$$
+
+**Heart-rate variability**
+
+$$
+\mathrm{SDNN} = \sqrt{\frac{1}{N-1}\sum_{i=1}^{N}\bigl(\mathrm{RR}_i - \overline{\mathrm{RR}}\bigr)^2}, \qquad \mathrm{RMSSD} = \sqrt{\frac{1}{N-1}\sum_{i=1}^{N-1}\bigl(\mathrm{RR}_{i+1} - \mathrm{RR}_i\bigr)^2}
+$$
+
+$$
+\mathrm{LF} = \int_{0.04\ \mathrm{Hz}}^{0.15\ \mathrm{Hz}} S_\mathrm{RR}(f)\,df, \qquad \mathrm{HF} = \int_{0.15\ \mathrm{Hz}}^{0.4\ \mathrm{Hz}} S_\mathrm{RR}(f)\,df
+$$
+
+**Sensitivity and positive predictivity**
+
+$$
+\mathrm{Se} = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FN}}, \qquad \mathrm{PPV} = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FP}}
+$$
+
+### [25. EEG Processing and Brain–Computer Interfaces]({% link chapters/25_eeg.md %})
+
+**Band power and relative band power**
+
+$$
+P_\mathrm{band} = \int_{f_1}^{f_2} S(f)\,df \approx \Delta f \sum_{f_1 \le f_k < f_2} \hat S(f_k), \qquad p_\mathrm{rel} = \frac{P_\mathrm{band}}{P_\mathrm{total}}
+$$
+
+**Welch estimate: resolution and scatter**
+
+$$
+\Delta f = \frac{f_\mathrm{s}}{N} = \frac{1}{T_\mathrm{seg}}, \qquad \frac{\sigma_{\hat S}}{S} \approx \frac{1}{\sqrt{K}}, \qquad \frac{\sigma_{\hat P}}{P} \approx \frac{1}{\sqrt{B\,T}}
+$$
+
+**Detecting a steady-state line**
+
+$$
+\mathrm{SNR}(f_0) = \frac{\hat S(f_0)}{\overline{\hat S}_\mathrm{neighbours}} \approx 1 + \frac{A_\mathrm{rms}^2\,T}{\mathrm{ENBW} \cdot S_\mathrm{n}(f_0)}
+$$
+
 ### [26. EMG and Neural Spike Processing]({% link chapters/26_emg.md %})
+
+**Time-domain EMG features over a window of \(N\) samples**
+
+$$
+\begin{aligned}
+\mathrm{MAV} &= \frac{1}{N}\sum_{n=1}^{N}\lvert x[n]\rvert, \qquad
+\mathrm{RMS} = \sqrt{\frac{1}{N}\sum_{n=1}^{N} x[n]^2}, \qquad
+\mathrm{WL} = \sum_{n=2}^{N}\lvert d[n]\rvert,\\
+\mathrm{ZC} &= \#\bigl\{n : x[n]\,x[n-1] < 0 \ \text{and}\ \lvert d[n]\rvert \ge T\bigr\},\\
+\mathrm{SSC} &= \#\bigl\{n : d[n]\,d[n-1] < 0 \ \text{and}\ \max\bigl(\lvert d[n]\rvert, \lvert d[n-1]\rvert\bigr) \ge T\bigr\}
+\end{aligned}
+$$
+
+**Robust noise estimate, threshold and false-alarm rate**
+
+$$
+\hat\sigma = \frac{\operatorname{median}\lvert x[n]\rvert}{0.6745}, \qquad \theta = -k\,\hat\sigma \quad (k = 4 \ldots 5), \qquad R_\mathrm{FA} \approx f_\mathrm{s}\,Q(k)
+$$
 
 **Nonlinear energy operator**
 
