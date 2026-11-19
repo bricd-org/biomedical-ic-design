@@ -60,7 +60,7 @@
   function eng(v) {
     var a = Math.abs(v); if (a === 0) return '0';
     var s = [[1e9, 'G'], [1e6, 'M'], [1e3, 'k'], [1, ''], [1e-3, 'm'], [1e-6, 'µ'], [1e-9, 'n'], [1e-12, 'p'], [1e-15, 'f']];
-    for (var i = 0; i < s.length; i++) if (a >= s[i][0] * 0.9995) { var x = v / s[i][0]; return (Math.abs(x) >= 100 ? x.toFixed(0) : Math.abs(x) >= 10 ? x.toFixed(1).replace(/\.0$/, '') : x.toPrecision(2).replace(/\.?0+$/, '')) + ' ' + s[i][1]; }
+    for (var i = 0; i < s.length; i++) if (a >= s[i][0] * 0.9995) { var x = v / s[i][0]; return (Math.abs(x) >= 100 ? x.toFixed(0) : Math.abs(x) >= 10 ? x.toFixed(1).replace(/\.0$/, '') : x.toPrecision(2).replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '')   /* only zeros after a decimal point: "10" stays 10 */) + ' ' + s[i][1]; }
     return v.toExponential(1);
   }
   function fft(re, im) {                 // in place, radix 2
@@ -106,4 +106,32 @@
   }
   window.BD = { C: C, setup: setup, frame: frame, line: line, hline: hline, vline: vline, dot: dot, logticks: logticks,
                 eng: eng, fft: fft, gauss: gauss, rng: rng, bind: bind, seg: seg, toggle: toggle, observe: observe };
+})();
+
+/* "Check yourself" questions (.bd-check): one listener for the whole page, so no per-demo script.
+   Markup: <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>Question?</p>
+   <div class="bd-check-opts" role="group" aria-label="Answers"><button type="button" data-correct data-why="...">...</button>
+   <button type="button" data-why="...">...</button>...</div><p class="bd-check-fb" aria-live="polite"></p></div> */
+(function () {
+  function checkClick(e) {
+    var b = e.target && e.target.closest ? e.target.closest('.bd-check-opts button') : null; if (!b) return;
+    var box = b.closest('.bd-check'), fb = box.querySelector('.bd-check-fb'), ok = b.hasAttribute('data-correct');
+    b.setAttribute('data-state', ok ? 'right' : 'wrong');
+    if (ok) box.querySelectorAll('.bd-check-opts button').forEach(function (o) { if (o !== b) o.removeAttribute('data-state'); });
+    if (fb) {
+      var why = b.getAttribute('data-why') || (ok ? box.getAttribute('data-why') : '') || (ok ? '' : 'Try another answer.');
+      fb.innerHTML = '';
+      var tag = document.createElement('span'); tag.className = ok ? 'ok' : 'bad'; tag.textContent = ok ? 'Right. ' : 'Not quite. ';
+      fb.appendChild(tag); fb.appendChild(document.createTextNode(why));
+    }
+  }
+  function checkInit() {
+    document.querySelectorAll('.bd-check').forEach(function (box) {
+      if (box.getAttribute('data-wired')) return; box.setAttribute('data-wired', '1');
+      box.querySelectorAll('.bd-check-opts button').forEach(function (b) { b.type = 'button'; });
+      var fb = box.querySelector('.bd-check-fb'); if (fb && !fb.hasAttribute('aria-live')) fb.setAttribute('aria-live', 'polite');
+    });
+  }
+  document.addEventListener('click', checkClick);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', checkInit); else checkInit();
 })();

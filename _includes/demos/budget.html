@@ -12,6 +12,19 @@
   </div>
   <div class="bd-read" aria-live="polite"><span>noise <b data-o="n">–</b></span><span>power <b data-o="p">–</b></span><span data-o="v"></span></div>
   <p class="bd-caption" data-o="cap"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Swap the electrodes.</b> At the start (wet electrodes, LNA current 2.00 µA) the channel shows 0.51 µVrms and 6.8 µW, and the electrodes take 44 % of the noise power. Click dry electrodes: the noise rises to 1.26 µVrms, still inside the 1.5 µVrms target, and the electrodes now take 91 % of it (Worked Example 29.1).</li>
+    <li><b>Throw current at the dry channel.</b> With dry electrodes, raise the LNA current from 2.00 to 8.00 µA. The noise falls only from 1.26 to 1.22 µVrms, while the power doubles to 14.0 µW and the readout says the channel misses the power target.</li>
+    <li><b>Let the converter pay for the LNA.</b> Back on wet electrodes at 2.00 µA, click EMG · SAR: the power falls from 6.8 to 4.9 µW, because a small share of the SAR replaces the ΔΣ converter's 1.9 µW. In ECG/EEG · ΔΣ the LNA current can rise to 4.50 µA (9.8 µW) before the power target is missed; in EMG · SAR, to 6.00 µA (9.7 µW).</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>With dry electrodes the channel sits at 1.26 µVrms, inside the 1.5 µVrms target but with little margin. Which change buys the most noise margin?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-why="With dry electrodes the LNA is only about 8 % of the noise power, so four times the current lowers the total just to 1.22 µVrms and costs over 7 µW.">Raise the LNA current to 8 µA</button>
+      <button type="button" data-correct data-why="The electrodes take 91 % of the noise power, so their own noise is the only large lever: switching to wet electrodes brings the total down to 0.51 µVrms.">Lower the electrodes' own noise with a better contact</button>
+      <button type="button" data-why="Their 0.13 µVrms is about 1 % of the noise power with dry electrodes, so removing them would lower the total by less than 0.01 µVrms and leave the inputs unprotected.">Remove the two input-protection resistors</button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 <script>
 (function () {

@@ -14,6 +14,19 @@
   </div>
   <div class="bd-read" aria-live="polite"><span>stimuli <b data-o="n">–</b></span><span>mean phase error <b data-o="m">–</b></span><span>spread <b data-o="s">–</b></span><span>within ±30° <b data-o="w">–</b></span></div>
   <p class="bd-caption" data-o="cap"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Speed up the rhythm.</b> At the start (rhythm frequency 0.79 Hz, loop latency 60 ms, ±10 ms jitter) the delay costs 360° × 0.79 Hz × 60 ms = 17°, and 83 % of the stimuli land within ±30° of the peak. Slide rhythm frequency to about 10 Hz: the same 60 ms now costs about 216°, as the chapter computes for alpha, within ±30° drops to 0 %, and the stimuli land nearer the trough.</li>
+    <li><b>Compensate the mean latency.</b> Still at about 10 Hz, click compensate the mean latency: the mean phase error drops below +10° and about 60 % of the stimuli land within ±30°, but the spread stays near ±34°. A fixed delay can be aimed around; its ±10 ms jitter, ±36° at 10 Hz, cannot.</li>
+    <li><b>Bury the rhythm in background EEG.</b> Back at 0.79 Hz with compensation off, set loop latency and latency jitter (±) to 0 ms. At a background EEG of 2 µVrms the spread is ±9° and 100 % land within ±30°; at 60 µVrms the causal filter's zero crossings wander, the spread grows to ±52° and only 59 % land within ±30°.</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>With compensate the mean latency on and the default 60 ms ± 10 ms loop, 94 % of the stimuli land within ±30° of the peak at 0.79 Hz, but only about 60 % at 10 Hz. What limits the alpha loop?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-why="Compensation aims earlier by the known delay, adding whole periods where needed, so any fixed delay can be undone: at 10 Hz the mean error is under 10°, and the stimuli are centred, only spread.">60 ms is more than half an alpha period, too long to compensate</button>
+      <button type="button" data-correct data-why="The rule 360° · f · τ applies to the jitter too: ±10 ms is only ±3° at 0.79 Hz but ±36° at 10 Hz, and no fixed correction can remove a random delay.">The ±10 ms jitter, which is ±36° of phase at 10 Hz</button>
+      <button type="button" data-why="The background EEG is the same 15 µVrms at both frequencies, and with latency and jitter set to 0 ms the alpha stimuli still land 95 % within ±30°.">The background EEG disturbs alpha more than the slow oscillation</button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 <script>
 (function () {

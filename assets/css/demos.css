@@ -31,3 +31,34 @@
 .bd button:focus-visible,.bd input:focus-visible{outline:2px solid #9fd0ff;outline-offset:2px;}
 .bd-caption{margin:10px 2px 0 !important;font-size:13.5px;line-height:1.5;color:rgba(215,230,247,.92);min-height:2.6em;}
 @media (max-width:640px){.bd-row{grid-template-columns:minmax(0,1fr);}.bd-caption{font-size:12.5px;}.bd-scope canvas{height:170px;}}
+
+/* ================================================================================================
+   "Three things to try" and "Check yourself" boxes at the end of a demo (same markup and look as the
+   photonics tutorial). Scoped to .main-content so they work inside .bd demos and the SAR demo (.sard). */
+/* ---- "Three things to try": <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol><li>…</li></ol></div> */
+.bd-try,.bd-check{margin:12px 2px 0;padding:9px 12px 10px;border-radius:8px;font-size:13.5px;line-height:1.5;color:rgba(215,230,247,.94);}
+.bd-try{border:1px solid rgba(230,190,95,.32);background:rgba(230,190,95,.06);}
+.main-content .bd-try-h,.main-content .bd-check-h{display:block;margin:0 0 4px !important;font-family:"IBM Plex Mono",monospace;font-size:10px !important;letter-spacing:.1em;text-transform:uppercase;color:#e9d08f;}
+.main-content .bd-try ol{list-style:none;counter-reset:bdtry;margin:0;padding:0;}
+.main-content .bd-try ol > li{counter-increment:bdtry;position:relative;margin:5px 0 0;padding-left:27px;font-size:13.5px;}
+.main-content .bd-try ol > li::before{content:counter(bdtry);position:absolute;left:0;top:1px;width:19px;height:19px;border:1px solid rgba(230,190,95,.6);border-radius:50%;font-family:"IBM Plex Mono",monospace;font-size:10px !important;line-height:17px;text-align:center;color:#f3d48a;}
+.main-content .bd-try b,.main-content .bd-check b{color:#fff;font-weight:600;}
+
+/* ---- "Check yourself": a question, option buttons (the right one has data-correct; each may carry its own
+   one-line explanation in data-why) and a feedback line. demos.js wires every .bd-check on the page. */
+.bd-check{border:1px solid rgba(120,170,225,.3);background:rgba(5,16,32,.3);}
+.bd-check .bd-check-h{color:#9fd0ff;}
+.main-content .bd-check-q{margin:0 !important;font-size:13.5px;}
+.bd-check-opts{display:flex;flex-direction:column;gap:5px;margin-top:8px;}
+.bd-check-opts button{display:block;width:100%;text-align:left;font:inherit;font-size:13px;line-height:1.4;color:rgba(215,230,247,.94);background:rgba(120,170,225,.06);border:1px solid rgba(140,190,240,.3);border-radius:7px;padding:6px 10px;cursor:pointer;}
+.bd-check-opts button:hover{border-color:#9fd0ff;color:#fff;}
+/* block, not flex, so <sub>/<sup> inside an answer stay inline; the right/wrong marker floats right */
+.bd-check-opts button::after{content:"";float:right;margin-left:10px;font-family:"IBM Plex Mono",monospace;font-weight:600;}
+.bd-check-opts button[data-state="right"]{border-color:#7fe0a0;background:rgba(127,224,160,.12);color:#fff;}
+.bd-check-opts button[data-state="right"]::after{content:"✓ right";color:#7fe0a0;}
+.bd-check-opts button[data-state="wrong"]{border-color:rgba(243,154,124,.8);background:rgba(243,154,124,.08);}
+.bd-check-opts button[data-state="wrong"]::after{content:"✗ not this";color:#f39a7c;}
+.main-content .bd-check-fb{margin:7px 0 0 !important;font-size:13px;min-height:1.4em;color:rgba(215,230,247,.9);}
+.bd-check-fb .ok{color:#7fe0a0;font-weight:600;}.bd-check-fb .bad{color:#f39a7c;font-weight:600;}
+.bd-check-opts button:focus-visible,.bd-play:focus-visible{outline:2px solid #9fd0ff;outline-offset:2px;}
+@media (max-width:640px){.bd-try,.bd-check,.main-content .bd-try ol > li,.main-content .bd-check-q{font-size:12.5px;}.bd-check-opts button{font-size:12.5px;}}

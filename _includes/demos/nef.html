@@ -9,6 +9,19 @@
   <div class="bd-scope tall"><canvas data-c="p" aria-hidden="true"></canvas><span class="bd-tag">input-referred noise against supply current (log–log)</span></div>
   <div class="bd-read" aria-live="polite"><span>noise <b data-o="vn">–</b></span><span>power at 1.2 V <b data-o="p">–</b></span><span>PEF <b data-o="pef">–</b></span></div>
   <p class="bd-caption" data-o="cap"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Pay four times for half the noise.</b> From the start (total supply current I<sub>tot</sub> 2 µA, NEF 3.00) the amplifier makes 0.43 µVrms, the first stage of Worked Example 6.3. Cut I<sub>tot</sub> to a quarter, 495 nA: the noise only doubles, to 0.88 µVrms, because it falls as 1/√I.</li>
+    <li><b>Spend the wet-electrode budget.</b> Keep NEF 3.00 and lower I<sub>tot</sub> to 182 nA: the noise reaches 1.5 µVrms, the 1.46 µVrms budget the caption says costs 180 nA (Worked Example 6.2). Now drag noise efficiency factor NEF to 1.75, next to the dashed 1.73 MOS-pair limit: at the same current the noise falls in proportion, to 0.85 µVrms.</li>
+    <li><b>Widen the band.</b> Go back to 2 µA and NEF 3.00, then click EMG 10–500 Hz. The band is almost five times wider (490 Hz against 99.5 Hz), so the noise rises √5 ≈ 2.2-fold, from 0.43 to 0.96 µVrms: noise power grows in proportion to the band.</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>In the EEG band, one amplifier has NEF 2 and another NEF 4, and both must reach the same 1.46 µVrms. How much more current does the NEF 4 amplifier need?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-why="At a fixed current the noise doubles with the NEF, but noise falls only as 1/√I, so winning it back costs four times the current, not two.">Twice as much</button>
+      <button type="button" data-correct data-why="Itot = NEF² × 4kT·UT·Bn / Vni², so doubling the NEF quadruples the current: the caption shows 79.9 nA at NEF 2 and 319 nA at NEF 4.">Four times as much</button>
+      <button type="button" data-why="The current is proportional to NEF², not NEF⁴: the noise voltage scales with the NEF, and the current needed scales with the square of that noise.">Sixteen times as much</button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 <script>
 (function () {

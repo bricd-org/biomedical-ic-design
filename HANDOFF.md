@@ -187,6 +187,43 @@ The user asked for the labs to be a top-level section like the photonics tutoria
   `build_formula_sheet.py` ranges (29, 30) and (31, 33)). The history in sections 2–2d still uses the old numbers.
 - Old URLs: `redirects/part5-ch31.html` keeps `/part-5/ch31/` working (maps `#lab-N`, `#setup`, `#capstone`, `#tab-31-1`, `#fig-31-x` to the new pages; checked: `/part-5/ch31/#lab-11` → `/labs/lab-11/`); `redirects/part6-ch34.html` sends `/part-6/ch34/` to `/part-6/ch33/`. `/part-6/ch32/` and `/part-6/ch33/` are reused by the renumbered chapters. Site check after the move: 65 pages, 1,606 links, 1,246 equations, 100 images, clean.
 
+## 2f. Interactive Demos page and demo quizzes (19 Nov 2026)
+
+- `demos.md` → `/demos/`, "Interactive Demos", nav 1.5 (after the Preface, like Open-SERDES): all 17 demos by part,
+  each linking to `chapter#<demo root id>`. Add a line there for every new demo.
+- Every demo ends with **Three things to try** (`.bd-try`, 3 items, each verified in the running demo by four
+  agents driving the built pages) and **Check yourself** (`.bd-check`: 3 buttons, exactly one `data-correct`,
+  each with a one-sentence `data-why`), copied from the photonics tutorial. CSS at the end of
+  `assets/css/demos.css` (scoped to `.main-content`, so it also styles the SAR demo's `.sard`); one page-wide click
+  handler at the end of `assets/js/demos.js`. `data-why` is inserted as **text**: no markup inside it. The SAR demo
+  now includes `demos/assets.html`.
+- **Fixed:** `BD.eng()` in `demos.js` turned values from 9.95 to 9.999 of a unit into "1" (toPrecision → "10", then
+  the trailing-zero regex stripped the 0); it now strips zeros only after a decimal point.
+- **Demo/chapter mismatches found by the agents (not yet fixed; ask the user):**
+  - Ch 19 DSM demo: OSR 256 shows "-Infinity dB" (test tone above the band edge); 1st order simulates 62.4 dB at
+    OSR 128 vs Table 19.1's 55.5 dB; 2nd order barely changes with input level (short record).
+  - Ch 33 phase demo: starts at 0.79 Hz, chapter says 0.75 Hz (and 16° vs 17°); chapter's "5 ms loop keeps alpha
+    within 18°" disagrees with the demo (+35° mean at 10.1 Hz, probably the 128 S/s grid).
+  - Ch 31 NLMS demo: caption says "both" references are best; at share 20 % or L ≥ 16 accel. alone beats both.
+    Demo defaults differ from Fig 31.1 (128 vs 256 S/s).
+  - Ch 29 budget demo: caption always says the LNA is the largest term (wrong for wet at 8 µA); "leaves 3.2 µW" fixed
+    in EMG mode; 10.003 µW shows "10.0 µW" but "misses".
+  - Ch 9: text says slide f_ch below the corner (slider minimum 500 Hz > 461 Hz corner); demo offset 0.39 mV is the
+    100 µm² value, text says 1000 µm² devices (0.12 mV).
+  - Ch 11 aafilter: caption says higher order costs droop (it is the reverse at fixed corner); 4 kHz chopper ripple
+    shown as harmful "0Hz (in band!)" while the chapter says it is a removable offset.
+  - Ch 18 SAR captions: a flipped decision is stated as fact; "add up to only 256 LSB" (255.5); radix-mode caption
+    says an error stays when the final error is 0. Radix 1.8 is slightly worse than binary noise-free.
+  - Ch 22 fftleak: the per-bin quantisation-floor line is drawn 3 dB low (−110.1 vs −107.1 dBFS); Hann reads 36.3 dB,
+    chapter says ~41 dB.
+  - Ch 24 pt demo vs WE 24.3: the demo fails by false beats (4 bits: Se 100 %, PPV 53.5 %), the chapter's offline
+    sweep by missed beats (4 bits: 85–96 %); different signals and filters, both say 5 bits.
+  - Ch 27 BLE: chapter's "about 30 µW" for features at 500 ms vs 46 µW in the demo; caption suggests the 2M PHY where
+    packets per event is the limit. Ch 20 text: "8 × 512 kHz … four times the OTA bandwidth" (should be eight?).
+  - Ch 28 Cole: caption says the phase peaks near f_c (Q peaks at f_c, phase at ~1.6 f_c); default sliders snap to
+    29.5 kHz / 49.5 kHz instead of 30 / 50 kHz.
+  - Small: sampling demo shows "1 bits"; Ch 4 mains default ΔZ 40.3 kΩ vs 40.7; Ch 6 NEF 0.43 vs 0.44 µVrms.
+
 ## 3. Decisions already made (do not re-litigate)
 
 - **No LaTeX book, no PDF.** The Markdown pages are the source; edit them directly.
@@ -501,7 +538,7 @@ home page.
   box sits under "Noise sources" and repeats the formula in section 6.3); Ch 6 reading list says
   "Razavi (Chapter on noise)".
 - `figsrc/bricdstyle.py` still carries SerDes eye-diagram helpers (harmless).
-- **Bug, `biosig.spikes()` noise (found 18 Nov):** it divides the filtered noise by 0.37, but the filter's rms gain
+- **FIXED 19 Nov — bug, `biosig.spikes()` noise (found 18 Nov):** `spikes()` now scales the filtered noise by its measured std, so `noise_rms` is exact at any fs; `ch26_figs.py` no longer compensates; Ch 2 Fig 2.4 and Fig 26.3 redrawn; Ch 26 text updated (median estimate 8.20 µV, false alarms 0.88/0.12/0.013 and 0.66/0.069/0.004 per s, 77.2 %, 91.2 %, ψ noise 1.06σ²). Original note: it divides the filtered noise by 0.37, but the filter's rms gain
   is 0.614 at 30 kS/s (0.48 at 20 kS/s), so `noise_rms=8e-6` gives 13.3 µVrms (16.7 at 20 kS/s). Ch 2 Fig 2.4's
   "8 µVrms" caption inherits it. `figsrc/ch26_figs.py` compensates with `_noise_gain()`; if `biosig.py` is fixed
   (normalise by the measured std), remove that compensation and redraw Ch 2 Fig 2.4.

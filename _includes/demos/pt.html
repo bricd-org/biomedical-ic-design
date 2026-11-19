@@ -10,6 +10,19 @@
   <div class="bd-read" aria-live="polite"><span>beats <b data-o="nb">–</b></span><span>sensitivity <b data-o="se">–</b></span><span>positive predictivity <b data-o="ppv">–</b></span></div>
   <div class="bd-controls"><button type="button" class="bd-btn" data-b="new">new record</button><button type="button" class="bd-toggle" data-t="bw" aria-pressed="true">baseline wander</button></div>
   <p class="bd-caption" data-o="cap"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Follow a beat through the stages.</b> Click input, band-pass, derivative² and integral + threshold in turn: the band-pass strips the baseline wander and most of the P and T waves, squaring turns each QRS into positive spikes, and the integral makes one hump per beat. Each hump peaks about 0.2 s after its gold tick, the filters' 188 ms group delay (Worked Example 24.1), which the detector subtracts before placing the green dots.</li>
+    <li><b>Take bits away.</b> At 100 µVrms of added noise, step ADC bits over ±5 mV down from 12: sensitivity and positive predictivity stay at 100 % for all 23 beats down to 5 bits, a 312 µV step. At 4 bits (625 µV) sensitivity is still 100 % but positive predictivity collapses to 53.5 %: nearly one false beat for every true one.</li>
+    <li><b>Add noise instead.</b> Back at 12 bits, raise the added noise: positive predictivity falls to 95.8 % at 150 µVrms, 88.5 % at 200 µVrms and 46.9 % at 300 µVrms, while sensitivity stays at 100 %. Noise peaks that clear the adaptive threshold become false beats while every real beat is still found.</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>At 4 bits the detector finds all 23 beats (sensitivity 100 %), but its positive predictivity is 53.5 %. What would a heart-rate monitor built on it display?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-correct data-why="Positive predictivity is true detections over all detections: 23 of about 43, so some 20 false beats inflate the count by over 80 %.">Nearly twice the true heart rate</button>
+      <button type="button" data-why="Sensitivity only says that no beat was missed; false detections, which positive predictivity counts, still add to the beat count.">The right heart rate, since every beat was found</button>
+      <button type="button" data-why="Missed beats would lower the sensitivity, which is still 100 %; a positive predictivity of 53.5 % means extra detections, not missing ones.">About half the true heart rate, since half the beats are missed</button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 <script>
 (function () {

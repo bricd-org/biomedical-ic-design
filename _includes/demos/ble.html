@@ -15,6 +15,19 @@
   </div>
   <div class="bd-read" aria-live="polite"><span>capacity <b data-o="cap">–</b></span><span>needed <b data-o="req">–</b></span><span data-o="fit"></span><span>radio <b data-o="p">–</b></span><span>FIFO <b data-o="fifo">–</b></span><span>100 mAh lasts <b data-o="life">–</b></span></div>
   <p class="bd-caption" data-o="cap2"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Stretch the interval, fill the packets.</b> At the start (raw ECG, LE 1M, 30 ms, 2 packets) the link fits at 51 % and the radio draws 0.67 mW, half of it on waking up 33 times a second. Slide connection interval to 100 ms (does not fit, 39 kb/s), then raise packets per event to 4: it fits at 85 %, the radio drops to 0.43 mW and 100 mAh lasts 30 days instead of 21, at the price of a 3.25 kB FIFO instead of 0.97 kB.</li>
+    <li><b>Turn off data length extension.</b> From the start, switch data length extension off: 20-byte payloads carry only 11 kb/s and raw ECG no longer fits. Even 4 packets per event carry just 21 kb/s, the figure of Worked Example 27.2, and 8 packets 43 kb/s.</li>
+    <li><b>Send features, not samples.</b> Choose features (5.2 kb/s needed) at 30 ms: only 4 % used, yet the radio still draws 0.36 mW, nearly all of it on connection events. Slide connection interval to 500 ms: 67 % used, 0.046 mW, and 100 mAh lasts 122 days instead of raw ECG's 21.</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>Raw ECG at 100 ms with 4 packets per event fits on LE 1M, with the radio at 0.43 mW. What does switching to LE 2M change?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-why="Each bit spends half as long on air, so the energy per bit falls (about 3 nJ against 5 nJ) and the radio power drops, not rises.">It raises the radio power, because the radio runs twice as fast</button>
+      <button type="button" data-correct data-why="The capacity is set by 4 packets of 244 bytes every 100 ms, which 2M does not change; it only makes each bit cheaper, so the radio reads 0.30 mW.">The capacity stays at 78 kb/s, but the radio drops to 0.30 mW</button>
+      <button type="button" data-why="Capacity is packets per event times payload over the interval; 2M adds capacity only when the interval is already full of packets, which 4 packets in 100 ms are far from.">It doubles the capacity to about 156 kb/s</button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 <script>
 (function () {

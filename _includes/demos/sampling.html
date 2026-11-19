@@ -11,6 +11,19 @@
   <div class="bd-scope short"><canvas data-c="q" aria-hidden="true"></canvas><span class="bd-tag">quantisation error, in LSB</span></div>
   <div class="bd-read" aria-live="polite"><span>samples describe <b data-o="fa">–</b></span><span>held output vs tone <b data-o="he">–</b></span><span>SQNR measured <b data-o="sq">–</b></span><span>6.02N + 1.76 dB <b data-o="th">–</b></span></div>
   <p class="bd-caption" data-o="cap"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Fold a tone onto the band edge.</b> At the starting 500 S/s, raise tone frequency to 350 Hz: samples describe reads 150 Hz (aliased), and the dashed 150 Hz wave passes through every sample. This is the f<sub>s</sub> &minus; f<sub>B</sub> = 350 Hz tone that lands on the ECG band edge in Worked Example 13.2.</li>
+    <li><b>Count 6 dB per bit.</b> Step converter bits N from 8 to 12: SQNR measured climbs from 48.8 to 73.0 dB, tracking 6.02N + 1.76 dB less the 1 dB back-off (48.9 and 73.0 dB).</li>
+    <li><b>Back off the tone.</b> At 12 bits, lower tone amplitude from &minus;1 to &minus;20 dBFS: SQNR measured falls from 73.0 to 54.1 dB, one dB for every dB, because the rounding noise stays at LSB<sup>2</sup>/12 while the signal shrinks. A signal that uses a tenth of the range throws away about three of the twelve bits.</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>At 500 S/s, a 350 Hz tone gives exactly the samples of a 150 Hz tone. What can still tell the two apart?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-why="After sampling there is no 350 Hz left to reject: the samples are those of a 150 Hz tone, and the readout says 150 Hz (aliased).">A digital filter after the converter, set to reject 350 Hz</button>
+      <button type="button" data-why="Rounding moves each sample by at most half an LSB and cannot move it off the 150 Hz wave: at 16 bits the samples still describe 150 Hz.">More converter bits, so each sample is more exact</button>
+      <button type="button" data-correct data-why="The samples lie exactly on the dashed 150 Hz wave, so the difference is lost at the sampling instant, which is why the anti-alias filter must act before the sampler.">Nothing after the sampler; only an analog filter in front of it can keep the 350 Hz tone out</button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 <script>
 (function () {

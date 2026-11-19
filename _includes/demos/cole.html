@@ -15,6 +15,19 @@
   </div>
   <div class="bd-read" aria-live="polite"><span>tissue <b data-o="z">–</b></span><span>measured <b data-o="m">–</b></span><span>I, Q at 10 µA <b data-o="iq">–</b></span></div>
   <p class="bd-caption" data-o="cap"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Walk along the arc.</b> At the start (tetrapolar, excitation 49.5 kHz) the tissue reads 42.3 Ω, −12.0°, the chapter's 42 Ω at −12°. Slide excitation frequency down to 1 kHz: 58.6 Ω, close to R<sub>0</sub>, as the current flows around the cells; up to 1 MHz: 31.3 Ω, close to R<sub>∞</sub>, as it passes through the membranes too.</li>
+    <li><b>Measure with two electrodes.</b> Click bipolar, wet: measured jumps to 2041 Ω at −0.2°, the tissue's 42 Ω plus about 2 kΩ of electrodes; bipolar, dry reads 10041 Ω. The I output grows from 413 µV to 20.4 mV while Q stays at 87.9 µV: the tissue is now 2 % of the reading, which is why the tetrapolar pair exists.</li>
+    <li><b>Change the spread of cells.</b> Slide dispersion α from 0.70 to 1.00: the arc rounds out into a semicircle and the tissue reads 40.1 Ω at −19.2°. Lower it to 0.50 and the arc flattens, its centre sinking below the real axis: 43.2 Ω at −8.1°, as a wider spread of cell sizes smears the transition over more frequencies.</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>With the tetrapolar defaults, at which excitation frequency does the Q output of the I/Q demodulator, the reactive part, carry the most signal?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-why="At low frequency the current flows around the cells and the membrane capacitance barely matters, so the impedance is almost purely resistive: Q reads only 22.9 µV at 1 kHz.">At the lowest frequency, where the tissue impedance is largest</button>
+      <button type="button" data-why="Once the membranes are short-circuited the tissue is resistive again, close to R∞, and Q falls to 20.9 µV at 1 MHz.">At the highest frequency, where the cell membranes conduct</button>
+      <button type="button" data-correct data-why="The reactance peaks at the top of the arc, where the excitation equals the characteristic frequency: at 29.5 kHz Q reaches its largest value, 91.9 µV.">Near f<sub>c</sub>, at the top of the arc</button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 <script>
 (function () {

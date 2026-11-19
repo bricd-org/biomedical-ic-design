@@ -11,6 +11,19 @@
   <div class="bd-read" aria-live="polite"><span>artefact removed <b data-o="db">–</b></span><span>accel. alone <b data-o="a">–</b></span><span>impedance alone <b data-o="z">–</b></span><span>both <b data-o="b">–</b></span></div>
   <div class="bd-controls"><button type="button" class="bd-toggle" data-t="reg" aria-pressed="true">regularised (δ ≈ reference power)</button><button type="button" class="bd-btn" data-b="new">new recording</button></div>
   <p class="bd-caption" data-o="cap"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Let the artefact choose the reference.</b> At the start (step size μ 0.0083, L 8, impedance share 60 %) the readout shows accel. alone 8.2 dB, impedance alone 4.7 dB and both 9.6 dB. Slide the impedance share of the artefact to 100 %: impedance alone climbs to about 9 dB and accel. alone falls to about 3 dB; at 0 % the two trade places.</li>
+    <li><b>Give each reference the taps it needs.</b> Set taps per reference L to 1: accel. alone drops to about 3 dB while impedance alone keeps about 5 dB. At L = 16 accel. alone rises to about 12 dB and impedance alone stays near 4 dB: the accelerometer's effect lags through the mechanics of the skin, while the impedance trace needs only a few taps.</li>
+    <li><b>Switch off the regularisation.</b> Click regularised (δ ≈ reference power) to turn it off: artefact removed falls from 9.6 dB to −1.9 dB, and the filter now adds error (other recordings land a few dB either side of zero). Between movements the references are nearly zero, and dividing by their power lets the EEG throw the weights about.</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>With both references, slide step size μ all the way to the right: artefact removed rises to a peak and then falls again. Why does a larger step eventually remove less?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-why="NLMS is stable for 0 &lt; μ &lt; 2, and the slider stops at 0.20, far inside that range; the residual stays bounded, it just becomes noisier.">The filter goes unstable at large μ</button>
+      <button type="button" data-why="It is the other way round: a larger μ adapts faster, and slow tracking is what limits the removal at the left end of the slider.">A larger step follows the movements too slowly</button>
+      <button type="button" data-correct data-why="The filter also adapts to the EEG it should ignore; that weight jitter grows with μ and shows up as added error, so beyond the peak it costs more than the faster tracking gains.">The EEG jitters the weights more (misadjustment)</button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 <script>
 (function () {

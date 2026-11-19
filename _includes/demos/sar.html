@@ -1,5 +1,6 @@
 <!-- Interactive demo: one SAR conversion, binary or redundant, with noisy fast decisions (Chapter 18).
      Self-contained: scoped CSS (.sard), one IIFE, no libraries; chapters include it inside a nomarkdown block. -->
+{% include demos/assets.html %}
 <div class="sard" id="sard" role="group" aria-label="Interactive SAR converter demo">
   <div class="sard-head">
     <span>// try it · one 12-bit SAR conversion</span>
@@ -33,6 +34,19 @@
   </div>
   <p class="sard-caption" id="sardCap" aria-live="polite"></p>
   <p class="sard-stats" id="sardStats"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Step one binary search.</b> At the start (binary · 12, v<sub>in</sub> = +0.1234 V), press Step twelve times: each decision moves the DAC by half the previous step (1024, 512, 256 &hellip; 0.50 LSB), and the conversion ends at code 2553, ideal 2553, error 0 LSB.</li>
+    <li><b>Let noise flip a decision.</b> Set v<sub>in</sub> to +0.1255 V, where decision 2 leaves a residue of only 2.05 LSB, switch on Noisy fast decisions and press Run a few times. In about one run in four, decision 3 turns red and the code ends at 2559, error &minus;3 LSB: the binary steps still to come add up to less than the 256 LSB step just taken, so they cannot undo it.</li>
+    <li><b>Count the damage.</b> With the noise still on, press Convert 1000 inputs: the binary search is off by more than 1 LSB for roughly 8&ndash;9 % of inputs (rms error about 1.2 LSB, against 0.29 LSB noise-free), while radix 1.8 stays near 0.45 LSB rms with only about 2 % off.</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>The radix-1.8 search spends 14 decisions on the same 12-bit code. What do the two extra decisions buy?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-correct data-why="Each radix-1.8 step (910, 506, 281 &hellip; LSB) is smaller than the sum of the steps after it, so later decisions can make up for one flipped by noise, which is why Convert 1000 inputs shows far fewer bad codes.">Room to undo a wrong early decision</button>
+      <button type="button" data-why="The code still runs from 0 to 4095 and is compared with the same 12-bit ideal: radix-1.8 steps carry less than a bit each, so 14 of them still make 12 bits.">Two extra bits, for a 14-bit result</button>
+      <button type="button" data-why="Each decision is as noisy as before; what changes is that a decision the noise flips can still be corrected by the steps that follow.">Less comparator noise, by averaging two more comparisons</button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 
 <style>

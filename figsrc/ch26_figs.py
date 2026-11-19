@@ -198,19 +198,10 @@ SPK_IN = 0.625e-3             # spike-mode input range: +-0.5 V at the SAR over 
 DEAD = int(1e-3 * FS_SPK)     # 1 ms dead time after each detection
 
 
-def _noise_gain(fs):
-    """biosig.spikes() divides its band-pass noise by 0.37, which is not its rms at these rates (it is 0.61 at
-    30 kS/s): measure the real gain so that the background is NOISE_SPK."""
-    return bs.spikes(fs=fs, duration=60.0, amp=0.0, noise_rms=1.0, seed=99)[1].std()
-
-
-_GAIN = {}
-
-
 def spike_rec(amp=150e-6, duration=60.0, seed=4, rate=20.0, fs=FS_SPK, noise=NOISE_SPK):
-    if fs not in _GAIN:
-        _GAIN[fs] = _noise_gain(fs)
-    return bs.spikes(fs=fs, duration=duration, rate=rate, amp=amp, noise_rms=noise / _GAIN[fs], seed=seed)
+    """biosig.spikes() scales its band-pass noise to exactly `noise` rms (fixed 19 Nov 2026; it used to
+    divide by a constant 0.37 and gave 13.3 uVrms at 30 kS/s for 8 uV asked, which this script compensated)."""
+    return bs.spikes(fs=fs, duration=duration, rate=rate, amp=amp, noise_rms=noise, seed=seed)
 
 
 def sigma_hat(x):
@@ -380,7 +371,7 @@ def numbers():
     print("  LDA on chip: 5 classes x 32 features = %d MAC per decision, %d MAC/s at 20/s" % (5 * 32, 5 * 32 * 20))
     print("== Spike noise estimate (30 kS/s, 8 uVrms background)")
     t, x, tm = spike_rec(150e-6)
-    print("  biosig.spikes() noise gain at 30 kS/s %.3f (requested noise x %.2f)" % (_GAIN[FS_SPK], _GAIN[FS_SPK]))
+    print("  background noise alone: %.2f uVrms (asked %.2f)" % (spike_rec(0.0)[1].std() * 1e6, NOISE_SPK * 1e6))
     print("  %d spikes in 60 s (%.1f /s), troughs 105-150 uV: std %.2f uV, median estimate %.2f uV"
           % (len(tm), len(tm) / 60, x.std() * 1e6, sigma_hat(x) * 1e6))
     s = sigma_hat(x)

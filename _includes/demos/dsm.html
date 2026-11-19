@@ -10,6 +10,19 @@
   <div class="bd-scope short"><canvas data-c="b" aria-hidden="true"></canvas><span class="bd-tag">the input and the first 160 bits</span></div>
   <div class="bd-read" aria-live="polite"><span>in-band SQNR, simulated <b data-o="sq">–</b></span><span>linear model at full scale <b data-o="lm">–</b></span><span>band edge <b data-o="fb">–</b></span></div>
   <p class="bd-caption" data-o="cap"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Mind the model gap.</b> At the start (2nd order, OSR 128, &minus;6 dBFS), in-band SQNR, simulated reads 84.3 dB against 100.2 dB for the linear model at full scale. The &minus;6 dBFS back-off accounts for 6 dB; the rest comes from the 1-bit quantiser, whose larger error and effective gain of about 0.63 the model ignores (Worked Example 19.1).</li>
+    <li><b>Drop to first order.</b> Click 1st order: the simulated SQNR falls to 62.4 dB and the model to 65.8 dB. The gold NTF line now rises at 20 dB per decade instead of 40, so far more of the shaped noise is left inside the shaded band.</li>
+    <li><b>Find the idle tones.</b> Still at 1st order, set oversampling ratio OSR to 64 and input amplitude to &minus;30 dBFS: the SQNR collapses to 16.0 dB, because the loop's regular bit pattern puts a tall spur inside the shaded band. Click 2nd order and the same settings give 49.2 dB.</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>The second-order loop gives 84.3 dB at OSR 128 and &minus;6 dBFS. What happens when you halve the OSR to 64?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-why="Three dB per octave holds for white noise; here the wider band reaches up into noise that rises at 40 dB per decade, and the demo drops to 71.9 dB.">It loses about 3 dB, as plain oversampling does</button>
+      <button type="button" data-correct data-why="Halving the OSR lets in 6L + 3 = 15 dB more shaped noise for L = 2: the linear model drops by 15 dB (100.2 to 85.2 dB) and the simulation by 12 dB (84.3 to 71.9 dB).">It loses 12&ndash;15 dB, because the wider band takes in steeply rising shaped noise</button>
+      <button type="button" data-why="The loop moves the noise up in frequency but does not remove it; halving the OSR doubles the band (fs / 256 to fs / 128) and lets much more of it in.">Almost nothing, because the loop has already pushed the noise out of the band</button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 <script>
 (function () {

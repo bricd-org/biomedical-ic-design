@@ -14,6 +14,19 @@
   </div>
   <div class="bd-read" aria-live="polite"><span>residual <b data-o="tot">–</b></span><span>limit <b>1 mVpp</b></span><span data-o="pass"></span></div>
   <p class="bd-caption" data-o="cap"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Switch off the right-leg drive.</b> From the start the residual is 58 µVpp. Drag right-leg drive loop gain to off: the full 28.3 Vpp of the CMRR test (Worked Example 4.3) reaches the electrodes, the residual grows 103-fold, one plus the loop gain, to 5.99 mVpp, and the demo reports that it fails the test.</li>
+    <li><b>Find the input impedance the test needs.</b> Keep the right-leg drive off and raise common-mode input impedance Z<sub>cm</sub>. The test first passes at 1.7 GΩ (969 µVpp); at 1.9 GΩ the residual is 881 µVpp, the 90 dB of Worked Example 4.4.</li>
+    <li><b>Let the amplifier take over.</b> Still without the right-leg drive, push Z<sub>cm</sub> to its 10 GΩ maximum: the residual falls to 397 µVpp and the caption now blames the amplifier's own CMRR. Lower amplifier CMRR to 89 dB, the bare minimum of Worked Example 4.3, and the test fails at 1.12 mVpp, because the imbalance term still adds its share.</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>With the right-leg drive off and Z<sub>cm</sub> at 200 MΩ, the residual is 5.99 mVpp. What does raising amplifier CMRR from 100 dB to 130 dB do to it?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-why="Only the 1/CMRR term, 0.28 mVpp here, falls with the amplifier's CMRR; the 5.7 mVpp from the electrode imbalance does not depend on the amplifier at all.">Cuts it about thirty-fold, so the test passes</button>
+      <button type="button" data-why="30 dB is a factor of 31.6 in voltage (1000 in power), and in any case only the small 1/CMRR term scales with the amplifier's CMRR.">Cuts it a thousand-fold, since 30 dB is a factor of 1000</button>
+      <button type="button" data-correct data-why="The ΔZ and Zcm divider turns part of the common mode into a differential signal before the amplifier, which amplifies it like the ECG, so only a higher Zcm or a smaller common mode helps.">Very little: it stays near 5.7 mVpp</button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 <script>
 (function () {

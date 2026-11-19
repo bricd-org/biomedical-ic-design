@@ -10,6 +10,19 @@
   <div class="bd-scope tall"><canvas data-c="p" aria-hidden="true"></canvas><span class="bd-tag">filter response, and where the interferer lands after sampling</span></div>
   <div class="bd-read" aria-live="polite"><span>attenuation at the interferer <b data-o="att">–</b></span><span>it aliases to <b data-o="al">–</b></span><span>droop at 500 Hz <b data-o="dr">–</b></span></div>
   <p class="bd-caption" data-o="cap"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Drop to second order.</b> From the start (2 kS/s, corner at 600 Hz, interferer at 1.5 kHz), set Butterworth order to 2: the attenuation at the interferer falls from 31.8 dB to 16.0 dB, well short of the 30 dB the EMG path needs. Each order is worth about 8 dB here, 6 dB per octave over the 1.3 octaves from 600 Hz to 1.5 kHz.</li>
+    <li><b>Follow the chopper ripple.</b> Set Butterworth order back to 4 and interferer frequency to 4 kHz: it aliases to 0 Hz, after the filter has cut it by 65.9 dB (66 dB in the chapter). Because the chopper and SAR clocks are locked, the ripple lands at DC as an offset that the high-pass removes, not as a tone in the band.</li>
+    <li><b>Sample faster, filter less.</b> Set sample rate f<sub>s</sub> to 4 kS/s, Butterworth order to 2 and interferer frequency to 3.5 kHz: it now folds to the band edge (490&ndash;510 Hz), and second order already gives 31 dB there. Doubling the rate moved the first folding frequency, f<sub>s</sub> &minus; 500 Hz, from 1.5 to 3.5 kHz and halved the filter order.</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>At the start, the 1.5 kHz interferer aliases to 500 Hz, inside the EMG band. Which change moves its alias out of the band?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-why="The order only sets how much the interferer is attenuated before it folds (16.0 dB at order 2, 63.7 dB at order 8); it still aliases to 500 Hz.">Raise the Butterworth order</button>
+      <button type="button" data-correct data-why="Where a tone lands depends only on its frequency and the sample rate: at 2.5 kS/s the 1.5 kHz interferer aliases to 1 kHz, outside the band, where a digital filter can still remove it.">Raise the sample rate f<sub>s</sub></button>
+      <button type="button" data-why="Like the order, the corner changes the attenuation, not the folding: at 500 Hz it gives 38.2 dB, but the alias stays at 500 Hz and the band edge now droops by 3 dB.">Lower the filter corner f<sub>c</sub></button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 <script>
 (function () {

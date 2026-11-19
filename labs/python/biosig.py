@@ -130,7 +130,8 @@ def spikes(fs=30000.0, duration=0.5, rate=20.0, amp=150e-6, noise_rms=8e-6, seed
         k = int(ts * fs)
         x[k:k + tmpl.size] += amp * rng.uniform(0.7, 1.0) * tmpl[:n - k]
     b, a = sps.butter(2, [300, 7000], btype="band", fs=fs)
-    x += sps.filtfilt(b, a, rng.standard_normal(n)) * noise_rms / 0.37
+    w = sps.filtfilt(b, a, rng.standard_normal(n))
+    x += w * noise_rms / np.std(w)        # scale by the measured rms, so the background is noise_rms at any fs
     return t, x, times
 
 

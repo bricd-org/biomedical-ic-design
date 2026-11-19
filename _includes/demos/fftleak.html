@@ -9,6 +9,19 @@
   <div class="bd-scope tall"><canvas data-c="p" aria-hidden="true"></canvas><span class="bd-tag">FFT of the converter output (dBFS)</span></div>
   <div class="bd-read" aria-live="polite"><span>SNR read from the FFT <b data-o="snr">–</b></span><span>ideal 6.02N + 1.76 <b data-o="th">–</b></span><span data-o="coh"></span></div>
   <p class="bd-caption" data-o="cap"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Break coherence.</b> At the start (67.00 cycles, 12 bits, no window) the SNR read from the FFT is 73.9 dB against the ideal 74.0 dB. Slide the tone to 67.30 cycles: the record is not coherent, the leakage skirt fills the spectrum and the same perfect converter reads 10.2 dB.</li>
+    <li><b>Window the leak.</b> Keep 67.30 cycles and choose Hann: 36.3 dB, much better, but the Hann sidelobes close to the tone still count as noise. Choose Blackman–Harris: 73.8 dB, within 0.2 dB of ideal, because its leakage stays below the 12-bit floor outside the main lobe.</li>
+    <li><b>Avoid an even cycle count.</b> Back on no window, set the tone to 64.00 cycles: coherent, yet the SNR reads 75.7 dB, better than an ideal 12-bit converter can be. With exactly 64 samples per cycle the same 64 codes repeat, so the quantisation error collapses into a handful of spurs instead of noise; a prime count such as 61 or 67 reads 73.9 dB.</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>Blackman–Harris restores the ideal SNR at 67.30 cycles with 12 bits. Keep that window and tone and test a 16-bit converter instead: what do you expect?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-why="No window has zero sidelobes: at 16 bits the Blackman–Harris leakage lies above the quantisation noise, so the demo reads 88.1 dB, not 98.1 dB.">The ideal 98.1 dB: once the window confines the tone, the FFT tracks the converter at any resolution</button>
+      <button type="button" data-why="At 12 bits the reading matched the 74.0 dB ideal, so quantisation noise, not leakage, set it; the reading rises with the bits until the window's leakage takes over.">About 74 dB, as at 12 bits: the window's leakage was what set the 12-bit reading</button>
+      <button type="button" data-correct data-why="The demo reads 88.1 dB against an ideal 98.1 dB; to test 16 bits, make the record coherent, which reads 98.1 dB with no window at all.">Well short of 98 dB: the window's own leakage now sets the reading, not the converter</button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 <script>
 (function () {

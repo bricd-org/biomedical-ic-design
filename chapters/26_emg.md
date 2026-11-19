@@ -156,12 +156,12 @@ For Gaussian noise the median of $$\lvert x\rvert$$ is $$0.6745\sigma$$, the 75t
 
 Take `biosig.spikes()` at 30 kS/s, with 8 µVrms of background noise and spikes of 105–150 µV, 1 182 of them in 60 s (19.7 per second).
 
-- **Noise estimate.** The plain standard deviation is 12.0 µV, 50 % high, because it counts the spikes as noise; the median estimate gives 8.19 µV, 2 % high.
+- **Noise estimate.** The plain standard deviation is 12.0 µV, 50 % high, because it counts the spikes as noise; the median estimate gives 8.20 µV, 2.5 % high.
 - **Threshold.** At $$k$$ = 4.5 it is −36.9 µV from the median but −54.0 µV from the standard deviation, which would miss most spikes smaller than that.
-- **False alarms** on noise alone, over 1 200 s: 0.88 per second at 4σ, 0.11 at 4.5σ and 0.012 at 5σ, against $$f_\mathrm{s}Q(k)$$ = 0.95, 0.10 and 0.009. At 20 kS/s: 0.65, 0.068 and 0.004 per second.
+- **False alarms** on noise alone, over 1 200 s: 0.88 per second at 4σ, 0.12 at 4.5σ and 0.013 at 5σ, against $$f_\mathrm{s}Q(k)$$ = 0.95, 0.10 and 0.009. At 20 kS/s: 0.66, 0.069 and 0.004 per second.
 - **Spikes.** A 4.5σ threshold adds one false event for every 180 true ones. Every spike crosses even 5σ; the 19 missed (1.6 %) arrive within 1 ms of another spike, inside the 1 ms dead time.
 
-For large spikes $$k$$ hardly matters. For small ones it does: with troughs of 35–50 µV (4.3–6.1σ) the detector finds 95.9 % at 4σ, 89.7 % at 4.5σ and 77.3 % at 5σ ([Figure 26.3](#fig-26-3)b). Choose $$k$$ from the false-alarm rate that spike sorting downstream can tolerate.
+For large spikes $$k$$ hardly matters. For small ones it does: with troughs of 35–50 µV (4.3–6.1σ) the detector finds 95.9 % at 4σ, 89.7 % at 4.5σ and 77.2 % at 5σ ([Figure 26.3](#fig-26-3)b). Choose $$k$$ from the false-alarm rate that spike sorting downstream can tolerate.
 
 </div>
 
@@ -178,9 +178,9 @@ $$
 
 $$\psi$$ is large where the signal is both large *and* changing quickly, so it emphasises spikes over slower, equally large background fluctuations. A threshold on a smoothed $$\psi$$, at a multiple of its mean, detects the spikes. It costs two multiplications per sample, which suits an implant.
 
-How much it helps depends on what is slower than the spike. A 100 µV local field potential at 10 Hz gives $$\psi = A^2\sin^2(2\pi f/f_\mathrm{s}) = 4.4\times10^{-14}$$ V² at 30 kS/s, nearly five thousand times less than the $$2.1\times10^{-10}$$ V² of a 50 µV spike, so the NEO ignores the LFP and drift that defeat a fixed threshold. In Open-BioAFE's spike mode, however, the 300 Hz high-pass has already removed the LFP, and the remaining noise fills the band to 7 kHz: it is *faster* than the spike. At 30 kS/s a spike's trough spans several samples, so $$x[n-1]\,x[n+1] \approx x[n]^2$$ and the peak $$\psi$$ of a 50 µV spike is only $$3.2\sigma^2$$, against a noise mean of $$0.87\sigma^2$$. Stretching the operator to the spike's time scale, $$\psi_\ell[n] = x[n]^2 - x[n-\ell]\,x[n+\ell]$$ with a lag $$\ell$$ = 5 samples (0.17 ms) {% include cite.html keys="choi2006" %}, raises the peak to $$35.8\sigma^2$$ against $$1.05\sigma^2$$.
+How much it helps depends on what is slower than the spike. A 100 µV local field potential at 10 Hz gives $$\psi = A^2\sin^2(2\pi f/f_\mathrm{s}) = 4.4\times10^{-14}$$ V² at 30 kS/s, nearly five thousand times less than the $$2.1\times10^{-10}$$ V² of a 50 µV spike, so the NEO ignores the LFP and drift that defeat a fixed threshold. In Open-BioAFE's spike mode, however, the 300 Hz high-pass has already removed the LFP, and the remaining noise fills the band to 7 kHz: it is *faster* than the spike. At 30 kS/s a spike's trough spans several samples, so $$x[n-1]\,x[n+1] \approx x[n]^2$$ and the peak $$\psi$$ of a 50 µV spike is only $$3.2\sigma^2$$, against a noise mean of $$0.87\sigma^2$$. Stretching the operator to the spike's time scale, $$\psi_\ell[n] = x[n]^2 - x[n-\ell]\,x[n+\ell]$$ with a lag $$\ell$$ = 5 samples (0.17 ms) {% include cite.html keys="choi2006" %}, raises the peak to $$35.8\sigma^2$$ against $$1.06\sigma^2$$.
 
-On the small spikes over 400 s ([Figure 26.3](#fig-26-3)), at one false alarm per second the plain NEO smoothed over five samples finds 10 % (26 % unsmoothed), the amplitude threshold 96.4 % and the lag-5 NEO 97.6 %; at 0.1 per second, 3.4, 91.3 and 96.0 %. The NEO is also blind to polarity, so it finds positive-going spikes that a one-sided threshold misses.
+On the small spikes over 400 s ([Figure 26.3](#fig-26-3)), at one false alarm per second the plain NEO smoothed over five samples finds 10 % (26 % unsmoothed), the amplitude threshold 96.4 % and the lag-5 NEO 97.6 %; at 0.1 per second, 3.4, 91.2 and 96.0 %. The NEO is also blind to polarity, so it finds positive-going spikes that a one-sided threshold misses.
 
 <figure id="fig-26-3">
   <img src="{{ '/assets/figs/ch26_spikes.svg' | relative_url }}" style="width:720px" alt="Sixty milliseconds of a synthetic extracellular recording with small spikes and an amplitude threshold, the nonlinear energy operator at lags 1 and 5, and detection rate versus false alarms per second for the three detectors">

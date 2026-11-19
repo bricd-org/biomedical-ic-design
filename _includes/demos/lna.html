@@ -11,6 +11,19 @@
   <div class="bd-scope tall"><canvas data-c="p" aria-hidden="true"></canvas><span class="bd-tag">closed-loop gain (dB) against frequency</span></div>
   <div class="bd-read" aria-live="polite"><span>A<sub>M</sub> <b data-o="am">–</b></span><span>f<sub>L</sub> <b data-o="fl">–</b></span><span>f<sub>H</sub> <b data-o="fh">–</b></span></div>
   <p class="bd-caption" data-o="cap"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Rescue the delta band.</b> The demo starts on thin oxide, 1 pair: f<sub>L</sub> is 4 Hz and the caption warns that the EEG's delta band is lost. Click thick oxide, 27 °C and f<sub>L</sub> drops to 14.2 mHz, the 0.014 Hz of Worked Example 8.2; then click thick, 85 °C and the same device's corner climbs seventyfold, to 995 mHz.</li>
+    <li><b>Trade gain for a lower corner.</b> Back on thin oxide, 1 pair, raise feedback capacitor C<sub>2</sub> to its 998 fF maximum. f<sub>L</sub> falls fivefold to 798 mHz, still above 0.5 Hz, while A<sub>M</sub> drops to 20 (26.0 dB) and f<sub>H</sub> rises to 119 kHz, because a lower gain leaves the OTA more loop gain.</li>
+    <li><b>Load the output.</b> With C<sub>2</sub> back at 200 fF, raise load capacitor C<sub>L</sub> from 2 pF to 10 pF: f<sub>H</sub> falls from 23.9 kHz to 4.8 kHz, as in Worked Example 8.1. Push OTA transconductance g<sub>m</sub> to its 99.8 µS maximum and f<sub>H</sub> only recovers to 15.8 kHz: bandwidth is bought with OTA current.</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>From the starting design, you double input capacitor C<sub>1</sub> from 20 pF to 40 pF. What happens to the response?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-correct data-why="C1 appears only in AM = C1/C2; fL = 1/(2πR·C2) does not contain it, and fH = gm/(2π·AM·CL) halves because the OTA's loop gain 1/AM halves (the demo shows 200, 4 Hz and 12 kHz).">The gain doubles and f<sub>H</sub> halves; f<sub>L</sub> does not move</button>
+      <button type="button" data-why="The low corner is set by the pseudo-resistor and C2 in the feedback path, not by the input capacitor, so fL stays at 4 Hz; it is fH that moves.">The gain doubles and f<sub>L</sub> halves; f<sub>H</sub> does not move</button>
+      <button type="button" data-why="fH = gm/(2π·AM·CL) has the gain in its denominator: with gm and CL fixed, doubling the gain halves the bandwidth, to 12 kHz.">The gain doubles and neither corner moves</button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 <script>
 (function () {

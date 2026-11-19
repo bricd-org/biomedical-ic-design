@@ -8,6 +8,19 @@
   <div class="bd-scope tall"><canvas data-c="p" aria-hidden="true"></canvas><span class="bd-tag">conversion error against DC input over ±0.8 of the reference, 8001 inputs (log)</span></div>
   <div class="bd-read" aria-live="polite"><span>worst error <b data-o="e">–</b></span><span>resolution log<sub>2</sub>(1/err) <b data-o="b">–</b></span><span>at 512 kHz <b data-o="r">–</b></span></div>
   <p class="bd-caption" data-o="cap"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Count the bits per doubling.</b> At the start (2nd order + CoI, M = 1024) the worst error is 1.04e-5, 16.5 bits at 500 S/s, the figure Chapter 19 derives. Slide cycles per conversion M to 2048: 18.6 bits, two bits more for twice the cycles, because the error falls as 1/M<sup>2</sup>.</li>
+    <li><b>Read the loop with a counter.</b> Set M back to 1024 and click 1st order + counter: the worst error jumps to 1.74e-3, only 9.2 bits, and M = 2048 buys just one bit more (10.2 bits). At one bit per doubling, 16 bits would take 65 536 cycles per conversion.</li>
+    <li><b>Trade rate for resolution.</b> Back on 2nd order + CoI, set M = 512 to double the output rate to 1000 S/s: the gold worst-case line rises above the green 16-bit line, at 14.5 bits. With the clock fixed at 512 kHz, M = 1024 is the shortest conversion on the slider that clears 16 bits.</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>The second-order loop's worst error at M = 1024 is about 1 × 10<sup>−5</sup>. If you cut the conversion to M = 256 for four times the output rate, roughly what worst error should you expect?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-why="That is 1/M scaling, the first-order counter's; the second-order loop's error grows with the square of the cut, 4² = 16 times.">About 4 × 10<sup>−5</sup>, four times larger</button>
+      <button type="button" data-correct data-why="The error falls as 1/M², two bits per doubling, so a quarter of the cycles costs four bits: the demo shows 1.88e-4, or 12.4 bits.">About 2 × 10<sup>−4</sup>, some sixteen times larger</button>
+      <button type="button" data-why="That is the square-root gain of averaging random noise; the loop does not average noise but shapes a deterministic quantisation error, which shrinks much faster with M.">About 2 × 10<sup>−5</sup>, twice as large</button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 <script>
 (function () {

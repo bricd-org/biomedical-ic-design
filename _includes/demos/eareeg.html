@@ -15,6 +15,19 @@
   </div>
   <div class="bd-read" aria-live="polite"><span>alpha at the ear <b data-o="s">–</b></span><span>noise <b data-o="n">–</b></span><span>SNR <b data-o="snr">–</b></span></div>
   <p class="bd-caption" data-o="cap"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Widen the band.</b> At the start (dry, same ear, alpha 8–13 Hz, LNA supply current 2.00 µA) the alpha at the ear is 2.50 µVrms against 0.28 µVrms of noise: SNR 18.9 dB. Click 0.5–100 Hz: the alpha stays 2.50 µVrms, but the noise grows with the square root of the bandwidth to 1.26 µVrms and the SNR falls to 5.9 dB.</li>
+    <li><b>Move the reference across the head.</b> Back in alpha 8–13 Hz, click other ear: the alpha reaching the pair rises from 2.50 to 8.00 µVrms and the SNR to 29.0 dB, with the noise unchanged at 0.28 µVrms. In a real earpiece the price is a wire, or a radio and a shared clock, between the two ears.</li>
+    <li><b>Chase 0.5 µVrms over 1–40 Hz.</b> With dry electrodes in the same ear, click 1–40 Hz: the noise is 0.79 µVrms, as in Worked Example 32.1. Raising LNA supply current to 8.00 µA only reaches 0.76 µVrms, while wet gel at 2.00 µA gives 0.32 µVrms: the contact, not the chip, decides.</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>From the starting point (dry contacts, reference in the same ear, alpha band, 18.9 dB), which single change raises the SNR the most?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-correct data-why="The reference sets how much of the scalp alpha reaches the pair: behind the ear doubles it to 5.00 µVrms, +6 dB to 25.0 dB, while the noise stays the same.">Reference the pair behind the ear</button>
+      <button type="button" data-why="The dry electrodes take 91 % of the noise power, so four times the current lowers the noise only from 0.28 to 0.27 µVrms, to 19.2 dB.">Raise the LNA supply current to 8 µA</button>
+      <button type="button" data-why="A better dry contact helps, but the noise falls only from 0.28 to 0.20 µVrms, about +3 dB to 22.0 dB: half of what doubling the signal gives.">Fit good dry electrodes</button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 <script>
 (function () {

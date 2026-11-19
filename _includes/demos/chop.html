@@ -12,6 +12,19 @@
   <div class="bd-read" aria-live="polite"><span>noise 0.5–100 Hz <b data-o="vn">–</b></span><span>unchopped <b data-o="vu">–</b></span><span>ripple at f<sub>ch</sub>, gain 100 <b data-o="rip">–</b></span><span>residual offset <b data-o="ro">–</b></span></div>
   <div class="bd-controls"><button type="button" class="bd-toggle" data-t="chop" aria-pressed="true">chopper on</button></div>
   <p class="bd-caption" data-o="cap"></p>
+  <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
+    <li><b>Switch the chopper off.</b> From the start, click chopper on so that it reads chopper off: noise 0.5–100 Hz jumps from 0.272 µVrms to 1.31 µVrms, nearly all of it flicker noise, and the full 0.39 mV offset now sits on the signal (Worked Example 9.1).</li>
+    <li><b>Chop a small input pair.</b> Turn the chopper back on and raise amplifier 1/f corner f<sub>c</sub> to 4.7 kHz, close to the 4.6 kHz of a 100 µm² pair: f<sub>ch</sub> is now below the corner, the caption warns in red, and the noise reads 0.367 µVrms, 40 % above the 0.26 µVrms white floor. Raise chopper frequency f<sub>ch</sub> to 10.2 kHz and it falls to 0.306 µVrms, within 20 % (Worked Example 9.1).</li>
+    <li><b>Count the cost of a fast clock.</b> With f<sub>ch</sub> back at 4 kHz, click dry electrodes: the residual offset 2f<sub>ch</sub>Δq·R<sub>s</sub> rises from 0.40 µV to 7.9 µV, because R<sub>s</sub> grows from 50 kΩ to 1 MΩ. Raise f<sub>ch</sub> to 10.2 kHz and it reaches 20.4 µV: chop just above the 1/f corner, not as fast as you can.</li>
+  </ol></div>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>With the chopper on, the amplifier's 0.39 mV input offset no longer appears in the signal band. Where has it gone?</p>
+    <div class="bd-check-opts" role="group" aria-label="Answers">
+      <button type="button" data-why="The residual offset comes from mismatched charge injection through the electrode impedance, not from the amplifier: change input offset and it stays at 0.40 µV.">It has become the 0.40 µV residual offset</button>
+      <button type="button" data-correct data-why="The offset enters after the input chopper, so the output chopper multiplies it only once and moves it to fch: the ripple readout follows input offset times the gain of 100 (0.12 mV gives 12 mV).">Up to f<sub>ch</sub>, as a ripple of offset times gain that the low-pass must remove</button>
+      <button type="button" data-why="The output chopper undoes the input chopper only for what passes through both, the signal; the offset enters between them, is multiplied once, and survives as a square wave at fch until it is filtered.">It is cancelled, because the output chopper undoes the input chopper</button>
+    </div>
+    <p class="bd-check-fb" aria-live="polite"></p>
+  </div>
 </div>
 <script>
 (function () {
