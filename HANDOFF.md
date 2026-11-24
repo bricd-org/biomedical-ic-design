@@ -1,12 +1,26 @@
 # HANDOFF — Open-BioAFE Tutorial (pick up here)
 
-Last updated: 18 November 2026 (labs moved to their own section and Part VI renumbered to Ch 31–33, section 2e; Part IV deepened, section 2d; Ch 3 diagrams, section 2c; before that 14 November: **all chapters 1–30, appendices A–E, 22 architecture/circuit diagrams and
-all 15 labs with scripts are written**; Labs 1, 11 and 12 also run on real PhysioNet data; Ch 29 has five
-more diagrams modelled on SerDes Ch 14; see section 2 and Step 3 for the lab results and the corrections they
-forced; outline review against lecture material in section 2a). On
-10 November the tutorial was switched from a LaTeX book (with a generated website) to **a website
-written directly in Markdown**. There is no LaTeX book and no PDF any more; `book/` and
-`tools/build_site.py` were removed.
+Last updated: 23 November 2026. **Live and complete at `777b68f`** (pushed 19 Nov, Pages deploy checked):
+https://www.thebricd.org/biomedical-ic-design/
+
+**Where things stand, in one paragraph.** Every page is written: preface, 33 chapters in six parts, the
+Hands-On Labs section (15 labs with scripts plus a capstone), the Interactive Demos page (17 demos, each
+with *Three things to try* and a *Check yourself* question), appendices A–E and 68 references, in the
+Monitor colour theme with a cover on the home page. The last full-site crawl (19 Nov) found 66 pages, 1,658 links,
+1,246 equations and 100 images, all clean. **What is left is polish, not writing:** the demo/chapter
+mismatches in section 2f come first, then the items in section 4 "Now". Read section 3 (decisions) and
+section 5 (conventions) before editing anything.
+
+History, newest first: 19 Nov Interactive Demos page, demo quizzes, `BD.eng` fix, `spikes()` noise fix,
+"written" badges removed from the home page (section 2f); 18 Nov labs moved to their own section and
+Part VI renumbered to Ch 31–33 (2e), Part IV deepened (2d), Ch 3 diagrams (2c); 16 Nov BLE section and
+Part VI (2b); 14 Nov all chapters 1–30, appendices, 22 diagrams and all labs written; 12 Nov outline
+review against lecture material (2a). On 10 November the tutorial was switched from a LaTeX book (with a
+generated website) to **a website written directly in Markdown**. There is no LaTeX book and no PDF any
+more; `book/` and `tools/build_site.py` were removed.
+
+Section 2's table and sections 2a–2e are a dated record: chapter numbers there are the numbers *of that
+day* (Part VI was Ch 32–34 and the labs were Ch 31 before 18 Nov).
 
 ## 1. The goal
 
@@ -16,22 +30,26 @@ following the curriculum document *"Biomedical IC Design Tutorial — Curriculum
 (section 8) and in the outline chapters. Unlike Open-SERDES, **no LaTeX book or PDF**.
 
 - Title: **Open-BioAFE: Designing a Biopotential Acquisition Chip from Scratch**
-- 5 parts, 31 chapters, 15 labs, appendices A–E. One reference chip: 8-channel ECG/EEG/EMG
-  front-end + 12-bit async SAR + 2nd-order incremental ΔΣ in IHP SG13G2.
+- 6 parts, 33 chapters, a Hands-On Labs section (15 labs + capstone), 17 interactive demos, appendices
+  A–E (the curriculum had 5 parts and 31 chapters; Part VI was added 16 Nov and the labs chapter became
+  a section 18 Nov). One reference chip: 8-channel ECG/EEG/EMG front-end + 12-bit async SAR +
+  2nd-order incremental ΔΣ in IHP SG13G2.
 - Formula per concept (same as SerDes): short derivation → worked example with the project's real
   numbers → *what this means for your design* box.
 - Optional content source: https://www.skillsurf.org/art_of_aicd/ — cross-link its Part II
   (transistor, gm/ID) from Ch 5 rather than repeating it.
 
-**Scope of the first release:** the full outline + the basic chapters (Part I), then pause. The
-user works directly on `main`.
+**Scope of the first release:** was "the full outline + Part I, then pause"; it grew into the whole
+tutorial, which is now live. The user works directly on `main`.
 
 ## 2. Where we stopped
 
 | Item | State |
 |---|---|
 | Site (Jekyll 4.4 + just-the-docs 0.10.1, BRICD theme, dark mode, KaTeX) | done; builds cleanly |
-| Home page `index.md` (hero, key numbers, signal chain, part cards) | done |
+| Home page `index.md` (cover `assets/images/cover.svg`/`.png`, key numbers, signal chain, part cards) | done; the cards' "written" status badges were removed 19 Nov (user's request) |
+| Interactive Demos `demos.md` (`/demos/`, nav 1.5) | **done** (19 Nov 2026): 17 demos with things to try and a quiz each; section 2f |
+| Part VI · Wearable Systems, Ch 31–33 (`31_quality.md`, `32_ear.md`, `33_closedloop.md`) | **written** (16 Nov 2026, as Ch 32–34; renumbered 18 Nov): thinner than Parts I–IV, see section 4 "Now"; no NeurEar details (user's rule) |
 | Preface `preface.md` (incl. reading-paths figure `assets/figs/reading-paths.svg`) | **written** |
 | Ch 1–4 (Part I) | **written** (11 Nov 2026): full text, 15 figures (incl. diagrams `ch03_electrode_model.svg`, `ch04_mains_coupling.svg`), 5 tables, worked examples; every number checked against `biosig.py` |
 | Ch 13 | **written** (12 Nov 2026): aliasing of mains harmonics (250 Hz → 6 Hz at 256 S/s), anti-alias order (8th at 500 S/s vs 3rd at 2 kS/s), quantisation model and its failures, dither, oversampling, jitter, Table 13.1 (rate and bits per mode); 3 figures from `figsrc/ch13_figs.py` |
@@ -61,14 +79,14 @@ user works directly on `main`.
 | Ch 29 | **written** (14 Nov 2026): noise budget 0.51 µVrms wet / 1.26 dry (electrodes 91 % of dry noise power); CMRR test 0.06 mVpp (24 dB margin), Z_cm need ≈ 12 MΩ with RLD; power 6.8 µW/ch ECG/EEG, 4.9 EMG; ~1.7 mm² core; Table 29.1 spec vs designed; bioZ channel ~5 µW; floorplan; budgets live in `figsrc/ch29_figs.py` (NOISE/POWER tables). **Table 1.2 Z_cm row updated; Ch 3 and Ch 4 sentences aligned**. 14 Nov (user asked for diagrams like SerDes Ch 14): 7 figures now — 29.1 chip, **29.2 level diagram** (`level_diagram()` in `ch29_figs.py` → `ch29_levels.svg`: all modes ≈ 0.4 V at the converter, EEG 6 dB headroom, noise 39 dB above 16-b quantisation), 29.3 budgets, **29.4 clock plan + 2 ms timing** (`ch29_clocks.svg`, new section 29.6 One clock: 1.024 MHz ÷2 → 512 kHz ΔΣ, ÷1024 → 500 S/s, ÷256 → 4 kHz chopper, ÷64 → 16 kHz SAR, ÷5 ÷4 → 51.2 kHz bioZ I/Q), **29.5 floorplan** (core to scale 1.6 × 1.06 mm; `figsrc/ch29_floorplan_svg.py`), **29.6 test chip** (`ch29_testchip.svg`, new section 29.8 Test chip and package) and **29.7 QFN-40 pinout** (6 × 6 mm, inputs round the top-left corner, digital bottom-right; `figsrc/ch29_package_svg.py`). Sections now 29.1–29.8 |
 | Ch 30 | **written** (14 Nov 2026): Table 30.1 tool set (Xschem, ngspice/Xyce, Python, Verilog/Icarus/Verilator, Yosys/OpenROAD, KLayout, JKU template); `.spiceinit` OSDI + corner lib + subcircuits; gmin/abstol/time-varying traps from this tutorial; XSPICE+Verilator co-sim; corners (tt/ss/ff/sf/fs, ±10 % supply, 0–45 °C use, −20–85 °C qual) + mismatch MC; DRC/LVS/PEX; tape-out checklist; no figure. **All outline chapters 1–30 are now written. Next: Step 2 (Ch 31 labs), Step 3 (lab scripts), appendices** |
 | Labs (was Ch 31 `chapters/31_labs.md`; since 18 Nov `labs.md` + `labs/labNN_*.md`, section 2e) | **written** (14 Nov 2026): set-up, all 15 labs with expected results (Labs 1, 11, 12 also on real PhysioNet data), capstone; anchors `#lab-1`…`#lab-15`, `#setup`, `#capstone` |
-| Appendices | **written** (14 Nov 2026): `appendices/` A formula sheet (generated by `tools/build_formula_sheet.py` from the 42 key-equation boxes; rerun after changing one), B reference tables (signals, electrodes, SG13G2 data, IEC limits, design numbers, constants), C design-review checklists, D glossary, E further reading (`_includes/reflist.html` prints full entries); menu: Appendices nav 7, References 8; home-page cards all "written" |
-| `references.md` + `_data/references.yml` (48 entries; `rich1983`, `ott2009` added 12 Nov) | done |
+| Appendices | **written** (14 Nov 2026): `appendices/` A formula sheet (generated by `tools/build_formula_sheet.py` from the 42 key-equation boxes; rerun after changing one), B reference tables (signals, electrodes, SG13G2 data, IEC limits, design numbers, constants), C design-review checklists, D glossary, E further reading (`_includes/reflist.html` prints full entries); menu: Appendices nav 8, References 9 (see section 3) |
+| `references.md` + `_data/references.yml` (68 entries; newest `hrvtaskforce1996`, `welch1967`, `hudgins1993`, `englehart2003`, `mukhopadhyay1998`, `choi2006`, `quiroga2004`) | done |
 | `labs/python/biosig.py` (shared model) | done, tested; converter helpers added 12 Nov: `quantize`, `sqnr_ideal_db`, `enob`, `alias_freq`, `butter_atten_db`, `sqnr_os_db(N, osr, L)`, `jitter_snr_db`, `coherent_tone`, `tone_metrics` (SNDR/SNR/THD/SFDR, optional in-band limit); 13 Nov: `cdac_weights`, `sar_convert`, `code_to_volts`, `dnl_inl`, `ktc_cap`, `e_thermal_min`, `fom_walden`, `fom_schreier`; ΔΣ: `ntf_pure`, `synth_ntf(order, osr, h_inf, opt_zeros)`, `ntf_response`, `simulate_dsm(u, b, a, dither=)` (1-bit error-feedback loop, dither shaped), `dsm_sqnr` (Hann² window — plain Hann caps 3rd/4th order near 100 dB), `incremental2(u_dc, M)` |
 | SG13G2 device data | `labs/spice/sg13_char.py` runs ngspice in `hpretl/iic-osic-tools:2026.10` (12 s; writes its own `.spiceinit` loading psp103/r3_cmc OSDI; models `cornerMOSlv.lib mos_tt`, `cornerHBT.lib hbt_typ`; devices `sg13_lv_nmos/pmos d g s b w= l=`, `npn13G2 c b e bn Nx=`) → `figsrc/data/sg13_gmid.csv`, `sg13_noise.csv`, `sg13_hbt.csv`, `sg13_hbt_noise.csv` (committed, so figures need no Docker). Working files in `labs/spice/char/` (git-ignored). Extend it for Ch 6–12 (e.g. OTA, pseudo-resistor, switch sims) |
 | Lab scripts | **all written**: Python labs in `labs/python/` (1, 2, 6 via `adctest.py`, 9, 11, 12, 13, 15 part 1), SG13G2 labs in `labs/spice/` (3 via `sg13_char.py`, 4, 5, 7, 8, 10, 14, 15 part 2) |
 | Figure scripts `figsrc/chNN_figs.py` → `assets/figs/*.svg` | done for every chapter, reviewed at page size; diagrams are hand-written SVG (Ch 29 floorplan and package from `figsrc/ch29_*_svg.py`) |
 | Pages deploy | `.github/workflows/pages.yml` deploys on every push to `main` |
-| Local preview | `preview_start bioafe` (Docker, port 4005; entry in `~/SkillSurf/.claude/launch.json`) → http://localhost:4005/biomedical-ic-design/ |
+| Local preview | from a session in `~/BRICD`: `preview_start bioafe-jekyll` (Docker, port 4000; entry in `~/BRICD/.claude/launch.json`) → http://localhost:4000/biomedical-ic-design/. From `~/SkillSurf`: `preview_start bioafe` (port 4005). The preview tool reads the *session root's* launch.json |
 | BRICD home page | Open-BioAFE is Project 01 (*to be commenced*) on www.thebricd.org (`bricd-org.github.io`, pushed 12 Nov, `a2cf7ac`), linking this tutorial; keep its numbers in step with `SPEC`. Preview: `preview_start bricd-site` (port 4006) |
 
 ## 2a. Outline review against lecture material (12 Nov 2026)
@@ -199,7 +217,12 @@ The user asked for the labs to be a top-level section like the photonics tutoria
   now includes `demos/assets.html`.
 - **Fixed:** `BD.eng()` in `demos.js` turned values from 9.95 to 9.999 of a unit into "1" (toPrecision → "10", then
   the trailing-zero regex stripped the 0); it now strips zeros only after a decimal point.
-- **Demo/chapter mismatches found by the agents (not yet fixed; ask the user):**
+- Same commit (`777b68f`): the `biosig.spikes()` noise bug fixed (section 7; Ch 2 Fig 2.4, Fig 26.3 and the
+  Ch 26 numbers redrawn) and the "written" badges removed from the home-page cards. All 17 quizzes were
+  clicked through in the built site; full-site crawl 66 pages, 1,658 links, 1,246 equations, 100 images, clean;
+  deploy run 44627675872 succeeded and the live pages were checked (`/demos/` 200, 17 demo links, quizzes
+  present, 0 badges, `eng` fix served).
+- **Demo/chapter mismatches found by the agents (not yet fixed; this is the next job, section 4 "Now"):**
   - Ch 19 DSM demo: OSR 256 shows "-Infinity dB" (test tone above the band edge); 1st order simulates 62.4 dB at
     OSR 128 vs Table 19.1's 55.5 dB; 2nd order barely changes with input level (short record).
   - Ch 33 phase demo: starts at 0.79 Hz, chapter says 0.75 Hz (and 16° vs 17°); chapter's "5 ms loop keeps alpha
@@ -229,9 +252,13 @@ The user asked for the labs to be a top-level section like the photonics tutoria
 - **No LaTeX book, no PDF.** The Markdown pages are the source; edit them directly.
 - **Permalinks follow the curriculum's site map:** chapters `/part-N/chNN/`, parts `/part-N/`,
   plus `/preface/` and `/references/`; labs `/labs/`, `/labs/lab-NN/`, `/labs/capstone/` (since 18 Nov).
-  Moved pages keep their old URL through a stub in `redirects/`. Appendices, when written: `/appendix/a/`…`/e/` and an
-  index at `/appendix/` (parent "Appendices").
-- **Menu order** (`nav_order`): Home 0, Preface 1, Parts I–VI 2–7, Hands-On Labs 7.5, Appendices 8,
+  Moved pages keep their old URL through a stub in `redirects/`. Appendices: `/appendix/a/`…`/e/` and an
+  index at `/appendix/` (parent "Appendices"). Demos: `/demos/`.
+- **Demos** (19 Nov 2026): each lives in `_includes/demos/NAME.html`, starts with `{% include demos/assets.html %}`,
+  reproduces its chapter's numbers at its default settings, and ends with a `.bd-try` (three items, each with
+  the result to expect) and a `.bd-check` (three options, one `data-correct`, a plain-text `data-why` on each).
+  Every demo gets a line on `demos.md` linking `chapter#rootid`.
+- **Menu order** (`nav_order`): Home 0, Preface 1, Interactive Demos 1.5, Parts I–VI 2–7, Hands-On Labs 7.5, Appendices 8,
   References 9; chapters sit under their part (`parent: "Part I · Foundations"` etc.) with `nav_order` =
   chapter number, labs under "Hands-On Labs" with `nav_order` = lab number (capstone 16).
 - **Labs are their own section** (18 Nov 2026, user's request; replaces "Chapter 31 is the lab hub"): `labs.md` is
@@ -251,6 +278,30 @@ The user asked for the labs to be a top-level section like the photonics tutoria
   Winter and Webster, Rich, Chi et al.).
 
 ## 4. Next steps, in order
+
+### Now (23 Nov 2026) — what is left
+
+All writing is done; these are polish items. Do them in this order, one commit each, and ask before
+pushing (the user says "Commit and push" when they want it).
+
+1. **Fix the demo/chapter mismatches listed in section 2f.** For each: decide whether the demo or the
+   chapter is wrong (rerun the chapter's `figsrc/chNN_figs.py` or `biosig.py` numbers; the chapter's
+   worked examples are the reference), fix one side, then recheck that demo's *Three things to try* and
+   *Check yourself* answers, which quote demo numbers. Highest value first: Ch 19 (OSR 256 "-Infinity",
+   1st-order 62.4 vs 55.5 dB), Ch 33 (0.79 vs 0.75 Hz, the "within 18°" claim), Ch 29 and Ch 31 captions,
+   Ch 22 floor line, then the small items.
+2. **Align Ch 27's spike-snippet budget** (16 × 12-bit) with the Ch 26 specnote (48 × 8-bit); section 7.
+3. **Deepen the thinner chapters** to the Part I–IV standard (worked examples with project numbers,
+   a figure from `figsrc/`, key-equation box, takeaways): Ch 30 (tool flow, has no figure) and
+   Part VI Ch 31–33. Part VI stays free of NeurEar details. Rerun `tools/build_formula_sheet.py`
+   if a key-equation box changes.
+4. **Check and tag (Step 5):** preview, check light/dark and phone width, crawl the site (links,
+   anchors, `.katex-error`, images, unknown citations), then tag `v0.1` when the user agrees.
+5. Optional extras from Step 1c: SAR async timing waveform (Ch 18), level-crossing sampler (Ch 21),
+   lead-off detection diagram (Ch 12).
+
+Everything below in this section (Steps 1c, 1, 1b, 2, 3, 4) is **done** and kept as a record of how
+it was built; Step 5 is item 4 above.
 
 ### Step 1c — Architecture and circuit diagrams (user's request, 14 Nov 2026)
 
@@ -311,7 +362,7 @@ Notes for the next chapters:
 - Ch 13 figure 13.3a: plain-oversampling simulation falls ~3 dB under the line at high OSR
   (pure-sine quantisation error is not white); the text says so — keep it if redrawing.
 
-### Step 2 — Chapter 31 `chapters/31_labs.md` — Hands-on Labs: set-up, Lab 1, Lab 2 DONE (14 Nov 2026)
+### Step 2 — Chapter 31 `chapters/31_labs.md` — Hands-on Labs: ALL DONE (14 Nov 2026; moved to `labs.md` + `labs/` on 18 Nov, section 2e)
 Done: set-up (venv + `labs/python/requirements.txt`, container pull), Lab 1 and Lab 2 in full with
 expected-results tables (synthetic numbers for Lab 1; Lab 2 matches WE 4.1–4.4 and Ch 12 exactly),
 questions and deliverables; "Lab status" box replaces the outline box.
@@ -451,7 +502,7 @@ The outline has the lab table and a short section per lab. Write the set-up sect
 Lab 2 in full (goal, code, expected figure and numbers, questions); keep the anchors
 (`{#lab-1}` … `{#lab-15}`, `{#setup}`, `{#capstone}`) because other pages link to them.
 
-### Step 3 — Lab scripts in `labs/python/`: lab1 + lab2 DONE (14 Nov 2026)
+### Step 3 — Lab scripts in `labs/python/` and `labs/spice/`: ALL DONE (14 Nov 2026)
 `lab1_biosignal_explorer.py` (wfdb optional, falls back to synthetic; CHB-MIT via `wfdb.rdrecord`
 on the EDF — not tested here because wfdb is not installed in the anaconda env and nothing was
 downloaded) and `lab2_electrodes_interference.py` (verified). Original plan:
@@ -483,10 +534,10 @@ E Further reading (section 2 of the curriculum + AI-assistance disclaimer and co
 Add `appendices` to the `defaults` layout scope in `_config.yml`, and an Appendices card on the
 home page.
 
-### Step 5 — Check and publish
+### Step 5 — Check and publish (publishing done; checking and the tag are item 4 of "Now")
 1. Preview (section 6), check every page in light and dark mode and at phone width.
-2. Push to `main`; the Pages workflow deploys. In the repository settings, Pages → Source must be
-   **GitHub Actions**. Tag v0.1 when the first release is ready.
+2. Push to `main`; the Pages workflow deploys (Pages → Source is **GitHub Actions**; working since
+   10 Nov). Tag v0.1 when the first release is ready (not yet tagged).
 
 ## 5. Conventions and gotchas
 
@@ -520,12 +571,19 @@ home page.
   → http://localhost:4000/biomedical-ic-design/. In an arm64 container bundler adds an
   `aarch64-linux` platform to `Gemfile.lock`; revert that (`git checkout Gemfile.lock`) before
   committing unless it is wanted.
-- `gh` (GitHub CLI) is not installed.
+- `gh` (GitHub CLI) is not installed. To watch a deploy, poll the public API:
+  `curl -s https://api.github.com/repos/bricd-org/biomedical-ic-design/actions/runs?per_page=1`, then curl
+  the live page to confirm the change is served.
+- Headless Chrome (`/Applications/Google Chrome.app/…/Google Chrome --headless --screenshot`) works for
+  page renders; its window is at least ~500 px wide and it does not scroll to `#anchors`, so crop a tall
+  screenshot with PIL instead.
 - ngspice-47 installed (Homebrew).
 
 ## 7. Known issues to clean up
 
-- **Resolved in Ch 12 (keep Table 1.2 in step in Ch 29):** the RLD (loop gain 100) cuts the Z_cm need to 11.4 MΩ. Original note — **Open design point from Ch 4:** with the standards' 40.7 kΩ imbalance and a 100 dB amplifier,
+- **Open:** the demo/chapter mismatches in section 2f, and the Ch 27 snippet-size mismatch below. Everything
+  marked RESOLVED or FIXED here is kept only as a record.
+- **RESOLVED in Ch 12 (keep Table 1.2 in step in Ch 29):** the RLD (loop gain 100) cuts the Z_cm need to 11.4 MΩ. Original note — **Open design point from Ch 4:** with the standards' 40.7 kΩ imbalance and a 100 dB amplifier,
   90 dB effective CMRR needs Z_cm ≈ 1.9 GΩ at 50 Hz, about twice the "> 1 GΩ" goal in Table 1.2
   (Ch 1) and `SPEC`. Ch 4 says so in its specnote; settle it in the Ch 29 budgets and then update
   Table 1.2.
@@ -621,4 +679,7 @@ indico.cern.ch/event/1381495/contributions/5988502/ · MEDTEQ CMRR and Zin artic
 
 - ~~Keep Lab 14 in Track C or move it to Track B?~~ **Decided 16 Nov: keep it in Track C.**
 - NinaPro downloads may need registration: is a "bring your own file + synthetic fallback"
-  approach acceptable for Lab 1/13?
+  approach acceptable for Lab 1/13? (That is how Labs 1 and 13 work now; no answer yet.)
+- For each mismatch in section 2f, the fix may land on the demo or the chapter: OK to decide case by
+  case from the chapter's worked numbers, or does the user want to review each?
+- When to tag `v0.1`: after the mismatch fixes, or now?
