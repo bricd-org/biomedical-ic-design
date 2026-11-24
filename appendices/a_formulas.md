@@ -431,6 +431,16 @@ $$
 I = \frac{\lvert Z\rvert I_\mathrm{exc}}{2}\cos\varphi, \quad Q = \frac{\lvert Z\rvert I_\mathrm{exc}}{2}\sin\varphi, \qquad \lvert Z\rvert = \frac{2\sqrt{I^2 + Q^2}}{I_\mathrm{exc}}, \quad \varphi = \operatorname{atan2}(Q, I)
 $$
 
+## Part V · Putting it together
+
+### [30. Open-Source Design and Verification Flow]({% link chapters/30_flow.md %})
+
+**The uncertainty of a Monte Carlo result**
+
+$$
+\frac{\delta\sigma}{\sigma} \approx \frac{z}{\sqrt{2(N-1)}}, \qquad \frac{\delta p}{p} \approx \frac{z}{\sqrt{Np}}
+$$
+
 ## Part VI · Wearable systems
 
 ### [31. Signal Quality and Motion Artefacts]({% link chapters/31_quality.md %})

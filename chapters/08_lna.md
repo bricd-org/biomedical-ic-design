@@ -82,7 +82,7 @@ The thin-oxide devices of SG13G2, with their low threshold, leak too much: a sin
 <div class="tbox tbox-pitfall" markdown="1">
 <div class="tbox-title">Common pitfall · The simulator's own resistor</div>
 
-ngspice adds a conductance $$g_\mathrm{min}$$, $$10^{-12}$$ S by default, across junctions to help convergence. That is a 1 TΩ resistor in parallel with each device, the same size as the pseudo-resistor you are trying to simulate. With the default the thick-oxide pair above simulates at $$1.9\times10^{12}$$ Ω, exactly $$2/g_\mathrm{min}$$, thirty times too low. Simulate pseudo-resistors with `.option gmin=1e-15 abstol=1e-15` and check that the result does not move when $$g_\mathrm{min}$$ falls further.
+ngspice adds a conductance $$g_\mathrm{min}$$, $$10^{-12}$$ S by default, across junctions to help convergence. That is a 1 TΩ resistor in parallel with each device, the same size as the pseudo-resistor you are trying to simulate. With the default the thick-oxide pair above simulates at $$1.9\times10^{12}$$ Ω, exactly $$2/g_\mathrm{min}$$, thirty times too low. Simulate pseudo-resistors with `.option gmin=1e-15 abstol=1e-15` or lower and check that the result does not move when $$g_\mathrm{min}$$ falls further: Worked Example 30.1 ([Chapter 30]({% link chapters/30_flow.md %})) sweeps it and finds the values here still 3 % low at $$10^{-15}$$ S, settled from $$10^{-16}$$ S down.
 
 </div>
 

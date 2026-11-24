@@ -98,7 +98,7 @@ With a 1.2 V integrator swinging ±0.5 V around mid-supply, $$C_\mathrm{DSL} \ge
 
 With an integrator built from the 3.3 V thick-oxide devices, swinging ±1.5 V, $$C_\mathrm{DSL} = 4$$ pF and the noise gain is **1.32**, 18 % above the case without a loop ([Figure 10.2](#fig-10-2)b). Its current is tiny, because the loop works at DC, so the higher supply costs well under a microwatt.
 
-The high-pass corner: with $$C_\mathrm{DSL}/C_\mathrm{fb} = 4\ \text{pF}/200\ \text{fF} = 20$$, a 0.5 Hz corner needs $$\tau_\mathrm{int} = 20/(2\pi \times 0.5) = 6.4$$ s. An active-RC integrator with 1 pF and a thick-oxide pseudo-resistor (about $$10^{13}$$ Ω at body temperature) gives about 10 s. A small integrating current from a subthreshold transconductor does the same.
+The high-pass corner: with $$C_\mathrm{DSL}/C_\mathrm{fb} = 4\ \text{pF}/200\ \text{fF} = 20$$, a 0.5 Hz corner needs $$\tau_\mathrm{int} = 20/(2\pi \times 0.5) = 6.4$$ s. An active-RC integrator with 1 pF and a thick-oxide pseudo-resistor (about $$10^{13}$$ Ω at body temperature) gives about 10 s, but that resistance moves by a factor of six between process corners at 37 °C, and by far more over temperature ([Chapter 30]({% link chapters/30_flow.md %})); a bias-controlled pseudo-resistor ([Chapter 8]({% link chapters/08_lna.md %})) holds the corner against both. A small integrating current from a subthreshold transconductor does the same.
 
 </div>
 
