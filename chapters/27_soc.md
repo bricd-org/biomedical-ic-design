@@ -45,9 +45,9 @@ Every bit that leaves the chip costs energy in the radio; every operation on chi
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 27.1 · What raw data costs in the radio</div>
 
-Eight channels of raw samples need 64 kb/s for ECG (500 S/s, 16 bits), 33 kb/s for EEG (256 S/s, 16 bits) and 192 kb/s for EMG (2 kS/s, 12 bits); one spike channel at 30 kS/s and 12 bits needs 360 kb/s. The features of the previous chapters need 0.3 kb/s (RR intervals and rhythm flags), 0.4 kb/s (six band powers per 2 s window and channel), 2.6 kb/s (four features per channel at five windows per second) and 6.7 kb/s (spike times and 16-sample snippets): **54 to 190 times less** ([Figure 27.2](#fig-27-2)a).
+Eight channels of raw samples need 64 kb/s for ECG (500 S/s, 16 bits), 33 kb/s for EEG (256 S/s, 16 bits) and 192 kb/s for EMG (2 kS/s, 12 bits); one spike channel at 30 kS/s and 12 bits needs 360 kb/s. The features of the previous chapters need 0.3 kb/s (RR intervals and rhythm flags), 0.4 kb/s (six band powers per 2 s window and channel), 2.6 kb/s (four features per channel at five windows per second) and 12.5 kb/s (spike times and 1.6 ms snippets of 48 eight-bit samples, at 30 spikes per second): **29 to 190 times less** ([Figure 27.2](#fig-27-2)a).
 
-A Bluetooth-Low-Energy-class radio costs of the order of 5 nJ per transmitted bit, all overheads included. Raw EMG then costs 960 µW in the radio, twelve times the 80 µW of the whole eight-channel front-end; raw ECG 320 µW; the features 2–13 µW ([Figure 27.2](#fig-27-2)b).
+A Bluetooth-Low-Energy-class radio costs of the order of 5 nJ per transmitted bit, all overheads included. Raw EMG then costs 960 µW in the radio, twelve times the 80 µW of the whole eight-channel front-end; raw ECG 320 µW; the ECG, EEG and EMG features 2–13 µW ([Figure 27.2](#fig-27-2)b), and the spike times and snippets 62 µW.
 
 </div>
 
@@ -55,7 +55,7 @@ The features cost little to compute. Band power is a filter, a squarer and an ac
 
 <figure id="fig-27-2">
   <img src="{{ '/assets/figs/ch27_soc.svg' | relative_url }}" style="width:720px" alt="Data rate per mode for raw samples and on-chip features, and radio power versus energy per bit for raw and feature data compared with the analog front-end power">
-  <figcaption><span class="capnum">Figure 27.2.</span> <strong>Features cut the data by 50 to 200 times, and the radio power with it.</strong> (a) Data rate of eight channels of raw samples and of the on-chip features of Chapters 24–26 for each mode (spikes: one channel). (b) Radio power against the radio's energy per transmitted bit for raw data (solid) and features (dashed), with the 80 µW of the eight-channel analog front-end; the dotted lines mark a BLE-class radio and a backscatter link. Computed in <code>figsrc/ch27_figs.py</code>; the energy-per-bit values are order-of-magnitude assumptions.</figcaption>
+  <figcaption><span class="capnum">Figure 27.2.</span> <strong>Features cut the data by 29 to 190 times, and the radio power with it.</strong> (a) Data rate of eight channels of raw samples and of the on-chip features of Chapters 24–26 for each mode (spikes: one channel, times and 48-sample, 8-bit snippets). (b) Radio power against the radio's energy per transmitted bit for raw data (solid) and features (dashed), with the 80 µW of the eight-channel analog front-end; the dotted lines mark a BLE-class radio and a backscatter link. Computed in <code>figsrc/ch27_figs.py</code>; the energy-per-bit values are order-of-magnitude assumptions.</figcaption>
 </figure>
 
 ## <span class="secnum">27.2</span>Case study: an EEG seizure-detection SoC
@@ -108,7 +108,8 @@ A 244-byte notification on an encrypted link is 265 bytes on air with preamble, 
 
 | Stream | Rate | A BLE setting that carries it |
 |---|---|---|
-| features, any mode | 0.3–7 kb/s | 1M PHY, 20-byte payload, interval 100–500 ms |
+| features: ECG, EEG, EMG | 0.35–2.7 kb/s | 1M PHY, 20-byte payload, interval 100–500 ms |
+| spike times and snippets, one channel | 13 kb/s | 1M, 244-byte payload, 100 ms, 1 packet |
 | raw EEG, 8 × 256 S/s × 16 b | 34 kb/s | 1M, 244-byte payload, 50 ms, 1–2 packets per event |
 | raw ECG, 8 × 500 S/s × 16 b | 67 kb/s | 1M, 244-byte payload, 30 ms, 2 packets |
 | raw EMG, 8 × 2 kS/s × 12 b | 200 kb/s | 2M, 244-byte payload, 15 ms, 2 packets |
@@ -141,7 +142,7 @@ Compute the features on chip and send them, with raw data only on demand and los
 <div class="tbox tbox-specnote" markdown="1">
 <div class="tbox-title">Open-BioAFE target</div>
 
-On chip: decimation, the feature paths of [Chapters 24–26]({% link chapters/24_ecg.md %}) (RR intervals, band powers, EMG features, spike times) and lossless difference coding for raw streams. Out: an SPI interface to an external BLE or backscatter radio, features by default (0.3–7 kb/s), raw data on demand. Separate analog, converter and digital LDOs; front-end PSRR ≥ 80 dB. No stimulator in the first revision.
+On chip: decimation, the feature paths of [Chapters 24–26]({% link chapters/24_ecg.md %}) (RR intervals, band powers, EMG features, spike times) and lossless difference coding for raw streams. Out: an SPI interface to an external BLE or backscatter radio, features by default (0.3–12.5 kb/s), raw data on demand. Separate analog, converter and digital LDOs; front-end PSRR ≥ 80 dB. No stimulator in the first revision.
 
 </div>
 
@@ -164,7 +165,7 @@ Add a lossless Rice coder to `figsrc/ch27_figs.py` and measure its compression r
 <div class="tbox tbox-takeaways" markdown="1">
 <div class="tbox-title">Key takeaways</div>
 
-- On-chip features cut the data by 54 to 190 times (ECG, EEG, EMG, spikes).
+- On-chip features cut the data by 29 to 190 times (spikes, EMG, EEG, ECG).
 - At about 5 nJ per radio bit, raw EMG from eight channels costs 960 µW, twelve times the front-end; features cost 2–13 µW.
 - Lossless difference coding halves to thirds raw ECG and EEG; spikes are compressed by detection.
 - The front-end needs its own LDO and high PSRR: 80 dB turns 30 µV of supply noise into 3 nV.

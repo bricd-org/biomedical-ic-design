@@ -80,7 +80,7 @@
     <text x="639" y="92">decimators</text><text x="639" y="104" font-size="8.5" fill="#56656B">CoI (Ch 20, 23)</text>
     <text x="639" y="136">feature extraction</text><text x="639" y="148" font-size="8.5" fill="#56656B">Ch 24–26</text>
     <text x="639" y="180">lossless coding</text><text x="639" y="192" font-size="8.5" fill="#56656B">raw streams (Ch 27)</text>
-    <text x="639" y="224">SPI</text><text x="639" y="236" font-size="8.5" fill="#56656B">features 0.3–7 kb/s</text>
+    <text x="639" y="224">SPI</text><text x="639" y="236" font-size="8.5" fill="#56656B">features 0.3–12.5 kb/s</text>
   </g>
   <path d="M639 288 V318" stroke="#1D2A30" stroke-width="1.6" fill="none" marker-end="url(#za)"/>
   <text x="630" y="314" font-size="9.5" fill="#1D2A30" text-anchor="end">to a radio or MCU</text>

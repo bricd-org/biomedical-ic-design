@@ -208,10 +208,10 @@ Implants compress because their radio, not their front-end, limits them. Ten cha
 One channel at 30 kS/s and 12 bits is 360 kb/s. The recording of Worked Example 26.4 carries 19.7 spikes per second, one event for about every 1 500 samples. The chip can send:
 
 - **spike times only,** as 32-bit sample counts: 0.63 kb/s, 570 times less;
-- **times and 16 twelve-bit samples** per spike, the budget of [Chapter 27]({% link chapters/27_soc.md %}#fig-27-2) at 30 spikes per second: 6.7 kb/s, 54 times less;
-- **times and the full 1.6 ms snippet,** 48 samples at 30 kS/s, at 8 bits: 8.2 kb/s at 19.7 spikes per second and 12.5 kb/s at 30, 44 and 29 times less.
+- **times and 16 twelve-bit samples** per spike, a 0.53 ms window: 4.4 kb/s at 19.7 spikes per second and 6.7 kb/s at 30, 82 and 54 times less;
+- **times and the full 1.6 ms snippet,** 48 samples at 30 kS/s, at 8 bits: 8.2 kb/s at 19.7 spikes per second and 12.5 kb/s at 30, 44 and 29 times less. This is the budget of [Chapter 27]({% link chapters/27_soc.md %}#fig-27-2).
 
-Eight bits suffice for the snippet: over ±0.625 mV one LSB is 4.9 µV and its quantisation noise 1.4 µVrms, under a third of the 8 µVrms background, the rule of [Chapter 13]({% link chapters/13_sampling.md %}). Ten channels, 3 Mb/s raw at 10 bits, need 82–125 kb/s with snippets and 6–10 kb/s with times alone.
+The full snippet costs about twice as much as the short one and is the one to send: a 0.53 ms window holds the trough but cuts short the slower repolarisation after it, and sorting tells neurons apart by the whole waveform. Eight bits suffice for it: over ±0.625 mV one LSB is 4.9 µV and its quantisation noise 1.4 µVrms, under a third of the 8 µVrms background, the rule of [Chapter 13]({% link chapters/13_sampling.md %}). Ten channels, 3 Mb/s raw at 10 bits, need 82–125 kb/s with snippets and 6–10 kb/s with times alone.
 
 </div>
 

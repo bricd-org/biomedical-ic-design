@@ -9,7 +9,7 @@ MODES = {   # name: (raw bits/s for 8 channels, feature bits/s for 8 channels)
     "ECG": (CH * 500 * 16, CH * 2 * 16 * 1.25 + 16),          # RR intervals (16 b per beat) + rhythm flags
     "EEG": (CH * 256 * 16, CH * 6 * 16 / 2.0),                # six band powers per 2 s window
     "EMG": (CH * 2000 * 12, CH * 4 * 16 * 5),                 # MAV, WL, ZC, SSC at 5 windows/s
-    "Spikes (1 ch)": (30000 * 12, 30 * (32 + 16 * 12)),       # 30 spikes/s: time stamp + 16-sample snippet
+    "Spikes (1 ch)": (30000 * 12, 30 * (32 + 48 * 8)),        # 30 spikes/s: time stamp + 1.6 ms snippet, 48 x 8 b (Ch 26)
 }
 AFE_W = CH * 10e-6
 

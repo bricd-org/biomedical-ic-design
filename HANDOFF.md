@@ -1,6 +1,6 @@
 # HANDOFF — Open-BioAFE Tutorial (pick up here)
 
-Last updated: 23 November 2026. **Live and complete at `777b68f`** (pushed 19 Nov, Pages deploy checked):
+Last updated: 24 November 2026. **Live and complete** (Pages redeploys on every push to `main`; last deploy checked 23 Nov at `abde58f`):
 https://www.thebricd.org/biomedical-ic-design/
 
 **Where things stand, in one paragraph.** Every page is written: preface, 33 chapters in six parts, the
@@ -8,7 +8,7 @@ Hands-On Labs section (15 labs with scripts plus a capstone), the Interactive De
 with *Three things to try* and a *Check yourself* question), appendices A–E and 68 references, in the
 Monitor colour theme with a cover on the home page. The last full-site crawl (19 Nov) found 66 pages, 1,658 links,
 1,246 equations and 100 images, all clean. **What is left is polish, not writing:** the items in section 4
-"Now". The demo/chapter mismatches of section 2f were fixed on 23 Nov (committed locally; push pending). Read section 3 (decisions) and
+"Now". The demo/chapter mismatches of section 2f were fixed and pushed on 23 Nov (`abde58f`), and Ch 27's spike-snippet budget was aligned with Ch 26 on 24 Nov. Read section 3 (decisions) and
 section 5 (conventions) before editing anything.
 
 History, newest first: 19 Nov Interactive Demos page, demo quizzes, `BD.eng` fix, `spikes()` noise fix,
@@ -74,7 +74,7 @@ tutorial, which is now live. The user works directly on `main`.
 | Ch 24 | **written** (13 Nov 2026): Pan–Tompkins (compact version in `figsrc/ch24_figs.py`), HRV, beat classification (patient-independent), NSTDB; **behavioural sweep on synthetic ECG: Se = PPV = 100 % with ≥ 5 bits over ±5 mV and ≤ 100 µVrms noise; 98.6–100 % at 200 µVrms; 4 bits 85–96 %** → spec set by EEG/morphology, monitoring mode could be far cheaper (Ch 29); 1 figure |
 | Ch 25 | **written** (13 Nov 2026): band power & spectral features, artefacts (ICA offline, flag on chip), seizure detection on synthetic EEG (`figsrc/ch25_figs.py`, 3 rhythmic 60 µV discharges, 2 s windows, EEG range ±0.625 mV): **line length fails (= 75 % trivial), theta power 99 % at 6–7 bits even with 15 µVrms noise**; SSVEP & motor imagery; 1 figure |
 | Ch 26 | **written** (13 Nov 2026): EMG envelope & MAV/WL/ZC/SSC; synthetic 8-ch 5-gesture LDA (`figsrc/ch26_figs.py`): 100 % with ≥ 5 bits over ±5 mV at 500–2000 S/s, 4 bits 98–99.5 %, 3 bits 57–66 % (synthetic = easy; NinaPro harder, depends on channels/placement); NEO spike detector; spike sorting off-implant, send spike times/snippets (3 Mb/s raw for 10 ch); 1 figure |
-| Ch 27 | **written** (14 Nov 2026): data rates raw vs features (8 ch: ECG 64 vs 0.34 kb/s, EEG 33 vs 0.38, EMG 192 vs 2.6, 1 spike ch 360 vs 6.7 → 54–190×); radio at ~5 nJ/b: raw EMG 960 µW (12× the 80 µW AFE), features 2–13 µW; Verma 2010 qualitative; compression; LDO/PSRR (80 dB: 30 µV → 3 nV); BLE/backscatter/inductive; stimulation & charge balance; spec: features out over SPI, raw on demand; 1 figure `figsrc/ch27_figs.py` (energy/bit values are order-of-magnitude assumptions) |
+| Ch 27 | **written** (14 Nov 2026): data rates raw vs features (8 ch: ECG 64 vs 0.34 kb/s, EEG 33 vs 0.38, EMG 192 vs 2.6, 1 spike ch 360 vs 12.5 with 48 × 8-bit snippets → 29–190×; aligned with Ch 26 on 24 Nov); radio at ~5 nJ/b: raw EMG 960 µW (12× the 80 µW AFE), features 2–13 µW; Verma 2010 qualitative; compression; LDO/PSRR (80 dB: 30 µV → 3 nV); BLE/backscatter/inductive; stimulation & charge balance; spec: features out over SPI, raw on demand; 1 figure `figsrc/ch27_figs.py` (energy/bit values are order-of-magnitude assumptions) |
 | Ch 28 | **written** (14 Nov 2026): applications; Cole model (example R0 60, R∞ 30, fc 30 kHz, α 0.7 → 42 Ω −12° at 50 kHz); bipolar adds 2Z_e (≈2 kΩ wet, 10 kΩ dry at 50 kHz) → tetrapolar; excitation options; CF limit 500 µA at 50 kHz; IQ demod, resolution 50 nV/√Hz·√10 Hz/I → 16 mΩ at 10 µA, 3.2 mΩ at 50 µA; square-wave demod odd harmonics; ECG+Z frequency separation; impedance-aware mode spec; 1 figure `figsrc/ch28_figs.py` |
 | Ch 29 | **written** (14 Nov 2026): noise budget 0.51 µVrms wet / 1.26 dry (electrodes 91 % of dry noise power); CMRR test 0.06 mVpp (24 dB margin), Z_cm need ≈ 12 MΩ with RLD; power 6.8 µW/ch ECG/EEG, 4.9 EMG; ~1.7 mm² core; Table 29.1 spec vs designed; bioZ channel ~5 µW; floorplan; budgets live in `figsrc/ch29_figs.py` (NOISE/POWER tables). **Table 1.2 Z_cm row updated; Ch 3 and Ch 4 sentences aligned**. 14 Nov (user asked for diagrams like SerDes Ch 14): 7 figures now — 29.1 chip, **29.2 level diagram** (`level_diagram()` in `ch29_figs.py` → `ch29_levels.svg`: all modes ≈ 0.4 V at the converter, EEG 6 dB headroom, noise 39 dB above 16-b quantisation), 29.3 budgets, **29.4 clock plan + 2 ms timing** (`ch29_clocks.svg`, new section 29.6 One clock: 1.024 MHz ÷2 → 512 kHz ΔΣ, ÷1024 → 500 S/s, ÷256 → 4 kHz chopper, ÷64 → 16 kHz SAR, ÷5 ÷4 → 51.2 kHz bioZ I/Q), **29.5 floorplan** (core to scale 1.6 × 1.06 mm; `figsrc/ch29_floorplan_svg.py`), **29.6 test chip** (`ch29_testchip.svg`, new section 29.8 Test chip and package) and **29.7 QFN-40 pinout** (6 × 6 mm, inputs round the top-left corner, digital bottom-right; `figsrc/ch29_package_svg.py`). Sections now 29.1–29.8 |
 | Ch 30 | **written** (14 Nov 2026): Table 30.1 tool set (Xschem, ngspice/Xyce, Python, Verilog/Icarus/Verilator, Yosys/OpenROAD, KLayout, JKU template); `.spiceinit` OSDI + corner lib + subcircuits; gmin/abstol/time-varying traps from this tutorial; XSPICE+Verilator co-sim; corners (tt/ss/ff/sf/fs, ±10 % supply, 0–45 °C use, −20–85 °C qual) + mismatch MC; DRC/LVS/PEX; tape-out checklist; no figure. **All outline chapters 1–30 are now written. Next: Step 2 (Ch 31 labs), Step 3 (lab scripts), appendices** |
@@ -298,11 +298,14 @@ The user asked for the labs to be a top-level section like the photonics tutoria
 All writing is done; these are polish items. Do them in this order, one commit each, and ask before
 pushing (the user says "Commit and push" when they want it).
 
-1. ~~Fix the demo/chapter mismatches listed in section 2f.~~ **DONE 23 Nov** (section 2f; committed locally,
-   push when the user says). Method, for any future demo change: decide from the chapter's worked numbers
+1. ~~Fix the demo/chapter mismatches listed in section 2f.~~ **DONE 23 Nov** (section 2f; pushed as `abde58f`). Method, for any future demo change: decide from the chapter's worked numbers
    and `figsrc/` scripts which side is wrong, fix it, then re-measure the demo in the built page (drive the
    sliders from `javascript_tool`) and update its *Three things to try* and *Check yourself* numbers.
-2. **Align Ch 27's spike-snippet budget** (16 × 12-bit) with the Ch 26 specnote (48 × 8-bit); section 7.
+2. ~~Align Ch 27's spike-snippet budget with the Ch 26 specnote.~~ **DONE 24 Nov**: Ch 27 now budgets spike times
+   plus 48 × 8-bit snippets (12.5 kb/s at 30 spikes/s, 29× less than raw; 62 µW at 5 nJ/b), Fig 27.2 redrawn,
+   the BLE table splits ECG/EEG/EMG features (0.35–2.7 kb/s) from spike snippets (13 kb/s, 1M, 244 B, 100 ms,
+   1 packet), and the feature range is 0.3–12.5 kb/s in Ch 27, Ch 29 and the `ch27_system`/`ch29_chip` diagrams.
+   WE 26.5 keeps 16 × 12-bit as the cheaper option and says why the full snippet is the one to send.
 3. **Deepen the thinner chapters** to the Part I–IV standard (worked examples with project numbers,
    a figure from `figsrc/`, key-equation box, takeaways): Ch 30 (tool flow, has no figure) and
    Part VI Ch 31–33. Part VI stays free of NeurEar details. Rerun `tools/build_formula_sheet.py`
@@ -593,7 +596,7 @@ home page.
 
 ## 7. Known issues to clean up
 
-- **Open:** the Ch 27 snippet-size mismatch below (the section 2f demo mismatches were fixed 23 Nov). Everything
+- **Open:** nothing (the section 2f demo mismatches were fixed 23 Nov, the Ch 27 snippet size 24 Nov). Everything
   marked RESOLVED or FIXED here is kept only as a record.
 - **RESOLVED in Ch 12 (keep Table 1.2 in step in Ch 29):** the RLD (loop gain 100) cuts the Z_cm need to 11.4 MΩ. Original note — **Open design point from Ch 4:** with the standards' 40.7 kΩ imbalance and a 100 dB amplifier,
   90 dB effective CMRR needs Z_cm ≈ 1.9 GΩ at 50 Hz, about twice the "> 1 GΩ" goal in Table 1.2
@@ -612,8 +615,8 @@ home page.
   is 0.614 at 30 kS/s (0.48 at 20 kS/s), so `noise_rms=8e-6` gives 13.3 µVrms (16.7 at 20 kS/s). Ch 2 Fig 2.4's
   "8 µVrms" caption inherits it. `figsrc/ch26_figs.py` compensates with `_noise_gain()`; if `biosig.py` is fixed
   (normalise by the measured std), remove that compensation and redraw Ch 2 Fig 2.4.
-- **Mismatch:** Ch 27 budgets spike snippets of 16 × 12-bit samples (0.53 ms at 30 kS/s); the Ch 26 specnote says
-  48 × 8-bit (1.6 ms). WE 26.5 gives both; align Ch 27.
+- **FIXED 24 Nov — mismatch:** Ch 27 budgeted spike snippets of 16 × 12-bit samples (0.53 ms at 30 kS/s); the Ch 26 specnote says
+  48 × 8-bit (1.6 ms). Ch 27 now uses 48 × 8-bit; WE 26.5 still gives both (section 4 item 2).
 - **Environment:** `~/opt/anaconda3` lacks `libmkl_core.1.dylib`, so scipy routines that call LAPACK
   (`CubicSpline`, `make_interp_spline`, `interp1d(kind="cubic")`, `welch(detrend="linear")`) abort. Use `splrep`,
   `PchipInterpolator`, constant detrending.

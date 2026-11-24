@@ -73,7 +73,7 @@ The channel's CMRR has an intrinsic part and a part lost to the source ([Chapter
 
 **Area.** The input capacitors dominate: two 20 pF MIM capacitors per channel (0.027 mm²), the anti-alias filter's capacitors (about 0.03 mm²), the servo and boosting capacitors, the LNA, PGA and ΔΣ transistors. With routing, about 0.14 mm² per channel, 1.15 mm² for eight. The SAR, references, bias, LDOs and right-leg drive add about 0.2 mm², the digital back end about 0.3 mm²: **about 1.7 mm² of core**, plus the pad ring.
 
-**Data rate.** Features, 0.3–7 kb/s; raw data on demand up to 192 kb/s (eight channels of EMG), both well within an SPI link at a few megahertz ([Chapter 27]({% link chapters/27_soc.md %})).
+**Data rate.** Features, 0.3–12.5 kb/s; raw data on demand up to 192 kb/s (eight channels of EMG), both well within an SPI link at a few megahertz ([Chapter 27]({% link chapters/27_soc.md %})).
 
 <figure id="fig-29-3">
   <img src="{{ '/assets/figs/ch29_budgets.svg' | relative_url }}" style="width:720px" alt="Stacked noise-power budget of one channel with wet and dry electrodes against the 1.5 microvolt target, and stacked power per channel by block in ECG/EEG and EMG modes against 10 microwatts">
@@ -101,7 +101,7 @@ The demo below holds the two budgets of [Figure 29.3](#fig-29-3). Change the LNA
 | EMG/spike converter | 12 bits | asynchronous SAR, ENOB ≥ 11, 16 kS/s shared | 13–18 |
 | Power per channel | < 10 µW | 6.8 µW (ECG/EEG), 4.9 µW (EMG) | 6, 14, 18, 20, 29 |
 | Supply, process | 1.2 V, SG13G2 | 1.2 V core, 3.3 V servo, IHP SG13G2 | 5, 10, 30 |
-| Data out | SPI | features 0.3–7 kb/s; raw ≤ 192 kb/s | 27 |
+| Data out | SPI | features 0.3–12.5 kb/s; raw ≤ 192 kb/s | 27 |
 
 The converter routing of [Figure 1.1]({% link chapters/01_why.md %}#fig-1-1) follows from Part III. **ECG and EEG** go to the incremental ΔΣ: their dynamic range, set by the residual electrode offset and artefacts, needs 16 bits, and at that resolution the oversampled converter's 1.1 pF sampling capacitor beats the 150 pF a Nyquist converter would need ([Chapter 14]({% link chapters/14_adcspecs.md %})). **EMG and spikes** go to the SAR: 12 bits suffice ([Chapter 13]({% link chapters/13_sampling.md %})), and at those bandwidths a shared Nyquist converter at about 12 pJ per conversion is almost free. A heart-rate-only mode could go further, with the ΔΣ at about 8 bits and the front-end bias halved ([Chapter 24]({% link chapters/24_ecg.md %})).
 
@@ -183,7 +183,7 @@ Edit the `NOISE` and `POWER` tables in `figsrc/ch29_figs.py` with your own lab r
 - Noise: 0.51 µVrms (wet) and 1.26 µVrms (dry) against 1.5 µVrms; with dry electrodes the electrodes take 91 % of the noise power.
 - CMRR: chopping, boosting and a right-leg drive of loop gain 100 pass the ECG test with 24 dB of margin; the common-mode impedance requirement is about 12 MΩ with the right-leg drive.
 - Power: 6.8 µW per channel in ECG/EEG mode and 4.9 µW in EMG mode, against 10 µW.
-- About 1.7 mm² of core; features 0.3–7 kb/s over SPI.
+- About 1.7 mm² of core; features 0.3–12.5 kb/s over SPI.
 - One 1.024 MHz reference clocks everything, so the chopper ripple aliases to a constant; floorplan and pinout keep the inputs and the digital at opposite edges.
 - ECG/EEG to the incremental ΔΣ, EMG/spikes to the shared SAR, as Part III's budgets require.
 
