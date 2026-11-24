@@ -48,7 +48,7 @@ For a 1.2 V, 16 kS/s, 12-bit converter, a dynamic comparator, StrongARM or doubl
 
 ## <span class="secnum">16.2</span>Offset and calibration
 
-The comparator's offset is the input-pair mismatch of Pelgrom's law, plus the latch's mismatch divided by the gain of the integration phase. With the SG13G2 coefficients ([Chapter 5]({% link chapters/05_devices.md %})), a 4 µm² input pair has $$\sigma(V_\mathrm{os}) = 3.9/\sqrt4 = 2.0$$ mV (NMOS) or 1.1 mV (PMOS), eight and four LSBs ([Figure 16.2](#fig-16-2)b). That is the input pair alone. A Monte Carlo of the whole StrongARM in SG13G2 ([Lab 7]({% link labs/lab07_comparator.md %})) gives 4.5 mV in the fast mode: the minimum-size latch transistors add their own mismatch, divided by the small gain of a short integration phase.
+The comparator's offset is the input-pair mismatch of Pelgrom's law, plus the latch's mismatch divided by the gain of the integration phase. With the SG13G2 coefficients ([Chapter 5]({% link chapters/05_devices.md %})), a 4 µm² input pair has $$\sigma(V_\mathrm{os}) = 5.5/\sqrt4 = 2.8$$ mV (NMOS) or 1.6 mV (PMOS), eleven and six LSBs ([Figure 16.2](#fig-16-2)b). That is the input pair alone. A Monte Carlo of the whole StrongARM in SG13G2 ([Lab 7]({% link labs/lab07_comparator.md %})) gives 4.5 mV in the fast mode: the minimum-size latch transistors add their own mismatch, divided by the small gain of a short integration phase.
 
 In a SAR this matters much less than it seems. The comparator compares every bit against the *same* threshold, so its offset shifts the whole transfer curve. It is a converter offset, not a nonlinearity, and [Chapter 14]({% link chapters/14_adcspecs.md %}) showed that offset is harmless in a biomedical channel whose DC level is removed anyway. Two cases still need care. A pipelined or two-comparator scheme compares against two thresholds, and there the offsets must match. And a large offset eats into the input range. A foreground calibration at power-up, shorting the inputs and trimming a small capacitor DAC on the comparator's internal nodes until the output toggles, brings it below an LSB.
 
@@ -112,14 +112,14 @@ Comparator: double-tail dynamic latch, weak-inversion NMOS input pair, noise ≤
 <div class="tbox tbox-pitfall" markdown="1">
 <div class="tbox-title">Common pitfall</div>
 
-Measuring comparator noise with a single transient run. One run gives one decision per clock and needs thousands of decisions per input level to estimate a probability. Sweep five to ten input levels across ±3σ, run a few thousand clocks at each with transient noise on, and fit the error function. Fewer points give a number, but not a trustworthy one.
+Measuring comparator noise with a single transient run. One run gives one decision per clock and needs thousands of decisions per input level to estimate a probability. Sweep five to ten input levels across ±3σ, run a few thousand clocks at each with transient noise on (in ngspice, explicit `trnoise` sources at the input devices), and fit the error function. Fewer points give a number, but not a trustworthy one.
 
 </div>
 
 <div class="tbox tbox-tryit" markdown="1">
 <div class="tbox-title">Labs for this chapter</div>
 
-[Lab 7]({% link labs/lab07_comparator.md %}) designs the StrongARM comparator in SG13G2, finds its offset with Monte Carlo and its input-referred noise with transient noise, and measures its energy per decision. Compare your noise with [Figure 16.2](#fig-16-2)a at the charge your design integrates.
+[Lab 7]({% link labs/lab07_comparator.md %}) designs the StrongARM comparator in SG13G2, finds its offset with Monte Carlo, estimates its input-referred noise from the charge it integrates (ngspice adds no device noise to a transient), and measures its energy per decision. Compare your noise with [Figure 16.2](#fig-16-2)a at the charge your design integrates.
 
 </div>
 

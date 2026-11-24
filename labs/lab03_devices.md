@@ -42,7 +42,7 @@ In these models the NMOS has less flicker noise than the PMOS, the opposite of t
 2. Plot the measured input noise against 1/(W·L) at 1 Hz. Is it a straight line? Extract K yourself and compare with the table.
 3. At what source resistance does the HBT's base shot noise make it noisier than the MOSFET? Compare with the electrode impedances of [Chapter 3]({% link chapters/03_electrodes.md %}).
 4. Add the ss and ff corners and 85 °C to the script. How much do n, I<sub>spec</sub> and K move? Which number in your design is most sensitive?
-5. From the PDK's mismatch coefficients (A<sub>VT</sub> = 3.9 mV·µm for the NMOS), find the input-pair offset for the 1800 µm² devices, and say why chopping makes it irrelevant ([Chapter 9]({% link chapters/09_chopper.md %})).
+5. From the PDK's mismatch coefficients (3.9 mV·µm per NMOS device, so A<sub>VT</sub> = 5.5 mV·µm for a pair), find the input-pair offset for the 1800 µm² devices, and say why chopping makes it irrelevant ([Chapter 9]({% link chapters/09_chopper.md %})).
 
 **Deliverable.** gm/ID lookup tables for both devices at three lengths, flicker noise against gate area, and a one-paragraph choice of input device for the LNA of Lab 4.
 

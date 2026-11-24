@@ -10,7 +10,7 @@ Q = 1.602176634e-19
 UT = bs.K_B * 300 / Q
 N = 1.22
 LSB12 = 1.0 / 4096
-A_VT = {"NMOS": 3.9e-3, "PMOS": 2.2e-3}
+A_VT = {"NMOS": 3.9e-3 * np.sqrt(2), "PMOS": 2.2e-3 * np.sqrt(2)}   # for a pair: the PDK gives 3.9 and 2.2 mV um per device
 
 
 def sigma_noise(qint):
@@ -33,7 +33,7 @@ def fig():
     panel(a1, "a")
     wl = np.logspace(-1, 3, 200)
     for dev, c in (("NMOS", C1), ("PMOS", C4)):
-        a2.loglog(wl, A_VT[dev] / np.sqrt(wl) * 1e3, color=c, label=f"{dev} pair, {A_VT[dev]*1e3:g} mV·µm")
+        a2.loglog(wl, A_VT[dev] / np.sqrt(wl) * 1e3, color=c, label=f"{dev} pair, {A_VT[dev]*1e3:.1f} mV·µm")
     a2.axhline(LSB12 * 1e3, color=AMBER, ls="--", lw=0.9)
     a2.text(0.12, LSB12 * 1e3 * 1.12, "1 LSB at 12 b (244 µV)", fontsize=6.5, color=AMBERDK)
     a2.set_xlim(0.1, 1000); a2.set_ylim(0.05, 20)

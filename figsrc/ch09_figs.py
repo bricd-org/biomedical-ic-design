@@ -9,7 +9,7 @@ import biosig as bs
 K_NMOS = 1.58e-10        # V^2 um^2
 FLOOR = 18.5e-9          # one NMOS at 1 uA
 F1, F2 = 0.5, 100.0
-A_VT = 3.9e-3            # V um
+A_VT = 3.9e-3 * np.sqrt(2)   # V um, for a pair: the PDK's 3.9 mV um is per device (Ch 5, Ch 30)
 GAIN = 100.0
 
 
@@ -48,7 +48,7 @@ def fig_spectra():
     fs = 400e3
     t = np.arange(0, 0.2, 1 / fs)
     vin = 50e-6 * np.sin(2 * np.pi * 10 * t)
-    vos = 0.39e-3                                      # 1 sigma offset of a 100 um^2 NMOS pair
+    vos = A_VT / np.sqrt(100)                          # 1 sigma offset of a 100 um^2 NMOS pair, 0.55 mV
     m = np.sign(np.sin(2 * np.pi * fch * t) + 1e-12)
     amp = GAIN * (vin * m + vos)                      # input chopper, amplifier with offset
     out = amp * m                                      # output chopper
@@ -59,7 +59,7 @@ def fig_spectra():
     a2.plot(t[sel] * 1e3, out[sel] * 1e3, color=PALE, lw=0.4, label="after output chopper")
     a2.plot(t[sel] * 1e3, filt[sel] * 1e3, color=C1, lw=1.3, label="after 2nd-order low-pass at 200 Hz")
     a2.plot(t[sel] * 1e3, GAIN * vin[sel] * 1e3, color=C3, lw=0.8, ls="--", label="ideal: 100 × input")
-    a2.set_xlim(50, 200); a2.set_ylim(-50, 50)
+    a2.set_xlim(50, 200); a2.set_ylim(-70, 70)
     finish(a2, xlabel="Time (ms)", ylabel="Output (mV)", legend=True, loc="upper right")
     a2.legend(loc="upper right", fontsize=6.0)
     panel(a2, "b")
@@ -99,11 +99,11 @@ def fig_tradeoff():
 if __name__ == "__main__":
     for wl in (100.0, 1000.0):
         fc = K_NMOS / wl / FLOOR ** 2
-        print("WL %g: 1/f corner %.0f Hz; offset sigma %.3f mV; in-band chopped noise at 1/2/4/10 kHz:" % (wl, fc, A_VT / np.sqrt(wl) * 1e3 * np.sqrt(2) / np.sqrt(2)),
+        print("WL %g: 1/f corner %.0f Hz; offset sigma %.3f mV; in-band chopped noise at 1/2/4/10 kHz:" % (wl, fc, A_VT / np.sqrt(wl) * 1e3),
               [round(inband(x, wl) * 1e6, 3) for x in (1e3, 2e3, 4e3, 10e3)])
     for x in (1e3, 4e3, 10e3):
         print("fch %g: Zin(20pF) %.2f MOhm" % (x, 1 / (2 * x * 20e-12) / 1e6))
     print("residual offset 2 fch dq Rs, dq=1fC, fch=4k: wet 50k %.2f uV, dry 1M %.2f uV" % (2 * 4e3 * 1e-15 * 50e3 * 1e6, 2 * 4e3 * 1e-15 * 1e6 * 1e6))
-    print("ripple: 100 x 0.39 mV = %.0f mV; after 2nd-order LPF at 200 Hz: x1/%.0f" % (100 * 0.39, (4e3 / 200) ** 2))
+    print("ripple: 100 x %.2f mV = %.0f mV; after 2nd-order LPF at 200 Hz: x1/%.0f" % (A_VT / 10 * 1e3, 100 * A_VT / 10 * 1e3, (4e3 / 200) ** 2))
     fig_spectra()
     fig_tradeoff()

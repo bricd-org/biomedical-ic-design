@@ -114,7 +114,7 @@ SAR sampler: differential, bottom-plate, bootstrapped NMOS input switches (0.5/0
 <div class="tbox tbox-pitfall" markdown="1">
 <div class="tbox-title">Common pitfall</div>
 
-Simulating leakage with the simulator's defaults. The default $$g_\mathrm{min}$$ adds $$10^{-12}$$ S across each junction, a picoampere at 1 V, the same size as the leakage you want to see; and the default absolute tolerance hides it too. Lower both, as `labs/spice/sg13_switch.py` does, and simulate at the hottest corner you must meet.
+Simulating leakage with the simulator's defaults. The default $$g_\mathrm{min}$$ adds $$10^{-12}$$ S across each junction, a picoampere at 1 V, the same size as the leakage you want to see. Here it flows from the drain to the bulk, outside the measured path, and moves the result by at most 1 %; measured at the drain, it would add 0.6 pA. Lower it, as `labs/spice/sg13_switch.py` does, check that the leakage does not move ([Chapter 30]({% link chapters/30_flow.md %})), and simulate at the hottest corner you must meet.
 
 </div>
 

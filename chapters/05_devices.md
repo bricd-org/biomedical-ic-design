@@ -159,14 +159,14 @@ $$
 
 </div>
 
-The SG13G2 mismatch models state the coefficients directly (in `sg13g2_moslv_mismatch.lib`): $$A_{V_T} = 3.9$$ mV·µm and $$A_\beta = 0.5$$ %·µm for the low-voltage NMOS, 2.2 mV·µm and 0.33 %·µm for the PMOS. MIM capacitors match to 1 %·µm (`cap_carea_mm` in the capacitor library), and the HBT saturation current to 3.8 % for a single minimum device.
+The SG13G2 mismatch models (`sg13g2_moslv_mismatch.lib`) give every transistor its own random threshold shift and current factor, with standard deviations of 3.9 mV·µm and 0.5 %·µm over $$\sqrt{WL}$$ for the low-voltage NMOS, and 2.2 mV·µm and 0.33 %·µm for the PMOS. Those are the spreads of one device; Pelgrom's law describes the *difference* of two, which is $$\sqrt2$$ wider. For a pair, then, $$A_{V_T} = 5.5$$ mV·µm and $$A_\beta = 0.71$$ %·µm (NMOS), 3.1 mV·µm and 0.47 %·µm (PMOS), as a Monte Carlo of the pair confirms ([Chapter 30]({% link chapters/30_flow.md %})). Each MIM capacitor varies by 1 %·µm over the square root of its area (`cap_carea_mm` in the capacitor library), and the HBT saturation current by 3.8 % for a single minimum device.
 
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 5.4 · Offset of the input pair and of a bias mirror</div>
 
-**Input pair.** Two 1800 µm² NMOS devices (Worked Example 5.3) have $$\sigma(\Delta V_\mathrm{T}) = 3.9/\sqrt{1800} = 0.092$$ mV. Three standard deviations, 0.28 mV, is about 190 times the 1.5 µVrms noise target. No reasonable area brings offset down to the noise level; it has to be removed by chopping ([Chapter 9]({% link chapters/09_chopper.md %})) or by a DC servo loop ([Chapter 10]({% link chapters/10_dsl.md %})).
+**Input pair.** Two 1800 µm² NMOS devices (Worked Example 5.3) have $$\sigma(\Delta V_\mathrm{T}) = 5.5/\sqrt{1800} = 0.13$$ mV. Three standard deviations, 0.39 mV, is about 260 times the 1.5 µVrms noise target. No reasonable area brings offset down to the noise level; it has to be removed by chopping ([Chapter 9]({% link chapters/09_chopper.md %})) or by a DC servo loop ([Chapter 10]({% link chapters/10_dsl.md %})).
 
-**Bias mirror.** In weak inversion a threshold mismatch turns into a current mismatch multiplied by $$g_\mathrm{m}/I_\mathrm{D}$$: $$\sigma(\Delta I/I) \approx \sigma(\Delta V_\mathrm{T})\,g_\mathrm{m}/I_\mathrm{D}$$. A 10 µm² PMOS mirror at $$g_\mathrm{m}/I_\mathrm{D} = 30$$ V⁻¹ gives $$(2.2/\sqrt{10}\ \text{mV}) \times 30 = 2.1\,\%$$. The same mirror biased in strong inversion at 5 V⁻¹ gives 0.35 %. Bias current mirrors should therefore run in strong inversion, the opposite of the input pair.
+**Bias mirror.** In weak inversion a threshold mismatch turns into a current mismatch multiplied by $$g_\mathrm{m}/I_\mathrm{D}$$: $$\sigma(\Delta I/I) \approx \sigma(\Delta V_\mathrm{T})\,g_\mathrm{m}/I_\mathrm{D}$$. A 10 µm² PMOS mirror at $$g_\mathrm{m}/I_\mathrm{D} = 30$$ V⁻¹ gives $$(3.1/\sqrt{10}\ \text{mV}) \times 30 = 2.9\,\%$$. The same mirror biased in strong inversion at 5 V⁻¹ gives 0.5 %, the current-factor mismatch included. Bias current mirrors should therefore run in strong inversion, the opposite of the input pair.
 
 **Capacitors.** The 12-bit SAR of [Chapter 14]({% link chapters/14_adcspecs.md %}) needs unit capacitors matched to 0.26 %. At 1 %·µm that takes $$(1/0.26)^2 \approx 15$$ µm² per unit, a figure [Chapter 17]({% link chapters/17_cdac.md %}) uses.
 
@@ -209,6 +209,6 @@ Do not size a biomedical amplifier with square-law equations. At 100 nA per squa
 - In weak inversion thermal noise per microampere is lowest: 18.5 nV/√Hz for a 1 µA NMOS, 0.26 µVrms for a pair over 0.5–100 Hz.
 - Flicker noise dominates the EEG band: an unchopped NMOS pair needs about 1800 µm² per device for 1 µVrms; in these models the NMOS is quieter than the PMOS.
 - The SiGe HBT has more $$g_\mathrm{m}$$ and no voltage flicker noise, but its 1.5 nA base current adds noise, loads the electrode (18 MΩ) and makes offset; it suits wet electrodes, not dry ones.
-- Pelgrom coefficients: 3.9 mV·µm (NMOS), 2.2 mV·µm (PMOS), MIM 1 %·µm. Input offset needs chopping or a servo loop; mirrors belong in strong inversion.
+- Pelgrom coefficients for a pair: 5.5 mV·µm (NMOS), 3.1 mV·µm (PMOS), √2 times the PDK's per-device 3.9 and 2.2; MIM 1 %·µm per capacitor. Input offset needs chopping or a servo loop; mirrors belong in strong inversion.
 
 </div>

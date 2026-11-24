@@ -47,8 +47,8 @@ The numbers the chapters design with, collected in one place. The biosignal and 
 | Specific current per square, NMOS / PMOS | 0.78 / 0.20 µA | 5 |
 | Thermal noise of a MOSFET at 1 µA | 18.5 nV/√Hz | 5 |
 | Flicker coefficient K, NMOS / PMOS | 1.6 × 10⁻¹⁰ / 5.4 × 10⁻¹⁰ V²·µm² | 5 |
-| Pelgrom A<sub>VT</sub>, NMOS / PMOS | 3.9 / 2.2 mV·µm | 5 |
-| Pelgrom A<sub>β</sub>, NMOS / PMOS | 0.5 / 0.33 %·µm | 5 |
+| Pelgrom A<sub>VT</sub> of a pair, NMOS / PMOS | 5.5 / 3.1 mV·µm (3.9 / 2.2 per device) | 5 |
+| Pelgrom A<sub>β</sub> of a pair, NMOS / PMOS | 0.71 / 0.47 %·µm (0.5 / 0.33 per device) | 5 |
 | MIM capacitor density; matching; smallest cell | 1.5 fF/µm²; 1 %·µm; 1.14 × 1.14 µm² (1.95 fF) | [17]({% link chapters/17_cdac.md %}) |
 | Gate capacitance in weak inversion | about 2.2 fF/µm² | [8]({% link chapters/08_lna.md %}) |
 | npn13G2 at 1 µA: gm/I<sub>C</sub>, β, input noise | 37.7 V⁻¹, about 680, 15.1 nV/√Hz | 5 |

@@ -182,7 +182,7 @@ def main():
     vos = -(v_up + v_dn) / 2                          # input-referred offset
     hys = v_up - v_dn
     print(f"Offset Monte Carlo ({n} samples, 4/1 µm input pair, step {2*vr/ncyc*1e3:.2f} mV):"
-          f" mean {vos.mean()*1e3:+.2f} mV, sigma {vos.std(ddof=1)*1e3:.2f} mV (Pelgrom estimate 2.0 mV);"
+          f" mean {vos.mean()*1e3:+.2f} mV, sigma {vos.std(ddof=1)*1e3:.2f} mV (Pelgrom estimate 2.8 mV);"
           f" thresholds going up and down {abs(hys.mean())*1e3:.2f} ± {hys.std(ddof=1)*1e3:.2f} mV apart"
           f" ({'leaning away from' if hys.mean() < 0 else 'leaning towards'} the previous decisions)")
     os.makedirs(PLOTS, exist_ok=True)

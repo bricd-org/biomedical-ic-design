@@ -64,14 +64,14 @@ A 100 µm² pair has a corner of 4.6 kHz. Chopped at the same 4 kHz it gives 0.3
 
 <figure id="fig-9-2">
   <img src="{{ '/assets/figs/ch09_chop.svg' | relative_url }}" style="width:720px" alt="Noise spectrum of an input pair unchopped and chopped at 4 kHz, and the output of a chopper amplifier before and after low-pass filtering">
-  <figcaption><span class="capnum">Figure 9.2.</span> <strong>Chopping trades flicker noise in the band for ripple at the chopping frequency.</strong> (a) Input-referred noise of the SG13G2 NMOS pair (1000 µm² and 1 µA per device): unchopped, flicker noise dominates the EEG band (shaded); chopped at 4 kHz, the band is at the thermal floor and the flicker noise sits at f<sub>ch</sub> and its harmonics. (b) A 50 µV, 10 Hz input through a chopper amplifier of gain 100 whose input pair has 0.39 mV of offset: after the output chopper the offset is a ±39 mV square wave at 4 kHz (grey band); a second-order low-pass filter at 200 Hz reduces it to about 0.1 mV and leaves the 5 mV signal (blue) on the ideal output (dashed). Computed in <code>figsrc/ch09_figs.py</code>.</figcaption>
+  <figcaption><span class="capnum">Figure 9.2.</span> <strong>Chopping trades flicker noise in the band for ripple at the chopping frequency.</strong> (a) Input-referred noise of the SG13G2 NMOS pair (1000 µm² and 1 µA per device): unchopped, flicker noise dominates the EEG band (shaded); chopped at 4 kHz, the band is at the thermal floor and the flicker noise sits at f<sub>ch</sub> and its harmonics. (b) A 50 µV, 10 Hz input through a chopper amplifier of gain 100 whose input pair has 0.55 mV of offset: after the output chopper the offset is a ±55 mV square wave at 4 kHz (grey band); a second-order low-pass filter at 200 Hz reduces it to about 0.14 mV and leaves the 5 mV signal (blue) on the ideal output (dashed). Computed in <code>figsrc/ch09_figs.py</code>.</figcaption>
 </figure>
 
 ## <span class="secnum">9.2</span>Residual offset and ripple
 
 Chopping does not make the offset vanish. It moves it, and it adds a small offset of its own.
 
-**Ripple.** The amplifier's offset, multiplied by the output chopper, becomes a square wave at $$f_\mathrm{ch}$$ whose amplitude is the offset times the gain. For a 100 µm² pair, $$\sigma(V_\mathrm{os}) = 3.9/\sqrt{100} = 0.39$$ mV, and at a gain of 100 the ripple is ±39 mV ([Figure 9.2](#fig-9-2)b). That is ten times the largest EEG at the output, and it eats a large part of the 1.2 V swing. A second-order low-pass filter at 200 Hz attenuates it by $$(4000/200)^2 = 400$$, to about 0.1 mV. Inside the amplifier, however, the ripple is still there, and its slewing and the following stage's linear range must cope with it.
+**Ripple.** The amplifier's offset, multiplied by the output chopper, becomes a square wave at $$f_\mathrm{ch}$$ whose amplitude is the offset times the gain. For a 100 µm² pair, $$\sigma(V_\mathrm{os}) = 5.5/\sqrt{100} = 0.55$$ mV ([Chapter 5]({% link chapters/05_devices.md %})), and at a gain of 100 the ripple is ±55 mV ([Figure 9.2](#fig-9-2)b). That is more than ten times the largest EEG at the output, and it eats a large part of the 1.2 V swing. A second-order low-pass filter at 200 Hz attenuates it by $$(4000/200)^2 = 400$$, to about 0.14 mV. Inside the amplifier, however, the ripple is still there, and its slewing and the following stage's linear range must cope with it.
 
 **Residual offset.** The input chopper's switches inject charge on every transition. If the two halves inject slightly different charges $$\Delta q$$, the mismatch flows through the source impedance $$R_\mathrm{s}$$ twice per period, and the average current $$2f_\mathrm{ch}\Delta q$$ produces a DC error:
 
@@ -81,7 +81,7 @@ With $$\Delta q = 1$$ fC and $$f_\mathrm{ch} = 4$$ kHz, that is 0.4 µV for a 50
 
 **Clock errors.** A chopper clock whose duty cycle is not exactly 50 %, or whose two phases overlap or leave a gap, demodulates the signal imperfectly: the effective gain drops and a residue of the ripple appears at baseband. Non-overlapping clocks with a short, well-defined gap and a symmetric layout keep this small. Synchronising the chopper clock with the converter's sampling clock keeps the ripple and its harmonics from aliasing into the band ([Chapter 13]({% link chapters/13_sampling.md %})).
 
-The demo below puts the two sections together. It starts at Open-BioAFE's choice, 1000 µm² input devices (corner 460 Hz, 18.5 nV/√Hz per device, 0.12 mV of offset) chopped at 4 kHz; switch the chopper off, slide f<sub>ch</sub> below the corner, or move to dry electrodes and watch the residual offset.
+The demo below puts the two sections together. It starts at Open-BioAFE's choice, 1000 µm² input devices (corner 460 Hz, 18.5 nV/√Hz per device, 0.17 mV of offset) chopped at 4 kHz; switch the chopper off, slide f<sub>ch</sub> below the corner, or move to dry electrodes and watch the residual offset.
 
 {::nomarkdown}
 {% include demos/chop.html %}
@@ -91,7 +91,7 @@ The demo below puts the two sections together. It starts at Open-BioAFE's choice
 
 Filtering the ripple after the amplifier works, but it leaves the ripple inside it. A **ripple-reduction loop** removes the offset at its source. It senses the ripple at the amplifier output, before the output chopper has turned the signal back to baseband, where the ripple is a square wave at $$f_\mathrm{ch}$$ and the signal is still up-modulated. A third chopper demodulates the ripple to DC, an integrator accumulates it, and the result is fed back as a correction current into the amplifier's first stage until the ripple disappears. The loop's gain is high only at DC, so it nulls the static offset without touching the signal. The reference design of Yazicioglu et al. {% include cite.html keys="yazicioglu2007" %} combined a chopper, a ripple-reduction loop and a DC servo loop in a 60 µW ExG front-end with 60 nV/√Hz of input noise.
 
-For Open-BioAFE, a ripple-reduction loop makes it possible to use small input devices (100 µm², 0.39 mV of offset) without ±39 mV of internal ripple. The alternative is larger input devices with less offset (1000 µm², 0.12 mV and ±12 mV of ripple) and a lower chopping frequency.
+For Open-BioAFE, a ripple-reduction loop makes it possible to use small input devices (100 µm², 0.55 mV of offset) without ±55 mV of internal ripple. The alternative is larger input devices with less offset (1000 µm², 0.17 mV and ±17 mV of ripple) and a lower chopping frequency.
 
 ## <span class="secnum">9.4</span>Auto-zero and correlated double sampling
 
@@ -136,14 +136,14 @@ Chop the first stage just above its flicker corner. With 1000 µm² input device
 <div class="tbox tbox-specnote" markdown="1">
 <div class="tbox-title">Open-BioAFE target</div>
 
-Chopping frequency 4 kHz, synchronous with the converter clock. Input pair 1000 µm² per device (for example $$W/L = 100/10$$ µm), 1 µA each: chopped noise 0.27 µVrms over 0.5–100 Hz before the capacitive noise gain, about 0.31 µVrms after it. Offset ripple ±12 mV (1σ) at the LNA output, removed by a ripple-reduction loop or the following low-pass filter. Input impedance 6.25 MΩ before boosting.
+Chopping frequency 4 kHz, synchronous with the converter clock. Input pair 1000 µm² per device (for example $$W/L = 100/10$$ µm), 1 µA each: chopped noise 0.27 µVrms over 0.5–100 Hz before the capacitive noise gain, about 0.31 µVrms after it. Offset ripple ±17 mV (1σ) at the LNA output, removed by a ripple-reduction loop or the following low-pass filter. Input impedance 6.25 MΩ before boosting.
 
 </div>
 
 <div class="tbox tbox-pitfall" markdown="1">
 <div class="tbox-title">Common pitfall</div>
 
-Simulating a chopper amplifier only with AC and noise analyses. Chopping is a time-varying operation, so a plain `.noise` run shows the unchopped spectrum, and `.ac` misses the ripple, the residual offset and the input-impedance loss entirely. Use transient noise or periodic steady-state analysis, or at least a long transient with a small sine input, and measure the input current to get the true input impedance.
+Simulating a chopper amplifier only with AC and noise analyses. Chopping is a time-varying operation, so a plain `.noise` run shows the unchopped spectrum, and `.ac` misses the ripple, the residual offset and the input-impedance loss entirely. Use a transient with the noise injected as explicit `trnoise` sources, as Lab 5 does (ngspice adds no device noise to a transient and has no periodic noise analysis), or at least a long transient with a small sine input, and measure the input current to get the true input impedance.
 
 </div>
 
@@ -161,7 +161,7 @@ Simulating a chopper amplifier only with AC and noise analyses. Chopping is a ti
 
 - Two choppers pass the signal and move the amplifier's offset and $$1/f$$ noise to $$f_\mathrm{ch}$$; the baseband noise approaches the white floor when $$f_\mathrm{ch}$$ is above the flicker corner.
 - For the 1000 µm² SG13G2 pair (corner 460 Hz), chopping at 4 kHz cuts the EEG-band noise from 1.32 to 0.27 µVrms.
-- The offset becomes a ripple of offset × gain at $$f_\mathrm{ch}$$ (±39 mV for a 100 µm² pair at gain 100); a ripple-reduction loop nulls it at its source.
+- The offset becomes a ripple of offset × gain at $$f_\mathrm{ch}$$ (±55 mV for a 100 µm² pair at gain 100); a ripple-reduction loop nulls it at its source.
 - Charge-injection mismatch leaves $$2f_\mathrm{ch}\Delta qR_\mathrm{s}$$ of residual offset, 0.4–8 µV for 1 fC at 4 kHz.
 - Auto-zeroing folds wideband noise into the band; chopping does not.
 - A chopped CCIA's input impedance is $$1/(2f_\mathrm{ch}C_\mathrm{in})$$: 6.25 MΩ for 20 pF at 4 kHz, too low for dry electrodes without boosting.
