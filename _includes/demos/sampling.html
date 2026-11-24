@@ -31,7 +31,7 @@
   var S = BD.bind(root, {
     fs:  { map: function (v) { return Math.round(10 * Math.pow(10, 1.602 * v / 100)) * 10; }, fmt: function (x) { return BD.eng(x) + 'S/s'; } },
     f:   { fmt: function (x) { return x.toFixed(0) + ' Hz'; } },
-    nb:  { fmt: function (x) { return x.toFixed(0) + ' bits'; } },
+    nb:  { fmt: function (x) { return x.toFixed(0) + (x === 1 ? ' bit' : ' bits'); } },
     amp: { fmt: function (x) { return x.toFixed(0) + ' dBFS'; } }
   }, function () { draw(); });
   var q = function (s) { return root.querySelector(s); };
@@ -67,7 +67,7 @@
     q('[data-o="th"]').textContent = (6.02 * nb + 1.76 + S.amp).toFixed(1) + ' dB at this amplitude';
     var c = f0 > FS / 2 ? 'The tone is above f<sub>s</sub>/2 = ' + (FS / 2).toFixed(0) + ' Hz: its samples (blue dots) are exactly those of a ' + fa.toFixed(0) + ' Hz tone (dashed). Nothing after the sampler can tell the two apart; only a filter before it can. '
       : 'Below f<sub>s</sub>/2 the samples describe the tone itself. ';
-    c += 'Rounding to ' + nb + ' bits adds an error that stays within ±½ LSB; for a busy signal it behaves like noise of LSB²/12, which gives 6.02N + 1.76 dB for a full-scale sine and 1 dB less per dB of back-off. The held output (white staircase) follows the tone more closely with both a faster rate and more bits: the rate shrinks the steps in time, the bits shrink them in amplitude.' + (nb <= 3 ? ' At so few bits the error is visibly correlated with the signal: it is distortion, not noise.' : '');
+    c += 'Rounding to ' + nb + (nb === 1 ? ' bit' : ' bits') + ' adds an error that stays within ±½ LSB; for a busy signal it behaves like noise of LSB²/12, which gives 6.02N + 1.76 dB for a full-scale sine and 1 dB less per dB of back-off. The held output (white staircase) follows the tone more closely with both a faster rate and more bits: the rate shrinks the steps in time, the bits shrink them in amplitude.' + (nb <= 3 ? ' At so few bits the error is visibly correlated with the signal: it is distortion, not noise.' : '');
     q('[data-o="cap"]').innerHTML = c;
   }
   BD.observe(root, draw);

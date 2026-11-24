@@ -68,12 +68,15 @@
     }
     g.fillStyle = '#f39a7c'; g.fillText('interferer', X1 + 6, Math.min(Y1 + 14, d.h - f.p.b - 4));
     q('[data-o="att"]').textContent = A.toFixed(1) + ' dB';
-    q('[data-o="al"]').textContent = BD.eng(fa) + 'Hz' + (fa <= 500 && fi > fs / 2 ? ' (in band!)' : '');
+    // an interferer at a multiple of fs (the 4 kHz chopper ripple at 2 kS/s, with locked clocks) lands exactly at DC
+    var dc = fi > fs / 2 && fa === 0;
+    q('[data-o="al"]').textContent = BD.eng(fa) + 'Hz' + (dc ? ' (DC: an offset)' : fa <= 500 && fi > fs / 2 ? ' (in band!)' : '');
     q('[data-o="dr"]').textContent = att(500, fc, n).toFixed(2) + ' dB';
     var c = fi <= fs / 2 ? 'The interferer is below f<sub>s</sub>/2, so it does not alias; it simply stays in the record, attenuated by ' + A.toFixed(0) + ' dB.'
-      : 'Sampling folds the interferer at ' + BD.eng(fi) + 'Hz down to ' + BD.eng(fa) + 'Hz' + (fa <= 500 ? ', inside the EMG band, where no digital filter can remove it.' : ', outside the band, so a digital filter can still remove it.') +
-        ' The analog filter attenuates it by ' + A.toFixed(0) + ' dB before it folds.';
-    c += ' A Butterworth filter gives 6n dB per octave above its corner: each extra order buys attenuation, but costs area, power and droop in the band.';
+      : dc ? 'The interferer is an exact multiple of f<sub>s</sub>, so it folds to DC: with locked clocks, as for the chopper ripple, it becomes a constant offset that the high-pass removes, not a tone in the band.'
+      : 'Sampling folds the interferer at ' + BD.eng(fi) + 'Hz down to ' + BD.eng(fa) + 'Hz' + (fa <= 500 ? ', inside the EMG band, where no digital filter can remove it.' : ', outside the band, so a digital filter can still remove it.');
+    if (fi > fs / 2) c += ' The analog filter attenuates it by ' + A.toFixed(0) + ' dB before it folds.';
+    c += ' A Butterworth filter gives 6n dB per octave above its corner. At a fixed corner each extra order buys attenuation and even flattens the band edge, but costs area and power; a lower corner buys attenuation at the price of droop in the band.';
     q('[data-o="cap"]').innerHTML = c;
   }
   BD.observe(root, draw);

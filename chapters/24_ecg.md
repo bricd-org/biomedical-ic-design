@@ -94,7 +94,7 @@ The delay is fixed by the time spans, about 0.19 s at any rate. The rate sets th
 
 The original paper reported detecting 99.3 % of the beats in the MIT-BIH Arrhythmia Database {% include cite.html keys="mitbih" %}. `figsrc/ch24_figs.py` contains the integer version and a compact one with a Butterworth band-pass at 500 S/s, whose stages [Figure 24.4](#fig-24-4)a shows.
 
-The demo below runs the detector of [Figure 24.1](#fig-24-1) on a 20 s synthetic ECG with heart-rate variability, using the original integer filters at 200 S/s. Step through the stages, then add noise or take bits away and watch the sensitivity and positive predictivity.
+The demo below runs the detector of [Figure 24.1](#fig-24-1) on a 20 s synthetic ECG with heart-rate variability, using the original integer filters at 200 S/s. Step through the stages, then add noise or take bits away and watch the sensitivity and positive predictivity. Like Worked Example 24.3, it needs 5 bits, but it fails differently below that: its integer filters turn the coarse steps into false beats, so the positive predictivity falls, while the compact 500 S/s detector of the worked example misses beats instead.
 
 {::nomarkdown}
 {% include demos/pt.html %}

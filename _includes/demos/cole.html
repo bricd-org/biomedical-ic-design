@@ -5,9 +5,9 @@
   <div class="bd-sliders">
     <label class="bd-sl"><span>R<sub>0</sub> (low frequency) <b data-v="r0"></b></span><input type="range" data-k="r0" min="20" max="200" step="1" value="60" aria-label="R0"></label>
     <label class="bd-sl"><span>R<sub>∞</sub> (high frequency) <b data-v="ri"></b></span><input type="range" data-k="ri" min="5" max="150" step="1" value="30" aria-label="R infinity"></label>
-    <label class="bd-sl"><span>characteristic frequency f<sub>c</sub> <b data-v="fc"></b></span><input type="range" data-k="fc" min="0" max="100" step="0.5" value="49.2" aria-label="Characteristic frequency"></label>
+    <label class="bd-sl"><span>characteristic frequency f<sub>c</sub> <b data-v="fc"></b></span><input type="range" data-k="fc" min="0" max="30" step="1" value="15" aria-label="Characteristic frequency"></label>
     <label class="bd-sl"><span>dispersion α <b data-v="al"></b></span><input type="range" data-k="al" min="0.4" max="1" step="0.01" value="0.7" aria-label="Alpha"></label>
-    <label class="bd-sl"><span>excitation frequency <b data-v="f"></b></span><input type="range" data-k="f" min="0" max="100" step="0.5" value="56.6" aria-label="Excitation frequency"></label>
+    <label class="bd-sl"><span>excitation frequency <b data-v="f"></b></span><input type="range" data-k="f" min="0" max="30" step="1" value="17" aria-label="Excitation frequency"></label>
   </div>
   <div class="bd-row">
     <div class="bd-scope tall"><canvas data-c="ny" aria-hidden="true"></canvas><span class="bd-tag">Nyquist plot: −X against R (Ω)</span></div>
@@ -16,15 +16,15 @@
   <div class="bd-read" aria-live="polite"><span>tissue <b data-o="z">–</b></span><span>measured <b data-o="m">–</b></span><span>I, Q at 10 µA <b data-o="iq">–</b></span></div>
   <p class="bd-caption" data-o="cap"></p>
   <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
-    <li><b>Walk along the arc.</b> At the start (tetrapolar, excitation 49.5 kHz) the tissue reads 42.3 Ω, −12.0°, the chapter's 42 Ω at −12°. Slide excitation frequency down to 1 kHz: 58.6 Ω, close to R<sub>0</sub>, as the current flows around the cells; up to 1 MHz: 31.3 Ω, close to R<sub>∞</sub>, as it passes through the membranes too.</li>
-    <li><b>Measure with two electrodes.</b> Click bipolar, wet: measured jumps to 2041 Ω at −0.2°, the tissue's 42 Ω plus about 2 kΩ of electrodes; bipolar, dry reads 10041 Ω. The I output grows from 413 µV to 20.4 mV while Q stays at 87.9 µV: the tissue is now 2 % of the reading, which is why the tetrapolar pair exists.</li>
-    <li><b>Change the spread of cells.</b> Slide dispersion α from 0.70 to 1.00: the arc rounds out into a semicircle and the tissue reads 40.1 Ω at −19.2°. Lower it to 0.50 and the arc flattens, its centre sinking below the real axis: 43.2 Ω at −8.1°, as a wider spread of cell sizes smears the transition over more frequencies.</li>
+    <li><b>Walk along the arc.</b> At the start (tetrapolar, f<sub>c</sub> 30 kHz, excitation 50 kHz) the tissue reads 42.3 Ω, −12.0°, the chapter's 42 Ω at −12°. Slide excitation frequency down to 1 kHz: 58.7 Ω, close to R<sub>0</sub>, as the current flows around the cells; up to 1 MHz: 31.4 Ω, close to R<sub>∞</sub>, as it passes through the membranes too.</li>
+    <li><b>Measure with two electrodes.</b> Back at 50 kHz, click bipolar, wet: measured jumps to 2041 Ω at −0.2°, the tissue's 42 Ω plus about 2 kΩ of electrodes; bipolar, dry reads 10041 Ω. The I output grows from 414 µV to 20.4 mV while Q stays at 88 µV: the tissue is now 2 % of the reading, which is why the tetrapolar pair exists.</li>
+    <li><b>Change the spread of cells.</b> Back on tetrapolar, slide dispersion α from 0.70 to 1.00: the arc rounds out into a semicircle and the tissue reads 40.2 Ω at −19.2°. Lower it to 0.50 and the arc flattens, its centre sinking below the real axis: 43.2 Ω at −8.1°, as a wider spread of cell sizes smears the transition over more frequencies.</li>
   </ol></div>
   <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>With the tetrapolar defaults, at which excitation frequency does the Q output of the I/Q demodulator, the reactive part, carry the most signal?</p>
     <div class="bd-check-opts" role="group" aria-label="Answers">
-      <button type="button" data-why="At low frequency the current flows around the cells and the membrane capacitance barely matters, so the impedance is almost purely resistive: Q reads only 22.9 µV at 1 kHz.">At the lowest frequency, where the tissue impedance is largest</button>
-      <button type="button" data-why="Once the membranes are short-circuited the tissue is resistive again, close to R∞, and Q falls to 20.9 µV at 1 MHz.">At the highest frequency, where the cell membranes conduct</button>
-      <button type="button" data-correct data-why="The reactance peaks at the top of the arc, where the excitation equals the characteristic frequency: at 29.5 kHz Q reaches its largest value, 91.9 µV.">Near f<sub>c</sub>, at the top of the arc</button>
+      <button type="button" data-why="At low frequency the current flows around the cells and the membrane capacitance barely matters, so the impedance is almost purely resistive: Q reads only 22.6 µV at 1 kHz.">At the lowest frequency, where the tissue impedance is largest</button>
+      <button type="button" data-why="Once the membranes are short-circuited the tissue is resistive again, close to R∞, and Q falls to 21.2 µV at 1 MHz.">At the highest frequency, where the cell membranes conduct</button>
+      <button type="button" data-correct data-why="The reactance peaks at the top of the arc, where the excitation equals the characteristic frequency: at 30 kHz Q reaches its largest value, 91.9 µV. The phase peaks higher, near 49 kHz.">Near f<sub>c</sub>, at the top of the arc</button>
     </div>
     <p class="bd-check-fb" aria-live="polite"></p>
   </div>
@@ -33,11 +33,15 @@
 (function () {
   var root = document.getElementById('bdCole'); if (!root || !window.BD) return;
   var cfg = 'tetra';
+  // round frequencies, ten per decade from 1 kHz to 1 MHz, so the chapter's 30 kHz and 50 kHz are exact steps
+  var GRID = [];
+  for (var e = 3; e < 6; e++) [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8].forEach(function (m) { GRID.push(Math.round(m * Math.pow(10, e))); });
+  GRID.push(1e6);
   var S = BD.bind(root, {
     r0: { fmt: function (x) { return x.toFixed(0) + ' Ω'; } }, ri: { fmt: function (x) { return x.toFixed(0) + ' Ω'; } },
-    fc: { map: function (v) { return 1e3 * Math.pow(10, 3 * v / 100); }, fmt: function (x) { return BD.eng(x) + 'Hz'; } },
+    fc: { map: function (v) { return GRID[v]; }, fmt: function (x) { return BD.eng(x) + 'Hz'; } },
     al: { fmt: function (x) { return x.toFixed(2); } },
-    f:  { map: function (v) { return 1e3 * Math.pow(10, 3 * v / 100); }, fmt: function (x) { return BD.eng(x) + 'Hz'; } }
+    f:  { map: function (v) { return GRID[v]; }, fmt: function (x) { return BD.eng(x) + 'Hz'; } }
   }, function () { draw(); });
   BD.seg(root, 'cfg', function (v) { cfg = v; draw(); });
   var q = function (s) { return root.querySelector(s); };
@@ -65,13 +69,14 @@
     BD.dot(g, vi, vq, BD.C.gold, 4);
     c.fillStyle = BD.C.axis; c.fillText('Q', g.X(0) + 4, g.p.t + 10);
     var mag = Math.hypot(z[0], z[1]), ph = Math.atan2(z[1], z[0]) * 180 / Math.PI, magm = Math.hypot(zm[0], zm[1]), phm = Math.atan2(zm[1], zm[0]) * 180 / Math.PI;
-    q('[data-o="z"]').textContent = mag.toFixed(1) + ' Ω, ' + ph.toFixed(1) + '°';
-    q('[data-o="m"]').textContent = magm.toFixed(magm > 100 ? 0 : 1) + ' Ω, ' + phm.toFixed(1) + '°';
+    var deg = function (x) { return x.toFixed(1).replace('-', '−') + '°'; };
+    q('[data-o="z"]').textContent = mag.toFixed(1) + ' Ω, ' + deg(ph);
+    q('[data-o="m"]').textContent = magm.toFixed(magm > 100 ? 0 : 1) + ' Ω, ' + deg(phm);
     q('[data-o="iq"]').textContent = BD.eng(vi) + 'V, ' + BD.eng(vq) + 'V';
     q('[data-o="cap"]').innerHTML = (cfg === 'tetra'
       ? 'Tetrapolar: the outer pair carries the current and the inner pair senses with no current in its electrodes, so the demodulator sees the tissue alone. '
       : 'Bipolar: the same two electrodes carry the current and sense, so their impedance, about ' + (2 * ze / 1000).toFixed(0) + ' kΩ for the pair, adds to the ' + mag.toFixed(0) + ' Ω of tissue and buries it. ') +
-      'The arc runs from R<sub>0</sub> at low frequency to R<sub>∞</sub> at high frequency; α < 1 flattens it below the real axis. Near f<sub>c</sub> the phase is largest, which is where the I/Q readout separates resistance from reactance best.';
+      'The arc runs from R<sub>0</sub> at low frequency to R<sub>∞</sub> at high frequency; α < 1 flattens it below the real axis. The reactance, and with it the Q output, is largest at f<sub>c</sub>, the top of the arc; the phase peaks higher, at f<sub>c</sub>(R<sub>0</sub>/R<sub>∞</sub>)<sup>1/2α</sup> = ' + BD.eng(fc * Math.pow(r0 / ri, 1 / (2 * a))) + 'Hz here.';
   }
   BD.observe(root, draw);
 })();

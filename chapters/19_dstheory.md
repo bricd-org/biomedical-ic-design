@@ -102,7 +102,7 @@ To meet 16 bits, the converter's total noise must sit 98 dB below full scale. If
   <figcaption><span class="capnum">Figure 19.3.</span> <strong>Order buys SQNR, but costs input range.</strong> (a) Simulated SQNR at −6 dBFS against OSR for orders 1–4 (solid), with the linear-model prediction for orders 1 and 2 (dotted) and the 108 dB target. The points above 120 dB are limited by the record length. (b) SQNR against input amplitude at an OSR of 128. The second-order loop stays stable but overloads at full scale; the third-order loop goes unstable at 0 dBFS and the fourth-order loop at −4 dBFS (crosses). Computed with <code>biosig.simulate_dsm()</code>, <code>biosig.synth_ntf()</code> and <code>biosig.dsm_sqnr()</code>.</figcaption>
 </figure>
 
-The demo below runs a 1-bit modulator in your browser, 8192 cycles at a time, and reads its in-band SQNR the way `biosig.dsm_sqnr()` does. It starts at the second-order loop at OSR 128 and −6 dBFS of this section; change the order and the OSR, and compare the simulation with the linear model.
+The demo below runs a 1-bit modulator in your browser on the same 131 072-cycle record as [Table 19.1](#tab-19-1), and reads its in-band SQNR the way `biosig.dsm_sqnr()` does, so at −6 dBFS it reproduces the table's first two rows. It starts at the second-order loop at OSR 128 and −6 dBFS of this section; change the order and the OSR, and compare the simulation with the linear model.
 
 {::nomarkdown}
 {% include demos/dsm.html %}

@@ -85,9 +85,8 @@
     var c;
     if (!fits) {
       c = 'The link carries ' + kb(k.cap) + ', short of ' + kb(req) + '. ' + (!dle ? 'Turn on data length extension: 244 instead of 20 bytes per packet is twelve times the throughput. '
-        : k.n < S.np ? 'Only ' + k.nFit + ' packets fit in a ' + (T * 1e3).toFixed(1) + ' ms interval; lengthen it or use the 2M PHY. '
-        : phy === 1 ? 'Try the 2M PHY, more packets per event or a shorter interval. ' : 'More packets per event or a shorter interval would do it, if the phone allows. ') +
-        (st === 'spk' ? '' : '');
+        : k.n < S.np ? 'Only ' + k.nFit + ' packets fit in a ' + (T * 1e3).toFixed(1) + ' ms interval; lengthen it' + (phy === 1 ? ' or use the 2M PHY, whose shorter packets fit more per interval' : '') + '. '
+        : 'The phone\'s limit of ' + S.np + ' packet' + (S.np > 1 ? 's' : '') + ' per event is what binds: more packets per event or a shorter interval would do it, if the phone allows. ' + (phy === 1 ? 'The 2M PHY alone would not: it shortens each packet, not the number per event. ' : ''));
     } else if (10e-6 / T > eb * req) {
       c = 'It fits with room to spare, and most of the radio\'s ' + (p * 1e3).toFixed(2) + ' mW goes on waking up ' + (1 / T).toFixed(0) + ' times a second. A longer interval with more packets per event moves the same bits for less, at the price of a bigger FIFO and more latency.';
     } else {

@@ -15,7 +15,7 @@
   <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
     <li><b>Swap the electrodes.</b> At the start (wet electrodes, LNA current 2.00 µA) the channel shows 0.51 µVrms and 6.8 µW, and the electrodes take 44 % of the noise power. Click dry electrodes: the noise rises to 1.26 µVrms, still inside the 1.5 µVrms target, and the electrodes now take 91 % of it (Worked Example 29.1).</li>
     <li><b>Throw current at the dry channel.</b> With dry electrodes, raise the LNA current from 2.00 to 8.00 µA. The noise falls only from 1.26 to 1.22 µVrms, while the power doubles to 14.0 µW and the readout says the channel misses the power target.</li>
-    <li><b>Let the converter pay for the LNA.</b> Back on wet electrodes at 2.00 µA, click EMG · SAR: the power falls from 6.8 to 4.9 µW, because a small share of the SAR replaces the ΔΣ converter's 1.9 µW. In ECG/EEG · ΔΣ the LNA current can rise to 4.50 µA (9.8 µW) before the power target is missed; in EMG · SAR, to 6.00 µA (9.7 µW).</li>
+    <li><b>Let the converter pay for the LNA.</b> Back on wet electrodes at 2.00 µA, click EMG · SAR: the power falls from 6.8 to 4.9 µW, because a small share of the SAR replaces the ΔΣ converter's 1.9 µW. In ECG/EEG · ΔΣ the LNA current can rise to 4.50 µA (9.8 µW) before the power target is missed; in EMG · SAR, to 6.25 µA (10.0 µW). By then the electrodes, not the LNA, are the largest noise term even with wet electrodes.</li>
   </ol></div>
   <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>With dry electrodes the channel sits at 1.26 µVrms, inside the 1.5 µVrms target but with little margin. Which change buys the most noise margin?</p>
     <div class="bd-check-opts" role="group" aria-label="Answers">
@@ -59,13 +59,16 @@
     var vn = Math.sqrt(vn2);
     q('[data-o="n"]').textContent = vn.toFixed(2) + ' µVrms';
     q('[data-o="p"]').textContent = p.toFixed(1) + ' µW';
-    var ok = vn <= 1.5 && p <= 10;
-    q('[data-o="v"]').innerHTML = ok ? '<b class="ok">meets both targets</b>' : '<b class="bad">misses ' + (vn > 1.5 ? 'the noise target' : 'the power target') + '</b>';
-    var share = noise[0][1] / vn2 * 100;
-    q('[data-o="cap"]').innerHTML = 'Noise adds in power, so the bars stack µV²; the electrodes take ' + share.toFixed(0) + ' % of it. ' +
+    // judge the targets on the values as shown, so 10.003 µW (shown 10.0 µW) meets a 10 µW target
+    var vnS = Math.round(vn * 100) / 100, pS = Math.round(p * 10) / 10, ok = vnS <= 1.5 && pS <= 10;
+    q('[data-o="v"]').innerHTML = ok ? '<b class="ok">meets both targets</b>' : '<b class="bad">misses ' + (vnS > 1.5 ? 'the noise target' : 'the power target') + '</b>';
+    var share = noise[0][1] / vn2 * 100, lnaShare = noise[1][1] / vn2 * 100;
+    var p2 = pw.reduce(function (a, b) { return a + b[1]; }, 0) - 1.2 * i + 1.2 * 2;   // this mode's power at Chapter 29's 2 µA
+    q('[data-o="cap"]').innerHTML = 'Noise adds in power, so the bars stack µV²; the electrodes take ' + share.toFixed(0) + ' % of it and the LNA ' + lnaShare.toFixed(0) + ' %. ' +
       (el === 'dry' ? 'With dry electrodes more LNA current buys almost nothing: the electrodes dominate whatever the amplifier does. '
-                    : 'With wet electrodes the LNA is the largest term, and its current is the main lever. ') +
-      'The LNA\'s noise falls as 1/√I while its power grows as I; Chapter 29\'s 2 µA leaves ' + (10 - 6.8).toFixed(1) + ' µW of the 10 µW for everything not yet measured.';
+       : lnaShare > share ? 'With wet electrodes the LNA is the largest term, and its current is the main lever. '
+       : 'At this current the LNA has fallen below the electrodes, so more current buys little even with wet electrodes. ') +
+      'The LNA\'s noise falls as 1/√I while its power grows as I; in this mode Chapter 29\'s 2 µA leaves ' + (10 - p2).toFixed(1) + ' µW of the 10 µW for everything not yet measured.';
   }
   BD.observe(root, draw);
 })();

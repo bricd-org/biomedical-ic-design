@@ -6,19 +6,19 @@
     <label class="bd-sl"><span>oversampling ratio OSR <b data-v="osr"></b></span><input type="range" data-k="osr" min="4" max="8" step="1" value="7" aria-label="Oversampling ratio"></label>
     <label class="bd-sl"><span>input amplitude <b data-v="amp"></b></span><input type="range" data-k="amp" min="-40" max="-1" step="1" value="-6" aria-label="Input amplitude"></label>
   </div>
-  <div class="bd-scope tall"><canvas data-c="p" aria-hidden="true"></canvas><span class="bd-tag">spectrum of the bit stream (dBFS), 8192 points</span><span class="bd-tag r">shaped noise against NTF</span></div>
-  <div class="bd-scope short"><canvas data-c="b" aria-hidden="true"></canvas><span class="bd-tag">the input and the first 160 bits</span></div>
+  <div class="bd-scope tall"><canvas data-c="p" aria-hidden="true"></canvas><span class="bd-tag">bit-stream spectrum, dBFS</span><span class="bd-tag r">gold: linear model</span></div>
+  <div class="bd-scope short"><canvas data-c="b" aria-hidden="true"></canvas><span class="bd-tag">160 bits at the input's peak</span></div>
   <div class="bd-read" aria-live="polite"><span>in-band SQNR, simulated <b data-o="sq">–</b></span><span>linear model at full scale <b data-o="lm">–</b></span><span>band edge <b data-o="fb">–</b></span></div>
   <p class="bd-caption" data-o="cap"></p>
   <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
-    <li><b>Mind the model gap.</b> At the start (2nd order, OSR 128, &minus;6 dBFS), in-band SQNR, simulated reads 84.3 dB against 100.2 dB for the linear model at full scale. The &minus;6 dBFS back-off accounts for 6 dB; the rest comes from the 1-bit quantiser, whose larger error and effective gain of about 0.63 the model ignores (Worked Example 19.1).</li>
-    <li><b>Drop to first order.</b> Click 1st order: the simulated SQNR falls to 62.4 dB and the model to 65.8 dB. The gold NTF line now rises at 20 dB per decade instead of 40, so far more of the shaped noise is left inside the shaded band.</li>
-    <li><b>Find the idle tones.</b> Still at 1st order, set oversampling ratio OSR to 64 and input amplitude to &minus;30 dBFS: the SQNR collapses to 16.0 dB, because the loop's regular bit pattern puts a tall spur inside the shaded band. Click 2nd order and the same settings give 49.2 dB.</li>
+    <li><b>Mind the model gap.</b> At the start (2nd order, OSR 128, &minus;6 dBFS), in-band SQNR, simulated reads 84.9 dB, the value in Table 19.1, against 100.2 dB for the linear model at full scale. The &minus;6 dBFS back-off accounts for 6 dB; the other 9 dB come from the 1-bit quantiser, whose larger error and effective gain of about 0.63 the model ignores (Worked Example 19.1). Raise the input to &minus;1 dBFS and the simulation stays at 84.9 dB: near full scale the in-band noise grows as fast as the signal.</li>
+    <li><b>Drop to first order.</b> Click 1st order: the simulated SQNR falls to 55.5 dB, again as in Table 19.1, and the model to 65.8 dB. The gold model line now rises at 20 dB per decade instead of 40, so far more of the shaped noise is left inside the shaded band.</li>
+    <li><b>Find the idle tones.</b> Still at 1st order, set oversampling ratio OSR to 64 and input amplitude to &minus;30 dBFS: the SQNR falls to 18.5 dB, and the spectrum shows why: the loop's regular bit pattern puts a cluster of tall spurs inside the shaded band, near its edge. Click 2nd order and the same settings give 48.6 dB.</li>
   </ol></div>
-  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>The second-order loop gives 84.3 dB at OSR 128 and &minus;6 dBFS. What happens when you halve the OSR to 64?</p>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>The second-order loop gives 84.9 dB at OSR 128 and &minus;6 dBFS. What happens when you halve the OSR to 64?</p>
     <div class="bd-check-opts" role="group" aria-label="Answers">
-      <button type="button" data-why="Three dB per octave holds for white noise; here the wider band reaches up into noise that rises at 40 dB per decade, and the demo drops to 71.9 dB.">It loses about 3 dB, as plain oversampling does</button>
-      <button type="button" data-correct data-why="Halving the OSR lets in 6L + 3 = 15 dB more shaped noise for L = 2: the linear model drops by 15 dB (100.2 to 85.2 dB) and the simulation by 12 dB (84.3 to 71.9 dB).">It loses 12&ndash;15 dB, because the wider band takes in steeply rising shaped noise</button>
+      <button type="button" data-why="Three dB per octave holds for white noise; here the wider band reaches up into noise that rises at 40 dB per decade, and the demo drops to 69.9 dB.">It loses about 3 dB, as plain oversampling does</button>
+      <button type="button" data-correct data-why="Halving the OSR lets in 6L + 3 = 15 dB more shaped noise for L = 2: the linear model drops from 100.2 to 85.2 dB and the simulation from 84.9 to 69.9 dB, both by 15 dB, as in Table 19.1.">It loses about 15 dB, because the wider band takes in steeply rising shaped noise</button>
       <button type="button" data-why="The loop moves the noise up in frequency but does not remove it; halving the OSR doubles the band (fs / 256 to fs / 128) and lets much more of it in.">Almost nothing, because the loop has already pushed the noise out of the band</button>
     </div>
     <p class="bd-check-fb" aria-live="polite"></p>
@@ -27,48 +27,59 @@
 <script>
 (function () {
   var root = document.getElementById('bdDsm'); if (!root || !window.BD) return;
-  var N = 8192, BIN = 23, ord = 2, cache = {};
+  // The record and tone of Table 19.1 (figsrc/ch19_figs.py): 2^17 cycles, tone in bin 13, so the tone sits
+  // inside the band at every OSR (the band edge at OSR 256 is bin 256).
+  var N = 131072, BIN = 13, ord = 2, cache = {}, ncache = 0;
   var S = BD.bind(root, {
     osr: { map: function (v) { return Math.pow(2, v); }, fmt: function (x) { return x.toFixed(0); } },
-    amp: { fmt: function (x) { return x.toFixed(0) + ' dBFS'; } }
+    amp: { fmt: function (x) { return x.toFixed(0).replace('-', '−') + ' dBFS'; } }
   }, function () { draw(); });
   BD.seg(root, 'ord', function (v) { ord = parseInt(v, 10); draw(); });
   var q = function (s) { return root.querySelector(s); };
   function simulate(L, amp) {                // error-feedback loop with NTF = (1 - z^-1)^L, 1-bit quantiser
     var key = L + ':' + amp; if (cache[key]) return cache[key];
-    var A = Math.pow(10, amp / 20), u = new Float64Array(N), v = new Float64Array(N), e1 = 0, e2 = 0;
-    for (var n = 0; n < N; n++) {
-      u[n] = A * Math.sin(2 * Math.PI * BIN * n / N);
-      var y = L === 1 ? u[n] - e1 : u[n] - 2 * e1 + e2;   // v = u + (1 - z^-1)^L e
-      v[n] = y >= 0 ? 1 : -1;
-      e2 = e1; e1 = v[n] - y;              // e = v - y, fed back with the NTF's coefficients
-    }
+    if (ncache >= 12) { cache = {}; ncache = 0; }                    // each entry holds 0.5 MB
+    // −6 dBFS is an amplitude of exactly 0.5, as in Table 19.1; other settings scale from there
+    var A = 0.5 * Math.pow(10, (amp + 6) / 20), n0 = Math.round(N / (4 * BIN)), u = [], v = [], e1 = 0, e2 = 0;
     var re = new Float64Array(N), im = new Float64Array(N), w2 = 0;
-    for (n = 0; n < N; n++) { var w = 0.5 - 0.5 * Math.cos(2 * Math.PI * n / N); w *= w; re[n] = v[n] * w; w2 += w; }   // Hann²
+    for (var n = 0; n < N; n++) {
+      var un = A * Math.sin(2 * Math.PI * BIN * n / N);
+      var y = L === 1 ? un - e1 : un - 2 * e1 + e2;      // v = u + (1 - z^-1)^L e
+      var vn = y >= 0 ? 1 : -1;
+      e2 = e1; e1 = vn - y;                                // e = v - y, fed back with the NTF's coefficients
+      if (n >= n0 && n < n0 + 160) { u.push(un); v.push(vn); }
+      var w = 0.5 - 0.5 * Math.cos(2 * Math.PI * n / N); w *= w; re[n] = vn * w; w2 += w;   // Hann², as biosig.dsm_sqnr
+    }
     BD.fft(re, im);
     var P = new Float64Array(N / 2);
     for (var k = 0; k < N / 2; k++) P[k] = (re[k] * re[k] + im[k] * im[k]) / (w2 * w2 / 4);
+    ncache++;
     return (cache[key] = { u: u, v: v, P: P });
   }
   function draw() {
     var r = simulate(ord, S.amp), P = r.P, osr = S.osr, kb = Math.floor(N / (2 * osr));
+    // biosig.dsm_sqnr: signal = bins m-2..m+2, noise = bins 4..n/(2 OSR) without them (summed directly, not by subtraction)
     var sig = 0, noi = 0;
-    for (var k = 1; k < kb; k++) { if (Math.abs(k - BIN) <= 3) sig += P[k]; else if (k > 2) noi += P[k]; }
+    for (var k = 4; k <= kb; k++) { if (Math.abs(k - BIN) <= 2) sig += P[k]; else noi += P[k]; }
     var sq = 10 * Math.log10(sig / noi);
     var lm = 6.02 + 1.76 + (20 * ord + 10) * Math.log10(osr) - 10 * Math.log10(Math.pow(Math.PI, 2 * ord) / (2 * ord + 1));
-    var d = BD.setup(q('[data-c="p"]')), f = BD.frame(d, { x: [1 / N, 0.5], y: [-170, 5], xlog: true,
-      xt: [[1e-3, '0.001 fs'], [1e-2, '0.01 fs'], [1e-1, '0.1 fs'], [0.5, '0.5']], yt: [[0, '0'], [-40, '−40'], [-80, '−80'], [-120, '−120'], [-160, '−160 dBFS']], pad: { l: 58 } });
+    var d = BD.setup(q('[data-c="p"]')), f = BD.frame(d, { x: [1 / N, 0.5], y: [-190, 5], xlog: true,
+      xt: [[1e-4, '10⁻⁴ fs'], [1e-3, '0.001 fs'], [1e-2, '0.01 fs'], [1e-1, '0.1 fs'], [0.5, '0.5']], yt: [[0, '0'], [-40, '−40'], [-80, '−80'], [-120, '−120'], [-160, '−160 dBFS']], pad: { l: 58 } });
     var g = d.g; g.fillStyle = 'rgba(224,184,90,.10)'; g.fillRect(f.p.l, f.p.t, f.X(kb / N) - f.p.l, d.h - f.p.t - f.p.b);
-    var xs = [], ys = [];
-    for (k = 1; k < N / 2; k++) { xs.push(k / N); ys.push(10 * Math.log10(P[k] + 1e-30)); }
+    // 65 536 bins are too many to draw: average the power over log-spaced groups (single bins at the low end)
+    var xs = [], ys = [], k0 = 1;
+    while (k0 < N / 2) { var k1 = Math.min(N / 2, Math.max(k0 + 1, Math.round(k0 * 1.012))), s = 0;
+      for (k = k0; k < k1; k++) s += P[k];
+      xs.push(Math.sqrt(k0 * (k1 - 1)) / N); ys.push(10 * Math.log10(s / (k1 - k0) + 1e-30)); k0 = k1; }
     BD.line(f, xs, ys, BD.C.blue, 0.9);
-    // NTF shape, scaled to the white quantisation noise of a 1-bit quantiser seen through the Hann² window
+    // linear model: white noise of variance 1/3 (1-bit quantiser, levels ±1) shaped by |NTF|², per bin of the
+    // Hann² window: 4 σ² ENBW / N with ENBW = 1.944 bins
     var ns = [], nf = [];
-    for (k = 1; k <= 200; k++) { var fr = Math.pow(10, -3.9 + 3.6 * k / 200); ns.push(fr);
-      nf.push(10 * Math.log10(Math.pow(2 * Math.sin(Math.PI * fr), 2 * ord) * (1 / 3) * (2 / N) * 1.94) ); }
+    for (k = 1; k <= 240; k++) { var fr = Math.pow(10, -5.2 + 4.9 * k / 240); ns.push(fr);
+      nf.push(10 * Math.log10(Math.pow(2 * Math.sin(Math.PI * fr), 2 * ord) * (1 / 3) * 4 * 1.944 / N)); }
     BD.line(f, ns, nf, BD.C.gold, 1.2, [5, 3]);
     BD.vline(f, kb / N, BD.C.gold, [2, 3], 'fs / 2·OSR');
-    // bits
+    // bits, 160 cycles from the input's positive peak
     var e = BD.setup(q('[data-c="b"]')), fb = BD.frame(e, { x: [0, 160], y: [-1.3, 1.3], yt: [[-1, '−1'], [0, '0'], [1, '+1']], xt: [], pad: { l: 30, b: 8 } });
     var bx = [], by = [], ux = [];
     for (var n = 0; n < 160; n++) { bx.push(n, n + 1); by.push(r.v[n], r.v[n]); ux.push(r.u[n]); }
@@ -79,8 +90,8 @@
     q('[data-o="lm"]').textContent = lm.toFixed(1) + ' dB';
     q('[data-o="fb"]').textContent = 'fs / ' + (2 * osr);
     q('[data-o="cap"]').innerHTML = 'The loop pushes the quantisation noise up in frequency as (2 sin πf/f<sub>s</sub>)<sup>' + (2 * ord) + '</sup>: ' + (20 * ord + 10) + ' dB per decade of oversampling for this order. ' +
-      'The shaded band is what the decimation filter keeps. The linear model assumes white quantisation noise and full scale; the simulated loop, at ' + S.amp + ' dBFS, falls ' + (lm - sq).toFixed(0) + ' dB short, partly from the back-off and partly because a 1-bit quantiser is not the additive-noise source the model pretends.' +
-      (ord === 1 ? ' A first-order loop also leaves idle tones: try −30 dBFS.' : '');
+      'The shaded band is what the decimation filter keeps; the spectrum is of a 131 072-cycle record, and the strip below shows 160 of its bits at the input\'s positive peak, where the share of +1s is (1 + u)/2. The linear model assumes white quantisation noise and full scale; the simulated loop, at ' + String(S.amp).replace('-', '−') + ' dBFS, falls ' + (lm - sq).toFixed(0) + ' dB short, partly from the back-off and partly because a 1-bit quantiser is not the additive-noise source the model pretends.' +
+      (ord === 1 ? ' A first-order loop also leaves idle tones: try OSR 64 at −30 dBFS.' : '');
   }
   BD.observe(root, draw);
 })();

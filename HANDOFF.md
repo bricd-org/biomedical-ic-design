@@ -7,8 +7,8 @@ https://www.thebricd.org/biomedical-ic-design/
 Hands-On Labs section (15 labs with scripts plus a capstone), the Interactive Demos page (17 demos, each
 with *Three things to try* and a *Check yourself* question), appendices A–E and 68 references, in the
 Monitor colour theme with a cover on the home page. The last full-site crawl (19 Nov) found 66 pages, 1,658 links,
-1,246 equations and 100 images, all clean. **What is left is polish, not writing:** the demo/chapter
-mismatches in section 2f come first, then the items in section 4 "Now". Read section 3 (decisions) and
+1,246 equations and 100 images, all clean. **What is left is polish, not writing:** the items in section 4
+"Now". The demo/chapter mismatches of section 2f were fixed on 23 Nov (committed locally; push pending). Read section 3 (decisions) and
 section 5 (conventions) before editing anything.
 
 History, newest first: 19 Nov Interactive Demos page, demo quizzes, `BD.eng` fix, `spikes()` noise fix,
@@ -222,30 +222,44 @@ The user asked for the labs to be a top-level section like the photonics tutoria
   clicked through in the built site; full-site crawl 66 pages, 1,658 links, 1,246 equations, 100 images, clean;
   deploy run 44627675872 succeeded and the live pages were checked (`/demos/` 200, 17 demo links, quizzes
   present, 0 badges, `eng` fix served).
-- **Demo/chapter mismatches found by the agents (not yet fixed; this is the next job, section 4 "Now"):**
-  - Ch 19 DSM demo: OSR 256 shows "-Infinity dB" (test tone above the band edge); 1st order simulates 62.4 dB at
-    OSR 128 vs Table 19.1's 55.5 dB; 2nd order barely changes with input level (short record).
-  - Ch 33 phase demo: starts at 0.79 Hz, chapter says 0.75 Hz (and 16° vs 17°); chapter's "5 ms loop keeps alpha
-    within 18°" disagrees with the demo (+35° mean at 10.1 Hz, probably the 128 S/s grid).
-  - Ch 31 NLMS demo: caption says "both" references are best; at share 20 % or L ≥ 16 accel. alone beats both.
-    Demo defaults differ from Fig 31.1 (128 vs 256 S/s).
-  - Ch 29 budget demo: caption always says the LNA is the largest term (wrong for wet at 8 µA); "leaves 3.2 µW" fixed
-    in EMG mode; 10.003 µW shows "10.0 µW" but "misses".
-  - Ch 9: text says slide f_ch below the corner (slider minimum 500 Hz > 461 Hz corner); demo offset 0.39 mV is the
-    100 µm² value, text says 1000 µm² devices (0.12 mV).
-  - Ch 11 aafilter: caption says higher order costs droop (it is the reverse at fixed corner); 4 kHz chopper ripple
-    shown as harmful "0Hz (in band!)" while the chapter says it is a removable offset.
-  - Ch 18 SAR captions: a flipped decision is stated as fact; "add up to only 256 LSB" (255.5); radix-mode caption
-    says an error stays when the final error is 0. Radix 1.8 is slightly worse than binary noise-free.
-  - Ch 22 fftleak: the per-bin quantisation-floor line is drawn 3 dB low (−110.1 vs −107.1 dBFS); Hann reads 36.3 dB,
-    chapter says ~41 dB.
-  - Ch 24 pt demo vs WE 24.3: the demo fails by false beats (4 bits: Se 100 %, PPV 53.5 %), the chapter's offline
-    sweep by missed beats (4 bits: 85–96 %); different signals and filters, both say 5 bits.
-  - Ch 27 BLE: chapter's "about 30 µW" for features at 500 ms vs 46 µW in the demo; caption suggests the 2M PHY where
-    packets per event is the limit. Ch 20 text: "8 × 512 kHz … four times the OTA bandwidth" (should be eight?).
-  - Ch 28 Cole: caption says the phase peaks near f_c (Q peaks at f_c, phase at ~1.6 f_c); default sliders snap to
-    29.5 kHz / 49.5 kHz instead of 30 / 50 kHz.
-  - Small: sampling demo shows "1 bits"; Ch 4 mains default ΔZ 40.3 kΩ vs 40.7; Ch 6 NEF 0.43 vs 0.44 µVrms.
+- **Demo/chapter mismatches: ALL FIXED 23 Nov 2026** (local commit after `3999863`; every demo's numbers, *Three things
+  to try* and *Check yourself* re-measured in the built pages; crawl 66 pages, 99 images, no broken links or
+  anchors; all 17 quizzes click through; no console or KaTeX errors). What each was and how it was settled:
+  - **Ch 19 DSM:** the demo used 8192 points with the tone in bin 23, which lies above the OSR-256 band edge
+    (bin 16), hence "-Infinity"; first order is also record-sensitive. The demo now runs Table 19.1's own
+    record (2^17 cycles, tone in bin 13, −6 dBFS = amplitude 0.5) and `dsm_sqnr`'s bins, so it reproduces both
+    rows exactly (55.5/84.9 dB at OSR 128). Spectrum drawn as log-bucket averages; gold line corrected to the
+    linear model (σ² = 1/3, 4σ²·ENBW/N; it was 3 dB low). 2nd order's flat 84.9 dB from −1 to −6 dBFS is real
+    (Fig 19.3b shows it). Chapter's demo intro updated.
+  - **Ch 33 phase:** slider now log with 0.75 Hz and 10 Hz on exact steps; demo runs at 500 S/s (the chip's EEG
+    rate, was 128), interpolates the zero crossing and reads the true phase between samples, so the latency is
+    the only delay: 0.75 Hz/60 ms → +12° (16° from the rule, −4° filter baseline); 10 Hz/5 ms → +14°, inside the
+    chapter's 18°. Chapter intro says so.
+  - **Ch 31 NLMS:** defaults now Figure 31.1's (256 S/s, μ = 0.01 exact, 8 taps, δ one per tap): 6.1/5.1/8.7 dB,
+    same order as the figure's 7.5/5.7/12.2; caption names whichever reference set removes most (impedance
+    alone beats both at 100 % share). Chapter says the browser recording differs a little from the figure.
+  - **Ch 29 budget:** caption names the larger of LNA and electrodes, computes the leftover power for the
+    selected mode (3.2 µW ECG/EEG, 5.1 µW EMG), and judges targets on the displayed values (EMG 6.25 µA = 10.0 µW meets).
+  - **Ch 9:** sliders anchored on 4 kHz and 460 Hz (f_ch now goes down to 100 Hz, below the corner); white-noise
+    slider is per device (18.5 nV/√Hz); offset default 0.12 mV (1000 µm²). **Chapter error fixed:** the
+    unchopped 1000 µm² pair is 1.32 µVrms over 0.5–100 Hz, not 1.29 (1.29 is the flicker part alone, Ch 5).
+  - **Ch 11 aafilter:** caption now says more order flattens the band edge at a fixed corner; an alias at exactly
+    DC reads "(DC: an offset)" with the chapter's locked-clock explanation.
+  - **Ch 18 SAR:** remaining-steps sum printed as 255.5 (was rounded to 256); after a flip the caption gives the
+    least error that must remain, and says the code may still be right when that is under 1 LSB. Try text: flip
+    in ~3 runs in 10; noise-free radix 1.8 is 0.36 vs 0.29 LSB rms (rounding a non-binary sum), stated.
+  - **Ch 22 fftleak:** floor line now −107.1 dBFS (rect), as the chapter says. Hann: both numbers are right for
+    their settings (40.0 dB at 0.05 bin off with 3 signal bins, the chapter's figure; 36.3 dB at 0.3 bin off
+    with 5); chapter sentence rewritten to say it depends on the offset.
+  - **Ch 24:** kept both; the chapter's demo intro and the try item now say the integer 200 S/s demo fails at
+    4 bits by false beats and the compact 500 S/s detector of WE 24.3 by missed beats, both needing 5 bits.
+  - **Ch 27:** chapter now says 5 kb/s of features at 500 ms costs ~46 µW (26 bits + 20 events), about half the
+    80 µW front-end; the BLE caption no longer suggests 2M when packets per event bind. **Ch 20:** multiplexing
+    needs *eight* times the OTA bandwidth and current (4.1 MHz clock).
+  - **Ch 28 Cole:** frequency sliders step through round values (1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8 per decade),
+    so 30/50 kHz are exact; caption: Q peaks at f_c, phase at f_c(R0/R∞)^(1/2α) = 49.2 kHz here.
+  - **Small:** "1 bit"; Ch 4 mains defaults exactly 40.7 kΩ, 200 MΩ, RLD loop gain 100 (reads 60 µVpp, 6.04 mVpp
+    without RLD); Ch 6 NEF current anchored on 2 µA in 2^0.1 steps (0.44 µVrms, quarter = 500 nA exactly).
 
 ## 3. Decisions already made (do not re-litigate)
 
@@ -284,12 +298,10 @@ The user asked for the labs to be a top-level section like the photonics tutoria
 All writing is done; these are polish items. Do them in this order, one commit each, and ask before
 pushing (the user says "Commit and push" when they want it).
 
-1. **Fix the demo/chapter mismatches listed in section 2f.** For each: decide whether the demo or the
-   chapter is wrong (rerun the chapter's `figsrc/chNN_figs.py` or `biosig.py` numbers; the chapter's
-   worked examples are the reference), fix one side, then recheck that demo's *Three things to try* and
-   *Check yourself* answers, which quote demo numbers. Highest value first: Ch 19 (OSR 256 "-Infinity",
-   1st-order 62.4 vs 55.5 dB), Ch 33 (0.79 vs 0.75 Hz, the "within 18°" claim), Ch 29 and Ch 31 captions,
-   Ch 22 floor line, then the small items.
+1. ~~Fix the demo/chapter mismatches listed in section 2f.~~ **DONE 23 Nov** (section 2f; committed locally,
+   push when the user says). Method, for any future demo change: decide from the chapter's worked numbers
+   and `figsrc/` scripts which side is wrong, fix it, then re-measure the demo in the built page (drive the
+   sliders from `javascript_tool`) and update its *Three things to try* and *Check yourself* numbers.
 2. **Align Ch 27's spike-snippet budget** (16 × 12-bit) with the Ch 26 specnote (48 × 8-bit); section 7.
 3. **Deepen the thinner chapters** to the Part I–IV standard (worked examples with project numbers,
    a figure from `figsrc/`, key-equation box, takeaways): Ch 30 (tool flow, has no figure) and
@@ -581,7 +593,7 @@ home page.
 
 ## 7. Known issues to clean up
 
-- **Open:** the demo/chapter mismatches in section 2f, and the Ch 27 snippet-size mismatch below. Everything
+- **Open:** the Ch 27 snippet-size mismatch below (the section 2f demo mismatches were fixed 23 Nov). Everything
   marked RESOLVED or FIXED here is kept only as a record.
 - **RESOLVED in Ch 12 (keep Table 1.2 in step in Ch 29):** the RLD (loop gain 100) cuts the Z_cm need to 11.4 MΩ. Original note — **Open design point from Ch 4:** with the standards' 40.7 kΩ imbalance and a 100 dB amplifier,
   90 dB effective CMRR needs Z_cm ≈ 1.9 GΩ at 50 Hz, about twice the "> 1 GΩ" goal in Table 1.2
@@ -680,6 +692,7 @@ indico.cern.ch/event/1381495/contributions/5988502/ · MEDTEQ CMRR and Zin artic
 - ~~Keep Lab 14 in Track C or move it to Track B?~~ **Decided 16 Nov: keep it in Track C.**
 - NinaPro downloads may need registration: is a "bring your own file + synthetic fallback"
   approach acceptable for Lab 1/13? (That is how Labs 1 and 13 work now; no answer yet.)
-- For each mismatch in section 2f, the fix may land on the demo or the chapter: OK to decide case by
-  case from the chapter's worked numbers, or does the user want to review each?
+- ~~Section 2f mismatches: decide case by case?~~ Done case by case on 23 Nov; chapter text changed in
+  Ch 9 (1.29 → 1.32 µVrms unchopped), Ch 20 (four → eight times), Ch 22 (Hann sentence), Ch 27 (30 → 46 µW)
+  and the demo intros of Ch 19, 24, 31 and 33. The user may want to skim those before pushing.
 - When to tag `v0.1`: after the mismatch fixes, or now?

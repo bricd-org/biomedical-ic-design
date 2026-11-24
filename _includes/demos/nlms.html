@@ -3,7 +3,7 @@
   <div class="bd-head"><span>// try it · cancelling a motion artefact (synthetic)</span>
     <span class="bd-seg" role="group" aria-label="References"><button type="button" data-ref="acc" aria-pressed="false">accelerometer</button><button type="button" data-ref="dz" aria-pressed="false">impedance</button><button type="button" data-ref="both" aria-pressed="true">both</button></span></div>
   <div class="bd-sliders">
-    <label class="bd-sl"><span>step size μ <b data-v="mu"></b></span><input type="range" data-k="mu" min="0" max="100" step="1" value="40" aria-label="Step size"></label>
+    <label class="bd-sl"><span>step size μ <b data-v="mu"></b></span><input type="range" data-k="mu" min="-50" max="65" step="1" value="0" aria-label="Step size"></label>
     <label class="bd-sl"><span>taps per reference L <b data-v="L"></b></span><input type="range" data-k="L" min="1" max="32" step="1" value="8" aria-label="Taps"></label>
     <label class="bd-sl"><span>impedance share of the artefact <b data-v="mix"></b></span><input type="range" data-k="mix" min="0" max="100" step="5" value="60" aria-label="Impedance share"></label>
   </div>
@@ -12,11 +12,11 @@
   <div class="bd-controls"><button type="button" class="bd-toggle" data-t="reg" aria-pressed="true">regularised (δ ≈ reference power)</button><button type="button" class="bd-btn" data-b="new">new recording</button></div>
   <p class="bd-caption" data-o="cap"></p>
   <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
-    <li><b>Let the artefact choose the reference.</b> At the start (step size μ 0.0083, L 8, impedance share 60 %) the readout shows accel. alone 8.2 dB, impedance alone 4.7 dB and both 9.6 dB. Slide the impedance share of the artefact to 100 %: impedance alone climbs to about 9 dB and accel. alone falls to about 3 dB; at 0 % the two trade places.</li>
-    <li><b>Give each reference the taps it needs.</b> Set taps per reference L to 1: accel. alone drops to about 3 dB while impedance alone keeps about 5 dB. At L = 16 accel. alone rises to about 12 dB and impedance alone stays near 4 dB: the accelerometer's effect lags through the mechanics of the skin, while the impedance trace needs only a few taps.</li>
-    <li><b>Switch off the regularisation.</b> Click regularised (δ ≈ reference power) to turn it off: artefact removed falls from 9.6 dB to −1.9 dB, and the filter now adds error (other recordings land a few dB either side of zero). Between movements the references are nearly zero, and dividing by their power lets the EEG throw the weights about.</li>
+    <li><b>Let the artefact choose the reference.</b> At the start (step size μ 0.010, L 8, impedance share 60 %, Figure 31.1's settings) the readout shows accel. alone 6.1 dB, impedance alone 5.1 dB and both 8.7 dB, in the same order as the figure. Slide the impedance share of the artefact to 100 %: impedance alone climbs to 11.8 dB and accel. alone falls to 2.1 dB, and impedance alone now beats both (10.2 dB), because the accelerometer's weights only add jitter. At 0 % the two trade places: accel. alone 6.8 dB, impedance alone 3.5 dB.</li>
+    <li><b>Give each reference the taps it needs.</b> Back at 60 %, set taps per reference L to 1: accel. alone drops to 3.2 dB while impedance alone keeps 5.2 dB. At L = 16 accel. alone rises to 9.8 dB and both to 12.2 dB, while impedance alone stays near 5 dB: the accelerometer's effect lags through the mechanics of the skin and needs a longer filter, while the impedance trace needs only a few taps.</li>
+    <li><b>Switch off the regularisation.</b> Back at L = 8, click regularised (δ ≈ reference power) to turn it off: artefact removed falls from 8.7 dB to −11.8 dB, and the filter now adds far more error than it removes (other recordings land between about −14 and +3 dB). Between movements the references are nearly zero, and dividing by their power lets the EEG throw the weights about.</li>
   </ol></div>
-  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>With both references, slide step size μ all the way to the right: artefact removed rises to a peak and then falls again. Why does a larger step eventually remove less?</p>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>With both references, slide step size μ all the way to the right: artefact removed rises to a peak of about 10.4 dB near μ = 0.05 and falls to 8.3 dB at 0.20. Why does a larger step eventually remove less?</p>
     <div class="bd-check-opts" role="group" aria-label="Answers">
       <button type="button" data-why="NLMS is stable for 0 &lt; μ &lt; 2, and the slider stops at 0.20, far inside that range; the residual stays bounded, it just becomes noisier.">The filter goes unstable at large μ</button>
       <button type="button" data-why="It is the other way round: a larger μ adapts faster, and slow tracking is what limits the removal at the left end of the slider.">A larger step follows the movements too slowly</button>
@@ -28,9 +28,10 @@
 <script>
 (function () {
   var root = document.getElementById('bdNlms'); if (!root || !window.BD) return;
-  var FS = 128, N = 128 * 40, ref = 'both', reg = true, seed = 5, scene = null;
+  // Figure 31.1's settings: 256 S/s, μ = 0.01, 8 taps per reference, δ = one per tap
+  var FS = 256, N = 256 * 40, ref = 'both', reg = true, seed = 5, scene = null;
   var S = BD.bind(root, {
-    mu:  { map: function (v) { return 0.001 * Math.pow(10, 2.3 * v / 100); }, fmt: function (x) { return x.toPrecision(2); } },
+    mu:  { map: function (v) { return 0.01 * Math.pow(10, v / 50); }, fmt: function (x) { return x.toPrecision(2); } },   // 0.001 … 0.2
     L:   { fmt: function (x) { return x.toFixed(0); } },
     mix: { map: function (v) { return v / 100; }, fmt: function (x) { return (x * 100).toFixed(0) + ' %'; } }
   }, function (k) { if (k === 'mix') scene = null; draw(); });
@@ -103,7 +104,11 @@
     q('[data-o="db"]').textContent = fmt(cur); q('[data-o="a"]').textContent = fmt(res.acc); q('[data-o="z"]').textContent = fmt(res.dz); q('[data-o="b"]').textContent = fmt(res.both);
     var c = !reg ? '<b style="color:#f39a7c">Without regularisation the filter divides by a nearly zero reference power between movements</b>, so the EEG alone kicks the weights about, and they are wrong when the next movement starts. '
       : cur.db < 0 ? 'The filter is adding error: the step is too large for the EEG it must ignore, or the references do not explain this artefact. ' : '';
-    c += 'Each reference removes the part of the artefact it is related to: the impedance trace follows the lead-off current through the moving contact, the accelerometer the part that follows the movement directly. Slide the impedance share and watch the two trade places; "both" is best wherever the artefact has both parts. A larger μ tracks faster but lets the EEG jitter the weights.';
+    var names = { acc: 'the accelerometer alone', dz: 'the impedance alone', both: 'both references' }, best = 'both';
+    ['acc', 'dz'].forEach(function (k) { if (res[k].db > res[best].db) best = k; });
+    c += 'Each reference removes the part of the artefact it is related to: the impedance trace follows the lead-off current through the moving contact, the accelerometer the part that follows the movement directly. Slide the impedance share and watch the two trade places. Here ' + names[best] + ' remove' + (best === 'both' ? '' : 's') + ' the most' +
+      (best === 'both' ? '. ' : ': two references give the EEG twice as many weights to jitter, so when one reference explains nearly all of the artefact it can beat both. ') +
+      'A larger μ tracks faster but lets the EEG jitter the weights.';
     q('[data-o="cap"]').innerHTML = c;
   }
   BD.observe(root, draw);

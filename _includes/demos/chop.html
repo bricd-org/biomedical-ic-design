@@ -3,24 +3,24 @@
   <div class="bd-head"><span>// try it · chopping</span>
     <span class="bd-seg" role="group" aria-label="Electrodes"><button type="button" data-rs="5e4" aria-pressed="true">wet electrodes</button><button type="button" data-rs="1e6" aria-pressed="false">dry electrodes</button></span></div>
   <div class="bd-sliders">
-    <label class="bd-sl"><span>chopper frequency f<sub>ch</sub> <b data-v="fch"></b></span><input type="range" data-k="fch" min="0" max="100" step="0.5" value="45.2" aria-label="Chopper frequency"></label>
-    <label class="bd-sl"><span>amplifier 1/f corner f<sub>c</sub> <b data-v="fc"></b></span><input type="range" data-k="fc" min="0" max="100" step="0.5" value="51.8" aria-label="1/f corner"></label>
-    <label class="bd-sl"><span>white noise floor <b data-v="sw"></b></span><input type="range" data-k="sw" min="10" max="100" step="1" value="26" aria-label="White noise"></label>
-    <label class="bd-sl"><span>input offset <b data-v="vos"></b></span><input type="range" data-k="vos" min="0" max="2" step="0.01" value="0.39" aria-label="Input offset"></label>
+    <label class="bd-sl"><span>chopper frequency f<sub>ch</sub> <b data-v="fch"></b></span><input type="range" data-k="fch" min="-160" max="100" step="1" value="0" aria-label="Chopper frequency"></label>
+    <label class="bd-sl"><span>amplifier 1/f corner f<sub>c</sub> <b data-v="fc"></b></span><input type="range" data-k="fc" min="-166" max="154" step="1" value="0" aria-label="1/f corner"></label>
+    <label class="bd-sl"><span>white noise per device <b data-v="sw"></b></span><input type="range" data-k="sw" min="7" max="70" step="0.5" value="18.5" aria-label="White noise per device"></label>
+    <label class="bd-sl"><span>input offset <b data-v="vos"></b></span><input type="range" data-k="vos" min="0" max="2" step="0.01" value="0.12" aria-label="Input offset"></label>
   </div>
   <div class="bd-scope tall"><canvas data-c="p" aria-hidden="true"></canvas><span class="bd-tag">input-referred noise density at the output, before the low-pass</span></div>
   <div class="bd-read" aria-live="polite"><span>noise 0.5–100 Hz <b data-o="vn">–</b></span><span>unchopped <b data-o="vu">–</b></span><span>ripple at f<sub>ch</sub>, gain 100 <b data-o="rip">–</b></span><span>residual offset <b data-o="ro">–</b></span></div>
   <div class="bd-controls"><button type="button" class="bd-toggle" data-t="chop" aria-pressed="true">chopper on</button></div>
   <p class="bd-caption" data-o="cap"></p>
   <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
-    <li><b>Switch the chopper off.</b> From the start, click chopper on so that it reads chopper off: noise 0.5–100 Hz jumps from 0.272 µVrms to 1.31 µVrms, nearly all of it flicker noise, and the full 0.39 mV offset now sits on the signal (Worked Example 9.1).</li>
-    <li><b>Chop a small input pair.</b> Turn the chopper back on and raise amplifier 1/f corner f<sub>c</sub> to 4.7 kHz, close to the 4.6 kHz of a 100 µm² pair: f<sub>ch</sub> is now below the corner, the caption warns in red, and the noise reads 0.367 µVrms, 40 % above the 0.26 µVrms white floor. Raise chopper frequency f<sub>ch</sub> to 10.2 kHz and it falls to 0.306 µVrms, within 20 % (Worked Example 9.1).</li>
-    <li><b>Count the cost of a fast clock.</b> With f<sub>ch</sub> back at 4 kHz, click dry electrodes: the residual offset 2f<sub>ch</sub>Δq·R<sub>s</sub> rises from 0.40 µV to 7.9 µV, because R<sub>s</sub> grows from 50 kΩ to 1 MΩ. Raise f<sub>ch</sub> to 10.2 kHz and it reaches 20.4 µV: chop just above the 1/f corner, not as fast as you can.</li>
+    <li><b>Switch the chopper off.</b> From the start, click chopper on so that it reads chopper off: noise 0.5–100 Hz jumps from 0.273 µVrms to 1.32 µVrms, nearly all of it flicker noise, and the full 0.12 mV offset now sits on the signal (Worked Example 9.1).</li>
+    <li><b>Chop a small input pair.</b> Turn the chopper back on and raise amplifier 1/f corner f<sub>c</sub> to 4.6 kHz, the corner of a 100 µm² pair: f<sub>ch</sub> is now below the corner, the caption warns in red, and the noise reads 0.367 µVrms, 40 % above the 0.26 µVrms white floor. Raise chopper frequency f<sub>ch</sub> to 10 kHz and it falls to 0.308 µVrms, within 20 % (Worked Example 9.1). The small pair's offset is larger too: set input offset to 0.39 mV and the ripple grows from 12 to 39 mV.</li>
+    <li><b>Count the cost of a fast clock.</b> With f<sub>ch</sub> back at 4 kHz and f<sub>c</sub> at 460 Hz, click dry electrodes: the residual offset 2f<sub>ch</sub>Δq·R<sub>s</sub> rises from 0.40 µV to 8.0 µV, because R<sub>s</sub> grows from 50 kΩ to 1 MΩ. Raise f<sub>ch</sub> to 10 kHz and it reaches 20.1 µV, while the noise improves only from 0.273 to 0.266 µVrms: chop just above the 1/f corner, not as fast as you can.</li>
   </ol></div>
-  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>With the chopper on, the amplifier's 0.39 mV input offset no longer appears in the signal band. Where has it gone?</p>
+  <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>With the chopper on, the amplifier's 0.12 mV input offset no longer appears in the signal band. Where has it gone?</p>
     <div class="bd-check-opts" role="group" aria-label="Answers">
       <button type="button" data-why="The residual offset comes from mismatched charge injection through the electrode impedance, not from the amplifier: change input offset and it stays at 0.40 µV.">It has become the 0.40 µV residual offset</button>
-      <button type="button" data-correct data-why="The offset enters after the input chopper, so the output chopper multiplies it only once and moves it to fch: the ripple readout follows input offset times the gain of 100 (0.12 mV gives 12 mV).">Up to f<sub>ch</sub>, as a ripple of offset times gain that the low-pass must remove</button>
+      <button type="button" data-correct data-why="The offset enters after the input chopper, so the output chopper multiplies it only once and moves it to fch: the ripple readout follows input offset times the gain of 100 (0.12 mV gives 12 mV; the 0.39 mV of a 100 µm² pair gives 39 mV).">Up to f<sub>ch</sub>, as a ripple of offset times gain that the low-pass must remove</button>
       <button type="button" data-why="The output chopper undoes the input chopper only for what passes through both, the signal; the offset enters between them, is multiplied once, and survives as a square wave at fch until it is filtered.">It is cancelled, because the output chopper undoes the input chopper</button>
     </div>
     <p class="bd-check-fb" aria-live="polite"></p>
@@ -31,9 +31,11 @@
   var root = document.getElementById('bdChop'); if (!root || !window.BD) return;
   var rs = 5e4, chop = true;
   var S = BD.bind(root, {
-    fch: { map: function (v) { return 500 * Math.pow(10, 2 * v / 100); }, fmt: function (x) { return BD.eng(x) + 'Hz'; } },
-    fc:  { map: function (v) { return 10 * Math.pow(10, 3.2 * v / 100); }, fmt: function (x) { return BD.eng(x) + 'Hz'; } },
-    sw:  { fmt: function (x) { return x.toFixed(0) + ' nV/√Hz'; } },
+    // log scales with Worked Example 9.1's values on exact steps: f_ch 4 kHz at 0 (100 Hz … 40 kHz),
+    // f_c 460 Hz at 0 and 4.6 kHz (a 100 µm² pair) at 100
+    fch: { map: function (v) { return 4000 * Math.pow(10, v / 100); }, fmt: function (x) { return BD.eng(x) + 'Hz'; } },
+    fc:  { map: function (v) { return 460 * Math.pow(10, v / 100); }, fmt: function (x) { return BD.eng(x) + 'Hz'; } },
+    sw:  { fmt: function (x) { return x.toFixed(1) + ' nV/√Hz'; } },
     vos: { fmt: function (x) { return x.toFixed(2) + ' mV'; } }
   }, function () { draw(); });
   BD.seg(root, 'rs', function (v) { rs = parseFloat(v); draw(); });
@@ -41,7 +43,7 @@
   BD.toggle(tb, function (on) { chop = on; tb.textContent = on ? 'chopper on' : 'chopper off'; draw(); });
   var q = function (s) { return root.querySelector(s); };
   function draw() {
-    var sw = S.sw * 1e-9, fc = S.fc, fch = S.fch, fL = 0.5, fH = 100;
+    var sw = S.sw * Math.SQRT2 * 1e-9, fc = S.fc, fch = S.fch, fL = 0.5, fH = 100;   // the pair: √2 × one device
     var vu = sw * Math.sqrt((fH - fL) + fc * Math.log(fH / fL));
     var vc = sw * Math.sqrt((fH - fL) * (1 + 0.85 * fc / fch));
     var d = BD.setup(q('[data-c="p"]')), f = BD.frame(d, { x: [0.1, 1e5], y: [3e-9, 3e-6], xlog: true, ylog: true,

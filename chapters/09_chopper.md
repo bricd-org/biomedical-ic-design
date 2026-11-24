@@ -56,7 +56,7 @@ The baseband noise of a chopped amplifier is its white noise plus whatever flick
 <div class="tbox tbox-example" markdown="1">
 <div class="tbox-title">Worked Example 9.1 · Chopping the SG13G2 input pair</div>
 
-The 1000 µm² NMOS pair at 1 µA per device has a flicker corner of $$1.58\times10^{-13}/(18.5\ \text{nV})^2 = 460$$ Hz. Unchopped, its noise over 0.5–100 Hz is 1.29 µVrms, nearly all flicker. Chopped at 4 kHz, the baseband spectrum is flat at the thermal floor ([Figure 9.2](#fig-9-2)a) and the noise falls to **0.273 µVrms**, 5 % above the 0.26 µVrms thermal floor of the pair.
+The 1000 µm² NMOS pair at 1 µA per device has a flicker corner of $$1.58\times10^{-13}/(18.5\ \text{nV})^2 = 460$$ Hz. Unchopped, its noise over 0.5–100 Hz is 1.32 µVrms, nearly all flicker (the 1.29 µVrms of [Chapter 5]({% link chapters/05_devices.md %}) plus the thermal floor). Chopped at 4 kHz, the baseband spectrum is flat at the thermal floor ([Figure 9.2](#fig-9-2)a) and the noise falls to **0.273 µVrms**, 5 % above the 0.26 µVrms thermal floor of the pair.
 
 A 100 µm² pair has a corner of 4.6 kHz. Chopped at the same 4 kHz it gives 0.367 µVrms, 40 % above the floor; it needs about 10 kHz to come within 20 % ([Figure 9.3](#fig-9-3)b).
 
@@ -81,7 +81,7 @@ With $$\Delta q = 1$$ fC and $$f_\mathrm{ch} = 4$$ kHz, that is 0.4 µV for a 50
 
 **Clock errors.** A chopper clock whose duty cycle is not exactly 50 %, or whose two phases overlap or leave a gap, demodulates the signal imperfectly: the effective gain drops and a residue of the ripple appears at baseband. Non-overlapping clocks with a short, well-defined gap and a symmetric layout keep this small. Synchronising the chopper clock with the converter's sampling clock keeps the ripple and its harmonics from aliasing into the band ([Chapter 13]({% link chapters/13_sampling.md %})).
 
-The demo below puts the two sections together. It starts at Open-BioAFE's choice, 1000 µm² input devices (corner 460 Hz, 26 nV/√Hz) chopped at 4 kHz; switch the chopper off, slide f<sub>ch</sub> below the corner, or move to dry electrodes and watch the residual offset.
+The demo below puts the two sections together. It starts at Open-BioAFE's choice, 1000 µm² input devices (corner 460 Hz, 18.5 nV/√Hz per device, 0.12 mV of offset) chopped at 4 kHz; switch the chopper off, slide f<sub>ch</sub> below the corner, or move to dry electrodes and watch the residual offset.
 
 {::nomarkdown}
 {% include demos/chop.html %}
@@ -160,7 +160,7 @@ Simulating a chopper amplifier only with AC and noise analyses. Chopping is a ti
 <div class="tbox-title">Key takeaways</div>
 
 - Two choppers pass the signal and move the amplifier's offset and $$1/f$$ noise to $$f_\mathrm{ch}$$; the baseband noise approaches the white floor when $$f_\mathrm{ch}$$ is above the flicker corner.
-- For the 1000 µm² SG13G2 pair (corner 460 Hz), chopping at 4 kHz cuts the EEG-band noise from 1.29 to 0.27 µVrms.
+- For the 1000 µm² SG13G2 pair (corner 460 Hz), chopping at 4 kHz cuts the EEG-band noise from 1.32 to 0.27 µVrms.
 - The offset becomes a ripple of offset × gain at $$f_\mathrm{ch}$$ (±39 mV for a 100 µm² pair at gain 100); a ripple-reduction loop nulls it at its source.
 - Charge-injection mismatch leaves $$2f_\mathrm{ch}\Delta qR_\mathrm{s}$$ of residual offset, 0.4–8 µV for 1 fC at 4 kHz.
 - Auto-zeroing folds wideband noise into the band; chopping does not.

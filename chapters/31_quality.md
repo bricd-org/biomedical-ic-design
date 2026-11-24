@@ -87,7 +87,7 @@ The **normalised LMS** (NLMS) update makes the step independent of the reference
 
 Three conditions make it work on real data. The references must be sampled on the same clock as the signal, or their delay changes and the filter chases it; this is one more argument for measuring impedance on the recording chip. The references must not contain the biosignal: an impedance trace demodulated out of band is clean, but an accelerometer on the head picks up the ballistocardiogram, the tiny motion of each heartbeat, and can cancel part of a cardiac signal. And the filter must be stopped from adapting when there is no movement, or reset after a large one, or it drifts.
 
-Try it below on the same kind of synthetic recording. Change the references, the step size and the number of taps, slide how much of the artefact comes through the impedance, and switch the regularisation off to see the filter fail between movements.
+Try it below on the same kind of synthetic recording, with Figure 31.1's settings: 256 S/s, 8 taps per reference, μ = 0.01 and δ of one per tap. The recording is generated in your browser, so its numbers differ a little from the figure's. Change the references, the step size and the number of taps, slide how much of the artefact comes through the impedance, and switch the regularisation off to see the filter fail between movements.
 
 {::nomarkdown}
 {% include demos/nlms.html %}

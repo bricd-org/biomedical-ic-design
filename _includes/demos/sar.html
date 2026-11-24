@@ -36,8 +36,8 @@
   <p class="sard-stats" id="sardStats"></p>
   <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
     <li><b>Step one binary search.</b> At the start (binary · 12, v<sub>in</sub> = +0.1234 V), press Step twelve times: each decision moves the DAC by half the previous step (1024, 512, 256 &hellip; 0.50 LSB), and the conversion ends at code 2553, ideal 2553, error 0 LSB.</li>
-    <li><b>Let noise flip a decision.</b> Set v<sub>in</sub> to +0.1255 V, where decision 2 leaves a residue of only 2.05 LSB, switch on Noisy fast decisions and press Run a few times. In about one run in four, decision 3 turns red and the code ends at 2559, error &minus;3 LSB: the binary steps still to come add up to less than the 256 LSB step just taken, so they cannot undo it.</li>
-    <li><b>Count the damage.</b> With the noise still on, press Convert 1000 inputs: the binary search is off by more than 1 LSB for roughly 8&ndash;9 % of inputs (rms error about 1.2 LSB, against 0.29 LSB noise-free), while radix 1.8 stays near 0.45 LSB rms with only about 2 % off.</li>
+    <li><b>Let noise flip a decision.</b> Set v<sub>in</sub> to +0.1255 V, where decision 2 leaves a residue of only 2.05 LSB, switch on Noisy fast decisions and press Run a few times. In about three runs in ten, decision 3 turns red and the code ends at 2559, error &minus;3 LSB: the binary steps still to come add up to 255.5 LSB, less than the 256 LSB step just taken, so they cannot undo it.</li>
+    <li><b>Count the damage.</b> With the noise still on, press Convert 1000 inputs: the binary search is off by more than 1 LSB for roughly 8&ndash;10 % of inputs (rms error 1.0&ndash;1.2 LSB, against 0.29 LSB noise-free), while radix 1.8 stays near 0.45 LSB rms with only about 2 % off. Switch the noise off and convert again: now radix 1.8 is slightly worse, 0.36 against 0.29 LSB rms, because its steps do not add up to whole codes and the sum must be rounded. Redundancy pays only when decisions can go wrong.</li>
   </ol></div>
   <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>The radix-1.8 search spends 14 decisions on the same 12-bit code. What do the two extra decisions buy?</p>
     <div class="bd-check-opts" role="group" aria-label="Answers">
@@ -118,6 +118,7 @@
   }
   function fmtV(v) { return (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(4) + ' V'; }
   function fmtL(e) { var a = Math.abs(e); return a >= 100 ? a.toFixed(0) : a >= 10 ? a.toFixed(1) : a.toFixed(2); }
+  function fmtSum(e) { var a = Math.abs(e); return a >= 10 ? a.toFixed(1) : a.toFixed(2); }   // 255.5 must not print as 256
 
   function reset() {
     stop();
@@ -136,9 +137,12 @@
     var rest = 0; for (var i = S.k; i < S.steps.length; i++) rest += S.steps[i];
     var t = 'Decision ' + S.k + ': ' + (d ? 'v<sub>in</sub> &gt; v<sub>DAC</sub>, so the bit is 1 and the DAC moves up ' : 'v<sub>in</sub> &lt; v<sub>DAC</sub>, so the bit is 0 and the DAC moves down ') +
             fmtL(s) + ' LSB. ';
+    // the best the remaining steps can do leaves |residue| - rest; under 1 LSB the code may still come out right
+    var left = Math.abs(S.vin - S.x) - rest;
     if (wrong) t += '<b style="color:#f39a7c">Noise flipped this decision</b>: the residue was only ' + fmtL(e) + ' LSB, inside the comparator noise. ' +
-            (rest >= Math.abs(S.vin - S.x) ? 'The steps still to come add up to ' + fmtL(rest) + ' LSB, enough to undo it.' :
-             'The steps still to come add up to only ' + fmtL(rest) + ' LSB, so the error stays in the result.');
+            (left <= 0 ? 'The steps still to come add up to ' + fmtSum(rest) + ' LSB, enough to undo it.' :
+             left < 1 ? 'The steps still to come add up to ' + fmtSum(rest) + ' LSB, which leaves at least ' + fmtL(left) + ' LSB of error: under one LSB, so the code may still come out right.' :
+             'The steps still to come add up to only ' + fmtSum(rest) + ' LSB, so at least ' + fmtL(left) + ' LSB of error stays in the result.');
     else t += 'Residue now ' + fmtL(S.vin - S.x) + ' LSB.';
     if (S.k === S.steps.length) {
       var err = codeOf(S.x) - idealOf(S.vin);

@@ -11,7 +11,7 @@
   <p class="bd-caption" data-o="cap"></p>
   <div class="bd-try"><p class="bd-try-h">Three things to try</p><ol>
     <li><b>Break coherence.</b> At the start (67.00 cycles, 12 bits, no window) the SNR read from the FFT is 73.9 dB against the ideal 74.0 dB. Slide the tone to 67.30 cycles: the record is not coherent, the leakage skirt fills the spectrum and the same perfect converter reads 10.2 dB.</li>
-    <li><b>Window the leak.</b> Keep 67.30 cycles and choose Hann: 36.3 dB, much better, but the Hann sidelobes close to the tone still count as noise. Choose Blackman–Harris: 73.8 dB, within 0.2 dB of ideal, because its leakage stays below the 12-bit floor outside the main lobe.</li>
+    <li><b>Window the leak.</b> Keep 67.30 cycles and choose Hann: 36.3 dB, much better, but the Hann sidelobes close to the tone still count as noise, as the chapter warns. Choose Blackman–Harris: 73.8 dB, within 0.2 dB of ideal, because its leakage stays below the 12-bit floor (the gold line, −107 dBFS per bin without a window, a few dB higher with one) outside the main lobe.</li>
     <li><b>Avoid an even cycle count.</b> Back on no window, set the tone to 64.00 cycles: coherent, yet the SNR reads 75.7 dB, better than an ideal 12-bit converter can be. With exactly 64 samples per cycle the same 64 codes repeat, so the quantisation error collapses into a handful of spurs instead of noise; a prime count such as 61 or 67 reads 73.9 dB.</li>
   </ol></div>
   <div class="bd-check"><p class="bd-check-q"><span class="bd-check-h">Check yourself</span>Blackman–Harris restores the ideal SNR at 67.30 cycles with 12 bits. Keep that window and tone and test a 16-bit converter instead: what do you expect?</p>
@@ -55,7 +55,9 @@
     var xs = [], ys = [];
     for (k = 1; k < N / 2; k++) { xs.push(k); ys.push(10 * Math.log10(P[k] + 1e-30)); }
     BD.line(f, xs, ys, BD.C.blue, 0.8);
-    var floor = 10 * Math.log10(dq * dq / 12 * 2 / N * (sw2 * N) / (sw * sw));
+    // per-bin noise: 4 σ² Σw² / (Σw)² with σ² = Δ²/12, on the same scale as P (a full-scale sine reads 0 dB):
+    // −107 dBFS for 12 bits and no window, as the chapter's processing-gain paragraph says
+    var floor = 10 * Math.log10(dq * dq / 12 * 4 * sw2 / (sw * sw));
     BD.hline(f, floor, BD.C.gold, [5, 4], 'quantisation floor per bin');
     var coh = Math.abs(S.cyc - Math.round(S.cyc)) < 1e-9;
     q('[data-o="snr"]').textContent = snr.toFixed(1) + ' dB';
