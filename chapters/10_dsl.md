@@ -98,7 +98,7 @@ With a 1.2 V integrator swinging ±0.5 V around mid-supply, $$C_\mathrm{DSL} \ge
 
 With an integrator built from the 3.3 V thick-oxide devices, swinging ±1.5 V, $$C_\mathrm{DSL} = 4$$ pF and the noise gain is **1.32**, 18 % above the case without a loop ([Figure 10.2](#fig-10-2)b). Its current is tiny, because the loop works at DC, so the higher supply costs well under a microwatt.
 
-The high-pass corner: with $$C_\mathrm{DSL}/C_\mathrm{fb} = 4\ \text{pF}/200\ \text{fF} = 20$$, a 0.5 Hz corner needs $$\tau_\mathrm{int} = 20/(2\pi \times 0.5) = 6.4$$ s. An active-RC integrator with 1 pF and a thick-oxide pseudo-resistor (about $$10^{13}$$ Ω at body temperature) gives about 10 s, but that resistance moves by a factor of six between process corners at 37 °C, and by far more over temperature ([Chapter 30]({% link chapters/30_flow.md %})); a bias-controlled pseudo-resistor ([Chapter 8]({% link chapters/08_lna.md %})) holds the corner against both. A small integrating current from a subthreshold transconductor does the same.
+The high-pass corner: with $$C_\mathrm{DSL}/C_\mathrm{fb} = 4\ \text{pF}/200\ \text{fF} = 20$$, a 0.5 Hz corner needs $$\tau_\mathrm{int} = 20/(2\pi \times 0.5) = 6.4$$ s. An active-RC integrator with 1 pF and a thick-oxide pseudo-resistor (about $$10^{13}$$ Ω at body temperature) gives about 10 s, but that resistance moves by a factor of six between process corners at 37 °C, and by far more over temperature ([Chapter 30]({% link chapters/30_flow.md %})); a bias-controlled pseudo-resistor ([Chapter 8]({% link chapters/08_lna.md %})) holds the corner against both. A small integrating current from a subthreshold transconductor does the same. Open-BioAFE uses the bias-controlled pseudo-resistor, and its bias current doubles as a fast-settle control: raised a hundredfold after power-up or an overload, it moves the corner to about 50 Hz, and the loop settles to the electrode offset in about 16 ms instead of 1.6 s (0.5 Hz) or 16 s (0.05 Hz), five time constants each.
 
 </div>
 
@@ -134,7 +134,7 @@ A chopped CCIA no longer blocks DC, so it needs a DC servo loop, and its input i
 <div class="tbox tbox-specnote" markdown="1">
 <div class="tbox-title">Open-BioAFE target</div>
 
-DC servo loop with a 3.3 V thick-oxide integrator (±1.5 V), $$C_\mathrm{DSL} = 4$$ pF, ±300 mV offset range, high-pass corner 0.5 Hz (selectable down to 0.05 Hz), integrator output sampled by the SAR as an electrode-offset monitor. Positive-feedback boosting to above 100 MΩ at 10 Hz (residual ≤ 6 %), input pads below 2 pF each. Total LNA noise gain about 1.32: chopped input noise about 0.36 µVrms over 0.5–100 Hz.
+DC servo loop with a 3.3 V thick-oxide integrator (±1.5 V), $$C_\mathrm{DSL} = 4$$ pF, ±300 mV offset range, high-pass corner 0.5 Hz (selectable down to 0.05 Hz), set by a bias-controlled thick-oxide pseudo-resistor in the integrator whose programmable replica current fixes the corner against process and temperature (a plain one moves it 6.5 times between process corners at 37 °C, [Chapter 30]({% link chapters/30_flow.md %})); a fast-settle mode raises that current a hundredfold (corner about 50 Hz) for about 20 ms after power-up or an overload; integrator output sampled by the SAR as an electrode-offset monitor. Positive-feedback boosting to above 100 MΩ at 10 Hz (residual ≤ 6 %), input pads below 2 pF each. Total LNA noise gain about 1.32: chopped input noise about 0.36 µVrms over 0.5–100 Hz.
 
 </div>
 

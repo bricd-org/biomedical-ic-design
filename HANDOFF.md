@@ -292,6 +292,16 @@ The user asked for the labs to be a top-level section like the photonics tutoria
   pitfall (no device transient noise in ngspice), Ch 8 pitfall (points to WE 30.1), Ch 10 (pseudo-resistor
   integrator spread; recommends a bias-controlled one).
 - Appendix A regenerated (56 key equations).
+- **Specs added (user's decision, 24 Nov):** Ch 8 specnote: thick-oxide NMOS reset switch (0.5/0.5 µm, gate 0 V
+  off) across each C₂ of the unchopped LNA; `sg13_flow.py --reset` (check 4, `sg13_flow_reset.csv`): junction
+  leakage 0.06/0.23/0.31/1.6 fA at 0/37/45/85 °C, DC shift across the pseudo-resistor 2–15 mV at 37 °C, at most
+  0.12 V (ss, 0 °C); a thick-oxide PMOS switch leaks 19–500 fA (shift 0.34–4 V), so NMOS only. Ch 8 §8.5
+  voltage-dependence bullet points to it. Ch 10: bias-controlled thick-oxide pseudo-resistor in the servo
+  integrator with a programmable replica current (sets 0.5/0.05 Hz, holds it over process and 0–45 °C) and a
+  fast-settle mode (current ×100, corner ≈ 50 Hz, settles in ~16 ms vs 1.6 s / 16 s; spec says ~20 ms), in the
+  WE 10.2 text and the specnote. Ch 29: new Table 29.1 row "High-pass corner" and the specnote. Ch 30 WE 30.2
+  says the specs took both lessons. Not done: no simulation of the bias-controlled pseudo-resistor itself (its
+  femtoampere replica currents are a real design task for Lab 5 or a later revision).
 
 ## 3. Decisions already made (do not re-litigate)
 
@@ -731,7 +741,5 @@ indico.cern.ch/event/1381495/contributions/5988502/ · MEDTEQ CMRR and Zin artic
   Ch 9 (1.29 → 1.32 µVrms unchopped), Ch 20 (four → eight times), Ch 22 (Hann sentence), Ch 27 (30 → 46 µW)
   and the demo intros of Ch 19, 24, 31 and 33. The user may want to skim those before pushing.
 - When to tag `v0.1`: after the mismatch fixes, or now?
-- **New 24 Nov (Ch 30, WE 30.2):** the thick-oxide pseudo-resistor's corner spans 0.0004–0.15 Hz over the
-  five MOS corners and 0–45 °C, and RC₂ reaches 400 s at ss/0 °C. Ch 30 now says the LNA needs a reset
-  switch across C₂ (or a fast-settling mode), and Ch 10 now recommends a bias-controlled pseudo-resistor for the
-  servo integrator. Neither is in the Ch 8/10/29 specnotes or Fig 29.1 yet: add them, or leave as advice?
+- ~~Reset switch and bias-controlled servo pseudo-resistor: specs or advice?~~ **Decided 24 Nov: in the specs**
+  (Ch 8, Ch 10, Ch 29 specnote and Table 29.1; section 2g). Fig 29.1 is block-level and unchanged.

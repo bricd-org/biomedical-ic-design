@@ -2,8 +2,9 @@
 
     python labs/spice/sg13_flow.py            # needs Docker and hpretl/iic-osic-tools:2026.10
     python labs/spice/sg13_flow.py --mc 400   # fewer Monte Carlo samples, for a quick check
+    python labs/spice/sg13_flow.py --reset    # only check 4 (needs sg13_flow_corners.csv from a full run)
 
-Three checks on numbers this tutorial depends on:
+Four checks on numbers this tutorial depends on:
   1. Simulator settings: the thick-oxide pseudo-resistor of Chapter 8 (one back-to-back pair of
      sg13_hv_pmos, W/L = 1/10 um, tt, 27 degC) with gmin from 1e-9 to 1e-18 S and abstol at 1e-12 A
      (the ngspice default), 1e-15 and 1e-18 A.
@@ -12,7 +13,12 @@ Three checks on numbers this tutorial depends on:
      (the comparator's input pair, Chapter 16) with mos_tt_mismatch and mm_ok=1; and, without mismatch,
      gm and gds at that operating point, because a diode-connected device turns a threshold shift into
      a gate-voltage shift of only gm / (gm + gds) of it.
-Results: figsrc/data/sg13_flow_gmin.csv, sg13_flow_corners.csv, sg13_flow_mc.csv, sg13_flow_gmgds.csv.
+  4. Reset switch across C2 of the unchopped LNA (Chapter 8): off-state leakage of a 0.5/0.5 um thick-oxide
+     NMOS (gate and bulk at 0 V) and PMOS (gate and n-well at 3.3 V) with its terminals at 0.62 and 0.60 V,
+     at tt/ss/ff and 0, 37, 45, 85 degC. The current each terminal sends to the bulk must flow through the
+     pseudo-resistor, so it shifts that resistor's DC level by I x R (R from check 2 at the same corner).
+Results: figsrc/data/sg13_flow_gmin.csv, sg13_flow_corners.csv, sg13_flow_mc.csv, sg13_flow_gmgds.csv,
+sg13_flow_reset.csv.
 """
 import argparse, os, re, sys
 import numpy as np
@@ -103,6 +109,46 @@ def gm_gds():
     return vg, i0, gm, gds
 
 
+RESET = """* off reset switch {dev}, {corner}, {temp} degC
+.lib cornerMOShv.lib mos_{corner}
+.temp {temp}
+.option gmin=1e-18 abstol=1e-18
+Vx x 0 0.62
+Vo o 0 0.60
+Vg g 0 {vg}
+Vb b 0 {vb}
+XM x g o b sg13_hv_{dev} w=0.5u l=0.5u ng=1 m=1
+.control
+op
+let ix = -i(Vx)
+let io = -i(Vo)
+wrdata /work/out/{tag}.txt ix io
+.endc
+.end
+"""
+RESET_CASES = [("nmos", c, t) for c in ("tt", "ss", "ff") for t in (0, 37, 45, 85)] + \
+              [("pmos", c, t) for c in ("tt", "ff") for t in (37, 45)]
+
+
+def reset_check():
+    """Leakage of the off reset switch, and the DC shift it causes across the pseudo-resistor."""
+    bias = {"nmos": (0.0, 0.0), "pmos": (3.3, 3.3)}
+    nl = {f"flow_reset_{d}_{c}_{t}": RESET.format(dev=d, corner=c, temp=t, vg=bias[d][0], vb=bias[d][1],
+                                                  tag=f"flow_reset_{d}_{c}_{t}") for d, c, t in RESET_CASES}
+    ch.run(nl)
+    r = {}
+    for line in open(os.path.join(ch.DATA, "sg13_flow_corners.csv")).read().split()[1:]:
+        c, t, v = line.split(","); r[(c, int(t))] = float(v)
+    with open(os.path.join(ch.DATA, "sg13_flow_reset.csv"), "w") as f:
+        f.write("device,corner,temp_C,I_from_x_A,I_from_o_A,R_pseudo_ohm,shift_V\n")
+        for d, c, t in RESET_CASES:
+            a = np.loadtxt(os.path.join(ch.OUT, f"flow_reset_{d}_{c}_{t}.txt"))
+            ix, io = a[1], a[3]
+            shift = abs(ix) * r[(c, t)]
+            f.write(f"{d},{c},{t},{ix:.4e},{io:.4e},{r[(c, t)]:.4e},{shift:.4e}\n")
+            print("reset %s %s %3d C: %.3g A from x, R %.3g ohm, shift %.3g mV" % (d, c, t, ix, r[(c, t)], shift * 1e3))
+
+
 def r_at(tag, v0=0.02):
     """Small-signal resistance dV/dI at v0, as figsrc/ch08_figs.py computes it."""
     v, i = ch.load(tag, 1)
@@ -112,7 +158,11 @@ def r_at(tag, v0=0.02):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--mc", type=int, default=4000, help="Monte Carlo samples")
+    ap.add_argument("--reset", action="store_true", help="run only the reset-switch check")
     args = ap.parse_args()
+    if args.reset:
+        reset_check()
+        return
     nl = {}
     for g in GMINS:
         for a in ABSTOLS:
@@ -146,6 +196,7 @@ def main():
         f.write(f"{vg:.5f},{i0:.5e},{gm:.5e},{gds:.5e}\n")
     print("Monte Carlo: %d samples, sigma %.3f mV" % (len(vos), np.std(vos, ddof=1) * 1e3))
     print("diode point: VGS %.4f V, gm/gds %.1f, gm/(gm+gds) %.3f" % (vg, gm / gds, gm / (gm + gds)))
+    reset_check()
     print("wrote", ch.DATA)
 
 
