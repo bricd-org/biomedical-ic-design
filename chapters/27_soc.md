@@ -142,7 +142,7 @@ Compute the features on chip and send them, with raw data only on demand and los
 <div class="tbox tbox-specnote" markdown="1">
 <div class="tbox-title">Open-BioAFE target</div>
 
-On chip: decimation, the feature paths of [Chapters 24–26]({% link chapters/24_ecg.md %}) (RR intervals, band powers, EMG features, spike times) and lossless difference coding for raw streams. Out: an SPI interface to an external BLE or backscatter radio, features by default (0.3–12.5 kb/s), raw data on demand. Separate analog, converter and digital LDOs; front-end PSRR ≥ 80 dB. No stimulator in the first revision.
+On chip: decimation, the feature paths of [Chapters 24–26]({% link chapters/24_ecg.md %}) (RR intervals, band powers, EMG features, spike times) and lossless difference coding for raw streams. Out: an SPI interface to an external BLE or backscatter radio, features by default (0.3–12.5 kb/s), raw data on demand, each with its signal-quality record (about 0.35 kb/s, [Chapter 31]({% link chapters/31_quality.md %})). Separate analog, converter and digital LDOs; front-end PSRR ≥ 80 dB. No stimulator in the first revision.
 
 </div>
 

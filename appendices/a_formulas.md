@@ -451,10 +451,40 @@ $$e[n] = d[n] - \mathbf{w}^\mathsf{T}\mathbf{x}[n], \qquad \mathbf{w} \leftarrow
 
 $$\mathbf{x}$$ holds the last $$L$$ samples of every reference, $$0 < \mu < 2$$ is the step size and $$\delta$$ regularises the division.
 
+**How fast NLMS learns, and what it costs**
+
+$$\tau \approx \frac{L}{2\mu_\mathrm{eff}}\ \text{samples}, \qquad \mathcal{M} \approx \frac{\mu_\mathrm{eff}}{2 - \mu_\mathrm{eff}}, \qquad \mu_\mathrm{eff} = \mu\,\frac{\mathbf{x}^\mathsf{T}\mathbf{x}}{\delta + \mathbf{x}^\mathsf{T}\mathbf{x}}$$
+
+$$\tau$$ is the time constant of the output's mean-square error, $$L$$ the total number of weights, and $$\mathcal{M}$$ the misadjustment: the excess output power, as a fraction of the power the filter cannot remove, mostly the biosignal itself. Both hold for white references; narrowband, bursty references learn their slowest components more slowly.
+
+### [32. Ear-EEG and Multimodal Sensing at the Ear]({% link chapters/32_ear.md %})
+
+**Ratio of ratios and the power of the light**
+
+$$
+R = \frac{(\mathrm{AC}/\mathrm{DC})_\mathrm{red}}{(\mathrm{AC}/\mathrm{DC})_\mathrm{IR}}, \qquad \mathrm{SpO_2} \approx 110 - 25R, \qquad P_\mathrm{LED} = N_\lambda\, I_\mathrm{LED}\, V_\mathrm{LED}\, t_\mathrm{p}\, f_\mathrm{s}
+$$
+
 ### [33. Closed-Loop Systems]({% link chapters/33_closedloop.md %})
 
 **Phase error from latency**
 
 $$\Delta\varphi = 360^\circ \cdot f \cdot \tau$$
 
-A latency $$\tau$$ that is not compensated becomes a phase error $$\Delta\varphi$$ at the rhythm's frequency $$f$$; a jitter in $$\tau$$ becomes a phase jitter by the same rule.
+A latency $$\tau$$ that is not compensated becomes a phase error $$\Delta\varphi$$ at the rhythm's frequency $$f$$; a jitter in $$\tau$$ becomes a phase jitter by the same rule, and a latency compensated with a frequency that is wrong by $$\delta f$$ leaves $$360^\circ \cdot \delta f \cdot \tau$$.
+
+**Recovery after a step at the input**
+
+$$
+t_\mathrm{rec} = \tau \ln\frac{V_0}{V_\mathrm{ok}}\ \ (V_0 \le V_\mathrm{lin}), \qquad t_\mathrm{rec} = \tau\left(\frac{V_0}{V_\mathrm{lin}} - 1 + \ln\frac{V_\mathrm{lin}}{V_\mathrm{ok}}\right)\ \ (V_0 > V_\mathrm{lin}), \qquad \tau = \frac{1}{2\pi f_\mathrm{HP}}
+$$
+
+$$V_0$$ is the step at the input, $$V_\mathrm{lin}$$ the LNA's linear input range, $$f_\mathrm{HP}$$ the servo's high-pass corner and $$V_\mathrm{ok}$$ the residual you accept: the converter's range for the end of the blind time, the input noise for a clean record. Stimuli at a rate $$f_\mathrm{stim}$$ lose a fraction $$f_\mathrm{stim}\,t_\mathrm{rec}$$ of the recording.
+
+**The averaging gain**
+
+$$
+\sigma_N = \frac{\sigma_1}{\sqrt N}, \qquad \mathrm{SNR}_N = N\,\frac{A^2\,T_\mathrm{ep}}{e_\mathrm{n}^2}, \qquad T = N\,T_\mathrm{ep} = \mathrm{SNR}_\mathrm{req}\,\frac{e_\mathrm{n}^2}{A^2}
+$$
+
+$$A$$ is the response's rms amplitude, $$e_\mathrm{n}$$ the noise density at its frequency and $$\mathrm{SNR}_\mathrm{req}$$ the power ratio a detection needs.

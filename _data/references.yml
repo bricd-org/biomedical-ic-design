@@ -137,3 +137,7 @@
   text: "J. H. Choi, H. K. Jung and T. Kim. “A new action potential detector using the MTEO and its effects on spike sorting systems at low signal-to-noise ratios.” *IEEE Transactions on Biomedical Engineering*, 53(4):738–746, 2006."
 - key: quiroga2004
   text: "R. Quian Quiroga, Z. Nadasdy and Y. Ben-Shaul. “Unsupervised spike detection and sorting with wavelets and superparamagnetic clustering.” *Neural Computation*, 16(8):1661–1687, 2004."
+- key: mendelson1992
+  text: "Yitzhak Mendelson. “Pulse oximetry: theory and applications for noninvasive monitoring.” *Clinical Chemistry*, 38(9):1601–1607, 1992."
+- key: budidha2014
+  text: "Karthik Budidha and Panayiotis A. Kyriacou. “The human ear canal: investigation of its suitability for monitoring photoplethysmographs and arterial oxygen saturation.” *Physiological Measurement*, 35(2):111–128, 2014."

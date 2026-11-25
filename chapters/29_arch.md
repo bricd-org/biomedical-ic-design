@@ -96,7 +96,7 @@ The demo below holds the two budgets of [Figure 29.3](#fig-29-3). Change the LNA
 | Input noise, 0.5–100 Hz | < 1.5 µVrms | 0.51 µVrms (wet), 1.26 µVrms (dry) | 3, 6, 9–12 |
 | CMRR test residual | < 1 mVpp (≈ 89 dB) | 0.06 mVpp (24 dB margin) | 4, 7, 10, 12 |
 | Electrode offset | ±300 mV | ±300 mV with the 4 pF, 3.3 V servo loop | 10 |
-| High-pass corner | 0.5 Hz; 0.05 Hz for diagnostic ECG | 0.5 or 0.05 Hz from the servo's programmable bias, held over process and 0–45 °C; 20 ms fast-settle mode | 8, 10, 30 |
+| High-pass corner | 0.5 Hz; 0.05 Hz for diagnostic ECG | 0.5 or 0.05 Hz from the servo's programmable bias, held over process and 0–45 °C; fast-settle mode while clipped and 26 ms after | 8, 10, 30, 33 |
 | Input impedance | ≥ 2.5 MΩ; ≥ 100 MΩ for dry | 6.25 MΩ chopped; about 200 MΩ boosted | 9, 10 |
 | ECG/EEG converter | 16 bits | incremental ΔΣ, 16.5 bits at 500 S/s | 13, 19, 20 |
 | EMG/spike converter | 12 bits | asynchronous SAR, ENOB ≥ 11, 16 kS/s shared | 13–18 |

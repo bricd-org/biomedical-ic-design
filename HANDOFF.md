@@ -1,7 +1,16 @@
 # HANDOFF — Open-BioAFE Tutorial (pick up here)
 
-Last updated: 24 November 2026. **Live and complete** (Pages redeploys on every push to `main`; last deploy checked 23 Nov at `abde58f`):
+Last updated: 24 November 2026. **Live and complete** (Pages redeploys on every push to `main`; last push 24 Nov, Part VI deepened):
 https://www.thebricd.org/biomedical-ic-design/
+
+**24 Nov 2026, end of the first release.** Part VI (Ch 31–33) was deepened to the Part I–IV standard (section 2h), the
+site was checked and pushed, and the user then **deleted the local clone to save disk space**. The tag `v0.1`
+already existed (annotated, 15 Nov, on `f750250`, the chapters 1–31 state) and was left as it is; the 24 Nov state
+is not tagged. To work on it
+again: `git clone git@github.com:bricd-org/biomedical-ic-design.git` (SSH; HTTPS has no credentials), then rebuild
+what is git-ignored as section 6 says (`.venv`, PhysioNet downloads in `data/`, ngspice working files in
+`labs/spice/char/`, lab outputs). Nothing in those folders was unique: every result is in the chapters and in
+`figsrc/data/`.
 
 **Where things stand, in one paragraph.** Every page is written: preface, 33 chapters in six parts, the
 Hands-On Labs section (15 labs with scripts plus a capstone), the Interactive Demos page (17 demos, each
@@ -50,7 +59,7 @@ tutorial, which is now live. The user works directly on `main`.
 | Site (Jekyll 4.4 + just-the-docs 0.10.1, BRICD theme, dark mode, KaTeX) | done; builds cleanly |
 | Home page `index.md` (cover `assets/images/cover.svg`/`.png`, key numbers, signal chain, part cards) | done; the cards' "written" status badges were removed 19 Nov (user's request) |
 | Interactive Demos `demos.md` (`/demos/`, nav 1.5) | **done** (19 Nov 2026): 17 demos with things to try and a quiz each; section 2f |
-| Part VI · Wearable Systems, Ch 31–33 (`31_quality.md`, `32_ear.md`, `33_closedloop.md`) | **written** (16 Nov 2026, as Ch 32–34; renumbered 18 Nov): thinner than Parts I–IV, see section 4 "Now"; no NeurEar details (user's rule) |
+| Part VI · Wearable Systems, Ch 31–33 (`31_quality.md`, `32_ear.md`, `33_closedloop.md`) | **written** (16 Nov 2026, as Ch 32–34; renumbered 18 Nov); **deepened 24 Nov** (section 2h): 3–4 worked examples, 1–3 key equations and two figures each; no NeurEar details (user's rule) |
 | Preface `preface.md` (incl. reading-paths figure `assets/figs/reading-paths.svg`) | **written** |
 | Ch 1–4 (Part I) | **written** (11 Nov 2026): full text, 15 figures (incl. diagrams `ch03_electrode_model.svg`, `ch04_mains_coupling.svg`), 5 tables, worked examples; every number checked against `biosig.py` |
 | Ch 13 | **written** (12 Nov 2026): aliasing of mains harmonics (250 Hz → 6 Hz at 256 S/s), anti-alias order (8th at 500 S/s vs 3rd at 2 kS/s), quantisation model and its failures, dither, oversampling, jitter, Table 13.1 (rate and bits per mode); 3 figures from `figsrc/ch13_figs.py` |
@@ -303,6 +312,49 @@ The user asked for the labs to be a top-level section like the photonics tutoria
   says the specs took both lessons. Not done: no simulation of the bias-controlled pseudo-resistor itself (its
   femtoampere replica currents are a real design task for Lab 5 or a later revision).
 
+## 2h. Part VI deepened; v0.1 (24 Nov 2026)
+
+User's request: finish Part VI, push, finalise, then delete the local clone. Ch 31 written here; Ch 32 and Ch 33 by
+two subagents with the same brief (only their chapter, `figsrc/chNN_figs.py` and new SVGs), then reviewed. Every
+new number is printed by the chapter's script (`python figsrc/ch31_figs.py`; `python figsrc/ch32_figs.py report`;
+`python figsrc/ch33_figs.py report`). Appendix A regenerated: 60 key equations.
+
+- **Ch 31** (3,300 words): key equation *How fast NLMS learns* (τ ≈ L/2μ_eff samples, M ≈ μ_eff/(2−μ_eff),
+  μ_eff = μ·x'x/(δ+x'x); checked on white references: 899 vs 800 samples). WE 31.2 step size on Fig 31.1's scene
+  (x'x ≈ 34 while walking, μ_eff = 0.68μ, τ 4.6 s at μ = 0.01; minute 10.3/12.2/10.5/7.2/5.0 dB for μ =
+  0.003/0.01/0.03/0.1/0.3; first walk worst for every μ). WE 31.3 line the references up (impedance trace through
+  a 10 Hz output filter is 23 ms late: 12.2 → 10.6 dB; 2 Hz/123 ms: 7.6 dB; aligning recording *and* accelerometer
+  restores 12.2 (13.0); delaying only the recording gives 9.4). Fig 31.2 `ch31_learning.svg`. WE 31.4 quality
+  record 352 b/s (1.1 % of raw EEG, 1.8 µW at 5 nJ/b, 92 % of band powers; 64 b/s class-only). New specnote
+  (quality record per 250 ms window, impedance once a second, DC lead-off off while recording, NLMS off chip in
+  rev 1); Ch 27 specnote mentions the record. §31.2 impedance bullet now says the tone sees a dry contact only
+  through its capacitance (Ch 32's finding). §31.5 arithmetic fixed (64 000 MAC/s per pass, 128 000 in all).
+  Least-squares ceiling 18.1 dB confirmed.
+- **Ch 32** (subagent; ~3,600 words): new §32.4 "What dry contacts ask of the input" (old 32.4/32.5 → 32.5/32.6).
+  WE 32.2 dry ear contacts (564 kΩ imbalance, 51 dB effective CMRR, 3.4 µVrms of 50 Hz at 200 MΩ, 1.40 GΩ for
+  0.5 µV; RLD phase margin 54°); 51.2 kHz tone reads 5.04 kΩ at −7.5°, track the quadrature part (×848 → 50 Hz
+  interface impedance while R_pC_p = 4.7 ms). Key equation ratio of ratios + LED power; WE 32.3 SpO2 (±1 point
+  needs 2.8e-4 of DC; ambient 10 % makes 85 % read 86.1 %; LEDs 330 µW or 41 µW at 25 S/s, 25 µs). WE 32.4 data
+  and power (raw 25.2 kb/s, 226 µW radio; features 187 b/s, 5.9 µW; earpiece 583/282/74 µW = 10.6/22/83 days on
+  40 mAh). Fig 32.2 `ch32_system.svg`. New refs `mendelson1992`, `budidha2014` (70 references now).
+  Assumptions stated in the text: contact B at twice A's impedance, pulse 1 %/0.5 %, LEDs 10 mA/50 µs/3.3 V,
+  four channels at 250 S/s, accelerometer and radio processor left out of the power budget.
+- **Ch 33** (subagent; ~4,200 words): WE 33.1 on chip (2.9 ms: 0.8° / 10.6°) or through a phone (33–63 ms:
+  13° ± 4° / 174° ± 54°; scheduled on the sample counter, 5 % frequency error leaves 0.9° / 11.5°; radio 375 µW
+  vs 0.05 µW to decide on chip); §33.3 detuning 360°·τ_g·(f − f₀) (±8 % → +14°/−13°). Key equation *Recovery
+  after a step* and WE 33.2 (4.5 mV step: 0.63 s / 2.5 s at 0.5 Hz, 6.3 / 25 ms fast-settle; 50 mV slews for ten
+  τ: 38 / 58 ms fast; 1 stimulus/s loses 2.6 %); Fig 33.2 `ch33_recovery.svg` (loop simulation matches the
+  equation to 0.6 %). Key equation *Averaging gain* and WE 33.3 ASSR (2/15/58 epochs on the contacts' 0.75 µV;
+  whole dry channel 2/17/65; F-test 7.0 s; 50 ppm stimulus clock −0.8 dB). Decimator called
+  cascade-of-integrators as in Ch 20; ABR text: SAR one channel at 25 kS/s in spike mode (Ch 18 spec).
+- **Fast-settle spec changed (follows WE 33.2):** 20 ms leaves 8.4 µV of a 4.5 mV step, 26 ms (8τ) leaves 1.3 µV,
+  and a clipping step first slews. Ch 10 specnote and Table 29.1 now say *fast-settle while the LNA output is
+  clipped and 26 ms after* (was "about 20 ms"). WE 10.2's 16 ms (five τ) is unchanged. Ch 33 notes that its
+  recovery model takes the integrator resistor as linear, the pessimistic case: a pseudo-resistor with ~0.45 V
+  across it conducts tens of times more (Ch 8), so real slewing ends sooner.
+- Final check 24 Nov: crawl 66 pages, 6,490 links, 103 images, 0 problems; 1,387 equations on 66 pages, no KaTeX
+  errors; Part VI checked in dark mode at phone width (no horizontal scroll) and in light mode at desktop width.
+
 ## 3. Decisions already made (do not re-litigate)
 
 - **No LaTeX book, no PDF.** The Markdown pages are the source; edit them directly.
@@ -349,11 +401,13 @@ pushing (the user says "Commit and push" when they want it).
    1 packet), and the feature range is 0.3–12.5 kb/s in Ch 27, Ch 29 and the `ch27_system`/`ch29_chip` diagrams.
    WE 26.5 keeps 16 × 12-bit as the cheaper option and says why the full snippet is the one to send.
 3. **Deepen the thinner chapters** to the Part I–IV standard (worked examples with project numbers,
-   a figure from `figsrc/`, key-equation box, takeaways): ~~Ch 30~~ **done 24 Nov** (section 2g); left:
-   Part VI Ch 31–33. Part VI stays free of NeurEar details. Rerun `tools/build_formula_sheet.py`
-   if a key-equation box changes.
+   a figure from `figsrc/`, key-equation box, takeaways): ~~Ch 30~~ **done 24 Nov** (section 2g); ~~Part VI
+   Ch 31–33~~ **done 24 Nov** (section 2h). Part VI stays free of NeurEar details. Rerun
+   `tools/build_formula_sheet.py` if a key-equation box changes.
 4. **Check and tag (Step 5):** preview, check light/dark and phone width, crawl the site (links,
    anchors, `.katex-error`, images, unknown citations), then tag `v0.1` when the user agrees.
+   **Checked 24 Nov** (section 2h). `v0.1` turned out to exist already (15 Nov, `f750250`, chapters 1–31) and was
+   not moved; tag the finished state as a new version if wanted (GitHub → Releases → new tag).
 5. Optional extras from Step 1c: SAR async timing waveform (Ch 18), level-crossing sampler (Ch 21),
    lead-off detection diagram (Ch 12).
 
@@ -594,7 +648,7 @@ home page.
 ### Step 5 — Check and publish (publishing done; checking and the tag are item 4 of "Now")
 1. Preview (section 6), check every page in light and dark mode and at phone width.
 2. Push to `main`; the Pages workflow deploys (Pages → Source is **GitHub Actions**; working since
-   10 Nov). Tag v0.1 when the first release is ready (not yet tagged).
+   10 Nov). `v0.1` was tagged on 15 Nov 2026 at `f750250` (chapters 1–31); the 24 Nov state is not tagged.
 
 ## 5. Conventions and gotchas
 
@@ -622,6 +676,13 @@ home page.
 
 ## 6. Environment status (this Mac)
 
+- **The local clone was deleted on 24 Nov 2026** (user's request, to save 3.4 GB). Clone again over SSH. The
+  git-ignored folders were all regenerable: `.venv` (recreate as section 5 says), `data/physionet/` (the
+  download commands are in the labs set-up), `labs/spice/char/` (3 GB of ngspice working files from
+  `sg13_char.py`), `labs/spice/out/`, `labs/python/out/` (lab outputs). The preview entry `bioafe-jekyll` in
+  `/Users/kithminrw/BRICD/.claude/launch.json` still points at `/Users/kithminrw/BRICD/biomedical-ic-design`,
+  so clone back to that path to reuse it.
+
 - No Ruby ≥ 3.1 on the Mac (system Ruby is 2.6), so preview in Docker (the `ruby:3.3` image is
   pulled; gems are cached in the `bioafe-gems` volume):
   `docker run --rm -p 4000:4000 -v "$PWD":/site -v bioafe-gems:/usr/local/bundle -w /site ruby:3.3 bash -c "bundle install && bundle exec jekyll serve --host 0.0.0.0 --force_polling"`
@@ -638,8 +699,10 @@ home page.
 
 ## 7. Known issues to clean up
 
-- **Open:** nothing (the section 2f demo mismatches were fixed 23 Nov, the Ch 27 snippet size and the Pelgrom √2 24 Nov). Everything
-  marked RESOLVED or FIXED here is kept only as a record.
+- **Open:** no errors known (the section 2f demo mismatches were fixed 23 Nov, the Ch 27 snippet size and the Pelgrom √2 24 Nov). Everything
+  marked RESOLVED or FIXED here is kept only as a record. Design work not simulated, and said so in the text: the
+  bias-controlled pseudo-resistor (Ch 10, femtoampere replica currents) and its large-signal behaviour during
+  fast-settle (Ch 33's recovery model is the linear, pessimistic case).
 - **RESOLVED in Ch 12 (keep Table 1.2 in step in Ch 29):** the RLD (loop gain 100) cuts the Z_cm need to 11.4 MΩ. Original note — **Open design point from Ch 4:** with the standards' 40.7 kΩ imbalance and a 100 dB amplifier,
   90 dB effective CMRR needs Z_cm ≈ 1.9 GΩ at 50 Hz, about twice the "> 1 GΩ" goal in Table 1.2
   (Ch 1) and `SPEC`. Ch 4 says so in its specnote; settle it in the Ch 29 budgets and then update
@@ -740,6 +803,7 @@ indico.cern.ch/event/1381495/contributions/5988502/ · MEDTEQ CMRR and Zin artic
 - ~~Section 2f mismatches: decide case by case?~~ Done case by case on 23 Nov; chapter text changed in
   Ch 9 (1.29 → 1.32 µVrms unchopped), Ch 20 (four → eight times), Ch 22 (Hann sentence), Ch 27 (30 → 46 µW)
   and the demo intros of Ch 19, 24, 31 and 33. The user may want to skim those before pushing.
-- When to tag `v0.1`: after the mismatch fixes, or now?
+- Tagging: `v0.1` already exists (15 Nov, `f750250`, chapters 1–31). Whether to tag the finished 24 Nov state
+  (for example `v0.2`) is the user's call.
 - ~~Reset switch and bias-controlled servo pseudo-resistor: specs or advice?~~ **Decided 24 Nov: in the specs**
   (Ch 8, Ch 10, Ch 29 specnote and Table 29.1; section 2g). Fig 29.1 is block-level and unchanged.
