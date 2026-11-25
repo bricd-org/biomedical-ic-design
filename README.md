@@ -7,21 +7,23 @@ IHP SG13G2 130 nm SiGe BiCMOS open PDK, written for [BRICD](https://www.thebricd
 The tutorial is a website made of Markdown pages, built with Jekyll and the just-the-docs theme,
 and published at <https://www.thebricd.org/biomedical-ic-design/>.
 
-**Status: work in progress (draft v0.1, November 2026).**
+**Status: release v0.2 (November 2026), a living draft.** Every page is written.
 
 | Part | Chapters | State |
 |---|---|---|
 | Preface | audience, reading paths, how the labs work | written |
 | I. Foundations | 1–4: why biomedical ICs, bioelectric signals, electrodes, interference and safety | written |
-| II. The analog front-end | 5–12 | outline |
-| III. Data converters | 13–22 | outline |
-| IV. Biosignal processing and systems | 23–28 | outline |
-| V. Putting it together | 29–30 (architecture, open-source flow) | outline |
+| II. The analog front-end | 5–12 | written |
+| III. Data converters | 13–22 | written |
+| IV. Biosignal processing and systems | 23–28 | written |
+| V. Putting it together | 29–30 (architecture, open-source flow) | written |
 | VI. Wearable systems | 31–33 (signal quality, ear-EEG, closed-loop systems) | written |
 | Hands-on labs | 15 labs and a capstone, one page each (`labs.md`, `labs/`) | written |
-| Appendices | A–E | to do |
+| Interactive demos | 17 demos, each with things to try and a quiz (`demos.md`) | written |
+| Appendices | A–E: formula sheet, tables, checklists, glossary, reading | written |
 
-Each outline chapter lists its topics, the design question it answers, its labs and its reading.
+Every chapter has worked examples with the project's numbers and figures drawn by the scripts in `figsrc/`.
+`HANDOFF.md` records how the tutorial was built, the decisions behind it and what is left.
 
 ## Repository layout
 
@@ -84,8 +86,10 @@ cd figsrc && for f in ch0*_figs.py; do python "$f"; done
 
 ## Next steps
 
-1. Write Labs 1–2 in full, and the appendices.
-2. Write `labs/python/lab1_biosignal_explorer.py` and `lab2_electrodes_interference.py`.
+1. Optional diagrams: SAR asynchronous timing (Ch 18), level-crossing sampler (Ch 21), lead-off detection (Ch 12).
+2. Simulate the bias-controlled servo pseudo-resistor (Ch 10) and its large-signal behaviour during fast-settle
+   (Ch 33), which the text describes but does not yet simulate.
+3. Refine the numbers as the labs are run on silicon. `HANDOFF.md` section 4 has the details.
 
 ## AI assistance and corrections
 

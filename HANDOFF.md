@@ -5,8 +5,8 @@ https://www.thebricd.org/biomedical-ic-design/
 
 **24 Nov 2026, end of the first release.** Part VI (Ch 31–33) was deepened to the Part I–IV standard (section 2h), the
 site was checked and pushed, and the user then **deleted the local clone to save disk space**. The tag `v0.1`
-already existed (annotated, 15 Nov, on `f750250`, the chapters 1–31 state) and was left as it is; the 24 Nov state
-is not tagged. To work on it
+already existed (annotated, 15 Nov, on `f750250`, the chapters 1–31 state) and was left as it is; the
+finished state is tagged **`v0.2`** (on `2e99064`; the next commit changed the site's version labels to v0.2). To work on it
 again: `git clone git@github.com:bricd-org/biomedical-ic-design.git` (SSH; HTTPS has no credentials), then rebuild
 what is git-ignored as section 6 says (`.venv`, PhysioNet downloads in `data/`, ngspice working files in
 `labs/spice/char/`, lab outputs). Nothing in those folders was unique: every result is in the chapters and in
@@ -312,7 +312,7 @@ The user asked for the labs to be a top-level section like the photonics tutoria
   says the specs took both lessons. Not done: no simulation of the bias-controlled pseudo-resistor itself (its
   femtoampere replica currents are a real design task for Lab 5 or a later revision).
 
-## 2h. Part VI deepened; v0.1 (24 Nov 2026)
+## 2h. Part VI deepened; v0.2 (24 Nov 2026)
 
 User's request: finish Part VI, push, finalise, then delete the local clone. Ch 31 written here; Ch 32 and Ch 33 by
 two subagents with the same brief (only their chapter, `figsrc/chNN_figs.py` and new SVGs), then reviewed. Every
@@ -407,7 +407,8 @@ pushing (the user says "Commit and push" when they want it).
 4. **Check and tag (Step 5):** preview, check light/dark and phone width, crawl the site (links,
    anchors, `.katex-error`, images, unknown citations), then tag `v0.1` when the user agrees.
    **Checked 24 Nov** (section 2h). `v0.1` turned out to exist already (15 Nov, `f750250`, chapters 1–31) and was
-   not moved; tag the finished state as a new version if wanted (GitHub → Releases → new tag).
+   not moved; the finished state is tagged `v0.2` (`2e99064`, user's request), and the home page, preface and
+   README say v0.2.
 5. Optional extras from Step 1c: SAR async timing waveform (Ch 18), level-crossing sampler (Ch 21),
    lead-off detection diagram (Ch 12).
 
@@ -648,7 +649,7 @@ home page.
 ### Step 5 — Check and publish (publishing done; checking and the tag are item 4 of "Now")
 1. Preview (section 6), check every page in light and dark mode and at phone width.
 2. Push to `main`; the Pages workflow deploys (Pages → Source is **GitHub Actions**; working since
-   10 Nov). `v0.1` was tagged on 15 Nov 2026 at `f750250` (chapters 1–31); the 24 Nov state is not tagged.
+   10 Nov). `v0.1` was tagged on 15 Nov 2026 at `f750250` (chapters 1–31); `v0.2` on 24 Nov at `2e99064` (all 33 chapters to the full standard).
 
 ## 5. Conventions and gotchas
 
@@ -803,7 +804,7 @@ indico.cern.ch/event/1381495/contributions/5988502/ · MEDTEQ CMRR and Zin artic
 - ~~Section 2f mismatches: decide case by case?~~ Done case by case on 23 Nov; chapter text changed in
   Ch 9 (1.29 → 1.32 µVrms unchopped), Ch 20 (four → eight times), Ch 22 (Hann sentence), Ch 27 (30 → 46 µW)
   and the demo intros of Ch 19, 24, 31 and 33. The user may want to skim those before pushing.
-- Tagging: `v0.1` already exists (15 Nov, `f750250`, chapters 1–31). Whether to tag the finished 24 Nov state
-  (for example `v0.2`) is the user's call.
+- ~~Tagging?~~ **Done 24 Nov:** `v0.1` (15 Nov, `f750250`, chapters 1–31) and `v0.2` (24 Nov, `2e99064`, the
+  finished release; user's request). The labels on the site say v0.2.
 - ~~Reset switch and bias-controlled servo pseudo-resistor: specs or advice?~~ **Decided 24 Nov: in the specs**
   (Ch 8, Ch 10, Ch 29 specnote and Table 29.1; section 2g). Fig 29.1 is block-level and unchanged.

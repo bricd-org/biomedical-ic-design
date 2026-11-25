@@ -59,4 +59,4 @@ The tutorial is written for the Open-BioAFE project at [BRICD](https://www.thebr
 
 **How this tutorial is made.** The Open-BioAFE Tutorial is being developed with the help of AI tools, and this draft may contain mistakes. If you spot one, please email [bricd.org@gmail.com](mailto:bricd.org@gmail.com) and we will correct it.
 
-This is a living draft (v0.1, November 2026): all thirty-three chapters, the appendices and the fifteen [hands-on labs]({% link labs.md %}) are written, and most chapters have an interactive demo. Corrections and contributions are welcome through [GitHub issues](https://github.com/bricd-org/biomedical-ic-design/issues).
+This is a living draft (v0.2, November 2026): all thirty-three chapters, the appendices and the fifteen [hands-on labs]({% link labs.md %}) are written, and most chapters have an interactive demo. Corrections and contributions are welcome through [GitHub issues](https://github.com/bricd-org/biomedical-ic-design/issues).

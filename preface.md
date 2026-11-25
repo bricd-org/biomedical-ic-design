@@ -88,13 +88,13 @@ Fifteen labs in three tracks use only free tools: Python (NumPy, SciPy, wfdb, py
 
 ## The state of this draft
 
-This is release v0.1 (November 2026). All thirty-three chapters, the five appendices and the fifteen [hands-on labs]({% link labs.md %}) are written; the SG13G2 labs have scripts that run in the IIC-OSIC-TOOLS container, the real-data labs read PhysioNet recordings, and most chapters carry an interactive demo. Expect corrections as the labs are run on silicon.
+This is release v0.2 (November 2026). All thirty-three chapters, the five appendices and the fifteen [hands-on labs]({% link labs.md %}) are written; the SG13G2 labs have scripts that run in the IIC-OSIC-TOOLS container, the real-data labs read PhysioNet recordings, and most chapters carry an interactive demo. Expect corrections as the labs are run on silicon.
 
 ## Sources and acknowledgments
 
 The biomedical-instrumentation chapters draw on Webster's *Medical Instrumentation* {% include cite.html keys="webster" %} and on Yazicioglu, Van Hoof and Puers' *Biopotential Readout Circuits* {% include cite.html keys="yazicioglubook" %}; the converter chapters on Pelgrom {% include cite.html keys="pelgrom" %} and on Schreier, Temes and Pavan {% include cite.html keys="schreier" %}. The chip is possible because IHP opened its SG13G2 process design kit {% include cite.html keys="ihppdk" %} and the Institute for Integrated Circuits at JKU Linz maintains the IIC-OSIC-TOOLS container and the analog chip template {% include cite.html keys="iicosic,jkutemplate" %}. The labs use open data from PhysioNet {% include cite.html keys="physionet" %} and NinaPro {% include cite.html keys="ninapro" %}.
 
-This is a **living draft (v0.1)**; numbers will be refined as the design matures. If you find an error, an unclear derivation or a figure that does not explain what it should, please email [bricd.org@gmail.com](mailto:bricd.org@gmail.com) or open an issue or a pull request on the project's GitHub repository, linked from thebricd.org.
+This is a **living draft (v0.2)**; numbers will be refined as the design matures. If you find an error, an unclear derivation or a figure that does not explain what it should, please email [bricd.org@gmail.com](mailto:bricd.org@gmail.com) or open an issue or a pull request on the project's GitHub repository, linked from thebricd.org.
 
 ## How this tutorial was made
 
